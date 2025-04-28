@@ -1,20 +1,27 @@
 import React from "react";
 
 const Contact = () => {
+
+  const [formStatus, setFormStatus] = useState("");
+
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    setFormStatus("Send Sucessfully...")
+  }
   return (
     <section id="contact" className="py-10 min-h-screen flex flex-col justify-center items-center px-6 bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white">
       
       <div className="w-full max-w-3xl p-8 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20">
         <h2 className="text-4xl font-bold text-center mb-8">Contact Me</h2>
 
-        <form 
+        <form  onSubmit={handleSubmit}
           action="https://formsubmit.co/aafaquebuisness@gmail.com" 
           method="POST" 
           className="flex flex-col gap-6"
         >
           {/* Hidden settings for FormSubmit */}
           <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value=""/>
 
           <input
             type="text"
