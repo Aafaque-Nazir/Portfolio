@@ -7,7 +7,7 @@ const Contact = () => {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    setFormStatus("Send Sucessfully...")
+    setFormStatus("")
   }
   return (
     <section id="contact" className="py-10 min-h-screen flex flex-col justify-center items-center px-6 bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white">
