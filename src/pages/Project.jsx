@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 const projects = [
   {
     title: "BlogPostApp",
@@ -54,7 +53,7 @@ const projects = [
 
 const Project = () => {
   return (
-    <section className="py-16 px-6 bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white">
+    <section id="projects" className="py-16 px-6 bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white">
       <div className="max-w-3xl mx-auto space-y-12">
 
         {/* Featured Project */}

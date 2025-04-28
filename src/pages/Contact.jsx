@@ -14,7 +14,7 @@ const Contact = () => {
         >
           {/* Hidden settings for FormSubmit */}
           <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="aafaque-portfolio.netlify.app/thank-you" />
+          <input type="hidden" name="_next" value="https://aafaque-portfolio.netlify.app/thank-you" />
 
           <input
             type="text"
