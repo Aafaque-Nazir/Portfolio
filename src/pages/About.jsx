@@ -12,7 +12,7 @@ const Home = () => {
       
       {/* Main Container */}
       <div className="w-full max-w-5xl mx-auto flex flex-col  md:flex-row items-center justify-between gap-20">
-
+    
         {/* LEFT: Text */}
         <div className="text-center md:text-left flex-1">
           <motion.h1
