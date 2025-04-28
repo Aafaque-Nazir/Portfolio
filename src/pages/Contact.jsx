@@ -7,7 +7,7 @@ const Contact = () => {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    setFormStatus("")
+    setFormStatus("Sucess")
   }
   return (
     <section id="contact" className="py-10 min-h-screen flex flex-col justify-center items-center px-6 bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white">
@@ -51,6 +51,11 @@ const Contact = () => {
           >
             Send Message
           </button>
+          {formStatus === "Success" && (
+        <div className="mt-4 text-green-500">
+          <p>Thank you for contacting us! We will get back to you soon.</p>
+        </div>
+      )}
         </form>
       </div>
 
