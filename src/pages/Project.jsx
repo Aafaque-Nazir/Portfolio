@@ -53,7 +53,7 @@ const projects = [
 
 const Project = () => {
   return (
-    <section id="projects" className="py-16 px-6 bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white">
+    <section id="projects" className="py-16 px-6 text-white">
       <div className="max-w-3xl mx-auto space-y-12">
         {/* Featured Project */}
         <div className="flex flex-col md:flex-row   items-center gap-8 bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/20">

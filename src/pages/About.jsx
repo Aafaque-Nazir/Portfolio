@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
     <Navbar/>
-    <section className="relative min-h-screen flex flex-col justify-center items-center px-10 text-white overflow-hidden">
+    <section className=" relative min-h-screen flex flex-col justify-center items-center px-10 text-white overflow-hidden">
       
       {/* Main Container */}
       <div className="w-full max-w-5xl mx-auto flex flex-col  md:flex-row items-center justify-between gap-20">
@@ -36,9 +36,30 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
           className="flex gap-4 justify-center md:justify-start">
-            <a href="#contact" className="px-6 py-3 border border-cyan-400 hover:bg-cyan-600 hover:text-white text-cyan-300 font-semibold rounded-full transition">
-              Contact Me
-            </a>
+            <a
+  href="/Aafaque_Resume.pdf"
+  download
+  className="px-6 py-3  text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:text-cyan-700 transition duration-300 shadow-lg hover:shadow-xl"
+>
+  Download CV
+</a>
+<a
+  href="/Aafaque_Resume.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="px-6 py-3  text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:text-cyan-700 transition duration-300 shadow-lg"
+>
+  View CV
+</a>
+<a 
+href="https://github.com/Aafaque-Nazir"
+target="_blank"
+rel="noopener noreferrer"
+className="text-center px-6 py-3 text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:text-cyan-700 transition duration-300 shadow-lg"
+>
+GitHub
+</a>
+
           </motion.div>
         </div>
 
