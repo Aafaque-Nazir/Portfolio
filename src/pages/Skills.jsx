@@ -14,7 +14,7 @@ function Skills() {
       return (
         <>
         <Logos />
-        <section id='skills' className="  py-12 text-white">
+        <section id='skills' className="py-12 text-white">
           <h2 className="text-3xl font-bold text-center mb-6">My Skills</h2>
           <div className="max-w-4xl mx-auto px-6">
             {skills.map((skill, index) => (

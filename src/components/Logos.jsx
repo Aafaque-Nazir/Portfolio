@@ -18,7 +18,7 @@ const Logos = () => {
   const scrollingLogos = [...techLogos, ...techLogos, ...techLogos]; // Repeat logos for seamlessness
 
   return (
-    <section className=" py-12 overflow-hidden">
+    <section className="py-12 overflow-hidden">
       <h2 className="text-4xl font-bold text-center mb-10 text-gray-700">Frontend Technologies</h2>
 
       <div className="relative w-full overflow-hidden LogoGradient">
