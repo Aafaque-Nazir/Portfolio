@@ -9,6 +9,15 @@ const projects = [
     tech: ["React","Redux", "Tailwind", "AppWrite"],
   },
   {
+    title: "LandingPages Folder",
+    description: "ToolyMon is an all-in-one platform that brings together multiple Landing Pages in one place.",
+    image: "/your-featured-project-image.png",
+    link: "https://lpfolder.netlify.app/",
+    target: "_blank",
+    featured: true,
+    tech: ["React", "TailwindCSS"],
+  },
+  {
     title: "Toolymon",
     description: "ToolyMon is an all-in-one platform that brings together multiple useful online tools in one place.",
     image: "/your-featured-project-image.png",
