@@ -4,7 +4,7 @@ const projects = [
     title: "BlogPostApp",
     description: "BlogPost App is a minimalist blogging platform designed for users to create and manage blog posts effortlessly. ",
     image: "/your-featured-project-image.png",
-    link: " ",
+    link: "blogpostapp-aaafaque.netlify.app ",
     featured: true,
     tech: ["React","Redux", "Tailwind", "AppWrite"],
   },
