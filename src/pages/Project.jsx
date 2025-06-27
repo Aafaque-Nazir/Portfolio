@@ -23,7 +23,6 @@ const projects = [
     image: "/your-featured-project-image.png",
     link: "https://toolymon.netlify.app/",
     target: "_blank",
-    featured: true,
     tech: ["React", "TailwindCSS"],
   },
   {
@@ -75,7 +74,7 @@ const Project = () => {
                 <span key={index} className="px-3 py-1 bg-cyan-400/20 text-cyan-300 text-xs rounded-full">{tech}</span>
               ))}
             </div>
-            <a href={projects[0].link} className="inline-block px-6 py-3 bg-cyan-400 text-white font-semibold rounded-full hover:bg-cyan-500 transition">
+            <a href={projects[0].link} className="inline-block px-6 py-3 bg-cyan-400 font-semibold text-black rounded-full hover:bg-cyan-500 transition">
               View Project
             </a>
           </div>
@@ -94,7 +93,7 @@ const Project = () => {
                   <span key={idx} className="px-2 py-1 bg-cyan-400/20 text-cyan-300 text-xs rounded-full">{tech}</span>
                 ))}
               </div>
-              <a href={project.link} className="mt-auto px-4 py-2 bg-cyan-400 text-white font-semibold rounded-full hover:bg-cyan-500 transition">
+              <a href={project.link} className="mt-auto px-4 py-2 bg-cyan-400 text-black font-semibold w-24 text-center rounded-full hover:bg-cyan-500 transition">
                 View
               </a>
             </div>
