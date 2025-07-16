@@ -1,4 +1,6 @@
 import React from "react";
+import { IoIosSend } from "react-icons/io";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   return (
@@ -7,7 +9,11 @@ const Contact = () => {
       <div className="w-full max-w-7xl flex flex-col md:flex-row gap-8 p-4">
 
         {/* Contact Form */}
-        <div className="flex-1 p-8 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20">
+        <motion.div 
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.5 , ease: "easeInOut" , delay: 0.3 }}
+        className="flex-1 p-8 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20">
           <h2 className="text-4xl font-bold text-center mb-8">Contact Me</h2>
           <form 
             action="https://formsubmit.co/aafaquebuisness@gmail.com" 
@@ -40,15 +46,20 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="bg-cyan-600 hover:bg-cyan-800 text-white font-semibold py-4 rounded-lg transition duration-300 shadow-md hover:shadow-md"
+              className="bg-cyan-600 hover:bg-cyan-800 text-white font-semibold py-4 rounded-lg transition duration-300 shadow-md hover:shadow-md flex justify-center items-center gap-2"
             >
-              Send Message
+             <IoIosSend /> Send Message
             </button>
           </form>
-        </div>
+        </motion.div>
 
         {/* Map Section */}
-        <div className="flex-1 rounded-2xl overflow-hidden shadow-lg border border-white/20">
+
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.5 ,  ease: "easeInOut" , delay: 0.3}}
+         className="flex-1 rounded-2xl overflow-hidden shadow-lg border border-white/20">
         <iframe
   title="Orange Orchid, Taloja Phase 1"
   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.123456789!2d73.123456789!3d19.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7e123456789%3A0x123456789abcdef!2sTaloja%20Phase%201%2C%20Navi%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1685799201326!5m2!1sen!2sin"
@@ -59,7 +70,7 @@ const Contact = () => {
   loading="lazy"
   referrerPolicy="no-referrer-when-downgrade"
 ></iframe>
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -23,7 +23,7 @@ export default function Navbar() {
       </div>
         <ul className='hidden lg:flex gap-7'>
             {[ 'About', 'Skills', 'Projects', 'Contact '].map((text) => (
-            <li key={text} className=' font-bold tracking-wider hover:scale-90 hover:animate-pulse'>
+            <li key={text} className=' font-bold text-lg tracking-wider hover:scale-90 hover:animate-pulse transition-transform duration-400'>
               <a href={`#${text.toLowerCase()}`}>{text}</a>
             </li>
           ))}

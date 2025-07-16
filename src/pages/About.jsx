@@ -3,13 +3,15 @@ import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import Navbar from "../components/Navbar";
 import codingAnimation from "../assets/coding.json"; // Add your Lottie JSON here
+import { FaGithub } from "react-icons/fa";
+import { PiReadCvLogoFill } from "react-icons/pi";
 
 const Home = () => {
   return (
     <>
     <Navbar/>
+
     <section className=" relative min-h-screen flex flex-col justify-center items-center px-10 text-white overflow-hidden">
-      
       {/* Main Container */}
       <div className="w-full max-w-5xl mx-auto flex flex-col  md:flex-row items-center justify-between gap-20">
     
@@ -39,34 +41,30 @@ const Home = () => {
             <a
   href="/Aafaque_Resume.pdf"
   download
-  className="px-6 py-3  text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:text-cyan-700 transition duration-300 shadow-lg hover:shadow-xl"
+  className="text-center px-6 py-3   text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:bg-cyan-500 hover:text-black transition ease-in duration-300 shadow-lg hover:shadow-xl"
 >
-  Download CV
-</a>
-<a
-  href="/Aafaque_Resume.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="px-6 py-3  text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:text-cyan-700 transition duration-300 shadow-lg"
->
-  View CV
+  <PiReadCvLogoFill className="inline-block mr-2"/> CV 
 </a>
 <a 
 href="https://github.com/Aafaque-Nazir"
 target="_blank"
 rel="noopener noreferrer"
-className="text-center px-6 py-3 text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:text-cyan-700 transition duration-300 shadow-lg"
+className="text-center px-6 py-3 text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:bg-cyan-500 hover:text-black transition ease-in duration-300 shadow-lg"
 >
-GitHub
+<FaGithub className="inline-block mr-2" />GitHub
 </a>
 
           </motion.div>
         </div>
 
         {/* RIGHT: Lottie Animation */}
-        <div className=" w-72 mb-26 md:mb-48  z-10 md:w-[400px] h-[200px]">
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9 }}
+        className=" w-72 mb-26 md:mb-48  z-10 md:w-[400px] h-[200px]">
           <Lottie animationData={codingAnimation} loop={true} />
-        </div>
+        </motion.div>
       </div>
 
       {/* Scroll Down Cue */}
