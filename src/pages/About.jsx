@@ -1,84 +1,82 @@
-import React from "react";
 import { motion } from "framer-motion";
-import Lottie from "lottie-react";
-import Navbar from "../components/Navbar";
-import codingAnimation from "../assets/coding.json"; // Add your Lottie JSON here
-import { FaGithub } from "react-icons/fa";
-import { PiReadCvLogoFill } from "react-icons/pi";
+import {
+  SiReact,
+  SiTailwindcss,
+  SiFramer,
+  SiGithub,
+  SiJavascript,
+  SiHtml5,
+  SiCss3,
+  SiRedux,
+} from "react-icons/si";
 
-const Home = () => {
+const skills = [
+  { icon: <SiReact />, name: "React" },
+  { icon: <SiTailwindcss />, name: "Tailwind CSS" },
+  { icon: <SiFramer />, name: "Framer Motion" },
+  { icon: <SiGithub />, name: "GitHub" },
+  { icon: <SiJavascript />, name: "JavaScript" },
+  { icon: <SiHtml5 />, name: "HTML5" },
+  { icon: <SiCss3 />, name: "CSS3" },
+  { icon: <SiRedux />, name: "Redux" },
+];
+
+const About = () => {
   return (
-    <>
-    <Navbar/>
+    <section
+      id="about"
+      className="relative min-h-screen flex flex-col justify-center items-center px-6 md:px-16 py-20 bg-[#0b0f19] text-white overflow-hidden"
+    >
+      <div className="max-w-5xl w-full mx-auto text-center">
+        {/* Heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-5xl font-bold text-cyan-400 mb-4"
+        >
+          About Me
+        </motion.h2>
 
-    <section className=" relative min-h-screen flex flex-col justify-center items-center px-10 text-white overflow-hidden">
-      {/* Main Container */}
-      <div className="w-full max-w-5xl mx-auto flex flex-col  md:flex-row items-center justify-between gap-20">
-    
-        {/* LEFT: Text */}
-        <div className="text-center md:text-left flex-1">
-          <motion.h1
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl font-bold mb-4"
-          >
-            Hi, I'm <span className="text-cyan-400">Aafaque Nazir</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-lg md:text-xl text-gray-300 max-w-lg mb-6"
-          >
-            A frontend developer crafting clean & interactive user experiences with React, Tailwind, and animation.
-          </motion.p>
-          <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="flex gap-4 justify-center md:justify-start">
-            <a
-  href="/Aafaque_Resume.pdf"
-  download
-  className="text-center px-6 py-3   text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:bg-cyan-500 hover:text-black transition ease-in duration-300 shadow-lg hover:shadow-xl"
->
-  <PiReadCvLogoFill className="inline-block mr-2"/> CV 
-</a>
-<a 
-href="https://github.com/Aafaque-Nazir"
-target="_blank"
-rel="noopener noreferrer"
-className="text-center px-6 py-3 text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:bg-cyan-500 hover:text-black transition ease-in duration-300 shadow-lg"
->
-<FaGithub className="inline-block mr-2" />GitHub
-</a>
+        {/* Subheading */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-gray-400 text-md md:text-lg max-w-3xl mx-auto leading-relaxed"
+        >
+          I’m a <span className="text-cyan-300 font-medium">Frontend Developer</span> based in Navi Mumbai.
+          I specialize in building beautiful and responsive websites using
+          <span className="text-cyan-300 font-medium"> React</span>,
+          <span className="text-cyan-300 font-medium"> Tailwind CSS</span>, and
+          <span className="text-cyan-300 font-medium"> Framer Motion</span>.
+          I focus on clean code, smooth animations, and seamless user experiences.
+        </motion.p>
 
-          </motion.div>
-        </div>
-
-        {/* RIGHT: Lottie Animation */}
+        {/* Skills Grid */}
         <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-        className=" w-72 mb-26 md:mb-48  z-10 md:w-[400px] h-[200px]">
-          <Lottie animationData={codingAnimation} loop={true} />
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+          viewport={{ once: true }}
+          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-300"
+        >
+          {skills.map((skill, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.08 }}
+              className="bg-[#111827] hover:bg-[#1e293b] rounded-xl px-4 py-5 flex flex-col items-center gap-2 shadow-md border border-gray-700 transition-all duration-300"
+            >
+              <span className="text-3xl text-cyan-400">{skill.icon}</span>
+              <span className="text-base">{skill.name}</span>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
-
-      {/* Scroll Down Cue */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
-        className="absolute bottom-18 text-white text-lg opacity-70"
-      >
-        ↓ Scroll Down
-      </motion.div>
     </section>
-    </>
   );
 };
 
-export default Home;
+export default About;
