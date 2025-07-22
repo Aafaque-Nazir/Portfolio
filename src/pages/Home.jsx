@@ -5,13 +5,24 @@ import { PiReadCvLogoFill } from "react-icons/pi";
 import BlurText from "../components/BlurText";
 import DecryptedText from "../components/DecryptedText";
 import UserCard from "../components/UserCard";
+import Aurora from "../components/Aurora";
 
 const Home = () => {
   return (
     <>
     <Navbar/>
-
-    <section className=" relative -z-10 min-h-screen flex flex-col justify-center items-center px-10 text-white overflow-hidden">
+  <div>
+    
+    {/* Aurora Background */}
+    <div className="absolute inset-0 -z-10">
+      <Aurora
+        colorStops={["#43ccee", "#1b5bd2", "#00fff0"]}
+        blend={10}
+        amplitude={1}
+        speed={1.5}
+      />
+    </div>
+    <section id="home" className=" relative z-0 min-h-screen flex flex-col justify-center items-center px-10 text-white overflow-hidden">
 
       {/* Main Container */}
       <div className="w-full max-w-5xl mx-auto flex flex-col-reverse  md:flex-row items-center justify-between gap-28 py-20 relative z-10">
@@ -19,9 +30,9 @@ const Home = () => {
         {/* LEFT: Text */}
         <div className="text-center md:text-left flex-1">
           <motion.h1
-            initial={{ opacity: 0, y: -40 }}
+            initial={{ opacity: 0, y: -70 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1 }}
             className="text-4xl md:text-6xl font-bold mb-4 mx-auto inline-block"
           >
             Hi, I'm <BlurText
@@ -53,7 +64,7 @@ const Home = () => {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="flex gap-4 justify-center md:justify-start">
             <a
-  href="/Aafaque_Resume.pdf"
+  href="/Aafaque_Nazir_Resume.pdf"
   download
   className="text-center px-6 py-3   text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:bg-cyan-500 hover:text-black transition ease-in duration-300 shadow-lg hover:shadow-xl"
 >
@@ -76,12 +87,13 @@ className="text-center px-6 py-3 text-cyan-400 font-semibold border border-cyan-
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
-        className=" w-72 mb-26 md:mb-88  md:w-[400px] h-[200px] -mt-4">
+        className=" w-72 mb-26 md:mb-88  md:w-[400px] h-[200px] -mt-32 md:-mt-6">
           <UserCard
            />
         </motion.div>
           </div>
     </section>
+    </div>
     </>
   );
 };
