@@ -88,7 +88,9 @@ className="text-center px-6 py-3 text-cyan-400 font-semibold border border-cyan-
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
         className=" w-72 mb-26 md:mb-88  md:w-[400px] h-[200px] -mt-32 md:-mt-6">
-          <UserCard
+          <UserCard    onContactClick={() => {
+    window.location.href = "https://www.linkedin.com/in/aafaque-nazir/";
+  }}
            />
         </motion.div>
           </div>

@@ -62,7 +62,7 @@
 
 .pc-card {
   height: 80svh;
-  max-height: 540px;
+  max-height: 530px;
   display: grid;
   aspect-ratio: 0.718;
   border-radius: var(--card-radius);
@@ -109,7 +109,7 @@
   transition: filter 0.6s ease;
   filter: brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.5);
   animation: holo-bg 18s linear infinite;
-  mix-blend-mode: color-dodge;
+  mix-blend-mode: color-burn;
 }
 
 .pc-shine,
@@ -213,8 +213,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(30px);
+  background: rgba(0, 0, 0, 0.198);
+  backdrop-filter: blur(80px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   padding: 12px 14px;
@@ -307,7 +307,7 @@
   background-image: linear-gradient(to bottom, #fff, #6f6fbe);
   background-size: 1em 1.5em;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background-clip: text; 
   -webkit-background-clip: text;
 }
 

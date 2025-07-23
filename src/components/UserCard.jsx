@@ -33,7 +33,7 @@ const easeInOutCubic = (x) =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
 const ProfileCardComponent = ({
-  avatarUrl = "<Placeholder for avatar URL>",
+  avatarUrl = "Photo-BW.jpeg",
   iconUrl = "<Placeholder for icon URL>",
   grainUrl = "<Placeholder for grain URL>",
   behindGradient,
@@ -43,11 +43,10 @@ const ProfileCardComponent = ({
   enableTilt = true,
   miniAvatarUrl,
   name = "Aafaque Nazir",
-  title = "Frontend Developer",
-  handle = "aafaque.7",
+  handle = "aafaque-nazir",
   status = "Online",
   contactText = "Contact",
-  showUserInfo = false,
+  showUserInfo = true,
   onContactClick,
 }) => {
   const wrapRef = useRef(null);
@@ -285,18 +284,14 @@ const ProfileCardComponent = ({
                   onClick={handleContactClick}
                   style={{ pointerEvents: "auto" }}
                   type="button"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={`Contact ${name || "user"}`}
                 >
                   {contactText}
                 </button>
               </div>
             )}
-          </div>
-          <div className="pc-content">
-            <div className="pc-details">
-              <h3>{name}</h3>
-              <p>{title}</p>
-            </div>
           </div>
         </div>
       </section>
