@@ -9,7 +9,6 @@ const projects = [
       "A minimalist blogging platform for creating and managing blog posts effortlessly.",
     image: "/your-featured-project-image.png",
     link: "https://blogpostapp-aafaque.netlify.app/",
-    featured: true,
     tech: ["React", "Redux", "Tailwind", "AppWrite"],
     github: "https://github.com/Aafaque-Nazir/BlogProject",
   },
@@ -128,7 +127,10 @@ const Project = () => {
           </div>
         </motion.div>
 
+
         {/* Mini Projects */}
+
+
         <motion.div
           variants={container}
           initial="hidden"
@@ -161,7 +163,7 @@ const Project = () => {
                   ))}
                 </div>
               </div>
-              <div className="flex justify-between mt-4">
+              <div className="flex justify-center md:justify-start gap-4 mt-4">
                 <a
                   href={project.link}
                   target="_blank"
