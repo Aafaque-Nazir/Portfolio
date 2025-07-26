@@ -30,7 +30,7 @@ export default function Navbar() {
         </ul>
 
         {menuOpen && (
-          <div className='absolute top-16 left-0 w-full py-3 bg-black  z-10 border-t-1 border-b-1 shadow-xl'>
+          <div className='absolute top-14 left-0 w-full py-3 bg-black  z-10 border-t-1 border-b-1 shadow-xl'>
             <ul className='flex flex-col items-center justify-center  gap-8 text-lg'>
               {[ 'Home','About', 'Skills', 'Projects', 'Contact '].map((text) => (
                 <li key={text} className='
