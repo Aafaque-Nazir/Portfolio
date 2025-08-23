@@ -16,7 +16,7 @@ export default function Navbar() {
     initial={{ opacity: 0.4, y: -70 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
-    className='navbar  text-cyan-400 md:backdrop-blur-sm md:rounded-3xl z-50 flex justify-center mx-auto items-center p-4 md:w-112 sticky md:top-12 md:shadow-xl'>
+    className='navbar  text-cyan-400 md:backdrop-blur-sm md:rounded-3xl z-50 flex justify-center mx-auto items-center p-4 md:w-112 sticky md:top-4 md:shadow-xl'>
      
       <div className="lg:hidden z-20 cursor-pointer " onClick={toggleMenu}>
         {menuOpen ? <FaTimes size={24}/> : <FaBars size={24}/>}
