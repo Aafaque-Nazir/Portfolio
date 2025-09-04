@@ -5,36 +5,25 @@ import { PiReadCvLogoFill } from "react-icons/pi";
 import BlurText from "../components/BlurText";
 import DecryptedText from "../components/DecryptedText";
 import UserCard from "../components/UserCard";
-import Aurora from "../components/Aurora";
 
 const Home = () => {
   return (
     <>
-      <div>
-        {/* Aurora Background */}
+      
           <Navbar />
-        <div className="absolute inset-0 -z-10">
-          <Aurora
-            colorStops={["#43ccee", "#1b5bd2", "#00fff0"]}
-            blend={10}
-            amplitude={1}
-            speed={1.5}
-          />
-        </div>
-
         <section
           id="home"
           className="relative z-0 min-h-screen flex flex-col justify-center items-center px-10 text-white overflow-hidden"
         >
           {/* Main Container */}
-          <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+          <div className="w-full  flex flex-col items-center justify-between gap-12 relative z-10">
             {/* LEFT: Text */}
-            <div className="text-center md:text-left flex-1 md:pb-12">
+            <div className="text-center">
               <motion.h1
                 initial={{ opacity: 0, y: -70 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
-                className="text-4xl md:text-6xl font-bold mb-4 mx-auto inline-block"
+                className="text-4xl md:text-6xl font-bold mb-8 mx-auto inline-block"
               >
                 Hi, I'm{" "}
                 <BlurText
@@ -63,7 +52,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
-                className="flex gap-4 justify-center md:justify-start"
+                className="flex gap-4 justify-center mx-auto"
               >
                 <a
                   href="/Aafaque_Nazir_Resume.pdf"
@@ -84,7 +73,7 @@ const Home = () => {
             </div>
 
             {/* RIGHT: Card */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9 }}
@@ -104,10 +93,9 @@ const Home = () => {
                     "https://www.linkedin.com/in/aafaque-nazir/";
                 }}
 />
-            </motion.div>
+            </motion.div> */}
           </div>
         </section>
-      </div>
     </>
   );
 };

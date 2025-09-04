@@ -81,7 +81,7 @@ const cardVariants = {
 
 const Project = () => {
   return (
-    <section id="projects" className="py-20 px-6 bg-[#0b0f19] text-white">
+    <section id="projects" className="py-20 px-6  text-white">
       <div className="max-w-6xl mx-auto space-y-20">
         {/* Featured Project */}
         <motion.div

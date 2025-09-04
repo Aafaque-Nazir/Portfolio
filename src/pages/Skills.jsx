@@ -1,12 +1,12 @@
 import React from 'react';
 import Logos from '../components/Logos';
 import { motion } from "framer-motion";
+import { RiNextjsFill } from "react-icons/ri";
 import {
   FaHtml5,
   FaCss3Alt,
   FaJs,
   FaReact,
-  FaNodeJs,
 } from "react-icons/fa";
 import { SiTailwindcss, SiFramer } from "react-icons/si";
 
@@ -17,14 +17,14 @@ const skills = [
   { name: "React.js", level: "80%", icon: <FaReact className="text-cyan-400" /> },
   { name: "TailwindCSS", level: "90%", icon: <SiTailwindcss className="text-sky-400" /> },
   { name: "Framer Motion", level: "60%", icon: <SiFramer className="text-pink-400" /> },
-  { name: "Node.js", level: "70%", icon: <FaNodeJs className="text-green-400" /> },
+  { name: "Next.Js", level: "80%", icon: <RiNextjsFill className="text-black" /> },
 ];
 
 function Skills() {
   return (
     <>
       <Logos />
-      <section id='skills' className="bg-[#0a0f1b] py-16 px-6 text-white">
+      <section id='skills' className=" py-16 px-6 text-white">
         <motion.h2
           className="text-4xl font-bold text-center mb-12 text-cyan-400"
           initial={{ opacity: 0, y: -20 }}

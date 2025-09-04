@@ -25,7 +25,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex flex-col justify-center items-center px-6 md:px-16 py-20 bg-[#0b0f19] text-white overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center items-center px-6 md:px-16 py-20  text-white overflow-hidden"
     >
       <div className="max-w-5xl w-full mx-auto text-center">
         {/* Heading */}
@@ -67,7 +67,7 @@ const About = () => {
             <motion.div
               key={i}
               whileHover={{ scale: 1.08 }}
-              className="bg-[#111827] hover:bg-[#1e293b] rounded-xl px-4 py-5 flex flex-col items-center gap-2 shadow-md border border-gray-700 transition-all duration-300"
+              className="bg-[#111827]/50 hover:bg-[#1e293b] backdrop-blur-sm rounded-xl px-4 py-5 flex flex-col items-center gap-2 shadow-md border border-gray-700 transition-all duration-300"
             >
               <span className="text-3xl text-cyan-400">{skill.icon}</span>
               <span className="text-base">{skill.name}</span>
