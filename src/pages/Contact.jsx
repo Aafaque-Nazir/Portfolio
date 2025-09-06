@@ -1,4 +1,3 @@
-import React from "react";
 import { IoIosSend } from "react-icons/io";
 import { motion } from "framer-motion";
 

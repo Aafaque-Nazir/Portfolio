@@ -24,7 +24,7 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className='hidden lg:flex gap-7'>
-          {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((text) => (
+          {['Home', 'About', 'Projects', 'Contact'].map((text) => (
             <li key={text} className='font-bold text-lg tracking-wider hover:scale-90 hover:animate-pulse transition-transform duration-400'>
               <a href={`#${text.toLowerCase()}`} className="hover:text-cyan-300">
                 {text}

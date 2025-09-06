@@ -13,10 +13,10 @@ const Home = () => {
           <Navbar />
         <section
           id="home"
-          className="relative z-0 min-h-screen flex flex-col justify-center items-center px-10 text-white overflow-hidden"
+          className="relative z-0 md:h-screen flex flex-col justify-center items-center px-10 text-white  mx-auto sm:h-full sm:py-20 overflow-hidden"
         >
           {/* Main Container */}
-          <div className="w-full  flex flex-col items-center justify-between gap-12 relative z-10">
+          <div className=" flex flex-col py-6 items-center justify-between gap-12 relative z-10">
             {/* LEFT: Text */}
             <div className="text-center">
               <motion.h1
