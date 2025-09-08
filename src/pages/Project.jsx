@@ -27,6 +27,9 @@ const projects = [
 const Project = () => {
   return (
     <section id="projects" className="py-20 px-6 text-white">
+      <h2 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-cyan-400 to-cyan-500 bg-clip-text text-transparent">
+        My Projects
+      </h2>
       <div className="max-w-6xl mx-auto">
         {/* Projects Grid */}
         <motion.div
@@ -54,6 +57,7 @@ const Project = () => {
                 bg-gray-900/40 backdrop-blur-xl border border-gray-700/50 
                 hover:shadow-cyan-400/20 transition-shadow duration-500 
                 min-h-[480px]">
+
 
                 {/* Image */}
                 <div className="flex-1 w-full overflow-hidden rounded-xl">

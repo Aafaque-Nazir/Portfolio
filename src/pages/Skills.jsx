@@ -22,10 +22,11 @@ const techLogos = [
 
 export default function TechStack() {
   return (
-    <div style={{ height: '80px', position: 'relative', overflow: 'hidden' }}>
+    <div
+    className='h-36 relative overflow-hidden mt-12 md:mt-4' aria-label="Technologies I work with">
       <LogoLoop
         logos={techLogos}
-        speed={60}
+        speed={90}
         direction="left"
         logoHeight={50}
         gap={50}

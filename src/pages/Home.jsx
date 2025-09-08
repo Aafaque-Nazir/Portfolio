@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 import { PiReadCvLogoFill } from "react-icons/pi";
 import BlurText from "../components/BlurText";
 import DecryptedText from "../components/DecryptedText";
-import UserCard from "../components/UserCard";
+
 
 const Home = () => {
   return (
@@ -13,11 +13,11 @@ const Home = () => {
           <Navbar />
         <section
           id="home"
-          className="relative z-0 md:h-screen flex flex-col justify-center items-center px-10 text-white  mx-auto sm:h-full sm:py-20 overflow-hidden"
+          className="relative z-0 h-screen md:h-[80vh] flex flex-col justify-center items-center -mt-20 md:mt-2 text-white  mx-auto   overflow-hidden"
         >
           {/* Main Container */}
           <div className=" flex flex-col py-6 items-center justify-between gap-12 relative z-10">
-            {/* LEFT: Text */}
+            {/* Text */}
             <div className="text-center">
               <motion.h1
                 initial={{ opacity: 0, y: -70 }}
