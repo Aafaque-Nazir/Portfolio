@@ -55,7 +55,7 @@ const Home = () => {
                 className="flex gap-4 justify-center mx-auto"
               >
                 <a
-                  href="/Aafaque_Nazir_Resume.pdf"
+                  href="/AafaqueNazirCV.pdf"
                   download
                   className="text-center px-6 py-3 text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:bg-cyan-500 hover:text-black transition ease-in duration-300 shadow-lg hover:shadow-xl"
                 >
