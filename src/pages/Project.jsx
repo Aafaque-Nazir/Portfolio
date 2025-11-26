@@ -8,8 +8,8 @@ const projects = [
   {
     title: "Inventory Management system",
     description:
-      "A Full Stack Commodity Management System: Inventory, suppliers, purchase orders, and real-time stock tracking with automated IN/OUT movement and role-based access.",
-    image: "./comodities-thumbnail.jpeg",
+      "A Full Stack Inventory Management System: Inventory, suppliers, purchase orders, and real-time stock tracking with automated IN/OUT movement and role-based access.",
+    image: "./inventory-thumbnail.jpeg",
     link: "https://nvntory-mgm.vercel.app/",
     tech: ["Next.js", "Tailwind CSS", "Supabase", "ShadCN UI", "RBAC Auth", "Redux"],
     github: "https://github.com/Aafaque-Nazir/",
