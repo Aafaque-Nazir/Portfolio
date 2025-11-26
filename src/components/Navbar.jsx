@@ -39,7 +39,7 @@ export default function Navbar() {
             className='absolute top-16 left-0 w-full bg-black/10 backdrop-blur-sm border-b shadow-xl z-40'
           >
             <ul className='flex flex-col items-center justify-center gap-8 py-6 text-lg'>
-              {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((text) => (
+              {['Home', 'About', 'Projects', 'Contact'].map((text) => (
                 <li key={text} className='font-bold tracking-wider hover:scale-90 hover:animate-pulse'>
                   <a
                     href={`#${text.toLowerCase()}`}
