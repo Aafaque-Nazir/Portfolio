@@ -9,6 +9,15 @@
     rgba(0, 0, 0, 0)
     );
 }
+@keyframes sheen {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(100%) skewX(-15deg); }
+}
+
+.animate-sheen {
+  animation: sheen 1s ease-in-out infinite;
+}
+
 body {
     background-size: cover;
     background-position: center;

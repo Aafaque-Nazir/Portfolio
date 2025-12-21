@@ -102,45 +102,87 @@ const About = () => {
             Education
           </h3>
 
-          <div className="relative border-l-2 border-cyan-500/30 ml-4 md:ml-8 space-y-12">
-            {/* BSc IT */}
-            <div className="relative pl-8 md:pl-12 group">
-              {/* Dot */}
-              <span className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-cyan-500 border-4 border-slate-950 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_rgba(6,182,212,0.6)]"></span>
-              
-              <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-cyan-500/30 transition-all duration-300 hover:bg-slate-800/50">
-                <h4 className="text-xl md:text-2xl font-bold text-white">Bachelor of Science in Information Technology</h4>
-                <p className="text-cyan-400 font-medium mt-1">University of Mumbai</p>
-                <span className="inline-block mt-2 px-3 py-1 bg-cyan-500/10 text-cyan-300 text-xs rounded-full border border-cyan-500/20">
-                  Aug 2021 - May 2024
-                </span>
-              </div>
-            </div>
+          <div className="relative mt-16 max-w-3xl mx-auto">
+            {/* 🌈 High-End Gradient Timeline Rail */}
+            <div className="absolute left-4 md:left-6 top-0 bottom-0 w-[3px] bg-gradient-to-b from-cyan-500 via-teal-500 to-purple-600 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.4)]"></div>
 
-            {/* HSC */}
-            <div className="relative pl-8 md:pl-12 group">
-              <span className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-teal-500 border-4 border-slate-950 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_rgba(20,184,166,0.6)]"></span>
-              
-              <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-teal-500/30 transition-all duration-300 hover:bg-slate-800/50">
-                <h4 className="text-xl md:text-2xl font-bold text-white">HSC Science</h4>
-                <p className="text-teal-400 font-medium mt-1">Maharashtra State Board</p>
-                <span className="inline-block mt-2 px-3 py-1 bg-teal-500/10 text-teal-300 text-xs rounded-full border border-teal-500/20">
-                  Jul 2021
-                </span>
-              </div>
-            </div>
+            <div className="space-y-10">
+              {/* BSc IT */}
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="relative pl-12 md:pl-16 group"
+              >
+                {/* Glowing Node */}
+                <div className="absolute left-[10px] md:left-[18px] top-2 w-5 h-5 rounded-full bg-slate-950 border-[3px] border-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.8)] z-10 group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div className="relative overflow-hidden bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 transition-all duration-500 hover:border-cyan-500/50 hover:bg-slate-800/60 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] group-hover:-translate-y-1">
+                  {/* Inner Gradient Accent */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 blur-[50px] -z-10 group-hover:bg-cyan-500/10 transition-colors"></div>
+                  
+                  <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    Bachelor of Science in IT
+                  </h4>
+                  <div className="flex flex-wrap items-center gap-3 mt-2">
+                    <p className="text-cyan-400/90 font-semibold tracking-wide">University of Mumbai</p>
+                    <span className="px-3 py-1 bg-cyan-500/10 text-cyan-300 text-[11px] font-bold uppercase tracking-wider rounded-lg border border-cyan-500/20">
+                      2021 - 2024
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
 
-            {/* SSC */}
-            <div className="relative pl-8 md:pl-12 group">
-              <span className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-950 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_rgba(168,85,247,0.6)]"></span>
-              
-              <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300 hover:bg-slate-800/50">
-                <h4 className="text-xl md:text-2xl font-bold text-white">SSC</h4>
-                <p className="text-purple-400 font-medium mt-1">Maharashtra State Board</p>
-                <span className="inline-block mt-2 px-3 py-1 bg-purple-500/10 text-purple-300 text-xs rounded-full border border-purple-500/20">
-                  Jun 2019
-                </span>
-              </div>
+              {/* HSC */}
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="relative pl-12 md:pl-16 group"
+              >
+                <div className="absolute left-[10px] md:left-[18px] top-2 w-5 h-5 rounded-full bg-slate-950 border-[3px] border-teal-500 shadow-[0_0_12px_rgba(20,184,166,0.8)] z-10 group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div className="relative overflow-hidden bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 transition-all duration-500 hover:border-teal-500/50 hover:bg-slate-800/60 hover:shadow-[0_0_30px_rgba(20,184,166,0.15)] group-hover:-translate-y-1">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 blur-[50px] -z-10 group-hover:bg-teal-500/10 transition-colors"></div>
+
+                  <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-teal-300 transition-colors">
+                    HSC Science
+                  </h4>
+                  <div className="flex flex-wrap items-center gap-3 mt-2">
+                    <p className="text-teal-400/90 font-semibold tracking-wide">Maharashtra State Board</p>
+                    <span className="px-3 py-1 bg-teal-500/10 text-teal-300 text-[11px] font-bold uppercase tracking-wider rounded-lg border border-teal-500/20">
+                      2021
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* SSC */}
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="relative pl-12 md:pl-16 group"
+              >
+                <div className="absolute left-[10px] md:left-[18px] top-2 w-5 h-5 rounded-full bg-slate-950 border-[3px] border-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.8)] z-10 group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div className="relative overflow-hidden bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 transition-all duration-500 hover:border-purple-500/50 hover:bg-slate-800/60 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] group-hover:-translate-y-1">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-[50px] -z-10 group-hover:bg-purple-500/10 transition-colors"></div>
+
+                  <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors">
+                    SSC
+                  </h4>
+                  <div className="flex flex-wrap items-center gap-3 mt-2">
+                    <p className="text-purple-400/90 font-semibold tracking-wide">Maharashtra State Board</p>
+                    <span className="px-3 py-1 bg-purple-500/10 text-purple-300 text-[11px] font-bold uppercase tracking-wider rounded-lg border border-purple-500/20">
+                      2019
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>

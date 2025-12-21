@@ -66,100 +66,78 @@ const Project = () => {
           technologies.
         </motion.p>
 
-        {/* Projects Grid */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="grid gap-12 md:grid-cols-3"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {projects.map((project, index) => (
               <div
                 key={index}
-                className="group relative flex flex-col items-center gap-6 
-                rounded-3xl p-6 shadow-xl 
-                bg-slate-900/50 backdrop-blur-xl border border-white/10 
-                hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/20 
+                className="group relative flex flex-col items-center gap-3 
+                rounded-2xl p-3 shadow-lg 
+                bg-slate-900/40 backdrop-blur-md border border-white/5 
+                hover:border-cyan-500/30 hover:shadow-2xl hover:shadow-cyan-500/10 
                 hover:-translate-y-2
-                transition-all duration-500 ease-out min-h-[480px]"
+                transition-all duration-500 ease-out"
               >
-                {/* Image */}
-                <div className="flex-1 w-full overflow-hidden rounded-xl">
+                {/* Image Wrapper */}
+                <div className="relative w-full aspect-video overflow-hidden rounded-xl">
                   <motion.img
                     src={project.image}
                     alt={project.title}
                     whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full h-64 md:h-80 object-cover rounded-xl shadow-lg"
+                    transition={{ duration: 0.6 }}
+                    className="w-full h-full object-cover rounded-xl shadow-md"
                   />
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-cyan-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 w-full text-center md:text-left space-y-4">
-                  <h2 className="text-2xl md:text-3xl font-extrabold from-cyan-300 to-cyan-500 bg-clip-text text-transparent">
+                <div className="w-full px-2 py-1 space-y-3">
+                  <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
                     {project.title}
-                  </h2>
-                  <p className="text-gray-300 text-base md:text-lg leading-relaxed">
+                  </h3>
+                  
+                  <p className="text-gray-400 text-sm line-clamp-2 leading-relaxed h-10">
                     {project.description}
                   </p>
 
                   {/* Tech stack */}
-                  <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                    {project.tech.map((tech, idx) => (
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {project.tech.slice(0, 4).map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 bg-cyan-400/10 text-cyan-300 text-xs font-medium rounded-full border border-cyan-400/20 backdrop-blur-sm"
+                        className="px-2 py-0.5 bg-slate-800/50 text-cyan-300/90 text-[10px] font-medium rounded-md border border-white/5"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  {/* Buttons */}
-                  <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-3">
-                    {/* Live Demo */}
+                  {/* Bottom Actions */}
+                  <div className="flex items-center justify-between pt-2 border-t border-white/5 mt-auto">
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative group px-5 py-3 rounded-xl overflow-hidden 
-                                 bg-gradient-to-r from-emerald-300 to-cyan-400 
-                                 text-slate-900 font-bold shadow-lg shadow-emerald-500/30 
-                                 hover:shadow-emerald-500/50 transform hover:scale-105 
-                                 hover:brightness-110
-                                 transition-all duration-300"
+                      className="inline-flex items-center gap-1.5 text-cyan-400 text-sm font-semibold hover:text-cyan-300 transition-colors"
                     >
-                      <span className="relative z-10 flex items-center gap-2">
-                        <RiSignalTowerFill
-                          size={20}
-                          className="group-hover:rotate-12 transition-transform duration-300"
-                        />
-                        Live Demo
-                      </span>
-                      <span className="absolute inset-0 rounded-xl border-2 border-emerald-400/40 group-hover:border-emerald-300 blur-sm"></span>
+                      <RiSignalTowerFill size={16} />
+                      Live Demo
                     </a>
 
-                    {/* GitHub */}
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative group px-5 py-3 rounded-xl overflow-hidden 
-                                 bg-gradient-to-r from-purple-400 to-fuchsia-400 
-                                 text-slate-900 font-bold shadow-lg shadow-purple-500/30 
-                                 hover:shadow-purple-500/50 transform hover:scale-105 
-                                 hover:brightness-110
-                                 transition-all duration-300"
+                      className="p-2 bg-slate-800/50 rounded-lg text-white hover:bg-slate-700 transition-all border border-white/5"
+                      aria-label="View Code"
                     >
-                      <span className="relative z-10 flex items-center gap-2">
-                        <FaGithub
-                          size={20}
-                          className="group-hover:scale-110 transition-transform duration-300"
-                        />
-                        GitHub
-                      </span>
-                      <span className="absolute inset-0 rounded-xl border-2 border-purple-400/40 group-hover:border-fuchsia-300 blur-sm"></span>
+                      <FaGithub size={18} />
                     </a>
                   </div>
                 </div>
