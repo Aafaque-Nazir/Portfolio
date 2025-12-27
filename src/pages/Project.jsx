@@ -12,7 +12,6 @@ const projects = [
     image: "./inventory-thumbnail.jpeg",
     link: "https://nvntory-mgm.vercel.app/",
     tech: ["Next.js", "Tailwind CSS", "Supabase", "ShadCN UI", "RBAC Auth", "Redux"],
-    github: "https://github.com/Aafaque-Nazir/",
   },
   {
     title: "Ecommerce Platform",
@@ -21,7 +20,6 @@ const projects = [
     image: "./ecommerce-thumbnail.jpeg",
     link: "https://shopease-aafaque.netlify.app/",
     tech: ["Next.js", "Redux", "Tailwind", "Google Authentication"],
-    github: "https://github.com/Aafaque-Nazir/ecomstore",
   },
   {
     title: "Restaurant App",
@@ -30,7 +28,6 @@ const projects = [
     image: "./resturant-thumbnail.jpeg",
     link: "https://bread-and-bite.netlify.app/",
     tech: ["React", "Tailwind","Cart Integration", "WhatsApp API", "Responsive Design",],
-    github: "https://github.com/Aafaque-Nazir/Foodiezz-main",
   },
   {
     title: "Car Booking App",
@@ -39,7 +36,6 @@ const projects = [
     image: "./car-thumbnail.jpeg",
     link: "https://royalcarz.netlify.app/",
     tech: ["Next.js", "Tailwind", "Booking System",  "Responsive Design",],
-    github: "https://github.com/Aafaque-Nazir/my-app",
   },
 ];
 
@@ -128,25 +124,15 @@ const Project = () => {
                   </div>
 
                   {/* Bottom Actions */}
-                  <div className="flex items-center justify-between pt-2 border-t border-white/5 mt-auto">
+                  <div className="flex items-center justify-center pt-4 border-t border-white/5 mt-auto">
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-cyan-400 text-sm font-semibold hover:text-cyan-300 transition-colors"
+                      className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-slate-800/50 backdrop-blur-md border border-white/10 text-cyan-400 font-bold tracking-wider hover:bg-cyan-500 hover:text-slate-950 hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300"
                     >
-                      <RiSignalTowerFill size={16} />
+                      <RiSignalTowerFill size={18} />
                       Live Demo
-                    </a>
-
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 bg-slate-800/50 rounded-lg text-white hover:bg-slate-700 transition-all border border-white/5"
-                      aria-label="View Code"
-                    >
-                      <FaGithub size={18} />
                     </a>
                   </div>
                 </div>

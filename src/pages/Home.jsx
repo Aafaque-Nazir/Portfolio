@@ -71,10 +71,10 @@ const Home = () => {
                 className="flex gap-4 justify-center mx-auto"
               >
                 <a
-                  href="/AafaqueResume.pdf"
-                  download
+                href="/AafaqueResume.pdf"
+                download
                   className="text-center px-6 py-3 text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:bg-cyan-500 hover:text-black transition ease-in duration-300 shadow-lg hover:shadow-xl"
-                >
+              >
                   <PiReadCvLogoFill className="inline-block mr-2" /> CV
                 </a>
                 <a
@@ -84,8 +84,8 @@ const Home = () => {
                   className="text-center px-6 py-3 text-cyan-400 font-semibold border border-cyan-400 rounded-lg hover:bg-cyan-500 hover:text-black transition ease-in duration-300 shadow-lg"
                 >
                   <FaGithub className="inline-block mr-2" /> GitHub
-                </a>
-              </motion.div>
+              </a>
+            </motion.div>
             </div>
 
             {/* RIGHT: Card */}
