@@ -32,6 +32,15 @@ const projects = [
     tech: ["React", "Tailwind","Cart Integration", "WhatsApp API", "Responsive Design",],
     github: "https://github.com/Aafaque-Nazir/Foodiezz-main",
   },
+  {
+    title: "Car Booking App",
+    description:
+      "Car Booking App Book your car with ease and comfort. Request Car and we Arrive at your doorstep. ",
+    image: "./car-thumbnail.jpeg",
+    link: "https://royalcarz.netlify.app/",
+    tech: ["Next.js", "Tailwind", "Booking System",  "Responsive Design",],
+    github: "https://github.com/Aafaque-Nazir/my-app",
+  },
 ];
 
 const Project = () => {
