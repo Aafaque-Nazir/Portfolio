@@ -68,22 +68,17 @@ const About = () => {
           className="bg-slate-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl"
         >
           <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
-            Hey there 👋 I’m{" "}
-            <span className="text-cyan-300 font-semibold">Aafaque Nazir</span>, a{" "}
-            <span className="text-cyan-300 font-semibold">Frontend Developer</span> based in{" "}
-            <span className="text-cyan-300 font-semibold">Navi Mumbai</span>.  
-            I craft sleek, interactive, and high-performing web experiences using{" "}
-            <span className="text-cyan-300 font-semibold">React</span>,{" "}
-            <span className="text-cyan-300 font-semibold">Next.js</span>, and{" "}
-            <span className="text-cyan-300 font-semibold">Tailwind CSS</span>.
+            I’m <span className="text-cyan-300 font-semibold">Aafaque Nazir</span>, a <span className="text-cyan-300 font-semibold">Frontend-First Full Stack Developer</span> based in Navi Mumbai.
+            <br /><br />
+            I specialize in <span className="text-white font-medium">engineering digital experiences</span> that are visually immersive and technically sound. 
+            My core strength lies in <span className="text-cyan-300 font-semibold">Advanced UI Engineering</span> (Next.js, Tailwind, Motion Design), where I craft the user journey.
+            <br /><br />
+            To deliver complete solutions, I architect <span className="text-purple-400 font-semibold">modern backend integrations</span> using <span className="text-teal-400 font-semibold">Supabase</span> and <span className="text-teal-400 font-semibold">Serverless</span> technologies—ensuring seamless data management without the overhead of legacy systems.
+            <br /><br />
+            I don't just write code; I <span className="text-white font-bold decoration-cyan-500 underline underline-offset-4">build products</span> that scale, ensuring every layer from the database to the pixel is optimized for performance.
             <br />
-            <br />
-            My work is guided by precision and passion — every component, animation, and pixel has a purpose.
-            I love blending aesthetics with usability, turning complex ideas into seamless digital experiences.
-            <br />
-            <br />
-            <span className="block mt-6 text-sm italic text-gray-500 border-t border-white/10 pt-4">
-              “Design is intelligence made visible — and code is how I give it life.”
+            <span className="block mt-8 text-sm italic text-gray-500 border-t border-white/10 pt-6">
+              “Focused on the Output. Powered by Modern Architecture.”
             </span>
           </p>
         </motion.div>

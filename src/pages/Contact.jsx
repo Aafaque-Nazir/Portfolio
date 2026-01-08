@@ -40,7 +40,7 @@ const Contact = () => {
       {/* 🌌 High-End Animated Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[10%] right-[5%] w-80 h-80 bg-teal-500/10 rounded-full blur-[150px] animate-pulse delay-700" />
+        <div className="absolute bottom-[10%] right-[5%] w-80 h-80 bg-cyan-600/10 rounded-full blur-[150px] animate-pulse delay-700" />
       </div>
 
       <Toaster position="top-right" reverseOrder={false} />
@@ -52,7 +52,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-cyan-300 via-teal-400 to-emerald-400 bg-clip-text text-transparent"
+            className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-500 bg-clip-text text-transparent"
           >
             Let's Collaborate
           </motion.h2>
@@ -93,7 +93,7 @@ const Contact = () => {
 
                     {/* Email */}
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-teal-400 ml-1">Email</label>
+                      <label className="text-sm font-semibold text-cyan-400 ml-1">Email</label>
                       <input
                         type="email"
                         placeholder="john@example.com"
@@ -104,7 +104,7 @@ const Contact = () => {
                             message: "Enter a valid email",
                           },
                         })}
-                        className="w-full p-4 rounded-2xl bg-slate-800/40 border border-white/5 placeholder-gray-500 text-white focus:outline-none focus:border-teal-500/50 focus:ring-4 focus:ring-teal-500/10 transition-all duration-300"
+                        className="w-full p-4 rounded-2xl bg-slate-800/40 border border-white/5 placeholder-gray-500 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-500/10 transition-all duration-300"
                       />
                       {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
                     </div>
@@ -112,12 +112,12 @@ const Contact = () => {
 
                   {/* Message */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-emerald-400 ml-1">Message</label>
+                    <label className="text-sm font-semibold text-cyan-400 ml-1">Message</label>
                     <textarea
                       rows="4"
                       placeholder="Tell me about your project..."
                       {...register("message", { required: "Message is required" })}
-                      className="w-full p-4 rounded-2xl bg-slate-800/40 border border-white/5 placeholder-gray-500 text-white focus:outline-none focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300 resize-none"
+                      className="w-full p-4 rounded-2xl bg-slate-800/40 border border-white/5 placeholder-gray-500 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-500/10 transition-all duration-300 resize-none"
                     ></textarea>
                     {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>}
                   </div>
@@ -128,7 +128,7 @@ const Contact = () => {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full relative group overflow-hidden bg-gradient-to-r from-cyan-400 via-teal-500 to-emerald-500 text-slate-950 font-black py-4 rounded-2xl shadow-xl transition-all duration-300 disabled:opacity-50"
+                    className="w-full relative group overflow-hidden bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 text-slate-950 font-black py-4 rounded-2xl shadow-xl transition-all duration-300 disabled:opacity-50"
                   >
                     {/* Glossy Sheen Effect */}
                     <div className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-sheen" />
