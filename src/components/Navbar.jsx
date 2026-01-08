@@ -34,7 +34,7 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className='hidden lg:flex gap-7'>
-          {['Home', 'About', 'Projects', 'Contact'].map((text) => (
+          {['Home', 'About', 'Projects', 'Services', 'Contact'].map((text) => (
             <li key={text} className='font-bold text-lg tracking-wider hover:scale-90 hover:animate-pulse transition-transform duration-400'>
               <a href={`#${text.toLowerCase()}`} className="hover:text-cyan-300">
                 {text}
@@ -78,7 +78,7 @@ export default function Navbar() {
 
               {/* Navigation links */}
               <ul className='flex flex-col items-center justify-center gap-8 px-6 mt-12'>
-                {['Home', 'About', 'Projects', 'Contact'].map((text, index) => (
+                {['Home', 'About', 'Projects', 'Services', 'Contact'].map((text, index) => (
                   <motion.li
                     key={text}
                     initial={{ opacity: 0, x: 50 }}
