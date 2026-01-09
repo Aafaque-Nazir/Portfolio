@@ -9,7 +9,7 @@ const Services = () => {
   const packages = [
     {
       title: "The Launchpad",
-      price: "₹8,000",
+      price: "₹6,000",
       description: "Ideal for personal brands & portfolios. Fast, sleek, and high-impact.",
       features: [
         "Single Page Application (SPA)",
@@ -25,7 +25,7 @@ const Services = () => {
     },
     {
       title: "The Growth",
-      price: "₹20,000",
+      price: "₹15,000",
       description: "Perfect for businesses needing a CMS and multiple pages to scale.",
       features: [
         "5-8 Premium Pages",
@@ -42,7 +42,7 @@ const Services = () => {
     },
     {
       title: "The Empire",
-      price: "₹45,000",
+      price: "₹50,000",
       description: "Full-stack custom solution for startups and complex requirements.",
       features: [
         "Custom SaaS / Web App",
