@@ -187,7 +187,7 @@ const Contact = () => {
                 {[
                   { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/aafaque-nazir/" },
                   { icon: <FaGithub />, href: "https://github.com/Aafaque-Nazir" },
-                  { icon: <FaEnvelope />, href: "mailto:aafaquebuisness@gmail.com" },
+                  { icon: <FaEnvelope />, href: "mailto:aafaquenazir@gmail.com" },
                   { icon: <FaWhatsapp />, href: "https://wa.me/919325629256" }
                 ].map((social, idx) => (
                   <motion.a

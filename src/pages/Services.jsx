@@ -29,7 +29,7 @@ const Services = () => {
       description: "Perfect for businesses needing a CMS and multiple pages to scale.",
       features: [
         "5-8 Premium Pages",
-        "Admin Dashboard / CMS",
+        "Admin Dashboard / Basic CMS",
         "Dynamic Blog & News Section",
         "Analytics & Map Integration",
         "Speed Optimization (Green Score)"

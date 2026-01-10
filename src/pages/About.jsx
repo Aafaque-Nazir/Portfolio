@@ -123,7 +123,7 @@ const About = () => {
                   <div className="flex flex-wrap items-center gap-3 mt-2">
                     <p className="text-cyan-400/90 font-semibold tracking-wide">University of Mumbai</p>
                     <span className="px-3 py-1 bg-cyan-500/10 text-cyan-300 text-[11px] font-bold uppercase tracking-wider rounded-lg border border-cyan-500/20">
-                      2021 - 2024
+                      2024
                     </span>
                   </div>
                 </div>
