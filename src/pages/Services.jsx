@@ -9,13 +9,13 @@ const Services = () => {
   const packages = [
     {
       title: "The Launchpad",
-      price: "₹6,000",
+      price: "₹4,999",
       description: "Ideal for personal brands & portfolios. Fast, sleek, and high-impact.",
       features: [
         "Single Page Application (SPA)",
         "Mobile-First Responsive Design",
         "SEO-Ready Architecture",
-        "Contact Form Integration",
+        "Contact Form & WhatsApp Chat",
         "Free Deployment Setup"
       ],
       recommendedFor: "Starters",
@@ -25,13 +25,13 @@ const Services = () => {
     },
     {
       title: "The Growth",
-      price: "₹15,000",
+      price: "₹13,999",
       description: "Perfect for businesses needing a CMS and multiple pages to scale.",
       features: [
         "5-8 Premium Pages",
         "Admin Dashboard / Basic CMS",
-        "Dynamic Blog & News Section",
-        "Analytics & Map Integration",
+        "On Page SEO",
+        "Google Maps & Analytics",
         "Speed Optimization (Green Score)"
       ],
       recommendedFor: "Scaling",
@@ -42,13 +42,13 @@ const Services = () => {
     },
     {
       title: "The Empire",
-      price: "₹50,000",
+      price: "₹47,999",
       description: "Full-stack custom solution for startups and complex requirements.",
       features: [
-        "Custom SaaS / Web App",
+        "Custom SaaS / E-commerce App",
         "Secure User Auth (Login/DB)",
         "Real-time Data & Inventory",
-        "Payment Gateway (Stripe/Razorpay)",
+        "UPI & International Payments",
         "1 Month Priority Support"
       ],
       recommendedFor: "Enterprise",
@@ -61,10 +61,10 @@ const Services = () => {
   const addons = [
     {
       id: 1,
-      title: "Domain & Server Config",
-      price: "₹1,999",
+      title: "Domain & Hosting Setup",
+      price: "₹1,599",
       type: "One-time",
-      description: "Complete setup: Custom Domain (DNS), Free SSL (Green Lock)",
+      description: "Hassle-free launch: Custom Domain connection, DNS Management & Free SSL (Green Lock).",
       icon: <FaServer />,
       color: "text-blue-400",
       bg: "bg-blue-400/10",
@@ -72,10 +72,10 @@ const Services = () => {
     },
     {
       id: 2,
-      title: "Monthly Maintenance",
-      price: "₹2,499",
+      title: "Priority Support",
+      price: "₹999",
       type: "Per Month",
-      description: "Peace of mind: Regular backups, security monitoring, and 3 minor content updates monthly.",
+      description: "On-demand content updates via WhatsApp, weekly backups & security monitoring.",
       icon: <FaTools />,
       color: "text-amber-400",
       bg: "bg-amber-400/10",
@@ -83,26 +83,15 @@ const Services = () => {
     },
     {
       id: 3,
-      title: "Advanced Animations",
+      title: "UI/UX & 3D Magic",
       price: "Custom Quote",
       type: "Project Based",
-      description: "GSAP/Framer Motion integration. 3D elements, scroll-triggers, and micro-interactions for a premium feel.",
+      description: "GSAP/Framer Motion animations and 3D product visuals for a premium brand feel.",
       icon: <FaMagic />,
       color: "text-fuchsia-400",
       bg: "bg-fuchsia-400/10",
       border: "hover:border-fuchsia-400/50"
     },
-    {
-      id: 4,
-      title: "SEO Booster Pack",
-      price: "₹4,999",
-      type: "One-time",
-      description: "Technical SEO setup: Sitemap, Robot.txt, Meta Tags, and Google My Business profile setup.",
-      icon: <FaSearchPlus />,
-      color: "text-emerald-400",
-      bg: "bg-emerald-400/10",
-      border: "hover:border-emerald-400/50"
-    }
   ];
 
   return (
@@ -222,7 +211,7 @@ const Services = () => {
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent mt-6 rounded-full" />
            </div>
 
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative max-w-7xl mx-auto">
              {/* Decorative Background Elements for the Grid */}
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-cyan-500/5 blur-[100px] pointer-events-none rounded-full" />
 
