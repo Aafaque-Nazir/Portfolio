@@ -9,7 +9,8 @@ const Services = () => {
   const packages = [
     {
       title: "The Launchpad",
-      price: "₹4,999",
+      oldPrice: "₹4,999",
+      price: "₹3,999",
       description: "Ideal for personal brands & portfolios. Fast, sleek, and high-impact.",
       features: [
         "Single Page Application (SPA)",
@@ -19,13 +20,14 @@ const Services = () => {
         "Free Deployment Setup"
       ],
       recommendedFor: "Starters",
-      icon: <FaRocket className="text-3xl text-cyan-400" />,
+      icon: <FaRocket className="text-3xl text-cyan-400 group-hover:text-cyan-300 transition-colors" />,
       accentColor: "cyan",
       delay: 0
     },
     {
       title: "The Growth",
-      price: "₹13,999",
+      oldPrice: "₹13,999",
+      price: "₹9,999",
       description: "Perfect for businesses needing a CMS and multiple pages to scale.",
       features: [
         "5-8 Premium Pages",
@@ -35,14 +37,16 @@ const Services = () => {
         "Speed Optimization (Green Score)"
       ],
       recommendedFor: "Scaling",
-      icon: <FaChartLine className="text-3xl text-teal-400" />,
+      icon: <FaChartLine className="text-3xl text-teal-400 group-hover:text-teal-300 transition-colors" />,
       accentColor: "teal",
       highlight: true,
+      popularBadge: "MOST POPULAR",
       delay: 0.2
     },
     {
       title: "The Empire",
-      price: "₹47,999",
+      oldPrice: "₹47,999",
+      price: "₹39,999",
       description: "Full-stack custom solution for startups and complex requirements.",
       features: [
         "Custom SaaS / E-commerce App",
@@ -52,7 +56,7 @@ const Services = () => {
         "1 Month Priority Support"
       ],
       recommendedFor: "Enterprise",
-      icon: <FaCrown className="text-3xl text-purple-400" />,
+      icon: <FaCrown className="text-3xl text-purple-400 group-hover:text-purple-300 transition-colors" />,
       accentColor: "purple",
       delay: 0.4
     }
@@ -120,12 +124,15 @@ const Services = () => {
         </motion.div>
 
         {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2 mb-32 relative z-10">
           {packages.map((pkg, index) => {
              const isHighlight = pkg.highlight;
              const baseBorder = isHighlight ? "border-teal-500/50" : "border-white/10";
              const hoverBorder = isHighlight ? "hover:border-teal-400" : "hover:border-cyan-400/50";
              const shadowColor = isHighlight ? "shadow-teal-500/20" : "shadow-cyan-500/10";
+             const btnColor = isHighlight 
+                ? "bg-gradient-to-r from-teal-500 to-emerald-500 text-white shadow-[0_0_20px_rgba(20,184,166,0.4)] hover:shadow-teal-500/50"
+                : "bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-cyan-400/30";
 
              return (
               <motion.div
@@ -134,66 +141,86 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: pkg.delay }}
                 viewport={{ once: true }}
-                className={`relative group flex flex-col p-1 rounded-2xl transition-all duration-500 hover:-translate-y-2
-                  ${isHighlight ? "lg:-mt-8 lg:mb-8 z-20" : "z-10"}
+                className={`relative group flex flex-col rounded-3xl transition-all duration-500 hover:-translate-y-2
+                  ${isHighlight ? "lg:-mt-12 lg:mb-4 z-20 scale-105" : "z-10"}
                 `}
               >
-                {/* Cyberpunk Border Effect */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                {/* Glow Effect */}
+                <div className={`absolute -inset-0.5 rounded-3xl bg-gradient-to-b from-white/20 to-transparent opacity-0 group-hover:opacity-100 blur transition-opacity duration-500`} />
                 
                 {/* Card Content */}
-                <div className={`relative h-full flex flex-col p-8 rounded-xl bg-slate-900/80 backdrop-blur-xl border ${baseBorder} ${hoverBorder} shadow-2xl ${shadowColor} transition-all duration-300 overflow-hidden`}>
+                <div className={`relative h-full flex flex-col p-8 rounded-3xl bg-[#0a0f1c]/90 backdrop-blur-xl border ${baseBorder} ${hoverBorder} shadow-2xl ${shadowColor} transition-all duration-300 overflow-hidden`}>
                   
                   {/* Decorative "Tech" Lines */}
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-white/5 to-transparent -mr-10 -mt-10 rounded-full blur-2xl pointer-events-none" />
-                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-cyan-500/10 to-transparent -ml-16 -mb-16 rounded-full blur-3xl pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/5 to-transparent -mr-16 -mt-16 rounded-full blur-2xl pointer-events-none group-hover:bg-white/10 transition-colors" />
+                  <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-cyan-500/5 to-transparent -ml-20 -mb-20 rounded-full blur-3xl pointer-events-none" />
                   
-                  <div className="flex justify-between items-start mb-6 w-full">
-                    <div className={`p-3 rounded-lg bg-slate-800/50 border border-white/5 shadow-inner`}>
+                  {/* Header Section */}
+                  <div className="flex justify-between items-start mb-6 w-full relative">
+                    <div className={`p-4 rounded-2xl bg-slate-800/50 border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-500`}>
                       {pkg.icon}
                     </div>
                     {isHighlight && (
-                      <span className="px-3 py-1 text-xs font-bold text-teal-950 bg-teal-400 rounded-full shadow-[0_0_10px_rgba(45,212,191,0.6)] animate-pulse">
-                        POPULAR
+                      <span className="absolute -top-2 -right-2 px-3 py-1 text-[10px] font-extrabold text-teal-950 bg-teal-400 rounded-full shadow-[0_0_10px_rgba(45,212,191,0.6)] animate-pulse uppercase tracking-wider">
+                        {pkg.popularBadge}
                       </span>
+                    )}
+                    {!isHighlight && (
+                       <span className="px-3 py-1 text-[10px] font-bold text-cyan-300 bg-cyan-950/50 border border-cyan-500/30 rounded-full uppercase tracking-wider">
+                         {pkg.recommendedFor}
+                       </span>
                     )}
                   </div>
 
-                  <h3 className="text-2xl font-bold text-white mb-1 tracking-wide">{pkg.title}</h3>
-                  <div className="flex items-baseline gap-1 mb-4">
-                     <span className="text-sm text-gray-500 font-mono">Starts at</span>
-                     <span className={`text-3xl font-bold text-white ml-2`}>
-                       {pkg.price}
-                     </span>
-                  </div>
-
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6 border-b border-white/5 pb-6">
+                  {/* Title & Description */}
+                  <h3 className="text-2xl font-bold text-white mb-2 tracking-wide group-hover:text-cyan-100 transition-colors">{pkg.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6 h-10 line-clamp-2">
                     {pkg.description}
                   </p>
 
-                  <ul className="space-y-3 mb-8 flex-grow">
-                    {pkg.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-sm text-gray-300">
-                        <FaCheck className={`mt-1 flex-shrink-0 
-                          ${pkg.accentColor === 'cyan' ? 'text-cyan-400' : ''}
-                          ${pkg.accentColor === 'teal' ? 'text-teal-400' : ''}
-                          ${pkg.accentColor === 'purple' ? 'text-purple-400' : ''}
-                        `} size={12} />
-                        <span className="group-hover:text-white transition-colors duration-300">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Pricing Section - REDESIGNED */}
+                  <div className="mb-8 p-4 rounded-2xl bg-white/5 border border-white/5 group-hover:border-white/10 transition-colors">
+                    <div className="flex flex-col">
+                        <span className="text-xs font-mono text-gray-500 uppercase mb-1">Limited Offer</span>
+                        <div className="flex items-baseline gap-3">
+                            <span className="text-lg text-gray-500 line-through decoration-red-500/50 decoration-2 font-medium">
+                                {pkg.oldPrice}
+                            </span>
+                            <span className={`text-4xl font-extrabold text-white tracking-tight`}>
+                                {pkg.price}
+                            </span>
+                        </div>
+                    </div>
+                  </div>
 
+                  {/* Features List */}
+                  <div className="flex-grow space-y-4 mb-8">
+                    {pkg.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-start gap-3 text-sm text-gray-300 group/item">
+                        <div className={`mt-1 p-0.5 rounded-full bg-slate-800 border border-slate-700/50 flex-shrink-0
+                          ${pkg.accentColor === 'cyan' ? 'group-hover/item:border-cyan-500/50 group-hover/item:text-cyan-400' : ''}
+                          ${pkg.accentColor === 'teal' ? 'group-hover/item:border-teal-500/50 group-hover/item:text-teal-400' : ''}
+                          ${pkg.accentColor === 'purple' ? 'group-hover/item:border-purple-500/50 group-hover/item:text-purple-400' : ''}
+                        `}>
+                            <FaCheck size={10} />
+                        </div>
+                        <span className="group-hover:text-white transition-colors duration-300 leading-snug">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
                   <a
                     href="#contact"
-                    className={`relative w-full py-3.5 rounded-lg font-bold text-center uppercase tracking-wider text-sm transition-all duration-300 overflow-hidden group/btn
-                      ${isHighlight 
-                        ? "bg-teal-500 text-slate-950 shadow-[0_0_20px_rgba(20,184,166,0.4)] hover:bg-teal-400" 
-                        : "bg-white/5 border border-white/10 text-white hover:bg-cyan-500/20 hover:border-cyan-400/50"
-                      }
+                    className={`relative w-full py-4 rounded-xl font-bold text-center uppercase tracking-widest text-xs transition-all duration-300 overflow-hidden transform group-hover:scale-[1.02] active:scale-[0.98]
+                      ${btnColor}
                     `}
                   >
-                    Select Plan
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                        Get Started <FaArrowRight />
+                    </span>
+                    {/* Button Shine Effect */}
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
                   </a>
                 </div>
               </motion.div>
