@@ -9,8 +9,8 @@ const Services = () => {
   const packages = [
     {
       title: "The Launchpad",
-      oldPrice: "₹4,999",
-      price: "₹3,999",
+      oldPrice: "₹6,999",
+      price: "₹4,999",
       description: "Ideal for personal brands & portfolios. Fast, sleek, and high-impact.",
       features: [
         "Single Page Application (SPA)",
@@ -27,7 +27,7 @@ const Services = () => {
     {
       title: "The Growth",
       oldPrice: "₹13,999",
-      price: "₹9,999",
+      price: "₹10,999",
       description: "Perfect for businesses needing a CMS and multiple pages to scale.",
       features: [
         "5-8 Premium Pages",
@@ -66,7 +66,7 @@ const Services = () => {
     {
       id: 1,
       title: "Domain & Hosting Setup",
-      price: "₹1,599",
+      price: "₹699",
       type: "One-time",
       description: "Hassle-free launch: Custom Domain connection, DNS Management & Free SSL (Green Lock).",
       icon: <FaServer />,
@@ -84,17 +84,6 @@ const Services = () => {
       color: "text-amber-400",
       bg: "bg-amber-400/10",
       border: "hover:border-amber-400/50"
-    },
-    {
-      id: 3,
-      title: "UI/UX & 3D Magic",
-      price: "Custom Quote",
-      type: "Project Based",
-      description: "GSAP/Framer Motion animations and 3D product visuals for a premium brand feel.",
-      icon: <FaMagic />,
-      color: "text-fuchsia-400",
-      bg: "bg-fuchsia-400/10",
-      border: "hover:border-fuchsia-400/50"
     },
   ];
 
@@ -238,7 +227,7 @@ const Services = () => {
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent mt-6 rounded-full" />
            </div>
 
-           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative max-w-7xl mx-auto">
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative max-w-7xl mx-auto">
              {/* Decorative Background Elements for the Grid */}
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-cyan-500/5 blur-[100px] pointer-events-none rounded-full" />
 
@@ -262,7 +251,7 @@ const Services = () => {
                         <h4 className="text-xl font-bold text-white group-hover:text-cyan-100 transition-colors">
                           {addon.title}
                         </h4>
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold border border-white/10 ${addon.color} ${addon.bg} uppercase tracking-wider`}>
+                        <span className={`w-fit px-3 py-1 rounded-full text-xs font-bold border border-white/10 ${addon.color} ${addon.bg} uppercase tracking-wider`}>
                           {addon.price}
                         </span>
                       </div>
