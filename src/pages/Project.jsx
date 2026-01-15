@@ -55,7 +55,7 @@ const projects = [
       "A comprehensive bus operator dashboard featuring real-time seat management, automated manifest generation, and seamless WhatsApp integration.",
     image: "./bus-booked-thumbnail.png",
     link: "https://bus-booked.netlify.app/",
-    tech: ["Next.js", "Booking Logic", "Framer"],
+    tech: ["Next.js", "Booking Logic", "Supabase"],
     id: 6,
   },
 ];
