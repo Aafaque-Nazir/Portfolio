@@ -36,7 +36,7 @@ const projects = [
     description:
       "An end-to-end Restaurant OS that streamlines operations with direct table-to-kitchen ordering, eliminating service bottlenecks and errors in real-time.",
     image: "./smart-dining-thumbnail.png",
-    link: "https://bread-and-bite.netlify.app/",
+    link: "https://korner-kafe.netlify.app/",
     tech: ["Next.js 16", "Tailwind CSS 4", "PostgreSQL"],
     id: 4,
   },
@@ -48,6 +48,15 @@ const projects = [
     link: "https://royalcarz.netlify.app/",
     tech: ["Next.js", "Booking Logic", "Framer"],
     id: 5,
+  },
+  {
+    title: "Bus Booked",
+    description:
+      "A comprehensive bus operator dashboard featuring real-time seat management, automated manifest generation, and seamless WhatsApp integration.",
+    image: "./bus-booked-thumbnail.png",
+    link: "https://bus-booked.netlify.app/",
+    tech: ["Next.js", "Booking Logic", "Framer"],
+    id: 6,
   },
 ];
 
@@ -116,6 +125,7 @@ const Project = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ["start start", "end end"],
   });
 
   // Adjusted transformation range to start more centrally and end with the last card visible
@@ -127,6 +137,7 @@ const Project = () => {
       ref={targetRef}
       id="projects"
       className="relative h-[300vh] bg-slate-950"
+      style={{ position: "relative" }}
     >
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
         {/* Title */}
@@ -136,12 +147,12 @@ const Project = () => {
           </h2>
         </div>
 
-        <div className="absolute top-16 md:top-24 left-0 w-full flex justify-center z-20 pointer-events-none mix-blend-overlay">
+        <div className="absolute top-20 md:top-24 left-0 w-full flex justify-center z-20 pointer-events-none mix-blend-overlay">
           <motion.h2
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="text-5xl md:text-8xl font-black uppercase tracking-tighter text-transparent"
+            className="text-[12vw] md:text-8xl font-black uppercase tracking-tighter text-transparent leading-none text-center px-4"
             style={{ WebkitTextStroke: "1px rgba(255,255,255,0.3)" }}
           >
             Featured Projects
@@ -153,7 +164,7 @@ const Project = () => {
         <div className="w-full flex items-center mt-20 md:mt-0">
           <motion.div
             style={{ x }}
-            className="flex gap-8 md:gap-12 pl-4 md:pl-20"
+            className="flex gap-8 md:gap-12 pl-4 md:pl-20 pr-8 md:pr-20"
           >
             {projects.map((project) => (
               <ProjectCard project={project} key={project.id} />
@@ -162,7 +173,7 @@ const Project = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 flex flex-col items-center gap-2 text-gray-500 animate-pulse">
+        <div className="absolute bottom-8 flex flex-col items-center gap-2 text-gray-500 animate-pulse z-50">
           <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
           <div className="w-[1px] h-8 bg-gradient-to-b from-cyan-500 to-transparent" />
         </div>

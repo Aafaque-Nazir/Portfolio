@@ -19,13 +19,14 @@ const Home = () => {
           {/* Animated Gradient Orbs */}
           <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-cyan-500/10 blur-[100px] animate-pulse" />
           <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-purple-500/10 blur-[100px] animate-pulse delay-1000" />
-          
+
           {/* Tech Grid Overlay */}
-          <div 
-            className="absolute inset-0 opacity-[0.15]" 
-            style={{ 
-              backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)', 
-              backgroundSize: '50px 50px' 
+          <div
+            className="absolute inset-0 opacity-[0.15]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
+              backgroundSize: "50px 50px",
             }}
           />
 
@@ -47,7 +48,6 @@ const Home = () => {
 
         {/* 🚀 Main Content Container */}
         <div className="relative z-10 w-full max-w-7xl px-4 md:px-6 flex flex-col items-center justify-center text-center h-screen pt-16">
-          
           {/* Floating 'Status' Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -78,7 +78,7 @@ const Home = () => {
                 NAZIR
               </span>
             </motion.h1>
-            
+
             {/* Decorative 'Ghost' Text behind */}
             <h1 className="absolute top-1 left-1/2 -translate-x-1/2 w-full text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-cyan-500/10 -z-10 select-none blur-sm animate-pulse leading-tight">
               AAFAQUE
@@ -89,13 +89,13 @@ const Home = () => {
 
           {/* Subheadline */}
           <div className="h-auto min-h-[30px] md:h-10 mb-4 flex items-center justify-center px-2">
-             <BlurText
-               text="FRONTEND ARCHITECT & PRODUCT ENGINEER"
-               delay={100}
-               animateBy="letters"
-               direction="bottom"
-               className="text-cyan-400/80 text-xs sm:text-sm md:text-lg font-mono tracking-[0.2em] md:tracking-[0.3em] uppercase font-bold text-wrap"
-             />
+            <BlurText
+              text="FRONTEND ARCHITECT & PRODUCT ENGINEER"
+              delay={100}
+              animateBy="letters"
+              direction="bottom"
+              className="text-cyan-400/80 text-xs sm:text-sm md:text-lg font-mono tracking-[0.2em] md:tracking-[0.3em] uppercase font-bold text-wrap"
+            />
           </div>
 
           {/* Description */}
@@ -129,7 +129,19 @@ const Home = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-300 via-teal-300 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative z-10 flex items-center gap-2">
                 Let's Build Impact
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                <svg
+                  className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  ></path>
+                </svg>
               </span>
             </a>
 
@@ -143,29 +155,16 @@ const Home = () => {
                 <span>Download CV</span>
               </a>
 
-              <a 
-                href="https://github.com/Aafaque-Nazir" 
-                target="_blank" 
+              <a
+                href="https://github.com/Aafaque-Nazir"
+                target="_blank"
                 className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/30 hover:text-white text-gray-400 transition-all flex items-center justify-center aspect-square"
               >
                 <FaGithub size={20} />
               </a>
             </div>
           </motion.div>
-
         </div>
-
-        {/* Bottom Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: [0, 10, 0] }}
-          transition={{ delay: 1, duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center pt-2">
-            <div className="w-1 m-1 h-1 bg-cyan-400 rounded-full animate-bounce" />
-          </div>
-        </motion.div>
       </section>
     </>
   );

@@ -90,12 +90,17 @@ const Contact = () => {
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Name */}
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-cyan-400 ml-1">
+                      <label
+                        htmlFor="name"
+                        className="text-sm font-semibold text-cyan-400 ml-1"
+                      >
                         Name
                       </label>
                       <input
+                        id="name"
                         type="text"
                         placeholder="John Doe"
+                        autoComplete="name"
                         {...register("name", { required: "Name is required" })}
                         className="w-full p-4 rounded-2xl bg-slate-800/40 border border-white/5 placeholder-gray-500 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-500/10 transition-all duration-300"
                       />
@@ -108,12 +113,17 @@ const Contact = () => {
 
                     {/* Email */}
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-cyan-400 ml-1">
+                      <label
+                        htmlFor="email"
+                        className="text-sm font-semibold text-cyan-400 ml-1"
+                      >
                         Email
                       </label>
                       <input
+                        id="email"
                         type="email"
                         placeholder="john@example.com"
+                        autoComplete="email"
                         {...register("email", {
                           required: "Email is required",
                           pattern: {
@@ -133,12 +143,17 @@ const Contact = () => {
 
                   {/* Message */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-cyan-400 ml-1">
+                    <label
+                      htmlFor="message"
+                      className="text-sm font-semibold text-cyan-400 ml-1"
+                    >
                       Message
                     </label>
                     <textarea
+                      id="message"
                       rows="4"
                       placeholder="Tell me about your project..."
+                      autoComplete="off"
                       {...register("message", {
                         required: "Message is required",
                       })}
@@ -155,7 +170,7 @@ const Contact = () => {
                   <motion.button
                     whileHover={{
                       scale: 1.02,
-                      boxShadow: "0 0 20px rgba(6,182,212,0.3)",
+                      boxShadow: "0 0 20px #06b6d4",
                     }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
@@ -244,7 +259,7 @@ const Contact = () => {
                     whileHover={{
                       scale: 1.05,
                       y: -2,
-                      borderColor: "rgba(6,182,212,0.5)",
+                      borderColor: "#06b6d4",
                       boxShadow: "0 0 20px rgba(6,182,212,0.2)",
                     }}
                     className="flex items-center justify-center gap-3 py-4 rounded-2xl transition-all bg-slate-800/40 text-cyan-400 border border-white/10 shadow-lg group hover:bg-slate-800/60"
