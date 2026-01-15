@@ -3,7 +3,7 @@ import { IoIosSend } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { FaLinkedin, FaGithub, FaEnvelope , FaWhatsapp } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaEnvelope, FaWhatsapp } from "react-icons/fa";
 
 const Contact = () => {
   const {
@@ -15,11 +15,14 @@ const Contact = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await fetch("https://formsubmit.co/aafaquebuisness@gmail.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const res = await fetch(
+        "https://formsubmit.co/aafaquebuisness@gmail.com",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (res.ok) {
         toast.success("Message sent successfully 🚀");
@@ -62,7 +65,8 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-medium"
           >
-            Ready to turn your vision into a digital masterpiece? <br className="hidden md:block" />
+            Ready to turn your vision into a digital masterpiece?{" "}
+            <br className="hidden md:block" />
             Drop a message and let's make it happen.
           </motion.p>
         </div>
@@ -75,25 +79,33 @@ const Contact = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <div className="relative group p-[1px] rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-transparent">
-              <div className="relative bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-8 md:p-10 shadow-2xl">
+            <div className="relative group p-[1px] rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-transparent h-full">
+              <div className="relative bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-8 md:p-10 shadow-2xl h-full flex flex-col justify-center">
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Name */}
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-cyan-400 ml-1">Name</label>
+                      <label className="text-sm font-semibold text-cyan-400 ml-1">
+                        Name
+                      </label>
                       <input
                         type="text"
                         placeholder="John Doe"
                         {...register("name", { required: "Name is required" })}
                         className="w-full p-4 rounded-2xl bg-slate-800/40 border border-white/5 placeholder-gray-500 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-500/10 transition-all duration-300"
                       />
-                      {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name.message}</p>}
+                      {errors.name && (
+                        <p className="text-red-400 text-xs mt-1">
+                          {errors.name.message}
+                        </p>
+                      )}
                     </div>
 
                     {/* Email */}
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-cyan-400 ml-1">Email</label>
+                      <label className="text-sm font-semibold text-cyan-400 ml-1">
+                        Email
+                      </label>
                       <input
                         type="email"
                         placeholder="john@example.com"
@@ -106,25 +118,40 @@ const Contact = () => {
                         })}
                         className="w-full p-4 rounded-2xl bg-slate-800/40 border border-white/5 placeholder-gray-500 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-500/10 transition-all duration-300"
                       />
-                      {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
+                      {errors.email && (
+                        <p className="text-red-400 text-xs mt-1">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   {/* Message */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-cyan-400 ml-1">Message</label>
+                    <label className="text-sm font-semibold text-cyan-400 ml-1">
+                      Message
+                    </label>
                     <textarea
                       rows="4"
                       placeholder="Tell me about your project..."
-                      {...register("message", { required: "Message is required" })}
+                      {...register("message", {
+                        required: "Message is required",
+                      })}
                       className="w-full p-4 rounded-2xl bg-slate-800/40 border border-white/5 placeholder-gray-500 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-500/10 transition-all duration-300 resize-none"
                     ></textarea>
-                    {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>}
+                    {errors.message && (
+                      <p className="text-red-400 text-xs mt-1">
+                        {errors.message.message}
+                      </p>
+                    )}
                   </div>
 
                   {/* Submit Button */}
                   <motion.button
-                    whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(6,182,212,0.3)" }}
+                    whileHover={{
+                      scale: 1.02,
+                      boxShadow: "0 0 20px rgba(6,182,212,0.3)",
+                    }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isSubmitting}
@@ -132,12 +159,15 @@ const Contact = () => {
                   >
                     {/* Glossy Sheen Effect */}
                     <div className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-sheen" />
-                    
+
                     <div className="relative flex items-center justify-center gap-3">
                       {isSubmitting ? (
                         <div className="w-6 h-6 border-4 border-slate-950/30 border-t-slate-950 rounded-full animate-spin" />
                       ) : (
-                        <IoIosSend size={24} className="group-hover:rotate-12 transition-transform" />
+                        <IoIosSend
+                          size={24}
+                          className="group-hover:rotate-12 transition-transform"
+                        />
                       )}
                       <span className="text-lg uppercase tracking-wider">
                         {isSubmitting ? "Sending..." : "Send Message"}
@@ -170,40 +200,54 @@ const Contact = () => {
               ></iframe>
               <div className="absolute inset-0 bg-cyan-500/5 pointer-events-none group-hover:opacity-0 transition-opacity" />
               <div className="absolute bottom-4 left-4 right-4 bg-slate-900/80 backdrop-blur-md p-3 rounded-xl border border-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
-                <p className="text-xs font-medium text-cyan-300">📍 Taloja, Navi Mumbai, Maharashtra</p>
+                <p className="text-xs font-medium text-cyan-300">
+                  📍 Taloja, Navi Mumbai, Maharashtra
+                </p>
               </div>
             </div>
 
             {/* Social & Contact Info */}
             <div className="flex-1 bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col justify-between">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-2 underline decoration-cyan-500/30 underline-offset-8">Direct Connections</h3>
+                <h3 className="text-2xl font-bold text-white mb-2 underline decoration-cyan-500/30 underline-offset-8">
+                  Direct Connections
+                </h3>
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed mt-4">
-                  Have a specific inquiry or just want to chat? Reach out through any of these premium channels.
+                  Have a specific inquiry or just want to chat? Reach out
+                  through any of these premium channels.
                 </p>
               </div>
 
-              <div className="grid grid-cols-4 gap-4 mb-6">
+              <div className="grid grid-cols-2 gap-4 mb-6">
                 {[
-                  { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/aafaque-nazir/" },
-                  { icon: <FaGithub />, href: "https://github.com/Aafaque-Nazir" },
-                  { icon: <FaEnvelope />, href: "mailto:aafaquenazir@gmail.com" },
-                  { icon: <FaWhatsapp />, href: "https://wa.me/919325629256" }
+                  {
+                    icon: <FaEnvelope />,
+                    href: "mailto:aafaquenazir@gmail.com",
+                    label: "Email",
+                  },
+                  {
+                    icon: <FaWhatsapp />,
+                    href: "https://wa.me/919325629256",
+                    label: "WhatsApp",
+                  },
                 ].map((social, idx) => (
                   <motion.a
                     key={idx}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ 
-                      scale: 1.1, 
-                      y: -5,
+                    whileHover={{
+                      scale: 1.05,
+                      y: -2,
                       borderColor: "rgba(6,182,212,0.5)",
-                      boxShadow: "0 0 20px rgba(6,182,212,0.2)"
+                      boxShadow: "0 0 20px rgba(6,182,212,0.2)",
                     }}
-                    className="aspect-square flex items-center justify-center rounded-2xl text-2xl transition-all bg-slate-800/40 text-cyan-400 border border-white/10 shadow-lg"
+                    className="flex items-center justify-center gap-3 py-4 rounded-2xl transition-all bg-slate-800/40 text-cyan-400 border border-white/10 shadow-lg group hover:bg-slate-800/60"
                   >
-                    {social.icon}
+                    <span className="text-2xl">{social.icon}</span>
+                    <span className="font-semibold text-sm uppercase tracking-wide text-gray-300 group-hover:text-white transition-colors">
+                      {social.label}
+                    </span>
                   </motion.a>
                 ))}
               </div>
