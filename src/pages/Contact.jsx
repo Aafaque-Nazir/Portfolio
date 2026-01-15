@@ -20,7 +20,12 @@ const Contact = () => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            ...data,
+            _captcha: "false",
+            _template: "table",
+            _subject: `New Portfolio Message from ${data.name}`,
+          }),
         }
       );
 
@@ -112,7 +117,7 @@ const Contact = () => {
                         {...register("email", {
                           required: "Email is required",
                           pattern: {
-                            value: /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/,
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                             message: "Enter a valid email",
                           },
                         })}
