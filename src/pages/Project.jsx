@@ -37,7 +37,7 @@ const projects = [
       "An end-to-end Restaurant OS that streamlines operations with direct table-to-kitchen ordering, eliminating service bottlenecks and errors in real-time.",
     image: "./smart-dining-thumbnail.png",
     link: "https://korner-kafe.netlify.app/",
-    tech: ["Next.js 16", "Tailwind CSS 4", "PostgreSQL"],
+    tech: ["Next.js", "Tailwind", "PostgreSQL"],
     id: 4,
   },
   {
