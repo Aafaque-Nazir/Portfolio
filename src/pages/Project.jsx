@@ -7,7 +7,7 @@ const projects = [
   {
     title: "Inventory System",
     description:
-      "Full-stack dashboard with RBAC, realtime stock tracking & automated orders.",
+      "Eliminates operational chaos with real-time stock tracking and automated reordering.",
     image: "./inventory-thumbnail.png",
     link: "https://nvntory-mgm.vercel.app/",
     tech: ["Next.js", "Supabase", "ShadCN"],
@@ -16,7 +16,7 @@ const projects = [
   {
     title: "Ecommerce Store",
     description:
-      "Modern shopping platform with cart logic, secure auth & checkout flow.",
+      "Converts visitors into loyal customers with a seamless, secure shopping experience.",
     image: "./ecommerce-thumbnail.png",
     link: "https://shopease-aafaque.netlify.app/",
     tech: ["Next.js", "Redux", "Stripe"],
@@ -25,7 +25,7 @@ const projects = [
   {
     title: "Restaurant App",
     description:
-      "Speed-focused food ordering app optimized for WhatsApp conversions.",
+      "Streamlines food ordering to reduce wait times and maximize table turnover.",
     image: "./resturant-thumbnail.png",
     link: "https://bread-and-bite.netlify.app/",
     tech: ["React", "WhatsApp API", "Tailwind"],
@@ -35,19 +35,19 @@ const projects = [
     title: "Smart Dining OS",
     description:
       "An end-to-end Restaurant OS that streamlines operations with direct table-to-kitchen ordering, eliminating service bottlenecks and errors in real-time.",
-    image: "./resturant-thumbnail.png",
+    image: "./smart-dining-thumbnail.png",
     link: "https://bread-and-bite.netlify.app/",
-    tech: ["React", "WhatsApp API", "Tailwind"],
-    id: 3,
+    tech: ["Next.js 16", "Tailwind CSS 4", "PostgreSQL"],
+    id: 4,
   },
   {
-    title: "Car Booking",
+    title: "Luxury Chauffeur",
     description:
-      "Premium vehicle reservation system with instant quotes and booking management.",
+      "Premium booking engine that simplifies reservation management for high-end fleets.",
     image: "./car-thumbnail.png",
     link: "https://royalcarz.netlify.app/",
     tech: ["Next.js", "Booking Logic", "Framer"],
-    id: 4,
+    id: 5,
   },
 ];
 
