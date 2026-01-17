@@ -147,7 +147,7 @@ const Home = () => {
 
             <div className="flex gap-4 w-full sm:w-auto justify-center">
               <a
-                href="/AafaqueResume.pdf"
+                href="/AafaqueNazir_CV.pdf"
                 download
                 className="group flex-1 sm:flex-none px-6 py-3 text-white font-medium rounded-full border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300 flex items-center justify-center gap-2 text-sm md:text-base whitespace-nowrap"
               >
