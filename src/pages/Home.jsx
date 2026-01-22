@@ -18,7 +18,7 @@ const Home = () => {
         <div className="absolute inset-0 z-0 pointer-events-none">
           {/* Animated Gradient Orbs */}
           <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-cyan-500/10 blur-[100px] animate-pulse" />
-          <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-purple-500/10 blur-[100px] animate-pulse delay-1000" />
+          <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-500/10 blur-[100px] animate-pulse delay-1000" />
 
           {/* Tech Grid Overlay */}
           <div
