@@ -86,7 +86,7 @@ const GlobalBackground = () => {
 
         // Fading tail effect
         ctx.strokeStyle = BASE_COLOR;
-        ctx.lineWidth = 4; // Thicker lines for glass effect (blur eats it a bit)
+        ctx.lineWidth = 1.5; // Thinner lines ("patle kar")
         ctx.lineCap = "round"; // Softer ends
 
         // "Blury circuit" - High shadow blur + low opacity line

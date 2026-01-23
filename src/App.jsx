@@ -33,6 +33,8 @@ function App() {
       {/* Contact */}
       <Contact />
 
+      <SectionDivider />
+
       <Footer />
     </div>
   );
