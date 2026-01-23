@@ -6,14 +6,17 @@ import BlurText from "../components/BlurText";
 import DecryptedText from "../components/DecryptedText";
 import LightRays from "../components/LightRays";
 
+import GlobalBackground from "../components/GlobalBackground";
+
 const Home = () => {
   return (
     <>
       <Navbar />
       <section
         id="home"
-        className="relative z-0 min-h-screen flex flex-col justify-center items-center text-white mx-auto overflow-hidden bg-slate-950"
+        className="relative z-0 min-h-screen flex flex-col justify-center items-center text-white mx-auto overflow-hidden"
       >
+        <GlobalBackground />
         {/* 🌟 Dynamic Background Layer */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           {/* Animated Gradient Orbs */}

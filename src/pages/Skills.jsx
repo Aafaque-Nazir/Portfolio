@@ -23,31 +23,103 @@ import {
 } from "react-icons/si";
 
 const techLogos = [
-  { node: <SiReact style={{ color: "#61DAFB" }} />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs style={{ color: "#ffffff" }} />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiJavascript style={{ color: "#F0DB4F" }} />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-  { node: <SiTypescript style={{ color: "#3178C6" }} />, title: "TypeScript", href: "https://www.typescriptlang.org/" },
-  { node: <SiTailwindcss style={{ color: "#06B6D4" }} />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-  { node: <SiFramer style={{ color: "#0055FF" }} />, title: "Framer Motion", href: "https://www.framer.com/motion/" },
-  { node: <SiGreensock style={{ color: "#88CE02" }} />, title: "GSAP", href: "https://greensock.com/" },
-  { node: <SiSupabase style={{ color: "#3ECF8E" }} />, title: "Supabase", href: "https://supabase.com/" },
-  { node: <SiNodedotjs style={{ color: "#339933" }} />, title: "Node.js", href: "https://nodejs.org/" },
-  { node: <SiPostgresql style={{ color: "#4169E1" }} />, title: "PostgreSQL", href: "https://www.postgresql.org/" },
-  { node: <SiRedux style={{ color: "#764ABC" }} />, title: "Redux", href: "https://redux.js.org/" },
-  { node: <SiVite style={{ color: "#646CFF" }} />, title: "Vite", href: "https://vitejs.dev/" },
-  { node: <SiHtml5 style={{ color: "#E34F26" }} />, title: "HTML5", href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-  { node: <SiCss3 style={{ color: "#1572B6" }} />, title: "CSS3", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
-  { node: <SiGithub style={{ color: "#ffffff" }} />, title: "GitHub", href: "https://github.com" },
-  { node: <SiGit style={{ color: "#F05032" }} />, title: "Git", href: "https://git-scm.com" },
-  { node: <SiVercel style={{ color: "#ffffff" }} />, title: "Vercel", href: "https://vercel.com/" },
-  { node: <SiPostman style={{ color: "#FF6C37" }} />, title: "Postman", href: "https://www.postman.com/" },
+  {
+    node: <SiReact style={{ color: "#61DAFB" }} />,
+    title: "React",
+    href: "https://react.dev",
+  },
+  {
+    node: <SiNextdotjs style={{ color: "#ffffff" }} />,
+    title: "Next.js",
+    href: "https://nextjs.org",
+  },
+  {
+    node: <SiJavascript style={{ color: "#F0DB4F" }} />,
+    title: "JavaScript",
+    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+  },
+  {
+    node: <SiTypescript style={{ color: "#3178C6" }} />,
+    title: "TypeScript",
+    href: "https://www.typescriptlang.org/",
+  },
+  {
+    node: <SiTailwindcss style={{ color: "#06B6D4" }} />,
+    title: "Tailwind CSS",
+    href: "https://tailwindcss.com",
+  },
+  {
+    node: <SiFramer style={{ color: "#0055FF" }} />,
+    title: "Framer Motion",
+    href: "https://www.framer.com/motion/",
+  },
+  {
+    node: <SiGreensock style={{ color: "#88CE02" }} />,
+    title: "GSAP",
+    href: "https://greensock.com/",
+  },
+  {
+    node: <SiSupabase style={{ color: "#3ECF8E" }} />,
+    title: "Supabase",
+    href: "https://supabase.com/",
+  },
+  {
+    node: <SiNodedotjs style={{ color: "#339933" }} />,
+    title: "Node.js",
+    href: "https://nodejs.org/",
+  },
+  {
+    node: <SiPostgresql style={{ color: "#4169E1" }} />,
+    title: "PostgreSQL",
+    href: "https://www.postgresql.org/",
+  },
+  {
+    node: <SiRedux style={{ color: "#764ABC" }} />,
+    title: "Redux",
+    href: "https://redux.js.org/",
+  },
+  {
+    node: <SiVite style={{ color: "#646CFF" }} />,
+    title: "Vite",
+    href: "https://vitejs.dev/",
+  },
+  {
+    node: <SiHtml5 style={{ color: "#E34F26" }} />,
+    title: "HTML5",
+    href: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+  },
+  {
+    node: <SiCss3 style={{ color: "#1572B6" }} />,
+    title: "CSS3",
+    href: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+  },
+  {
+    node: <SiGithub style={{ color: "#ffffff" }} />,
+    title: "GitHub",
+    href: "https://github.com",
+  },
+  {
+    node: <SiGit style={{ color: "#F05032" }} />,
+    title: "Git",
+    href: "https://git-scm.com",
+  },
+  {
+    node: <SiVercel style={{ color: "#ffffff" }} />,
+    title: "Vercel",
+    href: "https://vercel.com/",
+  },
+  {
+    node: <SiPostman style={{ color: "#FF6C37" }} />,
+    title: "Postman",
+    href: "https://www.postman.com/",
+  },
 ];
 
 export default function TechStack() {
   return (
     <section
       id="techstack"
-      className="relative w-full py-20 flex flex-col justify-center items-center text-white overflow-hidden bg-slate-950"
+      className="relative w-full py-20 flex flex-col justify-center items-center text-white overflow-hidden"
       aria-label="Technologies I work with"
     >
       {/* Premium Static Background */}

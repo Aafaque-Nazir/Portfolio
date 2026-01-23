@@ -185,21 +185,13 @@ const MobileHorizontalScroll = () => {
           <div className="w-[10vw] shrink-0" />
         </motion.div>
       </div>
-
-      {/* Scroll Indicator Overlay */}
-      <div className="fixed bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none md:hidden z-50 opacity-60">
-        <span className="text-[10px] text-white uppercase tracking-widest animate-pulse">
-          Scroll Down
-        </span>
-        <div className="w-[1px] h-8 bg-gradient-to-b from-cyan-400 to-transparent" />
-      </div>
     </section>
   );
 };
 
 const Project = () => {
   return (
-    <div id="projects" className="bg-slate-950 relative">
+    <div id="projects" className="relative">
       {/* --- Desktop View: Bento Grid (Standard Scroll) --- */}
       <div className="hidden md:block py-20">
         <div className="max-w-7xl mx-auto px-4 mb-20 text-center">

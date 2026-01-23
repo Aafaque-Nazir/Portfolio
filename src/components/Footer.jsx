@@ -8,7 +8,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-slate-950 border-t border-white/5 pt-16 pb-8">
+    <footer className="w-full border-t border-white/5 pt-16 pb-8">
       <div className="container mx-auto px-4 flex flex-col items-center">
         {/* Brand Name */}
         <div className="mb-6">
