@@ -151,6 +151,10 @@ const Services = () => {
       id="services"
       className="relative min-h-screen py-24 md:py-0 md:h-auto md:min-h-screen px-4 text-white overflow-hidden flex flex-col justify-center items-center"
     >
+      <SEO
+        title="Services"
+        description="Professional web development services: Single Page Applications, CMS, and Full-stack custom solutions."
+      />
       {/* Premium Static Background (Matched to Project.jsx) */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-cyan-900/20 via-slate-950 to-slate-950" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-teal-900/10 via-slate-950 to-slate-950" />

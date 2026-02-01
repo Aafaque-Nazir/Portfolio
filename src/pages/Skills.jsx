@@ -187,6 +187,10 @@ export default function TechStack() {
       className="relative w-full py-12 px-4 flex flex-col justify-center items-center text-white overflow-hidden" // Reduced padding
       aria-label="Technologies I work with"
     >
+      <SEO
+        title="Skills & Tech Stack"
+        description="A comprehensive list of my technical skills, including React, Next.js, Node.js, and AI integrations."
+      />
       {/* 🔮 Background Glow */}
       <div className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
 

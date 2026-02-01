@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
+import SEO from "../components/SEO";
 import { BentoGrid, BentoGridItem } from "../components/ui/bento-grid";
 import {
   RiSignalTowerFill,

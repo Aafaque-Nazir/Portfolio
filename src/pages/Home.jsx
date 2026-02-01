@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
+import SEO from "../components/SEO";
 import { FaGithub } from "react-icons/fa";
 import { PiReadCvLogoFill } from "react-icons/pi";
 import BlurText from "../components/BlurText";
