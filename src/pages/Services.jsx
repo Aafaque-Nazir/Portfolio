@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import SEO from "../components/SEO";
 import {
   motion,
   useInView,
