@@ -1,7 +1,6 @@
 // sections/About.jsx
 "use client";
 import { motion } from "framer-motion";
-import SEO from "../components/SEO";
 import {
   SiReact,
   SiNextdotjs,
@@ -61,10 +60,6 @@ const About = () => {
       className="relative w-full h-screen flex flex-col justify-center items-center px-4 md:px-6 overflow-hidden"
       aria-labelledby="about-heading"
     >
-      <SEO
-        title="About Me"
-        description="I am a Frontend-First Full Stack Developer specializing in Architecting Scalable Software Products."
-      />
       {/* 🌟 Content Container */}
       <div className="relative z-10 max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
         {/* Left: Bio & Identity */}

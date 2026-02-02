@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
-import SEO from "../components/SEO";
 
 const Contact = () => {
   const {
@@ -50,10 +49,6 @@ const Contact = () => {
       id="contact"
       className="relative min-h-screen py-24 flex flex-col justify-center items-center text-white overflow-hidden"
     >
-      <SEO
-        title="Contact"
-        description="Get in touch with Aafaque Nazir. Send a message or connect via WhatsApp for your next project."
-      />
       {/* 🌌 Ambient Background Glow */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-[20%] left-[20%] w-96 h-96 bg-cyan-500/5 rounded-full blur-[100px] animate-pulse" />
