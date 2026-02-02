@@ -23,13 +23,15 @@ const projects = [
       <img
         src="./coursira-thumbnail.png"
         alt="Coursira"
-        className="w-full h-full object-cover group-hover/bento:scale-105 transition-transform duration-500"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover/bento:scale-105"
       />
     ),
     link: "https://coursira.vercel.app/",
     icon: <RiBrainFill className="h-4 w-4" />,
     className: "md:col-span-2", // Big (Left)
     id: 7,
+    techStack: ["Next.js", "Gemini AI", "Tailwind", "NeonDB"],
+    status: "Live",
   },
   {
     title: "Bus Booked",
@@ -39,13 +41,15 @@ const projects = [
       <img
         src="./bus-booked-thumbnail.png"
         alt="Bus Booked"
-        className="w-full h-full object-cover group-hover/bento:scale-105 transition-transform duration-500"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover/bento:scale-105"
       />
     ),
     link: "https://busbooked.netlify.app/",
     icon: <RiBusFill className="h-4 w-4" />,
     className: "md:col-span-1", // Small (Right)
     id: 6,
+    techStack: ["React", "Firebase", "Redux"],
+    status: "Live",
   },
 
   // --- Row 2: [1] [2] (Offset) ---
@@ -56,13 +60,15 @@ const projects = [
       <img
         src="./inventory-thumbnail.png"
         alt="Inventory Management"
-        className="w-full h-full object-cover group-hover/bento:scale-105 transition-transform duration-500"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover/bento:scale-105"
       />
     ),
     link: "https://nvntory-mgm.vercel.app/",
     icon: <RiSignalTowerFill className="h-4 w-4" />,
     className: "md:col-span-1", // Small (Left)
     id: 1,
+    techStack: ["Next.js", "Supabase", "Prisma"],
+    status: "Live",
   },
   {
     title: "Smart Dining OS",
@@ -72,13 +78,15 @@ const projects = [
       <img
         src="./smart-dining-thumbnail.png"
         alt="Smart Dining OS"
-        className="w-full h-full object-cover group-hover/bento:scale-105 transition-transform duration-500"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover/bento:scale-105"
       />
     ),
     link: "https://korner-kafe.netlify.app/",
     icon: <RiRestaurantFill className="h-4 w-4" />,
     className: "md:col-span-2", // Big (Right) - Creates Asymmetry
     id: 4,
+    techStack: ["React", "Node.js", "Socket.io"],
+    status: "Beta",
   },
 
   // --- Row 3: [1] [1] [1] ---
@@ -90,13 +98,15 @@ const projects = [
       <img
         src="./car-thumbnail.png"
         alt="Luxury Chauffeur"
-        className="w-full h-full object-cover group-hover/bento:scale-105 transition-transform duration-500"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover/bento:scale-105"
       />
     ),
     link: "https://royalcarz.netlify.app/",
     icon: <RiCarFill className="h-4 w-4" />,
     className: "md:col-span-1",
     id: 5,
+    techStack: ["React", "Motion", "Tailwind"],
+    status: "Live",
   },
   {
     title: "Ecommerce Store",
@@ -106,13 +116,15 @@ const projects = [
       <img
         src="./ecommerce-thumbnail.png"
         alt="Ecommerce Store"
-        className="w-full h-full object-cover group-hover/bento:scale-105 transition-transform duration-500"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover/bento:scale-105"
       />
     ),
     link: "https://shopease-aafaque.netlify.app/",
     icon: <RiShoppingCartFill className="h-4 w-4" />,
     className: "md:col-span-1",
     id: 2,
+    techStack: ["React", "Redux", "Stripe"],
+    status: "Live",
   },
   {
     title: "Food Delivery App",
@@ -122,13 +134,15 @@ const projects = [
       <img
         src="./resturant-thumbnail.png"
         alt="Food Delivery App"
-        className="w-full h-full object-cover group-hover/bento:scale-105 transition-transform duration-500"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover/bento:scale-105"
       />
     ),
     link: "https://bread-and-bite.netlify.app/",
     icon: <RiMotorbikeFill className="h-4 w-4" />,
     className: "md:col-span-1",
     id: 3,
+    techStack: ["React", "Firebase", "Maps API"],
+    status: "Live",
   },
 ];
 
@@ -139,27 +153,54 @@ const MobileProjectCard = ({ item }) => {
       href={item.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="shrink-0 w-[85vw] h-[60vh] bg-slate-900 border border-white/10 rounded-3xl overflow-hidden relative flex flex-col group snap-center"
+      className="shrink-0 w-[85vw] h-[60vh] bg-[#0a0f1c] border border-white/10 rounded-3xl overflow-hidden relative flex flex-col group snap-center shadow-xl"
     >
+      {/* Status Badge */}
+      <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <span className="text-[10px] uppercase font-bold text-gray-300 tracking-wider">
+          {item.status || "Live"}
+        </span>
+      </div>
+
       {/* Image Area */}
-      <div className="h-[60%] w-full relative overflow-hidden">
-        <div className="overlay absolute inset-0 bg-black/10 z-10" />
-        {item.header}
+      <div className="h-[55%] w-full relative overflow-hidden">
+        <div className="overlay absolute inset-0 bg-gradient-to-t from-[#0a0f1c] to-transparent z-10" />
+        <div className="w-full h-full transition-transform duration-700 group-hover:scale-105">
+          {item.header}
+        </div>
       </div>
 
       {/* Content Area */}
-      <div className="flex-1 p-6 flex flex-col justify-between relative z-20 bg-gradient-to-t from-slate-950 to-slate-900">
+      <div className="flex-1 p-6 flex flex-col justify-between relative z-20 bg-[#0a0f1c]">
         <div>
-          <div className="flex items-center gap-2 mb-2 text-cyan-400 text-2xl">
-            {item.icon}
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+              {item.icon}
+            </div>
+            <h3 className="text-xl font-bold text-white tracking-tight">
+              {item.title}
+            </h3>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
-          <p className="text-slate-400 text-sm line-clamp-3">
+
+          <p className="text-slate-400 text-sm line-clamp-2 leading-relaxed mb-4">
             {item.description}
           </p>
+
+          {/* Tech Stack */}
+          <div className="flex gap-2 mb-4 overflow-x-auto pb-2 scrollbar-hide">
+            {item.techStack?.slice(0, 3).map((tech, i) => (
+              <span
+                key={i}
+                className="text-[10px] uppercase font-mono px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-400 whitespace-nowrap"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-widest mt-4">
+        <div className="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-widest">
           View Project <RiArrowRightUpLine className="text-lg" />
         </div>
       </div>
@@ -215,6 +256,8 @@ const Project = () => {
               icon={item.icon}
               className={item.className}
               link={item.link}
+              techStack={item.techStack}
+              status={item.status}
             />
           ))}
         </BentoGrid>
