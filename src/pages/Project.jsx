@@ -163,11 +163,21 @@ const MobileProjectCard = ({ item }) => {
         </span>
       </div>
 
-      {/* Image Area */}
-      <div className="h-[55%] w-full relative overflow-hidden">
-        <div className="overlay absolute inset-0 bg-gradient-to-t from-[#0a0f1c] to-transparent z-10" />
-        <div className="w-full h-full transition-transform duration-700 group-hover:scale-105">
-          {item.header}
+      {/* Image Area with Browser Frame */}
+      <div className="h-[55%] w-full relative overflow-hidden p-4 pb-0">
+        <div className="w-full h-full relative rounded-t-xl overflow-hidden border-t border-l border-r border-white/10 bg-slate-950 shadow-2xl">
+          {/* Browser Toolbar */}
+          <div className="h-6 bg-slate-900 border-b border-white/5 flex items-center px-3 gap-1.5">
+            <div className="w-2 h-2 rounded-full bg-red-500/80" />
+            <div className="w-2 h-2 rounded-full bg-amber-500/80" />
+            <div className="w-2 h-2 rounded-full bg-emerald-500/80" />
+          </div>
+
+          {/* Image Itself */}
+          <div className="relative w-full h-full">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1c] to-transparent z-10 opacity-60" />
+            {item.header}
+          </div>
         </div>
       </div>
 
