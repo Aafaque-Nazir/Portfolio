@@ -94,7 +94,7 @@ const Home = () => {
           {/* Subheadline */}
           <div className="h-auto min-h-[30px] md:h-10 mb-4 flex items-center justify-center px-2">
             <BlurText
-              text="FRONTEND ARCHITECT & PRODUCT ENGINEER"
+              text="FULL STACK ARCHITECT & SOFTWARE DEVELOPER"
               delay={100}
               animateBy="letters"
               direction="bottom"
@@ -111,7 +111,7 @@ const Home = () => {
           >
             <p className="text-gray-300 text-sm md:text-lg leading-relaxed font-light line-clamp-3 md:line-clamp-none">
               <DecryptedText
-                text="I architect digital realities. Blending advanced frontend engineering with scalable backend systems to build web applications that perform as beautifully as they look."
+                text="I build intelligent software solutions. Leveraging AI-driven development to architect scalable full-stack applications that merge cutting-edge performance with next-gen user experiences."
                 animateOn="view"
                 revealDirection="center"
                 className="inline"
