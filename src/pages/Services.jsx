@@ -243,11 +243,16 @@ const Services = () => {
 
                   {/* Pricing Section - REDESIGNED */}
                   <div className="mb-8 lg:mb-4 p-4 lg:p-3 rounded-2xl bg-white/5 border border-white/5 group-hover:border-white/10 transition-colors">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col relative overflow-hidden group/price">
+                      <div className="absolute inset-0 flex items-center justify-center z-10 opacity-0 group-hover/price:opacity-100 transition-opacity duration-300">
+                        <span className="text-xs font-bold text-white bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                          Request Quote
+                        </span>
+                      </div>
                       <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-1 font-bold">
                         {pkg.priceLabel}
                       </span>
-                      <div className="flex items-baseline gap-3">
+                      <div className="flex items-baseline gap-3 filter blur-[12px] select-none opacity-50 transition-all duration-300 group-hover/price:blur-[8px]">
                         {pkg.oldPrice && (
                           <span className="text-lg text-gray-500 line-through decoration-red-500/50 decoration-2 font-medium">
                             {pkg.oldPrice}
@@ -287,13 +292,13 @@ const Services = () => {
 
                   {/* CTA Button */}
                   <a
-                    href="#contact"
+                    href={`#contact?service=${encodeURIComponent(pkg.title)}`}
                     className={`relative w-full py-4 lg:py-2.5 rounded-xl font-bold text-center uppercase tracking-widest text-xs transition-all duration-300 overflow-hidden transform group-hover:scale-[1.02] active:scale-[0.98]
                       ${btnColor}
                     `}
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
-                      Get Started <FaArrowRight />
+                      Contact for Pricing <FaArrowRight />
                     </span>
                     {/* Button Shine Effect */}
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />

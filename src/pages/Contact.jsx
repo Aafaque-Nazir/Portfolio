@@ -4,21 +4,44 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
+import SEO from "../components/SEO";
+import { useEffect } from "react";
 
 const Contact = () => {
+  // ... inside Contact component ...
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm();
-  // ...
+
+  // Watch service to change UI or just for debugging
+  const selectedService = watch("service");
+
+  useEffect(() => {
+    // Parse URL hash for service param (e.g., #contact?service=The%20Launchpad)
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      const paramString = hash.split("?")[1];
+      if (paramString) {
+        const params = new URLSearchParams(paramString);
+        const serviceName = params.get("service");
+        if (serviceName) {
+          setValue("service", serviceName);
+          // Clear the hash param to clean up URL but keep #contact? Or just leave it.
+          // keeping it simple for now.
+        }
+      }
+    }
+  }, [setValue]);
+
+  // ... (onSubmit remains same) ...
 
   const onSubmit = async (data) => {
     try {
-      // Simulate submission for UI demo purposes if actual endpoint isn't ready
-      // await new Promise(resolve => setTimeout(resolve, 2000));
-
       const res = await fetch(
         "https://formsubmit.co/aafaquebuisness@gmail.com",
         {
@@ -28,7 +51,7 @@ const Contact = () => {
             ...data,
             _captcha: "false",
             _template: "table",
-            _subject: `New Portfolio Message from ${data.name}`,
+            _subject: `Portfolio Inquiry: ${data.service || "General"} from ${data.name}`,
           }),
         },
       );
@@ -133,6 +156,33 @@ const Contact = () => {
                   </div>
                 </div>
 
+                {/* Service Selection Dropdown (NEW) */}
+                <div className="group/input">
+                  <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
+                    // SELECT_SERVICE_MODULE
+                  </label>
+                  <select
+                    {...register("service", { required: true })}
+                    className="w-full bg-slate-950/50 border-b border-white/10 p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono appearance-none"
+                  >
+                    <option value="" className="bg-slate-900 text-gray-400">
+                      SELECT A PACKAGE
+                    </option>
+                    <option value="The Launchpad" className="bg-slate-900">
+                      The Launchpad (SPA Website)
+                    </option>
+                    <option value="The Growth" className="bg-slate-900">
+                      The Growth (Business Scale)
+                    </option>
+                    <option value="The Empire" className="bg-slate-900">
+                      The Empire (Custom SaaS/App)
+                    </option>
+                    <option value="Other / Custom" className="bg-slate-900">
+                      Other / Custom Requirement
+                    </option>
+                  </select>
+                </div>
+
                 {/* Message Input */}
                 <div className="group/input">
                   <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
@@ -191,7 +241,7 @@ const Contact = () => {
 
               <iframe
                 title="Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15091.95655459344!2d73.0768!3d19.0760!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c15555555555%3A0x5555555555555555!2sNavi%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1685799201326!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15086.582875152862!2d73.10915740428518!3d19.10271597843054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c1851e40ee81%3A0x6b5b5c98d697841!2sTaloja%20Panchanand%2C%20Taloja%20Phase%201%2C%20Taloja%2C%20Navi%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1707070000000!5m2!1sen!2sin"
                 className="w-full h-full grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-700 scale-110"
                 style={{ border: 0 }}
                 allowFullScreen
@@ -200,7 +250,7 @@ const Contact = () => {
 
               <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur px-3 py-1 rounded border border-cyan-500/30 z-30">
                 <p className="text-[10px] text-cyan-400 font-mono tracking-widest">
-                  ● LIVE FEED :: NAVI MUMBAI
+                  ● LIVE FEED :: TALOJA PHASE 1
                 </p>
               </div>
             </div>

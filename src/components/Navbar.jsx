@@ -40,7 +40,9 @@ export default function Navbar() {
           {/* Mobile Hamburger (Only visible on small screens) */}
           <div className="lg:hidden">
             <span className="text-white font-bold tracking-wider mr-4 text-sm uppercase">
-              Menu
+              {activeSection === "techstack"
+                ? "Skills"
+                : activeSection || "Menu"}
             </span>
           </div>
 
