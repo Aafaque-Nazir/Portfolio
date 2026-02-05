@@ -39,11 +39,17 @@ export default function Navbar() {
         <div className="flex items-center justify-between gap-6 px-6 py-3 rounded-full bg-black/50 backdrop-blur-xl border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.2)] hover:border-white/20 transition-colors duration-300">
           {/* Mobile Hamburger (Only visible on small screens) */}
           <div className="lg:hidden">
-            <span className="text-white font-bold tracking-wider mr-4 text-sm uppercase">
-              {activeSection === "techstack"
-                ? "Skills"
-                : activeSection || "Menu"}
-            </span>
+            <div className="flex items-center gap-2 mr-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              </span>
+              <span className="text-white font-bold tracking-wider text-sm uppercase">
+                {activeSection === "techstack"
+                  ? "Skills"
+                  : activeSection || "Menu"}
+              </span>
+            </div>
           </div>
 
           <button
