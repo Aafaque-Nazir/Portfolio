@@ -98,7 +98,7 @@ const Home = () => {
               delay={100}
               animateBy="letters"
               direction="bottom"
-              className="text-cyan-400/80 text-xs sm:text-sm md:text-lg font-mono tracking-[0.2em] md:tracking-[0.3em] uppercase font-bold text-wrap"
+              className="text-cyan-400/80 text-[10px] sm:text-sm md:text-lg font-mono tracking-[0.15em] md:tracking-[0.3em] uppercase font-bold text-center max-w-[90vw] mx-auto"
             />
           </div>
 

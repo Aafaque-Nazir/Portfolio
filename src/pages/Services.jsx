@@ -292,7 +292,21 @@ const Services = () => {
 
                   {/* CTA Button */}
                   <a
-                    href={`#contact?service=${encodeURIComponent(pkg.title)}`}
+                    href="#contact"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // Dispatch custom event for Contact form
+                      const event = new CustomEvent("selectService", {
+                        detail: pkg.title,
+                      });
+                      window.dispatchEvent(event);
+
+                      // Smooth scroll to contact section
+                      const contactSection = document.getElementById("contact");
+                      if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
                     className={`relative w-full py-4 lg:py-2.5 rounded-xl font-bold text-center uppercase tracking-widest text-xs transition-all duration-300 overflow-hidden transform group-hover:scale-[1.02] active:scale-[0.98]
                       ${btnColor}
                     `}
