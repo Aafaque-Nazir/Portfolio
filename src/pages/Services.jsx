@@ -53,15 +53,15 @@ const Services = () => {
   const packages = [
     {
       title: "The Launchpad",
-      oldPrice: "₹7,000",
-      price: "4,999",
+      oldPrice: "₹10,000",
+      price: "6,999",
       priceLabel: "Starts at",
       description:
         "Ideal for personal brands & portfolios. Fast, sleek, and high-impact.",
       features: [
         "Single Page Application (SPA)",
         "Mobile-First Responsive Design",
-        "SEO-Ready Architecture",
+        "Advanced SEO & GSC Indexing",
         "Contact Form & WhatsApp Chat",
         "Free Deployment Setup",
       ],
@@ -74,15 +74,15 @@ const Services = () => {
     },
     {
       title: "The Growth",
-      oldPrice: "₹15,000",
-      price: "10,999",
+      oldPrice: "₹20,000",
+      price: "14,999",
       priceLabel: "Starts at",
       description:
         "Perfect for businesses needing a CMS and multiple pages to scale.",
       features: [
         "5-8 Premium Pages",
         "Admin Dashboard / Basic CMS",
-        "On Page SEO",
+        "Advanced SEO & GSC Indexing",
         "Google Maps & Analytics",
         "Speed Optimization (Green Score)",
       ],
@@ -97,17 +97,17 @@ const Services = () => {
     },
     {
       title: "The Empire",
-      oldPrice: "₹50,000",
-      price: "39,999",
+      oldPrice: "₹60,000",
+      price: "44,999",
       priceLabel: "Starts at",
       description:
         "Full-stack custom solution for startups and complex requirements.",
       features: [
         "Custom SaaS / E-commerce App",
         "Secure User Auth (Login/DB)",
+        "Advanced SEO & GSC Indexing",
         "Real-time Data & Inventory",
         "UPI & International Payments",
-        "1 Month Priority Support",
       ],
       recommendedFor: "Enterprise",
       icon: (
