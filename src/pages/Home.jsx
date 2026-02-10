@@ -15,7 +15,7 @@ const Home = () => {
       <Navbar />
       <section
         id="home"
-        className="relative z-0 min-h-screen flex flex-col justify-center items-center text-white mx-auto overflow-hidden"
+        className="relative z-0 h-screen flex flex-col justify-center items-center text-white mx-auto overflow-hidden"
       >
         <GlobalBackground />
         {/* 🌟 Dynamic Background Layer */}
@@ -34,24 +34,11 @@ const Home = () => {
             }}
           />
 
-          {/* Existing LightRays - Tuned for subtlety */}
-          <div className="absolute inset-0 opacity-50">
-            <LightRays
-              raysOrigin="top-center"
-              raysColor="#22d3ee" // Cyan-400
-              raysSpeed={2}
-              lightSpread={2}
-              rayLength={1.5}
-              followMouse={true}
-              mouseInfluence={0.3}
-              noiseAmount={0.05}
-              distortion={0.1}
-            />
-          </div>
+
         </div>
 
         {/* 🚀 Main Content Container */}
-        <div className="relative z-10 w-full max-w-7xl px-4 md:px-6 flex flex-col items-center justify-center md:justify-start text-center min-h-screen pt-28 md:pt-32 pb-12">
+        <div className="relative z-10 w-full max-w-7xl px-4 md:px-6 flex flex-col items-center justify-center text-center h-screen pt-16 md:pt-20 pb-6 md:pb-8">
           {/* Floating 'Status' Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
