@@ -4,30 +4,36 @@ export const useActiveSection = (sectionIds) => {
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
+    // Track how much of each section is visible (in pixels)
     const visibilityMap = {};
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Store the height of the intersection rectangle
-          // This represents how many pixels of this section are actually visible on screen
-          visibilityMap[entry.target.id] = entry.intersectionRect.height;
+          visibilityMap[entry.target.id] = entry.isIntersecting
+            ? entry.intersectionRect.height
+            : 0;
         });
 
-        // Find section with highest visible height in pixels
-        // This is more robust than intersectionRatio for handling very large vs very small sections
-        const visibleSection = Object.entries(visibilityMap).reduce(
-          (max, [id, visibleHeight]) => (visibleHeight > max.visibleHeight ? { id, visibleHeight } : max),
-          { id: '', visibleHeight: 0 }
-        );
+        // Find the section with the most visible pixels
+        let bestId = '';
+        let bestHeight = 0;
 
-        if (visibleSection.visibleHeight > 0) {
-          setActiveSection(visibleSection.id);
+        for (const [id, height] of Object.entries(visibilityMap)) {
+          if (height > bestHeight) {
+            bestHeight = height;
+            bestId = id;
+          }
+        }
+
+        if (bestId) {
+          setActiveSection(bestId);
         }
       },
       {
-        rootMargin: '-40% 0px -40% 0px', // Focus on the center 20% strip of the screen
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+        // Observe the full viewport
+        rootMargin: '0px 0px 0px 0px',
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
       }
     );
 
