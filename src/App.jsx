@@ -11,6 +11,8 @@ import SectionDivider from "./components/SectionDivider";
 import { useActiveSection } from "./hooks/useActiveSection"; // Import hook
 import { useEffect } from "react";
 
+import SmoothScroll from "./components/SmoothScroll"; // Import SmoothScroll
+
 function App() {
   const sectionIds = [
     "home",
@@ -38,6 +40,7 @@ function App() {
 
   return (
     <div className="relative min-h-screen">
+      <SmoothScroll /> {/* Activate Smooth Scroll */}
       <Navbar /> {/* Ensure Navbar is present if it wasn't before */}
       {/* Pages Content */}
       <Home />
