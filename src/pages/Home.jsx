@@ -51,13 +51,13 @@ const Home = () => {
         </div>
 
         {/* 🚀 Main Content Container */}
-        <div className="relative z-10 w-full max-w-7xl px-4 md:px-6 flex flex-col items-center justify-center text-center h-screen pt-16">
+        <div className="relative z-10 w-full max-w-7xl px-4 md:px-6 flex flex-col items-center justify-start text-center min-h-screen pt-32 pb-12">
           {/* Floating 'Status' Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-cyan-500/30 bg-cyan-500/5 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.1)]"
+            className="mb-2 inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-cyan-500/30 bg-cyan-500/5 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.1)]"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
@@ -69,12 +69,12 @@ const Home = () => {
           </motion.div>
 
           {/* Hero Typography */}
-          <div className="relative mb-2 w-full">
+          <div className="relative mb-0 w-full">
             <motion.h1
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white drop-shadow-2xl leading-tight"
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black tracking-tighter text-white drop-shadow-2xl leading-tight"
             >
               AAFAQUE
               <br className="lg:hidden" />
@@ -84,7 +84,7 @@ const Home = () => {
             </motion.h1>
 
             {/* Decorative 'Ghost' Text behind */}
-            <h1 className="absolute top-1 left-1/2 -translate-x-1/2 w-full text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-cyan-500/10 -z-10 select-none blur-sm animate-pulse leading-tight">
+            <h1 className="absolute top-1 left-1/2 -translate-x-1/2 w-full text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black tracking-tighter text-cyan-500/10 -z-10 select-none blur-sm animate-pulse leading-tight">
               AAFAQUE
               <br className="lg:hidden" />
               <span className="lg:ml-4">NAZIR</span>
@@ -92,7 +92,7 @@ const Home = () => {
           </div>
 
           {/* Subheadline */}
-          <div className="h-auto min-h-[30px] md:h-10 mb-4 flex items-center justify-center px-2">
+          <div className="h-auto min-h-[30px] md:h-10 mb-2 flex items-center justify-center px-2">
             <BlurText
               text="FULL STACK ARCHITECT & SOFTWARE DEVELOPER"
               delay={100}
@@ -107,7 +107,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="max-w-xl md:max-w-2xl mx-auto mb-8 px-2"
+            className="max-w-xl md:max-w-2xl mx-auto mb-6 px-2"
           >
             <p className="text-gray-300 text-sm md:text-lg leading-relaxed font-light line-clamp-3 md:line-clamp-none">
               <DecryptedText
@@ -125,6 +125,7 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-3 md:gap-6 items-center w-full sm:w-auto"
+            style={{ marginBottom: '2rem' }}
           >
             <a
               href="#contact"
