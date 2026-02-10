@@ -51,13 +51,13 @@ const Home = () => {
         </div>
 
         {/* 🚀 Main Content Container */}
-        <div className="relative z-10 w-full max-w-7xl px-4 md:px-6 flex flex-col items-center justify-start text-center min-h-screen pt-32 pb-12">
+        <div className="relative z-10 w-full max-w-7xl px-4 md:px-6 flex flex-col items-center justify-center md:justify-start text-center min-h-screen pt-28 md:pt-32 pb-12">
           {/* Floating 'Status' Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-2 inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-cyan-500/30 bg-cyan-500/5 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.1)]"
+            className="mb-3 md:mb-4 inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-cyan-500/30 bg-cyan-500/5 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.1)]"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
