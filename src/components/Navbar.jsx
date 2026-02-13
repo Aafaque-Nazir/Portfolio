@@ -8,7 +8,7 @@ export default function Navbar() {
   const sectionIds = [
     "home",
     "about",
-    "techstack",
+    "skills",
     "projects",
     "services",
     "contact",
@@ -22,7 +22,7 @@ export default function Navbar() {
   const navItems = [
     { name: "Home", id: "home" },
     { name: "About", id: "about" },
-    { name: "Skills", id: "techstack" },
+    { name: "Skills", id: "skills" },
     { name: "Projects", id: "projects" },
     { name: "Services", id: "services" },
     { name: "Contact", id: "contact" },
@@ -59,7 +59,7 @@ export default function Navbar() {
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     className="text-white font-bold tracking-wider text-sm uppercase whitespace-nowrap block"
                   >
-                    {activeSection === "techstack"
+                    {activeSection === "skills"
                       ? "Skills"
                       : activeSection || "Menu"}
                   </motion.span>
@@ -84,11 +84,10 @@ export default function Navbar() {
                 <li key={item.name}>
                   <a
                     href={`#${item.id}`}
-                    className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 block group ${
-                      isActive
-                        ? "text-slate-950 font-bold"
-                        : "text-gray-400 hover:text-white"
-                    }`}
+                    className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 block group ${isActive
+                      ? "text-slate-950 font-bold"
+                      : "text-gray-400 hover:text-white"
+                      }`}
                   >
                     {/* Active Background Pill */}
                     {isActive && (
@@ -166,11 +165,10 @@ export default function Navbar() {
                       <a
                         href={`#${item.id}`}
                         onClick={toggleMenu}
-                        className={`block w-full py-4 px-6 rounded-xl text-lg font-medium transition-all ${
-                          isActive
-                            ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                            : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
-                        }`}
+                        className={`block w-full py-4 px-6 rounded-xl text-lg font-medium transition-all ${isActive
+                          ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                          : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
+                          }`}
                       >
                         {item.name}
                       </a>

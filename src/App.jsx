@@ -17,7 +17,7 @@ function App() {
   const sectionIds = [
     "home",
     "about",
-    "techstack",
+    "skills",
     "projects",
     "services",
     "contact",
@@ -29,7 +29,7 @@ function App() {
       const titles = {
         home: "Home | Aafaque Nazir",
         about: "About | Aafaque Nazir",
-        techstack: "Skills | Aafaque Nazir",
+        skills: "Skills | Aafaque Nazir",
         projects: "Projects | Aafaque Nazir",
         services: "Services | Aafaque Nazir",
         contact: "Contact | Aafaque Nazir",

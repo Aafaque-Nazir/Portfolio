@@ -1,35 +1,16 @@
 "use client";
-import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  SiReact,
-  SiNextdotjs,
-  SiJavascript,
-  SiTailwindcss,
-  SiFramer,
-  SiGit,
-  SiTypescript,
-  SiNodedotjs,
-  SiSupabase,
-  SiPostgresql,
-  SiMysql,
-  SiMongodb,
-  SiFirebase,
-  SiHtml5,
-  SiCss3,
-  SiVite,
-  SiGreensock,
-  SiRedux,
-  SiVercel,
-  SiPostman,
-  SiDocker,
-  SiPrisma,
-  SiGraphql,
-  SiFigma,
-  SiOpenai,
+  SiReact, SiNextdotjs, SiJavascript, SiTailwindcss, SiFramer, SiGit,
+  SiTypescript, SiNodedotjs, SiSupabase, SiPostgresql, SiMysql,
+  SiMongodb, SiFirebase, SiGreensock, SiRedux, SiVercel, SiDocker,
+  SiFigma, SiOpenai
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
-import { RiBrainLine, RiCursorFill } from "react-icons/ri";
+import { SkillDock } from "../components/ui/skill-dock";
+import { TechCard } from "../components/ui/tech-card";
 
 const GeminiIcon = () => (
   <svg
@@ -58,165 +39,95 @@ const AntigravityIcon = () => (
 );
 
 const allSkills = [
-  // Frontend
+  // --- Frontend Core ---
   { icon: SiReact, name: "React", color: "#61DAFB", category: "Frontend" },
   { icon: SiNextdotjs, name: "Next.js", color: "#ffffff", category: "Frontend" },
-  { icon: SiJavascript, name: "JavaScript", color: "#F0DB4F", category: "Core" },
-  { icon: SiTypescript, name: "TypeScript", color: "#3178C6", category: "Core" },
-  { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4", category: "Frontend" },
+  { icon: SiTypescript, name: "TypeScript", color: "#3178C6", category: "Frontend" },
+  { icon: SiJavascript, name: "JavaScript", color: "#F0DB4F", category: "Frontend" },
+  { icon: SiTailwindcss, name: "Tailwind CSS", color: "#06B6D4", category: "Frontend" },
   { icon: SiFramer, name: "Framer Motion", color: "#0055FF", category: "Frontend" },
   { icon: SiGreensock, name: "GSAP", color: "#88CE02", category: "Frontend" },
-  { icon: SiRedux, name: "Redux", color: "#764ABC", category: "State" },
+  { icon: SiRedux, name: "Redux", color: "#764ABC", category: "Frontend" },
 
-  // Backend & DB
+  // --- Backend ---
   { icon: SiNodedotjs, name: "Node.js", color: "#339933", category: "Backend" },
-  { icon: SiMongodb, name: "MongoDB", color: "#47A248", category: "Database" },
-  { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1", category: "Database" },
-  { icon: SiMysql, name: "MySQL", color: "#4479A1", category: "Database" },
   { icon: SiSupabase, name: "Supabase", color: "#3ECF8E", category: "Backend" },
   { icon: SiFirebase, name: "Firebase", color: "#FFCA28", category: "Backend" },
 
-  // Tools
-  { icon: SiGit, name: "Git", color: "#F05032", category: "Tools" },
-  { icon: VscVscode, name: "VS Code", color: "#007ACC", category: "Tools" },
-  { icon: SiVercel, name: "Vercel", color: "#ffffff", category: "DevOps" },
-  { icon: SiDocker, name: "Docker", color: "#2496ED", category: "DevOps" },
-  { icon: SiFigma, name: "Figma", color: "#F24E1E", category: "Design" },
+  // --- Database ---
+  { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1", category: "Database" },
+  { icon: SiMongodb, name: "MongoDB", color: "#47A248", category: "Database" },
+  { icon: SiMysql, name: "MySQL", color: "#4479A1", category: "Database" },
 
-  // AI
-  { icon: AntigravityIcon, name: "Antigravity", color: "#FFD700", category: "AI" },
-  { icon: GeminiIcon, name: "Gemini", color: "#8E75B2", category: "AI" },
+  // --- DevOps ---
+  { icon: SiDocker, name: "Docker", color: "#2496ED", category: "DevOps" },
+  { icon: SiVercel, name: "Vercel", color: "#ffffff", category: "DevOps" },
+  { icon: SiGit, name: "Git", color: "#F05032", category: "DevOps" },
+
+  // --- Tools ---
+  { icon: SiFigma, name: "Figma", color: "#F24E1E", category: "Tools" },
+  { icon: VscVscode, name: "VS Code", color: "#007ACC", category: "Tools" },
+
+  // --- AI ---
   { icon: SiOpenai, name: "OpenAI", color: "#412991", category: "AI" },
+  { icon: GeminiIcon, name: "Gemini", color: "#8E75B2", category: "AI" },
+  { icon: AntigravityIcon, name: "Antigravity", color: "#FFD700", category: "AI" },
 ];
 
-const TechCard = ({ tech, index }) => {
-  const ref = useRef(null);
+export default function Skills() {
+  const [activeCategory, setActiveCategory] = useState("All");
 
-  // Mouse position logic for 3D tilt
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"]);
-
-  const handleMouseMove = (e) => {
-    if (!ref.current) return;
-
-    const rect = ref.current.getBoundingClientRect();
-
-    const width = rect.width;
-    const height = rect.height;
-
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  const filteredSkills = activeCategory === "All"
+    ? allSkills
+    : allSkills.filter(s => s.category === activeCategory);
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.4, delay: index * 0.02 }}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
-      className="group relative w-16 h-16 md:w-20 md:h-20 rounded-xl bg-white/5 border border-white/10 cursor-pointer perspective-1000"
-    >
-      {/* Reduced Glow for Performance */}
-      <div
-        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{
-          background: `radial-gradient(circle at 50% 50%, ${tech.color}20, transparent 70%)`,
-        }}
-      />
+    <section id="skills" className="relative h-[110vh] min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-black text-white">
 
-      {/* Floating Animation Wrapper - Optimized */}
-      <motion.div
-        animate={{
-          y: [0, -3, 0],
-        }}
-        transition={{
-          duration: 3 + Math.random() * 1.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: Math.random() * 2,
-        }}
-        className="relative h-full w-full flex flex-col items-center justify-center gap-1 transform-style-3d"
-      >
-        {/* Icon */}
-        <div
-          className="text-2xl md:text-3xl transition-transform duration-300 group-hover:scale-110"
-          style={{
-            color: tech.color,
-            filter: "drop-shadow(0 0 5px rgba(0,0,0,0.3))"
-          }}
-        >
-          <tech.icon />
+      {/* Dynamic Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+
+      {/* Radial Gradient for Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+
+      <div className="container mx-auto px-4 z-10 flex flex-col items-center h-full justify-center">
+
+        {/* Header */}
+        <div className="text-center mb-8 md:mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 mb-4 uppercase tracking-tighter"
+          >
+            Tech Arsenal
+          </motion.h2>
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            My preferred weapons of choice for building scalable apps.
+          </p>
         </div>
 
-        {/* Name Label */}
-        <span
-          className="text-[8px] md:text-[10px] font-bold tracking-wider opacity-60 group-hover:opacity-100 transition-opacity duration-300 group-hover:text-white"
-        >
-          {tech.name}
-        </span>
-      </motion.div>
-    </motion.div>
-  );
-};
+        {/* Skill Holographic Grid */}
+        <div className="w-full max-w-6xl mb-12 min-h-[300px]">
+          <motion.div
+            layout
+            className="flex flex-wrap justify-center gap-4 md:gap-6"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredSkills.map((tech, index) => (
+                <TechCard key={tech.name} tech={tech} index={index} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </div>
 
-export default function TechStack() {
-  return (
-    <section
-      id="techstack" // Corrected ID for navigation
-      className="relative w-full h-screen min-h-[600px] flex flex-col justify-center items-center text-white overflow-hidden py-0"
-    >
-      {/* 🧠 Section Heading */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="text-center mb-8 md:mb-12 relative z-10"
-      >
-        <span className="text-cyan-400 font-mono text-xs tracking-[0.2em] mb-2 uppercase block">
-           // THE_STACK
-        </span>
-        <h2 className="text-3xl md:text-5xl font-black mb-2 tracking-tighter">
-          TECH{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-            ARSENAL
-          </span>
-        </h2>
-        <p className="text-slate-400 max-w-lg mx-auto text-xs md:text-sm">
-          My preferred weapons of choice for building scalable apps.
-        </p>
-      </motion.div>
+        {/* Floating Interactions Dock */}
+        <div className="absolute bottom-12 left-0 right-0 z-50 flex justify-center pointer-events-none">
+          <div className="pointer-events-auto">
+            <SkillDock activeCategory={activeCategory} setCategory={setActiveCategory} />
+          </div>
+        </div>
 
-      {/* Grid Container */}
-      <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-5xl mx-auto relative z-10 px-4 content-center">
-        {allSkills.map((tech, index) => (
-          <TechCard key={index} tech={tech} index={index} />
-        ))}
       </div>
     </section>
   );
