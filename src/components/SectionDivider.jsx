@@ -56,9 +56,13 @@ const SectionDivider = () => {
       </div>
 
       {/* 📝 Technical Label */}
-      <div className="absolute bottom-2 text-[10px] text-cyan-500/50 font-mono tracking-[0.3em] uppercase">
-        System Partition // Active
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        className="absolute bottom-2 text-[10px] text-cyan-400 font-mono tracking-[0.3em] uppercase drop-shadow-[0_0_5px_rgba(34,211,238,0.8)] animate-pulse"
+      >
+        System Partition // <span className="text-white font-bold">Active</span>
+      </motion.div>
     </div>
   );
 };
