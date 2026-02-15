@@ -10,10 +10,23 @@ import {
     RiBusFill,
     RiBrainFill,
     RiArrowRightUpLine,
+    RiPlaneFill,
     RiGithubFill,
 } from "react-icons/ri";
 
 const projects = [
+    {
+        title: "Dubai Travel & Tourism",
+        description:
+            "Premium booking platform for exclusive Dubai experiences, from desert safaris to Dubai Tech.",
+        image: "https://placehold.co/600x400/000000/FFF?text=Dubai+Tourism",
+        link: "https://dubai-tt.netlify.app/",
+        icon: <RiPlaneFill />,
+        category: "Commerce & Services",
+        techStack: ["Next.Js", "Tailwind", "Framer Motion"],
+        status: "Live",
+        id: 8,
+    },
     {
         title: "Coursira",
         description:
@@ -107,17 +120,17 @@ export function ProjectShowcase({ category }) {
             : projects.filter((p) => p.category === category);
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:overflow-visible md:pb-0 max-w-[85rem] mx-auto no-visible-scrollbar">
             {filteredProjects.map((project) => (
-                <CardContainer key={project.id} className="inter-var w-full h-full">
-                    <CardBody className="bg-slate-900/50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-auto rounded-xl p-6 border border-white/10 backdrop-blur-sm">
+                <CardContainer key={project.id} className="inter-var w-[85vw] md:w-full flex-shrink-0 snap-center h-full">
+                    <CardBody className="bg-slate-900/50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-auto rounded-xl p-4 border border-white/10 backdrop-blur-sm">
 
                         {/* Header: Icon + Title */}
                         <CardItem
                             translateZ="50"
-                            className="text-xl font-bold text-neutral-600 dark:text-white flex items-center gap-2"
+                            className="text-lg font-bold text-neutral-600 dark:text-white flex items-center gap-2"
                         >
-                            <span className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
+                            <span className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-400 text-lg">
                                 {project.icon}
                             </span>
                             {project.title}
@@ -127,32 +140,38 @@ export function ProjectShowcase({ category }) {
                         <CardItem
                             as="p"
                             translateZ="60"
-                            className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300 line-clamp-2"
+                            className="text-neutral-500 text-xs max-w-sm mt-2 dark:text-neutral-300 line-clamp-2 leading-relaxed"
                         >
                             {project.description}
                         </CardItem>
 
+                        {/* Divider */}
+                        <div className="w-full h-px bg-white/10 my-4" />
+
                         {/* Image */}
-                        <CardItem translateZ="100" className="w-full mt-4">
-                            <div className="rounded-xl overflow-hidden group-hover/card:shadow-xl shadow-cyan-500/10">
+                        <CardItem translateZ="100" className="w-full mt-3">
+                            <div className="rounded-lg overflow-hidden group-hover/card:shadow-xl shadow-cyan-500/10">
                                 <img
                                     src={project.image}
                                     height="1000"
                                     width="1000"
-                                    className="h-48 w-full object-cover rounded-xl group-hover/card:shadow-xl group-hover/card:scale-105 transition-transform duration-500"
+                                    className="h-40 w-full object-cover rounded-lg group-hover/card:shadow-xl group-hover/card:scale-105 transition-transform duration-500"
                                     alt={project.title}
                                 />
                             </div>
                         </CardItem>
 
+                        {/* Divider */}
+                        <div className="w-full h-px bg-white/10 my-4" />
+
                         {/* Footer: Tech Stack + Link */}
-                        <div className="flex justify-between items-center mt-8">
+                        <div className="flex justify-between items-center mt-4">
                             <CardItem
                                 translateZ={20}
                                 className="flex gap-2 text-xs font-bold"
                             >
                                 {project.techStack.slice(0, 2).map((tech, idx) => (
-                                    <span key={idx} className="px-2 py-1 bg-white/5 rounded-md text-slate-400 border border-white/5">
+                                    <span key={idx} className="px-2 py-1 bg-white/5 rounded-md text-slate-400 border border-white/5 text-[10px]">
                                         {tech}
                                     </span>
                                 ))}
@@ -162,7 +181,7 @@ export function ProjectShowcase({ category }) {
                                 as={Link}
                                 to={project.link}
                                 target="__blank"
-                                className="px-4 py-2 rounded-xl bg-white dark:bg-white dark:text-black text-white text-xs font-bold"
+                                className="px-3 py-2 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 text-xs font-bold whitespace-nowrap transition-colors"
                             >
                                 View Project →
                             </CardItem>
