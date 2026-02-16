@@ -13,14 +13,27 @@ import {
     RiPlaneFill,
     RiGithubFill,
     RiArrowRightDoubleFill,
+    RiCupFill,
 } from "react-icons/ri";
 
 const projects = [
     {
+        title: "VelvetBrew Coffee",
+        description:
+            "Premium e-commerce platform for luxury coffee machines, artisan beans, and curated accessories with a dark, immersive brand experience.",
+        image: "./velvet.png",
+        link: "https://velvet-coffee.netlify.app",
+        icon: <RiCupFill />,
+        category: "Commerce & Services",
+        techStack: ["Next.js", "Tailwind", "MongoDB"],
+        status: "Live",
+        id: 9,
+    },
+    {
         title: "Dubai Travel & Tourism",
         description:
             "Premium booking platform for exclusive Dubai experiences, from desert safaris to Dubai Tech.",
-        image: "https://placehold.co/600x400/000000/FFF?text=Dubai+Tourism",
+        image: "./dubai.png",
         link: "https://dubai-tt.netlify.app/",
         icon: <RiPlaneFill />,
         category: "Commerce & Services",
