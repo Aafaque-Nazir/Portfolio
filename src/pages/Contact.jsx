@@ -279,7 +279,7 @@ const Contact = () => {
 
               {/* WhatsApp Module */}
               <a
-                href="https://wa.me/919325629256"
+                href="https://wa.me/919325629256?text=Hey%20Aafaque!%20%F0%9F%91%8B%20I%20visited%20your%20portfolio%20and%20I%E2%80%99m%20interested%20in%20discussing%20a%20project.%20Let%E2%80%99s%20connect!"
                 className="bg-slate-900/40 border border-white/5 p-6 rounded-2xl flex items-center justify-between group hover:border-green-500/50 hover:bg-green-500/5 transition-all"
               >
                 <div className="flex items-center gap-4">
