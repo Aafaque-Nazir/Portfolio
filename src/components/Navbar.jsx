@@ -48,20 +48,44 @@ export default function Navbar() {
               <motion.div
                 layout
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="relative h-5 overflow-hidden flex items-center"
+                className="relative h-7 overflow-hidden flex items-center px-2 py-1"
               >
-                <AnimatePresence mode="popLayout" initial={false}>
+                <AnimatePresence mode="wait">
                   <motion.span
                     key={activeSection || "menu"}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="text-white font-bold tracking-wider text-sm uppercase whitespace-nowrap block"
+                    initial={{ opacity: 0, x: -20, filter: "brightness(2) contrast(1.5)" }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      filter: "brightness(1) contrast(1)",
+                      textShadow: [
+                        "0 0 0px #fff",
+                        "2px 0 10px #22d3ee, -2px 0 10px #e879f9",
+                        "-2px 0 15px #22d3ee, 2px 0 15px #e879f9",
+                        "0 0 5px #22d3ee"
+                      ]
+                    }}
+                    exit={{ opacity: 0, x: 20, filter: "brightness(0) contrast(0)" }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 20,
+                      textShadow: { duration: 0.8, ease: "easeInOut" }
+                    }}
+                    className="text-white font-black tracking-[0.2em] text-sm uppercase whitespace-nowrap block relative"
                   >
-                    {activeSection === "skills"
-                      ? "Skills"
-                      : activeSection || "Menu"}
+                    {/* The text itself */}
+                    <span className="relative z-10 mix-blend-difference">
+                      {activeSection === "skills" ? "Skills" : activeSection || "Menu"}
+                    </span>
+
+                    {/* Cyber Glitch/Swipe Overlay */}
+                    <motion.div
+                      initial={{ left: "-100%", opacity: 0 }}
+                      animate={{ left: "100%", opacity: [0, 1, 1, 0] }}
+                      transition={{ duration: 0.6, ease: "linear" }}
+                      className="absolute inset-y-0 w-full bg-gradient-to-r from-transparent via-cyan-400 to-transparent skew-x-[-20deg] mix-blend-overlay z-20 pointer-events-none"
+                    />
                   </motion.span>
                 </AnimatePresence>
               </motion.div>
