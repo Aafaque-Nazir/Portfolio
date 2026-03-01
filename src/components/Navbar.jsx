@@ -44,26 +44,30 @@ export default function Navbar() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
             </span>
 
-            {/* Fixed width container prevents flex layout shifts (the 'jhatka') */}
-            <div className="relative h-8 w-[110px] sm:w-[130px] overflow-hidden flex items-center justify-start ml-2">
-              <AnimatePresence mode="wait">
+            {/* Dynamic width container that animates its size smoothly */}
+            <motion.div
+              layout
+              transition={{ type: "spring", stiffness: 450, damping: 30 }}
+              className="relative h-8 overflow-hidden flex items-center justify-start ml-2 rounded-full"
+            >
+              <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div
                   key={activeSection || "menu"}
-                  initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
-                  animate={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
-                  exit={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
-                  transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
-                  className="absolute inset-x-0 flex items-center"
+                  layout
+                  initial={{ opacity: 0, filter: "blur(4px)", scale: 0.9 }}
+                  animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+                  exit={{ opacity: 0, filter: "blur(4px)", scale: 0.9, position: "absolute" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="flex items-center justify-center whitespace-nowrap min-w-min pr-2"
                 >
                   <motion.span
-                    initial={{ y: 20, rotateX: 90, filter: "blur(4px)" }}
+                    initial={{ y: 20, rotateX: 90 }}
                     animate={{
                       y: 0,
                       rotateX: 0,
-                      filter: "blur(0px)",
                       backgroundPosition: ["200% center", "-200% center"]
                     }}
-                    exit={{ y: -20, rotateX: -90, filter: "blur(4px)" }}
+                    exit={{ y: -20, rotateX: -90 }}
                     transition={{
                       type: "spring",
                       stiffness: 350,
@@ -89,7 +93,7 @@ export default function Navbar() {
                   </motion.span>
                 </motion.div>
               </AnimatePresence>
-            </div>
+            </motion.div>
           </div>
 
           <button
