@@ -48,45 +48,52 @@ export default function Navbar() {
               <motion.div
                 layout
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="relative h-7 overflow-hidden flex items-center px-2 py-1"
+                className="relative h-8 overflow-hidden flex items-center justify-center px-4 py-1"
               >
-                <AnimatePresence mode="wait">
-                  <motion.span
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.div
                     key={activeSection || "menu"}
-                    initial={{ opacity: 0, x: -20, filter: "brightness(2) contrast(1.5)" }}
-                    animate={{
-                      opacity: 1,
-                      x: 0,
-                      filter: "brightness(1) contrast(1)",
-                      textShadow: [
-                        "0 0 0px #fff",
-                        "2px 0 10px #22d3ee, -2px 0 10px #e879f9",
-                        "-2px 0 15px #22d3ee, 2px 0 15px #e879f9",
-                        "0 0 5px #22d3ee"
-                      ]
-                    }}
-                    exit={{ opacity: 0, x: 20, filter: "brightness(0) contrast(0)" }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 20,
-                      textShadow: { duration: 0.8, ease: "easeInOut" }
-                    }}
-                    className="text-white font-black tracking-[0.2em] text-sm uppercase whitespace-nowrap block relative"
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{ width: "auto", opacity: 1 }}
+                    exit={{ width: 0, opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    className="overflow-hidden flex items-center justify-center whitespace-nowrap"
                   >
-                    {/* The text itself */}
-                    <span className="relative z-10 mix-blend-difference">
-                      {activeSection === "skills" ? "Skills" : activeSection || "Menu"}
-                    </span>
-
-                    {/* Cyber Glitch/Swipe Overlay */}
-                    <motion.div
-                      initial={{ left: "-100%", opacity: 0 }}
-                      animate={{ left: "100%", opacity: [0, 1, 1, 0] }}
-                      transition={{ duration: 0.6, ease: "linear" }}
-                      className="absolute inset-y-0 w-full bg-gradient-to-r from-transparent via-cyan-400 to-transparent skew-x-[-20deg] mix-blend-overlay z-20 pointer-events-none"
-                    />
-                  </motion.span>
+                    <motion.span
+                      initial={{ y: 20, rotateX: 90, filter: "blur(4px)" }}
+                      animate={{
+                        y: 0,
+                        rotateX: 0,
+                        filter: "blur(0px)",
+                        // Shimmer background position animation
+                        backgroundPosition: ["200% center", "-200% center"]
+                      }}
+                      exit={{ y: -20, rotateX: -90, filter: "blur(4px)" }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                        backgroundPosition: {
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }
+                      }}
+                      className="font-black tracking-[0.2em] text-sm uppercase block"
+                      style={{
+                        // Glossy Shine Effect on Text
+                        backgroundImage: "linear-gradient(110deg, #ffffff 10%, #22d3ee 30%, #ffffff 50%, #22d3ee 70%, #ffffff 90%)",
+                        backgroundSize: "200% auto",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        filter: "drop-shadow(0px 0px 8px rgba(34,211,238,0.8))"
+                      }}
+                    >
+                      {activeSection === "skills"
+                        ? "Skills"
+                        : activeSection || "Menu"}
+                    </motion.span>
+                  </motion.div>
                 </AnimatePresence>
               </motion.div>
             </div>
