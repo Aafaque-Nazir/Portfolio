@@ -24,9 +24,14 @@ export default function Navbar() {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      // Get absolute position, offset for navbar
-      const y = element.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      if (window.lenis) {
+        // Use Lenis for ultra-smooth buttery scrolling
+        window.lenis.scrollTo(element, { offset: -100, duration: 1.5 });
+      } else {
+        // Fallback to native smooth scroll
+        const y = element.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }
     // Close mobile menu if open
     if (menuOpen) {

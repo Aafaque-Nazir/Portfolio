@@ -14,6 +14,9 @@ const SmoothScroll = () => {
             touchMultiplier: 2,
         });
 
+        // Expose to window so other components (like Navbar) can use lenis.scrollTo()
+        window.lenis = lenis;
+
         const raf = (time) => {
             lenis.raf(time);
             requestAnimationFrame(raf);
@@ -23,6 +26,7 @@ const SmoothScroll = () => {
 
         return () => {
             lenis.destroy();
+            delete window.lenis;
         };
     }, []);
 
