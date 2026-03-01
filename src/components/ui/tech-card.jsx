@@ -6,58 +6,18 @@ import { useRef } from "react";
 export function TechCard({ tech, index }) {
     const ref = useRef(null);
 
-    // Mouse position logic for 3D tilt
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseXSpring = useSpring(x);
-    const mouseYSpring = useSpring(y);
-
-    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["20deg", "-20deg"]);
-    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-20deg", "20deg"]);
-
-    const handleMouseMove = (e) => {
-        if (!ref.current) return;
-
-        const rect = ref.current.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
     return (
         <motion.div
-            ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+            initial={{ opacity: 0, scale: 0.8, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{
-                duration: 0.2,
-                delay: index * 0.05,
+                duration: 0.4,
+                delay: index * 0.03,
                 type: "spring",
-                stiffness: 400, // Super snappy
-                damping: 25
+                stiffness: 300,
+                damping: 20
             }}
-            style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-            }}
-            className="group relative w-20 h-20 md:w-24 md:h-24 cursor-pointer z-0 hover:z-50 transition-all duration-200 ease-out"
+            className="group relative w-20 h-20 md:w-24 md:h-24 cursor-pointer z-0 hover:z-50"
         >
             {/* INNER CONTAINER: Functionally mask the rotating border */}
             <div className="absolute inset-0 rounded-full bg-slate-950 border border-white/5 overflow-hidden backdrop-blur-md shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] group-hover:border-cyan-500/50">

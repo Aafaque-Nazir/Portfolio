@@ -110,14 +110,15 @@ export default function Skills() {
         {/* Skill Holographic Grid */}
         <div className="w-full max-w-6xl mb-12 min-h-[300px]">
           <motion.div
-            layout
+            key={activeCategory} // Force re-render of children to trigger entrance animations cheaply
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
             className="flex flex-wrap justify-center gap-4 md:gap-6"
           >
-            <AnimatePresence mode="popLayout">
-              {filteredSkills.map((tech, index) => (
-                <TechCard key={tech.name} tech={tech} index={index} />
-              ))}
-            </AnimatePresence>
+            {filteredSkills.map((tech, index) => (
+              <TechCard key={tech.name} tech={tech} index={index} />
+            ))}
           </motion.div>
         </div>
 
