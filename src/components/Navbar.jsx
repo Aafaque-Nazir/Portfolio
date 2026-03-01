@@ -19,6 +19,21 @@ export default function Navbar() {
     setMenuOpen((prev) => !prev);
   };
 
+  // Intercept anchor clicks and apply smooth window scrolling to fix sudden jumps
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      // Get absolute position, offset for navbar
+      const y = element.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    // Close mobile menu if open
+    if (menuOpen) {
+      setMenuOpen(false);
+    }
+  };
+
   const navItems = [
     { name: "Home", id: "home" },
     { name: "About", id: "about" },
@@ -112,6 +127,7 @@ export default function Navbar() {
                 <li key={item.name}>
                   <a
                     href={`#${item.id}`}
+                    onClick={(e) => handleNavClick(e, item.id)}
                     className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 block group ${isActive
                       ? "text-slate-950 font-bold"
                       : "text-gray-400 hover:text-white"
@@ -192,7 +208,7 @@ export default function Navbar() {
                     >
                       <a
                         href={`#${item.id}`}
-                        onClick={toggleMenu}
+                        onClick={(e) => handleNavClick(e, item.id)}
                         className={`block w-full py-4 px-6 rounded-xl text-lg font-medium transition-all ${isActive
                           ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
                           : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
