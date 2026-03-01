@@ -9,12 +9,11 @@ import { useActiveSection } from "./hooks/useActiveSection";
 import InitialLoader from "./components/InitialLoader";
 import { motion } from "framer-motion";
 
-// Lazy loaded sections to reduce initial bundle
-const About = lazy(() => import("./pages/About"));
-const Skills = lazy(() => import("./pages/Skills"));
-const Project = lazy(() => import("./pages/Project"));
-const Services = lazy(() => import("./pages/Services"));
-const Contact = lazy(() => import("./pages/Contact"));
+import About from "./pages/About";
+import Skills from "./pages/Skills";
+import Project from "./pages/Project";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
 
 function App() {
   const [isAppLoading, setIsAppLoading] = useState(true);
@@ -61,28 +60,22 @@ function App() {
           <Home />
           <SectionDivider />
 
-          <Suspense fallback={
-            <div className="min-h-screen flex items-center justify-center bg-[#0a0f1c] text-cyan-400 text-sm font-black tracking-[0.2em] uppercase animate-pulse">
-              Loading Simulation...
-            </div>
-          }>
-            <About />
-            <SectionDivider />
+          <About />
+          <SectionDivider />
 
-            <Skills />
-            <SectionDivider />
+          <Skills />
+          <SectionDivider />
 
-            <Project />
-            <SectionDivider />
+          <Project />
+          <SectionDivider />
 
-            <Services />
-            <SectionDivider />
+          <Services />
+          <SectionDivider />
 
-            <Contact />
-            <SectionDivider />
+          <Contact />
+          <SectionDivider />
 
-            <Footer />
-          </Suspense>
+          <Footer />
         </motion.div>
       )}
     </>
