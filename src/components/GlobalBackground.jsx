@@ -10,6 +10,7 @@ const GlobalBackground = () => {
     const ctx = canvas.getContext("2d", { alpha: false });
     let animationFrameId;
     let width, height;
+    let isVisible = true;
 
     // Data structures
     // Path: { points: [{x,y}, ...], length: totalPixelLength }
@@ -276,15 +277,30 @@ const GlobalBackground = () => {
         }
       });
 
-      animationFrameId = requestAnimationFrame(animate);
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
-    animate();
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          animate();
+        } else {
+          cancelAnimationFrame(animationFrameId);
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

@@ -37,65 +37,58 @@ export default function Navbar() {
         className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[90%] md:max-w-none"
       >
         <div className="flex items-center justify-between gap-6 px-6 py-3 rounded-full bg-black/50 backdrop-blur-xl border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.2)] hover:border-white/20 transition-colors duration-300">
-          {/* Mobile Hamburger (Only visible on small screens) */}
-          <div className="lg:hidden">
-            <div className="flex items-center gap-2 mr-4">
-              <span className="relative flex h-2 w-2 flex-shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-              </span>
+          {/* Mobile Hamburger Layout (Only visible on small screens) */}
+          <div className="lg:hidden flex items-center gap-2 mr-2">
+            <span className="relative flex h-2 w-2 flex-shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
 
-              <motion.div
-                layout
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="relative h-8 overflow-hidden flex items-center justify-center px-4 py-1"
-              >
-                <AnimatePresence mode="popLayout" initial={false}>
-                  <motion.div
-                    key={activeSection || "menu"}
-                    initial={{ width: 0, opacity: 0 }}
-                    animate={{ width: "auto", opacity: 1 }}
-                    exit={{ width: 0, opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    className="overflow-hidden flex items-center justify-center whitespace-nowrap"
+            {/* Fixed width container prevents flex layout shifts (the 'jhatka') */}
+            <div className="relative h-8 w-[110px] sm:w-[130px] overflow-hidden flex items-center justify-start ml-2">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeSection || "menu"}
+                  initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
+                  animate={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
+                  exit={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
+                  transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+                  className="absolute inset-x-0 flex items-center"
+                >
+                  <motion.span
+                    initial={{ y: 20, rotateX: 90, filter: "blur(4px)" }}
+                    animate={{
+                      y: 0,
+                      rotateX: 0,
+                      filter: "blur(0px)",
+                      backgroundPosition: ["200% center", "-200% center"]
+                    }}
+                    exit={{ y: -20, rotateX: -90, filter: "blur(4px)" }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 350,
+                      damping: 25,
+                      backgroundPosition: {
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }
+                    }}
+                    className="font-black tracking-[0.2em] text-sm uppercase block"
+                    style={{
+                      backgroundImage: "linear-gradient(110deg, #ffffff 10%, #22d3ee 30%, #ffffff 50%, #22d3ee 70%, #ffffff 90%)",
+                      backgroundSize: "200% auto",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      filter: "drop-shadow(0px 0px 8px rgba(34,211,238,0.8))"
+                    }}
                   >
-                    <motion.span
-                      initial={{ y: 20, rotateX: 90, filter: "blur(4px)" }}
-                      animate={{
-                        y: 0,
-                        rotateX: 0,
-                        filter: "blur(0px)",
-                        // Shimmer background position animation
-                        backgroundPosition: ["200% center", "-200% center"]
-                      }}
-                      exit={{ y: -20, rotateX: -90, filter: "blur(4px)" }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                        backgroundPosition: {
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }
-                      }}
-                      className="font-black tracking-[0.2em] text-sm uppercase block"
-                      style={{
-                        // Glossy Shine Effect on Text
-                        backgroundImage: "linear-gradient(110deg, #ffffff 10%, #22d3ee 30%, #ffffff 50%, #22d3ee 70%, #ffffff 90%)",
-                        backgroundSize: "200% auto",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        filter: "drop-shadow(0px 0px 8px rgba(34,211,238,0.8))"
-                      }}
-                    >
-                      {activeSection === "skills"
-                        ? "Skills"
-                        : activeSection || "Menu"}
-                    </motion.span>
-                  </motion.div>
-                </AnimatePresence>
-              </motion.div>
+                    {activeSection === "skills"
+                      ? "Skills"
+                      : activeSection || "Menu"}
+                  </motion.span>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 
