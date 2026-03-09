@@ -146,7 +146,7 @@ export function ProjectShowcase({ category }) {
             <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:overflow-visible md:pb-0 max-w-[85rem] mx-auto no-visible-scrollbar">
                 {filteredProjects.map((project) => (
                     <CardContainer key={project.id} className="inter-var w-[75vw] md:w-full flex-shrink-0 snap-center h-full">
-                        <CardBody className="bg-slate-900/50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-auto rounded-xl p-4 border border-white/10 backdrop-blur-sm">
+                        <CardBody className="bg-slate-900/50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-cyan-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-auto rounded-xl p-4 border border-white/10 backdrop-blur-sm">
 
                             {/* Header: Icon + Title */}
                             <CardItem

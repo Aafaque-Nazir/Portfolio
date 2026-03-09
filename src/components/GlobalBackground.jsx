@@ -199,7 +199,7 @@ const GlobalBackground = () => {
 
       // Gradient?
       const grad = ctx.createLinearGradient(pStart.x, pStart.y, pEnd.x, pEnd.y);
-      grad.addColorStop(0, "rgba(6, 182, 212, 0)");
+      grad.addColorStop(0, "rgba(6, 182, 212, 0.2)"); // Increased base opacity
       grad.addColorStop(1, "rgba(34, 211, 238, 1)");
 
       ctx.strokeStyle = grad;
@@ -214,7 +214,7 @@ const GlobalBackground = () => {
 
       // Draw Static Paths
       ctx.lineWidth = 1.5;
-      ctx.strokeStyle = "rgba(6, 182, 212, 0.1)";
+      ctx.strokeStyle = "rgba(6, 182, 212, 0.1)"; // Reverted to 0.1 per user request
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 
@@ -231,9 +231,9 @@ const GlobalBackground = () => {
 
       // Draw Nodes
       // Batch mode optimization
-      ctx.fillStyle = "rgba(6, 182, 212, 0.4)";
-      ctx.shadowBlur = 15;
-      ctx.shadowColor = "rgba(6, 182, 212, 0.8)";
+      ctx.fillStyle = "rgba(6, 182, 212, 0.4)"; // Reverted to 0.4
+      ctx.shadowBlur = 15; // Reverted to 15
+      ctx.shadowColor = "rgba(6, 182, 212, 0.8)"; // Reverted opacity
 
       dots.forEach(d => {
         ctx.beginPath();
@@ -241,16 +241,15 @@ const GlobalBackground = () => {
         ctx.fill();
 
         // Brighter core
-        // ctx.fillStyle = "#A5F3FC"; // lighter cyan
-        // ctx.beginPath();
-        // ctx.arc(d.x, d.y, d.size * 0.5, 0, Math.PI * 2);
-        // ctx.fill();
-        // ctx.fillStyle = "rgba(6, 182, 212, 0.4)"; // reset
+        ctx.fillStyle = "#ffffff"; // Added pure white core
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.size * 0.4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "rgba(6, 182, 212, 0.8)"; // reset
       });
       ctx.shadowBlur = 0;
 
       // Draw Trails
-      ctx.lineWidth = 3;
       trailers.forEach(t => {
         const p = paths[t.pathIdx];
         if (!p) return;
@@ -263,16 +262,38 @@ const GlobalBackground = () => {
 
         // Only draw if visible
         if (t.distance > 0 && t.distance - t.len < p.length) {
+          // --- GLITCH EFFECT LOGIC ---
+          // 8% chance to experience a glitch on any given frame
+          const isGlitching = Math.random() < 0.08;
+
+          // Randomly spike line width during glitch, otherwise keep crisp thick trail
+          ctx.lineWidth = isGlitching ? (Math.random() * 6 + 1) : 4;
+
           // Draw trail
-          const headPos = drawPathSegment(ctx, p.points, t.distance - t.len, t.distance);
+          let headPos = drawPathSegment(ctx, p.points, t.distance - t.len, t.distance);
+
+          // Randomly shift the head position slightly during glitch
+          if (isGlitching) {
+            const shiftX = (Math.random() * 8 - 4);
+            const shiftY = (Math.random() * 8 - 4);
+            headPos = { x: headPos.x + shiftX, y: headPos.y + shiftY };
+          }
 
           // Draw head glow
-          ctx.shadowBlur = 20;
-          ctx.shadowColor = "rgba(34, 211, 238, 1)";
-          ctx.fillStyle = "#ffffff";
-          ctx.beginPath();
-          ctx.arc(headPos.x, headPos.y, 2.5, 0, Math.PI * 2);
-          ctx.fill();
+          // Spike shadow blur to extreme during glitch, or completely drop it
+          ctx.shadowBlur = isGlitching ? (Math.random() < 0.3 ? 0 : Math.random() * 50 + 20) : 30;
+          ctx.shadowColor = isGlitching && Math.random() > 0.5 ? "rgba(255, 255, 255, 1)" : "rgba(34, 211, 238, 1)";
+
+          ctx.fillStyle = isGlitching && Math.random() > 0.3 ? "#A5F3FC" : "#ffffff";
+
+          // Skip drawing the head 15% of the time during a glitch to create a flicker/skip effect
+          if (!isGlitching || Math.random() > 0.15) {
+            ctx.beginPath();
+            // Randomly grow/shrink the head dot
+            ctx.arc(headPos.x, headPos.y, isGlitching ? (Math.random() * 4 + 1) : 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
           ctx.shadowBlur = 0;
         }
       });

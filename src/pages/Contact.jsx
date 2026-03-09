@@ -72,10 +72,8 @@ const Contact = () => {
       id="contact"
       className="relative min-h-screen py-24 flex flex-col justify-center items-center text-white overflow-hidden"
     >
-      {/* 🌌 Ambient Background Glow */}
+      {/* 🌌 Ambient Background Glow (Removed for pure black) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[20%] left-[20%] w-96 h-96 bg-cyan-500/5 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-[20%] right-[20%] w-96 h-96 bg-teal-500/5 rounded-full blur-[100px] animate-pulse delay-1000" />
       </div>
 
       <Toaster
@@ -280,17 +278,17 @@ const Contact = () => {
               {/* WhatsApp Module */}
               <a
                 href="https://wa.me/919325629256?text=Hey%20Aafaque!%20%F0%9F%91%8B%20I%20visited%20your%20portfolio%20and%20I%E2%80%99m%20interested%20in%20discussing%20a%20project.%20Let%E2%80%99s%20connect!"
-                className="bg-slate-900/40 border border-white/5 p-6 rounded-2xl flex items-center justify-between group hover:border-green-500/50 hover:bg-green-500/5 transition-all"
+                className="bg-slate-900/40 border border-white/5 p-6 rounded-2xl flex items-center justify-between group hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-green-400 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
                     <FaWhatsapp />
                   </div>
                   <div>
                     <h4 className="text-sm text-gray-400 font-mono uppercase tracking-wider">
                       Quick Chat
                     </h4>
-                    <p className="text-white font-bold group-hover:text-green-300 transition-colors">
+                    <p className="text-white font-bold group-hover:text-cyan-300 transition-colors">
                       +91 93256 29256
                     </p>
                   </div>

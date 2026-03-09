@@ -20,9 +20,7 @@ const Home = () => {
         <GlobalBackground />
         {/* 🌟 Dynamic Background Layer */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          {/* Animated Gradient Orbs */}
-          <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-cyan-500/10 blur-[100px] animate-pulse" />
-          <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-500/10 blur-[100px] animate-pulse delay-1000" />
+          {/* Animated Gradient Orbs (Removed for pure black bg) */}
 
           {/* Tech Grid Overlay */}
           <div
@@ -65,7 +63,7 @@ const Home = () => {
             >
               AAFAQUE
               <br className="lg:hidden" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-white lg:ml-4">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-white lg:ml-4">
                 NAZIR
               </span>
             </motion.h1>
@@ -118,7 +116,7 @@ const Home = () => {
               href="#contact"
               className="group relative w-full sm:w-auto px-8 md:px-10 py-3 bg-white text-slate-950 font-bold text-sm md:text-lg rounded-full overflow-hidden hover:scale-105 transition-transform duration-300 shadow-[0_0_40px_rgba(255,255,255,0.3)] flex justify-center items-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-300 via-teal-300 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-300 via-cyan-300 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative z-10 flex items-center gap-2">
                 Let's Build Impact
                 <svg

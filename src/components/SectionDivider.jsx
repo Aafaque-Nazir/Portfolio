@@ -25,7 +25,7 @@ const SectionDivider = () => {
         initial={{ x: "100%", opacity: 0 }}
         whileInView={{ x: "0%", opacity: 1 }}
         transition={{ duration: 0.8, ease: "circOut" }}
-        className="absolute right-0 w-[50%] h-[2px] bg-gradient-to-l from-transparent via-teal-500 to-cyan-400 shadow-[0_0_20px_#14b8a6]"
+        className="absolute right-0 w-[50%] h-[2px] bg-gradient-to-l from-transparent via-cyan-500 to-cyan-400 shadow-[0_0_20px_#06b6d4]"
       />
 
       {/* 💠 Central Core Reactor */}

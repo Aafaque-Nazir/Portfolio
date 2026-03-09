@@ -88,9 +88,9 @@ const Services = () => {
       ],
       recommendedFor: "Scaling",
       icon: (
-        <FaChartLine className="text-3xl text-teal-400 group-hover:text-teal-300 transition-colors" />
+        <FaChartLine className="text-3xl text-cyan-400 group-hover:text-cyan-300 transition-colors" />
       ),
-      accentColor: "teal",
+      accentColor: "cyan",
       highlight: true,
       popularBadge: "MOST POPULAR",
       delay: 0.2,
@@ -123,9 +123,7 @@ const Services = () => {
       id="services"
       className="relative min-h-screen py-24 md:py-0 md:h-auto md:min-h-screen px-4 text-white overflow-hidden flex flex-col justify-center items-center"
     >
-      {/* Premium Static Background (Matched to Project.jsx) */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-cyan-900/20 via-slate-950 to-slate-950" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-teal-900/10 via-slate-950 to-slate-950" />
+      {/* Premium Static Background (Removed for pure black) */}
 
       <div className="relative z-10 w-full max-w-7xl mx-auto">
         {/* Title */}
@@ -150,16 +148,16 @@ const Services = () => {
           {packages.map((pkg, index) => {
             const isHighlight = pkg.highlight;
             const baseBorder = isHighlight
-              ? "border-teal-500/50"
+              ? "border-cyan-500/50"
               : "border-white/10";
             const hoverBorder = isHighlight
-              ? "hover:border-teal-400"
+              ? "hover:border-cyan-400"
               : "hover:border-cyan-400/50";
             const shadowColor = isHighlight
-              ? "shadow-teal-500/20"
+              ? "shadow-cyan-500/20"
               : "shadow-cyan-500/10";
             const btnColor = isHighlight
-              ? "bg-gradient-to-r from-teal-500 to-emerald-500 text-white shadow-[0_0_20px_rgba(20,184,166,0.4)] hover:shadow-teal-500/50"
+              ? "bg-gradient-to-r from-cyan-500 to-cyan-500 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-cyan-500/50"
               : "bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-cyan-400/30";
 
             return (
@@ -194,7 +192,7 @@ const Services = () => {
                       {pkg.icon}
                     </div>
                     {isHighlight && (
-                      <span className="absolute -top-2 -right-2 px-3 py-1 text-[10px] font-extrabold text-teal-950 bg-teal-400 rounded-full shadow-[0_0_10px_rgba(45,212,191,0.6)] animate-pulse uppercase tracking-wider">
+                      <span className="absolute -top-2 -right-2 px-3 py-1 text-[10px] font-extrabold text-cyan-950 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.6)] animate-pulse uppercase tracking-wider">
                         {pkg.popularBadge}
                       </span>
                     )}
@@ -249,7 +247,6 @@ const Services = () => {
                         <div
                           className={`mt-1 p-0.5 rounded-full bg-slate-800 border border-slate-700/50 flex-shrink-0
                           ${pkg.accentColor === "cyan" ? "group-hover/item:border-cyan-500/50 group-hover/item:text-cyan-400" : ""}
-                          ${pkg.accentColor === "teal" ? "group-hover/item:border-teal-500/50 group-hover/item:text-teal-400" : ""}
                           ${pkg.accentColor === "purple" ? "group-hover/item:border-cyan-500/50 group-hover/item:text-cyan-400" : ""}
                         `}
                         >

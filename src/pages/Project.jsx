@@ -6,10 +6,10 @@ const Project = () => {
   const [activeTab, setActiveTab] = useState("All");
 
   return (
-    <div id="projects" className="relative min-h-screen py-24 bg-black/95">
+    <div id="projects" className="relative min-h-screen py-24 bg-black">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-grid-white/[0.02] -z-[1] pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-96 bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none" />
+      {/* Glow orb removed for pure black bg */}
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Header Section */}

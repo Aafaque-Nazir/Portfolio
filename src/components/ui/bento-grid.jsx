@@ -91,8 +91,8 @@ export const BentoGridItem = ({
       {/* Active Status Indicator (Top Right) */}
       <div className="absolute top-4 right-4 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg">
         <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
         </span>
         <span className="text-[10px] uppercase font-bold text-gray-300 tracking-wider">
           {status}
@@ -106,7 +106,7 @@ export const BentoGridItem = ({
           <div className="h-6 bg-slate-900 border-b border-white/5 flex items-center px-3 gap-1.5">
             <div className="w-2 h-2 rounded-full bg-red-500/80" />
             <div className="w-2 h-2 rounded-full bg-amber-500/80" />
-            <div className="w-2 h-2 rounded-full bg-emerald-500/80" />
+            <div className="w-2 h-2 rounded-full bg-cyan-500/80" />
           </div>
 
           {/* Image Itself */}
