@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 .LogoGradient {
-  mask-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0),
-    rgb(0, 0, 0) 10%,
-    rgb(0, 0, 0) 90%,
-    rgba(0, 0, 0, 0)
-  );
+  mask-image: linear-gradient(to right,
+      rgba(0, 0, 0, 0),
+      rgb(0, 0, 0) 10%,
+      rgb(0, 0, 0) 90%,
+      rgba(0, 0, 0, 0));
 }
+
 @keyframes sheen {
   0% {
     transform: translateX(-100%) skewX(-15deg);
   }
+
   100% {
     transform: translateX(100%) skewX(-15deg);
   }

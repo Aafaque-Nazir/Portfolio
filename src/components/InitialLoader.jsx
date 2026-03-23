@@ -32,8 +32,13 @@ const InitialLoader = ({ onComplete }) => {
 
         const bootInterval = setInterval(() => {
             if (logIndex < bootSequence.length) {
-                setLogs(prev => [...prev, `> ${bootSequence[logIndex]}`]);
+                const currentLog = bootSequence[logIndex];
+                if (currentLog) {
+                    setLogs(prev => [...prev, `> ${currentLog}`]);
+                }
                 logIndex++;
+            } else {
+                clearInterval(bootInterval);
             }
         }, 400);
 

@@ -6,11 +6,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="relative z-50 w-full border-t border-cyan-900/40 bg-[#060a13] pt-16 pb-12 flex flex-col items-center justify-center overflow-hidden">
-      {/* Soft Top Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-12 bg-cyan-500/10 blur-[40px] rounded-full pointer-events-none" />
-
+    <footer className="relative z-50 w-full border-t border-white/5 bg-black pt-16 pb-12 flex flex-col items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4 flex flex-col items-center relative z-10">
         {/* Brand Name */}
         <div className="mb-6 flex flex-col items-center">
