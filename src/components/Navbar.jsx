@@ -134,7 +134,7 @@ export default function Navbar() {
                     href={`#${item.id}`}
                     onClick={(e) => handleNavClick(e, item.id)}
                     className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 block group ${isActive
-                      ? "text-slate-950 font-bold"
+                      ? "text-white tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
                       : "text-gray-400 hover:text-white"
                       }`}
                   >
@@ -142,13 +142,18 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeNavTab"
-                        className="absolute inset-0 bg-cyan-400 rounded-full"
+                        className="absolute inset-0 bg-cyan-600/20 border border-cyan-400/50 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.4),inset_0_0_10px_rgba(6,182,212,0.2)] overflow-hidden"
                         transition={{
                           type: "spring",
-                          bounce: 0.2,
-                          duration: 0.6,
+                          bounce: 0.15,
+                          duration: 0.5,
                         }}
-                      />
+                      >
+                        {/* Shimmering Top Edge Light */}
+                        <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent opacity-90" />
+                        {/* Shimmering Bottom Edge Light */}
+                        <div className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+                      </motion.div>
                     )}
 
                     {/* Hover Background Pill (if not active) */}
