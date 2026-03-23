@@ -121,7 +121,7 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="relative min-h-screen py-24 md:py-0 md:h-auto md:min-h-screen px-4 text-white overflow-hidden flex flex-col justify-center items-center"
+      className="relative w-full h-auto min-h-[100svh] lg:h-[100svh] lg:min-h-[700px] flex flex-col justify-center items-center px-4 md:px-6 py-24 lg:py-0 overflow-hidden"
     >
       {/* Premium Static Background (Removed for pure black) */}
 
@@ -131,12 +131,12 @@ const Services = () => {
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20 lg:mb-20"
+          className="text-center mb-10 lg:mb-8 mt-8 lg:mt-0"
         >
-          <h2 className="text-5xl md:text-6xl lg:text-5xl font-extrabold mb-6 text-white tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-5xl font-extrabold mb-3 text-white tracking-tight">
             Services & Pricing
           </h2>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light tracking-wide leading-relaxed">
+          <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto font-light tracking-wide leading-relaxed">
             Elite digital solutions engineered for{" "}
             <span className="text-cyan-400 font-semibold">performance</span> and{" "}
             <span className="text-cyan-400 font-semibold">scale</span>.
@@ -144,7 +144,7 @@ const Services = () => {
         </motion.div>
 
         {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2 mb-32 lg:mb-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 px-2 mb-12 lg:mb-0 relative z-10">
           {packages.map((pkg, index) => {
             const isHighlight = pkg.highlight;
             const baseBorder = isHighlight
@@ -178,14 +178,14 @@ const Services = () => {
 
                 {/* Card Content */}
                 <div
-                  className={`relative h-full flex flex-col p-8 lg:p-5 rounded-3xl bg-[#0a0f1c]/90 backdrop-blur-xl border ${baseBorder} ${hoverBorder} shadow-2xl ${shadowColor} transition-all duration-300 overflow-hidden`}
+                  className={`relative h-full flex flex-col p-6 lg:p-5 rounded-3xl bg-[#0a0f1c]/90 backdrop-blur-xl border ${baseBorder} ${hoverBorder} shadow-2xl ${shadowColor} transition-all duration-300 overflow-hidden`}
                 >
                   {/* Decorative "Tech" Lines */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/5 to-transparent -mr-16 -mt-16 rounded-full blur-2xl pointer-events-none group-hover:bg-white/10 transition-colors" />
                   <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-cyan-500/5 to-transparent -ml-20 -mb-20 rounded-full blur-3xl pointer-events-none" />
 
                   {/* Header Section */}
-                  <div className="flex justify-between items-start mb-6 lg:mb-3 w-full relative">
+                  <div className="flex justify-between items-start mb-4 w-full relative">
                     <div
                       className={`p-4 rounded-2xl bg-slate-800/50 border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-500`}
                     >
@@ -238,11 +238,11 @@ const Services = () => {
                   </div>
 
                   {/* Features List */}
-                  <div className="flex-grow space-y-4 lg:space-y-2 mb-8 lg:mb-4">
+                  <div className="flex-grow space-y-3 lg:space-y-2 mb-6 lg:mb-4">
                     {pkg.features.map((feature, idx) => (
                       <div
                         key={idx}
-                        className="flex items-start gap-3 text-sm lg:text-xs text-gray-300 group/item"
+                        className="flex items-start gap-2 text-[13px] lg:text-xs text-gray-300 group/item"
                       >
                         <div
                           className={`mt-1 p-0.5 rounded-full bg-slate-800 border border-slate-700/50 flex-shrink-0

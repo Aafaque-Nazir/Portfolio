@@ -79,7 +79,7 @@ export default function Skills() {
     : allSkills.filter(s => s.category === activeCategory);
 
   return (
-    <section id="skills" className="relative h-[110vh] min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-black text-white">
+    <section id="skills" className="relative h-auto min-h-[100svh] lg:h-[100svh] lg:min-h-[650px] flex flex-col justify-center items-center overflow-hidden bg-black text-white py-24 lg:py-0">
 
       {/* Dynamic Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
@@ -88,30 +88,30 @@ export default function Skills() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
 
 
-      <div className="container mx-auto px-4 z-10 flex flex-col items-center h-full justify-center">
+      <div className="container mx-auto px-4 z-10 flex flex-col items-center h-full justify-center pb-24 lg:pb-10">
 
         {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
+        <div className="text-center mb-6 md:mb-8 mt-4 lg:mt-0">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 mb-4 uppercase tracking-tighter"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 mb-2 uppercase tracking-tighter"
           >
             Tech Arsenal
           </motion.h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">
             My preferred weapons of choice for building scalable apps.
           </p>
         </div>
 
         {/* Skill Holographic Grid */}
-        <div className="w-full max-w-6xl mb-12 min-h-[300px]">
+        <div className="w-full max-w-5xl mb-10 min-h-[250px]">
           <motion.div
             key={activeCategory} // Force re-render of children to trigger entrance animations cheaply
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="flex flex-wrap justify-center gap-4 md:gap-6"
+            className="flex flex-wrap justify-center gap-3 md:gap-5"
           >
             {filteredSkills.map((tech, index) => (
               <TechCard key={tech.name} tech={tech} index={index} />
@@ -120,7 +120,7 @@ export default function Skills() {
         </div>
 
         {/* Floating Interactions Dock */}
-        <div className="absolute bottom-12 left-0 right-0 z-50 flex justify-center pointer-events-none">
+        <div className="absolute bottom-6 md:bottom-8 left-0 right-0 z-50 flex justify-center pointer-events-none">
           <div className="pointer-events-auto">
             <SkillDock activeCategory={activeCategory} setCategory={setActiveCategory} />
           </div>
