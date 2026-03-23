@@ -1,301 +1,237 @@
 "use client";
+import React, { useEffect, useRef } from "react";
 import { IoIosSend } from "react-icons/io";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
-import SEO from "../components/SEO";
-import { useEffect } from "react";
 
 const Contact = () => {
-  // ... inside Contact component ...
   const {
     register,
     handleSubmit,
     reset,
     setValue,
-    watch,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm();
 
-  // Watch service to change UI or just for debugging
-  const selectedService = watch("service");
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = ({ currentTarget, clientX, clientY }) => {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  };
 
   useEffect(() => {
-    // Parse URL hash for service param (e.g., #contact?service=The%20Launchpad)
     if (typeof window !== "undefined") {
-      const hash = window.location.hash;
-      const paramString = hash.split("?")[1];
-      if (paramString) {
-        const params = new URLSearchParams(paramString);
-        const serviceName = params.get("service");
-        if (serviceName) {
-          setValue("service", serviceName);
-          // Clear the hash param to clean up URL but keep #contact? Or just leave it.
-          // keeping it simple for now.
-        }
-      }
+      const handleSelectService = (e) => {
+        if (e.detail) setValue("service", e.detail);
+      };
+      window.addEventListener("selectService", handleSelectService);
+      return () => window.removeEventListener("selectService", handleSelectService);
     }
   }, [setValue]);
 
-  // ... (onSubmit remains same) ...
-
   const onSubmit = async (data) => {
     try {
-      const res = await fetch(
-        "https://formsubmit.co/aafaquebuisness@gmail.com",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...data,
-            _captcha: "false",
-            _template: "table",
-            _subject: `Portfolio Inquiry: ${data.service || "General"} from ${data.name}`,
-          }),
-        },
-      );
+      const res = await fetch("https://formsubmit.co/aafaquebuisness@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+          _captcha: "false",
+          _template: "table",
+          _subject: `Portfolio Inquiry: ${data.service || "General"} from ${data.name}`,
+        }),
+      });
 
       if (res.ok) {
-        toast.success("Message Sent Successfully 🚀");
+        toast.success("Connection Established 🚀");
         reset();
       } else {
-        toast.error("Failed to send message. Please try again. ❌");
+        toast.error("Transmission Failed ❌");
       }
     } catch (error) {
-      toast.error("An error occurred. Check your connection. 😢");
+      toast.error("Uplink Error 😢");
     }
   };
 
   return (
-    <section
-      id="contact"
-      className="relative w-full h-auto min-h-[100svh] lg:h-[100svh] lg:min-h-[700px] flex flex-col justify-center items-center px-4 md:px-6 py-24 lg:py-0 text-white overflow-hidden"
-    >
-      {/* 🌌 Ambient Background Glow (Removed for pure black) */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-      </div>
-
+    <section id="contact" className="relative w-full h-[100svh] min-h-[650px] flex flex-col justify-center items-center px-4 overflow-hidden bg-black py-10">
       <Toaster
         position="bottom-right"
         toastOptions={{
           style: {
-            background: "rgba(15, 23, 42, 0.8)",
+            background: "rgba(0, 0, 0, 0.9)",
             color: "#fff",
-            border: "1px solid rgba(6, 182, 212, 0.3)",
-            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(34, 211, 238, 0.3)",
+            backdropFilter: "blur(20px)",
+            fontSize: '12px',
+            fontFamily: 'monospace'
           },
         }}
       />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 md:px-6">
-        {/* Header */}
-        <div className="text-center mb-8 lg:mb-10 lg:mt-6">
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col h-full justify-center">
+        <div className="text-center mb-10 lg:mb-14">
           <motion.h2
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black mb-3 tracking-tight text-white"
+            className="text-5xl lg:text-7xl font-black tracking-tighter text-white"
           >
-            LET'S <span className="text-cyan-400">CONNECT</span>
+            CONNECT <span className="text-cyan-500">.</span>
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto font-light tracking-wide"
-          >
-            Initiate a secure channel. Let's discuss your next breakthrough.
-          </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch pt-2 lg:pt-0">
-          {/* 📡 Holographic Form (Col 1-7) */}
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+          {/* Form Side */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-7"
+            onMouseMove={handleMouseMove}
+            className="lg:col-span-7 relative p-[1px] rounded-[2rem] overflow-hidden group isolation-isolate"
           >
-            <div className="relative h-full bg-slate-900/30 backdrop-blur-md rounded-3xl border border-white/5 p-6 md:p-8 shadow-2xl overflow-hidden group">
-              {/* Decorative Corner Lines */}
-              <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-cyan-500/30 rounded-tl-3xl group-hover:border-cyan-500/60 transition-colors" />
-              <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-cyan-500/30 rounded-br-3xl group-hover:border-cyan-500/60 transition-colors" />
+            {/* Hover Border Glow */}
+            <motion.div
+              className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]"
+              style={{
+                background: useTransform(
+                  [mouseX, mouseY],
+                  ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, rgba(255,255,255,0.08), transparent 80%)`
+                ),
+              }}
+            />
 
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="space-y-5 lg:space-y-6 relative z-10"
-              >
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Name Input */}
-                  <div className="group/input">
-                    <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      {...register("name", { required: true })}
-                      className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono"
+            <div className="relative h-full bg-zinc-950/40 backdrop-blur-3xl rounded-[1.95rem] border border-white/5 p-8 lg:p-10 flex flex-col justify-center overflow-hidden">
+                {/* Spotlight */}
+                <motion.div
+                  className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[1.95rem]"
+                  style={{
+                    background: useTransform(
+                      [mouseX, mouseY],
+                      ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, rgba(255,255,255,0.02), transparent 80%)`
+                    ),
+                  }}
+                />
+
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 relative z-10 w-full lg:max-w-md mx-auto">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Name</label>
+                      <input
+                        type="text"
+                        placeholder="Your Name"
+                        {...register("name", { required: true })}
+                        className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-3 text-sm text-white placeholder-white/10 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Email</label>
+                      <input
+                        type="email"
+                        placeholder="Your Email"
+                        {...register("email", { required: true })}
+                        className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-3 text-sm text-white placeholder-white/10 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Service</label>
+                    <select
+                      {...register("service", { required: true })}
+                      className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all appearance-none"
+                    >
+                      <option value="" className="bg-black">Select Package</option>
+                      <option value="Launchpad" className="bg-black">Launchpad (SPA)</option>
+                      <option value="Growth" className="bg-black">Growth (Business)</option>
+                      <option value="Empire" className="bg-black">Empire (Enterprise)</option>
+                      <option value="Custom" className="bg-black">Other / Custom</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Message</label>
+                    <textarea
+                      rows="3"
+                      placeholder="How can I help you?"
+                      {...register("message", { required: true })}
+                      className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-3 text-sm text-white placeholder-white/10 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all resize-none"
                     />
                   </div>
 
-                  {/* Email Input */}
-                  <div className="group/input">
-                    <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      {...register("email", { required: true })}
-                      className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono"
-                    />
-                  </div>
-                </div>
-
-                {/* Service Selection Dropdown (NEW) */}
-                <div className="group/input">
-                  <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
-                    Service Required
-                  </label>
-                  <select
-                    {...register("service", { required: true })}
-                    className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono appearance-none"
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-cyan-500 text-black font-black py-4 rounded-xl text-[10px] tracking-[0.3em] uppercase flex items-center justify-center gap-3 hover:bg-white transition-colors group/btn overflow-hidden relative shadow-[0_0_20px_rgba(34,211,238,0.2)]"
                   >
-                    <option value="" className="bg-slate-900 text-gray-400">
-                      Choose a package...
-                    </option>
-                    <option value="The Launchpad" className="bg-slate-900">
-                      The Launchpad (SPA Website)
-                    </option>
-                    <option value="The Growth" className="bg-slate-900">
-                      The Growth (Business Scale)
-                    </option>
-                    <option value="The Empire" className="bg-slate-900">
-                      The Empire (Custom SaaS/App)
-                    </option>
-                    <option value="Other / Custom" className="bg-slate-900">
-                      Other / Custom Requirement
-                    </option>
-                  </select>
-                </div>
-
-                {/* Message Input */}
-                <div className="group/input">
-                  <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
-                    Message
-                  </label>
-                  <textarea
-                    rows="3"
-                    placeholder="How can I help you?"
-                    {...register("message", { required: true })}
-                    className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono resize-none"
-                  ></textarea>
-                </div>
-
-                {/* Submit Button */}
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full relative overflow-hidden bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-5 rounded-xl transition-all duration-300 group/btn"
-                >
-                  <div className="relative flex items-center justify-center gap-3">
                     {isSubmitting ? (
-                      <div className="w-5 h-5 border-2 border-slate-950 rounded-full border-t-transparent animate-spin" />
+                        <div className="w-4 h-4 border-2 border-black rounded-full border-t-transparent animate-spin" />
                     ) : (
-                      <>
-                        <span className="text-sm tracking-[0.2em]">
-                          SEND MESSAGE
-                        </span>
-                        <IoIosSend
-                          size={20}
-                          className="group-hover/btn:translate-x-1 transition-transform"
-                        />
-                      </>
+                        <>
+                           <span>Send Message</span>
+                           <IoIosSend size={16} />
+                        </>
                     )}
-                  </div>
-                  {/* Glitch Effect Line */}
-                  <div className="absolute top-0 -left-full w-full h-full bg-white/20 skew-x-12 group-hover/btn:animate-sheen" />
-                </motion.button>
-              </form>
+                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12" />
+                  </motion.button>
+                </form>
             </div>
           </motion.div>
 
-          {/* 📍 Info Hub (Col 8-12) */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 flex flex-col gap-4 lg:gap-5"
-          >
-            {/* Satellite Map */}
-            <div className="relative h-48 lg:h-56 rounded-3xl overflow-hidden border border-white/10 shadow-lg group">
-              {/* Scanline Overlay */}
-              <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none z-20 opacity-20" />
-              <div className="absolute inset-0 border-[4px] border-cyan-500/20 z-20 pointer-events-none rounded-3xl" />
-
+          {/* Info Side */}
+          <div className="lg:col-span-5 flex flex-col gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="relative flex-1 rounded-[2rem] overflow-hidden border border-white/5 grayscale group hover:grayscale-0 transition-all duration-1000"
+            >
               <iframe
                 title="Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15086.582875152862!2d73.10915740428518!3d19.10271597843054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c1851e40ee81%3A0x6b5b5c98d697841!2sTaloja%20Panchanand%2C%20Taloja%20Phase%201%2C%20Taloja%2C%20Navi%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1707070000000!5m2!1sen!2sin"
-                className="w-full h-full grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-700 scale-110"
+                className="w-full h-full opacity-40 group-hover:opacity-100 transition-opacity duration-1000"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
-              ></iframe>
-
-              <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur px-3 py-1 rounded border border-cyan-500/30 z-30">
-                <p className="text-[10px] text-cyan-400 font-mono tracking-widest">
-                  ● LIVE FEED :: TALOJA PHASE 1
+              />
+              <div className="absolute inset-0 pointer-events-none border-[12px] border-black" />
+              <div className="absolute bottom-6 left-6 bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
+                <p className="text-[9px] text-cyan-400 font-mono tracking-widest uppercase flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
+                  Grid: Taloja Phase 1
                 </p>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Connection Modules */}
-            <div className="grid grid-cols-1 gap-3 flex-1">
-              {/* Email Module */}
-              <a
-                href="mailto:aafaquenazir@gmail.com"
-                className="bg-slate-900/40 border border-white/5 p-4 lg:p-5 rounded-2xl flex items-center justify-between group hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all"
-              >
+            <div className="flex flex-col gap-4">
+              <a href="mailto:aafaquenazir@gmail.com" className="group flex items-center justify-between p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
-                    <FaEnvelope />
+                  <div className="w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                    <FaEnvelope size={18} />
                   </div>
-                  <div>
-                    <h4 className="text-[11px] lg:text-xs text-gray-400 font-mono uppercase tracking-wider">
-                      Primary Comms
-                    </h4>
-                    <p className="text-sm lg:text-base text-white font-bold group-hover:text-cyan-300 transition-colors">
-                      aafaquenazir@gmail.com
-                    </p>
+                  <div className="font-mono">
+                    <span className="block text-[8px] text-white/30 uppercase tracking-[0.2em] mb-0.5">Primary Link</span>
+                    <span className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">aafaquenazir@gmail.com</span>
                   </div>
                 </div>
               </a>
 
-              {/* WhatsApp Module */}
-              <a
-                href="https://wa.me/919325629256?text=Hey%20Aafaque!%20%F0%9F%91%8B%20I%20visited%20your%20portfolio%20and%20I%E2%80%99m%20interested%20in%20discussing%20a%20project.%20Let%E2%80%99s%20connect!"
-                className="bg-slate-900/40 border border-white/5 p-4 lg:p-5 rounded-2xl flex items-center justify-between group hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all"
-              >
+              <a href="https://wa.me/919325629256" target="_blank" className="group flex items-center justify-between p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
-                    <FaWhatsapp />
+                  <div className="w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                    <FaWhatsapp size={18} />
                   </div>
-                  <div>
-                    <h4 className="text-[11px] lg:text-xs text-gray-400 font-mono uppercase tracking-wider">
-                      Quick Chat
-                    </h4>
-                    <p className="text-sm lg:text-base text-white font-bold group-hover:text-cyan-300 transition-colors">
-                      +91 93256 29256
-                    </p>
+                  <div className="font-mono">
+                    <span className="block text-[8px] text-white/30 uppercase tracking-[0.2em] mb-0.5">Quick Uplink</span>
+                    <span className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">+91 93256 29256</span>
                   </div>
                 </div>
               </a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
