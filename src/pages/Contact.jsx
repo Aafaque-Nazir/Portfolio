@@ -57,13 +57,13 @@ const Contact = () => {
       );
 
       if (res.ok) {
-        toast.success("Signal Transmitted Successfully 🚀");
+        toast.success("Message Sent Successfully 🚀");
         reset();
       } else {
-        toast.error("Transmission Failed. Retry. ❌");
+        toast.error("Failed to send message. Please try again. ❌");
       }
     } catch (error) {
-      toast.error("System Error. Check Connection. 😢");
+      toast.error("An error occurred. Check your connection. 😢");
     }
   };
 
@@ -130,11 +130,11 @@ const Contact = () => {
                   {/* Name Input */}
                   <div className="group/input">
                     <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
-                      // ID_NAME
+                      Name
                     </label>
                     <input
                       type="text"
-                      placeholder="ENTER NAME"
+                      placeholder="Your Name"
                       {...register("name", { required: true })}
                       className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono"
                     />
@@ -143,11 +143,11 @@ const Contact = () => {
                   {/* Email Input */}
                   <div className="group/input">
                     <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
-                      // COMMS_EMAIL
+                      Email Address
                     </label>
                     <input
                       type="email"
-                      placeholder="ENTER EMAIL"
+                      placeholder="Your Email"
                       {...register("email", { required: true })}
                       className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono"
                     />
@@ -157,14 +157,14 @@ const Contact = () => {
                 {/* Service Selection Dropdown (NEW) */}
                 <div className="group/input">
                   <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
-                    // SELECT_SERVICE_MODULE
+                    Service Required
                   </label>
                   <select
                     {...register("service", { required: true })}
                     className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono appearance-none"
                   >
                     <option value="" className="bg-slate-900 text-gray-400">
-                      SELECT A PACKAGE
+                      Choose a package...
                     </option>
                     <option value="The Launchpad" className="bg-slate-900">
                       The Launchpad (SPA Website)
@@ -184,11 +184,11 @@ const Contact = () => {
                 {/* Message Input */}
                 <div className="group/input">
                   <label className="text-xs font-mono text-cyan-400 mb-2 block uppercase tracking-wider">
-                    // TRANSMISSION_DATA
+                    Message
                   </label>
                   <textarea
                     rows="3"
-                    placeholder="INITIATE MESSAGE SEQUENCE..."
+                    placeholder="How can I help you?"
                     {...register("message", { required: true })}
                     className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono resize-none"
                   ></textarea>
@@ -208,7 +208,7 @@ const Contact = () => {
                     ) : (
                       <>
                         <span className="text-sm tracking-[0.2em]">
-                          TRANSMIT
+                          SEND MESSAGE
                         </span>
                         <IoIosSend
                           size={20}
