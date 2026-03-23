@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import {
+  RiGithubFill,
+  RiLinkedinFill,
+  RiInstagramLine,
+  RiTwitterFill
+} from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 import { useActiveSection } from "../hooks/useActiveSection";
 
@@ -19,24 +25,18 @@ export default function Navbar() {
     setMenuOpen((prev) => !prev);
   };
 
-  // Intercept anchor clicks and apply smooth window scrolling to fix sudden jumps
   const handleNavClick = (e, id) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
       if (window.lenis) {
-        // Use Lenis for ultra-smooth buttery scrolling
         window.lenis.scrollTo(element, { offset: -100, duration: 1.5 });
       } else {
-        // Fallback to native smooth scroll
         const y = element.getBoundingClientRect().top + window.scrollY - 100;
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
     }
-    // Close mobile menu if open
-    if (menuOpen) {
-      setMenuOpen(false);
-    }
+    if (menuOpen) setMenuOpen(false);
   };
 
   const navItems = [
@@ -57,63 +57,24 @@ export default function Navbar() {
         className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[90%] md:max-w-none"
       >
         <div className="flex items-center justify-between gap-6 px-6 py-3 rounded-full bg-black/50 backdrop-blur-xl border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.2)] hover:border-white/20 transition-colors duration-300">
-          {/* Mobile Hamburger Layout (Only visible on small screens) */}
+
+          {/* Mobile Dynamic Indicator (Restored) */}
           <div className="lg:hidden flex items-center gap-2 mr-2">
             <span className="relative flex h-2 w-2 flex-shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
             </span>
-
-            {/* Dynamic width container that animates its size smoothly */}
-            <motion.div
-              layout
-              transition={{ type: "spring", stiffness: 450, damping: 30 }}
-              className="relative h-8 overflow-hidden flex items-center justify-start ml-2 rounded-full"
-            >
-              <AnimatePresence mode="popLayout" initial={false}>
-                <motion.div
-                  key={activeSection || "menu"}
-                  layout
-                  initial={{ opacity: 0, filter: "blur(4px)", scale: 0.9 }}
-                  animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-                  exit={{ opacity: 0, filter: "blur(4px)", scale: 0.9, position: "absolute" }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="flex items-center justify-center whitespace-nowrap min-w-min pr-2"
-                >
-                  <motion.span
-                    initial={{ y: 20, rotateX: 90 }}
-                    animate={{
-                      y: 0,
-                      rotateX: 0,
-                      backgroundPosition: ["200% center", "-200% center"]
-                    }}
-                    exit={{ y: -20, rotateX: -90 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 350,
-                      damping: 25,
-                      backgroundPosition: {
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }
-                    }}
-                    className="font-black tracking-[0.2em] text-sm uppercase block"
-                    style={{
-                      backgroundImage: "linear-gradient(110deg, #ffffff 10%, #22d3ee 30%, #ffffff 50%, #22d3ee 70%, #ffffff 90%)",
-                      backgroundSize: "200% auto",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      filter: "drop-shadow(0px 0px 8px rgba(34,211,238,0.8))"
-                    }}
-                  >
-                    {activeSection === "skills"
-                      ? "Skills"
-                      : activeSection || "Menu"}
-                  </motion.span>
-                </motion.div>
-              </AnimatePresence>
-            </motion.div>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={activeSection}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                className="text-[10px] font-black tracking-[0.3em] text-white uppercase ml-1"
+              >
+                {activeSection || "Menu"}
+              </motion.span>
+            </AnimatePresence>
           </div>
 
           <button
@@ -138,29 +99,15 @@ export default function Navbar() {
                       : "text-gray-400 hover:text-white"
                       }`}
                   >
-                    {/* Active Background Pill */}
                     {isActive && (
                       <motion.div
                         layoutId="activeNavTab"
                         className="absolute inset-0 bg-cyan-600/20 border border-cyan-400/50 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.4),inset_0_0_10px_rgba(6,182,212,0.2)] overflow-hidden"
-                        transition={{
-                          type: "spring",
-                          bounce: 0.15,
-                          duration: 0.5,
-                        }}
+                        transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                       >
-                        {/* Shimmering Top Edge Light */}
                         <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent opacity-90" />
-                        {/* Shimmering Bottom Edge Light */}
-                        <div className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
                       </motion.div>
                     )}
-
-                    {/* Hover Background Pill (if not active) */}
-                    {!isActive && (
-                      <div className="absolute inset-0 bg-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    )}
-
                     <span className="relative z-10">{item.name}</span>
                   </a>
                 </li>
@@ -170,71 +117,96 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu Sidebar - slides in from right */}
       <AnimatePresence>
         {menuOpen && (
           <>
-            {/* Backdrop overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] lg:hidden"
+              className="fixed inset-0 bg-black/95 backdrop-blur-md z-[60] lg:hidden"
               onClick={toggleMenu}
             />
 
-            {/* Slide-in menu panel */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[280px] sm:w-[320px] bg-[#0a0f1c] border-l border-white/10 shadow-2xl z-[70] lg:hidden flex flex-col"
+              transition={{ type: "spring", damping: 30, stiffness: 200 }}
+              className="fixed top-0 right-0 h-full w-[300px] sm:w-[400px] bg-black/40 backdrop-blur-3xl border-l border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] z-[70] lg:hidden flex flex-col"
             >
-              {/* Close button at the top */}
-              <div className="flex justify-between items-center p-6 border-b border-white/5">
-                <span className="text-white font-bold tracking-widest uppercase text-sm">
-                  Navigation
-                </span>
-                <button
-                  onClick={toggleMenu}
-                  className="text-gray-400 hover:text-cyan-400 transition-colors p-2 rounded-full hover:bg-white/5"
-                >
-                  <FaTimes size={20} />
-                </button>
+              <div className="absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
+                <div className="absolute top-1/4 -right-10 w-40 h-[1px] bg-cyan-500/50 rotate-45" />
+                <div className="absolute bottom-1/4 -left-10 w-40 h-[1px] bg-cyan-500/50 rotate-45" />
               </div>
 
-              {/* Navigation links */}
-              <ul className="flex flex-col gap-2 p-6 overflow-y-auto">
+              <div className="flex justify-between items-center p-10 relative z-10">
+                <span className="text-white font-black tracking-[0.4em] uppercase text-xs opacity-60">NAVIGATION</span>
+                <motion.button
+                  whileHover={{ rotate: 90 }}
+                  onClick={toggleMenu}
+                  className="text-white bg-white/5 p-3 rounded-xl border border-white/10 hover:border-cyan-500/50 transition-colors"
+                >
+                  <FaTimes size={20} />
+                </motion.button>
+              </div>
+
+              <ul className="flex flex-col gap-6 p-10 relative z-10 overflow-y-auto">
                 {navItems.map((item, index) => {
                   const isActive = activeSection === item.id;
                   return (
                     <motion.li
                       key={item.name}
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: 40 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 + 0.1 }}
+                      transition={{ delay: index * 0.1, type: "spring" }}
                     >
                       <a
                         href={`#${item.id}`}
                         onClick={(e) => handleNavClick(e, item.id)}
-                        className={`block w-full py-4 px-6 rounded-xl text-lg font-medium transition-all ${isActive
-                          ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                          : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
+                        className={`group relative flex items-center justify-between w-full py-4 text-2xl font-black transition-all duration-300 ${isActive ? "text-white" : "text-white/20 hover:text-white"
                           }`}
                       >
-                        {item.name}
+                        <span className="relative z-10 tracking-[0.1em] uppercase">
+                          {item.name}
+                        </span>
+                        {isActive && (
+                          <motion.div
+                            layoutId="mobileActivePin"
+                            className="w-2.5 h-2.5 rounded-full bg-cyan-500 shadow-[0_0_15px_#22d3ee]"
+                          />
+                        )}
                       </a>
                     </motion.li>
                   );
                 })}
               </ul>
 
-              <div className="mt-auto p-6 border-t border-white/5">
-                <p className="text-center text-xs text-gray-600 font-mono">
-                  &copy; {new Date().getFullYear()} Aafaque Nazir
-                </p>
+              <div className="mt-auto p-10 bg-white/[0.02] border-t border-white/5 relative z-10">
+                <div className="flex gap-6 mb-8">
+                  {[
+                    { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white" },
+                    { icon: RiLinkedinFill, href: "https://www.linkedin.com/in/aafaque-nazir/", color: "hover:text-cyan-400" },
+                    { icon: RiInstagramLine, href: "https://www.instagram.com/aafaque.75/", color: "hover:text-pink-500" }
+                  ].map((item, i) => (
+                    <motion.a
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.6 + (i * 0.1) }}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-white/30 transition-all duration-300 hover:scale-125 ${item.color}`}
+                    >
+                      <item.icon size={26} />
+                    </motion.a>
+                  ))}
+                </div>
+                <div className="text-[10px] text-white/20 font-mono tracking-widest uppercase flex flex-col gap-1">
+                  <span>&copy; {new Date().getFullYear()} AAFAQUE NAZIR</span>
+                  <span className="opacity-50">Authorized System Access</span>
+                </div>
               </div>
             </motion.div>
           </>

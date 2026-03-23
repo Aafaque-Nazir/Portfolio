@@ -12,311 +12,192 @@ const GlobalBackground = () => {
     let width, height;
     let isVisible = true;
 
-    // Data structures
-    // Path: { points: [{x,y}, ...], length: totalPixelLength }
-    let paths = [];
-    // Junctions: { x, y, size }
-    let dots = [];
-    // Trailers: { pathIdx, distance, speed, len }
-    let trailers = [];
+    // --- DATA STRUCTURES ---
+    let paths = []; // { points: [{x,y}], length }
+    let trailers = []; // { pathIdx, distance, speed, len, width }
+    let dots = []; // { x, y, size, type: 'pad' }
 
-    const handleResize = () => {
+    const initializeCanvas = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      build();
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      ctx.scale(ratio, ratio);
+      buildWorld();
     };
 
     const dist = (p1, p2) => Math.hypot(p2.x - p1.x, p2.y - p1.y);
 
-    const createPath = (start, dirX, dirY, maxSteps, maxX, minX) => {
-      let points = [{ ...start }];
-      let current = { ...start };
-      let totalLen = 0;
-      let steps = 0;
-
-      const addPoint = (pt) => {
-        const d = dist(current, pt);
-        if (d > 0) {
-          points.push(pt);
-          totalLen += d;
-          current = { ...pt };
-        }
-      };
-
-      // Generate a path with turns
-      // We want to bias towards the center somewhat but stay in zone
-
-      while (steps < maxSteps) {
-        // Decide length
-        const segLen = 30 + Math.random() * 80;
-
-        // Decide direction: mostly consistent with startDir, but occasional 90deg turn
-        let dx = 0, dy = 0;
-        const turn = Math.random();
-
-        if (turn < 0.6) {
-          // Continue main direction
-          dx = dirX;
-          dy = dirY;
-        } else if (turn < 0.8) {
-          // Turn horizontal
-          dx = dirX !== 0 ? dirX : (Math.random() > 0.5 ? 1 : -1);
-          dy = 0;
-        } else {
-          // Turn vertical
-          dx = 0;
-          dy = dirY !== 0 ? dirY : (Math.random() > 0.5 ? 1 : -1);
-        }
-
-        let nextX = current.x + dx * segLen;
-        let nextY = current.y + dy * segLen;
-
-        // Clamp
-        nextX = Math.max(minX, Math.min(maxX, nextX));
-
-        // If we hit a wall/limit in X, stop or turn vertical
-        if (Math.abs(nextX - current.x) < 1 && Math.abs(nextY - current.y) < 1) {
-          break;
-        }
-
-        addPoint({ x: nextX, y: nextY });
-
-        // Chance to spawn a junction dot
-        if (Math.random() > 0.3) {
-          dots.push({ x: nextX, y: nextY, size: 2 + Math.random() * 2 });
-        }
-
-        steps++;
-      }
-
-      if (totalLen > 50) {
-        paths.push({ points, length: totalLen });
-        // Add start/end dots
-        dots.push({ x: points[0].x, y: points[0].y, size: 4 });
-        dots.push({ x: points[points.length - 1].x, y: points[points.length - 1].y, size: 4 });
-      }
-    };
-
-    const build = () => {
+    const buildWorld = () => {
       paths = [];
       dots = [];
       trailers = [];
 
       const isMobile = width < 768;
-      const maxRight = width * 0.45;
-      const minLeft = width * 0.55;
+      
+      // 4 Corners: TL, TR, BL, BR
+      const corners = [
+        { x: -20, y: -20, dx: 1, dy: 1 },
+        { x: width + 20, y: -20, dx: -1, dy: 1 },
+        { x: -20, y: height + 20, dx: 1, dy: -1 },
+        { x: width + 20, y: height + 20, dx: -1, dy: -1 }
+      ];
 
-      // TOP-LEFT Cluster
-      const tlCount = isMobile ? 5 : 8;
-      for (let i = 0; i < tlCount; i++) {
-        const sy = 20 + i * (isMobile ? 30 : 40) + Math.random() * 20;
-        createPath({ x: -10, y: sy }, 1, 1, 5 + Math.random() * 3, maxRight, -20);
-      }
+      corners.forEach(corner => {
+        const busCount = isMobile ? 2 : 4;
+        for (let i = 0; i < busCount; i++) {
+          const startX = corner.x + (corner.dx === 1 ? i * 15 : -i * 15);
+          const startY = corner.y + (corner.dy === 1 ? i * 15 : -i * 15);
+          createPCBPath({ x: startX, y: startY }, corner.dx, corner.dy, isMobile);
+        }
+      });
 
-      // BOTTOM-RIGHT Cluster
-      const brCount = isMobile ? 5 : 8;
-      for (let i = 0; i < brCount; i++) {
-        const sy = height - 20 - i * (isMobile ? 30 : 40) - Math.random() * 20;
-        createPath({ x: width + 10, y: sy }, -1, -1, 5 + Math.random() * 3, width + 20, minLeft);
-      }
-
-      // Initialize trailers (staggered)
-      // We add multiple trails per path, spread out
       paths.forEach((p, idx) => {
-        // Random number of trails per path (1 or 2)
-        const count = Math.random() > 0.5 ? 2 : 1;
+        const count = isMobile ? 1 : (Math.random() > 0.7 ? 2 : 1);
         for (let k = 0; k < count; k++) {
           trailers.push({
             pathIdx: idx,
-            // Stagger start positions: negative so they enter frame later
             distance: Math.random() * p.length - p.length,
-            speed: 1.5 + Math.random() * 1.5, // Variable speed "mid fast"
-            len: 100 + Math.random() * 80 // Long trails
+            speed: 1.5 + Math.random() * 2, 
+            len: 80 + Math.random() * 100,
+            width: 1.5 + Math.random() * 1
           });
         }
       });
     };
 
-    // Helper: Get coordinate at distance d on path
-    const getPointAtDist = (points, d) => {
-      let covered = 0;
-      for (let i = 0; i < points.length - 1; i++) {
-        const p1 = points[i];
-        const p2 = points[i + 1];
-        const segLen = dist(p1, p2);
+    const createPCBPath = (start, dx, dy, isMobile) => {
+      let points = [start];
+      let current = { ...start };
+      let totalLen = 0;
+      let steps = 0;
+      const maxSteps = isMobile ? 4 : 8;
 
-        if (d <= covered + segLen) {
-          // Interpolate
-          const t = (d - covered) / segLen;
-          return {
-            x: p1.x + (p2.x - p1.x) * t,
-            y: p1.y + (p2.y - p1.y) * t,
-          };
-        }
-        covered += segLen;
+      const angles = [
+        { x: dx, y: 0 },
+        { x: 0, y: dy },
+        { x: dx, y: dy }
+      ];
+
+      let lastDir = null;
+      while (steps < maxSteps) {
+        let dir = (!lastDir || Math.random() > 0.4) ? angles[Math.floor(Math.random() * angles.length)] : lastDir;
+        const segLen = 50 + Math.random() * 150;
+        let next = { x: current.x + dir.x * segLen, y: current.y + dir.y * segLen };
+        if (next.x < -100 || next.x > width + 100 || next.y < -100 || next.y > height + 100) break;
+
+        const d = dist(current, next);
+        points.push(next);
+        totalLen += d;
+        if (Math.random() > 0.7) dots.push({ x: next.x, y: next.y, size: 2.5, type: 'pad' });
+        current = next;
+        lastDir = dir;
+        steps++;
       }
-      return points[points.length - 1]; // Clamp to end
+
+      if (totalLen > 50) {
+        paths.push({ points, length: totalLen });
+        dots.push({ x: current.x, y: current.y, size: 4, type: 'pad' });
+      }
     };
 
-    // Helper: Stroke part of path from dStart to dEnd
-    const drawPathSegment = (ctx, points, dStart, dEnd, colorStart, colorEnd) => {
-      // Find start point index
-      // This is expensive if we scan every time. 
-      // Optimized approach: calculate interpolated points and lineTo between them.
-      // Since segments are straight lines, we just need the start/end and intermediate vertices.
-
-      const pStart = getPointAtDist(points, Math.max(0, dStart));
-      const pEnd = getPointAtDist(points, Math.max(0, dEnd));
-
-      // We really want a gradient. Canvas gradients are linear between two points. 
-      // For a multi-segment line, a single linear gradient isn't perfect but usually "good enough" visually if moving fast.
-      // Or we can just draw a segment from pStart to pEnd? No, that cuts corners.
-      // Correct way: Move to pStart -> Line to all intermediate vertices -> Line to pEnd.
-
-      ctx.beginPath();
-      ctx.moveTo(pStart.x, pStart.y);
-
-      // Add intermediate vertices
+    const getPointAtDist = (points, d) => {
+      if (d <= 0) return points[0];
       let covered = 0;
-      let started = false;
       for (let i = 0; i < points.length - 1; i++) {
         const segLen = dist(points[i], points[i + 1]);
-        if (covered + segLen > dStart && covered < dEnd) {
-          // This segment is at least partially involved
-          // We already did moveTo pStart.
-          // If we are fully past dStart, we should lineTo the vertex points[i+1]
-          // unless points[i+1] is beyond dEnd.
-
-          if (covered + segLen < dEnd) {
-            ctx.lineTo(points[i + 1].x, points[i + 1].y);
-          }
+        if (d <= covered + segLen) {
+          const t = (d - covered) / segLen;
+          return { x: points[i].x + (points[i + 1].x - points[i].x) * t, y: points[i].y + (points[i + 1].y - points[i].y) * t };
         }
         covered += segLen;
       }
-      ctx.lineTo(pEnd.x, pEnd.y);
-
-      // Gradient?
-      const grad = ctx.createLinearGradient(pStart.x, pStart.y, pEnd.x, pEnd.y);
-      grad.addColorStop(0, "rgba(6, 182, 212, 0.2)"); // Increased base opacity
-      grad.addColorStop(1, "rgba(34, 211, 238, 1)");
-
-      ctx.strokeStyle = grad;
-      ctx.stroke();
-
-      return pEnd; // Return head position for dot
+      return points[points.length - 1];
     };
 
-    const animate = () => {
+    const render = () => {
       ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, width, height);
 
-      // Draw Static Paths
-      ctx.lineWidth = 1.5;
-      ctx.strokeStyle = "rgba(6, 182, 212, 0.1)"; // Reverted to 0.1 per user request
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
+      // --- Draw PCB Traces ---
+      ctx.lineCap = "butt";
+      ctx.lineJoin = "miter";
+      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = "rgba(14, 116, 144, 0.15)"; 
 
       paths.forEach(p => {
         ctx.beginPath();
-        if (p.points.length > 0) {
-          ctx.moveTo(p.points[0].x, p.points[0].y);
-          for (let i = 1; i < p.points.length; i++) {
-            ctx.lineTo(p.points[i].x, p.points[i].y);
-          }
-        }
+        ctx.moveTo(p.points[0].x, p.points[0].y);
+        for (let i = 1; i < p.points.length; i++) ctx.lineTo(p.points[i].x, p.points[i].y);
         ctx.stroke();
       });
 
-      // Draw Nodes
-      // Batch mode optimization
-      ctx.fillStyle = "rgba(6, 182, 212, 0.4)"; // Reverted to 0.4
-      ctx.shadowBlur = 15; // Reverted to 15
-      ctx.shadowColor = "rgba(6, 182, 212, 0.8)"; // Reverted opacity
-
+      // --- Draw Logic Pads ---
       dots.forEach(d => {
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Brighter core
-        ctx.fillStyle = "#ffffff"; // Added pure white core
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.size * 0.4, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "rgba(6, 182, 212, 0.8)"; // reset
+        ctx.fillStyle = "rgba(34, 211, 238, 0.25)";
+        ctx.fillRect(d.x - d.size/2, d.y - d.size/2, d.size, d.size);
       });
-      ctx.shadowBlur = 0;
 
-      // Draw Trails
+      // --- Draw Trails ---
       trailers.forEach(t => {
         const p = paths[t.pathIdx];
         if (!p) return;
 
         t.distance += t.speed;
-        // Loop: if tail goes past end, reset to before start
-        if (t.distance - t.len > p.length) {
-          t.distance = -Math.random() * 200; // Random delay before restart
-        }
+        if (t.distance - t.len > p.length) t.distance = -t.len - Math.random() * 300;
 
-        // Only draw if visible
-        if (t.distance > 0 && t.distance - t.len < p.length) {
-          // --- GLITCH EFFECT LOGIC ---
-          // 8% chance to experience a glitch on any given frame
-          const isGlitching = Math.random() < 0.08;
+        if (t.distance > -t.len && t.distance < p.length + t.len) {
+          const dStart = Math.max(0, t.distance - t.len);
+          const dEnd = Math.min(p.length, t.distance);
+          
+          if (dEnd > dStart) {
+            const head = getPointAtDist(p.points, dEnd);
+            const tail = getPointAtDist(p.points, dStart);
 
-          // Randomly spike line width during glitch, otherwise keep crisp thick trail
-          ctx.lineWidth = isGlitching ? (Math.random() * 6 + 1) : 4;
+            const grad = ctx.createLinearGradient(tail.x, tail.y, head.x, head.y);
+            grad.addColorStop(0, "rgba(6, 182, 212, 0)");
+            grad.addColorStop(1, "rgba(34, 211, 238, 0.7)");
 
-          // Draw trail
-          let headPos = drawPathSegment(ctx, p.points, t.distance - t.len, t.distance);
-
-          // Randomly shift the head position slightly during glitch
-          if (isGlitching) {
-            const shiftX = (Math.random() * 8 - 4);
-            const shiftY = (Math.random() * 8 - 4);
-            headPos = { x: headPos.x + shiftX, y: headPos.y + shiftY };
-          }
-
-          // Draw head glow
-          // Spike shadow blur to extreme during glitch, or completely drop it
-          ctx.shadowBlur = isGlitching ? (Math.random() < 0.3 ? 0 : Math.random() * 50 + 20) : 30;
-          ctx.shadowColor = isGlitching && Math.random() > 0.5 ? "rgba(255, 255, 255, 1)" : "rgba(34, 211, 238, 1)";
-
-          ctx.fillStyle = isGlitching && Math.random() > 0.3 ? "#A5F3FC" : "#ffffff";
-
-          // Skip drawing the head 15% of the time during a glitch to create a flicker/skip effect
-          if (!isGlitching || Math.random() > 0.15) {
+            ctx.lineWidth = t.width;
+            ctx.strokeStyle = grad;
             ctx.beginPath();
-            // Randomly grow/shrink the head dot
-            ctx.arc(headPos.x, headPos.y, isGlitching ? (Math.random() * 4 + 1) : 3, 0, Math.PI * 2);
-            ctx.fill();
-          }
+            ctx.moveTo(tail.x, tail.y);
+            let covered = 0;
+            for (let i = 0; i < p.points.length - 1; i++) {
+              const segLen = dist(p.points[i], p.points[i+1]);
+              if (covered + segLen > dStart && covered < dEnd) {
+                 if (covered > dStart && covered < dEnd) ctx.lineTo(p.points[i].x, p.points[i].y);
+              }
+              covered += segLen;
+            }
+            ctx.lineTo(head.x, head.y);
+            ctx.stroke();
 
-          ctx.shadowBlur = 0;
+            // Head Glow (Simpler circle)
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = "rgba(34, 211, 238, 0.8)";
+            ctx.fillStyle = "#ffffff";
+            ctx.beginPath();
+            ctx.arc(head.x, head.y, t.width * 1.2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
         }
       });
 
-      if (isVisible) {
-        animationFrameId = requestAnimationFrame(animate);
-      }
+      if (isVisible) animationFrameId = requestAnimationFrame(render);
     };
 
-    handleResize();
+    const handleResize = () => initializeCanvas();
+    initializeCanvas();
     window.addEventListener("resize", handleResize);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-        if (isVisible) {
-          animate();
-        } else {
-          cancelAnimationFrame(animationFrameId);
-        }
-      },
-      { threshold: 0 }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) render();
+    });
     observer.observe(canvas);
 
     return () => {
@@ -326,12 +207,7 @@ const GlobalBackground = () => {
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 z-0 pointer-events-none"
-    />
-  );
+  return <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none" />;
 };
 
 export default GlobalBackground;

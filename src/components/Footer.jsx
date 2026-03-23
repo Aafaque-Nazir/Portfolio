@@ -21,7 +21,7 @@ const Footer = () => {
           {[
             { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white hover:drop-shadow-[0_0_10px_#fff]" },
             { icon: RiLinkedinFill, href: "https://www.linkedin.com/in/aafaque-nazir/", color: "hover:text-cyan-400 hover:drop-shadow-[0_0_10px_#22d3ee]" },
-            { icon: RiInstagramLine, href: "https://www.instagram.com/aafaque.7/", color: "hover:text-pink-500 hover:drop-shadow-[0_0_10px_#ec4899]" }
+            { icon: RiInstagramLine, href: "https://www.instagram.com/aafaque.75/", color: "hover:text-pink-500 hover:drop-shadow-[0_0_10px_#ec4899]" }
           ].map((item, idx) => (
             <a
               key={idx}
