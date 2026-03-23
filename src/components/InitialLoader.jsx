@@ -1,156 +1,188 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Helper function to generate random alphanumeric scramble
-const scramble = (len) => {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
-    let result = "";
-    for (let i = 0; i < len; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
+// --- THE SCRAMBLE ENGINE ---
+const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=-_";
+const ScrambleText = ({ text, delay = 0, duration = 0.8 }) => {
+    const [display, setDisplay] = useState("");
+    
+    useEffect(() => {
+        let frame = 0;
+        const totalFrames = duration * 60;
+        const timeout = setTimeout(() => {
+            const interval = setInterval(() => {
+                if (frame >= totalFrames) {
+                    setDisplay(text);
+                    clearInterval(interval);
+                    return;
+                }
+                
+                const progress = frame / totalFrames;
+                const scrambled = text.split("").map((char, i) => {
+                    if (i < text.length * progress) return text[i];
+                    return CHARS[Math.floor(Math.random() * CHARS.length)];
+                }).join("");
+                
+                setDisplay(scrambled);
+                frame++;
+            }, 1000 / 60);
+            return () => clearInterval(interval);
+        }, delay * 1000);
+        return () => clearTimeout(timeout);
+    }, [text, delay, duration]);
+
+    return <span>{display}</span>;
 };
 
 const InitialLoader = ({ onComplete }) => {
     const [loadingComplete, setLoadingComplete] = useState(false);
     const [percent, setPercent] = useState(0);
-    const [scrambledPhase, setScrambledPhase] = useState("INITIALIZING");
-
-    // Terminal Logs state
     const [logs, setLogs] = useState([]);
 
-    useEffect(() => {
-        const bootSequence = [
-            "ACCESSING KERNEL...",
-            "BYPASSING SECURITY PROTOCOLS...",
-            "LOADING UI MODULES...",
-            "MOUNTING 3D ASSETS...",
-            "ESTABLISHING SYNC...",
-            "SYSTEM READY."
-        ];
-        let logIndex = 0;
+    const bootSequence = useMemo(() => [
+        "INITIALIZING CORE...",
+        "DECRYPTING ASSETS...",
+        "MOUNTING QUANTUM MODULES...",
+        "STABILIZING INTERFACE...",
+        "OVERRIDE COMPLETE.",
+        "SYSTEMS OPERATIONAL."
+    ], []);
 
+    useEffect(() => {
+        let logIndex = 0;
         const bootInterval = setInterval(() => {
             if (logIndex < bootSequence.length) {
-                const currentLog = bootSequence[logIndex];
-                if (currentLog) {
-                    setLogs(prev => [...prev, `> ${currentLog}`]);
-                }
+                setLogs(prev => [...prev, bootSequence[logIndex]]);
                 logIndex++;
             } else {
                 clearInterval(bootInterval);
             }
-        }, 400);
+        }, 300);
 
         const percentInterval = setInterval(() => {
             setPercent(prev => {
-                if (prev >= 100) {
+                const next = prev + Math.floor(Math.random() * 8) + 1;
+                if (next >= 100) {
                     clearInterval(percentInterval);
                     setTimeout(() => {
                         setLoadingComplete(true);
-                        setTimeout(onComplete, 1200); // Trigger exit animation
-                    }, 500);
+                        setTimeout(onComplete, 1500);
+                    }, 400);
                     return 100;
                 }
-                return prev + Math.floor(Math.random() * 12) + 2;
+                return next;
             });
-        }, 100);
-
-        const scrambleInterval = setInterval(() => {
-            setScrambledPhase(scramble(12));
-        }, 50);
+        }, 80).unref; // just to be safe but standard browser env doesn't have .unref
 
         return () => {
             clearInterval(bootInterval);
             clearInterval(percentInterval);
-            clearInterval(scrambleInterval);
         };
-    }, [onComplete]);
+    }, [onComplete, bootSequence]);
 
     return (
         <AnimatePresence>
-            <motion.div
-                initial={{ opacity: 1 }}
-                exit={{
-                    opacity: 0,
-                    clipPath: "inset(0 0 100% 0)", // Wipe up exit
-                    transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] }
-                }}
-                className="fixed inset-0 z-[9999] justify-center bg-black flex flex-col items-center overflow-hidden font-mono"
-            >
-                {/* Background Grid that slowly scales */}
+            {!loadingComplete && (
                 <motion.div
-                    animate={{ scale: [1, 1.1], opacity: [0, 0.15] }}
-                    transition={{ duration: 4, ease: "easeOut" }}
-                    className="absolute inset-0 z-0"
-                    style={{
-                        backgroundImage: `linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px)`,
-                        backgroundSize: "40px 40px"
+                    initial={{ opacity: 1 }}
+                    exit={{
+                        opacity: 0,
+                        scale: 1.1,
+                        filter: "blur(20px) contrast(200%)", 
+                        transition: { duration: 0.8, ease: "circIn" }
                     }}
-                />
+                    className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center overflow-hidden font-mono text-cyan-500 selection:bg-cyan-500 selection:text-black"
+                >
+                    {/* --- HUD DECORATION (TOP CORNERS) --- */}
+                    <div className="absolute top-10 left-10 flex flex-col gap-1 opacity-40 mix-blend-screen">
+                        <div className="text-[10px] tracking-[0.3em] font-black uppercase">Region: Global/Edge</div>
+                        <div className="text-[10px] tracking-[0.3em] font-light">Status: <span className="text-white animate-pulse">Running</span></div>
+                        <div className="w-32 h-[1px] bg-gradient-to-r from-cyan-500 to-transparent mt-2" />
+                    </div>
 
-                {/* Ambient Cyan Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none z-0" />
-
-                {/* Main Content */}
-                <div className="relative z-10 w-full max-w-2xl px-8 flex flex-col">
-
-                    {/* Top Scrambled Decryptor */}
-                    <div className="flex justify-between items-end border-b border-cyan-500/30 pb-4 mb-8">
-                        <div className="text-cyan-500 text-xs tracking-[0.4em] opacity-80">
-                            {loadingComplete ? "SYS_AWAKE" : scrambledPhase}
-                        </div>
-                        <div className="text-cyan-400 text-sm font-black tracking-widest">
-                            v2.0.26
+                    <div className="absolute top-10 right-10 text-right opacity-40 mix-blend-screen">
+                        <div className="text-[10px] tracking-[0.3em] font-black uppercase">Build: v4.2.0-Alpha</div>
+                        <div className="text-[10px] tracking-[0.3em] font-light font-mono">
+                            {Math.random().toString(16).substring(2, 10).toUpperCase()}
                         </div>
                     </div>
 
-                    {/* Huge Central Number Display */}
-                    <div className="flex flex-col items-center justify-center py-12">
-                        <motion.div
-                            className="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-cyan-500 tracking-tighter"
-                            animate={{ opacity: [0.8, 1, 0.9], filter: ["blur(2px)", "blur(0px)", "blur(1px)"] }}
-                            transition={{ duration: 0.2, repeat: Infinity, repeatType: "reverse" }}
-                        >
-                            <span className="text-cyan-500/50 font-light mr-4">[</span>
-                            {percent.toString().padStart(3, '0')}
-                            <span className="text-cyan-500/50 font-light ml-4">]</span>
-                        </motion.div>
-                        <div className="h-1 w-24 bg-cyan-500/50 mt-8 rounded-full overflow-hidden">
-                            <motion.div
-                                className="h-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"
-                                initial={{ width: "0%" }}
-                                animate={{ width: `${percent}%` }}
+                    {/* --- CENTRAL CORE ELEMENT --- */}
+                    <div className="relative flex flex-col items-center">
+                        {/* THE GEOMETRIC INDICATOR */}
+                        <div className="relative w-48 h-48 flex items-center justify-center mb-12">
+                            {/* Rotating Ring */}
+                            <motion.div 
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                                className="absolute inset-0 border-[0.5px] border-dashed border-cyan-500/30 rounded-full"
                             />
+                            
+                            {/* Scanning Pulse */}
+                            <motion.div 
+                                animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.5, 0.2] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl"
+                            />
+
+                            {/* THE PERCENTAGE BOX */}
+                            <div className="relative z-10 flex flex-col items-center">
+                                <motion.span 
+                                    className="text-6xl md:text-8xl font-black tracking-tighter text-white drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]"
+                                >
+                                    {percent}
+                                </motion.span>
+                                <span className="text-[10px] tracking-[0.5em] font-bold text-cyan-400 mt-[-5px] opacity-80 uppercase">Loading</span>
+                            </div>
+
+                            {/* FOUR CORNER BRACKETS */}
+                            {[0, 90, 180, 270].map(rot => (
+                                <div key={rot} className="absolute inset-0" style={{ transform: `rotate(${rot}deg)` }}>
+                                    <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-500/40" />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* --- PROGRESS BAR --- */}
+                        <div className="w-64 h-[2px] bg-white/10 relative overflow-hidden group">
+                           <motion.div 
+                             className="absolute inset-0 bg-cyan-500 shadow-[0_0_15px_#22d3ee]"
+                             initial={{ x: "-100%" }}
+                             animate={{ x: `${percent - 100}%` }}
+                             transition={{ type: "spring", damping: 30, stiffness: 100 }}
+                           />
                         </div>
                     </div>
 
-                    {/* Terminal Boot Logs */}
-                    <div className="mt-8 h-32 flex flex-col justify-end overflow-hidden">
-                        <AnimatePresence>
-                            {logs.map((log, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    className="text-cyan-300 text-xs md:text-sm tracking-widest mb-2"
-                                >
-                                    {log}
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
+                    {/* --- LOG TERMINAL (BOTTOM) --- */}
+                    <div className="absolute bottom-20 left-10 md:left-20 w-full max-w-sm px-4">
+                        <div className="flex flex-col gap-1.5 h-32 justify-end">
+                            <AnimatePresence mode="popLayout">
+                                {logs.map((log, i) => (
+                                    <motion.div
+                                        key={log}
+                                        initial={{ opacity: 0, x: -10, filter: "blur(5px)" }}
+                                        animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                                        exit={{ opacity: 0, x: 10 }}
+                                        className="text-[10px] md:text-xs tracking-[0.2em] font-mono flex items-center gap-3"
+                                    >
+                                        <span className="w-1 h-3 bg-cyan-500/50" />
+                                        <ScrambleText text={log} duration={0.3} />
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                        </div>
                     </div>
 
-                </div>
+                    {/* --- THE SCAN LINE --- */}
+                    <motion.div 
+                        animate={{ top: ["-10%", "110%"] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                        className="absolute left-0 w-full h-[1px] bg-cyan-400/20 shadow-[0_0_20px_#22d3ee] pointer-events-none opacity-30 z-50"
+                    />
 
-                {/* Scanline Overlay */}
-                <motion.div
-                    animate={{ top: ["-10%", "110%"] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    className="absolute left-0 w-full h-8 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent pointer-events-none z-50"
-                />
-
-            </motion.div>
+                </motion.div>
+            )}
         </AnimatePresence>
     );
 };
