@@ -25,7 +25,7 @@ export function TechCard({ tech, index }) {
                 damping: 20
             }}
             onMouseMove={handleMouseMove}
-            className="group relative w-14 h-14 md:w-20 md:h-20 cursor-pointer z-0 hover:z-50 shrink-0"
+            className="group relative w-12 h-12 md:w-16 md:h-16 lg:w-14 lg:h-14 cursor-pointer z-0 hover:z-50 shrink-0"
         >
             {/* INNER CONTAINER */}
             <div className="absolute inset-0 rounded-full bg-stone-950/40 backdrop-blur-3xl border border-white/5 overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:border-white/20 isolation-isolate">
@@ -55,7 +55,7 @@ export function TechCard({ tech, index }) {
                 {/* Content (Icon) - COLOR BY DEFAULT */}
                 <div className="relative h-full w-full flex flex-col items-center justify-center z-30">
                     <div 
-                        className="text-2xl md:text-3xl transition-all duration-300 group-hover:scale-110 group-hover:brightness-125"
+                        className="text-xl md:text-2xl transition-all duration-300 group-hover:scale-110 group-hover:brightness-125"
                         style={{ color: tech.color || '#fff', filter: `drop-shadow(0 0 10px ${tech.color}40)` }}
                     >
                         <tech.icon />

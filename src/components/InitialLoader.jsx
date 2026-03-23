@@ -18,7 +18,7 @@ const ScrambleText = ({ text, delay = 0, duration = 0.8 }) => {
                 }
                 
                 const progress = frame / totalFrames;
-                const scrambled = text.split("").map((char, i) => {
+                const scrambled = (text || "").split("").map((char, i) => {
                     if (i < text.length * progress) return text[i];
                     return CHARS[Math.floor(Math.random() * CHARS.length)];
                 }).join("");
@@ -72,7 +72,7 @@ const InitialLoader = ({ onComplete }) => {
                 }
                 return next;
             });
-        }, 80).unref; // just to be safe but standard browser env doesn't have .unref
+        }, 80);
 
         return () => {
             clearInterval(bootInterval);
@@ -160,7 +160,7 @@ const InitialLoader = ({ onComplete }) => {
                             <AnimatePresence mode="popLayout">
                                 {logs.map((log, i) => (
                                     <motion.div
-                                        key={log}
+                                        key={`${log}-${i}`}
                                         initial={{ opacity: 0, x: -10, filter: "blur(5px)" }}
                                         animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                                         exit={{ opacity: 0, x: 10 }}

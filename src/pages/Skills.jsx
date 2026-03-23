@@ -54,55 +54,61 @@ export default function Skills() {
     : allSkills.filter(s => s.category === activeCategory);
 
   return (
-    <section id="skills" className="relative h-[100svh] min-h-[500px] flex flex-col items-center bg-black text-white shrink-0 overflow-hidden select-none">
-      
-      {/* Hide Scrollbar Globally for this section */}
-      <style jsx global>{`
+    <section id="skills" className="relative lg:h-screen min-h-[100svh] flex flex-col bg-black text-white shrink-0 overflow-hidden select-none">
+
+      {/* Dynamic Background Watermark (Reduced Spacy feel) */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none overflow-hidden">
+        <span className="text-[25vh] font-black tracking-tighter uppercase whitespace-nowrap rotate-90 lg:rotate-0">
+          ARSENAL
+        </span>
+      </div>
+
+      {/* Hide Scrollbar Globally */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
         #skills::-webkit-scrollbar { display: none; }
         #skills { -ms-overflow-style: none; scrollbar-width: none; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
+      `}} />
 
       {/* Neural Hub Background */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '30px 30px' }} 
+      <div className="absolute inset-0 opacity-10 pointer-events-none z-0"
+        style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '30px 30px' }}
       />
-      
+
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-cyan-500/[0.01] blur-[100px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 z-10 flex flex-col items-center justify-center h-full max-h-screen pt-4 pb-24 lg:pb-28">
-        
-        {/* Ultra-Compressed Header */}
-        <div className="text-center mb-6 lg:mb-8 shrink-0">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-3xl lg:text-5xl font-black text-white tracking-tighter uppercase"
-          >
-            Tech <span className="text-cyan-500">Arsenal</span>
-          </motion.h2>
-        </div>
+      {/* Header: Tightened vertical space */}
+      <div className="relative z-20 w-full pt-8 lg:pt-12 pb-2 lg:pb-4 flex flex-col items-center shrink-0">
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          className="text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase leading-none"
+        >
+          Tech <span className="text-cyan-500">Arsenal</span>
+        </motion.h2>
+        <div className="w-12 h-0.5 bg-cyan-500 mt-2 opacity-50" />
+      </div>
 
-        {/* Dynamic Skill Grid: High Density / Zero Scroll */}
-        <div className="w-full max-w-5xl flex items-center justify-center overflow-visible">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex flex-wrap justify-center gap-2.5 md:gap-6 lg:gap-8 max-h-[55vh] md:max-h-full overflow-visible"
-          >
-            {filteredSkills.map((tech, index) => (
-              <TechCard key={tech.name} tech={tech} index={index} />
-            ))}
-          </motion.div>
-        </div>
+      {/* Grid: Occupies more center space */}
+      <div className="flex-1 w-full max-w-6xl mx-auto overflow-y-auto no-scrollbar px-4 lg:px-8 relative z-10 flex flex-col items-center justify-center">
+        <motion.div
+          key={activeCategory}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:flex lg:flex-wrap justify-items-center justify-center gap-4 md:gap-6 lg:gap-8 w-full h-fit py-2"
+        >
+          {filteredSkills.map((tech, index) => (
+            <TechCard key={tech.name} tech={tech} index={index} />
+          ))}
+        </motion.div>
+      </div>
 
-        {/* Floating Dock Layer: Responsive spacing */}
-        <div className="absolute bottom-4 left-0 right-0 z-50 flex justify-center pointer-events-none h-fit px-4">
-          <div className="pointer-events-auto bg-black/40 backdrop-blur-3xl border border-white/5 rounded-2xl p-0.5 shadow-2xl scale-90 lg:scale-100">
-             <SkillDock activeCategory={activeCategory} setCategory={setActiveCategory} />
-          </div>
+      {/* Floating Dock: Anchored Bottom */}
+      <div className="absolute bottom-0 left-0 right-0 z-50 h-24 flex justify-center items-center pointer-events-none px-4 bg-gradient-to-t from-black via-black/80 to-transparent pt-2">
+        <div className="pointer-events-auto bg-black/60 backdrop-blur-3xl border border-white/5 rounded-[2rem] p-1 shadow-[0_0_50px_rgba(0,0,0,0.9)] scale-90 lg:scale-100 mb-2">
+          <SkillDock activeCategory={activeCategory} setCategory={setActiveCategory} />
         </div>
       </div>
     </section>
