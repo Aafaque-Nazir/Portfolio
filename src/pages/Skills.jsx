@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   SiReact, SiNextdotjs, SiJavascript, SiTailwindcss, SiFramer, SiGit,
   SiTypescript, SiNodedotjs, SiSupabase, SiPostgresql, SiMysql,
-  SiMongodb, SiFirebase, SiGreensock, SiRedux, SiVercel, SiDocker,
-  SiFigma, SiOpenai
+  SiMongodb, SiFirebase, SiGreensock, SiRedux, SiVercel, SiOpenai
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import { SkillDock } from "../components/ui/skill-dock";
@@ -60,12 +59,10 @@ const allSkills = [
   { icon: SiMysql, name: "MySQL", color: "#4479A1", category: "Database" },
 
   // --- DevOps ---
-  { icon: SiDocker, name: "Docker", color: "#2496ED", category: "DevOps" },
   { icon: SiVercel, name: "Vercel", color: "#ffffff", category: "DevOps" },
   { icon: SiGit, name: "Git", color: "#F05032", category: "DevOps" },
 
   // --- Tools ---
-  { icon: SiFigma, name: "Figma", color: "#F24E1E", category: "Tools" },
   { icon: VscVscode, name: "VS Code", color: "#007ACC", category: "Tools" },
 
   // --- AI ---

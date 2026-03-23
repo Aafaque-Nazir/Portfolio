@@ -83,20 +83,19 @@ const About = () => {
               <span className="text-cyan-300 font-bold">
                 Frontend-First Full Stack Developer
               </span>{" "}
-              and{" "}
-              <span className="text-cyan-300 font-bold">Software Engineer</span>
+              with a strong{" "}
+              <span className="text-cyan-300 font-bold">Business Acumen</span>
               .
             </p>
             <p className="text-gray-400 mt-3 sm:mt-4 text-sm sm:text-base md:text-lg">
-              I specialize in architecting scalable{" "}
-              <span className="text-white font-medium">Software Products</span>.
+              I don't just write code; I engineer scalable{" "}
+              <span className="text-white font-medium">Solutions</span> that drive growth.
               My expertise bridges{" "}
-              <span className="text-cyan-300">Advanced UI Engineering</span>{" "}
-              (Next.js, Motion) with robust{" "}
-              <span className="text-cyan-300">SQL & NoSQL</span> backends.
+              <span className="text-cyan-300">Advanced UI</span>{" "}
+              with robust backends, always prioritizing business goals and user retention.
             </p>
             <p className="text-gray-500 mt-3 sm:mt-4 italic text-xs sm:text-sm">
-              "Engineering pixel-perfect experiences backed by solid logic."
+              "Engineering pixel-perfect experiences that solve real business problems."
             </p>
           </div>
         </motion.div>
@@ -137,7 +136,7 @@ const About = () => {
 
               <h3 className="text-xl font-bold mb-6 text-gray-100 flex items-center gap-3">
                 <span className="w-6 h-1 bg-gradient-to-r from-cyan-400 to-cyan-400 rounded-full"></span>
-                Engineering Philosophy
+                Engineering & Product Philosophy
               </h3>
 
               <ul className="space-y-5 relative z-20">
@@ -168,6 +167,16 @@ const About = () => {
                   <div>
                     <h4 className="text-white font-semibold text-base group-hover:text-blue-300 transition-colors">Obsessive Performance</h4>
                     <p className="text-gray-400 text-sm mt-1 leading-relaxed">Sub-second loading times aren't optimization features, they are baseline requirements.</p>
+                  </div>
+                </li>
+
+                <li className="flex items-start gap-4">
+                  <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-cyan-500/10 flex items-center justify-center border border-cyan-500/30 text-cyan-400 group-hover:scale-110 transition-transform duration-300 delay-200">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold text-base group-hover:text-cyan-300 transition-colors">Business-Centric Execution</h4>
+                    <p className="text-gray-400 text-sm mt-1 leading-relaxed">Code isn't just about syntax; it's about solving business limits, driving user retention, and maximizing ROI.</p>
                   </div>
                 </li>
               </ul>
