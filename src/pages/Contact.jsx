@@ -70,7 +70,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative min-h-screen py-24 flex flex-col justify-center items-center text-white overflow-hidden"
+      className="relative w-full h-auto min-h-[100svh] lg:h-[100svh] lg:min-h-[700px] flex flex-col justify-center items-center px-4 md:px-6 py-24 lg:py-0 text-white overflow-hidden"
     >
       {/* 🌌 Ambient Background Glow (Removed for pure black) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -88,14 +88,14 @@ const Contact = () => {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 md:px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 lg:mb-10 lg:mt-6">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-black mb-6 tracking-tight text-white"
+            className="text-4xl md:text-5xl lg:text-6xl font-black mb-3 tracking-tight text-white"
           >
             LET'S <span className="text-cyan-400">CONNECT</span>
           </motion.h2>
@@ -103,13 +103,13 @@ const Contact = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light tracking-wide"
+            className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto font-light tracking-wide"
           >
             Initiate a secure channel. Let's discuss your next breakthrough.
           </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch pt-2 lg:pt-0">
           {/* 📡 Holographic Form (Col 1-7) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -117,14 +117,14 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
             className="lg:col-span-7"
           >
-            <div className="relative h-full bg-slate-900/30 backdrop-blur-md rounded-3xl border border-white/5 p-8 md:p-10 shadow-2xl overflow-hidden group">
+            <div className="relative h-full bg-slate-900/30 backdrop-blur-md rounded-3xl border border-white/5 p-6 md:p-8 shadow-2xl overflow-hidden group">
               {/* Decorative Corner Lines */}
               <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-cyan-500/30 rounded-tl-3xl group-hover:border-cyan-500/60 transition-colors" />
               <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-cyan-500/30 rounded-br-3xl group-hover:border-cyan-500/60 transition-colors" />
 
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="space-y-8 relative z-10"
+                className="space-y-5 lg:space-y-6 relative z-10"
               >
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Name Input */}
@@ -136,7 +136,7 @@ const Contact = () => {
                       type="text"
                       placeholder="ENTER NAME"
                       {...register("name", { required: true })}
-                      className="w-full bg-slate-950/50 border-b border-white/10 p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono"
+                      className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono"
                     />
                   </div>
 
@@ -149,7 +149,7 @@ const Contact = () => {
                       type="email"
                       placeholder="ENTER EMAIL"
                       {...register("email", { required: true })}
-                      className="w-full bg-slate-950/50 border-b border-white/10 p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono"
+                      className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono"
                     />
                   </div>
                 </div>
@@ -161,7 +161,7 @@ const Contact = () => {
                   </label>
                   <select
                     {...register("service", { required: true })}
-                    className="w-full bg-slate-950/50 border-b border-white/10 p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono appearance-none"
+                    className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono appearance-none"
                   >
                     <option value="" className="bg-slate-900 text-gray-400">
                       SELECT A PACKAGE
@@ -187,10 +187,10 @@ const Contact = () => {
                     // TRANSMISSION_DATA
                   </label>
                   <textarea
-                    rows="4"
+                    rows="3"
                     placeholder="INITIATE MESSAGE SEQUENCE..."
                     {...register("message", { required: true })}
-                    className="w-full bg-slate-950/50 border-b border-white/10 p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono resize-none"
+                    className="w-full bg-slate-950/50 border-b border-white/10 p-3 lg:p-4 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:bg-slate-900/80 transition-all font-mono resize-none"
                   ></textarea>
                 </div>
 
@@ -229,10 +229,10 @@ const Contact = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 flex flex-col gap-6"
+            className="lg:col-span-5 flex flex-col gap-4 lg:gap-5"
           >
             {/* Satellite Map */}
-            <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10 shadow-lg group">
+            <div className="relative h-48 lg:h-56 rounded-3xl overflow-hidden border border-white/10 shadow-lg group">
               {/* Scanline Overlay */}
               <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none z-20 opacity-20" />
               <div className="absolute inset-0 border-[4px] border-cyan-500/20 z-20 pointer-events-none rounded-3xl" />
@@ -254,21 +254,21 @@ const Contact = () => {
             </div>
 
             {/* Connection Modules */}
-            <div className="grid grid-cols-1 gap-4 flex-1">
+            <div className="grid grid-cols-1 gap-3 flex-1">
               {/* Email Module */}
               <a
                 href="mailto:aafaquenazir@gmail.com"
-                className="bg-slate-900/40 border border-white/5 p-6 rounded-2xl flex items-center justify-between group hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all"
+                className="bg-slate-900/40 border border-white/5 p-4 lg:p-5 rounded-2xl flex items-center justify-between group hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
                     <FaEnvelope />
                   </div>
                   <div>
-                    <h4 className="text-sm text-gray-400 font-mono uppercase tracking-wider">
+                    <h4 className="text-[11px] lg:text-xs text-gray-400 font-mono uppercase tracking-wider">
                       Primary Comms
                     </h4>
-                    <p className="text-white font-bold group-hover:text-cyan-300 transition-colors">
+                    <p className="text-sm lg:text-base text-white font-bold group-hover:text-cyan-300 transition-colors">
                       aafaquenazir@gmail.com
                     </p>
                   </div>
@@ -278,17 +278,17 @@ const Contact = () => {
               {/* WhatsApp Module */}
               <a
                 href="https://wa.me/919325629256?text=Hey%20Aafaque!%20%F0%9F%91%8B%20I%20visited%20your%20portfolio%20and%20I%E2%80%99m%20interested%20in%20discussing%20a%20project.%20Let%E2%80%99s%20connect!"
-                className="bg-slate-900/40 border border-white/5 p-6 rounded-2xl flex items-center justify-between group hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all"
+                className="bg-slate-900/40 border border-white/5 p-4 lg:p-5 rounded-2xl flex items-center justify-between group hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
                     <FaWhatsapp />
                   </div>
                   <div>
-                    <h4 className="text-sm text-gray-400 font-mono uppercase tracking-wider">
+                    <h4 className="text-[11px] lg:text-xs text-gray-400 font-mono uppercase tracking-wider">
                       Quick Chat
                     </h4>
-                    <p className="text-white font-bold group-hover:text-cyan-300 transition-colors">
+                    <p className="text-sm lg:text-base text-white font-bold group-hover:text-cyan-300 transition-colors">
                       +91 93256 29256
                     </p>
                   </div>

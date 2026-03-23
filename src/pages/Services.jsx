@@ -131,9 +131,9 @@ const Services = () => {
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-10 lg:mb-8 mt-8 lg:mt-0"
+          className="text-center mb-10 lg:mb-10 mt-12 lg:mt-6 text-white tracking-tight"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-5xl font-extrabold mb-3 text-white tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-5xl font-extrabold mb-6 md:mb-8 text-white tracking-tight">
             Services & Pricing
           </h2>
           <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto font-light tracking-wide leading-relaxed">
