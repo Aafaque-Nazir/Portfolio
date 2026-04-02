@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { ProjectShowcase } from "../components/ui/project-showcase";
-import { ProjectFilter } from "../components/ui/animated-tabs";
 
 const Project = () => {
-  const [activeTab, setActiveTab] = useState("All");
-
   return (
     <div id="projects" className="relative min-h-screen py-24 bg-black">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-grid-white/[0.02] -z-[1] pointer-events-none" />
-      {/* Glow orb removed for pure black bg */}
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Header Section */}
@@ -23,15 +19,8 @@ const Project = () => {
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex justify-center mb-16">
-          <div className="p-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-3xl">
-            <ProjectFilter activeTab={activeTab} setActiveTab={setActiveTab} />
-          </div>
-        </div>
-
-        {/* Project Grid */}
-        <ProjectShowcase category={activeTab} />
+        {/* Project Grid / Folders */}
+        <ProjectShowcase />
       </div>
     </div>
   );
