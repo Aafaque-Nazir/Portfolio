@@ -84,15 +84,7 @@ const Contact = () => {
           >
             CONNECT <span className="text-cyan-500">.</span>
           </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-[10px] lg:text-xs text-cyan-400 font-mono tracking-[0.4em] uppercase mt-4"
-          >
-            Initiate Link / Secure Channel
-          </motion.p>
+
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">

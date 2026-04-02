@@ -196,9 +196,7 @@ const Services = () => {
             Services <span className="text-cyan-500">.</span>
           </motion.h2>
           
-          <p className="text-gray-500 text-[8px] lg:text-[10px] max-w-xl mx-auto font-light leading-relaxed tracking-[0.2em] uppercase text-center opacity-60">
-            Bespoke architectural excellence engineered to <span className="text-white">scale</span>.
-          </p>
+
         </div>
 
         {/* 3-Column Grid */}

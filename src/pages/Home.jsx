@@ -37,21 +37,7 @@ const Home = () => {
 
         {/* 🚀 Main Content Container */}
         <div className="relative z-10 w-full max-w-7xl px-4 md:px-6 flex flex-col items-center justify-center text-center h-screen pt-16 md:pt-20 pb-6 md:pb-8">
-          {/* Floating 'Status' Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-3 md:mb-4 inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-cyan-500/30 bg-cyan-500/5 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.1)]"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-            </span>
-            <span className="text-cyan-300 text-[10px] md:text-xs font-mono tracking-widest uppercase">
-              System Online // Ready to Build
-            </span>
-          </motion.div>
+
 
           {/* Hero Typography */}
           <div className="relative mb-0 w-full">
