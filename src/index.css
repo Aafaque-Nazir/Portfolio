@@ -21,6 +21,10 @@
 .animate-sheen {
   animation: sheen 1s ease-in-out infinite;
 }
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 body {
   background-size: cover;
