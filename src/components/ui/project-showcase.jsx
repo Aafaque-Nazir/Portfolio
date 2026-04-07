@@ -129,77 +129,62 @@ const projects = [
 
 function ProjectCard({ project }) {
     return (
-        <CardContainer className="inter-var w-full h-full">
-            <CardBody className="bg-gradient-to-b from-[#0a0f18] to-black relative group/card hover:shadow-2xl hover:shadow-cyan-500/[0.15] border-white/5 hover:border-cyan-500/30 w-full h-full rounded-2xl p-5 border backdrop-blur-xl flex flex-col transition-all duration-500 ease-out">
+        <a href={project.link} target="_blank" rel="noreferrer" className="group block w-full h-full outline-none">
+            <div className="relative w-full h-full bg-[#030303] border border-white/[0.04] rounded-3xl overflow-hidden flex flex-col transition-all duration-500 hover:border-white/[0.15] hover:shadow-[0_20px_40px_-20px_rgba(34,211,238,0.2)] hover:-translate-y-2">
                 
-                {/* Header: Icon + Title */}
-                <CardItem
-                    translateZ="50"
-                    className="text-xl font-bold text-white flex items-center gap-3 tracking-tight group-hover/card:text-cyan-300 transition-colors"
-                >
-                    <span className="p-2 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-cyan-400 text-xl border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.1)] group-hover/card:shadow-[0_0_25px_rgba(34,211,238,0.3)] transition-all">
-                        {project.icon}
-                    </span>
-                    {project.title}
-                </CardItem>
-
-                {/* Description */}
-                <CardItem
-                    as="p"
-                    translateZ="60"
-                    className="text-slate-400 text-sm mt-4 line-clamp-2 leading-relaxed flex-grow font-medium"
-                >
-                    {project.description}
-                </CardItem>
-
-                {/* Divider */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-5" />
-
-                {/* Image */}
-                <CardItem translateZ="100" className="w-full mt-auto relative z-10">
-                    <div className="rounded-xl overflow-hidden shadow-2xl block h-44 relative group/image">
-                        <div className="absolute inset-0 bg-cyan-500/20 mix-blend-overlay opacity-0 group-hover/image:opacity-100 transition-opacity z-10" />
-                        <img
-                            src={project.image}
-                            height="1000"
-                            width="1000"
-                            className="h-full w-full object-cover rounded-xl group-hover/card:scale-110 transition-transform duration-700 ease-out"
-                            alt={project.title}
-                        />
-                    </div>
-                </CardItem>
-
-                {/* Divider */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-5" />
-
-                {/* Footer: Tech Stack + Link */}
-                <div className="flex justify-between items-center mt-auto pb-1 relative z-20">
-                    <CardItem
-                        translateZ={20}
-                        className="flex gap-2 text-xs font-bold"
-                    >
-                        {project.techStack.slice(0, 2).map((tech, idx) => (
-                            <span key={idx} className="px-2.5 py-1.5 bg-white/[0.03] rounded-lg text-slate-300 border border-white/5 uppercase tracking-wider text-[9px] shadow-inner group-hover/card:border-white/10 transition-colors">
+                {/* 1. Feature Image (Edge to Edge, Top) */}
+                <div className="relative w-full aspect-[16/10] overflow-hidden bg-zinc-900 border-b border-white/[0.04]">
+                    <div className="absolute inset-0 bg-cyan-900/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                    <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transform transition-transform duration-[1.2s] ease-[0.16,1,0.3,1] group-hover:scale-[1.03]"
+                    />
+                    
+                    {/* Floating Tech Stack Overlay - Cascading in on hover */}
+                    <div className="absolute top-4 right-4 flex flex-col gap-1.5 z-20">
+                        {project.techStack.map((tech, idx) => (
+                            <span 
+                                key={idx} 
+                                className="px-2.5 py-1 bg-black/80 backdrop-blur-md border border-white/10 rounded-[6px] text-[9px] font-mono text-cyan-50 uppercase tracking-[0.2em] transform translate-x-8 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 shadow-xl" 
+                                style={{ transitionDelay: `${idx * 75}ms` }}
+                            >
                                 {tech}
                             </span>
                         ))}
-                    </CardItem>
-                    <CardItem
-                        translateZ={20}
-                        as={Link}
-                        to={project.link}
-                        target="__blank"
-                        className="relative overflow-hidden px-4 py-2 rounded-xl bg-cyan-500/10 text-cyan-400 text-xs font-bold whitespace-nowrap transition-all group/btn"
-                    >
-                        <span className="relative z-10 flex items-center gap-1 group-hover/btn:text-white transition-colors">
-                            View <span className="hidden sm:inline">Project</span> 
-                            <RiArrowLeftLine className="rotate-135 ml-1" />
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                    </CardItem>
+                    </div>
                 </div>
-            </CardBody>
-        </CardContainer>
+
+                {/* 2. Minimal Details Block */}
+                <div className="p-6 md:p-8 flex flex-col flex-grow relative overflow-hidden bg-gradient-to-b from-transparent to-transparent group-hover:to-cyan-950/10 transition-colors duration-700">
+                    
+                    <div className="flex justify-between items-start mb-4 relative z-10">
+                        <div className="pr-4">
+                            <div className="flex items-center gap-2 mb-2.5">
+                                <span className="text-slate-500 group-hover:text-cyan-500/80 transition-colors text-base">
+                                    {project.icon}
+                                </span>
+                                <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-slate-500 group-hover:text-cyan-500/80 transition-colors">
+                                    {project.category}
+                                </span>
+                            </div>
+                            <h4 className="text-xl md:text-2xl font-bold text-slate-100 group-hover:text-white tracking-tight transition-colors">
+                                {project.title}
+                            </h4>
+                        </div>
+                        
+                        {/* Directed Action Indicator */}
+                        <div className="w-10 h-10 rounded-full border border-white/[0.05] bg-white/[0.01] flex items-center justify-center group-hover:bg-cyan-500 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all duration-500 shrink-0 transform group-hover:-rotate-45">
+                            <RiArrowLeftLine className="text-slate-500 group-hover:text-black text-lg rotate-180 transition-colors duration-500" />
+                        </div>
+                    </div>
+
+                    <p className="text-slate-400/80 text-xs md:text-[13px] leading-relaxed font-medium line-clamp-3 relative z-10 group-hover:text-slate-300 transition-colors flex-grow">
+                        {project.description}
+                    </p>
+                </div>
+            </div>
+        </a>
     );
 }
 
@@ -214,9 +199,6 @@ export function ProjectShowcase() {
 
     return (
         <div className="relative w-full h-auto min-h-[380px]">
-             {/* Floating Background Orbs for eye-catchy depth */}
-             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen animate-pulse" />
-             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen animate-pulse" style={{ animationDelay: '1s' }} />
 
             <AnimatePresence mode="wait">
                 {!selectedFolder ? (
@@ -299,74 +281,88 @@ export function ProjectShowcase() {
                     <motion.div
                         layoutId={`folder-container-${selectedFolder.name}`}
                         key="expanded-folder"
-                        className="relative bg-gradient-to-b from-[#05080e] to-black border border-white/[0.08] rounded-[40px] p-6 sm:p-10 md:p-14 lg:p-20 w-full max-w-[90rem] mx-auto shadow-2xl overflow-hidden z-20 hover:border-white/[0.15] transition-colors duration-700"
+                        className="relative bg-zinc-950/80 backdrop-blur-3xl border border-white/5 rounded-[2.5rem] p-6 md:p-12 lg:p-16 w-full max-w-7xl mx-auto shadow-[0_20px_80px_-20px_rgba(0,0,0,1)] overflow-hidden z-20"
                     >
-                         {/* Ambient Folder Glow */}
-                         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-cyan-500/5 blur-[150px] rounded-full pointer-events-none mix-blend-screen" />
+                        {/* 🌟 Folder Expanded Top Lighting / Glow */}
+                        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-500/10 via-blue-900/5 to-transparent pointer-events-none mix-blend-screen opacity-70" />
+                        
+                        {/* Folder Top Rim Edge Highlight */}
+                        <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-cyan-500/0 via-cyan-400/50 to-blue-600/0 shadow-[0_0_30px_rgba(34,211,238,0.8)]" />
 
-                        {/* Folder Top Flap (Expanded) */}
-                        <div className="absolute top-0 left-0 w-2/3 md:w-1/3 h-1.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-br-3xl shadow-[0_0_20px_rgba(34,211,238,0.4)]" />
-
-                        {/* Header of the expanded folder */}
-                        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 gap-6 border-b border-white/10 pb-10 relative z-20">
-                            <div>
-                                <motion.button
-                                    whileHover={{ x: -5 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => setSelectedFolder(null)}
-                                    className="flex items-center gap-3 text-sm font-bold text-slate-400 hover:text-white transition-colors mb-8 group/back"
-                                >
-                                    <div className="w-10 h-10 rounded-full bg-white/5 group-hover/back:bg-white/20 group-hover/back:shadow-[0_0_15px_rgba(255,255,255,0.2)] flex items-center justify-center transition-all duration-300">
-                                        <RiArrowLeftLine className="text-current text-xl group-hover/back:-translate-x-1 transition-transform" />
-                                    </div>
-                                    <span className="uppercase tracking-widest text-xs">Return</span>
-                                </motion.button>
-                                
-                                <div className="flex items-center gap-4">
-                                     <div className="hidden sm:flex w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 items-center justify-center shadow-[0_0_30px_rgba(34,211,238,0.2)]">
-                                        <RiFolder3Fill className="text-3xl text-cyan-400" />
-                                     </div>
-                                    <div>
-                                        <motion.h3 
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: 0.2 }}
-                                            className="text-4xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 tracking-tight"
-                                        >
-                                            {selectedFolder.name}
-                                        </motion.h3>
-                                        <motion.div 
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ delay: 0.3 }}
-                                            className="flex items-center gap-3 mt-4"
-                                        >
-                                            <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold tracking-widest uppercase shadow-[0_0_10px_rgba(34,211,238,0.1)]">
-                                                Archive
-                                            </span>
-                                            <span className="text-slate-400 text-sm font-medium tracking-widest uppercase">
-                                                {selectedFolder.projects.length} curated works inside
-                                            </span>
-                                        </motion.div>
-                                    </div>
-                                </div>
+                        {/* Top Area: Close Action & CyberMetadata */}
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 relative z-20 gap-8">
+                            
+                            {/* Return Button */}
+                            <motion.button
+                                whileHover={{ x: -5 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => setSelectedFolder(null)}
+                                className="group/btn flex items-center gap-3 px-6 py-2.5 rounded-full bg-white/[0.03] border border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/10 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-all duration-300"
+                            >
+                                <RiArrowLeftLine className="text-slate-400 group-hover/btn:text-cyan-400 text-lg transition-colors" />
+                                <span className="text-xs font-bold text-slate-300 group-hover/btn:text-cyan-50 uppercase tracking-[0.2em] transition-colors">
+                                    Close Archive
+                                </span>
+                            </motion.button>
+                            
+                            {/* Tech Metadata Label */}
+                            <div className="hidden md:flex items-center gap-6 text-[9px] font-mono text-slate-500 uppercase tracking-[0.2em] px-6 py-2 rounded-xl bg-white/[0.02] border border-white/5">
+                                <span className="flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_5px_#22d3ee] animate-pulse" />
+                                    System.Active
+                                </span>
+                                <span>Directory Idx: {selectedFolder.projects.length} Files</span>
                             </div>
                         </div>
 
-                        {/* Projects Grid for this specific folder */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-10 relative z-20">
+                        {/* Middle Area: Massive Header */}
+                        <div className="flex flex-col md:flex-row items-center gap-8 mb-16 relative z-20 pb-8">
+                            {/* Giant Ghost Icon */}
+                            <div className="w-24 h-24 md:w-32 md:h-32 rounded-[2rem] bg-gradient-to-br from-white/[0.05] to-transparent border border-white/[0.08] flex items-center justify-center shadow-inner relative group/icon overflow-hidden hidden sm:flex">
+                                <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-500" />
+                                <RiFolder3Fill className="text-5xl md:text-6xl text-cyan-500/40 group-hover/icon:text-cyan-400 group-hover/icon:scale-110 transition-all duration-500" />
+                            </div>
+                            
+                            {/* Title Segment */}
+                            <div className="flex-1 w-full text-center md:text-left">
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 }}
+                                    className="text-[11px] font-mono text-cyan-400/80 uppercase tracking-[0.3em] mb-3 inline-flex items-center gap-2"
+                                >
+                                    <span className="w-3 h-[1px] bg-cyan-500/50 block" />
+                                    Archive / {selectedFolder.name.toLowerCase().replace(/\s+/g, '-')}
+                                </motion.div>
+                                <motion.h3 
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+                                    className="text-5xl md:text-6xl lg:text-[5rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/30 tracking-tight leading-none drop-shadow-sm"
+                                >
+                                    {selectedFolder.name}
+                                </motion.h3>
+                            </div>
+                        </div>
+
+                        {/* Thin Cybernetic Divider Line */}
+                        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12" />
+
+                        {/* Rendered Works Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 relative z-20">
                             <AnimatePresence>
                                 {selectedFolder.projects.map((project, idx) => (
                                     <motion.div
                                         initial={{ opacity: 0, y: 50, scale: 0.95 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.9 }}
                                         transition={{ 
                                             duration: 0.6,
-                                            delay: 0.3 + idx * 0.15, 
-                                            ease: [0.16, 1, 0.3, 1] // Apple-like spring easing
+                                            delay: 0.15 + idx * 0.1, 
+                                            ease: [0.16, 1, 0.3, 1] // Native Apple Spring Curve
                                         }}
                                         key={project.id}
-                                        className="h-[450px]"
+                                        className="h-full"
                                     >
                                         <ProjectCard project={project} />
                                     </motion.div>
