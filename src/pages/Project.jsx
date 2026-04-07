@@ -3,7 +3,7 @@ import { ProjectShowcase } from "../components/ui/project-showcase";
 
 const Project = () => {
   return (
-    <div id="projects" className="relative min-h-screen py-24 bg-black">
+    <div id="projects" className="relative h-auto py-24 bg-black">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-grid-white/[0.02] -z-[1] pointer-events-none" />
 

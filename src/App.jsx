@@ -9,11 +9,11 @@ import { useActiveSection } from "./hooks/useActiveSection";
 import InitialLoader from "./components/InitialLoader";
 import { motion } from "framer-motion";
 
-import About from "./pages/About";
-import Skills from "./pages/Skills";
-import Project from "./pages/Project";
-import Services from "./pages/Services";
-import Contact from "./pages/Contact";
+const About = lazy(() => import("./pages/About"));
+const Skills = lazy(() => import("./pages/Skills"));
+const Project = lazy(() => import("./pages/Project"));
+const Services = lazy(() => import("./pages/Services"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   const [isAppLoading, setIsAppLoading] = useState(true);
@@ -60,20 +60,22 @@ function App() {
           <Home />
           <SectionDivider />
 
-          <About />
-          <SectionDivider />
+          <Suspense fallback={<div className="w-full flex items-center justify-center py-20 text-cyan-500/50 mix-blend-screen text-xs uppercase font-mono tracking-widest"><span className="animate-pulse">Loading core modules...</span></div>}>
+            <About />
+            <SectionDivider />
 
-          <Skills />
-          <SectionDivider />
+            <Skills />
+            <SectionDivider />
 
-          <Project />
-          <SectionDivider />
+            <Project />
+            <SectionDivider />
 
-          <Services />
-          <SectionDivider />
+            <Services />
+            <SectionDivider />
 
-          <Contact />
-          <SectionDivider />
+            <Contact />
+            <SectionDivider />
+          </Suspense>
 
           <Footer />
         </motion.div>

@@ -213,7 +213,7 @@ export function ProjectShowcase() {
     }));
 
     return (
-        <div className="relative w-full min-h-[500px]">
+        <div className="relative w-full h-auto min-h-[380px]">
              {/* Floating Background Orbs for eye-catchy depth */}
              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen animate-pulse" />
              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen animate-pulse" style={{ animationDelay: '1s' }} />
