@@ -15,9 +15,22 @@ import {
     RiFolder3Fill,
     RiArrowLeftLine,
     RiShipFill,
+    RiHeartPulseFill,
 } from "react-icons/ri";
 
 const projects = [
+    {
+        title: "Clinical Curator",
+        description:
+            "Premium medical landing page utilizing AI-assisted screenings and precision medicine to deliver a curated clinical experience with highly optimized patient scheduling.",
+        image: "./clinical-curator.png",
+        link: "https://dockyy.netlify.app",
+        icon: <RiHeartPulseFill />,
+        category: "Landing Pages",
+        techStack: ["React", "Tailwind", "Motion"],
+        status: "Live",
+        id: 11,
+    },
     {
         title: "Sea Cross",
         description:
