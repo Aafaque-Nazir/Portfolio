@@ -6,7 +6,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="relative z-50 w-full border-t border-white/5 bg-black pt-16 pb-12 flex flex-col items-center justify-center overflow-hidden">
+    <footer role="contentinfo" aria-label="Aafaque Nazir — Footer and social links" className="relative z-50 w-full border-t border-white/5 bg-black pt-16 pb-12 flex flex-col items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4 flex flex-col items-center relative z-10">
         {/* Brand Name */}
         <div className="mb-6 flex flex-col items-center">
@@ -17,23 +17,24 @@ const Footer = () => {
         </div>
 
         {/* Social Links */}
-        <div className="flex gap-8 mb-10">
+        <nav aria-label="Social media links" className="flex gap-8 mb-10">
           {[
-            { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white hover:drop-shadow-[0_0_10px_#fff]" },
-            { icon: RiLinkedinFill, href: "https://www.linkedin.com/in/aafaque-nazir/", color: "hover:text-cyan-400 hover:drop-shadow-[0_0_10px_#22d3ee]" },
-            { icon: RiInstagramLine, href: "https://www.instagram.com/aafaque.75/", color: "hover:text-pink-500 hover:drop-shadow-[0_0_10px_#ec4899]" }
+            { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white hover:drop-shadow-[0_0_10px_#fff]", label: "Visit Aafaque Nazir's GitHub profile" },
+            { icon: RiLinkedinFill, href: "https://www.linkedin.com/in/aafaque-nazir/", color: "hover:text-cyan-400 hover:drop-shadow-[0_0_10px_#22d3ee]", label: "Visit Aafaque Nazir's LinkedIn profile" },
+            { icon: RiInstagramLine, href: "https://www.instagram.com/aafaque.75/", color: "hover:text-pink-500 hover:drop-shadow-[0_0_10px_#ec4899]", label: "Visit Aafaque Nazir's Instagram profile" }
           ].map((item, idx) => (
             <a
               key={idx}
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={item.label}
               className={`text-gray-500 transition-all duration-300 hover:scale-110 ${item.color}`}
             >
               <item.icon className="text-2xl" />
             </a>
           ))}
-        </div>
+        </nav>
 
         {/* Copyright */}
         <div className="text-gray-500 text-[10px] sm:text-xs font-mono tracking-wider flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/5 bg-slate-950/50 shadow-inner">

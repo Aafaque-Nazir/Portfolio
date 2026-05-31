@@ -14,8 +14,8 @@ const Project = () => {
             Selected Works
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            A curated collection of <span className="text-cyan-400 font-bold">scalable web applications</span> and digital experiences.
-            Engineered for performance, designed for impact.
+            A curated collection of <span className="text-cyan-400 font-bold">highly interactive web experiences</span> and creative front-end sandboxes.
+            Engineered for speed, designed for impact.
           </p>
         </div>
 

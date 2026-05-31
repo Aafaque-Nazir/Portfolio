@@ -9,9 +9,9 @@ import {
 } from "framer-motion";
 import {
   FaRocket,
-  FaChartLine,
-  FaCrown,
   FaCheck,
+  FaRobot,
+  FaCube,
 } from "react-icons/fa";
 
 const CountingPrice = ({ value, prefix = "" }) => {
@@ -131,55 +131,55 @@ const ServiceCard = ({ pkg }) => {
 const Services = () => {
   const packages = [
     {
-      title: "Launchpad",
-      oldPrice: "₹12k",
-      price: "7,999",
-      description: "Ideal for personal brands & high-impact portfolios. Fast and sleek.",
+      title: "Full-Stack Web Apps",
+      oldPrice: "₹45k",
+      price: "24,999",
+      description: "Scalable SaaS platforms, admin dashboards, and custom portals built with Next.js and secure backends.",
       features: [
-        "Single Page Experience (SPA)",
-        "Premium 1yr Hosting & Domain",
-        "Architecture Level SEO Indexing",
-        "Mobile-First Responsive Layout",
-        "Priority WhatsApp Integration",
+        "Next.js & React architectures",
+        "Supabase/PostgreSQL backends",
+        "Secure authentication & RLS",
+        "Real-time data & web sockets",
+        "Enterprise-grade scalability",
       ],
-      recommendedFor: "Personal",
+      recommendedFor: "SaaS & Startups",
       icon: <FaRocket />,
     },
     {
-      title: "Growth",
-      oldPrice: "₹22k",
-      price: "15,999",
-      description: "Engineered for scaling businesses needing advanced CMS integrations.",
+      title: "High-End Landing Pages",
+      oldPrice: "₹25k",
+      price: "14,999",
+      description: "Conversion-focused, highly animated websites and landing pages with premium UI/UX and lightning-fast speeds.",
       features: [
-        "8+ Premium Managed Pages",
-        "Dynamic CMS Logic & Database",
-        "Advanced Analytics Dashboard",
-        "Core Web Vitals Optimization",
-        "Google Business Profile Sync",
+        "Pixel-perfect UI design to code",
+        "GSAP & Framer Motion animations",
+        "Sub-second page load times",
+        "Flawless mobile responsiveness",
+        "Technical SEO optimization",
       ],
-      recommendedFor: "Business",
-      icon: <FaChartLine />,
+      recommendedFor: "Brands & Businesses",
+      icon: <FaCheck />,
       highlight: true,
     },
     {
-      title: "Empire",
-      oldPrice: "₹65k",
-      price: "45,999",
-      description: "Full-stack architectural solutions for complex startup requirements.",
+      title: "Interactive 3D Websites",
+      oldPrice: "₹50k",
+      price: "29,999",
+      description: "Mind-blowing WebGL and Three.js experiences that defy standard web design. Stand out with immersive 3D environments.",
       features: [
-        "Custom SaaS / E-Comm Core",
-        "Secure User Auth / JWT Systems",
-        "Real-time Data Architecture",
-        "Scalable Cloud Infrastructure",
-        "Multi-Gateway API Payments",
+        "Custom WebGL & Three.js",
+        "React Three Fiber (R3F)",
+        "Interactive 3D models & physics",
+        "Optimized 3D rendering for web",
+        "Award-winning level aesthetics",
       ],
-      recommendedFor: "Enterprise",
-      icon: <FaCrown />,
+      recommendedFor: "Creative & Luxury",
+      icon: <FaCube />,
     },
   ];
 
   return (
-    <section id="services" className="relative w-full md:h-screen min-h-screen flex flex-col items-center justify-center bg-black text-white pt-10 pb-6 overflow-hidden">
+    <section id="services" aria-label="Web Development Services by Aafaque Nazir — Full-Stack Apps, Landing Pages, 3D Websites" className="relative w-full md:h-screen min-h-screen flex flex-col items-center justify-center bg-black text-white pt-10 pb-6 overflow-hidden">
 
       {/* Background Decor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/[0.01] blur-[150px] pointer-events-none" />
@@ -199,8 +199,8 @@ const Services = () => {
 
         </div>
 
-        {/* 3-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+        {/* 2-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 w-full max-w-6xl">
           {packages.map((pkg, idx) => (
             <ServiceCard key={idx} pkg={pkg} />
           ))}

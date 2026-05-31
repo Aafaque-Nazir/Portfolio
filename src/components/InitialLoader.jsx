@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=-_";
 const ScrambleText = ({ text, delay = 0, duration = 0.8 }) => {
     const [display, setDisplay] = useState("");
-    
+
     useEffect(() => {
         let frame = 0;
         const totalFrames = duration * 60;
@@ -16,13 +16,13 @@ const ScrambleText = ({ text, delay = 0, duration = 0.8 }) => {
                     clearInterval(interval);
                     return;
                 }
-                
+
                 const progress = frame / totalFrames;
                 const scrambled = (text || "").split("").map((char, i) => {
                     if (i < text.length * progress) return text[i];
                     return CHARS[Math.floor(Math.random() * CHARS.length)];
                 }).join("");
-                
+
                 setDisplay(scrambled);
                 frame++;
             }, 1000 / 60);
@@ -88,7 +88,7 @@ const InitialLoader = ({ onComplete }) => {
                     exit={{
                         opacity: 0,
                         scale: 1.1,
-                        filter: "blur(20px) contrast(200%)", 
+                        filter: "blur(20px) contrast(200%)",
                         transition: { duration: 0.8, ease: "circIn" }
                     }}
                     className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center overflow-hidden font-mono text-cyan-500 selection:bg-cyan-500 selection:text-black"
@@ -112,14 +112,14 @@ const InitialLoader = ({ onComplete }) => {
                         {/* THE GEOMETRIC INDICATOR */}
                         <div className="relative w-48 h-48 flex items-center justify-center mb-12">
                             {/* Rotating Ring */}
-                            <motion.div 
+                            <motion.div
                                 animate={{ rotate: 360 }}
                                 transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                                 className="absolute inset-0 border-[0.5px] border-dashed border-cyan-500/30 rounded-full"
                             />
-                            
+
                             {/* Scanning Pulse */}
-                            <motion.div 
+                            <motion.div
                                 animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.5, 0.2] }}
                                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                                 className="absolute w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl"
@@ -127,7 +127,7 @@ const InitialLoader = ({ onComplete }) => {
 
                             {/* THE PERCENTAGE BOX */}
                             <div className="relative z-10 flex flex-col items-center">
-                                <motion.span 
+                                <motion.span
                                     className="text-6xl md:text-8xl font-black tracking-tighter text-white drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]"
                                 >
                                     {percent}
@@ -145,12 +145,12 @@ const InitialLoader = ({ onComplete }) => {
 
                         {/* --- PROGRESS BAR --- */}
                         <div className="w-64 h-[2px] bg-white/10 relative overflow-hidden group">
-                           <motion.div 
-                             className="absolute inset-0 bg-cyan-500 shadow-[0_0_15px_#22d3ee]"
-                             initial={{ x: "-100%" }}
-                             animate={{ x: `${percent - 100}%` }}
-                             transition={{ type: "spring", damping: 30, stiffness: 100 }}
-                           />
+                            <motion.div
+                                className="absolute inset-0 bg-cyan-500 shadow-[0_0_15px_#22d3ee]"
+                                initial={{ x: "-100%" }}
+                                animate={{ x: `${percent - 100}%` }}
+                                transition={{ type: "spring", damping: 30, stiffness: 100 }}
+                            />
                         </div>
                     </div>
 
@@ -175,7 +175,7 @@ const InitialLoader = ({ onComplete }) => {
                     </div>
 
                     {/* --- THE SCAN LINE --- */}
-                    <motion.div 
+                    <motion.div
                         animate={{ top: ["-10%", "110%"] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                         className="absolute left-0 w-full h-[1px] bg-cyan-400/20 shadow-[0_0_20px_#22d3ee] pointer-events-none opacity-30 z-50"

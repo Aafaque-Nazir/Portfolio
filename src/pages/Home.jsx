@@ -1,20 +1,17 @@
 import { motion } from "framer-motion";
-import Navbar from "../components/Navbar";
-import SEO from "../components/SEO";
 import { FaGithub } from "react-icons/fa";
 import { PiReadCvLogoFill } from "react-icons/pi";
 import BlurText from "../components/BlurText";
 import DecryptedText from "../components/DecryptedText";
-import LightRays from "../components/LightRays";
 
 import GlobalBackground from "../components/GlobalBackground";
 
 const Home = () => {
   return (
     <>
-      <Navbar />
       <section
         id="home"
+        aria-label="Hero — Aafaque Nazir, Frontend Engineer & Creative Developer"
         className="relative z-0 h-screen flex flex-col justify-center items-center text-white mx-auto overflow-hidden"
       >
         <GlobalBackground />
@@ -55,17 +52,17 @@ const Home = () => {
             </motion.h1>
 
             {/* Decorative 'Ghost' Text behind */}
-            <h1 className="absolute top-1 left-1/2 -translate-x-1/2 w-full text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black tracking-tighter text-cyan-500/10 -z-10 select-none blur-sm animate-pulse leading-tight">
+            <span aria-hidden="true" className="absolute top-1 left-1/2 -translate-x-1/2 w-full text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black tracking-tighter text-cyan-500/10 -z-10 select-none blur-sm animate-pulse leading-tight">
               AAFAQUE
               <br className="lg:hidden" />
               <span className="lg:ml-4">NAZIR</span>
-            </h1>
+            </span>
           </div>
 
           {/* Subheadline */}
           <div className="h-auto min-h-[30px] md:h-10 mb-2 flex items-center justify-center px-2">
             <BlurText
-              text="FULL STACK ARCHITECT & SOFTWARE DEVELOPER"
+              text="FRONTEND ENGINEER & CREATIVE DEVELOPER"
               delay={100}
               animateBy="letters"
               direction="bottom"
@@ -82,7 +79,7 @@ const Home = () => {
           >
             <p className="text-gray-300 text-sm md:text-lg leading-relaxed font-light line-clamp-3 md:line-clamp-none">
               <DecryptedText
-                text="I build intelligent software solutions. Leveraging AI-driven development to architect scalable full-stack applications that merge cutting-edge performance with next-gen user experiences."
+                text="I engineer highly interactive, visually polished web experiences. Specializing in high-performance client-side interfaces, responsive pixel-perfect layouts, and fluid micro-interactions that bring digital designs to life."
                 animateOn="view"
                 revealDirection="center"
                 className="inline"
@@ -100,6 +97,7 @@ const Home = () => {
           >
             <a
               href="#contact"
+              aria-label="Navigate to contact section"
               className="group relative w-full sm:w-auto px-8 md:px-10 py-3 bg-white text-slate-950 font-bold text-sm md:text-lg rounded-full overflow-hidden hover:scale-105 transition-transform duration-300 shadow-[0_0_40px_rgba(255,255,255,0.3)] flex justify-center items-center"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-300 via-cyan-300 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -125,6 +123,7 @@ const Home = () => {
               <a
                 href="/AafaqueNazirCV.pdf"
                 download
+                aria-label="Download Aafaque Nazir's CV as PDF"
                 className="group flex-1 sm:flex-none px-6 py-3 text-white font-medium rounded-full border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300 flex items-center justify-center gap-2 text-sm md:text-base whitespace-nowrap"
               >
                 <PiReadCvLogoFill className="text-lg md:text-xl group-hover:text-cyan-400 transition-colors" />
@@ -134,6 +133,8 @@ const Home = () => {
               <a
                 href="https://github.com/Aafaque-Nazir"
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit Aafaque Nazir's GitHub profile"
                 className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/30 hover:text-white text-gray-400 transition-all flex items-center justify-center aspect-square"
               >
                 <FaGithub size={20} />

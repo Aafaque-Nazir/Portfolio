@@ -59,7 +59,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative w-full min-h-screen flex flex-col justify-center items-center px-4 bg-black py-20 lg:py-32">
+    <section id="contact" aria-label="Contact Aafaque Nazir — Get in touch for web development services" className="relative w-full min-h-screen flex flex-col justify-center items-center px-4 bg-black py-20 lg:py-32">
       <Toaster
         position="bottom-right"
         toastOptions={{
@@ -148,10 +148,10 @@ const Contact = () => {
                       {...register("service", { required: true })}
                       className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer"
                     >
-                      <option value="" className="bg-black">Select Package</option>
-                      <option value="Launchpad" className="bg-black">Launchpad (SPA)</option>
-                      <option value="Growth" className="bg-black">Growth (Business)</option>
-                      <option value="Empire" className="bg-black">Empire (Enterprise)</option>
+                      <option value="" className="bg-black">Select Service</option>
+                      <option value="Full-Stack Web Apps" className="bg-black">Full-Stack Web Apps</option>
+                      <option value="High-End Landing Pages" className="bg-black">High-End Landing Pages</option>
+                      <option value="Interactive 3D Websites" className="bg-black">Interactive 3D Websites</option>
                       <option value="Custom" className="bg-black">Other / Custom</option>
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/30">
@@ -222,6 +222,7 @@ const Contact = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 href="mailto:aafaquenazir@gmail.com"
+                aria-label="Send email to Aafaque Nazir at aafaquenazir@gmail.com"
                 className="group flex items-center justify-between p-6 lg:p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all"
               >
                 <div className="flex items-center gap-4 lg:gap-6">
@@ -241,6 +242,8 @@ const Contact = () => {
                 viewport={{ once: true }}
                 href="https://wa.me/919325629256"
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contact Aafaque Nazir on WhatsApp at +91 93256 29256"
                 className="group flex items-center justify-between p-6 lg:p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all"
               >
                 <div className="flex items-center gap-4 lg:gap-6">

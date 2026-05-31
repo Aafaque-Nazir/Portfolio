@@ -20,136 +20,88 @@ import {
 
 const projects = [
     {
-        title: "Clinical Curator",
+        title: "Restaurant OS",
         description:
-            "Premium medical landing page utilizing AI-assisted screenings and precision medicine to deliver a curated clinical experience with highly optimized patient scheduling.",
-        image: "./clinical-curator.png",
-        link: "https://dockyy.netlify.app",
-        icon: <RiHeartPulseFill />,
-        category: "Landing Pages",
-        techStack: ["React", "Tailwind", "Motion"],
+            "Complete restaurant management system with live orders, table tracking, and kitchen display.",
+        image: "./restaurant-os-thumbnail.png",
+        link: "https://korner-kafe.netlify.app/",
+        icon: <RiSignalTowerFill />,
+        category: "SAAS",
+        techStack: ["Next.js", "Supabase", "PostgreSQL"],
         status: "Live",
-        id: 11,
+        id: 4,
     },
     {
-        title: "Sea Cross",
+        title: "E-Commerce Store",
         description:
-            "Premium booking platform for private boat tours, luxury couple rides, and exclusive parties at the Gateway of India, Mumbai.",
-        image: "./sea-cros-thumbnail.png",
-        link: "https://sea-cros.netlify.app",
-        icon: <RiShipFill />,
-        category: "Landing Pages",
-        techStack: ["React", "Tailwind", "Motion"],
-        status: "Live",
-        id: 10,
-    },
-    {
-        title: "VelvetBrew Coffee",
-        description:
-            "Premium e-commerce platform for luxury coffee machines, artisan beans, and curated accessories with a dark, immersive brand experience.",
-        image: "./velvet.png",
-        link: "https://velvet-coffee.netlify.app",
-        icon: <RiCupFill />,
-        category: "Commerce & Services",
-        techStack: ["React", "Motion", "MongoDB"],
-        status: "Live",
-        id: 9,
-    },
-    {
-        title: "Dubai Travel & Tourism",
-        description:
-            "Premium booking platform for exclusive Dubai experiences, from desert safaris to Dubai Tech.",
-        image: "./dubai.png",
-        link: "https://dubai-tt.netlify.app/",
-        icon: <RiPlaneFill />,
-        category: "Landing Pages",
-        techStack: ["Next.Js", "Tailwind", "Motion"],
-        status: "Live",
-        id: 8,
-    },
-    {
-        title: "Luxury Chauffeur",
-        description:
-            "Premium booking engine for high-end fleet reservation management with real-time availability.",
-        image: "./car-thumbnail.png",
-        link: "https://royalcarz.netlify.app/",
-        icon: <RiCarFill />,
-        category: "Commerce & Services",
-        techStack: ["React", "Motion", "Tailwind"],
-        status: "Live",
-        id: 5,
-    },
-    {
-        title: "Ecommerce Store",
-        description:
-            "Seamless and secure shopping experience converting visitors to customers with optimized checkout flows.",
+            "Fast online store with cart, filters, and instant page loads under one second.",
         image: "./ecommerce-thumbnail.png",
         link: "https://shopease-aafaque.netlify.app/",
         icon: <RiShoppingCartFill />,
-        category: "Commerce & Services",
-        techStack: ["React", "Redux", "Stripe"],
+        category: "Web Apps",
+        techStack: ["React", "Redux", "Tailwind CSS"],
         status: "Live",
         id: 2,
     },
     {
+        title: "Yacht Booking Website",
+        description:
+            "Luxury yacht booking landing page with smooth scroll animations and elegant design.",
+        image: "./yacht-booking-thumbnail.png",
+        link: "https://sea-cros.netlify.app",
+        icon: <RiShipFill />,
+        category: "Landing Pages",
+        techStack: ["React", "GSAP", "Lenis"],
+        status: "Live",
+        id: 10,
+    },
+    {
+        title: "Doctor Booking Portal",
+        description:
+            "Book doctor appointments with interactive calendar and real-time slot availability.",
+        image: "./doctor-booking-thumbnail.png",
+        link: "https://dockyy.netlify.app",
+        icon: <RiHeartPulseFill />,
+        category: "Web Apps",
+        techStack: ["React", "Tailwind CSS", "Framer Motion"],
+        status: "Live",
+        id: 11,
+    },
+    {
+        title: "Dubai Tourism Guide",
+        description:
+            "Travel guide with destination cards, search filters, and fast interactive sliders.",
+        image: "./dubai-tourism-thumbnail.png",
+        link: "https://dubai-tt.netlify.app/",
+        icon: <RiPlaneFill />,
+        category: "Landing Pages",
+        techStack: ["Next.js", "Tailwind CSS", "Framer Motion"],
+        status: "Live",
+        id: 8,
+    },
+    {
         title: "Food Delivery App",
         description:
-            "Streamlines food ordering to reduce wait times and maximize turnover for local chains.",
-        image: "./resturant-thumbnail.png",
+            "Online food ordering website with menu, cart, and orders sent directly to WhatsApp.",
+        image: "./food-delivery-thumbnail.png",
         link: "https://bread-and-bite.netlify.app/",
         icon: <RiMotorbikeFill />,
-        category: "Commerce & Services",
-        techStack: ["React", "Firebase", "Maps API"],
+        category: "Web Apps",
+        techStack: ["React", "Tailwind CSS", "WhatsApp API"],
         status: "Live",
         id: 3,
     },
     {
-        title: "Coursira",
-        description:
-            "Revolutionizing self-education with an AI engine that generates custom study plans, proctored tests, and instant feedback loops.",
-        image: "./coursira-thumbnail.png",
-        link: "https://coursira.vercel.app/",
-        icon: <RiBrainFill />,
-        category: "SaaS Systems",
-        techStack: ["Next.js", "Gemini", "NeonDB"],
-        status: "Live",
-        id: 7,
-    },
-    {
-        title: "Bus Booked",
-        description:
-            "Bus operator dashboard with real-time seat management and WhatsApp integration for automated ticketing.",
-        image: "./bus-booked-thumbnail.png",
-        link: "https://busbooked.netlify.app/",
-        icon: <RiBusFill />,
-        category: "SaaS Systems",
-        techStack: ["React", "Firebase", "Redux"],
-        status: "Live",
-        id: 6,
-    },
-    {
         title: "Inventory Management",
         description:
-            "Real-time stock tracking and automated reordering system for high-volume retail businesses.",
-        image: "./inventory-thumbnail.png",
+            "Real-time inventory dashboard with stock levels, alerts, and live data updates.",
+        image: "./inventory-mgmt-thumbnail.png",
         link: "https://nvntory-mgm.vercel.app/",
         icon: <RiSignalTowerFill />,
-        category: "SaaS Systems",
-        techStack: ["Next.js", "Supabase", "Prisma"],
+        category: "SAAS",
+        techStack: ["Next.js", "Supabase", "WebSockets"],
         status: "Live",
         id: 1,
-    },
-    {
-        title: "Smart Dining OS",
-        description:
-            "End-to-end Restaurant OS streamlining operations with table-to-kitchen ordering and analytics.",
-        image: "./smart-dining-thumbnail.png",
-        link: "https://korner-kafe.netlify.app/",
-        icon: <RiRestaurantFill />,
-        category: "SaaS Systems",
-        techStack: ["React", "Node.js", "Socket.io"],
-        status: "Beta",
-        id: 4,
     },
 ];
 
@@ -217,8 +169,7 @@ function ProjectCard({ project }) {
 export function ProjectShowcase() {
     const [selectedFolder, setSelectedFolder] = useState(null);
 
-    const dynamicCategories = Array.from(new Set(projects.map((p) => p.category)));
-    const categories = Array.from(new Set([...dynamicCategories, "Landing Pages"]));
+    const categories = Array.from(new Set(projects.map((p) => p.category)));
     
     const folders = categories.map((cat) => ({
         name: cat,
@@ -236,69 +187,71 @@ export function ProjectShowcase() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
                         transition={{ duration: 0.5, ease: "circOut" }}
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto relative z-10"
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-6xl mx-auto relative z-10"
                     >
                         {folders.map((folder, idx) => (
                             <motion.div
                                 layoutId={`folder-container-${folder.name}`}
                                 key={folder.name}
                                 onClick={() => setSelectedFolder(folder)}
-                                className="group relative cursor-pointer outline-none w-full h-[320px]"
+                                className="group relative cursor-pointer outline-none w-full"
                                 whileTap={{ scale: 0.97 }}
                             >
-                                {/* 🌟 Magnetic Glow Behind Card */}
-                                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-500/0 via-cyan-400/20 to-blue-600/0 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out z-0 translate-y-4 group-hover:translate-y-0" />
+                                {/* Glow Behind Card */}
+                                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-500/0 via-cyan-400/15 to-blue-600/0 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out z-0 translate-y-4 group-hover:translate-y-0" />
                                 
-                                {/* 📁 Main Folder Body - Glassmorphic Aesthetic */}
-                                <div className="relative w-full h-full bg-zinc-950/60 backdrop-blur-3xl border border-white/5 group-hover:border-cyan-500/30 rounded-[2.5rem] p-8 flex flex-col justify-between overflow-hidden transition-all duration-500 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8)] z-10 group-hover:bg-zinc-900/80">
+                                {/* Folder Card */}
+                                <div className="relative w-full bg-zinc-950/60 backdrop-blur-3xl border border-white/5 group-hover:border-cyan-500/25 rounded-[2rem] overflow-hidden transition-all duration-500 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8)] z-10 group-hover:bg-zinc-900/80">
                                     
-                                    {/* Abstract Grid Background inside Folder */}
-                                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none transition-opacity group-hover:opacity-[0.06]" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-
-                                    {/* Physical Folder Tab Simulation */}
-                                    <div className="absolute top-0 left-8 w-1/3 min-w-[120px] h-2 bg-cyan-500 rounded-b-xl shadow-[0_0_20px_rgba(34,211,238,0.5)] opacity-80 group-hover:opacity-100 group-hover:h-3 transition-all duration-500" />
+                                    {/* Folder Tab */}
+                                    <div className="absolute top-0 left-8 w-1/3 min-w-[100px] h-1.5 bg-cyan-500 rounded-b-lg shadow-[0_0_15px_rgba(34,211,238,0.4)] opacity-70 group-hover:opacity-100 group-hover:h-2 transition-all duration-500" />
                                     
-                                    {/* Header: Icon & Tech Dots */}
-                                    <div className="flex justify-between items-start relative z-10">
-                                        <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center shadow-inner group-hover:shadow-[inset_0_0_20px_rgba(34,211,238,0.2)] group-hover:border-cyan-500/40 transition-all duration-500">
-                                            <RiFolder3Fill className="text-3xl text-slate-400 group-hover:text-cyan-400 transform group-hover:scale-110 transition-all duration-500 drop-shadow-md" />
+                                    {/* Thumbnail Preview Stack */}
+                                    <div className="relative w-full h-[140px] overflow-hidden bg-zinc-900/50 border-b border-white/[0.04]">
+                                        <div className="absolute inset-0 flex gap-1 p-3">
+                                            {folder.projects.slice(0, 3).map((p, i) => (
+                                                <div 
+                                                    key={p.id} 
+                                                    className="relative flex-1 rounded-lg overflow-hidden border border-white/[0.06] opacity-60 group-hover:opacity-90 transition-all duration-500"
+                                                    style={{ transitionDelay: `${i * 75}ms` }}
+                                                >
+                                                    <img 
+                                                        src={p.image} 
+                                                        alt={p.title}
+                                                        className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                                </div>
+                                            ))}
                                         </div>
-
-                                        <div className="flex gap-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 mt-2">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee] animate-pulse" />
-                                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500/50" />
-                                            <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                                        </div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent pointer-events-none" />
                                     </div>
 
-                                    {/* Massive Background Typography */}
-                                    <div className="absolute -bottom-6 -right-6 text-[150px] font-black text-white/[0.02] tracking-tighter pointer-events-none group-hover:-translate-x-4 group-hover:-translate-y-4 transition-transform duration-700 ease-out select-none">
-                                        0{idx + 1}
-                                    </div>
-
-                                    {/* Middle: Title & Count */}
-                                    <div className="relative z-10 mt-auto mb-6 transform group-hover:-translate-y-2 transition-transform duration-500">
-                                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/5 mb-4 group-hover:border-cyan-500/30 transition-colors">
-                                            <span className="w-2 h-2 rounded-full bg-cyan-500" />
-                                            <span className="text-[10px] font-mono text-cyan-50 uppercase tracking-widest leading-none pt-0.5">
-                                                {folder.projects.length} Architectures
+                                    {/* Content */}
+                                    <div className="p-6 pb-5">
+                                        {/* Folder Icon + Count */}
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div className="w-11 h-11 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:border-cyan-500/30 group-hover:shadow-[inset_0_0_15px_rgba(34,211,238,0.15)] transition-all duration-500">
+                                                <RiFolder3Fill className="text-xl text-slate-400 group-hover:text-cyan-400 transition-all duration-500" />
+                                            </div>
+                                            <span className="text-[11px] font-medium text-slate-500 bg-white/[0.03] border border-white/5 px-3 py-1 rounded-full">
+                                                {folder.projects.length} {folder.projects.length === 1 ? 'project' : 'projects'}
                                             </span>
                                         </div>
-                                        <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-none group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-cyan-200 transition-all duration-300 drop-shadow-lg">
+                                        
+                                        {/* Folder Name */}
+                                        <h3 className="text-2xl md:text-[1.7rem] font-black text-white tracking-tight leading-none mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-cyan-200 transition-all duration-300">
                                             {folder.name}
                                         </h3>
-                                    </div>
-                                    
-                                    {/* Footer line & Arrow Button */}
-                                    <div className="relative z-10 flex items-center justify-between border-t border-white/10 pt-5 transform group-hover:-translate-y-1 transition-transform duration-500">
-                                        <span className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.2em] group-hover:text-cyan-400/80 transition-colors">
-                                            View Archive
-                                        </span>
-                                        <div 
-                                            className="w-10 h-10 rounded-full bg-white/[0.05] border border-white/10 group-hover:bg-cyan-500 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] flex items-center justify-center transition-all duration-500 group-hover:scale-110"
-                                        >
-                                            <RiArrowLeftLine className="text-white group-hover:text-black rotate-180 text-lg transition-transform duration-500 group-hover:translate-x-0.5" />
+                                        
+                                        {/* View Button */}
+                                        <div className="flex items-center justify-between pt-4 border-t border-white/[0.06]">
+                                            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.15em] group-hover:text-cyan-400/80 transition-colors">
+                                                View Projects
+                                            </span>
+                                            <div className="w-8 h-8 rounded-full bg-white/[0.04] border border-white/10 group-hover:bg-cyan-500 group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] flex items-center justify-center transition-all duration-500">
+                                                <RiArrowLeftLine className="text-white group-hover:text-black rotate-180 text-sm transition-all duration-500" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -309,93 +262,79 @@ export function ProjectShowcase() {
                     <motion.div
                         layoutId={`folder-container-${selectedFolder.name}`}
                         key="expanded-folder"
-                        className="relative bg-zinc-950/80 backdrop-blur-3xl border border-white/5 rounded-[1.5rem] p-5 md:p-6 lg:p-8 w-full max-w-5xl mx-auto shadow-[0_20px_80px_-20px_rgba(0,0,0,1)] overflow-hidden z-20"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="relative bg-[#060606] border border-white/[0.06] rounded-[1.5rem] w-full max-w-5xl mx-auto shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] overflow-hidden z-20"
                     >
-                        {/* 🌟 Folder Expanded Top Lighting / Glow */}
-                        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-500/10 via-blue-900/5 to-transparent pointer-events-none mix-blend-screen opacity-70" />
-                        
-                        {/* Folder Top Rim Edge Highlight */}
-                        <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-cyan-500/0 via-cyan-400/50 to-blue-600/0 shadow-[0_0_30px_rgba(34,211,238,0.8)]" />
+                        {/* Top Accent Line */}
+                        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
 
-                        {/* Top Area: Close Action & CyberMetadata */}
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 relative z-20 gap-4">
+                        {/* Header Bar */}
+                        <div className="relative z-20 px-5 md:px-8 py-5 flex items-center justify-between border-b border-white/[0.05]">
                             
-                            {/* Return Button */}
-                            <motion.button
-                                whileHover={{ x: -4 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setSelectedFolder(null)}
-                                className="group/btn flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.03] border border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/10 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300"
-                            >
-                                <RiArrowLeftLine className="text-slate-400 group-hover/btn:text-cyan-400 text-base transition-colors" />
-                                <span className="text-[10px] font-bold text-slate-300 group-hover/btn:text-cyan-50 uppercase tracking-[0.2em] transition-colors">
-                                    Close Archive
-                                </span>
-                            </motion.button>
-                            
-                            {/* Tech Metadata Label */}
-                            <div className="hidden md:flex items-center gap-5 text-[8.5px] font-mono text-slate-500 uppercase tracking-[0.2em] px-5 py-1.5 rounded-lg bg-white/[0.02] border border-white/5">
-                                <span className="flex items-center gap-2">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_5px_#22d3ee] animate-pulse" />
-                                    System.Active
-                                </span>
-                                <span>Directory Idx: {selectedFolder.projects.length} Files</span>
-                            </div>
-                        </div>
-
-                        {/* Middle Area: Neat Header */}
-                        <div className="flex items-center gap-4 mb-6 relative z-20 pb-3">
-                            {/* Smaller Ghost Icon */}
-                            <div className="w-14 h-14 md:w-16 md:h-16 rounded-[1rem] bg-gradient-to-br from-white/[0.05] to-transparent border border-white/[0.08] flex items-center justify-center shadow-inner relative group/icon overflow-hidden hidden sm:flex shrink-0">
-                                <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-500" />
-                                <RiFolder3Fill className="text-2xl md:text-3xl text-cyan-500/40 group-hover/icon:text-cyan-400 group-hover/icon:scale-110 transition-all duration-500" />
-                            </div>
-                            
-                            {/* Title Segment */}
-                            <div className="flex-1 w-full text-left">
-                                <motion.div 
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.1 }}
-                                    className="text-[9px] font-mono text-cyan-400/80 uppercase tracking-[0.25em] mb-1.5 inline-flex items-center gap-2"
+                            {/* Left: Back + Title */}
+                            <div className="flex items-center gap-4">
+                                <motion.button
+                                    whileHover={{ x: -3 }}
+                                    whileTap={{ scale: 0.93 }}
+                                    onClick={() => setSelectedFolder(null)}
+                                    className="group/btn w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:border-cyan-500/30 hover:bg-cyan-500/10 flex items-center justify-center transition-all duration-300"
                                 >
-                                    <span className="w-2.5 h-[1px] bg-cyan-500/50 block" />
-                                    Archive / {selectedFolder.name.toLowerCase().replace(/\s+/g, '-')}
-                                </motion.div>
-                                <motion.h3 
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-                                    className="text-2xl md:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/30 tracking-tight leading-none drop-shadow-sm"
-                                >
-                                    {selectedFolder.name}
-                                </motion.h3>
-                            </div>
-                        </div>
-
-                        {/* Thin Cybernetic Divider Line */}
-                        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6" />
-
-                        {/* Rendered Works Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-20">
-                            <AnimatePresence>
-                                {selectedFolder.projects.map((project, idx) => (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0.9 }}
-                                        transition={{ 
-                                            duration: 0.6,
-                                            delay: 0.15 + idx * 0.1, 
-                                            ease: [0.16, 1, 0.3, 1] // Native Apple Spring Curve
-                                        }}
-                                        key={project.id}
-                                        className="h-full"
+                                    <RiArrowLeftLine className="text-slate-400 group-hover/btn:text-cyan-400 text-base transition-colors" />
+                                </motion.button>
+                                
+                                <div className="flex items-center gap-3">
+                                    <RiFolder3Fill className="text-lg text-cyan-500/50" />
+                                    <motion.h3 
+                                        initial={{ opacity: 0, x: -8 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: 0.1, type: "spring", stiffness: 120 }}
+                                        className="text-lg md:text-xl font-bold text-white tracking-tight"
                                     >
-                                        <ProjectCard project={project} />
-                                    </motion.div>
-                                ))}
-                            </AnimatePresence>
+                                        {selectedFolder.name}
+                                    </motion.h3>
+                                </div>
+                            </div>
+                            
+                            {/* Right: Count Badge */}
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.15 }}
+                                className="flex items-center gap-2 text-[11px] font-medium text-slate-400 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06]"
+                            >
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                                {selectedFolder.projects.length} {selectedFolder.projects.length === 1 ? 'project' : 'projects'}
+                            </motion.div>
+                        </div>
+
+                        {/* Projects Grid */}
+                        <div className="p-5 md:p-8">
+                            <div className={`grid gap-5 md:gap-6 relative z-20 ${
+                                selectedFolder.projects.length <= 2 
+                                    ? 'grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto' 
+                                    : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                            }`}>
+                                <AnimatePresence>
+                                    {selectedFolder.projects.map((project, idx) => (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.95 }}
+                                            transition={{ 
+                                                duration: 0.5,
+                                                delay: 0.1 + idx * 0.08, 
+                                                ease: [0.16, 1, 0.3, 1]
+                                            }}
+                                            key={project.id}
+                                            className="h-full"
+                                        >
+                                            <ProjectCard project={project} />
+                                        </motion.div>
+                                    ))}
+                                </AnimatePresence>
+                            </div>
                         </div>
                     </motion.div>
                 )}

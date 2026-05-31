@@ -54,7 +54,7 @@ const AboutNode = ({ children, title, className = "" }) => {
 
 const About = () => {
   return (
-    <section id="about" className="relative w-full lg:h-screen min-h-[100svh] flex flex-col justify-center items-center px-4 overflow-hidden bg-black py-10">
+    <section id="about" aria-label="About Aafaque Nazir — Frontend Engineer & Creative Developer" className="relative w-full lg:h-screen min-h-[100svh] flex flex-col justify-center items-center px-4 overflow-hidden bg-black py-10">
       <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col h-full justify-center">
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -72,14 +72,14 @@ const About = () => {
 
             <AboutNode className="max-w-xl">
               <p className="text-xl lg:text-2xl text-gray-300 font-light leading-relaxed mb-6">
-                Frontend-First <span className="text-white font-bold">Full Stack Architect</span> with a precision-driven <span className="text-cyan-500 underline decoration-white/20 underline-offset-8">Business Mindset</span>.
+                Frontend-Focused <span className="text-white font-bold">Creative Developer</span> with a precision-driven <span className="text-cyan-500 underline decoration-white/20 underline-offset-8">Visual Mindset</span>.
               </p>
               <p className="text-sm lg:text-base text-gray-500 leading-relaxed font-light mb-6">
-                I don't just build websites; I engineer high-performance digital solutions that bridge <span className="text-white">Advanced UI aesthetics</span> with complex <span className="text-white">Full-stack logic</span>.
+                I don't just build layouts; I engineer high-performance, butter-smooth web experiences that bridge <span className="text-white">Advanced UI/UX aesthetics</span> with highly optimized, responsive <span className="text-white">React & Next.js architectures</span>.
               </p>
               <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
                 <p className="text-[10px] font-mono text-cyan-500/70 italic">
-                  "Every pixel is a decision. Every line of code is an asset."
+                  "Every transition must be purposeful. Every pixel must be intentional."
                 </p>
               </div>
             </AboutNode>
@@ -89,33 +89,33 @@ const About = () => {
           <div className="flex flex-col gap-6">
             {/* Bento Stats */}
             <div className="grid grid-cols-2 gap-4">
-              <AboutNode title="Requests">
-                <span className="text-4xl font-black text-white tracking-tighter">1M+</span>
-                <p className="text-[10px] font-mono text-cyan-500 uppercase mt-1">Uptime Guarded</p>
+              <AboutNode title="Performance">
+                <span className="text-4xl font-black text-white tracking-tighter">100/100</span>
+                <p className="text-[10px] font-mono text-cyan-500 uppercase mt-1">Lighthouse Score</p>
               </AboutNode>
-              <AboutNode title="Stability">
-                <span className="text-4xl font-black text-white tracking-tighter">100%</span>
-                <p className="text-[10px] font-mono text-cyan-500 uppercase mt-1">Type-Safe Logic</p>
+              <AboutNode title="Animation">
+                <span className="text-4xl font-black text-white tracking-tighter">120Hz</span>
+                <p className="text-[10px] font-mono text-cyan-500 uppercase mt-1">Fluid Render Target</p>
               </AboutNode>
             </div>
 
             {/* Philosophy Card */}
-            <AboutNode title="Product Philosophy">
+            <AboutNode title="Engineering Philosophy">
               <div className="space-y-6">
                 {[
                   {
                     label: "Zero Genericism",
-                    desc: "Refined, custom components engineered from scratch. No common UI presets.",
+                    desc: "Refined, custom components engineered from scratch using Tailwind, Framer Motion, and GSAP. No common UI presets.",
                     icon: "M13 10V3L4 14h7v7l9-11h-7z"
                   },
                   {
-                    label: "Security First",
-                    desc: "Hardened data layers and secure authentication systems built into every core.",
+                    label: "Design Fidelity",
+                    desc: "Obsessive attention to detail when converting UI designs into pixel-perfect, semantic, accessible, and responsive components.",
                     icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                   },
                   {
-                    label: "Obsessive Performance",
-                    desc: "Sub-second benchmarks as a standard requirement, not a visual feature.",
+                    label: "Vitals Optimization",
+                    desc: "Targeting sub-second page loads, zero Cumulative Layout Shift (CLS), and highly responsive Interaction to Next Paint (INP).",
                     icon: "M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4z"
                   }
                 ].map((item, i) => (

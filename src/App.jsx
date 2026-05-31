@@ -1,8 +1,8 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import Home from "./pages/Home";
+import SEO from "./components/SEO";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import GlobalBackground from "./components/GlobalBackground";
 import SectionDivider from "./components/SectionDivider";
 import SmoothScroll from "./components/SmoothScroll";
 import { useActiveSection } from "./hooks/useActiveSection";
@@ -31,14 +31,14 @@ function App() {
   useEffect(() => {
     if (activeSection) {
       const titles = {
-        home: "Home | Aafaque Nazir",
-        about: "About | Aafaque Nazir",
-        skills: "Skills | Aafaque Nazir",
-        projects: "Projects | Aafaque Nazir",
-        services: "Services | Aafaque Nazir",
-        contact: "Contact | Aafaque Nazir",
+        home: "Aafaque Nazir — Frontend Engineer & Creative Developer",
+        about: "About — Aafaque Nazir",
+        skills: "Tech Arsenal — Aafaque Nazir",
+        projects: "Selected Works — Aafaque Nazir",
+        services: "Services — Aafaque Nazir",
+        contact: "Contact — Aafaque Nazir",
       };
-      document.title = titles[activeSection] || "Aafaque Nazir | Portfolio";
+      document.title = titles[activeSection] || "Aafaque Nazir — Frontend Engineer & Creative Developer";
     }
   }, [activeSection]);
 
@@ -53,6 +53,7 @@ function App() {
           transition={{ duration: 1.5, ease: "easeInOut" }}
           className="relative min-h-screen overflow-x-hidden"
         >
+          <SEO section={activeSection || "home"} />
           <SmoothScroll />
           <Navbar />
 
