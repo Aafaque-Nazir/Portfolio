@@ -59,7 +59,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" aria-label="Contact Aafaque Nazir — Get in touch for web development services" className="relative w-full min-h-screen flex flex-col justify-center items-center px-4 bg-black py-20 lg:py-32">
+    <section id="contact" aria-label="Contact Aafaque Nazir — Get in touch for web development services" className="relative w-full py-20 flex flex-col justify-center items-center px-4 bg-black">
       <Toaster
         position="bottom-right"
         toastOptions={{
@@ -75,14 +75,14 @@ const Contact = () => {
       />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col justify-center">
-        <div className="text-center mb-12 lg:mb-20">
+        <div className="text-center mb-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-6xl lg:text-8xl font-black tracking-tighter text-white"
+            className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4"
           >
-            CONNECT <span className="text-cyan-500">.</span>
+            Connect<span className="text-cyan-500">.</span>
           </motion.h2>
 
         </div>

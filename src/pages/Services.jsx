@@ -191,9 +191,9 @@ const Services = () => {
           <motion.h2
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="text-3xl lg:text-4xl font-black text-white tracking-tighter uppercase mb-2"
+            className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4"
           >
-            Services <span className="text-cyan-500">.</span>
+            Services<span className="text-cyan-500">.</span>
           </motion.h2>
           
 

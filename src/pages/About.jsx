@@ -65,8 +65,8 @@ const About = () => {
               whileInView={{ opacity: 1, x: 0 }}
               className="mb-4 lg:mb-6"
             >
-              <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-white mb-4">
-                About <span className="text-cyan-500">Me</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4">
+                About Me<span className="text-cyan-500">.</span>
               </h2>
             </motion.div>
 

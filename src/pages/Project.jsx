@@ -10,8 +10,8 @@ const Project = () => {
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 mb-6 uppercase tracking-tight">
-            Selected Works
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4">
+            Selected Works<span className="text-cyan-500">.</span>
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
             A curated collection of <span className="text-cyan-400 font-bold">highly interactive web experiences</span> and creative front-end sandboxes.

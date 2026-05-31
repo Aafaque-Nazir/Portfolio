@@ -7,13 +7,16 @@ import {
 const Footer = () => {
   return (
     <footer role="contentinfo" aria-label="Aafaque Nazir — Footer and social links" className="relative z-50 w-full border-t border-white/5 bg-black pt-16 pb-12 flex flex-col items-center justify-center overflow-hidden">
+      {/* Premium Background Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-cyan-900/10 via-black to-black -z-0" />
+      
       <div className="container mx-auto px-4 flex flex-col items-center relative z-10">
         {/* Brand Name */}
         <div className="mb-6 flex flex-col items-center">
           <h2 className="text-3xl font-black text-white tracking-widest drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
-            AAFAQUE<span className="text-cyan-400">.</span>
+            AAFAQUE<span className="text-cyan-500">.</span>
           </h2>
-          <p className="text-gray-500 text-xs tracking-[0.2em] mt-2 uppercase font-mono">Full Stack Architect</p>
+          <p className="text-gray-500 text-xs tracking-[0.2em] mt-2 uppercase font-mono">Frontend Engineer & Creative Developer</p>
         </div>
 
         {/* Social Links */}

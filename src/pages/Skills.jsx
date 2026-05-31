@@ -84,9 +84,9 @@ export default function Skills() {
         <motion.h2
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          className="text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase leading-none"
+          className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4"
         >
-          Tech <span className="text-cyan-500">Arsenal</span>
+          Tech Arsenal<span className="text-cyan-500">.</span>
         </motion.h2>
         <div className="w-12 h-0.5 bg-cyan-500 mt-2 opacity-50" />
       </div>
