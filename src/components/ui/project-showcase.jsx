@@ -116,6 +116,8 @@ function ProjectCard({ project }) {
                     <img
                         src={project.image}
                         alt={project.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transform transition-transform duration-[1.2s] ease-[0.16,1,0.3,1] group-hover:scale-[1.03]"
                     />
                     
@@ -218,6 +220,8 @@ export function ProjectShowcase() {
                                                     <img 
                                                         src={p.image} 
                                                         alt={p.title}
+                                                        loading="lazy"
+                                                        decoding="async"
                                                         className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700"
                                                     />
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
