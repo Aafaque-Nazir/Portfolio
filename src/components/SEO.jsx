@@ -11,8 +11,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
   const siteUrl = "https://aafaque.in";
   const defaultImage = `${siteUrl}/og-image.png`;
 
-  const defaultDescription =
-    "Portfolio of Aafaque Nazir — a Frontend Engineer & Creative Developer from Navi Mumbai, India. Specializing in high-performance React & Next.js architectures, interactive interfaces, GSAP/Framer Motion animations, and pixel-perfect responsive UI/UX.";
+  const defaultDescription = "Portfolio of Aafaque Nazir — Frontend Engineer & Creative Developer from Navi Mumbai. Specializing in high-performance React & Next.js architectures.";
 
   const sectionDescriptions = {
     home: "Aafaque Nazir — Frontend Engineer & Creative Developer. I engineer highly interactive, visually polished web experiences with React, Next.js, GSAP, and Framer Motion.",
