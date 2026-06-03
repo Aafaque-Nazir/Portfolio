@@ -150,7 +150,7 @@ const Contact = () => {
                     >
                       <option value="" className="bg-black">Select Service</option>
                       <option value="Full-Stack Web Apps" className="bg-black">Full-Stack Web Apps</option>
-                      <option value="High-End Landing Pages" className="bg-black">High-End Landing Pages</option>
+                      <option value="Lead Generation Websites" className="bg-black">Lead Generation Websites</option>
                       <option value="Interactive 3D Websites" className="bg-black">Interactive 3D Websites</option>
                       <option value="Custom" className="bg-black">Other / Custom</option>
                     </select>

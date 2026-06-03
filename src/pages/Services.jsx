@@ -146,10 +146,10 @@ const Services = () => {
       icon: <FaRocket />,
     },
     {
-      title: "High-End Landing Pages",
+      title: "Lead Generation Websites",
       oldPrice: "₹25k",
       price: "14,999",
-      description: "Conversion-focused, highly animated websites and landing pages with premium UI/UX and lightning-fast speeds.",
+      description: "Conversion-focused, highly animated lead generation websites with premium UI/UX and lightning-fast speeds.",
       features: [
         "Pixel-perfect UI design to code",
         "GSAP & Framer Motion animations",
@@ -179,7 +179,7 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" aria-label="Web Development Services by Aafaque Nazir — Full-Stack Apps, Landing Pages, 3D Websites" className="relative w-full md:h-screen min-h-screen flex flex-col items-center justify-center bg-black text-white pt-10 pb-6 overflow-hidden">
+    <section id="services" aria-label="Web Development Services by Aafaque Nazir — Full-Stack Apps, Lead Generation Websites, 3D Websites" className="relative w-full md:h-screen min-h-screen flex flex-col items-center justify-center bg-black text-white pt-10 pb-6 overflow-hidden">
 
       {/* Background Decor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/[0.01] blur-[150px] pointer-events-none" />

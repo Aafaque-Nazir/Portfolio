@@ -22,7 +22,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
     projects:
       "Selected Works by Aafaque Nazir — a curated collection of highly interactive web experiences, SaaS dashboards, and creative front-end builds.",
     services:
-      "Web Development Services by Aafaque Nazir — Full-Stack Web Apps, High-End Landing Pages, and Interactive 3D Websites starting from ₹14,999.",
+      "Web Development Services by Aafaque Nazir — Full-Stack Web Apps, Lead Generation Websites, and Interactive 3D Websites starting from ₹14,999.",
     contact:
       "Contact Aafaque Nazir — hire a Frontend Engineer & Creative Developer for your next project. Based in Navi Mumbai, India.",
   };
@@ -36,7 +36,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
     projects:
       "Web Development Projects, React Projects, Next.js Portfolio, SaaS Dashboard, Interactive Websites, Frontend Projects India",
     services:
-      "Web Development Services India, Hire React Developer, Hire Frontend Developer, Landing Page Developer, Full Stack Developer Navi Mumbai, Web App Development",
+      "Web Development Services India, Hire React Developer, Hire Frontend Developer, Lead Generation Website Developer, Full Stack Developer Navi Mumbai, Web App Development",
     contact:
       "Hire Aafaque Nazir, Contact Frontend Developer, Freelance React Developer India, Web Developer for Hire Navi Mumbai",
   };
@@ -131,7 +131,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
           name: "Aafaque Nazir — Web Development Services",
           url: `${siteUrl}/#services`,
           description:
-            "Full-Stack Web Apps, High-End Landing Pages, and Interactive 3D Websites by Aafaque Nazir.",
+            "Full-Stack Web Apps, Lead Generation Websites, and Interactive 3D Websites by Aafaque Nazir.",
           provider: { "@type": "Person", name: "Aafaque Nazir" },
           areaServed: {
             "@type": "Country",
@@ -155,9 +155,9 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
                 "@type": "Offer",
                 itemOffered: {
                   "@type": "Service",
-                  name: "High-End Landing Pages",
+                  name: "Lead Generation Websites",
                   description:
-                    "Conversion-focused, highly animated websites and landing pages with premium UI/UX.",
+                    "Conversion-focused, highly animated lead generation websites with premium UI/UX.",
                 },
               },
               {
