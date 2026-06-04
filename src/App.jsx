@@ -33,7 +33,7 @@ function App() {
       const titles = {
         home: "Aafaque Nazir — Frontend Engineer & Creative Developer",
         about: "About — Aafaque Nazir",
-        skills: "Tech Arsenal — Aafaque Nazir",
+        skills: "Skills — Aafaque Nazir",
         projects: "Selected Works — Aafaque Nazir",
         services: "Services — Aafaque Nazir",
         contact: "Contact — Aafaque Nazir",

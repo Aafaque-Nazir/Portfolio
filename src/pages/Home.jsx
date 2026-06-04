@@ -75,7 +75,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="max-w-xl md:max-w-2xl mx-auto mb-6 px-2"
+            className="max-w-xl md:max-w-2xl mx-auto mb-6 px-2 text-left md:text-justify"
           >
             <p className="text-gray-300 text-sm md:text-lg leading-relaxed font-light line-clamp-3 md:line-clamp-none">
               <DecryptedText

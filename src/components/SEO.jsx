@@ -18,7 +18,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
     about:
       "About Aafaque Nazir — a precision-driven Creative Developer with an obsessive focus on performance, design fidelity, and zero-genericism UI engineering.",
     skills:
-      "Tech Arsenal of Aafaque Nazir — React, Next.js, TypeScript, Tailwind CSS, GSAP, Framer Motion, Node.js, Supabase, PostgreSQL, and modern AI tools.",
+      "Skills of Aafaque Nazir — React, Next.js, TypeScript, Tailwind CSS, GSAP, Framer Motion, Node.js, Supabase, PostgreSQL, and modern AI tools.",
     projects:
       "Selected Works by Aafaque Nazir — a curated collection of highly interactive web experiences, SaaS dashboards, and creative front-end builds.",
     services:

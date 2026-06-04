@@ -65,7 +65,7 @@ const About = () => {
               whileInView={{ opacity: 1, x: 0 }}
               className="mb-4 lg:mb-6"
             >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4 md:pl-8">
                 About Me<span className="text-cyan-500">.</span>
               </h2>
             </motion.div>
@@ -90,12 +90,12 @@ const About = () => {
             {/* Bento Stats */}
             <div className="grid grid-cols-2 gap-4">
               <AboutNode title="Performance">
-                <span className="text-4xl font-black text-white tracking-tighter">100/100</span>
+                <span className="text-4xl font-black text-white tracking-tighter">98/100</span>
                 <p className="text-[10px] font-mono text-cyan-500 uppercase mt-1">Lighthouse Score</p>
               </AboutNode>
               <AboutNode title="Animation">
-                <span className="text-4xl font-black text-white tracking-tighter">120Hz</span>
-                <p className="text-[10px] font-mono text-cyan-500 uppercase mt-1">Fluid Render Target</p>
+                <span className="text-4xl font-black text-white tracking-tighter">60 FPS</span>
+                <p className="text-[10px] font-mono text-cyan-500 uppercase mt-1">Render Target</p>
               </AboutNode>
             </div>
 
@@ -126,8 +126,8 @@ const About = () => {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-xs font-black text-white uppercase tracking-wider mb-1 group-hover/item:text-cyan-400 transition-colors">{item.label}</h4>
-                      <p className="text-[11px] text-gray-500 leading-relaxed font-light">{item.desc}</p>
+                      <h4 className="text-sm sm:text-base font-black text-white uppercase tracking-wider mb-1 group-hover/item:text-cyan-400 transition-colors">{item.label}</h4>
+                      <p className="text-xs sm:text-sm text-gray-500 leading-relaxed font-light">{item.desc}</p>
                     </div>
                   </div>
                 ))}
