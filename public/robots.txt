@@ -1,17 +1,9 @@
 # Robots.txt for aafaque.in
-# Last updated: 2026-05-31
+# Last updated: 2026-06-05
 
 User-agent: *
 Allow: /
-Disallow: /assets/
-Disallow: /*.js$
-Disallow: /*.css$
-
-# Crawl politeness
-Crawl-delay: 1
+Disallow: /AafaqueNazirCV.pdf
 
 # Sitemap location
 Sitemap: https://aafaque.in/sitemap.xml
-
-# Host directive
-Host: https://aafaque.in
