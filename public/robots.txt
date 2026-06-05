@@ -1,9 +1,53 @@
 # Robots.txt for aafaque.in
 # Last updated: 2026-06-05
 
+# ─── Standard Crawlers ───
 User-agent: *
 Allow: /
 Disallow: /AafaqueNazirCV.pdf
+
+# ─── Google AI / Gemini Crawler ───
+User-agent: Google-Extended
+Allow: /
+
+# ─── OpenAI / ChatGPT Crawlers ───
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# ─── Perplexity AI Crawler ───
+User-agent: PerplexityBot
+Allow: /
+
+# ─── Anthropic / Claude Crawler ───
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# ─── Microsoft / Bing / Copilot Crawlers ───
+User-agent: Bingbot
+Allow: /
+
+# ─── Meta AI Crawler ───
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# ─── Apple / Siri Crawler ───
+User-agent: Applebot
+Allow: /
+
+# ─── Common AI Research Crawlers ───
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
 
 # Sitemap location
 Sitemap: https://aafaque.in/sitemap.xml

@@ -1,0 +1,38 @@
+# Aafaque Nazir — Web Developer & AI Engineer
+
+> Freelance web developer and AI engineer based in Navi Mumbai, Maharashtra, India.
+> Website: https://aafaque.in
+> Email: aafaquenazir@gmail.com
+> WhatsApp: +91 93256 29256
+
+## About
+
+Aafaque Nazir is a freelance web developer and AI engineer based in Navi Mumbai, India. He specializes in building high-performance websites, AI-powered SaaS platforms, intelligent chatbots, and interactive 3D web experiences using React, Next.js, TypeScript, Python, and AI/ML technologies.
+
+## Services & Pricing
+
+- **Full-Stack AI Web Apps** — AI-powered SaaS platforms, intelligent dashboards, admin panels, and custom portals built with Next.js, React, OpenAI API, and secure backends. Starting from ₹24,999 (~$300 USD).
+- **Lead Generation Websites** — Conversion-focused, SEO-optimized, premium animated websites with fast load times and mobile responsiveness. Starting from ₹14,999 (~$180 USD).
+- **Ecommerce Website Development** — Custom ecommerce stores, Shopify alternatives, product catalogs, payment gateway integrations (Razorpay/Stripe), inventory management, and order tracking systems. Starting from ₹24,999 (~$300 USD).
+- **Interactive 3D Websites** — Immersive WebGL and Three.js experiences with 3D environments and physics-based interactions. Starting from ₹29,999 (~$360 USD).
+- **AI Chatbot & Automation** — Custom ChatGPT-powered chatbots, AI customer support systems, content generation tools, and workflow automation. Starting from ₹19,999 (~$240 USD).
+
+## Technical Skills
+
+React, Next.js, TypeScript, JavaScript, Python, Node.js, AI/ML, OpenAI API, LangChain, ChatGPT Integration, Tailwind CSS, GSAP, Framer Motion, Supabase, PostgreSQL, Firebase, MongoDB, Three.js, WebGL, Git, Vercel, SEO Optimization.
+
+## Location & Availability
+
+- Based in: Navi Mumbai, Maharashtra, India
+- Serves: Navi Mumbai, Mumbai, Pune, Thane, all of India, and worldwide remote clients
+- Available: Monday–Saturday, 9 AM – 9 PM IST
+- Languages: English, Hindi, Urdu
+
+## Contact
+
+- Website: https://aafaque.in
+- Email: aafaquenazir@gmail.com
+- WhatsApp: https://wa.me/919325629256
+- GitHub: https://github.com/Aafaque-Nazir
+- LinkedIn: https://www.linkedin.com/in/aafaque-nazir/
+- Instagram: https://www.instagram.com/aafaque.75/

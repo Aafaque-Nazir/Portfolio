@@ -161,72 +161,72 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
   const serviceSchema =
     section === "services"
       ? {
-          "@context": "https://schema.org",
-          "@type": "ProfessionalService",
-          name: "Aafaque Nazir — Web Development Services",
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: "Aafaque Nazir — Web Development Services",
+        url: siteUrl,
+        description:
+          "Professional web development services in Navi Mumbai — Full-Stack Web Apps, Lead Generation Websites, and Interactive 3D Websites. Affordable pricing for businesses and startups.",
+        provider: {
+          "@type": "Person",
+          name: "Aafaque Nazir",
           url: siteUrl,
-          description:
-            "Professional web development services in Navi Mumbai — Full-Stack Web Apps, Lead Generation Websites, and Interactive 3D Websites. Affordable pricing for businesses and startups.",
-          provider: {
-            "@type": "Person",
-            name: "Aafaque Nazir",
-            url: siteUrl,
-          },
-          areaServed: [
-            { "@type": "City", name: "Navi Mumbai" },
-            { "@type": "City", name: "Mumbai" },
-            { "@type": "State", name: "Maharashtra" },
-            { "@type": "Country", name: "India" },
+        },
+        areaServed: [
+          { "@type": "City", name: "Navi Mumbai" },
+          { "@type": "City", name: "Mumbai" },
+          { "@type": "State", name: "Maharashtra" },
+          { "@type": "Country", name: "India" },
+        ],
+        priceRange: "₹14,999 - ₹29,999",
+        telephone: "+91-93256-29256",
+        email: "aafaquenazir@gmail.com",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Navi Mumbai",
+          addressRegion: "Maharashtra",
+          addressCountry: "IN",
+        },
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Web Development Services",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Full-Stack Web Apps",
+                description:
+                  "Scalable SaaS platforms, admin dashboards, and custom web portals built with Next.js and secure backends. Starting from ₹24,999.",
+              },
+              price: "24999",
+              priceCurrency: "INR",
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Lead Generation Websites",
+                description:
+                  "Conversion-focused, premium animated websites with fast load times and mobile responsiveness. Starting from ₹14,999.",
+              },
+              price: "14999",
+              priceCurrency: "INR",
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Interactive 3D Websites",
+                description:
+                  "Immersive WebGL and Three.js experiences with 3D environments for luxury and creative brands. Starting from ₹29,999.",
+              },
+              price: "29999",
+              priceCurrency: "INR",
+            },
           ],
-          priceRange: "₹14,999 - ₹29,999",
-          telephone: "+91-93256-29256",
-          email: "aafaquenazir@gmail.com",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Navi Mumbai",
-            addressRegion: "Maharashtra",
-            addressCountry: "IN",
-          },
-          hasOfferCatalog: {
-            "@type": "OfferCatalog",
-            name: "Web Development Services",
-            itemListElement: [
-              {
-                "@type": "Offer",
-                itemOffered: {
-                  "@type": "Service",
-                  name: "Full-Stack Web Apps",
-                  description:
-                    "Scalable SaaS platforms, admin dashboards, and custom web portals built with Next.js and secure backends. Starting from ₹24,999.",
-                },
-                price: "24999",
-                priceCurrency: "INR",
-              },
-              {
-                "@type": "Offer",
-                itemOffered: {
-                  "@type": "Service",
-                  name: "Lead Generation Websites",
-                  description:
-                    "Conversion-focused, premium animated websites with fast load times and mobile responsiveness. Starting from ₹14,999.",
-                },
-                price: "14999",
-                priceCurrency: "INR",
-              },
-              {
-                "@type": "Offer",
-                itemOffered: {
-                  "@type": "Service",
-                  name: "Interactive 3D Websites",
-                  description:
-                    "Immersive WebGL and Three.js experiences with 3D environments for luxury and creative brands. Starting from ₹29,999.",
-                },
-                price: "29999",
-                priceCurrency: "INR",
-              },
-            ],
-          },
-        }
+        },
+      }
       : null;
 
   // ──────────────────────────────────────────────────
@@ -244,13 +244,13 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
       },
       ...(section && section !== "home"
         ? [
-            {
-              "@type": "ListItem",
-              position: 2,
-              name: section.charAt(0).toUpperCase() + section.slice(1),
-              item: `${siteUrl}/#${section}`,
-            },
-          ]
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: section.charAt(0).toUpperCase() + section.slice(1),
+            item: `${siteUrl}/#${section}`,
+          },
+        ]
         : []),
     ],
   };
@@ -262,43 +262,43 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
   const faqSchema =
     section === "home" || section === "services"
       ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: [
-            {
-              "@type": "Question",
-              name: "How much does a website cost in India?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Website development starts from ₹14,999 for lead generation websites, ₹24,999 for full-stack web apps, and ₹29,999 for interactive 3D websites. Prices vary based on features and complexity.",
-              },
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "How much does a website cost in India?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Website development starts from ₹14,999 for lead generation websites, ₹24,999 for full-stack web apps, and ₹29,999 for interactive 3D websites. Prices vary based on features and complexity.",
             },
-            {
-              "@type": "Question",
-              name: "How long does it take to build a website?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "A lead generation website typically takes 1-2 weeks. Full-stack web apps take 3-6 weeks depending on complexity. Interactive 3D websites can take 4-8 weeks.",
-              },
+          },
+          {
+            "@type": "Question",
+            name: "How long does it take to build a website?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "A lead generation website typically takes 1-2 weeks. Full-stack web apps take 3-6 weeks depending on complexity. Interactive 3D websites can take 4-8 weeks.",
             },
-            {
-              "@type": "Question",
-              name: "Do you build websites for businesses in Navi Mumbai?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Yes! I'm a freelance web developer based in Navi Mumbai, Maharashtra. I build websites for businesses, startups, and agencies across Navi Mumbai, Mumbai, and all of India. Remote clients worldwide are also welcome.",
-              },
+          },
+          {
+            "@type": "Question",
+            name: "Do you build websites for businesses in Navi Mumbai?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes! I'm a freelance web developer based in Navi Mumbai, Maharashtra. I build websites for businesses, startups, and agencies across Navi Mumbai, Mumbai, and all of India. Remote clients worldwide are also welcome.",
             },
-            {
-              "@type": "Question",
-              name: "What technologies do you use for web development?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "I specialize in React, Next.js, TypeScript, Tailwind CSS, Node.js, Supabase, PostgreSQL, and modern frontend technologies including GSAP and Framer Motion for animations, and Three.js for 3D web experiences.",
-              },
+          },
+          {
+            "@type": "Question",
+            name: "What technologies do you use for web development?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "I specialize in React, Next.js, TypeScript, Tailwind CSS, Node.js, Supabase, PostgreSQL, and modern frontend technologies including GSAP and Framer Motion for animations, and Three.js for 3D web experiences.",
             },
-          ],
-        }
+          },
+        ],
+      }
       : null;
 
   return (
