@@ -1,77 +1,60 @@
 import { useState, useEffect } from 'react';
 
 export const useActiveSection = (sectionIds) => {
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('home');
 
-  // Use a string representation for stable dependency comparison to prevent excessive re-renders
   const idsString = sectionIds.join(',');
 
   useEffect(() => {
-    // Track how much of each section is visible (in pixels)
-    const visibilityMap = {};
-    const observedElements = new Set();
-    const currentIds = idsString.split(',');
+    const handleScroll = () => {
+      // Find the section that is currently most visible in the viewport
+      let currentSection = activeSection;
+      let minDistance = Infinity;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          visibilityMap[entry.target.id] = entry.isIntersecting
-            ? entry.intersectionRect.height
-            : 0;
-        });
+      // We consider the "active" focal point to be roughly 1/3 down the screen
+      const focalPoint = window.innerHeight * 0.3;
 
-        // Find the section with the most visible pixels
-        let bestId = '';
-        let bestHeight = 0;
-
-        for (const [id, height] of Object.entries(visibilityMap)) {
-          if (height > bestHeight) {
-            bestHeight = height;
-            bestId = id;
-          }
-        }
-
-        if (bestId) {
-          setActiveSection(bestId);
-        }
-      },
-      {
-        // Observe the full viewport
-        rootMargin: '0px 0px 0px 0px',
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-      }
-    );
-
-    const checkAndObserve = () => {
-      let allObserved = true;
-      currentIds.forEach((id) => {
-        if (!observedElements.has(id)) {
-          const element = document.getElementById(id);
-          if (element) {
-            observer.observe(element);
-            observedElements.add(id);
+      sectionIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Calculate distance from top of section to the focal point
+          // If the section is currently spanning across the focal point, distance is 0
+          let distance;
+          if (rect.top <= focalPoint && rect.bottom >= focalPoint) {
+            distance = 0;
+          } else if (rect.top > focalPoint) {
+            distance = rect.top - focalPoint;
           } else {
-            allObserved = false;
+            distance = focalPoint - rect.bottom;
+          }
+
+          if (distance < minDistance) {
+            minDistance = distance;
+            currentSection = id;
           }
         }
       });
-      return allObserved;
+
+      if (currentSection !== activeSection) {
+        setActiveSection(currentSection);
+      }
     };
 
     // Initial check
-    let intervalId;
-    if (!checkAndObserve()) {
-      // Keep checking every 500ms for lazy-loaded sections
-      intervalId = setInterval(() => {
-        if (checkAndObserve()) {
-          clearInterval(intervalId);
-        }
-      }, 500);
-    }
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Also handle resizing
+    window.addEventListener('resize', handleScroll);
+
+    // To handle lazy-loaded sections that might not be in DOM immediately
+    const interval = setInterval(handleScroll, 1000);
 
     return () => {
-      if (intervalId) clearInterval(intervalId);
-      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      clearInterval(interval);
     };
   }, [idsString]);
 

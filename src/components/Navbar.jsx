@@ -4,7 +4,6 @@ import {
   RiGithubFill,
   RiLinkedinFill,
   RiInstagramLine,
-  RiTwitterFill
 } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 import { useActiveSection } from "../hooks/useActiveSection";
@@ -50,73 +49,79 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
+      <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[90%] md:max-w-none"
+        className="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
-        <div className="flex items-center justify-between gap-6 px-6 py-3 rounded-full bg-black/50 backdrop-blur-xl border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.2)] hover:border-white/20 transition-colors duration-300">
+        {/* Single Minimalist Center Pill */}
+        <div className="flex items-center bg-black/40 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] rounded-full px-2 py-1.5 pointer-events-auto relative">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-          {/* Mobile Dynamic Indicator (Restored) */}
-          <div className="lg:hidden flex items-center gap-2 mr-2">
-            <span className="relative flex h-2 w-2 flex-shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-            </span>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={activeSection}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                className="text-[10px] font-black tracking-[0.3em] text-white uppercase ml-1"
-              >
-                {activeSection || "Menu"}
-              </motion.span>
-            </AnimatePresence>
-          </div>
-
-          <button
-            onClick={toggleMenu}
-            className="lg:hidden text-cyan-400 hover:text-cyan-300 transition-colors p-1"
-            aria-label="Open Menu"
-          >
-            <FaBars size={20} />
-          </button>
-
-          {/* Desktop Menu */}
-          <ul className="hidden lg:flex items-center gap-1">
+          {/* Center Floating Pill Menu (PC) */}
+          <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
-                <li key={item.name}>
-                  <a
-                    href={`#${item.id}`}
-                    onClick={(e) => handleNavClick(e, item.id)}
-                    className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 block group ${isActive
-                      ? "text-white tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-                      : "text-gray-400 hover:text-white"
-                      }`}
-                  >
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeNavTab"
-                        className="absolute inset-0 bg-cyan-600/20 border border-cyan-400/50 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.4),inset_0_0_10px_rgba(6,182,212,0.2)] overflow-hidden"
-                        transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
-                      >
-                        <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent opacity-90" />
-                      </motion.div>
-                    )}
-                    <span className="relative z-10">{item.name}</span>
-                  </a>
-                </li>
+                <a
+                  key={item.name}
+                  href={`#${item.id}`}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className={`relative px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 block group uppercase ${
+                    isActive
+                      ? "text-white"
+                      : "text-white/50 hover:text-white"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavTabPC"
+                      className="absolute inset-0 bg-white/10 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    >
+                      {/* Subtle glowing bottom border */}
+                      <div className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80" />
+                    </motion.div>
+                  )}
+                  <span className="relative z-10">{item.name}</span>
+                </a>
               );
             })}
-          </ul>
-        </div>
-      </motion.nav>
+          </nav>
 
+          {/* Mobile Menu Toggle (Dynamic Island Style) */}
+          <div className="lg:hidden flex items-center gap-4 px-3 py-1">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-500"></span>
+              </span>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={activeSection}
+                  initial={{ y: 5, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -5, opacity: 0 }}
+                  className="text-[10px] font-bold tracking-[0.2em] text-white/80 uppercase"
+                >
+                  {activeSection || "Menu"}
+                </motion.span>
+              </AnimatePresence>
+            </div>
+            <button
+              onClick={toggleMenu}
+              className="flex items-center justify-center p-1.5 text-white/80 hover:text-cyan-400 transition-colors"
+              aria-label="Open Menu"
+            >
+              <FaBars size={16} />
+            </button>
+          </div>
+
+        </div>
+      </motion.header>
+
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -140,18 +145,18 @@ export default function Navbar() {
                 <div className="absolute bottom-1/4 -left-10 w-40 h-[1px] bg-cyan-500/50 rotate-45" />
               </div>
 
-              <div className="flex justify-between items-center p-10 relative z-10">
-                <span className="text-white font-black tracking-[0.4em] uppercase text-xs opacity-60">NAVIGATION</span>
+              <div className="flex justify-between items-center p-8 relative z-10">
+                <span className="text-white font-black tracking-[0.4em] uppercase text-[12px] opacity-60">NAVIGATION</span>
                 <motion.button
                   whileHover={{ rotate: 90 }}
                   onClick={toggleMenu}
-                  className="text-white bg-white/5 p-3 rounded-xl border border-white/10 hover:border-cyan-500/50 transition-colors"
+                  className="text-white bg-white/5 p-3 rounded-full border border-white/10 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors"
                 >
-                  <FaTimes size={20} />
+                  <FaTimes size={16} />
                 </motion.button>
               </div>
 
-              <ul className="flex flex-col gap-6 p-10 relative z-10 overflow-y-auto">
+              <ul className="flex flex-col gap-4 p-8 relative z-10 overflow-y-auto">
                 {navItems.map((item, index) => {
                   const isActive = activeSection === item.id;
                   return (
@@ -164,25 +169,22 @@ export default function Navbar() {
                       <a
                         href={`#${item.id}`}
                         onClick={(e) => handleNavClick(e, item.id)}
-                        className={`group relative flex items-center justify-between w-full py-4 text-2xl font-black transition-all duration-300 ${isActive ? "text-white" : "text-white/20 hover:text-white"
+                        className={`group relative flex items-center justify-between w-full py-4 text-[22px] sm:text-3xl font-black transition-all duration-300 ${isActive ? "text-white pl-4" : "text-white/30 hover:text-white hover:pl-4"
                           }`}
                       >
+                        {isActive && (
+                          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
+                        )}
                         <span className="relative z-10 tracking-[0.1em] uppercase">
                           {item.name}
                         </span>
-                        {isActive && (
-                          <motion.div
-                            layoutId="mobileActivePin"
-                            className="w-2.5 h-2.5 rounded-full bg-cyan-500 shadow-[0_0_15px_#22d3ee]"
-                          />
-                        )}
                       </a>
                     </motion.li>
                   );
                 })}
               </ul>
 
-              <div className="mt-auto p-10 bg-white/[0.02] border-t border-white/5 relative z-10">
+              <div className="mt-auto p-8 bg-white/[0.02] border-t border-white/5 relative z-10">
                 <div className="flex gap-6 mb-8">
                   {[
                     { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white" },
@@ -199,11 +201,11 @@ export default function Navbar() {
                       rel="noopener noreferrer"
                       className={`text-white/30 transition-all duration-300 hover:scale-125 ${item.color}`}
                     >
-                      <item.icon size={26} />
+                      <item.icon size={24} />
                     </motion.a>
                   ))}
                 </div>
-                <div className="text-[10px] text-white/20 font-mono tracking-widest uppercase flex flex-col gap-1">
+                <div className="text-xs text-white/30 font-mono tracking-widest flex flex-col gap-1">
                   <span>&copy; {new Date().getFullYear()} AAFAQUE NAZIR</span>
                   <span className="opacity-50">Authorized System Access</span>
                 </div>
