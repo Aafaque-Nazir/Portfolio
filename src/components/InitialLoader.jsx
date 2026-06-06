@@ -1,84 +1,60 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// --- THE SCRAMBLE ENGINE ---
-const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=-_";
-const ScrambleText = ({ text, delay = 0, duration = 0.8 }) => {
-    const [display, setDisplay] = useState("");
-
-    useEffect(() => {
-        let frame = 0;
-        const totalFrames = duration * 60;
-        const timeout = setTimeout(() => {
-            const interval = setInterval(() => {
-                if (frame >= totalFrames) {
-                    setDisplay(text);
-                    clearInterval(interval);
-                    return;
-                }
-
-                const progress = frame / totalFrames;
-                const scrambled = (text || "").split("").map((char, i) => {
-                    if (i < text.length * progress) return text[i];
-                    return CHARS[Math.floor(Math.random() * CHARS.length)];
-                }).join("");
-
-                setDisplay(scrambled);
-                frame++;
-            }, 1000 / 60);
-            return () => clearInterval(interval);
-        }, delay * 1000);
-        return () => clearTimeout(timeout);
-    }, [text, delay, duration]);
-
-    return <span>{display}</span>;
-};
+const STAGES = [
+  "Initializing Sequence...",
+  "Loading Assets...",
+  "Establishing Connection...",
+  "Finalizing Environment...",
+  "Welcome."
+];
 
 const InitialLoader = ({ onComplete }) => {
     const [loadingComplete, setLoadingComplete] = useState(false);
     const [percent, setPercent] = useState(0);
-    const [logs, setLogs] = useState([]);
-
-    const bootSequence = useMemo(() => [
-        "INITIALIZING CORE...",
-        "DECRYPTING ASSETS...",
-        "MOUNTING QUANTUM MODULES...",
-        "STABILIZING INTERFACE...",
-        "OVERRIDE COMPLETE.",
-        "SYSTEMS OPERATIONAL."
-    ], []);
+    const [stageIndex, setStageIndex] = useState(0);
 
     useEffect(() => {
-        let logIndex = 0;
-        const bootInterval = setInterval(() => {
-            if (logIndex < bootSequence.length) {
-                setLogs(prev => [...prev, bootSequence[logIndex]]);
-                logIndex++;
-            } else {
-                clearInterval(bootInterval);
+        const duration = 2800; // Premium loading duration
+        const intervalTime = 20;
+        const totalSteps = duration / intervalTime;
+        let step = 0;
+
+        const interval = setInterval(() => {
+            step++;
+            const progress = Math.min((step / totalSteps) * 100, 100);
+            
+            // Custom easing for a more natural acceleration/deceleration
+            const easeInOutQuart = progress < 50 
+                ? 8 * Math.pow(progress/100, 4) * 100
+                : (1 - Math.pow(-2 * (progress/100) + 2, 4) / 2) * 100;
+                
+            const currentPercent = Math.floor(easeInOutQuart);
+            
+            setPercent(currentPercent);
+
+            if (currentPercent < 20) setStageIndex(0);
+            else if (currentPercent < 45) setStageIndex(1);
+            else if (currentPercent < 75) setStageIndex(2);
+            else if (currentPercent < 95) setStageIndex(3);
+            else setStageIndex(4);
+
+            if (step >= totalSteps) {
+                clearInterval(interval);
+                setPercent(100);
+                setTimeout(() => {
+                    setLoadingComplete(true);
+                    setTimeout(onComplete, 1200); // Allow exit animation to play smoothly
+                }, 400); 
             }
-        }, 300);
+        }, intervalTime);
 
-        const percentInterval = setInterval(() => {
-            setPercent(prev => {
-                const next = prev + Math.floor(Math.random() * 8) + 1;
-                if (next >= 100) {
-                    clearInterval(percentInterval);
-                    setTimeout(() => {
-                        setLoadingComplete(true);
-                        setTimeout(onComplete, 1500);
-                    }, 400);
-                    return 100;
-                }
-                return next;
-            });
-        }, 80);
+        return () => clearInterval(interval);
+    }, [onComplete]);
 
-        return () => {
-            clearInterval(bootInterval);
-            clearInterval(percentInterval);
-        };
-    }, [onComplete, bootSequence]);
+    const circleRadius = 140;
+    const circleCircumference = 2 * Math.PI * circleRadius;
+    const strokeDashoffset = circleCircumference - (percent / 100) * circleCircumference;
 
     return (
         <AnimatePresence>
@@ -88,99 +64,116 @@ const InitialLoader = ({ onComplete }) => {
                     exit={{
                         opacity: 0,
                         scale: 1.1,
-                        filter: "blur(20px) contrast(200%)",
-                        transition: { duration: 0.8, ease: "circIn" }
+                        filter: "blur(20px)",
+                        transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
                     }}
-                    className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center overflow-hidden font-mono text-cyan-500 selection:bg-cyan-500 selection:text-black"
+                    className="fixed inset-0 z-[9999] bg-[#050505] flex flex-col items-center justify-center overflow-hidden"
                 >
-                    {/* --- HUD DECORATION (TOP CORNERS) --- */}
-                    <div className="absolute top-10 left-10 flex flex-col gap-1 opacity-40 mix-blend-screen">
-                        <div className="text-[10px] tracking-[0.3em] font-black uppercase">Region: Global/Edge</div>
-                        <div className="text-[10px] tracking-[0.3em] font-light">Status: <span className="text-white animate-pulse">Running</span></div>
-                        <div className="w-32 h-[1px] bg-gradient-to-r from-cyan-500 to-transparent mt-2" />
+                    {/* Noise Texture Overlay */}
+                    <div 
+                        className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-screen"
+                        style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+                        }}
+                    />
+
+                    {/* Deep Ambient Glows */}
+                    <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+                        <motion.div 
+                            animate={{ 
+                                scale: [1, 1.1, 1],
+                                opacity: [0.08, 0.12, 0.08],
+                            }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-indigo-500/20 rounded-full blur-[100px]"
+                        />
+                        <motion.div 
+                            animate={{ 
+                                scale: [1, 1.2, 1],
+                                opacity: [0.05, 0.08, 0.05],
+                            }}
+                            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                            className="absolute w-[60vw] h-[60vw] max-w-[600px] max-h-[600px] bg-cyan-500/20 rounded-full blur-[80px] translate-y-1/4"
+                        />
                     </div>
 
-                    <div className="absolute top-10 right-10 text-right opacity-40 mix-blend-screen">
-                        <div className="text-[10px] tracking-[0.3em] font-black uppercase">Build: v4.2.0-Alpha</div>
-                        <div className="text-[10px] tracking-[0.3em] font-light font-mono">
-                            {Math.random().toString(16).substring(2, 10).toUpperCase()}
-                        </div>
-                    </div>
-
-                    {/* --- CENTRAL CORE ELEMENT --- */}
-                    <div className="relative flex flex-col items-center">
-                        {/* THE GEOMETRIC INDICATOR */}
-                        <div className="relative w-48 h-48 flex items-center justify-center mb-12">
-                            {/* Rotating Ring */}
+                    <div className="relative z-10 flex flex-col items-center">
+                        {/* Circular Progress Container */}
+                        <div className="relative flex items-center justify-center w-[340px] h-[340px]">
+                            {/* Inner rotating dash ring (very subtle) */}
                             <motion.div
                                 animate={{ rotate: 360 }}
-                                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                                className="absolute inset-0 border-[0.5px] border-dashed border-cyan-500/30 rounded-full"
+                                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                className="absolute inset-4 border-[1px] border-dashed border-white/5 rounded-full"
                             />
 
-                            {/* Scanning Pulse */}
-                            <motion.div
-                                animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.5, 0.2] }}
-                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl"
-                            />
+                            {/* SVG Progress Ring */}
+                            <svg className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-[0_0_15px_rgba(165,180,252,0.3)]">
+                                {/* Track */}
+                                <circle 
+                                    cx="170" 
+                                    cy="170" 
+                                    r={circleRadius} 
+                                    stroke="rgba(255,255,255,0.02)" 
+                                    strokeWidth="1.5" 
+                                    fill="none" 
+                                />
+                                {/* Progress */}
+                                <motion.circle 
+                                    cx="170" 
+                                    cy="170" 
+                                    r={circleRadius} 
+                                    stroke="url(#gradient)" 
+                                    strokeWidth="2" 
+                                    fill="none" 
+                                    strokeLinecap="round"
+                                    initial={{ strokeDashoffset: circleCircumference }}
+                                    animate={{ strokeDashoffset }}
+                                    transition={{ duration: 0.1, ease: "linear" }}
+                                    style={{ strokeDasharray: circleCircumference }}
+                                />
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
+                                        <stop offset="50%" stopColor="#a5b4fc" stopOpacity="1" />
+                                        <stop offset="100%" stopColor="#22d3ee" stopOpacity="0.5" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
 
-                            {/* THE PERCENTAGE BOX */}
-                            <div className="relative z-10 flex flex-col items-center">
-                                <motion.span
-                                    className="text-6xl md:text-8xl font-black tracking-tighter text-white drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]"
-                                >
-                                    {percent}
-                                </motion.span>
-                                <span className="text-[10px] tracking-[0.5em] font-bold text-cyan-400 mt-[-5px] opacity-80 uppercase">Loading</span>
-                            </div>
-
-                            {/* FOUR CORNER BRACKETS */}
-                            {[0, 90, 180, 270].map(rot => (
-                                <div key={rot} className="absolute inset-0" style={{ transform: `rotate(${rot}deg)` }}>
-                                    <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-500/40" />
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* --- PROGRESS BAR --- */}
-                        <div className="w-64 h-[2px] bg-white/10 relative overflow-hidden group">
-                            <motion.div
-                                className="absolute inset-0 bg-cyan-500 shadow-[0_0_15px_#22d3ee]"
-                                initial={{ x: "-100%" }}
-                                animate={{ x: `${percent - 100}%` }}
-                                transition={{ type: "spring", damping: 30, stiffness: 100 }}
-                            />
-                        </div>
-                    </div>
-
-                    {/* --- LOG TERMINAL (BOTTOM) --- */}
-                    <div className="absolute bottom-20 left-10 md:left-20 w-full max-w-sm px-4">
-                        <div className="flex flex-col gap-1.5 h-32 justify-end">
-                            <AnimatePresence mode="popLayout">
-                                {logs.map((log, i) => (
-                                    <motion.div
-                                        key={`${log}-${i}`}
-                                        initial={{ opacity: 0, x: -10, filter: "blur(5px)" }}
-                                        animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                                        exit={{ opacity: 0, x: 10 }}
-                                        className="text-[10px] md:text-xs tracking-[0.2em] font-mono flex items-center gap-3"
+                            {/* Center Content */}
+                            <div className="flex flex-col items-center justify-center absolute">
+                                <div className="flex items-start">
+                                    <motion.span 
+                                        className="text-7xl md:text-8xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50"
+                                        style={{ fontVariantNumeric: "tabular-nums" }}
                                     >
-                                        <span className="w-1 h-3 bg-cyan-500/50" />
-                                        <ScrambleText text={log} duration={0.3} />
-                                    </motion.div>
-                                ))}
+                                        {percent}
+                                    </motion.span>
+                                    <span className="text-xl text-white/40 font-light mt-2">%</span>
+                                </div>
+                                <span className="text-[9px] md:text-[10px] tracking-[0.5em] text-white/30 uppercase mt-4 font-medium pl-2">
+                                    System Loading
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Status Text Crossfade */}
+                        <div className="mt-16 h-8 relative flex items-center justify-center w-full">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={stageIndex}
+                                    initial={{ opacity: 0, y: 8, filter: "blur(8px)" }}
+                                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                                    exit={{ opacity: 0, y: -8, filter: "blur(8px)" }}
+                                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                                    className="absolute text-xs md:text-sm tracking-[0.3em] text-white/50 font-light uppercase"
+                                >
+                                    {STAGES[stageIndex]}
+                                </motion.div>
                             </AnimatePresence>
                         </div>
                     </div>
-
-                    {/* --- THE SCAN LINE --- */}
-                    <motion.div
-                        animate={{ top: ["-10%", "110%"] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                        className="absolute left-0 w-full h-[1px] bg-cyan-400/20 shadow-[0_0_20px_#22d3ee] pointer-events-none opacity-30 z-50"
-                    />
-
                 </motion.div>
             )}
         </AnimatePresence>
