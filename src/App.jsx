@@ -48,7 +48,7 @@ function App() {
         about: "About Aafaque Nazir — Freelance Web Developer India",
         skills: "Technical Skills — React, Next.js, TypeScript, Node.js",
         projects: "Portfolio & Case Studies — Web Development Projects",
-        services: "Web Development Services — Websites Starting ₹14,999",
+        services: "Web Development Services — Websites Starting ₹8,999",
         contact: "Hire a Web Developer — Contact Aafaque Nazir",
       };
       document.title = titles[activeSection] || "Aafaque Nazir — Web Developer in Navi Mumbai | React & Next.js Expert";
