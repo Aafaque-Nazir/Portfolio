@@ -12,6 +12,7 @@ import {
   FaCheck,
   FaRobot,
   FaCube,
+  FaShoppingCart,
 } from "react-icons/fa";
 
 const CountingPrice = ({ value, prefix = "" }) => {
@@ -83,15 +84,23 @@ const ServiceCard = ({ pkg }) => {
           {/* Pricing Area */}
           <div className="mb-2 p-2 lg:p-3 rounded-xl lg:rounded-2xl bg-white/[0.02] border border-white/[0.05] group-hover:border-cyan-500/20 transition-all duration-500 relative overflow-hidden">
             <span className="text-[8px] md:text-[9px] font-bold text-white/30 uppercase tracking-[0.2em] mb-1 block font-mono">
-              STARTS FROM
+              {pkg.priceText || "STARTS FROM"}
             </span>
-            <div className="flex items-baseline gap-2 blur-md select-none">
-              <span className="text-2xl lg:text-3xl font-black text-white tracking-tighter">
-                <CountingPrice value={pkg.price} prefix="₹" />
-              </span>
-              <span className="text-[10px] md:text-[11px] text-white/20 line-through font-mono">
-                {pkg.oldPrice}
-              </span>
+            <div className="flex items-baseline gap-2 select-none">
+              {pkg.isCustomPrice ? (
+                <span className="text-xl lg:text-2xl font-black text-white tracking-tighter uppercase">
+                  Let's Talk
+                </span>
+              ) : (
+                <>
+                  <span className="text-2xl lg:text-3xl font-black text-white tracking-tighter">
+                    <CountingPrice value={pkg.price} prefix="₹" />
+                  </span>
+                  <span className="text-[10px] md:text-[11px] text-white/20 line-through font-mono">
+                    {pkg.oldPrice}
+                  </span>
+                </>
+              )}
             </div>
           </div>
 
@@ -126,50 +135,52 @@ const ServiceCard = ({ pkg }) => {
 const Services = () => {
   const packages = [
     {
-      title: "Full-Stack Web Apps",
-      oldPrice: "₹45k",
-      price: "24,999",
-      description: "Scalable SaaS platforms, admin dashboards, and custom portals built with Next.js and secure backends.",
+      title: "Conversion Websites",
+      oldPrice: "₹15k",
+      price: "8,999",
+      description: "Conversion-focused, highly animated landing pages designed to turn visitors into leads.",
       features: [
-        "Next.js & React architectures",
-        "Supabase/PostgreSQL backends",
-        "Secure authentication & RLS",
-        "Real-time data & web sockets",
-        "Enterprise-grade scalability",
-      ],
-      recommendedFor: "SaaS & Startups",
-      icon: <FaRocket />,
-    },
-    {
-      title: "Lead Generation Websites",
-      oldPrice: "₹25k",
-      price: "14,999",
-      description: "Conversion-focused, highly animated lead generation websites with premium UI/UX and lightning-fast speeds.",
-      features: [
-        "Pixel-perfect UI design to code",
-        "GSAP & Framer Motion animations",
-        "Sub-second page load times",
-        "Flawless mobile responsiveness",
-        "Technical SEO optimization",
+        "Premium Custom UI & Branding",
+        "Engaging Scroll Animations",
+        "Lightning-Fast Page Speeds",
+        "1 Year Hosting & Domain FREE",
+        "Chargeable after 1 year",
       ],
       recommendedFor: "Brands & Businesses",
       icon: <FaCheck />,
       highlight: true,
     },
     {
-      title: "Interactive 3D Websites",
-      oldPrice: "₹50k",
-      price: "29,999",
-      description: "Mind-blowing WebGL and Three.js experiences that defy standard web design. Stand out with immersive 3D environments.",
+      title: "Digital Stores (E-Comm)",
+      oldPrice: "₹45k",
+      price: "24,999",
+      description: "Custom e-commerce platforms and WhatsApp-based ordering systems with seamless user flows.",
       features: [
-        "Custom WebGL & Three.js",
-        "React Three Fiber (R3F)",
-        "Interactive 3D models & physics",
-        "Optimized 3D rendering for web",
-        "Award-winning level aesthetics",
+        "Custom E-Commerce Storefront",
+        "Secure Payment & WhatsApp Integration",
+        "Mobile-First & SEO Optimized",
+        "Admin Dashboard for Orders",
+        "Free 20 Products Setup (Bulk Extra)",
       ],
-      recommendedFor: "Creative & Luxury",
-      icon: <FaCube />,
+      recommendedFor: "Retail & Brands",
+      icon: <FaShoppingCart />,
+    },
+    {
+      title: "Business Software (SaaS)",
+      isCustomPrice: true,
+      priceText: "CUSTOM QUOTE",
+      oldPrice: "₹45k",
+      price: "24,999",
+      description: "Scalable SaaS platforms, admin dashboards, and custom portals built to automate and manage your entire business.",
+      features: [
+        "Custom Admin & Staff Dashboards",
+        "Secure Cloud Database Storage",
+        "Role-Based User Logins & Access",
+        "Real-Time Analytics & Tracking",
+        "Enterprise-Grade Scalability",
+      ],
+      recommendedFor: "SaaS & Startups",
+      icon: <FaRocket />,
     },
   ];
 
