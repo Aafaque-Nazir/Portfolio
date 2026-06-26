@@ -46,7 +46,7 @@ const allSkills = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative lg:h-screen min-h-[100svh] flex flex-col bg-black text-white shrink-0 overflow-hidden select-none">
+    <section id="skills" className="relative w-full min-h-[100svh] flex flex-col justify-center bg-black text-white shrink-0 overflow-hidden select-none py-20 lg:py-0">
 
       {/* Dynamic Background Watermark (Reduced Spacy feel) */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none overflow-hidden">
@@ -72,7 +72,7 @@ export default function Skills() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-cyan-500/[0.01] blur-[100px] pointer-events-none" />
 
       {/* Header: Tightened vertical space */}
-      <div className="relative z-20 w-full pt-8 lg:pt-12 pb-2 lg:pb-4 flex flex-col items-center shrink-0">
+      <div className="relative z-20 w-full pt-8 lg:pt-12 pb-6 lg:pb-4 flex flex-col items-center shrink-0">
         <motion.h2
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -84,7 +84,7 @@ export default function Skills() {
       </div>
 
       {/* Grid: Occupies more center space */}
-      <div className="flex-1 w-full max-w-6xl mx-auto overflow-y-auto no-scrollbar px-4 lg:px-8 relative z-10 flex flex-col items-center justify-start lg:justify-center pt-8">
+      <div className="flex-1 w-full max-w-6xl mx-auto px-4 lg:px-8 relative z-10 flex flex-col items-center justify-center">
         <motion.div
           key="all-skills"
           initial={{ opacity: 0 }}
