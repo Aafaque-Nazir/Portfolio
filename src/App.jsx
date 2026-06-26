@@ -96,7 +96,6 @@ function App() {
           <SectionDivider />
 
           <Contact />
-          <SectionDivider />
         </Suspense>
 
         <Footer />
