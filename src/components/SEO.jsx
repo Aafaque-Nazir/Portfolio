@@ -63,10 +63,19 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
       "hire web developer Navi Mumbai, contact web developer India, freelance web developer for hire, get a website quote, web development consultation free, web developer WhatsApp contact",
   };
 
+  const sectionTitles = {
+    home: "Aafaque Nazir — Web Developer in Navi Mumbai | React & Next.js Expert",
+    about: "About Aafaque Nazir — Freelance Web Developer India",
+    skills: "Technical Skills — React, Next.js, TypeScript, Node.js",
+    projects: "Portfolio & Case Studies — Web Development Projects",
+    services: "Web Development Services — Websites Starting ₹8,999",
+    contact: "Hire a Web Developer — Contact Aafaque Nazir",
+  };
+
   const resolvedTitle = title
     ? `${title} | ${siteName}`
-    : section
-      ? `${section.charAt(0).toUpperCase() + section.slice(1)} | ${siteName}`
+    : section && sectionTitles[section]
+      ? sectionTitles[section]
       : siteTitle;
 
   const resolvedDescription =
