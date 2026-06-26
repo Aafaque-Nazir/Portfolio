@@ -26,13 +26,13 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
   const siteTitle = "Aafaque Nazir — Web Developer in Navi Mumbai | React & Next.js Expert";
 
   const defaultDescription =
-    "Looking for a web developer in Navi Mumbai? Aafaque Nazir builds high-performance websites, SaaS platforms, and interactive web apps using React & Next.js. Websites starting from ₹14,999.";
+    "Looking for a web developer in Navi Mumbai? Aafaque Nazir builds high-performance websites, SaaS platforms, and interactive web apps using React & Next.js. Websites starting from ₹8,999.";
 
   // ──────────────────────────────────────────────────
   // CLIENT-FOCUSED descriptions per section
   // ──────────────────────────────────────────────────
   const sectionDescriptions = {
-    home: "Looking for a web developer in Navi Mumbai? Aafaque Nazir builds stunning, high-performance websites and web applications using React, Next.js, and modern technologies. Websites starting from ₹14,999.",
+    home: "Looking for a web developer in Navi Mumbai? Aafaque Nazir builds stunning, high-performance websites and web applications using React, Next.js, and modern technologies. Websites starting from ₹8,999.",
     about:
       "About Aafaque Nazir — a freelance web developer based in Navi Mumbai, India. Specializing in custom website development, SaaS platforms, and interactive web experiences with React & Next.js.",
     skills:
@@ -40,7 +40,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
     projects:
       "Web development portfolio by Aafaque Nazir — showcasing SaaS dashboards, ecommerce platforms, business websites, and interactive web applications built for clients across India.",
     services:
-      "Affordable web development services in Navi Mumbai — Full-Stack Web Apps from ₹24,999, Lead Generation Websites from ₹14,999, and Interactive 3D Websites from ₹29,999. Hire a professional web developer today.",
+      "Affordable web development services in Navi Mumbai — Business Software (SaaS), Digital Stores (E-Comm) from ₹24,999, and Conversion Websites from ₹8,999. Hire a professional web developer today.",
     contact:
       "Hire Aafaque Nazir — freelance web developer in Navi Mumbai. Get a free consultation for your website project. Available for businesses, startups, and agencies across India.",
   };
@@ -166,7 +166,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
         name: "Aafaque Nazir — Web Development Services",
         url: siteUrl,
         description:
-          "Professional web development services in Navi Mumbai — Full-Stack Web Apps, Lead Generation Websites, and Interactive 3D Websites. Affordable pricing for businesses and startups.",
+          "Professional web development services in Navi Mumbai — Business Software (SaaS), Digital Stores (E-Comm), and Conversion Websites. Affordable pricing for businesses and startups.",
         provider: {
           "@type": "Person",
           name: "Aafaque Nazir",
@@ -178,7 +178,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
           { "@type": "State", name: "Maharashtra" },
           { "@type": "Country", name: "India" },
         ],
-        priceRange: "₹14,999 - ₹29,999",
+        priceRange: "₹8,999 - ₹24,999+",
         telephone: "+91-93256-29256",
         email: "aafaquenazir@gmail.com",
         address: {
@@ -195,9 +195,20 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
-                name: "Full-Stack Web Apps",
+                name: "Conversion Websites",
                 description:
-                  "Scalable SaaS platforms, admin dashboards, and custom web portals built with Next.js and secure backends. Starting from ₹24,999.",
+                  "Conversion-focused, highly animated landing pages designed to turn visitors into leads. Starting from ₹8,999.",
+              },
+              price: "8999",
+              priceCurrency: "INR",
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Digital Stores (E-Comm)",
+                description:
+                  "Custom e-commerce platforms and WhatsApp-based ordering systems with seamless user flows. Starting from ₹24,999.",
               },
               price: "24999",
               priceCurrency: "INR",
@@ -206,23 +217,10 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
-                name: "Lead Generation Websites",
+                name: "Business Software (SaaS)",
                 description:
-                  "Conversion-focused, premium animated websites with fast load times and mobile responsiveness. Starting from ₹14,999.",
+                  "Scalable SaaS platforms, admin dashboards, and custom portals built to automate and manage your entire business.",
               },
-              price: "14999",
-              priceCurrency: "INR",
-            },
-            {
-              "@type": "Offer",
-              itemOffered: {
-                "@type": "Service",
-                name: "Interactive 3D Websites",
-                description:
-                  "Immersive WebGL and Three.js experiences with 3D environments for luxury and creative brands. Starting from ₹29,999.",
-              },
-              price: "29999",
-              priceCurrency: "INR",
             },
           ],
         },
@@ -270,7 +268,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
             name: "How much does a website cost in India?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Website development starts from ₹14,999 for lead generation websites, ₹24,999 for full-stack web apps, and ₹29,999 for interactive 3D websites. Prices vary based on features and complexity.",
+              text: "Website development starts from ₹8,999 for conversion websites, ₹24,999 for digital stores (e-comm), and custom pricing for business software (SaaS). Prices vary based on features and complexity.",
             },
           },
           {
@@ -278,7 +276,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
             name: "How long does it take to build a website?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "A lead generation website typically takes 1-2 weeks. Full-stack web apps take 3-6 weeks depending on complexity. Interactive 3D websites can take 4-8 weeks.",
+              text: "A conversion website typically takes 1-2 weeks. Digital stores (e-comm) take 2-4 weeks. Business software (SaaS) and full-stack web apps take 4-8 weeks depending on complexity.",
             },
           },
           {
