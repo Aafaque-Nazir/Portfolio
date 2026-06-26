@@ -54,7 +54,7 @@ const AboutNode = ({ children, title, className = "" }) => {
 
 const About = () => {
   return (
-    <section id="about" aria-label="About Aafaque Nazir — Frontend Engineer & Creative Developer" className="relative w-full lg:h-screen min-h-[100svh] flex flex-col justify-center items-center px-4 overflow-hidden bg-black py-10">
+    <section id="about" aria-label="About Aafaque Nazir — Frontend Engineer & Creative Developer" className="relative w-full min-h-[100svh] flex flex-col justify-center items-center px-4 bg-black py-12 lg:py-4">
       <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col h-full justify-center">
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">

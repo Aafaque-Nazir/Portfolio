@@ -3,74 +3,68 @@ import { motion } from "framer-motion";
 
 const SectionDivider = () => {
   return (
-    <div className="relative w-full h-40 flex flex-col items-center justify-center overflow-hidden pointer-events-none py-12 bg-black">
-      {/* 📏 Horizon Lines */}
-      <div className="absolute w-[85%] max-w-5xl flex items-center justify-between">
+    <div className="relative w-full h-32 flex flex-col items-center justify-center overflow-hidden pointer-events-none bg-black">
+      
+      {/* Container for the line and glowing center */}
+      <div className="absolute w-[85%] max-w-6xl flex items-center justify-center relative">
+        
+        {/* Left Line */}
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          className="h-[1.5px] flex-grow bg-gradient-to-r from-transparent via-cyan-500/50 to-cyan-400/80 origin-right rounded-full shadow-[0_0_10px_#22d3ee]"
+          className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-cyan-900/50 to-cyan-500/80 origin-right"
         />
 
-        {/* ✨ The Quantum Orbit Core */}
-        <div className="relative z-10 mx-6 flex items-center justify-center w-24 h-24" style={{ perspective: "1000px" }}>
-
-          {/* Central Energy Orb */}
+        {/* Central Core (Noticeable but sleek) */}
+        <div className="relative flex items-center justify-center px-4">
+          
+          {/* Large diffuse glow */}
           <motion.div
-            animate={{ scale: [0.9, 1.2, 0.9], filter: ["hue-rotate(0deg)", "hue-rotate(45deg)", "hue-rotate(0deg)"] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute w-5 h-5 rounded-full bg-cyan-300 shadow-[0_0_20px_#67e8f9,inset_0_0_10px_#fff]"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute w-32 h-8 bg-cyan-500/30 blur-2xl rounded-full"
           />
 
-          {/* Orbiting Ring 1 (Horizontal tilt) */}
+          {/* Central Bright Spot */}
           <motion.div
-            animate={{ rotateZ: [0, 360], rotateY: 70, rotateX: 60 }}
-            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-            className="absolute w-14 h-14 border-[1.5px] border-cyan-400/70 rounded-full"
-            style={{ transformStyle: "preserve-3d" }}
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            className="relative z-10 w-4 h-1 bg-cyan-300 shadow-[0_0_20px_#22d3ee,0_0_40px_#fff] rounded-full"
           />
 
-          {/* Orbiting Ring 2 (Vertical tilt) */}
-          <motion.div
-            animate={{ rotateZ: [360, 0], rotateX: 70, rotateY: 60 }}
+          {/* Rotating minimal brackets */}
+          <motion.div 
+            animate={{ rotate: 360 }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="absolute w-20 h-20 border-[1px] border-cyan-300/40 rounded-full"
-            style={{ transformStyle: "preserve-3d" }}
+            className="absolute w-12 h-12 border-[0.5px] border-dashed border-cyan-500/40 rounded-full"
           />
 
+          {/* Minimal pulsing rings */}
+          <motion.div
+            animate={{ scale: [1, 1.8], opacity: [0.8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+            className="absolute w-6 h-6 border-[1px] border-cyan-400 rounded-full"
+          />
         </div>
 
+        {/* Right Line */}
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          className="h-[1.5px] flex-grow bg-gradient-to-l from-transparent via-cyan-500/50 to-cyan-400/80 origin-left rounded-full shadow-[0_0_10px_#22d3ee]"
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="h-[1px] flex-grow bg-gradient-to-l from-transparent via-cyan-900/50 to-cyan-500/80 origin-left"
+        />
+        
+        {/* Scanning Light Particle */}
+        <motion.div
+          animate={{ left: ["0%", "100%", "0%"] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+          className="absolute w-16 h-[2px] bg-white shadow-[0_0_20px_#fff,0_0_40px_#22d3ee,0_0_60px_#22d3ee] rounded-full z-20"
+          style={{ top: "50%", transform: "translateY(-50%)" }}
         />
       </div>
-
-      {/* 💫 Ambient Floating Particles */}
-      {[...Array(8)].map((_, i) => (
-        <motion.div
-          key={i}
-          animate={{
-            y: [0, -40, 0],
-            opacity: [0, 0.9, 0],
-            scale: [0, 1.5, 0]
-          }}
-          transition={{
-            duration: 3 + (i % 3),
-            repeat: Infinity,
-            delay: i * 0.4,
-            ease: "easeInOut"
-          }}
-          className="absolute w-1 h-1 bg-cyan-200 rounded-full shadow-[0_0_8px_#fff]"
-          style={{
-            left: `calc(50% + ${(i % 2 === 0 ? 1 : -1) * (30 + i * 20)}px)`,
-            top: `calc(50% + ${(i % 2 === 0 ? -1 : 1) * 15}px)`
-          }}
-        />
-      ))}
+      
     </div>
   );
 };
