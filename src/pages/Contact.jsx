@@ -82,7 +82,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4"
           >
-            Connect<span className="text-cyan-500">.</span>
+            Connect
           </motion.h2>
 
         </div>

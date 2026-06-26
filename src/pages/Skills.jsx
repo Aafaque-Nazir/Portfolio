@@ -78,7 +78,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, scale: 1 }}
           className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4"
         >
-          Skills<span className="text-cyan-500">.</span>
+          Skills
         </motion.h2>
         <div className="w-12 h-0.5 bg-cyan-500 mt-2 opacity-50" />
       </div>

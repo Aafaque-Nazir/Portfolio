@@ -66,7 +66,7 @@ const About = () => {
               className="mb-4 lg:mb-6"
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4 md:pl-8">
-                About Me<span className="text-cyan-500">.</span>
+                About Me
               </h2>
             </motion.div>
 

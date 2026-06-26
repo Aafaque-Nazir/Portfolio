@@ -42,24 +42,14 @@ const Footer = () => {
           <div className="md:col-span-5 flex flex-col items-start gap-4">
             <div>
               <h2 className="text-2xl md:text-3xl font-black text-white tracking-wider">
-                AAFAQUE<span className="text-cyan-500">.</span>
+                AAFAQUE
               </h2>
               <p className="text-gray-400 text-[10px] sm:text-xs tracking-[0.15em] mt-1.5 uppercase font-mono">
                 Frontend Engineer & Creative Developer
               </p>
             </div>
             
-            {/* Status Pill */}
-            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-cyan-500/10 bg-cyan-950/20 backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-              </span>
-              <span className="text-[10px] text-cyan-400 font-mono tracking-wider uppercase">
-                Creative Web Developer
-              </span>
-            </div>
-            
+
             <p className="text-gray-500 text-xs font-mono max-w-sm mt-1 leading-relaxed">
               Crafting high-performance web applications with clean code and cutting-edge user experiences.
             </p>

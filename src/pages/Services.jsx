@@ -199,7 +199,7 @@ const Services = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-2"
           >
-            Services<span className="text-cyan-500">.</span>
+            Services
           </motion.h2>
 
 
