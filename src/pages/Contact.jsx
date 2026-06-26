@@ -141,21 +141,32 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Service</label>
-                  <div className="relative">
-                    <select
-                      {...register("service", { required: true })}
-                      className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer"
-                    >
-                      <option value="" className="bg-black">Select Service</option>
-                      <option value="Full-Stack Web Apps" className="bg-black">Full-Stack Web Apps</option>
-                      <option value="Lead Generation Websites" className="bg-black">Lead Generation Websites</option>
-                      <option value="Interactive 3D Websites" className="bg-black">Interactive 3D Websites</option>
-                      <option value="Custom" className="bg-black">Other / Custom</option>
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/30">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Phone</label>
+                    <input
+                      type="tel"
+                      placeholder="WhatsApp Number"
+                      {...register("phone", { required: true })}
+                      className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-4 text-sm text-white placeholder-white/10 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Service</label>
+                    <div className="relative">
+                      <select
+                        {...register("service", { required: true })}
+                        className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="" className="bg-black">Select Service</option>
+                        <option value="Conversion Websites" className="bg-black">Conversion Websites</option>
+                        <option value="Digital Stores (E-Comm)" className="bg-black">Digital Stores (E-Comm)</option>
+                        <option value="Business Software (SaaS)" className="bg-black">Business Software (SaaS)</option>
+                        <option value="Custom" className="bg-black">Other / Custom</option>
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/30">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                      </div>
                     </div>
                   </div>
                 </div>

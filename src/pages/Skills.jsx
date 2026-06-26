@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   SiReact, SiNextdotjs, SiJavascript, SiTailwindcss, SiFramer, SiGit,
@@ -8,7 +7,6 @@ import {
   SiMongodb, SiFirebase, SiGreensock, SiRedux, SiVercel, SiOpenai
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
-import { SkillDock } from "../components/ui/skill-dock";
 import { TechCard } from "../components/ui/tech-card";
 
 const GeminiIcon = () => (
@@ -47,12 +45,6 @@ const allSkills = [
 ];
 
 export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const filteredSkills = activeCategory === "All"
-    ? allSkills
-    : allSkills.filter(s => s.category === activeCategory);
-
   return (
     <section id="skills" className="relative lg:h-screen min-h-[100svh] flex flex-col bg-black text-white shrink-0 overflow-hidden select-none">
 
@@ -91,22 +83,15 @@ export default function Skills() {
         <div className="w-12 h-0.5 bg-cyan-500 mt-2 opacity-50" />
       </div>
 
-      {/* Floating Dock: Placed Above the Grid */}
-      <div className="relative z-30 w-full flex justify-center items-center mb-6 px-4">
-        <div className="bg-black/60 backdrop-blur-3xl border border-white/5 rounded-[2rem] p-1 shadow-[0_0_50px_rgba(0,0,0,0.9)] scale-90 lg:scale-100">
-          <SkillDock activeCategory={activeCategory} setCategory={setActiveCategory} />
-        </div>
-      </div>
-
       {/* Grid: Occupies more center space */}
-      <div className="flex-1 w-full max-w-6xl mx-auto overflow-y-auto no-scrollbar px-4 lg:px-8 relative z-10 flex flex-col items-center justify-start lg:justify-center">
+      <div className="flex-1 w-full max-w-6xl mx-auto overflow-y-auto no-scrollbar px-4 lg:px-8 relative z-10 flex flex-col items-center justify-start lg:justify-center pt-8">
         <motion.div
-          key={activeCategory}
+          key="all-skills"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:flex lg:flex-wrap justify-items-center justify-center gap-4 md:gap-6 lg:gap-8 w-full h-fit py-2 pb-12"
         >
-          {filteredSkills.map((tech, index) => (
+          {allSkills.map((tech, index) => (
             <TechCard key={tech.name} tech={tech} index={index} />
           ))}
         </motion.div>
