@@ -132,26 +132,37 @@ const projects = [
 function ProjectCard({ project }) {
     return (
         <a href={project.link} target="_blank" rel="noreferrer" className="group block w-full h-full outline-none">
-            <div className="relative w-full h-full bg-[#030303] border border-white/[0.04] rounded-3xl overflow-hidden flex flex-col transition-all duration-500 hover:border-white/[0.15] hover:shadow-[0_20px_40px_-20px_rgba(34,211,238,0.2)] hover:-translate-y-2">
+            <div className="relative w-full h-full bg-[#030303] border border-white/[0.05] rounded-[24px] overflow-hidden flex flex-col transition-all duration-700 hover:border-cyan-500/30 hover:shadow-[0_0_40px_-15px_rgba(34,211,238,0.2)] hover:-translate-y-2 z-10 hover:z-20 group-hover:bg-[#050505]">
+                
+                {/* Inner Glow Border */}
+                <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02)] pointer-events-none z-30 transition-all duration-700 group-hover:shadow-[inset_0_0_0_1px_rgba(34,211,238,0.2)]" />
                 
                 {/* 1. Feature Image (Edge to Edge, Top) */}
                 <div className="relative w-full aspect-[16/10] overflow-hidden bg-zinc-900 border-b border-white/[0.04]">
-                    <div className="absolute inset-0 bg-cyan-900/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                    {/* Dark gradient overlay at the bottom of the image for text readability if needed, or just cinematic feel */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent z-10 opacity-70" />
+                    <div className="absolute inset-0 bg-cyan-900/20 mix-blend-color-dodge opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
                     <img
                         src={project.image}
                         alt={project.title}
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-full object-cover transform transition-transform duration-[1.2s] ease-[0.16,1,0.3,1] group-hover:scale-[1.03]"
+                        className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-[1.08]"
                     />
                     
-                    {/* Floating Tech Stack Overlay - Cascading in on hover */}
-                    <div className="absolute top-4 right-4 flex flex-col gap-1.5 z-20">
+                    {/* Live Indicator on hover */}
+                    <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-full border border-white/10 opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 shadow-2xl">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
+                        <span className="text-[9px] font-bold text-white uppercase tracking-widest">Live</span>
+                    </div>
+
+                    {/* Floating Tech Stack Overlay - Cascading in from bottom */}
+                    <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-1.5 z-20">
                         {project.techStack.map((tech, idx) => (
                             <span 
                                 key={idx} 
-                                className="px-2.5 py-1 bg-black/80 backdrop-blur-md border border-white/10 rounded-[6px] text-[9px] font-mono text-cyan-50 uppercase tracking-[0.2em] transform translate-x-8 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 shadow-xl" 
-                                style={{ transitionDelay: `${idx * 75}ms` }}
+                                className="px-3 py-1 bg-black/70 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-cyan-50/90 tracking-wide translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 shadow-xl" 
+                                style={{ transitionDelay: `${idx * 50}ms` }}
                             >
                                 {tech}
                             </span>
@@ -159,31 +170,31 @@ function ProjectCard({ project }) {
                     </div>
                 </div>
 
-                {/* 2. Minimal Details Block */}
-                <div className="p-4 md:p-5 flex flex-col flex-grow relative overflow-hidden bg-gradient-to-b from-transparent to-transparent group-hover:to-cyan-950/10 transition-colors duration-700">
+                {/* 2. Details Block */}
+                <div className="p-5 md:p-6 flex flex-col flex-grow relative overflow-hidden bg-gradient-to-b from-transparent to-transparent group-hover:to-cyan-950/10 transition-colors duration-700">
                     
-                    <div className="flex justify-between items-start mb-2.5 relative z-10">
-                        <div className="pr-3">
-                            <div className="flex items-center gap-1.5 mb-1.5">
-                                <span className="text-slate-500 group-hover:text-cyan-500/80 transition-colors text-xs">
+                    <div className="flex justify-between items-start mb-3 relative z-10">
+                        <div className="pr-4">
+                            <div className="flex items-center gap-2 mb-2">
+                                <span className="text-slate-500 group-hover:text-cyan-400 transition-colors text-sm">
                                     {project.icon}
                                 </span>
-                                <span className="text-[7.5px] font-mono uppercase tracking-[0.25em] text-slate-500 group-hover:text-cyan-500/80 transition-colors">
+                                <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-slate-500 group-hover:text-cyan-400 transition-colors duration-500">
                                     {project.category}
                                 </span>
                             </div>
-                            <h4 className="text-base md:text-lg font-bold text-slate-100 group-hover:text-white tracking-tight transition-colors">
+                            <h4 className="text-lg md:text-xl font-black text-slate-200 group-hover:text-white tracking-tight transition-colors">
                                 {project.title}
                             </h4>
                         </div>
                         
                         {/* Directed Action Indicator */}
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-white/[0.05] bg-white/[0.01] flex items-center justify-center group-hover:bg-cyan-500 group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-500 shrink-0 transform group-hover:-rotate-45">
-                            <RiArrowLeftLine className="text-slate-500 group-hover:text-black text-[14px] md:text-base rotate-180 transition-colors duration-500" />
+                        <div className="w-10 h-10 rounded-full bg-white/[0.02] border border-white/[0.08] flex items-center justify-center group-hover:bg-cyan-500 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-500 shrink-0 transform group-hover:-rotate-45">
+                            <RiArrowLeftLine className="text-slate-400 group-hover:text-black text-lg rotate-180 transition-colors duration-500" />
                         </div>
                     </div>
 
-                    <p className="text-slate-400/80 text-[10.5px] md:text-[11px] leading-relaxed font-medium line-clamp-3 relative z-10 group-hover:text-slate-300 transition-colors flex-grow">
+                    <p className="text-slate-400/80 text-[12px] md:text-[13px] leading-relaxed font-medium line-clamp-2 relative z-10 group-hover:text-slate-300 transition-colors flex-grow">
                         {project.description}
                     </p>
                 </div>
@@ -290,38 +301,50 @@ export function ProjectShowcase() {
                     <motion.div
                         layoutId={`folder-container-${selectedFolder.name}`}
                         key="expanded-folder"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="relative bg-[#060606] border border-white/[0.06] rounded-[1.5rem] w-full max-w-5xl mx-auto shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] overflow-hidden z-20"
+                        initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 20, scale: 0.98 }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        className="relative bg-zinc-950/40 backdrop-blur-2xl border border-white/[0.08] rounded-[2rem] w-full max-w-6xl mx-auto shadow-[0_0_80px_-20px_rgba(0,0,0,0.9)] overflow-hidden z-20"
                     >
-                        {/* Top Accent Line */}
-                        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+                        {/* Immersive Ambient Backgrounds */}
+                        <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none mix-blend-overlay" />
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.08)_0%,transparent_50%)] pointer-events-none" />
+                        
+                        {/* Top Accent Line (Glowing) */}
+                        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent shadow-[0_0_15px_rgba(34,211,238,0.5)]" />
 
-                        {/* Header Bar */}
-                        <div className="relative z-20 px-5 md:px-8 py-5 flex items-center justify-between border-b border-white/[0.05]">
+                        {/* Sticky Glass Header Bar */}
+                        <div className="relative z-30 sticky top-0 px-6 md:px-10 py-6 flex items-center justify-between border-b border-white/[0.06] bg-zinc-950/50 backdrop-blur-md">
                             
                             {/* Left: Back + Title */}
-                            <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-5 md:gap-6">
                                 <motion.button
-                                    whileHover={{ x: -3 }}
-                                    whileTap={{ scale: 0.93 }}
+                                    whileHover={{ x: -4, scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
                                     onClick={() => setSelectedFolder(null)}
-                                    className="group/btn w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:border-cyan-500/30 hover:bg-cyan-500/10 flex items-center justify-center transition-all duration-300"
+                                    className="group/btn w-10 h-10 rounded-full bg-white/[0.03] border border-white/[0.1] hover:border-cyan-500/50 hover:bg-cyan-500/10 flex items-center justify-center transition-all duration-300 shadow-lg"
                                 >
-                                    <RiArrowLeftLine className="text-slate-400 group-hover/btn:text-cyan-400 text-base transition-colors" />
+                                    <RiArrowLeftLine className="text-slate-400 group-hover/btn:text-cyan-400 text-lg transition-colors" />
                                 </motion.button>
                                 
-                                <div className="flex items-center gap-3">
-                                    <RiFolder3Fill className="text-lg text-cyan-500/50" />
-                                    <motion.h3 
-                                        initial={{ opacity: 0, x: -8 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.1, type: "spring", stiffness: 120 }}
-                                        className="text-lg md:text-xl font-bold text-white tracking-tight"
-                                    >
-                                        {selectedFolder.name}
-                                    </motion.h3>
+                                <div className="flex items-center gap-3.5">
+                                    <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shadow-[inset_0_0_15px_rgba(34,211,238,0.1)]">
+                                        <RiFolder3Fill className="text-xl text-cyan-400" />
+                                    </div>
+                                    <div>
+                                        <motion.h3 
+                                            initial={{ opacity: 0, x: -10 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: 0.1, type: "spring", stiffness: 100 }}
+                                            className="text-xl md:text-3xl font-black text-white tracking-tight"
+                                        >
+                                            {selectedFolder.name}
+                                        </motion.h3>
+                                        <p className="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest font-semibold mt-1">
+                                            Curated Collection
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -330,29 +353,29 @@ export function ProjectShowcase() {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.15 }}
-                                className="flex items-center gap-2 text-[11px] font-medium text-slate-400 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06]"
+                                className="hidden md:flex items-center gap-2.5 text-xs font-bold text-cyan-50 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
                             >
-                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                                {selectedFolder.projects.length} {selectedFolder.projects.length === 1 ? 'project' : 'projects'}
+                                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                                {selectedFolder.projects.length} {selectedFolder.projects.length === 1 ? 'Project' : 'Projects'}
                             </motion.div>
                         </div>
 
                         {/* Projects Grid */}
-                        <div className="p-5 md:p-8">
-                            <div className={`grid gap-5 md:gap-6 relative z-20 ${
+                        <div className="p-6 md:p-10 relative z-20 min-h-[400px]">
+                            <div className={`grid gap-6 md:gap-8 ${
                                 selectedFolder.projects.length <= 2 
-                                    ? 'grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto' 
-                                    : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                                    ? 'grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto' 
+                                    : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
                             }`}>
                                 <AnimatePresence>
                                     {selectedFolder.projects.map((project, idx) => (
                                         <motion.div
-                                            initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                                            initial={{ opacity: 0, y: 40, scale: 0.95 }}
                                             animate={{ opacity: 1, y: 0, scale: 1 }}
                                             exit={{ opacity: 0, scale: 0.95 }}
                                             transition={{ 
-                                                duration: 0.5,
-                                                delay: 0.1 + idx * 0.08, 
+                                                duration: 0.6,
+                                                delay: 0.15 + idx * 0.1, 
                                                 ease: [0.16, 1, 0.3, 1]
                                             }}
                                             key={project.id}
