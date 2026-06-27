@@ -103,6 +103,30 @@ const projects = [
         status: "Live",
         id: 1,
     },
+    {
+        title: "Premium Burger Shop",
+        description:
+            "Aesthetic, high-conversion web experience for a gourmet burger restaurant with interactive animations.",
+        image: "./burger-shxp-thumbnail.png",
+        link: "https://burger-shxp.netlify.app",
+        icon: <RiRestaurantFill />,
+        category: "Conversion Websites",
+        techStack: ["React", "Tailwind CSS", "Framer Motion"],
+        status: "Live",
+        id: 12,
+    },
+    {
+        title: "3D Burger Experience",
+        description:
+            "Highly immersive scroll-driven 3D animation website where a burger dynamically builds itself as you scroll.",
+        image: "./3d-burger-thumbnail.png",
+        link: "https://3d-burger.netlify.app",
+        icon: <RiRestaurantFill />,
+        category: "Conversion Websites",
+        techStack: ["React", "Three.js", "GSAP ScrollTrigger"],
+        status: "Live",
+        id: 13,
+    },
 ];
 
 function ProjectCard({ project }) {
