@@ -44,7 +44,7 @@ const projects = [
         id: 2,
     },
     {
-        title: "Yacht Booking Website",
+        title: "Yacht Rentals",
         description:
             "Luxury yacht booking lead generation website with smooth scroll animations and elegant design.",
         image: "./yacht-booking-thumbnail.png",
@@ -56,7 +56,7 @@ const projects = [
         id: 10,
     },
     {
-        title: "Doctor Booking Portal",
+        title: "Doctor Appointments",
         description:
             "Book doctor appointments with interactive calendar and real-time slot availability.",
         image: "./doctor-booking-thumbnail.png",
@@ -126,6 +126,18 @@ const projects = [
         techStack: ["React", "Three.js", "GSAP ScrollTrigger"],
         status: "Live",
         id: 13,
+    },
+    {
+        title: "LA Salon & Spa",
+        description:
+            "Premium salon and spa booking website with interactive appointment scheduling and a beautiful dark-mode UI.",
+        image: "./la-salon-thumbnail.png",
+        link: "https://la-salon.netlify.app",
+        icon: <RiHeartPulseFill />,
+        category: "Conversion Websites",
+        techStack: ["React", "Tailwind CSS", "Framer Motion"],
+        status: "Live",
+        id: 14,
     },
 ];
 
