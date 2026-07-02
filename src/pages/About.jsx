@@ -4,6 +4,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import GlobalCTA from "../components/ui/GlobalCTA";
 import Testimonials from "../components/ui/Testimonial";
+import FAQ from "../components/ui/FAQ";
 
 const AboutNode = ({ children, title, className = "" }) => {
   const mouseX = useMotionValue(0);
@@ -141,6 +142,7 @@ const About = () => {
       </div>
 
       <Testimonials />
+      <FAQ />
 
       {/* Global Call to Action */}
       <GlobalCTA />
