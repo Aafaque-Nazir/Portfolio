@@ -11,11 +11,11 @@ const Project = () => {
         {/* Header Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4">
-            Selected Works
+            My Projects
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            A curated collection of <span className="text-cyan-400 font-bold">highly interactive web experiences</span> and creative front-end sandboxes.
-            Engineered for speed, designed for impact.
+            A collection of <span className="text-cyan-400 font-bold">my best web projects</span>.
+            Built to be fast, responsive, and easy to use.
           </p>
         </div>
 

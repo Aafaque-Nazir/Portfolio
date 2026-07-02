@@ -88,8 +88,8 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
     (section && sectionKeywords[section]) ||
     sectionKeywords.home;
 
-  // Canonical ALWAYS points to root — this is a single-page app
-  const resolvedUrl = siteUrl;
+  // Canonical URL reflects the current page route
+  const resolvedUrl = section && section !== "home" ? `${siteUrl}/${section}` : siteUrl;
   const resolvedImage = image || defaultImage;
 
   // ──────────────────────────────────────────────────
@@ -255,7 +255,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
             "@type": "ListItem",
             position: 2,
             name: section.charAt(0).toUpperCase() + section.slice(1),
-            item: `${siteUrl}/#${section}`,
+            item: `${siteUrl}/${section}`,
           },
         ]
         : []),

@@ -48,13 +48,13 @@ const Contact = () => {
       });
 
       if (res.ok) {
-        toast.success("Connection Established 🚀");
+        toast.success("Message Sent 🚀");
         reset();
       } else {
-        toast.error("Transmission Failed ❌");
+        toast.error("Message Failed ❌");
       }
     } catch (error) {
-      toast.error("Uplink Error 😢");
+      toast.error("Network Error 😢");
     }
   };
 
@@ -82,7 +82,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4"
           >
-            Connect
+            Contact Me
           </motion.h2>
 
         </div>
@@ -222,7 +222,7 @@ const Contact = () => {
               <div className="absolute bottom-6 left-6 bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
                 <p className="text-[9px] text-cyan-400 font-mono tracking-widest uppercase flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-                  Grid: Taloja Phase 1
+                  Location: Taloja Phase 1
                 </p>
               </div>
             </motion.div>
@@ -241,7 +241,7 @@ const Contact = () => {
                     <FaEnvelope size={20} />
                   </div>
                   <div className="font-mono">
-                    <span className="block text-[8px] text-white/30 uppercase tracking-[0.2em] mb-1">Primary Link</span>
+                    <span className="block text-[8px] text-white/30 uppercase tracking-[0.2em] mb-1">Email</span>
                     <span className="text-sm lg:text-base font-bold text-white group-hover:text-cyan-400 transition-colors">aafaquenazir@gmail.com</span>
                   </div>
                 </div>
@@ -262,7 +262,7 @@ const Contact = () => {
                     <FaWhatsapp size={20} />
                   </div>
                   <div className="font-mono">
-                    <span className="block text-[8px] text-white/30 uppercase tracking-[0.2em] mb-1">Quick Uplink</span>
+                    <span className="block text-[8px] text-white/30 uppercase tracking-[0.2em] mb-1">WhatsApp</span>
                     <span className="text-sm lg:text-base font-bold text-white group-hover:text-cyan-400 transition-colors">+91 93256 29256</span>
                   </div>
                 </div>

@@ -1,13 +1,12 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, lazy, useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import SEO from "./components/SEO";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import SectionDivider from "./components/SectionDivider";
 import SmoothScroll from "./components/SmoothScroll";
-import { useActiveSection } from "./hooks/useActiveSection";
 import InitialLoader from "./components/InitialLoader";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const About = lazy(() => import("./pages/About"));
 const Skills = lazy(() => import("./pages/Skills"));
@@ -15,11 +14,6 @@ const Project = lazy(() => import("./pages/Project"));
 const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 
-/**
- * Detect if the current user agent is a search engine bot.
- * Googlebot, Bingbot, etc. should NEVER see the loader —
- * they need immediate access to DOM content for indexing.
- */
 const isBot = () => {
   if (typeof navigator === "undefined") return true;
   return /Googlebot|Bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot|Sogou|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Applebot|AdsBot|Mediapartners/i.test(
@@ -27,75 +21,63 @@ const isBot = () => {
   );
 };
 
+// Page Transition Wrapper
+const PageWrapper = ({ children, sectionName }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`w-full ${sectionName !== 'home' ? 'pt-24 md:pt-32' : ''}`}
+    >
+      <SEO section={sectionName} />
+      {children}
+    </motion.div>
+  );
+};
+
 function App() {
-  // Bots skip the loader entirely — they see content immediately
   const [isAppLoading, setIsAppLoading] = useState(!isBot());
+  const location = useLocation();
 
-  const sectionIds = [
-    "home",
-    "about",
-    "skills",
-    "projects",
-    "services",
-    "contact",
-  ];
-  const activeSection = useActiveSection(sectionIds);
-
+  // Scroll to top on route change
   useEffect(() => {
-    if (activeSection) {
-      const titles = {
-        home: "Aafaque Nazir — Web Developer in Navi Mumbai | React & Next.js Expert",
-        about: "About Aafaque Nazir — Freelance Web Developer India",
-        skills: "Technical Skills — React, Next.js, TypeScript, Node.js",
-        projects: "Portfolio & Case Studies — Web Development Projects",
-        services: "Web Development Services — Websites Starting ₹8,999",
-        contact: "Hire a Web Developer — Contact Aafaque Nazir",
-      };
-      document.title = titles[activeSection] || "Aafaque Nazir — Web Developer in Navi Mumbai | React & Next.js Expert";
-    }
-  }, [activeSection]);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <>
-      {/* Loader is shown ONLY to real users, never to bots */}
       {isAppLoading && (
         <InitialLoader onComplete={() => setIsAppLoading(false)} />
       )}
 
-      {/*
-       * CRITICAL SEO FIX: Content is ALWAYS in the DOM.
-       * For real users: hidden behind the loader via opacity.
-       * For bots: immediately visible since isAppLoading = false.
-       */}
       <motion.div
         initial={{ opacity: isAppLoading ? 0 : 1 }}
         animate={{ opacity: isAppLoading ? 0 : 1 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
-        className="relative min-h-screen overflow-x-hidden"
+        className="relative min-h-screen overflow-x-hidden bg-black"
         style={{ pointerEvents: isAppLoading ? "none" : "auto" }}
       >
-        <SEO section={activeSection || "home"} />
         <SmoothScroll />
         <Navbar />
 
-        {/* Home is critical for LCP, keep it static */}
-        <Home />
-        <SectionDivider />
-
-        <Suspense fallback={<div className="w-full flex items-center justify-center py-20 text-cyan-500/50 mix-blend-screen text-xs uppercase font-mono tracking-widest"><span className="animate-pulse">Loading core modules...</span></div>}>
-          <About />
-          <SectionDivider />
-
-          <Skills />
-          <SectionDivider />
-
-          <Project />
-          <SectionDivider />
-
-          <Services />
-          <SectionDivider />
-
-          <Contact />
+        <Suspense fallback={
+          <div className="w-full min-h-screen flex items-center justify-center py-20 text-cyan-500/50 mix-blend-screen text-xs uppercase font-mono tracking-widest">
+            <span className="animate-pulse">Loading...</span>
+          </div>
+        }>
+          {/* AnimatePresence for Page Transitions */}
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<PageWrapper sectionName="home"><Home /></PageWrapper>} />
+              <Route path="/about" element={<PageWrapper sectionName="about"><About /></PageWrapper>} />
+              <Route path="/skills" element={<PageWrapper sectionName="skills"><Skills /></PageWrapper>} />
+              <Route path="/projects" element={<PageWrapper sectionName="projects"><Project /></PageWrapper>} />
+              <Route path="/services" element={<PageWrapper sectionName="services"><Services /></PageWrapper>} />
+              <Route path="/contact" element={<PageWrapper sectionName="contact"><Contact /></PageWrapper>} />
+            </Routes>
+          </AnimatePresence>
         </Suspense>
 
         <Footer />

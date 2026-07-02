@@ -135,7 +135,7 @@ const ServiceCard = ({ pkg }) => {
 const Services = () => {
   const packages = [
     {
-      title: "Conversion Websites",
+      title: "Business Websites",
       oldPrice: "₹15k",
       price: "8,999",
       description: "Conversion-focused, highly animated landing pages designed to turn visitors into leads.",
@@ -151,7 +151,7 @@ const Services = () => {
       highlight: true,
     },
     {
-      title: "Digital Stores (E-Comm)",
+      title: "E-Commerce Stores",
       oldPrice: "₹45k",
       price: "24,999",
       description: "Custom e-commerce platforms and WhatsApp-based ordering systems with seamless user flows.",
@@ -166,7 +166,7 @@ const Services = () => {
       icon: <FaShoppingCart />,
     },
     {
-      title: "Business Software (SaaS)",
+      title: "Custom Web Apps",
       isCustomPrice: true,
       priceText: "CUSTOM QUOTE",
       oldPrice: "₹45k",

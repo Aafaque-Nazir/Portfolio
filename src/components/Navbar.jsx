@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import {
   RiGithubFill,
@@ -6,46 +6,29 @@ import {
   RiInstagramLine,
 } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
-import { useActiveSection } from "../hooks/useActiveSection";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const sectionIds = [
-    "home",
-    "about",
-    "skills",
-    "projects",
-    "services",
-    "contact",
-  ];
-  const activeSection = useActiveSection(sectionIds);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
   };
 
-  const handleNavClick = (e, id) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      if (window.lenis) {
-        window.lenis.scrollTo(element, { offset: -100, duration: 1.5 });
-      } else {
-        const y = element.getBoundingClientRect().top + window.scrollY - 100;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    }
-    if (menuOpen) setMenuOpen(false);
-  };
-
   const navItems = [
-    { name: "Home", id: "home" },
-    { name: "About", id: "about" },
-    { name: "Skills", id: "skills" },
-    { name: "Projects", id: "projects" },
-    { name: "Services", id: "services" },
-    { name: "Contact", id: "contact" },
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Skills", path: "/skills" },
+    { name: "Projects", path: "/projects" },
+    { name: "Services", path: "/services" },
+    { name: "Contact", path: "/contact" },
   ];
+
+  // Helper to determine the "active text" for the dynamic island
+  const activeItemName = navItems.find(
+    (item) => item.path === location.pathname
+  )?.name || "Menu";
 
   return (
     <>
@@ -61,33 +44,35 @@ export default function Navbar() {
 
           {/* Center Floating Pill Menu (PC) */}
           <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <a
-                  key={item.name}
-                  href={`#${item.id}`}
-                  onClick={(e) => handleNavClick(e, item.id)}
-                  className={`relative px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 block group uppercase ${
+            {navItems.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.path}
+                className={({ isActive }) =>
+                  `relative px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 block group uppercase ${
                     isActive
                       ? "text-white"
                       : "text-white/50 hover:text-white"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNavTabPC"
-                      className="absolute inset-0 bg-white/10 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    >
-                      {/* Subtle glowing bottom border */}
-                      <div className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80" />
-                    </motion.div>
-                  )}
-                  <span className="relative z-10">{item.name}</span>
-                </a>
-              );
-            })}
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeNavTabPC"
+                        className="absolute inset-0 bg-white/10 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      >
+                        {/* Subtle glowing bottom border */}
+                        <div className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80" />
+                      </motion.div>
+                    )}
+                    <span className="relative z-10">{item.name}</span>
+                  </>
+                )}
+              </NavLink>
+            ))}
           </nav>
 
           {/* Mobile Menu Toggle (Dynamic Island Style) */}
@@ -99,13 +84,13 @@ export default function Navbar() {
               </span>
               <AnimatePresence mode="wait">
                 <motion.span
-                  key={activeSection}
+                  key={location.pathname}
                   initial={{ y: 5, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -5, opacity: 0 }}
                   className="text-[10px] font-bold tracking-[0.2em] text-white/80 uppercase"
                 >
-                  {activeSection || "Menu"}
+                  {activeItemName}
                 </motion.span>
               </AnimatePresence>
             </div>
@@ -157,31 +142,37 @@ export default function Navbar() {
               </div>
 
               <ul className="flex flex-col gap-4 p-8 relative z-10 overflow-y-auto">
-                {navItems.map((item, index) => {
-                  const isActive = activeSection === item.id;
-                  return (
-                    <motion.li
-                      key={item.name}
-                      initial={{ opacity: 0, x: 40 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, type: "spring" }}
+                {navItems.map((item, index) => (
+                  <motion.li
+                    key={item.name}
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1, type: "spring" }}
+                  >
+                    <NavLink
+                      to={item.path}
+                      onClick={() => setMenuOpen(false)}
+                      className={({ isActive }) =>
+                        `group relative flex items-center justify-between w-full py-4 text-[22px] sm:text-3xl font-black transition-all duration-300 ${
+                          isActive
+                            ? "text-white pl-4"
+                            : "text-white/30 hover:text-white hover:pl-4"
+                        }`
+                      }
                     >
-                      <a
-                        href={`#${item.id}`}
-                        onClick={(e) => handleNavClick(e, item.id)}
-                        className={`group relative flex items-center justify-between w-full py-4 text-[22px] sm:text-3xl font-black transition-all duration-300 ${isActive ? "text-white pl-4" : "text-white/30 hover:text-white hover:pl-4"
-                          }`}
-                      >
-                        {isActive && (
-                          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
-                        )}
-                        <span className="relative z-10 tracking-[0.1em] uppercase">
-                          {item.name}
-                        </span>
-                      </a>
-                    </motion.li>
-                  );
-                })}
+                      {({ isActive }) => (
+                        <>
+                          {isActive && (
+                            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
+                          )}
+                          <span className="relative z-10 tracking-[0.1em] uppercase">
+                            {item.name}
+                          </span>
+                        </>
+                      )}
+                    </NavLink>
+                  </motion.li>
+                ))}
               </ul>
 
               <div className="mt-auto p-8 bg-white/[0.02] border-t border-white/5 relative z-10">
@@ -207,7 +198,7 @@ export default function Navbar() {
                 </div>
                 <div className="text-xs text-white/30 font-mono tracking-widest flex flex-col gap-1">
                   <span>&copy; {new Date().getFullYear()} AAFAQUE NAZIR</span>
-                  <span className="opacity-50">Authorized System Access</span>
+                  <span className="opacity-50">All Rights Reserved</span>
                 </div>
               </div>
             </motion.div>
