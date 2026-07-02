@@ -2,6 +2,9 @@
 import React, { useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
+import GlobalCTA from "../components/ui/GlobalCTA";
+import Testimonials from "../components/ui/Testimonial";
+
 const AboutNode = ({ children, title, className = "" }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -54,7 +57,7 @@ const AboutNode = ({ children, title, className = "" }) => {
 
 const About = () => {
   return (
-    <section id="about" aria-label="About Aafaque Nazir — Frontend Engineer & Creative Developer" className="relative w-full min-h-[100svh] flex flex-col justify-center items-center px-4 bg-black py-12 lg:py-4">
+    <section id="about" aria-label="About Aafaque Nazir — Frontend Engineer & Creative Developer" className="relative w-full min-h-[100svh] flex flex-col justify-center items-center px-4 bg-black pt-24 lg:pt-32 pb-12">
       <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col h-full justify-center">
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -136,6 +139,11 @@ const About = () => {
           </div>
         </div>
       </div>
+
+      <Testimonials />
+
+      {/* Global Call to Action */}
+      <GlobalCTA />
     </section>
   );
 };

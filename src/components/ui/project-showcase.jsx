@@ -2,148 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { CardContainer, CardBody, CardItem } from "./3d-card";
-import {
-    RiSignalTowerFill,
-    RiShoppingCartFill,
-    RiMotorbikeFill,
-    RiRestaurantFill,
-    RiCarFill,
-    RiBusFill,
-    RiBrainFill,
-    RiPlaneFill,
-    RiCupFill,
-    RiFolder3Fill,
-    RiArrowLeftLine,
-    RiShipFill,
-    RiHeartPulseFill,
-} from "react-icons/ri";
-
-const projects = [
-    {
-        title: "Restaurant OS",
-        description:
-            "Complete restaurant management system with live orders, table tracking, and kitchen display.",
-        image: "./restaurant-os-thumbnail.png",
-        link: "https://korner-kafe.netlify.app/",
-        icon: <RiSignalTowerFill />,
-        category: "Business Software (SaaS)",
-        techStack: ["Next.js", "Supabase", "PostgreSQL"],
-        status: "Live",
-        id: 4,
-    },
-    {
-        title: "E-Commerce Store",
-        description:
-            "Fast online store with cart, filters, and instant page loads under one second.",
-        image: "./ecommerce-thumbnail.png",
-        link: "https://shopease-aafaque.netlify.app/",
-        icon: <RiShoppingCartFill />,
-        category: "Digital Stores (E-Comm)",
-        techStack: ["React", "Redux", "Tailwind CSS"],
-        status: "Live",
-        id: 2,
-    },
-    {
-        title: "Yacht Rentals",
-        description:
-            "Luxury yacht booking lead generation website with smooth scroll animations and elegant design.",
-        image: "./yacht-booking-thumbnail.png",
-        link: "https://sea-cros.netlify.app",
-        icon: <RiShipFill />,
-        category: "Conversion Websites",
-        techStack: ["React", "GSAP", "Lenis"],
-        status: "Live",
-        id: 10,
-    },
-    {
-        title: "Doctor Appointments",
-        description:
-            "Book doctor appointments with interactive calendar and real-time slot availability.",
-        image: "./doctor-booking-thumbnail.png",
-        link: "https://dockyy.netlify.app",
-        icon: <RiHeartPulseFill />,
-        category: "Conversion Websites",
-        techStack: ["React", "Tailwind CSS", "Framer Motion"],
-        status: "Live",
-        id: 11,
-    },
-    {
-        title: "Dubai Tour",
-        description:
-            "Browse and select exclusive Dubai travel packages with interactive sliders and detailed itineraries.",
-        image: "./dubai-tourism-thumbnail.png",
-        link: "https://dubai-tt.netlify.app/",
-        icon: <RiPlaneFill />,
-        category: "Conversion Websites",
-        techStack: ["Next.js", "Tailwind CSS", "Framer Motion"],
-        status: "Live",
-        id: 8,
-    },
-    {
-        title: "Food Delivery App",
-        description:
-            "Online food ordering website with menu, cart, and orders sent directly to WhatsApp.",
-        image: "./food-delivery-thumbnail.png",
-        link: "https://bread-and-bite.netlify.app/",
-        icon: <RiMotorbikeFill />,
-        category: "Digital Stores (E-Comm)",
-        techStack: ["React", "Tailwind CSS", "WhatsApp API"],
-        status: "Live",
-        id: 3,
-    },
-    {
-        title: "Inventory Management",
-        description:
-            "Real-time inventory dashboard with stock levels, alerts, and live data updates.",
-        image: "./inventory-mgmt-thumbnail.png",
-        link: "https://nvntory-mgm.vercel.app/",
-        icon: <RiSignalTowerFill />,
-        category: "Business Software (SaaS)",
-        techStack: ["Next.js", "Supabase", "WebSockets"],
-        status: "Live",
-        id: 1,
-    },
-    {
-        title: "Premium Burger Shop",
-        description:
-            "Aesthetic, high-conversion web experience for a gourmet burger restaurant with interactive animations.",
-        image: "./burger-shxp-thumbnail.png",
-        link: "https://burger-shxp.netlify.app",
-        icon: <RiRestaurantFill />,
-        category: "Conversion Websites",
-        techStack: ["React", "Tailwind CSS", "Framer Motion"],
-        status: "Live",
-        id: 12,
-    },
-    {
-        title: "3D Burger Experience",
-        description:
-            "Highly immersive scroll-driven 3D animation website where a burger dynamically builds itself as you scroll.",
-        image: "./3d-burger-thumbnail.png",
-        link: "https://3d-burger.netlify.app",
-        icon: <RiRestaurantFill />,
-        category: "Conversion Websites",
-        techStack: ["React", "Three.js", "GSAP ScrollTrigger"],
-        status: "Live",
-        id: 13,
-    },
-    {
-        title: "LA Salon & Spa",
-        description:
-            "Premium salon and spa booking website with interactive appointment scheduling and a beautiful dark-mode UI.",
-        image: "./la-salon-thumbnail.png",
-        link: "https://la-salon.netlify.app",
-        icon: <RiHeartPulseFill />,
-        category: "Conversion Websites",
-        techStack: ["React", "Tailwind CSS", "Framer Motion"],
-        status: "Live",
-        id: 14,
-    },
-];
+import { RiFolder3Fill, RiArrowLeftLine } from "react-icons/ri";
+import { projects } from "../../data/projects";
 
 function ProjectCard({ project }) {
     return (
-        <a href={project.link} target="_blank" rel="noreferrer" className="group block w-full h-full outline-none">
+        <Link to={`/projects/${project.id}`} className="group block w-full h-full outline-none">
             <div className="relative w-full h-full bg-[#030303] border border-white/[0.05] rounded-[24px] overflow-hidden flex flex-col transition-all duration-700 hover:border-cyan-500/30 hover:shadow-[0_0_40px_-15px_rgba(34,211,238,0.2)] hover:-translate-y-2 z-10 hover:z-20 group-hover:bg-[#050505]">
                 
                 {/* Inner Glow Border */}
@@ -211,7 +75,7 @@ function ProjectCard({ project }) {
                     </p>
                 </div>
             </div>
-        </a>
+        </Link>
     );
 }
 
@@ -332,12 +196,15 @@ export function ProjectShowcase() {
                             {/* Left: Back + Title */}
                             <div className="flex items-center gap-5 md:gap-6">
                                 <motion.button
-                                    whileHover={{ x: -4, scale: 1.05 }}
+                                    whileHover={{ x: -4, scale: 1.02 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => setSelectedFolder(null)}
-                                    className="group/btn w-10 h-10 rounded-full bg-white/[0.03] border border-white/[0.1] hover:border-cyan-500/50 hover:bg-cyan-500/10 flex items-center justify-center transition-all duration-300 shadow-lg"
+                                    className="group/btn flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.1] hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all duration-300 shadow-lg"
                                 >
                                     <RiArrowLeftLine className="text-slate-400 group-hover/btn:text-cyan-400 text-lg transition-colors" />
+                                    <span className="hidden sm:block text-[10px] md:text-xs font-bold text-slate-300 group-hover/btn:text-cyan-400 uppercase tracking-widest transition-colors">
+                                        Back
+                                    </span>
                                 </motion.button>
                                 
                                 <div className="flex items-center gap-3.5">
@@ -360,16 +227,7 @@ export function ProjectShowcase() {
                                 </div>
                             </div>
                             
-                            {/* Right: Count Badge */}
-                            <motion.div 
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.15 }}
-                                className="hidden md:flex items-center gap-2.5 text-xs font-bold text-cyan-50 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
-                            >
-                                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                                {selectedFolder.projects.length} {selectedFolder.projects.length === 1 ? 'Project' : 'Projects'}
-                            </motion.div>
+
                         </div>
 
                         {/* Projects Grid */}

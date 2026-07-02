@@ -1,5 +1,6 @@
 import React from "react";
 import { ProjectShowcase } from "../components/ui/project-showcase";
+import GlobalCTA from "../components/ui/GlobalCTA";
 
 const Project = () => {
   return (
@@ -22,6 +23,9 @@ const Project = () => {
         {/* Project Grid / Folders */}
         <ProjectShowcase />
       </div>
+
+      {/* Global Call to Action */}
+      <GlobalCTA />
     </div>
   );
 };

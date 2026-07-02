@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   motion,
   useInView,
@@ -7,13 +8,10 @@ import {
   useTransform,
   animate,
 } from "framer-motion";
-import {
-  FaRocket,
-  FaCheck,
-  FaRobot,
-  FaCube,
-  FaShoppingCart,
-} from "react-icons/fa";
+import { FaCode, FaPaintBrush, FaRocket, FaCheckCircle, FaLaptopCode, FaServer, FaMobileAlt, FaCheck, FaRobot, FaCube, FaShoppingCart } from "react-icons/fa";
+
+import GlobalCTA from "../components/ui/GlobalCTA";
+import ProcessTimeline from "../components/ui/ProcessTimeline";
 
 const CountingPrice = ({ value, prefix = "" }) => {
   const ref = useRef(null);
@@ -118,15 +116,16 @@ const ServiceCard = ({ pkg }) => {
         </div>
 
         {/* CTA */}
-        <a
-          href="#contact"
-          className={`relative z-10 w-full py-1.5 rounded-lg font-black text-center uppercase tracking-[0.4em] text-[11px] md:text-xs transition-all duration-300 ${isHighlight
+        <Link
+          to="/contact"
+          state={{ plan: pkg.title }}
+          className={`relative z-10 w-full block py-1.5 rounded-lg font-black text-center uppercase tracking-[0.4em] text-[11px] md:text-xs transition-all duration-300 ${isHighlight
             ? "bg-cyan-500 text-black shadow-[0_5px_15px_rgba(0,209,255,0.2)] hover:scale-[1.02]"
             : "bg-white/[0.03] text-white border border-white/10 hover:bg-white/10"
             }`}
         >
           SELECT
-        </a>
+        </Link>
       </div>
     </motion.div>
   );
@@ -185,7 +184,7 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" aria-label="Web Development Services by Aafaque Nazir — Full-Stack Apps, Lead Generation Websites, 3D Websites" className="relative w-full md:h-screen min-h-screen flex flex-col items-center justify-center bg-black text-white pt-6 pb-4 overflow-hidden">
+    <section id="services" aria-label="Web Development Services by Aafaque Nazir — Full-Stack Apps, Lead Generation Websites, 3D Websites" className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black text-white pt-24 pb-4">
 
       {/* Background Decor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/[0.01] blur-[150px] pointer-events-none" />
@@ -205,6 +204,9 @@ const Services = () => {
 
         </div>
 
+        {/* Process Timeline */}
+        <ProcessTimeline />
+
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 lg:gap-6 w-full max-w-6xl">
           {packages.map((pkg, idx) => (
@@ -212,6 +214,9 @@ const Services = () => {
           ))}
         </div>
       </div>
+
+      {/* Global Call to Action */}
+      <GlobalCTA />
     </section>
   );
 };

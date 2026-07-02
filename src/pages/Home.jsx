@@ -2,10 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { PiReadCvLogoFill } from "react-icons/pi";
-import BlurText from "../components/BlurText";
-import DecryptedText from "../components/DecryptedText";
 import GlobalBackground from "../components/GlobalBackground";
-
 // Animation Variants
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -50,16 +47,12 @@ const Home = () => {
         {/* 🌟 Deep Ambient Glows (Pure Cyan Theme) */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           {/* Main Core Glow */}
-          <motion.div
-            animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.25, 0.15] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-cyan-600/20 rounded-full blur-[120px]"
+          <div
+            className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-cyan-600/20 rounded-full blur-[120px] opacity-20"
           />
           {/* Secondary Highlight */}
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-cyan-400/10 rounded-full blur-[100px]"
+          <div
+            className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-cyan-400/10 rounded-full blur-[100px] opacity-10"
           />
 
           {/* Ultra-subtle scanline overlay for texture */}
@@ -69,36 +62,17 @@ const Home = () => {
         {/* 🚀 Main Content Grid */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center h-full pt-28 pb-12">
 
-          {/* Left Column: Typography & CTAs */}
+          {/* Main Column: Typography & CTAs */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-8 flex flex-col justify-center text-left"
+            className="lg:col-span-12 flex flex-col justify-center text-left max-w-4xl"
           >
-            {/* Status Badge */}
-            <motion.div variants={itemVariants} className="mb-8 inline-flex">
-              <div className="flex items-center gap-3 px-4 py-2 rounded-full border border-cyan-500/20 bg-white/[0.03] backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)] relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500 shadow-[0_0_8px_#22d3ee]"></span>
-                </span>
-              </div>
-            </motion.div>
+
 
             {/* Massive Typography */}
             <div className="relative mb-6">
-              {/* Parallax Ghost Outline Text */}
-              <motion.div
-                animate={{ x: [-10, 10, -10], y: [-5, 5, -5] }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-6 -left-6 md:-top-10 md:-left-10 text-[4.5rem] sm:text-[6.5rem] md:text-[9rem] lg:text-[11rem] font-black tracking-tighter text-transparent -z-10 pointer-events-none select-none opacity-20"
-                style={{ WebkitTextStroke: "1px rgba(34,211,238,0.3)" }}
-              >
-                AAFAQUE
-              </motion.div>
-
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] font-black tracking-tighter text-white leading-[0.9]">
                 <div className="overflow-hidden flex flex-wrap">
                   {firstName.map((char, index) => (
@@ -123,24 +97,15 @@ const Home = () => {
 
             {/* Subheadline */}
             <motion.div variants={itemVariants} className="mb-8">
-              <BlurText
-                text="WEB DEVELOPER & FRONTEND ENGINEER"
-                delay={200}
-                animateBy="words"
-                direction="bottom"
-                className="text-cyan-400/80 text-[10px] sm:text-xs md:text-sm font-mono tracking-[0.2em] md:tracking-[0.3em] uppercase font-bold"
-              />
+              <p className="text-cyan-400/80 text-[10px] sm:text-xs md:text-sm font-mono tracking-[0.2em] md:tracking-[0.3em] uppercase font-bold">
+                WEB DEVELOPER & FRONTEND ENGINEER
+              </p>
             </motion.div>
 
             {/* Description */}
             <motion.div variants={itemVariants} className="max-w-2xl mb-8 md:mb-10">
               <p className="text-gray-400 text-sm md:text-base lg:text-lg leading-relaxed font-light border-l-[1px] border-cyan-500/30 pl-4 md:pl-6">
-                <DecryptedText
-                  text="I build fast, beautiful websites that help your business grow. I focus on writing clean code and creating great user experiences."
-                  animateOn="view"
-                  revealDirection="start"
-                  className="inline"
-                />
+                I build fast, beautiful websites that help your business grow. I focus on writing clean code and creating great user experiences.
               </p>
             </motion.div>
 
@@ -187,39 +152,7 @@ const Home = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Abstract Decor / Grid Balancing */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
-            className="hidden lg:flex col-span-4 justify-end items-center relative h-full"
-          >
-            {/* Elegant glassmorphic decorative element to balance the layout */}
-            <div className="relative w-full aspect-square max-w-[300px] xl:max-w-[360px]">
-              <div className="absolute inset-0 border border-cyan-500/10 rounded-full rotate-45 border-dashed" />
-              <div className="absolute inset-4 border border-cyan-500/20 rounded-full" />
-              <div className="absolute inset-12 border border-cyan-400/10 rounded-full animate-pulse" />
 
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-cyan-500/20 rounded-full blur-2xl" />
-
-              {/* Floating tech nodes */}
-              <motion.div
-                animate={{ y: [-10, 10, -10], rotate: [0, 10, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-10 right-10 w-16 h-16 bg-cyan-500/5 border border-cyan-500/20 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(34,211,238,0.1)]"
-              >
-                <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [10, -10, 10], rotate: [0, -10, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-10 left-10 w-20 h-20 bg-cyan-500/5 border border-cyan-500/20 backdrop-blur-md rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(34,211,238,0.1)]"
-              >
-                <div className="w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_#67e8f9]" />
-              </motion.div>
-            </div>
-          </motion.div>
 
         </div>
       </section>

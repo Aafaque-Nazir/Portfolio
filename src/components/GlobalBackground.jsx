@@ -61,7 +61,7 @@ const GlobalBackground = () => {
           trailers.push({
             pathIdx: idx,
             distance: Math.random() * p.length - p.length,
-            speed: 1.5 + Math.random() * 2, 
+            speed: 0.5 + Math.random() * 0.8, // Slower speed: 0.5 to 1.3
             len: 80 + Math.random() * 100,
             width: 1.5 + Math.random() * 1
           });
@@ -76,16 +76,17 @@ const GlobalBackground = () => {
       let steps = 0;
       const maxSteps = isMobile ? 4 : 8;
 
-      const angles = [
-        { x: dx, y: 0 },
-        { x: 0, y: dy },
-        { x: dx, y: dy }
-      ];
-
       let lastDir = null;
       while (steps < maxSteps) {
-        let dir = (!lastDir || Math.random() > 0.4) ? angles[Math.floor(Math.random() * angles.length)] : lastDir;
-        const segLen = 50 + Math.random() * 150;
+        let dir;
+        if (!lastDir) {
+          dir = Math.random() > 0.5 ? { x: dx, y: 0 } : { x: 0, y: dy };
+        } else {
+          // Strictly alternate horizontal and vertical for a structured PCB look
+          dir = lastDir.x !== 0 ? { x: 0, y: dy } : { x: dx, y: 0 };
+        }
+
+        const segLen = 80 + Math.random() * 120; // more uniform, predictable segments
         let next = { x: current.x + dir.x * segLen, y: current.y + dir.y * segLen };
         if (next.x < -100 || next.x > width + 100 || next.y < -100 || next.y > height + 100) break;
 

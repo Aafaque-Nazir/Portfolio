@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const About = lazy(() => import("./pages/About"));
 const Skills = lazy(() => import("./pages/Skills"));
 const Project = lazy(() => import("./pages/Project"));
+const ProjectDetails = lazy(() => import("./pages/ProjectDetails"));
 const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 
@@ -29,7 +30,7 @@ const PageWrapper = ({ children, sectionName }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`w-full ${sectionName !== 'home' ? 'pt-24 md:pt-32' : ''}`}
+      className="w-full"
     >
       <SEO section={sectionName} />
       {children}
@@ -73,7 +74,16 @@ function App() {
               <Route path="/" element={<PageWrapper sectionName="home"><Home /></PageWrapper>} />
               <Route path="/about" element={<PageWrapper sectionName="about"><About /></PageWrapper>} />
               <Route path="/skills" element={<PageWrapper sectionName="skills"><Skills /></PageWrapper>} />
-              <Route path="/projects" element={<PageWrapper sectionName="projects"><Project /></PageWrapper>} />
+              <Route path="/projects" element={
+                <PageWrapper sectionName="projects">
+                  <Project />
+                </PageWrapper>
+              } />
+              <Route path="/projects/:id" element={
+                <PageWrapper sectionName="projects">
+                  <ProjectDetails />
+                </PageWrapper>
+              } />
               <Route path="/services" element={<PageWrapper sectionName="services"><Services /></PageWrapper>} />
               <Route path="/contact" element={<PageWrapper sectionName="contact"><Contact /></PageWrapper>} />
             </Routes>

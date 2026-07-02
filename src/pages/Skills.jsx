@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import GlobalCTA from "../components/ui/GlobalCTA";
+import CodeShowcase from "../components/ui/CodeShowcase";
 import {
   SiReact, SiNextdotjs, SiJavascript, SiTailwindcss, SiFramer, SiGit,
   SiTypescript, SiNodedotjs, SiSupabase, SiPostgresql, SiMysql,
@@ -46,7 +48,7 @@ const allSkills = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative w-full min-h-[100svh] flex flex-col justify-center bg-black text-white shrink-0 overflow-hidden select-none py-20 lg:py-0">
+    <section id="skills" className="relative w-full min-h-[100svh] flex flex-col justify-center bg-black text-white shrink-0 overflow-hidden select-none pt-24 lg:pt-32 pb-20">
 
       {/* Dynamic Background Watermark (Reduced Spacy feel) */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none overflow-hidden">
@@ -96,6 +98,12 @@ export default function Skills() {
           ))}
         </motion.div>
       </div>
+
+      {/* How I Code Section */}
+      <CodeShowcase />
+
+      {/* Global Call to Action */}
+      <GlobalCTA />
     </section>
   );
 }

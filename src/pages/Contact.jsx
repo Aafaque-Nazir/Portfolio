@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { IoIosSend } from "react-icons/io";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useForm } from "react-hook-form";
@@ -14,6 +15,8 @@ const Contact = () => {
     setValue,
     formState: { isSubmitting },
   } = useForm();
+  
+  const location = useLocation();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -33,6 +36,12 @@ const Contact = () => {
       return () => window.removeEventListener("selectService", handleSelectService);
     }
   }, [setValue]);
+
+  useEffect(() => {
+    if (location.state?.plan) {
+      setValue("service", location.state.plan);
+    }
+  }, [location, setValue]);
 
   const onSubmit = async (data) => {
     try {
@@ -59,17 +68,34 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" aria-label="Contact Aafaque Nazir — Get in touch for web development services" className="relative w-full py-20 flex flex-col justify-center items-center px-4 bg-black">
+    <section id="contact" aria-label="Contact Aafaque Nazir — Get in touch for web development services" className="relative w-full pt-24 lg:pt-32 pb-20 flex flex-col justify-center items-center px-4 bg-black">
       <Toaster
-        position="bottom-right"
+        position="top-center"
         toastOptions={{
+          className: '',
           style: {
-            background: "rgba(0, 0, 0, 0.9)",
+            background: "rgba(9, 9, 11, 0.9)",
             color: "#fff",
-            border: "1px solid rgba(34, 211, 238, 0.3)",
-            backdropFilter: "blur(20px)",
-            fontSize: '12px',
-            fontFamily: 'monospace'
+            border: "1px solid rgba(34, 211, 238, 0.2)",
+            backdropFilter: "blur(12px)",
+            fontSize: '14px',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            fontWeight: '500',
+            padding: '16px 24px',
+            borderRadius: '100px',
+            boxShadow: '0 20px 40px -10px rgba(34,211,238,0.15)',
+          },
+          success: {
+            iconTheme: {
+              primary: '#22d3ee',
+              secondary: '#000',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#fff',
+            },
           },
         }}
       />
@@ -121,63 +147,63 @@ const Contact = () => {
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 relative z-10 w-full lg:max-w-md mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Name</label>
+                  <div className="space-y-1 group/input">
+                    <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Name</label>
                     <input
                       type="text"
                       placeholder="Your Name"
                       {...register("name", { required: true })}
-                      className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-4 text-sm text-white placeholder-white/10 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white placeholder-white/20 hover:border-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.04] transition-all focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]"
                     />
                   </div>
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Email</label>
+                  <div className="space-y-1 group/input">
+                    <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Email</label>
                     <input
                       type="email"
                       placeholder="Your Email"
                       {...register("email", { required: true })}
-                      className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-4 text-sm text-white placeholder-white/10 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white placeholder-white/20 hover:border-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.04] transition-all focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Phone</label>
+                  <div className="space-y-1 group/input">
+                    <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Phone</label>
                     <input
                       type="tel"
                       placeholder="WhatsApp Number"
                       {...register("phone", { required: true })}
-                      className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-4 text-sm text-white placeholder-white/10 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white placeholder-white/20 hover:border-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.04] transition-all focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]"
                     />
                   </div>
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Service</label>
+                  <div className="space-y-1 group/input">
+                    <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Service</label>
                     <div className="relative">
                       <select
                         {...register("service", { required: true })}
-                        className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer"
+                        className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none hover:border-white/20 focus:border-cyan-500/50 focus:bg-white/[0.04] focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all appearance-none cursor-pointer"
                       >
                         <option value="" className="bg-black">Select Service</option>
-                        <option value="Conversion Websites" className="bg-black">Conversion Websites</option>
-                        <option value="Digital Stores (E-Comm)" className="bg-black">Digital Stores (E-Comm)</option>
-                        <option value="Business Software (SaaS)" className="bg-black">Business Software (SaaS)</option>
+                        <option value="Business Websites" className="bg-black">Business Websites</option>
+                        <option value="E-Commerce Stores" className="bg-black">E-Commerce Stores</option>
+                        <option value="Custom Web Apps" className="bg-black">Custom Web Apps</option>
                         <option value="Custom" className="bg-black">Other / Custom</option>
                       </select>
-                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/30">
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/30 group-focus-within/input:text-cyan-400 transition-colors">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-white uppercase tracking-widest pl-1">Message</label>
+                <div className="space-y-1 group/input">
+                  <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Message</label>
                   <textarea
                     rows="4"
                     placeholder="How can I help you?"
                     {...register("message", { required: true })}
-                    className="w-full bg-white/[0.03] border border-white/5 rounded-xl p-4 text-sm text-white placeholder-white/10 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all resize-none"
+                    className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white placeholder-white/20 hover:border-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.04] transition-all focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] resize-none"
                   />
                 </div>
 
@@ -186,7 +212,7 @@ const Contact = () => {
                   whileTap={{ scale: 0.99 }}
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-cyan-500 text-black font-black py-5 rounded-xl text-[11px] tracking-[0.3em] uppercase flex items-center justify-center gap-3 hover:bg-white transition-all group/btn overflow-hidden relative shadow-[0_0_20px_rgba(34,211,238,0.2)]"
+                  className="w-full bg-cyan-500 text-black font-black py-4 rounded-xl text-[11px] tracking-[0.3em] uppercase flex items-center justify-center gap-3 hover:bg-white transition-all group/btn overflow-hidden relative shadow-[0_0_20px_rgba(34,211,238,0.2)]"
                 >
                   {isSubmitting ? (
                     <div className="w-5 h-5 border-2 border-black rounded-full border-t-transparent animate-spin" />
@@ -198,6 +224,24 @@ const Contact = () => {
                   )}
                   <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12" />
                 </motion.button>
+                
+                {/* OR Divider */}
+                <div className="relative flex items-center py-2">
+                  <div className="flex-grow border-t border-white/10"></div>
+                  <span className="flex-shrink-0 mx-4 text-white/30 text-[10px] font-mono tracking-widest uppercase">Or</span>
+                  <div className="flex-grow border-t border-white/10"></div>
+                </div>
+
+                {/* Calendly Booking Button */}
+                <a
+                  href="https://calendly.com/aafaquebuisness/15min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-white/[0.02] border border-white/10 text-white font-bold py-4 rounded-xl text-[11px] tracking-[0.2em] uppercase flex items-center justify-center gap-3 hover:bg-white/[0.05] hover:border-cyan-500/50 hover:text-cyan-400 transition-all group overflow-hidden relative"
+                >
+                  <svg className="w-4 h-4 text-cyan-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <span>Book a Discovery Call</span>
+                </a>
               </form>
             </div>
           </motion.div>
@@ -219,12 +263,7 @@ const Contact = () => {
                 loading="lazy"
               />
               <div className="absolute inset-0 pointer-events-none border-[12px] border-black" />
-              <div className="absolute bottom-6 left-6 bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
-                <p className="text-[9px] text-cyan-400 font-mono tracking-widest uppercase flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-                  Location: Taloja Phase 1
-                </p>
-              </div>
+
             </motion.div>
 
             <div className="flex flex-col gap-4">
