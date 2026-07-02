@@ -63,8 +63,28 @@ const FAQItem = ({ faq, isOpen, onClick }) => {
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
+  // Generate Google Rich Snippet JSON-LD Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto py-12 px-4 sm:px-6 relative z-10">
+      {/* Injecting SEO Schema directly into the head/page for Google Bots */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      
       <div className="text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
