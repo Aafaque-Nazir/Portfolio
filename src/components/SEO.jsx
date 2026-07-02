@@ -161,7 +161,7 @@ const SEO = ({ title, description, keywords, image, url, section }) => {
     isPartOf: { "@type": "WebSite", name: siteName, url: siteUrl },
     author: { "@type": "Person", name: "Aafaque Nazir" },
     inLanguage: "en",
-    dateModified: "2026-06-05",
+    dateModified: "2026-07-02",
   };
 
   // ──────────────────────────────────────────────────
