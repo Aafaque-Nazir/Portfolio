@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useState, useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import SEO from "./components/SEO";
 import Footer from "./components/Footer";
@@ -40,11 +40,24 @@ const PageWrapper = ({ children, sectionName }) => {
 function App() {
   const [isAppLoading, setIsAppLoading] = useState(!isBot());
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  // Backward compatibility: Redirect legacy hash URLs (e.g. /#about) to true routes (e.g. /about)
+  useEffect(() => {
+    if (location.hash) {
+      const path = location.hash.replace('#', '');
+      const validPaths = ['about', 'skills', 'projects', 'services', 'contact'];
+      if (validPaths.includes(path)) {
+        // Replace current history entry so pressing 'Back' doesn't loop them back to the hash
+        navigate(`/${path}`, { replace: true });
+      }
+    }
+  }, [location.hash, navigate]);
 
   return (
     <>
