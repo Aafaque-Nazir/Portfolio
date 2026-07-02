@@ -72,14 +72,14 @@ const About = () => {
 
             <AboutNode className="max-w-xl">
               <p className="text-xl lg:text-2xl text-gray-300 font-light leading-relaxed mb-6">
-                Frontend-Focused <span className="text-white font-bold">Creative Developer</span> with a precision-driven <span className="text-cyan-500 underline decoration-white/20 underline-offset-8">Visual Mindset</span>.
+                <span className="text-white font-bold">Frontend Developer</span> with a passion for <span className="text-cyan-500 underline decoration-white/20 underline-offset-8">clean and modern design</span>.
               </p>
               <p className="text-sm lg:text-base text-gray-500 leading-relaxed font-light mb-6">
-                I don't just build layouts; I engineer high-performance, butter-smooth web experiences that bridge <span className="text-white">Advanced UI/UX aesthetics</span> with highly optimized, responsive <span className="text-white">React & Next.js architectures</span>.
+                I build fast, smooth, and responsive websites using modern tools like <span className="text-white">React and Next.js</span>.
               </p>
               <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
                 <p className="text-[10px] font-mono text-cyan-500/70 italic">
-                  "Every transition must be purposeful. Every pixel must be intentional."
+                  "Every detail matters."
                 </p>
               </div>
             </AboutNode>
@@ -104,18 +104,18 @@ const About = () => {
               <div className="space-y-6">
                 {[
                   {
-                    label: "Zero Genericism",
-                    desc: "Refined, custom components engineered from scratch using Tailwind, Framer Motion, and GSAP. No common UI presets.",
+                    label: "Custom Design",
+                    desc: "Unique websites built from scratch. No boring templates.",
                     icon: "M13 10V3L4 14h7v7l9-11h-7z"
                   },
                   {
-                    label: "Design Fidelity",
-                    desc: "Obsessive attention to detail when converting UI designs into pixel-perfect, semantic, accessible, and responsive components.",
+                    label: "Pixel Perfect",
+                    desc: "Turning beautiful designs into high-quality code.",
                     icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                   },
                   {
-                    label: "Vitals Optimization",
-                    desc: "Targeting sub-second page loads, zero Cumulative Layout Shift (CLS), and highly responsive Interaction to Next Paint (INP).",
+                    label: "High Performance",
+                    desc: "Fast loading speeds and smooth scrolling for all users.",
                     icon: "M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4z"
                   }
                 ].map((item, i) => (

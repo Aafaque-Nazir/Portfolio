@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Lenis from "lenis";
+import { useLocation } from "react-router-dom";
 
 const SmoothScroll = () => {
+    const location = useLocation();
+    const lenisRef = useRef(null);
+
     useEffect(() => {
         const lenis = new Lenis({
             duration: 1.5, // Slower duration for smoother feel
@@ -14,7 +18,9 @@ const SmoothScroll = () => {
             touchMultiplier: 2,
         });
 
-        // Expose to window so other components (like Navbar) can use lenis.scrollTo()
+        lenisRef.current = lenis;
+
+        // Expose to window so other components can use lenis.scrollTo()
         window.lenis = lenis;
 
         const raf = (time) => {
@@ -35,8 +41,16 @@ const SmoothScroll = () => {
             resizeObserver.disconnect();
             lenis.destroy();
             delete window.lenis;
+            lenisRef.current = null;
         };
     }, []);
+
+    // Reset scroll to top on page transition
+    useEffect(() => {
+        if (lenisRef.current) {
+            lenisRef.current.scrollTo(0, { immediate: true });
+        }
+    }, [location.pathname]);
 
     return null;
 };

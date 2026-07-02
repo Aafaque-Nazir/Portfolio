@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { PiReadCvLogoFill } from "react-icons/pi";
 import BlurText from "../components/BlurText";
@@ -83,9 +84,6 @@ const Home = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500 shadow-[0_0_8px_#22d3ee]"></span>
                 </span>
-                <span className="text-xs md:text-sm font-mono tracking-widest text-white/70 uppercase">
-                  Available for new opportunities
-                </span>
               </div>
             </motion.div>
 
@@ -138,7 +136,7 @@ const Home = () => {
             <motion.div variants={itemVariants} className="max-w-2xl mb-8 md:mb-10">
               <p className="text-gray-400 text-sm md:text-base lg:text-lg leading-relaxed font-light border-l-[1px] border-cyan-500/30 pl-4 md:pl-6">
                 <DecryptedText
-                  text="I build high-performance, visually stunning websites and interactive web applications that drive business growth. Combining pixel-perfect frontend engineering with seamless user experiences to deliver digital products that stand out."
+                  text="I build fast, beautiful websites that help your business grow. I focus on writing clean code and creating great user experiences."
                   animateOn="view"
                   revealDirection="start"
                   className="inline"
@@ -149,20 +147,20 @@ const Home = () => {
             {/* CTAs */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               {/* Primary Glowing Button */}
-              <a
-                href="#contact"
-                aria-label="Navigate to contact section"
+              <Link
+                to="/contact"
+                aria-label="Navigate to contact page"
                 className="group relative px-8 py-4 bg-white text-black font-bold text-sm md:text-base rounded-full overflow-hidden hover:scale-[1.02] transition-transform duration-300 flex items-center gap-3 w-full sm:w-auto justify-center"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-300 via-cyan-100 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center gap-2">
-                  Let's Build Impact
+                  Contact Me
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                   </svg>
                 </span>
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500 -z-10" />
-              </a>
+              </Link>
 
               {/* Secondary Buttons */}
               <div className="flex gap-4 w-full sm:w-auto">

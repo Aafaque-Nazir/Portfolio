@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const STAGES = [
-  "Initializing Sequence...",
-  "Loading Assets...",
-  "Establishing Connection...",
-  "Finalizing Environment...",
+  "Loading...",
+  "Getting things ready...",
+  "Almost there...",
+  "Finishing up...",
   "Welcome."
 ];
 
@@ -153,7 +153,7 @@ const InitialLoader = ({ onComplete }) => {
                                     <span className="text-xl text-white/40 font-light mt-2">%</span>
                                 </div>
                                 <span className="text-[9px] md:text-[10px] tracking-[0.5em] text-white/30 uppercase mt-4 font-medium pl-2">
-                                    System Loading
+                                    Loading
                                 </span>
                             </div>
                         </div>
