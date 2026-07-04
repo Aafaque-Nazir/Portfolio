@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
-import { PiReadCvLogoFill } from "react-icons/pi";
 import GlobalBackground from "../components/GlobalBackground";
 // Animation Variants
 const containerVariants = {
@@ -127,18 +126,7 @@ const Home = () => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500 -z-10" />
               </Link>
 
-              {/* Secondary Buttons */}
               <div className="flex gap-4 w-full sm:w-auto">
-                <a
-                  href="/AafaqueNazirCV.pdf"
-                  download
-                  aria-label="Download Aafaque Nazir's CV as PDF"
-                  className="group px-6 py-4 text-white font-medium rounded-full border border-cyan-500/20 bg-cyan-500/5 backdrop-blur-sm hover:bg-cyan-500/10 hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-all duration-300 flex items-center justify-center gap-2 text-sm md:text-base flex-1 sm:flex-none whitespace-nowrap"
-                >
-                  <PiReadCvLogoFill className="text-xl group-hover:text-cyan-400 transition-colors" />
-                  <span>Download CV</span>
-                </a>
-
                 <a
                   href="https://github.com/Aafaque-Nazir"
                   target="_blank"

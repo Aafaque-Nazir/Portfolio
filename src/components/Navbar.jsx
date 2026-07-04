@@ -5,6 +5,7 @@ import {
   RiLinkedinFill,
   RiInstagramLine,
 } from "react-icons/ri";
+import { PiReadCvLogoFill } from "react-icons/pi";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -73,10 +74,22 @@ export default function Navbar() {
                 )}
               </NavLink>
             ))}
+            {/* Download CV Button PC */}
+            <div className="w-[1px] h-4 bg-white/10 mx-2"></div>
+            <a
+              href="/AafaqueNazirCV.pdf"
+              download
+              aria-label="Download CV"
+              title="Download CV"
+              className="relative px-3 py-2 rounded-full text-white/50 hover:text-cyan-400 transition-all duration-300 block group"
+            >
+              <PiReadCvLogoFill size={18} className="relative z-10" />
+              <div className="absolute inset-0 bg-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </a>
           </nav>
 
           {/* Mobile Menu Toggle (Dynamic Island Style) */}
-          <div className="lg:hidden flex items-center gap-4 px-3 py-1">
+          <div className="lg:hidden flex items-center gap-3 px-3 py-1">
             <div className="flex items-center gap-2">
               <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
@@ -94,13 +107,25 @@ export default function Navbar() {
                 </motion.span>
               </AnimatePresence>
             </div>
-            <button
-              onClick={toggleMenu}
-              className="flex items-center justify-center p-1.5 text-white/80 hover:text-cyan-400 transition-colors"
-              aria-label="Open Menu"
-            >
-              <FaBars size={16} />
-            </button>
+
+            <div className="flex items-center gap-1 pl-1 border-l border-white/20">
+              <a
+                href="/AafaqueNazirCV.pdf"
+                download
+                aria-label="Download CV"
+                className="flex items-center justify-center p-1.5 text-white/80 hover:text-cyan-400 transition-colors"
+              >
+                <PiReadCvLogoFill size={16} />
+              </a>
+
+              <button
+                onClick={toggleMenu}
+                className="flex items-center justify-center p-1.5 text-white/80 hover:text-cyan-400 transition-colors"
+                aria-label="Open Menu"
+              >
+                <FaBars size={16} />
+              </button>
+            </div>
           </div>
 
         </div>
@@ -176,6 +201,18 @@ export default function Navbar() {
               </ul>
 
               <div className="mt-auto p-8 bg-white/[0.02] border-t border-white/5 relative z-10">
+                {/* CV Button for Mobile */}
+                <div className="mb-8">
+                  <a
+                    href="/AafaqueNazirCV.pdf"
+                    download
+                    className="flex items-center gap-3 w-fit text-white/50 hover:text-cyan-400 transition-all duration-300 border border-white/10 hover:border-cyan-500/30 rounded-full px-5 py-2.5 text-xs font-bold tracking-widest uppercase bg-white/5"
+                  >
+                    <PiReadCvLogoFill size={18} />
+                    <span>Download CV</span>
+                  </a>
+                </div>
+
                 <div className="flex gap-6 mb-8">
                   {[
                     { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white" },
