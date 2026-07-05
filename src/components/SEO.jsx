@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
  * - BreadcrumbList (for navigation breadcrumbs in SERPs)
  * - FAQPage (for FAQ rich results — bonus SERP real estate)
  */
-const SEO = ({ title, description, keywords, image, url, section }) => {
+const SEO = ({ title, description, keywords, image, section }) => {
   const siteName = "Aafaque Nazir";
   const siteUrl = "https://aafaque.in";
   const defaultImage = `${siteUrl}/og-image.png`;

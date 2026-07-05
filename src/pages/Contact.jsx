@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { IoIosSend } from "react-icons/io";
 import { motion, useMotionValue, useTransform } from "framer-motion";
@@ -62,7 +62,7 @@ const Contact = () => {
       } else {
         toast.error("Message Failed ❌");
       }
-    } catch (error) {
+    } catch {
       toast.error("Network Error 😢");
     }
   };

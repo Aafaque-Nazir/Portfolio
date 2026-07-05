@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import GlobalCTA from "../components/ui/GlobalCTA";

@@ -102,7 +102,7 @@ export function ProjectShowcase() {
                         transition={{ duration: 0.5, ease: "circOut" }}
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-6xl mx-auto relative z-10"
                     >
-                        {folders.map((folder, idx) => (
+                        {folders.map((folder) => (
                             <motion.div
                                 layoutId={`folder-container-${folder.name}`}
                                 key={folder.name}
