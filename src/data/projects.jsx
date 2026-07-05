@@ -7,9 +7,24 @@ import {
     RiHeartPulseFill,
     RiPlaneFill,
     RiShipFill,
+    RiBuilding2Fill,
 } from "react-icons/ri";
 
 export const projects = [
+    {
+        id: 15,
+        title: "Aura Estate",
+        description: "A high-performance, full-stack real estate web application designed for showcasing premium properties and managing prospective buyer leads.",
+        image: "/aura-estate-thumbnail.png",
+        link: "https://aura-e-state.netlify.app",
+        icon: <RiBuilding2Fill />,
+        category: "Business Software (SaaS)",
+        techStack: ["Next.js", "Supabase", "Tailwind CSS"],
+        status: "Live",
+        problem: "Real estate agencies struggle with disconnected systems for showcasing properties and managing prospective leads, leading to lost sales opportunities.",
+        solution: "Developed a comprehensive full-stack solution featuring a stunning UI for property showcases and a robust administrative dashboard for efficient property and lead management.",
+        lighthouse: { perf: 100, access: 100, seo: 100, bp: 100 }
+    },
     {
         id: 4,
         title: "Restaurant OS",
