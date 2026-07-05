@@ -185,8 +185,8 @@ const Contact = () => {
                         className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none hover:border-white/20 focus:border-cyan-500/50 focus:bg-white/[0.04] focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all appearance-none cursor-pointer"
                       >
                         <option value="" className="bg-black">Select Service</option>
-                        <option value="Business Websites" className="bg-black">Business Websites</option>
-                        <option value="E-Commerce Stores" className="bg-black">E-Commerce Stores</option>
+                        <option value="High-Converting Websites" className="bg-black">High-Converting Websites</option>
+                        <option value="Custom Online Stores" className="bg-black">Custom Online Stores</option>
                         <option value="Custom Web Apps" className="bg-black">Custom Web Apps</option>
                         <option value="Custom" className="bg-black">Other / Custom</option>
                       </select>
