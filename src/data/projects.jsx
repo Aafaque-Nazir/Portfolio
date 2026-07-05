@@ -12,6 +12,20 @@ import {
 
 export const projects = [
     {
+        id: 16,
+        title: "Clinic Haircare",
+        description: "A specialized e-commerce platform for a hair transplant clinic offering premium hair care products and treatments.",
+        image: "/hair-clinic-thumbnail.png",
+        link: "https://peppy-macaron-34949a.netlify.app/",
+        icon: <RiShoppingCartFill />,
+        category: "Digital Stores (E-Comm)",
+        techStack: ["React", "Tailwind CSS", "Framer Motion"],
+        status: "Live",
+        problem: "Hair clinics often struggle to sell their specialized post-transplant products online with a seamless, trustworthy medical aesthetic.",
+        solution: "Developed a dedicated e-commerce storefront tailored for medical grade hair care products, featuring an elegant, trustworthy design and smooth checkout experience.",
+        lighthouse: { perf: 98, access: 100, seo: 100, bp: 100 }
+    },
+    {
         id: 15,
         title: "Aura Estate",
         description: "A high-performance, full-stack real estate web application designed for showcasing premium properties and managing prospective buyer leads.",
