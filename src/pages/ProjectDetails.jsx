@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { projects } from "../data/projects";
 import GlobalCTA from "../components/ui/GlobalCTA";
+import ProgressiveImage from "../components/ui/ProgressiveImage";
 import { RiArrowLeftLine, RiExternalLinkLine, RiCheckboxCircleFill } from "react-icons/ri";
 
 const ProjectDetails = () => {
@@ -69,12 +70,11 @@ const ProjectDetails = () => {
           transition={{ duration: 0.6 }}
           className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-2xl overflow-hidden mb-20 border border-white/10 shadow-[0_0_50px_rgba(34,211,238,0.1)]"
         >
-          <img 
+          <ProgressiveImage 
             src={project.image} 
             alt={project.title} 
-            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
         </motion.div>
 
         {/* Case Study Grid */}

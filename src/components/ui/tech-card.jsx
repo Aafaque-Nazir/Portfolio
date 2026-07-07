@@ -55,10 +55,6 @@ export function TechCard({ tech, index }) {
                        {tech.name}
                     </span>
                 </div>
-                <div 
-                   className="w-1.5 h-1.5 rounded-full mt-1 animate-pulse shadow-[0_0_8px_currentColor]" 
-                   style={{ color: tech.color || '#22d3ee', backgroundColor: 'currentColor' }}
-                />
             </div>
         </motion.div>
     );

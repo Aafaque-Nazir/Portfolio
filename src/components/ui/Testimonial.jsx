@@ -60,23 +60,16 @@ const TestimonialCard = ({ testimonial, index }) => {
           }}
         />
         
-        <div className="relative z-10 mb-6">
-          <svg className="w-8 h-8 text-cyan-500/40 mb-4" fill="currentColor" viewBox="0 0 24 24">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center h-full gap-6">
+          <svg className="w-10 h-10 text-cyan-500/20 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]" fill="currentColor" viewBox="0 0 24 24">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
           </svg>
-          <p className="text-gray-300 text-sm md:text-base leading-relaxed font-light">
+          
+          <p className="text-gray-200 text-base md:text-lg leading-[1.8] font-light">
             "{testimonial.text}"
           </p>
-        </div>
 
-        <div className="relative z-10 flex items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 border border-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold uppercase">
-            {testimonial.name.charAt(0)}
-          </div>
-          <div>
-            <h4 className="text-white font-bold text-sm tracking-wide">{testimonial.name}</h4>
-            <p className="text-cyan-500/70 text-xs font-mono uppercase tracking-widest">{testimonial.role}</p>
-          </div>
+          <div className="w-12 h-[2px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mt-2 opacity-50" />
         </div>
       </div>
     </motion.div>

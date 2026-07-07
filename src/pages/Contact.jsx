@@ -4,8 +4,18 @@ import { useLocation } from "react-router-dom";
 import { IoIosSend } from "react-icons/io";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
+
+const contactSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().min(10, "Please enter a valid WhatsApp number"),
+  service: z.string().min(1, "Please select a service"),
+  message: z.string().min(10, "Message must be at least 10 characters")
+});
 
 const Contact = () => {
   const {
@@ -13,8 +23,10 @@ const Contact = () => {
     handleSubmit,
     reset,
     setValue,
-    formState: { isSubmitting },
-  } = useForm();
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(contactSchema)
+  });
   
   const location = useLocation();
 
@@ -146,43 +158,58 @@ const Contact = () => {
               />
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 relative z-10 w-full lg:max-w-md mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-1 group/input">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6 md:gap-y-4">
+                  <div className="space-y-1 group/input relative">
                     <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Name</label>
                     <input
                       type="text"
                       placeholder="Your Name"
-                      {...register("name", { required: true })}
-                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white placeholder-white/20 hover:border-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.04] transition-all focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+                      {...register("name")}
+                      className={`w-full bg-white/[0.02] border rounded-xl p-4 text-sm text-white placeholder-white/20 focus:outline-none transition-all ${errors.name ? 'border-red-500/50 focus:border-red-500/80 shadow-[0_0_15px_rgba(239,68,68,0.1)]' : 'border-white/10 hover:border-white/20 focus:border-cyan-500/50 focus:bg-white/[0.04] focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]'}`}
                     />
+                    {errors.name && (
+                      <motion.span initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="absolute -bottom-5 left-1 text-[10px] text-red-400 font-medium">
+                        {errors.name.message}
+                      </motion.span>
+                    )}
                   </div>
-                  <div className="space-y-1 group/input">
+                  <div className="space-y-1 group/input relative">
                     <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Email</label>
                     <input
                       type="email"
                       placeholder="Your Email"
-                      {...register("email", { required: true })}
-                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white placeholder-white/20 hover:border-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.04] transition-all focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+                      {...register("email")}
+                      className={`w-full bg-white/[0.02] border rounded-xl p-4 text-sm text-white placeholder-white/20 focus:outline-none transition-all ${errors.email ? 'border-red-500/50 focus:border-red-500/80 shadow-[0_0_15px_rgba(239,68,68,0.1)]' : 'border-white/10 hover:border-white/20 focus:border-cyan-500/50 focus:bg-white/[0.04] focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]'}`}
                     />
+                    {errors.email && (
+                      <motion.span initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="absolute -bottom-5 left-1 text-[10px] text-red-400 font-medium">
+                        {errors.email.message}
+                      </motion.span>
+                    )}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-1 group/input">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6 md:gap-y-4">
+                  <div className="space-y-1 group/input relative">
                     <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Phone</label>
                     <input
                       type="tel"
                       placeholder="WhatsApp Number"
-                      {...register("phone", { required: true })}
-                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white placeholder-white/20 hover:border-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.04] transition-all focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+                      {...register("phone")}
+                      className={`w-full bg-white/[0.02] border rounded-xl p-4 text-sm text-white placeholder-white/20 focus:outline-none transition-all ${errors.phone ? 'border-red-500/50 focus:border-red-500/80 shadow-[0_0_15px_rgba(239,68,68,0.1)]' : 'border-white/10 hover:border-white/20 focus:border-cyan-500/50 focus:bg-white/[0.04] focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]'}`}
                     />
+                    {errors.phone && (
+                      <motion.span initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="absolute -bottom-5 left-1 text-[10px] text-red-400 font-medium">
+                        {errors.phone.message}
+                      </motion.span>
+                    )}
                   </div>
-                  <div className="space-y-1 group/input">
+                  <div className="space-y-1 group/input relative">
                     <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Service</label>
                     <div className="relative">
                       <select
-                        {...register("service", { required: true })}
-                        className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none hover:border-white/20 focus:border-cyan-500/50 focus:bg-white/[0.04] focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all appearance-none cursor-pointer"
+                        {...register("service")}
+                        className={`w-full bg-white/[0.02] border rounded-xl p-4 text-sm text-white focus:outline-none transition-all appearance-none cursor-pointer ${errors.service ? 'border-red-500/50 focus:border-red-500/80 shadow-[0_0_15px_rgba(239,68,68,0.1)]' : 'border-white/10 hover:border-white/20 focus:border-cyan-500/50 focus:bg-white/[0.04] focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]'}`}
                       >
                         <option value="" className="bg-black">Select Service</option>
                         <option value="High-Converting Websites" className="bg-black">High-Converting Websites</option>
@@ -194,17 +221,27 @@ const Contact = () => {
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                       </div>
                     </div>
+                    {errors.service && (
+                      <motion.span initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="absolute -bottom-5 left-1 text-[10px] text-red-400 font-medium">
+                        {errors.service.message}
+                      </motion.span>
+                    )}
                   </div>
                 </div>
 
-                <div className="space-y-1 group/input">
+                <div className="space-y-1 group/input relative mt-4 md:mt-2">
                   <label className="text-[10px] font-bold text-gray-400 group-focus-within/input:text-cyan-400 uppercase tracking-[0.2em] pl-1 transition-colors">Message</label>
                   <textarea
                     rows="4"
                     placeholder="How can I help you?"
-                    {...register("message", { required: true })}
-                    className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white placeholder-white/20 hover:border-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.04] transition-all focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] resize-none"
+                    {...register("message")}
+                    className={`w-full bg-white/[0.02] border rounded-xl p-4 text-sm text-white placeholder-white/20 focus:outline-none transition-all resize-none ${errors.message ? 'border-red-500/50 focus:border-red-500/80 shadow-[0_0_15px_rgba(239,68,68,0.1)]' : 'border-white/10 hover:border-white/20 focus:border-cyan-500/50 focus:bg-white/[0.04] focus:shadow-[0_0_15px_rgba(34,211,238,0.1)]'}`}
                   />
+                  {errors.message && (
+                    <motion.span initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="absolute -bottom-5 left-1 text-[10px] text-red-400 font-medium">
+                      {errors.message.message}
+                    </motion.span>
+                  )}
                 </div>
 
                 <motion.button

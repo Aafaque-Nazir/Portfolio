@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { CardContainer, CardBody, CardItem } from "./3d-card";
+import ProgressiveImage from "./ProgressiveImage";
 import { RiFolder3Fill, RiArrowLeftLine } from "react-icons/ri";
 import { projects } from "../../data/projects";
 
@@ -17,13 +18,13 @@ function ProjectCard({ project }) {
                 <div className="relative w-full aspect-[16/10] overflow-hidden bg-zinc-900 border-b border-white/[0.04]">
                     {/* Dark gradient overlay at the bottom of the image for text readability if needed, or just cinematic feel */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent z-10 opacity-70" />
-                    <div className="absolute inset-0 bg-cyan-900/20 mix-blend-color-dodge opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
-                    <img
+                    <div className="absolute inset-0 bg-cyan-900/20 mix-blend-color-dodge opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
+                    <ProgressiveImage
                         src={project.image}
                         alt={project.title}
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-[1.08]"
+                        imgClassName="transform transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-[1.08]"
                     />
                     
                     {/* Live Indicator on hover */}
@@ -128,12 +129,12 @@ export function ProjectShowcase() {
                                                     className="relative flex-1 rounded-lg overflow-hidden border border-white/[0.06] opacity-60 group-hover:opacity-90 transition-all duration-500"
                                                     style={{ transitionDelay: `${i * 75}ms` }}
                                                 >
-                                                    <img 
+                                                    <ProgressiveImage 
                                                         src={p.image} 
                                                         alt={p.title}
                                                         loading="lazy"
                                                         decoding="async"
-                                                        className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700"
+                                                        imgClassName="scale-105 group-hover:scale-110 transition-transform duration-700"
                                                     />
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                                                 </div>

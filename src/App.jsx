@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import SmoothScroll from "./components/SmoothScroll";
 import InitialLoader from "./components/InitialLoader";
+import CustomCursor from "./components/ui/CustomCursor";
 import { motion, AnimatePresence } from "framer-motion";
 
 const About = lazy(() => import("./pages/About"));
@@ -60,6 +61,7 @@ function App() {
         className="relative min-h-screen overflow-x-hidden bg-black"
         style={{ pointerEvents: isAppLoading ? "none" : "auto" }}
       >
+        <CustomCursor />
         <SmoothScroll />
         <Navbar />
 

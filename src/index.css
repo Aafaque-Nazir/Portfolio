@@ -39,3 +39,9 @@ body {
   font-variation-settings: "wdth" 100;
   background-color: black;
 }
+
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}

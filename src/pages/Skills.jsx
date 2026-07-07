@@ -82,7 +82,6 @@ export default function Skills() {
         >
           Skills
         </motion.h2>
-        <div className="w-12 h-0.5 bg-cyan-500 mt-2 opacity-50" />
       </div>
 
       {/* Grid: Occupies more center space */}

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
     "@react-spring/web": "^10.0.1",
     "@tailwindcss/vite": "^4.1.4",
     "clsx": "^2.1.1",
@@ -30,7 +31,8 @@
     "react-parallax-tilt": "^1.7.307",
     "react-router-dom": "^7.5.2",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.4"
+    "tailwindcss": "^4.1.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
