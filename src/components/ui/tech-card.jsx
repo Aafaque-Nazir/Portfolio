@@ -17,7 +17,7 @@ export function TechCard({ tech, index }) {
         >
             {/* INNER CONTAINER (Hardware Accelerated) */}
             <div className="absolute inset-0 rounded-full bg-stone-950 border border-white/5 overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:border-white/20 isolation-isolate transform-gpu">
-                
+
                 {/* Animated Rotating Border (Hidden until hover for performance) */}
                 <div
                     className="absolute inset-[-50%] w-[200%] h-[200%] opacity-0 group-hover:opacity-100 group-hover:animate-[spin_3s_linear_infinite] transition-opacity duration-300 z-0 will-change-transform"
@@ -39,7 +39,7 @@ export function TechCard({ tech, index }) {
 
                 {/* Content (Icon) */}
                 <div className="relative h-full w-full flex flex-col items-center justify-center z-30">
-                    <div 
+                    <div
                         className="text-xl md:text-2xl transition-all duration-300 group-hover:scale-110 group-hover:brightness-125"
                         style={{ color: tech.color || '#fff', filter: `drop-shadow(0 0 8px ${tech.color}40)` }}
                     >
@@ -52,7 +52,7 @@ export function TechCard({ tech, index }) {
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center z-50 pointer-events-none translate-y-2 group-hover:translate-y-0 min-w-max">
                 <div className="bg-black/95 border border-white/10 px-2.5 py-1 rounded-md shadow-xl">
                     <span className="text-[9px] font-mono font-black text-white tracking-[0.1em] uppercase whitespace-nowrap">
-                       {tech.name}
+                        {tech.name}
                     </span>
                 </div>
             </div>
