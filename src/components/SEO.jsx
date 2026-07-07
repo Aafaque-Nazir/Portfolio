@@ -161,7 +161,7 @@ const SEO = ({ title, description, keywords, image, section }) => {
     isPartOf: { "@type": "WebSite", name: siteName, url: siteUrl },
     author: { "@type": "Person", name: "Aafaque Nazir" },
     inLanguage: "en",
-    dateModified: "2026-07-02",
+    dateModified: new Date().toISOString().split("T")[0],
   };
 
   // ──────────────────────────────────────────────────
@@ -346,7 +346,7 @@ const SEO = ({ title, description, keywords, image, section }) => {
       <meta name="twitter:image:alt" content="Aafaque Nazir — Web Developer in Navi Mumbai" />
 
       {/* Canonical — ALWAYS the root URL for a single-page app */}
-      <link rel="canonical" href={siteUrl} />
+      <link rel="canonical" href={resolvedUrl} />
 
       {/* JSON-LD Structured Data */}
       <script type="application/ld+json">

@@ -11,11 +11,9 @@ Aafaque Nazir is a freelance web developer and AI engineer based in Navi Mumbai,
 
 ## Services & Pricing
 
-- **Full-Stack AI Web Apps** — AI-powered SaaS platforms, intelligent dashboards, admin panels, and custom portals built with Next.js, React, OpenAI API, and secure backends. Starting from ₹24,999 (~$300 USD).
-- **Lead Generation Websites** — Conversion-focused, SEO-optimized, premium animated websites with fast load times and mobile responsiveness. Starting from ₹14,999 (~$180 USD).
-- **Ecommerce Website Development** — Custom ecommerce stores, Shopify alternatives, product catalogs, payment gateway integrations (Razorpay/Stripe), inventory management, and order tracking systems. Starting from ₹24,999 (~$300 USD).
-- **Interactive 3D Websites** — Immersive WebGL and Three.js experiences with 3D environments and physics-based interactions. Starting from ₹29,999 (~$360 USD).
-- **AI Chatbot & Automation** — Custom ChatGPT-powered chatbots, AI customer support systems, content generation tools, and workflow automation. Starting from ₹19,999 (~$240 USD).
+- **High-Converting Websites** — Conversion-focused, SEO-optimized, premium animated websites with fast load times and mobile responsiveness. Starting from ₹8,999 (~$110 USD).
+- **Custom Online Stores (E-Commerce)** — Custom ecommerce stores, product catalogs, payment gateway integrations (Razorpay/Stripe), inventory management, and order tracking systems. Starting from ₹24,999 (~$300 USD).
+- **Custom Web Apps (SaaS)** — Scalable SaaS platforms, admin dashboards, and custom portals built to automate and manage your entire business. Custom pricing.
 
 ## Technical Skills
 

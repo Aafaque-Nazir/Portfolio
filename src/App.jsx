@@ -65,6 +65,7 @@ function App() {
         <SmoothScroll />
         <Navbar />
 
+        <main>
         <Suspense fallback={
           <div className="w-full min-h-screen flex items-center justify-center py-20 text-cyan-500/50 mix-blend-screen text-xs uppercase font-mono tracking-widest">
             <span className="animate-pulse">Loading...</span>
@@ -91,6 +92,7 @@ function App() {
             </Routes>
           </AnimatePresence>
         </Suspense>
+        </main>
 
         <Footer />
       </motion.div>

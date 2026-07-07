@@ -20,17 +20,7 @@ He combines deep expertise in modern frontend frameworks (React, Next.js) with A
 
 ## Detailed Services
 
-### 1. Full-Stack AI Web Applications (from ₹24,999 / ~$300 USD)
-- AI-powered SaaS platforms with intelligent dashboards
-- Real-time data visualization and analytics
-- User authentication with role-based access control (RBAC)
-- Secure backends with Supabase/PostgreSQL/Firebase
-- Payment integrations (Razorpay, Stripe)
-- OpenAI API and LangChain integrations for AI features
-- Scalable cloud architectures on Vercel/AWS
-- Typical timeline: 3-6 weeks
-
-### 2. Lead Generation Websites (from ₹14,999 / ~$180 USD)
+### 1. High-Converting Websites (from ₹8,999 / ~$110 USD)
 - Conversion-focused landing pages and business websites
 - Premium GSAP and Framer Motion animations
 - Sub-second page load times (Lighthouse 95+)
@@ -39,32 +29,24 @@ He combines deep expertise in modern frontend frameworks (React, Next.js) with A
 - Contact forms with email notifications
 - Typical timeline: 1-2 weeks
 
-### 3. Ecommerce Website Development (from ₹24,999 / ~$300 USD)
+### 2. Custom Online Stores / E-Commerce (from ₹24,999 / ~$300 USD)
 - Custom ecommerce stores and online shops
-- Shopify alternatives with React/Next.js frontends
 - Product catalogs with filtering, search, and categories
 - Payment gateway integrations (Razorpay, Stripe, PayPal)
 - Inventory management and order tracking systems
 - Shopping cart with checkout flow optimization
 - Admin dashboards for product and order management
+- WhatsApp-based ordering systems
 - Typical timeline: 3-5 weeks
 
-### 4. Interactive 3D Websites (from ₹29,999 / ~$360 USD)
-- Custom WebGL and Three.js immersive experiences
-- React Three Fiber (R3F) for declarative 3D
-- Interactive 3D models with physics-based interactions
-- Optimized 3D rendering for smooth web performance
-- Award-winning level aesthetics for luxury and creative brands
+### 3. Custom Web Apps / SaaS (Custom Pricing)
+- Scalable SaaS platforms with intelligent dashboards
+- Real-time data visualization and analytics
+- User authentication with role-based access control (RBAC)
+- Secure backends with Supabase/PostgreSQL/Firebase
+- Payment integrations (Razorpay, Stripe)
+- Scalable cloud architectures on Vercel/AWS
 - Typical timeline: 4-8 weeks
-
-### 5. AI Chatbot & Automation Solutions (from ₹19,999 / ~$240 USD)
-- Custom ChatGPT/OpenAI-powered customer support chatbots
-- AI content generation and summarization tools
-- Intelligent document analysis and Q&A systems
-- Workflow automation using AI
-- Multi-language support and CRM integrations
-- 30 days free maintenance included
-- Typical timeline: 1-3 weeks
 
 ## Complete Technical Stack
 
