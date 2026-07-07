@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { IoIosSend } from "react-icons/io";
@@ -6,7 +5,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "sonner";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
 
 const contactSchema = z.object({
@@ -81,34 +80,18 @@ const Contact = () => {
 
   return (
     <section id="contact" aria-label="Contact Aafaque Nazir — Get in touch for web development services" className="relative w-full pt-24 lg:pt-32 pb-20 flex flex-col justify-center items-center px-4 bg-black">
-      <Toaster
-        position="top-center"
+      <Toaster 
+        theme="dark" 
+        position="top-center" 
         toastOptions={{
-          className: '',
           style: {
-            background: "rgba(9, 9, 11, 0.9)",
-            color: "#fff",
-            border: "1px solid rgba(34, 211, 238, 0.2)",
+            background: "rgba(9, 9, 11, 0.8)",
+            border: "1px solid rgba(34, 211, 238, 0.5)",
             backdropFilter: "blur(12px)",
-            fontSize: '14px',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
-            fontWeight: '500',
-            padding: '16px 24px',
-            borderRadius: '100px',
-            boxShadow: '0 20px 40px -10px rgba(34,211,238,0.15)',
+            color: "#fff",
+            boxShadow: "0 0 20px rgba(34, 211, 238, 0.2)"
           },
-          success: {
-            iconTheme: {
-              primary: '#22d3ee',
-              secondary: '#000',
-            },
-          },
-          error: {
-            iconTheme: {
-              primary: '#ef4444',
-              secondary: '#fff',
-            },
-          },
+          className: "font-mono tracking-wider text-sm"
         }}
       />
 
@@ -300,7 +283,6 @@ const Contact = () => {
                 loading="lazy"
               />
               <div className="absolute inset-0 pointer-events-none border-[12px] border-black" />
-
             </motion.div>
 
             <div className="flex flex-col gap-4">

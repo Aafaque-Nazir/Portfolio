@@ -45,3 +45,33 @@ body {
     cursor: none !important;
   }
 }
+
+/* Custom Text Selection */
+*::selection {
+  background-color: rgba(34, 211, 238, 0.4) !important;
+  color: #fff !important;
+}
+
+*::-moz-selection {
+  background-color: rgba(34, 211, 238, 0.4) !important;
+  color: #fff !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #000 !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.3) !important;
+  border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.6) !important;
+}

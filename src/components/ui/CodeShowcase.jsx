@@ -44,6 +44,22 @@ export function useRealtimeData(table) {
 
 const CodeShowcase = () => {
   const [copied, setCopied] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [displayedCode, setDisplayedCode] = useState("");
+
+  React.useEffect(() => {
+    if (!inView) return;
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayedCode(codeSnippet.slice(0, i));
+      i += 3; // speed up typing slightly
+      if (i > codeSnippet.length) {
+        setDisplayedCode(codeSnippet);
+        clearInterval(interval);
+      }
+    }, 10);
+    return () => clearInterval(interval);
+  }, [inView]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(codeSnippet);
@@ -77,15 +93,22 @@ const CodeShowcase = () => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="relative bg-[#0d1117] border border-[#30363d] rounded-xl overflow-hidden shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]"
+        viewport={{ once: true, margin: "-100px" }}
+        onViewportEnter={() => setInView(true)}
+        className="relative bg-[#0d1117]/80 backdrop-blur-xl border border-white/[0.05] rounded-xl overflow-hidden shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] ring-1 ring-white/10"
       >
         {/* IDE Header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-[#30363d]">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
+        <div className="flex items-center justify-between px-4 py-3 bg-white/[0.02] border-b border-white/[0.05]">
+          <div className="flex items-center gap-2 group/mac">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] flex items-center justify-center">
+              <svg className="w-2 h-2 text-black/50 opacity-0 group-hover/mac:opacity-100 transition-opacity" viewBox="0 0 14 14" fill="none"><path d="M11 3L3 11M3 3L11 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            </div>
+            <div className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] flex items-center justify-center">
+              <svg className="w-2 h-2 text-black/50 opacity-0 group-hover/mac:opacity-100 transition-opacity" viewBox="0 0 14 14" fill="none"><path d="M2.5 7H11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            </div>
+            <div className="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29] flex items-center justify-center">
+              <svg className="w-2 h-2 text-black/50 opacity-0 group-hover/mac:opacity-100 transition-opacity" viewBox="0 0 14 14" fill="none"><path d="M8 2L13 7M13 7L8 12M13 7H2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            </div>
           </div>
           <div className="flex items-center gap-2 text-xs font-mono text-slate-400 bg-[#0d1117] px-3 py-1 rounded-md border border-[#30363d]">
             <svg className="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -116,9 +139,9 @@ const CodeShowcase = () => {
         </div>
 
         {/* IDE Content */}
-        <div className="p-4 md:p-6 overflow-x-auto text-[13px] md:text-sm font-mono leading-relaxed text-slate-300">
+        <div className="p-4 md:p-6 overflow-x-auto text-[13px] md:text-sm font-mono leading-relaxed text-slate-300 min-h-[500px]">
           <pre>
-            <code dangerouslySetInnerHTML={{ __html: highlightCode(codeSnippet) }} />
+            <code dangerouslySetInnerHTML={{ __html: highlightCode(displayedCode) + (displayedCode.length < codeSnippet.length ? '<span class="animate-pulse bg-cyan-500/50 text-transparent">_</span>' : '') }} />
           </pre>
         </div>
       </motion.div>

@@ -39,12 +39,12 @@ const ServiceCard = ({ pkg }) => {
           background: useMotionTemplate`radial-gradient(500px circle at ${mouseX}px ${mouseY}px, rgba(6, 182, 212, 0.15), transparent 80%)`,
         }}
       />
-      
+
       {/* Highlighted Card Specific Animated Border */}
       {isHighlight && (
         <div className="absolute inset-0 z-0 bg-[conic-gradient(from_0deg,transparent_0_340deg,rgba(6,182,212,1)_360deg)] animate-[spin_4s_linear_infinite]" />
       )}
-      
+
       {/* Base Border Glow */}
       <motion.div
         className="absolute inset-0 z-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 pointer-events-none"
@@ -58,7 +58,7 @@ const ServiceCard = ({ pkg }) => {
 
       {/* Content Container */}
       <div className={`relative z-10 h-full flex flex-col p-8 rounded-[1.95rem] bg-gradient-to-b border transition-colors duration-700 overflow-hidden justify-between ${isHighlight ? "from-cyan-950/20 to-black/80 border-cyan-500/20 group-hover:border-cyan-500/40" : "from-transparent to-black/50 border-white/[0.05] group-hover:border-white/[0.1]"}`}>
-        
+
         {/* Subtle grid background for texture */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-20" />
 
@@ -203,10 +203,10 @@ const Services = () => {
             Stand Out <span className="text-cyan-500">Online</span>
           </motion.h2>
           <motion.p
-             initial={{ opacity: 0 }}
-             whileInView={{ opacity: 1 }}
-             transition={{ delay: 0.2 }}
-             className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base font-light"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base font-light"
           >
             Stop losing clients to competitors with outdated websites. Invest in a premium design that builds trust and gets people to take action.
           </motion.p>

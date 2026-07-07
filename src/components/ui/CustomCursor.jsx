@@ -51,7 +51,7 @@ const CustomCursor = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-8 h-8 rounded-full border border-cyan-400 pointer-events-none z-[9999] mix-blend-screen hidden lg:flex items-center justify-center transition-colors"
+      className="fixed top-0 left-0 w-8 h-8 rounded-full border border-cyan-400 pointer-events-none z-[9999] mix-blend-difference hidden lg:flex items-center justify-center transition-colors"
       style={{
         x: cursorX,
         y: cursorY,

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import GlobalBackground from "../components/GlobalBackground";
+import { SplitText } from "../components/ui/SplitText";
 // Animation Variants
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -95,10 +96,14 @@ const Home = () => {
             </div>
 
             {/* Subheadline */}
-            <motion.div variants={itemVariants} className="mb-8">
-              <p className="text-cyan-400/80 text-[10px] sm:text-xs md:text-sm font-mono tracking-[0.2em] md:tracking-[0.3em] uppercase font-bold">
+            <motion.div variants={itemVariants} className="mb-8 font-mono">
+              <SplitText 
+                type="words"
+                delay={0.5}
+                className="text-cyan-400/80 text-[10px] sm:text-xs md:text-sm tracking-[0.2em] md:tracking-[0.3em] uppercase font-bold"
+              >
                 WEB DEVELOPER & FRONTEND ENGINEER
-              </p>
+              </SplitText>
             </motion.div>
 
             {/* Description */}
