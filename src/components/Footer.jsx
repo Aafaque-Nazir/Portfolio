@@ -38,21 +38,26 @@ const Footer = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12">
-          {/* Column 1: Brand & Status */}
+          {/* Column 1: Brand & Business Details */}
           <div className="md:col-span-5 flex flex-col items-start gap-4">
             <div>
-              <h2 className="text-2xl md:text-3xl font-black text-white tracking-wider">
-                AAFAQUE
+              <h2 className="text-2xl md:text-3xl font-black text-white tracking-wider uppercase">
+                Aafaque Nazir
               </h2>
               <p className="text-gray-400 text-[10px] sm:text-xs tracking-[0.15em] mt-1.5 uppercase font-mono">
-                Frontend Engineer & Creative Developer
+                Independent Freelancer & Full-Stack Developer
               </p>
             </div>
-            
 
-            <p className="text-gray-500 text-xs font-mono max-w-sm mt-1 leading-relaxed">
-              Crafting high-performance web applications with clean code and cutting-edge user experiences.
-            </p>
+            <div className="text-gray-500 text-[11px] sm:text-xs font-mono max-w-sm mt-1 leading-relaxed space-y-2">
+              <p>
+                <strong className="text-gray-300">Business Name:</strong> Aafaque Nazir<br/>
+                <strong className="text-gray-300">Main Activity:</strong> Freelance Full-Stack Web Development, UI/UX Design & Digital Solutions.
+              </p>
+              <p>
+                <strong className="text-gray-300">Services Provided:</strong> Custom High-Converting Websites, E-Commerce Stores, and Full-Stack Web Applications.
+              </p>
+            </div>
           </div>
 
           {/* Column 2: Quick Links */}

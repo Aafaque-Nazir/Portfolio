@@ -58,7 +58,7 @@ const AboutNode = ({ children, title, className = "" }) => {
 
 const About = () => {
   return (
-    <section id="about" aria-label="About Aafaque Nazir — Frontend Engineer & Creative Developer" className="relative w-full min-h-[100svh] flex flex-col justify-center items-center px-4 bg-black pt-24 lg:pt-32 pb-12">
+    <section id="about" aria-label="About Aafaque Nazir — Full-Stack Web Developer & Creative Engineer" className="relative w-full min-h-[100svh] flex flex-col justify-center items-center px-4 bg-black pt-24 lg:pt-32 pb-12">
       <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col h-full justify-center">
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -76,10 +76,10 @@ const About = () => {
 
             <AboutNode className="max-w-xl">
               <p className="text-xl lg:text-2xl text-gray-300 font-light leading-relaxed mb-6">
-                <span className="text-white font-bold">Frontend Developer</span> with a passion for <span className="text-cyan-500 underline decoration-white/20 underline-offset-8">clean and modern design</span>.
+                <span className="text-white font-bold">Full-Stack Web Developer</span> with a passion for <span className="text-cyan-500 underline decoration-white/20 underline-offset-8">scalable architecture & modern design</span>.
               </p>
               <p className="text-sm lg:text-base text-gray-500 leading-relaxed font-light mb-6">
-                I build fast, smooth, and responsive websites using modern tools like <span className="text-white">React and Next.js</span>.
+                I build fast, secure, and responsive web applications from the ground up using modern tools like <span className="text-white">React, Next.js, and Node.js</span>.
               </p>
               <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
                 <p className="text-[10px] font-mono text-cyan-500/70 italic">
@@ -108,18 +108,18 @@ const About = () => {
               <div className="space-y-6">
                 {[
                   {
-                    label: "Custom Design",
-                    desc: "Unique websites built from scratch. No boring templates.",
+                    label: "Full-Stack Mastery",
+                    desc: "Building robust architectures from secure databases to beautiful UIs.",
                     icon: "M13 10V3L4 14h7v7l9-11h-7z"
                   },
                   {
                     label: "Pixel Perfect",
-                    desc: "Turning beautiful designs into high-quality code.",
+                    desc: "Turning beautiful designs into high-quality, responsive client-side code.",
                     icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                   },
                   {
                     label: "High Performance",
-                    desc: "Fast loading speeds and smooth scrolling for all users.",
+                    desc: "Fast APIs, optimized databases, and smooth 60fps frontend experiences.",
                     icon: "M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4z"
                   }
                 ].map((item, i) => (
