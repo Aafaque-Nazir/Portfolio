@@ -16,8 +16,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor_react: ['react', 'react-dom', 'react-router-dom'],
-          vendor_motion: ['framer-motion', 'motion'],
-          vendor_lottie: ['lottie-react']
+          vendor_motion: ['framer-motion']
         }
       }
     }
