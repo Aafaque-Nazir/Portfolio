@@ -61,7 +61,7 @@ const About = () => {
     <section id="about" aria-label="About Aafaque Nazir — Full-Stack Web Developer & Creative Engineer" className="relative w-full min-h-[100svh] flex flex-col justify-center items-center px-4 bg-black pt-24 lg:pt-32 pb-12">
       <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col h-full justify-center">
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left: Identity */}
           <div className="flex flex-col">
             <motion.div
@@ -91,16 +91,34 @@ const About = () => {
 
           {/* Right: Philosophy */}
           <div className="flex flex-col gap-6">
-            {/* Bento Stats */}
-            <div className="grid grid-cols-2 gap-4">
-              <AboutNode title="Performance">
-                <span className="text-4xl font-black text-white tracking-tighter">98/100</span>
-                <p className="text-[10px] font-mono text-cyan-500 uppercase mt-1">Lighthouse Score</p>
-              </AboutNode>
-              <AboutNode title="Animation">
-                <span className="text-4xl font-black text-white tracking-tighter">60 FPS</span>
-                <p className="text-[10px] font-mono text-cyan-500 uppercase mt-1">Render Target</p>
-              </AboutNode>
+            {/* Sleek Stats Strip */}
+            <div className="grid grid-cols-2 lg:flex lg:flex-row lg:flex-nowrap gap-y-8 gap-x-4 sm:gap-6 justify-between w-full py-6 px-6 sm:px-8 bg-zinc-950/40 backdrop-blur-3xl border border-white/5 rounded-3xl relative overflow-hidden group">
+              {/* Animated Glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none opacity-20" />
+              
+              <div className="relative z-10 flex flex-col gap-1">
+                <span className="text-3xl font-black text-white tracking-tighter">98<span className="text-cyan-500 text-lg">/100</span></span>
+                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Performance</span>
+              </div>
+              <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
+              
+              <div className="relative z-10 flex flex-col gap-1">
+                <span className="text-3xl font-black text-white tracking-tighter">60<span className="text-cyan-500 text-lg">FPS</span></span>
+                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Render Target</span>
+              </div>
+              <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
+              
+              <div className="relative z-10 flex flex-col gap-1">
+                <span className="text-3xl font-black text-white tracking-tighter">Zero</span>
+                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Vulns</span>
+              </div>
+              <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
+              
+              <div className="relative z-10 flex flex-col gap-1">
+                <span className="text-3xl font-black text-white tracking-tighter">100<span className="text-cyan-500 text-lg">%</span></span>
+                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Scalable</span>
+              </div>
             </div>
 
             {/* Philosophy Card */}
