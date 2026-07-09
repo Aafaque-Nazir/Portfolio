@@ -4,28 +4,16 @@ import {
   RiInstagramLine,
   RiArrowRightLine,
 } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const handleNavClick = (e, id) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      if (window.lenis) {
-        window.lenis.scrollTo(element, { offset: -100, duration: 1.5 });
-      } else {
-        const y = element.getBoundingClientRect().top + window.scrollY - 100;
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }
-  };
-
   const navItems = [
-    { name: "Home", id: "home" },
-    { name: "About", id: "about" },
-    { name: "Skills", id: "skills" },
-    { name: "Projects", id: "projects" },
-    { name: "Services", id: "services" },
-    { name: "Contact", id: "contact" },
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Skills", path: "/skills" },
+    { name: "Projects", path: "/projects" },
+    { name: "Services", path: "/services" },
+    { name: "Contact", path: "/contact" },
   ];
 
   return (
@@ -60,22 +48,21 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
+          {/* Column 2: Quick Links — Using real route Links for Google crawlability */}
           <div className="md:col-span-3 flex flex-col gap-4">
             <h3 className="text-white text-xs font-bold font-mono uppercase tracking-[0.2em] text-white/40">
               Quick Links
             </h3>
             <ul className="grid grid-cols-2 md:grid-cols-1 gap-2.5">
               {navItems.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={`#${item.id}`}
-                    onClick={(e) => handleNavClick(e, item.id)}
+                <li key={item.path}>
+                  <Link
+                    to={item.path}
                     className="group inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-cyan-400 transition-all font-mono"
                   >
                     <RiArrowRightLine className="text-[10px] opacity-0 -ml-3 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-cyan-400" />
                     <span>{item.name}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

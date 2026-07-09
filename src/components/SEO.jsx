@@ -89,7 +89,7 @@ const SEO = ({ title, description, keywords, image, section }) => {
     sectionKeywords.home;
 
   // Canonical URL reflects the current page route
-  const resolvedUrl = section && section !== "home" ? `${siteUrl}/${section}` : siteUrl;
+  const resolvedUrl = section && section !== "home" ? `${siteUrl}/${section}` : `${siteUrl}/`;
   const resolvedImage = image || defaultImage;
 
   // ──────────────────────────────────────────────────
@@ -161,7 +161,7 @@ const SEO = ({ title, description, keywords, image, section }) => {
     isPartOf: { "@type": "WebSite", name: siteName, url: siteUrl },
     author: { "@type": "Person", name: "Aafaque Nazir" },
     inLanguage: "en",
-    dateModified: new Date().toISOString().split("T")[0],
+    dateModified: "2026-07-09",
   };
 
   // ──────────────────────────────────────────────────
