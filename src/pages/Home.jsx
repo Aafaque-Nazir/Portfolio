@@ -58,7 +58,7 @@ const BentoCard = ({ children, className = "", title, colSpan = "col-span-1", ro
         }}
       />
       {/* Solid background color to avoid backdrop-blur performance drops */}
-      <div className="relative h-full w-full bg-[#09090b] rounded-[1.95rem] border border-white/5 p-6 flex flex-col justify-between overflow-hidden">
+      <div className="relative h-full w-full bg-[#09090b] rounded-[1.95rem] border border-white/5 p-4 md:p-5 flex flex-col justify-between overflow-hidden">
         {/* Spotlight Inner */}
         <motion.div
           className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[1.95rem]"
@@ -135,13 +135,12 @@ const ProjectDeckModule = () => {
 
   return (
     <BentoCard colSpan="col-span-1 md:col-span-2" title="Featured Projects">
-      <div className="relative h-full w-full flex flex-col justify-end sm:flex-row sm:items-stretch sm:justify-between gap-6 min-h-[280px] sm:min-h-0">
-        <div className="relative z-10 flex-grow sm:max-w-[55%] pr-0 sm:pr-4 flex flex-col justify-between py-1">
+      <div className="relative h-full w-full flex flex-col justify-end sm:flex-row sm:items-stretch sm:justify-between gap-4 min-h-[280px] sm:min-h-0">
+        <div className="relative z-10 flex-grow sm:max-w-[55%] pr-0 sm:pr-4 flex flex-col justify-between">
           <div>
-            <span className="text-[8px] font-mono text-cyan-400 uppercase tracking-[0.2em] font-semibold">Project 0{activeIdx + 1}</span>
-            <h4 className="text-base font-black text-white uppercase tracking-tight mt-1 truncate">{featured[activeIdx].title}</h4>
-            <p className="text-[11px] text-slate-300 sm:text-slate-400 font-light line-clamp-3 sm:line-clamp-2 mt-2 leading-relaxed">{featured[activeIdx].description}</p>
-            <div className="flex flex-wrap gap-1.5 mt-3">
+            <h4 className="text-sm md:text-base font-black text-white uppercase tracking-tight mt-1 truncate">{featured[activeIdx].title}</h4>
+            <p className="text-[10px] sm:text-[11px] text-slate-300 sm:text-slate-400 font-light line-clamp-2 mt-1.5 leading-relaxed">{featured[activeIdx].description}</p>
+            <div className="flex flex-wrap gap-1.5 mt-2.5">
               {featured[activeIdx].techStack.slice(0, 2).map((tech, idx) => (
                 <span key={idx} className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-[8px] font-mono font-semibold text-slate-300">
                   {tech}
@@ -149,8 +148,8 @@ const ProjectDeckModule = () => {
               ))}
             </div>
           </div>
-          <div className="mt-4 sm:mt-0">
-            <Link to={`/projects/${featured[activeIdx].id}`} className="inline-flex items-center gap-1 text-[9px] font-mono text-cyan-400 hover:text-cyan-300 group">
+          <div className="mt-3">
+            <Link to={`/projects/${featured[activeIdx].id}`} className="inline-flex items-center gap-1.5 text-[9px] font-mono text-cyan-400 hover:text-cyan-300 group">
               View Project <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px]" />
             </Link>
           </div>

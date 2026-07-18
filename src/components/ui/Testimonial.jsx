@@ -36,40 +36,60 @@ const TestimonialCard = ({ testimonial, index }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       onMouseMove={handleMouseMove}
-      className="group relative rounded-[2rem] p-[1px] overflow-hidden isolation-isolate"
+      className="group relative rounded-[2rem] p-[1px] overflow-hidden bg-white/5 transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)]"
     >
       {/* Hover Border Glow */}
       <motion.div
-        className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]"
+        className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] pointer-events-none"
         style={{
           background: useTransform(
             [mouseX, mouseY],
-            ([x, y]) => `radial-gradient(350px circle at ${x}px ${y}px, rgba(34,211,238,0.15), transparent 85%)`
+            ([x, y]) => `radial-gradient(350px circle at ${x}px ${y}px, rgba(34, 211, 238, 0.15), transparent 85%)`
           ),
         }}
       />
-      <div className="relative h-full bg-zinc-950/40 backdrop-blur-3xl rounded-[1.95rem] border border-white/5 p-8 flex flex-col justify-between overflow-hidden">
+      <div className="relative bg-[#09090b] rounded-[1.95rem] border border-white/5 p-8 flex flex-col justify-between h-full overflow-hidden min-h-[300px]">
         {/* Spotlight */}
         <motion.div
           className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[1.95rem]"
           style={{
             background: useTransform(
               [mouseX, mouseY],
-              ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, rgba(255,255,255,0.02), transparent 80%)`
+              ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, rgba(34, 211, 238, 0.02), transparent 80%)`
             ),
           }}
         />
         
-        <div className="relative z-10 flex flex-col items-center justify-center text-center h-full gap-6">
-          <svg className="w-10 h-10 text-cyan-500/20 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-          </svg>
+        <div className="relative z-10 flex flex-col justify-between h-full flex-grow">
+          {/* Top Row: Stars and Quote Mark */}
+          <div className="flex justify-between items-center mb-6">
+            <div className="flex gap-1 text-yellow-500">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.858 1.4-8.168L.132 9.21l8.2-1.192L12 .587z" />
+                </svg>
+              ))}
+            </div>
+            <svg className="w-8 h-8 text-cyan-500/20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+          </div>
           
-          <p className="text-gray-200 text-base md:text-lg leading-[1.8] font-light">
+          {/* Review Text */}
+          <p className="text-slate-300 text-sm md:text-base leading-relaxed font-light mb-8 italic flex-grow text-left">
             "{testimonial.text}"
           </p>
 
-          <div className="w-12 h-[2px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mt-2 opacity-50" />
+          {/* User Details */}
+          <div className="flex items-center gap-3 pt-4 border-t border-white/5">
+            <div className="w-10 h-10 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-sm font-black text-cyan-400">
+              {testimonial.name[0]}
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="text-sm font-black text-white leading-none block">{testimonial.name}</span>
+              <span className="text-[10px] font-mono text-cyan-500/70 tracking-wider uppercase mt-1.5 block">{testimonial.role}</span>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
