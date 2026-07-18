@@ -12,8 +12,8 @@ import { NavLink, useLocation } from "react-router-dom";
 
 // Framer Motion Animation Variants for the liquid dynamic island expansion
 const menuVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     height: 0,
     transition: {
       staggerChildren: 0.04,
@@ -21,8 +21,8 @@ const menuVariants = {
       height: { duration: 0.35, ease: [0.16, 1, 0.3, 1] }
     }
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     height: "auto",
     transition: {
       staggerChildren: 0.06,
@@ -34,11 +34,11 @@ const menuVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: -12, scale: 0.96 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1, 
-    transition: { type: "spring", stiffness: 350, damping: 26 } 
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 350, damping: 26 }
   }
 };
 
@@ -94,13 +94,12 @@ export default function Navbar() {
             mass: 0.75
           }}
           style={{ borderRadius: menuOpen ? "28px" : "9999px" }}
-          className={`flex flex-col bg-gradient-to-b from-zinc-900/95 to-black/98 backdrop-blur-3xl border border-white/15 shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_40px_rgba(0,0,0,0.6),0_0_30px_rgba(34,211,238,0.06)] pointer-events-auto overflow-hidden transition-shadow duration-500 hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.2),0_12px_45px_rgba(0,0,0,0.7),0_0_30px_rgba(34,211,238,0.12)] ${
-            menuOpen ? "w-[calc(100vw-32px)] max-w-[360px] p-5" : "px-2 py-1.5"
-          }`}
+          className={`flex flex-col bg-gradient-to-b from-zinc-900/95 to-black/98 backdrop-blur-3xl border border-white/15 shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_40px_rgba(0,0,0,0.6),0_0_30px_rgba(34,211,238,0.06)] pointer-events-auto overflow-hidden transition-shadow duration-500 hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.2),0_12px_45px_rgba(0,0,0,0.7),0_0_30px_rgba(34,211,238,0.12)] ${menuOpen ? "w-[calc(100vw-32px)] max-w-[360px] p-5" : "px-2 py-1.5"
+            }`}
         >
           {/* Top Row / Resting State (Always visible) */}
           <div className="flex items-center justify-between w-full">
-            
+
             {/* Desktop Navbar Menu (Hidden on Mobile) */}
             <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
@@ -108,8 +107,7 @@ export default function Navbar() {
                   key={item.name}
                   to={item.path}
                   className={({ isActive }) =>
-                    `relative px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 block group uppercase ${
-                      isActive ? "text-white" : "text-white/50 hover:text-white"
+                    `relative px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 block group uppercase ${isActive ? "text-white" : "text-white/50 hover:text-white"
                     }`
                   }
                 >
@@ -215,10 +213,9 @@ export default function Navbar() {
                         to={item.path}
                         onClick={() => setMenuOpen(false)}
                         className={({ isActive }) =>
-                          `group relative flex items-center justify-between w-full py-2.5 px-4 text-base font-bold transition-all duration-300 rounded-xl ${
-                            isActive 
-                              ? "text-white bg-white/5 border border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]" 
-                              : "text-white/40 hover:text-white hover:bg-white/[0.02] border border-transparent"
+                          `group relative flex items-center justify-between w-full py-2.5 px-4 text-base font-bold transition-all duration-300 rounded-xl ${isActive
+                            ? "text-white bg-white/5 border border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+                            : "text-white/40 hover:text-white hover:bg-white/[0.02] border border-transparent"
                           }`
                         }
                       >
