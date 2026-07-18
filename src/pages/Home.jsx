@@ -123,25 +123,36 @@ const TerminalModule = () => {
 
 // 2. Project Deck Module - Fully Responsive for Mobile and Tablets
 const ProjectDeckModule = () => {
+  const [shuffledProjects, setShuffledProjects] = useState([]);
   const [activeIdx, setActiveIdx] = useState(0);
-  const featured = projects.slice(0, 3);
 
   useEffect(() => {
+    // Shuffle all projects on mount
+    const shuffled = [...projects].sort(() => Math.random() - 0.5);
+    setShuffledProjects(shuffled);
+  }, []);
+
+  useEffect(() => {
+    if (shuffledProjects.length === 0) return;
     const timer = setInterval(() => {
-      setActiveIdx((prev) => (prev + 1) % featured.length);
+      setActiveIdx((prev) => (prev + 1) % shuffledProjects.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [featured.length]);
+  }, [shuffledProjects.length]);
+
+  if (shuffledProjects.length === 0) return null;
+
+  const currentProject = shuffledProjects[activeIdx];
 
   return (
     <BentoCard colSpan="col-span-1 md:col-span-2" title="Featured Projects">
       <div className="relative h-full w-full flex flex-col justify-end sm:flex-row sm:items-stretch sm:justify-between gap-4 min-h-[280px] sm:min-h-0">
         <div className="relative z-10 flex-grow sm:max-w-[55%] pr-0 sm:pr-4 flex flex-col justify-between">
           <div>
-            <h4 className="text-sm md:text-base font-black text-white uppercase tracking-tight mt-1 truncate">{featured[activeIdx].title}</h4>
-            <p className="text-[10px] sm:text-[11px] text-slate-300 sm:text-slate-400 font-light line-clamp-2 mt-1.5 leading-relaxed">{featured[activeIdx].description}</p>
+            <h4 className="text-sm md:text-base font-black text-white uppercase tracking-tight mt-1 truncate">{currentProject.title}</h4>
+            <p className="text-[10px] sm:text-[11px] text-slate-300 sm:text-slate-400 font-light line-clamp-2 mt-1.5 leading-relaxed">{currentProject.description}</p>
             <div className="flex flex-wrap gap-1.5 mt-2.5">
-              {featured[activeIdx].techStack.slice(0, 2).map((tech, idx) => (
+              {currentProject.techStack.slice(0, 2).map((tech, idx) => (
                 <span key={idx} className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-[8px] font-mono font-semibold text-slate-300">
                   {tech}
                 </span>
@@ -149,7 +160,7 @@ const ProjectDeckModule = () => {
             </div>
           </div>
           <div className="mt-3">
-            <Link to={`/projects/${featured[activeIdx].id}`} className="inline-flex items-center gap-1.5 text-[9px] font-mono text-cyan-400 hover:text-cyan-300 group">
+            <Link to={`/projects/${currentProject.id}`} className="inline-flex items-center gap-1.5 text-[9px] font-mono text-cyan-400 hover:text-cyan-300 group">
               View Project <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px]" />
             </Link>
           </div>
@@ -159,8 +170,8 @@ const ProjectDeckModule = () => {
           <AnimatePresence mode="wait">
             <motion.img
               key={activeIdx}
-              src={featured[activeIdx].image}
-              alt={featured[activeIdx].title}
+              src={currentProject.image}
+              alt={currentProject.title}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
@@ -528,17 +539,16 @@ const Home = () => {
                 </p>
               </motion.div>
 
-              {/* CTAs */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.8 }}
-                className="flex flex-col sm:flex-row gap-4 items-start sm:items-center"
+                className="flex flex-row gap-3 items-center w-full sm:w-auto"
               >
                 <Link
                   to="/contact"
                   aria-label="Navigate to contact page"
-                  className="group relative px-8 py-4 bg-white text-black font-bold text-sm md:text-base rounded-full overflow-hidden hover:scale-[1.02] transition-transform duration-300 flex items-center gap-3 w-full sm:w-auto justify-center"
+                  className="group relative px-6 sm:px-8 py-4 bg-white text-black font-bold text-sm md:text-base rounded-full overflow-hidden hover:scale-[1.02] transition-transform duration-300 flex items-center gap-2.5 flex-grow sm:flex-none justify-center"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-300 via-cyan-100 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="relative z-10 flex items-center gap-2">
@@ -550,17 +560,15 @@ const Home = () => {
                   <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500 -z-10" />
                 </Link>
 
-                <div className="flex gap-4 w-full sm:w-auto">
-                  <a
-                    href="https://github.com/Aafaque-Nazir"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Visit GitHub"
-                    className="p-4 rounded-full border border-cyan-500/20 bg-cyan-500/5 backdrop-blur-sm hover:bg-cyan-500/10 hover:border-cyan-400/50 hover:text-white text-cyan-400/60 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] transition-all flex items-center justify-center"
-                  >
-                    <FaGithub size={20} />
-                  </a>
-                </div>
+                <a
+                  href="https://github.com/Aafaque-Nazir"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit GitHub"
+                  className="p-4 rounded-full border border-cyan-500/20 bg-cyan-500/5 backdrop-blur-sm hover:bg-cyan-500/10 hover:border-cyan-400/50 hover:text-white text-cyan-400/60 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] transition-all flex items-center justify-center shrink-0"
+                >
+                  <FaGithub size={20} />
+                </a>
               </motion.div>
             </motion.div>
           </div>
