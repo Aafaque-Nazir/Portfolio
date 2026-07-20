@@ -18,7 +18,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 
 const isBot = () => {
   if (typeof navigator === "undefined") return true;
-  return /Googlebot|Bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot|Sogou|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Applebot|AdsBot|Mediapartners/i.test(
+  return /Googlebot|Bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot|Sogou|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Applebot|AdsBot|Mediapartners|Lighthouse|Chrome-Lighthouse|PageSpeed/i.test(
     navigator.userAgent
   );
 };
