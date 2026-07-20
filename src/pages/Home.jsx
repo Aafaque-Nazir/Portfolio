@@ -84,42 +84,6 @@ const BentoCard = ({ children, className = "", title, colSpan = "col-span-1", ro
   );
 };
 
-// 1. Terminal / Shell Simulation Module
-const TerminalModule = () => {
-  const [typedText, setTypedText] = useState("");
-  const codeText = "curl https://api.aafaque.dev/metrics\n{\n  \"status\": \"online\",\n  \"uptime\": \"99.99%\",\n  \"loc_written\": \"150k+\",\n  \"stack\": [\"Next.js\", \"Supabase\", \"Node\"]\n}";
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setTypedText(codeText.slice(0, index));
-      index += 2;
-      if (index > codeText.length) {
-        setTypedText(codeText);
-        clearInterval(interval);
-      }
-    }, 40);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <BentoCard colSpan="col-span-1 md:col-span-2" title="System Status">
-      <div className="bg-black/40 border border-white/5 rounded-xl p-4 font-mono text-[10px] text-emerald-400 h-full overflow-hidden relative">
-        <div className="flex gap-1.5 items-center mb-3 border-b border-white/5 pb-2">
-          <span className="w-2 h-2 rounded-full bg-red-500/60" />
-          <span className="w-2 h-2 rounded-full bg-yellow-500/60" />
-          <span className="w-2 h-2 rounded-full bg-green-500/60" />
-          <span className="text-[8px] text-slate-500 uppercase tracking-widest pl-2">shell@aafaque-node</span>
-        </div>
-        <pre className="whitespace-pre-wrap leading-relaxed text-slate-300">
-          <span className="text-cyan-400">$ </span>
-          {typedText}
-          <span className="animate-pulse bg-cyan-400 text-cyan-400">|</span>
-        </pre>
-      </div>
-    </BentoCard>
-  );
-};
 
 // 2. Project Deck Module - Fully Responsive for Mobile and Tablets
 const ProjectDeckModule = () => {
@@ -145,7 +109,7 @@ const ProjectDeckModule = () => {
   const currentProject = shuffledProjects[activeIdx];
 
   return (
-    <BentoCard colSpan="col-span-1 md:col-span-2" title="Featured Projects">
+    <BentoCard colSpan="col-span-1 md:col-span-2 lg:col-span-4" title="Featured Projects">
       <div className="relative h-full w-full flex flex-col justify-end sm:flex-row sm:items-stretch sm:justify-between gap-4 min-h-[280px] sm:min-h-0">
         <div className="relative z-10 flex-grow sm:max-w-[55%] pr-0 sm:pr-4 flex flex-col justify-between">
           <div>
@@ -664,8 +628,6 @@ const Home = () => {
             {/* 4. Project Deck slider */}
             <ProjectDeckModule />
 
-            {/* 5. Terminal CLI log */}
-            <TerminalModule />
 
             {/* 6. Estimator interactive grid */}
             <RecommenderModule />

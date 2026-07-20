@@ -27,147 +27,136 @@ const ProjectDetails = () => {
     <div className="min-h-screen bg-black pt-24 md:pt-32 pb-0">
       <div className="max-w-5xl mx-auto px-4 md:px-8 mb-20">
         
-        {/* Back Button */}
-        <Link 
-          to="/projects" 
-          className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/[0.1] hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all duration-300 shadow-lg mb-12 w-max"
-        >
-          <RiArrowLeftLine className="text-lg text-slate-400 group-hover:text-cyan-400 group-hover:-translate-x-1 transition-all" />
-          <span className="text-[10px] md:text-xs font-bold text-slate-300 group-hover:text-cyan-400 uppercase tracking-widest transition-colors">
-            Back to Projects
-          </span>
-        </Link>
+        {/* Breadcrumb */}
+        <div className="inline-flex items-center gap-3 text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] mb-12 md:mb-16">
+          <Link 
+            to="/projects" 
+            className="group flex items-center gap-2 text-slate-500 hover:text-cyan-400 transition-colors"
+          >
+            <RiArrowLeftLine className="text-sm group-hover:-translate-x-1 transition-transform" />
+            <span>Projects</span>
+          </Link>
+          <span className="text-white/20">/</span>
+          <span className="text-cyan-400/80">{project.title}</span>
+        </div>
 
         {/* Header Content */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-cyan-400 text-2xl">{project.icon}</span>
-            <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
-              {project.category}
+        <div className="mb-16">
+          <div className="flex items-center gap-2.5 mb-6">
+            <span className="text-cyan-400 text-lg">{project.icon}</span>
+            <span className="text-[10px] font-mono tracking-[0.2em] text-cyan-400 uppercase">
+              // {project.category}
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-6">
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-none mb-8">
             {project.title}
           </h1>
-          <p className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-3xl">
+          <p className="text-base md:text-lg text-slate-400 font-light leading-relaxed max-w-3xl">
             {project.description}
           </p>
         </div>
 
-        {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2 mb-12">
-          {project.techStack.map((tech, idx) => (
-            <span key={idx} className="px-4 py-2 bg-white/[0.03] border border-white/10 rounded-full text-xs font-semibold text-slate-300 tracking-wide">
-              {tech}
-            </span>
-          ))}
-        </div>
-
         {/* Hero Image */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-2xl overflow-hidden mb-20 border border-white/10 shadow-[0_0_50px_rgba(34,211,238,0.1)]"
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden mb-20 border border-white/5 shadow-[0_0_50px_rgba(34,211,238,0.05)]"
         >
           <ProgressiveImage 
             src={project.image} 
             alt={project.title} 
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
         </motion.div>
 
-        {/* Case Study Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 mb-20">
+        {/* Two-Column Details Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 mb-24 items-start">
           
-          {/* Problem */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-              <span className="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-sm">01</span>
-              The Problem
-            </h3>
-            <p className="text-slate-400 leading-relaxed">
-              {project.problem}
-            </p>
-          </motion.div>
+          {/* Left Column: Narrative (Challenge & Solution) */}
+          <div className="md:col-span-8 space-y-16">
+            {/* Problem */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-[10px] md:text-xs font-mono tracking-widest text-cyan-400 font-bold uppercase bg-cyan-400/10 px-3 py-1 rounded-full border border-cyan-400/20">
+                  01
+                </span>
+                <h3 className="text-xl md:text-2xl font-black tracking-tight text-white uppercase">
+                  The Challenge
+                </h3>
+              </div>
+              <div className="pl-4 md:pl-6 border-l border-white/10">
+                <p className="text-base md:text-lg text-slate-300 font-light leading-relaxed">
+                  {project.problem}
+                </p>
+              </div>
+            </motion.div>
 
-          {/* Solution */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-              <span className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-sm">02</span>
-              The Solution
-            </h3>
-            <p className="text-slate-400 leading-relaxed">
-              {project.solution}
-            </p>
-          </motion.div>
-        </div>
+            {/* Solution */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-[10px] md:text-xs font-mono tracking-widest text-cyan-400 font-bold uppercase bg-cyan-400/10 px-3 py-1 rounded-full border border-cyan-400/20">
+                  02
+                </span>
+                <h3 className="text-xl md:text-2xl font-black tracking-tight text-white uppercase">
+                  The Solution
+                </h3>
+              </div>
+              <div className="pl-4 md:pl-6 border-l border-cyan-400/30">
+                <p className="text-base md:text-lg text-slate-300 font-light leading-relaxed">
+                  {project.solution}
+                </p>
+              </div>
+            </motion.div>
+          </div>
 
-        {/* Lighthouse Scores */}
-        {project.lighthouse && (
+          {/* Right Column: Sleek Sidebar Meta Card */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-[#0a0a0a] border border-white/[0.05] rounded-2xl p-8 mb-20 relative overflow-hidden"
+            transition={{ duration: 0.6 }}
+            className="md:col-span-4 border border-white/5 bg-white/[0.01] rounded-2xl p-6 md:p-8 space-y-8"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.05),transparent_50%)] pointer-events-none" />
-            <h3 className="text-xl font-bold text-white mb-8 text-center flex items-center justify-center gap-3">
-              <RiCheckboxCircleFill className="text-emerald-400" />
-              Verified Performance
-            </h3>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { label: "Performance", score: project.lighthouse.perf },
-                { label: "Accessibility", score: project.lighthouse.access },
-                { label: "Best Practices", score: project.lighthouse.bp },
-                { label: "SEO", score: project.lighthouse.seo },
-              ].map((stat, idx) => (
-                <div key={idx} className="flex flex-col items-center justify-center space-y-3">
-                  <div className="relative">
-                    <svg className="w-20 h-20 transform -rotate-90">
-                      <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="6" fill="transparent" className="text-white/5" />
-                      <circle 
-                        cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="6" fill="transparent" 
-                        strokeDasharray={36 * 2 * Math.PI} 
-                        strokeDashoffset={36 * 2 * Math.PI - (stat.score / 100) * 36 * 2 * Math.PI}
-                        className={stat.score >= 90 ? "text-emerald-400" : "text-yellow-400"} 
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center text-xl font-black text-white">
-                      {stat.score}
-                    </div>
-                  </div>
-                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider text-center">{stat.label}</span>
-                </div>
-              ))}
+            {/* Tech Stack */}
+            <div>
+              <h4 className="text-[10px] font-mono tracking-widest text-slate-500 uppercase mb-4">Technologies</h4>
+              <div className="flex flex-wrap gap-2">
+                {project.techStack.map((tech, idx) => (
+                  <span key={idx} className="px-3 py-1 bg-white/5 border border-white/5 rounded-full text-[10px] font-mono text-slate-300">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA Link */}
+            <div className="pt-6 border-t border-white/5">
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noreferrer"
+                className="group relative w-full py-3.5 bg-cyan-400 hover:bg-cyan-300 text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Launch Site <RiExternalLinkLine className="text-sm" />
+                </span>
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
+              </a>
             </div>
           </motion.div>
-        )}
-
-        {/* Live Link Button */}
-        <div className="flex justify-center">
-          <a 
-            href={project.link} 
-            target="_blank" 
-            rel="noreferrer"
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-cyan-500 text-black font-black text-lg rounded-full overflow-hidden transition-all hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.3)]"
-          >
-            <span className="relative z-10">View Live Project</span>
-            <RiExternalLinkLine className="relative z-10 text-xl" />
-            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
-          </a>
         </div>
 
       </div>

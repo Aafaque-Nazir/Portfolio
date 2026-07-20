@@ -11,6 +11,7 @@ import {
 } from "react-icons/ri";
 
 export const projects = [
+/*
     {
         id: 16,
         title: "Clinic Haircare",
@@ -25,6 +26,7 @@ export const projects = [
         solution: "Developed a dedicated e-commerce storefront tailored for medical grade hair care products, featuring an elegant, trustworthy design and smooth checkout experience.",
         lighthouse: { perf: 98, access: 100, seo: 100, bp: 100 }
     },
+*/
     {
         id: 15,
         title: "Aura Estate",
@@ -83,7 +85,7 @@ export const projects = [
     },
     {
         id: 11,
-        title: "Doctor Appointments",
+        title: "CarePulse",
         description: "Book doctor appointments with interactive calendar and real-time slot availability.",
         image: "/doctor-booking-thumbnail.png",
         link: "https://dockyy.netlify.app",

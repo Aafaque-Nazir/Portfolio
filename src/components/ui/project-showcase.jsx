@@ -221,9 +221,6 @@ export function ProjectShowcase() {
                                         >
                                             {selectedFolder.name}
                                         </motion.h3>
-                                        <p className="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest font-semibold mt-1">
-                                            Curated Collection
-                                        </p>
                                     </div>
                                 </div>
                             </div>

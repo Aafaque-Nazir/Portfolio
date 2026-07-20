@@ -11,17 +11,22 @@ const categories = [
   {
     title: "Frontend & Interface Engineering",
     description: "Crafting interactive, highly optimized, and responsive user interfaces using modern frameworks, styling libraries, and fluid hardware-accelerated animations.",
-    skills: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Framer Motion", "GSAP", "Redux"]
+    skills: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Framer Motion", "GSAP", "Redux", "Zustand"]
   },
   {
     title: "Backend & Cloud Infrastructure",
     description: "Architecting secure server-side logic, real-time server connections, custom API endpoints, automated hosting deployments, and distributed version control.",
-    skills: ["Node.js", "Supabase", "Firebase", "Vercel", "Git"]
+    skills: ["Node.js", "Express.js", "Supabase", "Firebase", "Vercel", "Git"]
   },
   {
-    title: "Databases, Tooling & AI Systems",
-    description: "Designing structured schema patterns, integrating custom Large Language Model (LLM) APIs, and utilizing advanced developer tooling pipelines.",
-    skills: ["PostgreSQL", "MongoDB", "MySQL", "OpenAI", "Gemini", "Antigravity", "VS Code"]
+    title: "Databases & Tooling",
+    description: "Designing structured schema patterns, managing reliable relational/NoSQL databases, and ensuring robust data integrity.",
+    skills: ["PostgreSQL", "MongoDB", "MySQL"]
+  },
+  {
+    title: "AI Systems & Workflows",
+    description: "Integrating advanced Large Language Model (LLM) APIs, leveraging AI-assisted coding, and building automated intelligent pipelines.",
+    skills: ["OpenAI", "Gemini", "Claude"]
   }
 ];
 

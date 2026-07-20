@@ -26,7 +26,7 @@ const Contact = () => {
   } = useForm({
     resolver: zodResolver(contactSchema)
   });
-  
+
   const location = useLocation();
 
   const mouseX = useMotionValue(0);
@@ -80,9 +80,9 @@ const Contact = () => {
 
   return (
     <section id="contact" aria-label="Contact Aafaque Nazir — Get in touch for web development services" className="relative w-full pt-24 lg:pt-32 pb-20 flex flex-col justify-center items-center px-4 bg-black">
-      <Toaster 
-        theme="dark" 
-        position="top-center" 
+      <Toaster
+        theme="dark"
+        position="top-center"
         toastOptions={{
           style: {
             background: "rgba(9, 9, 11, 0.8)",
@@ -244,7 +244,7 @@ const Contact = () => {
                   )}
                   <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12" />
                 </motion.button>
-                
+
                 {/* OR Divider */}
                 <div className="relative flex items-center py-2">
                   <div className="flex-grow border-t border-white/10"></div>
