@@ -1,6 +1,5 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
 import SEO from "./components/SEO";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -8,6 +7,7 @@ import SmoothScroll from "./components/SmoothScroll";
 import CustomCursor from "./components/ui/CustomCursor";
 import { motion, AnimatePresence } from "framer-motion";
 
+const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Skills = lazy(() => import("./pages/Skills"));
 const Project = lazy(() => import("./pages/Project"));

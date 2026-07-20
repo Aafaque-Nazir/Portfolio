@@ -1,13 +1,22 @@
 # Aafaque Nazir — Web Developer & AI Engineer
 
 > Freelance web developer and AI engineer based in Navi Mumbai, Maharashtra, India.
-> Website: https://aafaque.in
-> Email: aafaquenazir@gmail.com
-> WhatsApp: +91 93256 29256
+> Website: [aafaque.in](https://aafaque.in)
+> Email: [aafaquenazir@gmail.com](mailto:aafaquenazir@gmail.com)
+> WhatsApp: [+91 93256 29256](https://wa.me/919325629256)
 
 ## About
 
 Aafaque Nazir is a freelance web developer and AI engineer based in Navi Mumbai, India. He specializes in building high-performance websites, AI-powered SaaS platforms, intelligent chatbots, and interactive 3D web experiences using React, Next.js, TypeScript, Python, and AI/ML technologies.
+
+## Pages
+
+- [Home](https://aafaque.in/)
+- [About](https://aafaque.in/about)
+- [Skills](https://aafaque.in/skills)
+- [Projects](https://aafaque.in/projects)
+- [Services](https://aafaque.in/services)
+- [Contact](https://aafaque.in/contact)
 
 ## Services & Pricing
 
@@ -28,9 +37,13 @@ React, Next.js, TypeScript, JavaScript, Python, Node.js, AI/ML, OpenAI API, Lang
 
 ## Contact
 
-- Website: https://aafaque.in
-- Email: aafaquenazir@gmail.com
-- WhatsApp: https://wa.me/919325629256
-- GitHub: https://github.com/Aafaque-Nazir
-- LinkedIn: https://www.linkedin.com/in/aafaque-nazir/
-- Instagram: https://www.instagram.com/aafaque.75/
+- Website: [aafaque.in](https://aafaque.in)
+- Email: [aafaquenazir@gmail.com](mailto:aafaquenazir@gmail.com)
+- WhatsApp: [wa.me/919325629256](https://wa.me/919325629256)
+- GitHub: [github.com/Aafaque-Nazir](https://github.com/Aafaque-Nazir)
+- LinkedIn: [linkedin.com/in/aafaque-nazir](https://www.linkedin.com/in/aafaque-nazir/)
+- Instagram: [instagram.com/aafaque.75](https://www.instagram.com/aafaque.75/)
+
+## Optional
+
+- [Full details (llms-full.txt)](https://aafaque.in/llms-full.txt)

@@ -6,15 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
+  <!-- Google Tag Manager — Deferred to after page load for performance -->
+  <script>window.addEventListener('load', function() {
+    (function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
         'gtm.start':
           new Date().getTime(), event: 'gtm.js'
       }); var f = d.getElementsByTagName(s)[0],
         j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-M35WBZJ7');</script>
+    })(window, document, 'script', 'dataLayer', 'GTM-M35WBZJ7');
+  });</script>
   <!-- End Google Tag Manager -->
 
   <!-- Primary Meta Tags — Client-Attracting Keywords -->
@@ -42,8 +44,10 @@
       via react-helmet-async. No static duplicates here.
     -->
 
-  <!-- Canonical URL — Single source of truth -->
-  <link rel="canonical" href="https://aafaque.in/" />
+  <!--
+      Canonical URL is handled EXCLUSIVELY by the React SEO component
+      via react-helmet-async. No static duplicate here.
+    -->
 
   <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
   <meta property="og:type" content="website" />
@@ -82,10 +86,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Google Fonts — with display=swap for non-blocking render -->
+  <!-- Google Fonts — Non-blocking load via media swap -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Saira:ital,wght@0,100..900;1,100..900&display=swap" />
   <link
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet" />
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+  </noscript>
 
   <!--
       JSON-LD Structured Data is handled EXCLUSIVELY by the React SEO component
