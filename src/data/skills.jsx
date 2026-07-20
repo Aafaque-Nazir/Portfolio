@@ -7,27 +7,27 @@ import {
 } from "react-icons/si";
 
 const GeminiIcon = () => (
-  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M11.97 0c0 9.87-2.9 12.18-11.97 12 9.07-.18 11.97 2.13 11.97 12 0-9.87 2.9-12.18 11.97-12-9.07.18-11.97-2.13-11.97-12z" />
   </svg>
 );
 
 const ZustandIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" height="1em" width="1em">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" height="1em" width="1em" aria-hidden="true">
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
     <text x="12" y="16" fontSize="12" fontWeight="bold" textAnchor="middle" fill="currentColor" stroke="none">Z</text>
   </svg>
 );
 
 const ConvexIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" height="1em" width="1em">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" height="1em" width="1em" aria-hidden="true">
     <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
     <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
   </svg>
 );
 
 const NoSQLIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" height="1em" width="1em">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" height="1em" width="1em" aria-hidden="true">
     <path strokeLinecap="round" strokeLinejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m-8 4v10" />
   </svg>
 );

@@ -168,7 +168,7 @@ export default function Skills() {
               className="bg-[#09090b] border border-white/5 rounded-2xl p-6 text-left hover:border-cyan-500/20 transition-colors duration-300"
             >
               <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4">
-                <pr.icon className="text-sm" />
+                <pr.icon className="text-sm" aria-hidden="true" />
               </div>
               <h4 className="text-sm font-bold text-white uppercase mb-2 tracking-wide">{pr.title}</h4>
               <p className="text-xs text-slate-400 leading-relaxed font-light">{pr.description}</p>

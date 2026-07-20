@@ -208,7 +208,7 @@ const InteractiveStackModule = () => {
                 style={{ color: tech.color }}
                 title={tech.name}
               >
-                <tech.icon />
+                <tech.icon aria-hidden="true" />
               </div>
             ))}
           </div>
