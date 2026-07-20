@@ -63,7 +63,7 @@ export const projects = [
         link: "https://shopease-aafaque.netlify.app/",
         icon: <RiShoppingCartFill />,
         category: "Digital Stores (E-Comm)",
-        techStack: ["React", "Redux", "Tailwind CSS"],
+        techStack: ["Next.js", "MongoDB", "Tailwind CSS"],
         status: "Live",
         problem: "E-commerce stores often suffer from slow load times and clunky filtering systems, causing high bounce rates during product discovery.",
         solution: "Engineered a high-performance React application with Redux state management for instantaneous cart updates. Implemented client-side filtering to ensure zero-latency product discovery.",
