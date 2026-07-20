@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaGithub, FaArrowRight, FaEnvelope, FaWhatsapp, FaStar } from "react-icons/fa";
+import { FaGithub, FaArrowRight, FaEnvelope, FaWhatsapp, FaStar, FaLock } from "react-icons/fa";
 import GlobalBackground from "../components/GlobalBackground";
 import { SplitText } from "../components/ui/SplitText";
 import { projects } from "../data/projects";
@@ -27,8 +27,8 @@ const charVariants = {
   }
 };
 
-// Reusable Bento Card component - Optimized solid background for FPS and smooth scrolling
-const BentoCard = ({ children, className = "", title, colSpan = "col-span-1", rowSpan = "row-span-1" }) => {
+// Reusable BentoCard component - Optimized solid background for FPS and smooth scrolling
+const BentoCard = ({ children, className = "", title, headerAction, colSpan = "col-span-1", rowSpan = "row-span-1" }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -70,9 +70,10 @@ const BentoCard = ({ children, className = "", title, colSpan = "col-span-1", ro
           }}
         />
         <div className="relative z-10 h-full w-full flex flex-col justify-between">
-          {title && (
+          {(title || headerAction) && (
             <div className="flex items-center justify-between mb-2 shrink-0">
-              <h3 className="text-[9px] font-mono text-cyan-400/80 uppercase tracking-[0.2em] font-bold">{title}</h3>
+              {title ? <h3 className="text-[9px] font-mono text-cyan-400/80 uppercase tracking-[0.2em] font-bold">{title}</h3> : <div />}
+              {headerAction}
             </div>
           )}
           <div className="flex-grow flex flex-col justify-center">
@@ -109,42 +110,46 @@ const ProjectDeckModule = () => {
   const currentProject = shuffledProjects[activeIdx];
 
   return (
-    <BentoCard colSpan="col-span-1 md:col-span-2 lg:col-span-4" title="Featured Projects">
-      <div className="relative h-full w-full flex flex-col justify-end sm:flex-row sm:items-stretch sm:justify-between gap-4 min-h-[280px] sm:min-h-0">
-        <div className="relative z-10 flex-grow sm:max-w-[55%] pr-0 sm:pr-4 flex flex-col justify-between">
-          <div>
-            <h4 className="text-sm md:text-base font-black text-white uppercase tracking-tight mt-1 truncate">{currentProject.title}</h4>
-            <p className="text-[10px] sm:text-[11px] text-slate-300 sm:text-slate-400 font-light line-clamp-2 mt-1.5 leading-relaxed">{currentProject.description}</p>
-            <div className="flex flex-wrap gap-1.5 mt-2.5">
-              {currentProject.techStack.slice(0, 2).map((tech, idx) => (
-                <span key={idx} className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-[8px] font-mono font-semibold text-slate-300">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="mt-3">
-            <Link to={`/projects/${currentProject.id}`} className="inline-flex items-center gap-1.5 text-[9px] font-mono text-cyan-400 hover:text-cyan-300 group">
-              View Project <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px]" />
-            </Link>
-          </div>
-        </div>
-        <div className="absolute inset-0 sm:relative w-full sm:w-[45%] h-full overflow-hidden rounded-xl border border-white/5 sm:border-none flex items-center justify-center bg-zinc-950 shrink-0 z-0 sm:z-10">
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-transparent sm:hidden z-10" />
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={activeIdx}
+    <BentoCard colSpan="col-span-1 lg:col-span-2" rowSpan="row-span-1 md:row-span-2" title="Featured Projects">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeIdx}
+          initial={{ opacity: 0, filter: "blur(4px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0, filter: "blur(4px)" }}
+          transition={{ duration: 0.3 }}
+          className="relative h-full w-full flex flex-col group/project pt-2"
+        >
+          <div className="relative w-full h-[160px] md:h-[55%] overflow-hidden rounded-2xl bg-zinc-950 shrink-0 mb-4 md:mb-6 border border-white/5">
+            <img
               src={currentProject.image}
               alt={currentProject.title}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4 }}
-              className="w-full h-full object-cover rounded-xl"
+              className="w-full h-full object-cover rounded-2xl transition-transform duration-700 group-hover/project:scale-105"
             />
-          </AnimatePresence>
-        </div>
-      </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+          </div>
+          
+          <div className="flex flex-col justify-between flex-grow">
+            <div>
+              <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">{currentProject.title}</h4>
+              <p className="text-xs md:text-sm text-slate-400 font-light line-clamp-2 mt-2 leading-relaxed">{currentProject.description}</p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {currentProject.techStack.slice(0, 3).map((tech, idx) => (
+                  <span key={idx} className="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-md text-[9px] font-mono font-bold text-cyan-400 tracking-wider uppercase">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between shrink-0">
+              <Link to={`/projects/${currentProject.id}`} className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-white hover:text-cyan-400 group/link transition-colors">
+                Explore Case Study <FaArrowRight className="group-hover/link:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </BentoCard>
   );
 };
@@ -152,34 +157,54 @@ const ProjectDeckModule = () => {
 // 3. Interactive Stack Explorer Module
 const InteractiveStackModule = () => {
   const [activeCategory, setActiveCategory] = useState("Frontend");
-  const categories = ["Frontend", "Backend", "Database"];
+  
+  const categories = [
+    { name: "Frontend", id: "Frontend", locked: false },
+    { name: "Backend", id: "Backend", locked: false },
+    { name: "Database", id: "Database", locked: true },
+    { name: "AI", id: "AI", locked: true }
+  ];
+  
   const skillsByCategory = allSkills.filter(s => s.category === activeCategory).slice(0, 8);
 
   return (
-    <BentoCard colSpan="col-span-1" rowSpan="row-span-2" title="Skills">
-      <div className="flex flex-col h-full justify-between py-1">
-        <div className="flex flex-col gap-1.5 mb-4 mt-2">
+    <BentoCard 
+      colSpan="col-span-1 md:col-span-2" 
+      rowSpan="row-span-1" 
+      title="Core Technologies"
+      headerAction={
+        <Link to="/skills" className="flex items-center gap-1.5 text-[9px] font-mono text-slate-500 hover:text-cyan-400 uppercase tracking-widest transition-colors group">
+          View All <FaArrowRight className="group-hover:translate-x-1 transition-transform" size={8} />
+        </Link>
+      }
+    >
+      <div className="flex flex-col md:flex-row h-full gap-4 md:gap-6 pt-2">
+        <div className="grid grid-cols-2 md:flex md:flex-col gap-2 shrink-0 md:w-40 justify-center">
           {categories.map(cat => (
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`w-full py-2 px-4 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider text-left border transition-all ${
-                activeCategory === cat
-                  ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
-                  : "bg-white/[0.01] text-gray-500 border-white/5 hover:border-white/10 hover:text-white"
+              key={cat.id}
+              onClick={() => !cat.locked && setActiveCategory(cat.id)}
+              className={`py-2 px-3 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider text-center md:text-left border transition-all flex items-center justify-center md:justify-start gap-2 ${
+                cat.locked
+                  ? "bg-white/[0.01] text-gray-600 border-white/5 cursor-not-allowed opacity-60"
+                  : activeCategory === cat.id
+                    ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+                    : "bg-white/[0.01] text-gray-500 border-white/5 hover:border-white/10 hover:text-white cursor-pointer"
               }`}
+              title={cat.locked ? "Unlock full view in Skills page" : ""}
             >
-              {cat}
+              {cat.name}
+              {cat.locked && <FaLock className="text-[8px] text-gray-500" />}
             </button>
           ))}
         </div>
         
-        <div className="flex-grow flex flex-col justify-center">
-          <div className="grid grid-cols-4 gap-3 justify-items-center">
+        <div className="flex-grow flex items-center justify-center border-t md:border-t-0 md:border-l border-white/5 pt-4 md:pt-0 md:pl-6 relative">
+          <div className="grid grid-cols-4 gap-3 md:gap-4 w-full">
             {skillsByCategory.map((tech) => (
               <div 
                 key={tech.name}
-                className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-lg hover:border-cyan-500/30 transition-all hover:scale-105"
+                className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-xl hover:border-cyan-500/30 transition-all hover:scale-110"
                 style={{ color: tech.color }}
                 title={tech.name}
               >
@@ -187,12 +212,6 @@ const InteractiveStackModule = () => {
               </div>
             ))}
           </div>
-        </div>
-        
-        <div className="mt-4 pt-4 border-t border-white/5 shrink-0">
-          <Link to="/skills" className="text-[9px] font-mono text-cyan-400 uppercase tracking-widest hover:underline flex items-center gap-1.5 group">
-            All Skills <FaArrowRight className="group-hover:translate-x-1 transition-transform" size={8} />
-          </Link>
         </div>
       </div>
     </BentoCard>
@@ -326,23 +345,31 @@ const ContactNodeModule = () => {
   }, []);
 
   return (
-    <BentoCard colSpan="col-span-1" rowSpan="row-span-2" title="Get in Touch">
-      <div className="flex flex-col h-full justify-between py-1 text-white">
-        <div>
+    <BentoCard colSpan="col-span-1 md:col-span-2" rowSpan="row-span-1" title="Get in Touch">
+      <div className="flex flex-col md:flex-row h-full gap-6 pt-2 items-center">
+        <div className="flex-grow w-full">
           <span className="text-[8px] font-mono text-gray-500 uppercase tracking-widest block mb-1">My Time (IST)</span>
-          <h4 className="text-lg font-mono font-black text-cyan-400 tracking-tighter">{time}</h4>
-          <span className="text-[8px] font-mono text-slate-500 uppercase block mt-1">New Delhi, India</span>
+          <h4 className="text-2xl md:text-3xl font-mono font-black text-cyan-400 tracking-tighter">{time || "00:00:00"}</h4>
+          <span className="text-[9px] font-mono text-slate-500 uppercase block mt-1">New Delhi, India</span>
+          
+          <Link
+            to="/contact"
+            className="mt-4 md:mt-6 text-[10px] font-mono text-white hover:text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-2 group w-fit"
+          >
+            Start a Project
+            <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px]" />
+          </Link>
         </div>
 
-        <div className="space-y-3 my-6">
+        <div className="flex flex-row md:flex-col gap-3 w-full md:w-48 shrink-0">
           <a
             href="mailto:aafaquebuisness@gmail.com"
-            className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.01] border border-white/5 hover:border-cyan-500/20 hover:bg-white/[0.03] transition-all group/link"
+            className="flex-1 flex items-center gap-3 p-3 md:p-4 rounded-xl bg-white/[0.01] border border-white/5 hover:border-cyan-500/20 hover:bg-white/[0.03] transition-all group/link"
           >
-            <FaEnvelope className="text-slate-500 group-hover/link:text-cyan-400 transition-colors" />
+            <FaEnvelope className="text-slate-500 text-lg group-hover/link:text-cyan-400 transition-colors" />
             <div className="flex flex-col">
               <span className="text-[8px] font-mono text-gray-500 uppercase leading-none">Email</span>
-              <span className="text-[10px] text-white font-medium mt-0.5">Send Email</span>
+              <span className="text-[10px] text-white font-medium mt-1">Send Email</span>
             </div>
           </a>
 
@@ -350,23 +377,15 @@ const ContactNodeModule = () => {
             href="https://wa.me/91XXXXXXXXXX"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.01] border border-white/5 hover:border-emerald-500/20 hover:bg-white/[0.03] transition-all group/link"
+            className="flex-1 flex items-center gap-3 p-3 md:p-4 rounded-xl bg-white/[0.01] border border-white/5 hover:border-emerald-500/20 hover:bg-white/[0.03] transition-all group/link"
           >
-            <FaWhatsapp className="text-slate-500 group-hover/link:text-emerald-400 transition-colors" />
+            <FaWhatsapp className="text-slate-500 text-lg group-hover/link:text-emerald-400 transition-colors" />
             <div className="flex flex-col">
               <span className="text-[8px] font-mono text-gray-500 uppercase leading-none">WhatsApp</span>
-              <span className="text-[9px] text-white font-medium mt-0.5">Direct Chat</span>
+              <span className="text-[10px] text-white font-medium mt-1">Direct Chat</span>
             </div>
           </a>
         </div>
-
-        <Link
-          to="/contact"
-          className="text-[9px] font-mono text-cyan-400 hover:text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-2 group w-fit shrink-0"
-        >
-          Contact Me
-          <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px]" />
-        </Link>
       </div>
     </BentoCard>
   );

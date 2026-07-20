@@ -16,12 +16,12 @@ const categories = [
   {
     title: "Backend & Cloud Infrastructure",
     description: "Architecting secure server-side logic, real-time server connections, custom API endpoints, automated hosting deployments, and distributed version control.",
-    skills: ["Node.js", "Express.js", "Supabase", "Firebase", "Vercel", "Git"]
+    skills: ["Node.js", "Express.js", "Supabase", "Firebase", "Appwrite", "Vercel", "Git"]
   },
   {
     title: "Databases & Tooling",
     description: "Designing structured schema patterns, managing reliable relational/NoSQL databases, and ensuring robust data integrity.",
-    skills: ["PostgreSQL", "MongoDB", "MySQL"]
+    skills: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Turso", "NoSQL", "Convex", "Prisma"]
   },
   {
     title: "AI Systems & Workflows",

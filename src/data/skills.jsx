@@ -2,7 +2,8 @@ import React from "react";
 import {
   SiReact, SiNextdotjs, SiJavascript, SiTailwindcss, SiFramer, SiGit,
   SiTypescript, SiNodedotjs, SiSupabase, SiPostgresql, SiMysql,
-  SiMongodb, SiFirebase, SiGreensock, SiRedux, SiVercel, SiOpenai, SiExpress
+  SiMongodb, SiFirebase, SiGreensock, SiRedux, SiVercel, SiOpenai, SiExpress,
+  SiRedis, SiPrisma, SiAppwrite, SiClaude, SiTurso
 } from "react-icons/si";
 
 const GeminiIcon = () => (
@@ -11,16 +12,23 @@ const GeminiIcon = () => (
   </svg>
 );
 
-const ClaudeIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" height="1em" width="1em">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5c-2.48 0-4.5-2.02-4.5-4.5S8.52 7.5 11 7.5c1.17 0 2.23.45 3.03 1.18l-1.32 1.39C12.27 9.61 11.66 9.3 11 9.3c-1.49 0-2.7 1.21-2.7 2.7s1.21 2.7 2.7 2.7c1.1 0 2.05-.66 2.47-1.6h-2.47v-1.7h4.31c.06.3.1.61.1.94 0 2.5-1.68 4.66-4.41 4.66z" />
-  </svg>
-);
-
 const ZustandIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" height="1em" width="1em">
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
     <text x="12" y="16" fontSize="12" fontWeight="bold" textAnchor="middle" fill="currentColor" stroke="none">Z</text>
+  </svg>
+);
+
+const ConvexIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" height="1em" width="1em">
+    <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
+    <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const NoSQLIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" height="1em" width="1em">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m-8 4v10" />
   </svg>
 );
 
@@ -39,14 +47,20 @@ export const allSkills = [
   { icon: SiExpress, name: "Express.js", color: "#ffffff", category: "Backend" },
   { icon: SiSupabase, name: "Supabase", color: "#3ECF8E", category: "Backend" },
   { icon: SiFirebase, name: "Firebase", color: "#FFCA28", category: "Backend" },
+  { icon: SiAppwrite, name: "Appwrite", color: "#F02E65", category: "Backend" },
   { icon: SiVercel, name: "Vercel", color: "#ffffff", category: "DevOps" },
   { icon: SiGit, name: "Git", color: "#F05032", category: "DevOps" },
 
   { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1", category: "Database" },
   { icon: SiMongodb, name: "MongoDB", color: "#47A248", category: "Database" },
   { icon: SiMysql, name: "MySQL", color: "#4479A1", category: "Database" },
+  { icon: SiRedis, name: "Redis", color: "#DC382D", category: "Database" },
+  { icon: SiTurso, name: "Turso", color: "#4CFFA8", category: "Database" },
+  { icon: NoSQLIcon, name: "NoSQL", color: "#00684A", category: "Database" },
+  { icon: ConvexIcon, name: "Convex", color: "#FA6E4F", category: "Database" },
+  { icon: SiPrisma, name: "Prisma", color: "#2D3748", category: "Database" },
   
   { icon: SiOpenai, name: "OpenAI", color: "#10a37f", category: "AI" },
   { icon: GeminiIcon, name: "Gemini", color: "#8E75B2", category: "AI" },
-  { icon: ClaudeIcon, name: "Claude", color: "#D19A66", category: "AI" },
+  { icon: SiClaude, name: "Claude", color: "#D97757", category: "AI" },
 ];
