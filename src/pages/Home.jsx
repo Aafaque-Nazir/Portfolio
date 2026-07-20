@@ -130,7 +130,7 @@ const ProjectDeckModule = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
           </div>
-          
+
           <div className="flex flex-col justify-between flex-grow">
             <div>
               <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">{currentProject.title}</h4>
@@ -143,7 +143,7 @@ const ProjectDeckModule = () => {
                 ))}
               </div>
             </div>
-            
+
             <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between shrink-0">
               <Link to={`/projects/${currentProject.id}`} className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-white hover:text-cyan-400 group/link transition-colors">
                 Explore Case Study <FaArrowRight className="group-hover/link:translate-x-1 transition-transform" />
@@ -159,20 +159,20 @@ const ProjectDeckModule = () => {
 // 3. Interactive Stack Explorer Module
 const InteractiveStackModule = () => {
   const [activeCategory, setActiveCategory] = useState("Frontend");
-  
+
   const categories = [
     { name: "Frontend", id: "Frontend", locked: false },
     { name: "Backend", id: "Backend", locked: false },
     { name: "Database", id: "Database", locked: true },
     { name: "AI", id: "AI", locked: true }
   ];
-  
+
   const skillsByCategory = allSkills.filter(s => s.category === activeCategory).slice(0, 8);
 
   return (
-    <BentoCard 
-      colSpan="col-span-1 md:col-span-2" 
-      rowSpan="row-span-1" 
+    <BentoCard
+      colSpan="col-span-1 md:col-span-2"
+      rowSpan="row-span-1"
       title="Core Technologies"
       headerAction={
         <Link to="/skills" className="flex items-center gap-1.5 text-[9px] font-mono text-slate-500 hover:text-cyan-400 uppercase tracking-widest transition-colors group">
@@ -186,13 +186,12 @@ const InteractiveStackModule = () => {
             <button
               key={cat.id}
               onClick={() => !cat.locked && setActiveCategory(cat.id)}
-              className={`py-2 px-3 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider text-center md:text-left border transition-all flex items-center justify-center md:justify-start gap-2 ${
-                cat.locked
+              className={`py-2 px-3 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider text-center md:text-left border transition-all flex items-center justify-center md:justify-start gap-2 ${cat.locked
                   ? "bg-white/[0.01] text-gray-600 border-white/5 cursor-not-allowed opacity-60"
                   : activeCategory === cat.id
                     ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
                     : "bg-white/[0.01] text-gray-500 border-white/5 hover:border-white/10 hover:text-white cursor-pointer"
-              }`}
+                }`}
               title={cat.locked ? "Unlock full view in Skills page" : ""}
             >
               {cat.name}
@@ -200,11 +199,11 @@ const InteractiveStackModule = () => {
             </button>
           ))}
         </div>
-        
+
         <div className="flex-grow flex items-center justify-center border-t md:border-t-0 md:border-l border-white/5 pt-4 md:pt-0 md:pl-6 relative">
           <div className="grid grid-cols-4 gap-3 md:gap-4 w-full">
             {skillsByCategory.map((tech) => (
-              <div 
+              <div
                 key={tech.name}
                 className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-xl hover:border-cyan-500/30 transition-all hover:scale-110"
                 style={{ color: tech.color }}
@@ -266,11 +265,10 @@ const RecommenderModule = () => {
                 <button
                   key={type}
                   onClick={() => setProjectType(type)}
-                  className={`flex-1 py-2 rounded-xl text-[9px] font-bold uppercase tracking-wider border transition-all ${
-                    projectType === type
+                  className={`flex-1 py-2 rounded-xl text-[9px] font-bold uppercase tracking-wider border transition-all ${projectType === type
                       ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
                       : "bg-white/[0.01] text-slate-400 border-white/5 hover:border-white/10 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {type}
                 </button>
@@ -285,11 +283,10 @@ const RecommenderModule = () => {
                 <button
                   key={time}
                   onClick={() => setTimeline(time)}
-                  className={`flex-1 py-2 rounded-xl text-[9px] font-bold uppercase tracking-wider border transition-all ${
-                    timeline === time
+                  className={`flex-1 py-2 rounded-xl text-[9px] font-bold uppercase tracking-wider border transition-all ${timeline === time
                       ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
                       : "bg-white/[0.01] text-slate-400 border-white/5 hover:border-white/10 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {time === "Urgent" ? "⚡ Urgent" : "📅 Standard"}
                 </button>
@@ -353,7 +350,7 @@ const ContactNodeModule = () => {
           <span className="text-[8px] font-mono text-gray-500 uppercase tracking-widest block mb-1">My Time (IST)</span>
           <h4 className="text-2xl md:text-3xl font-mono font-black text-cyan-400 tracking-tighter">{time || "00:00:00"}</h4>
           <span className="text-[9px] font-mono text-slate-500 uppercase block mt-1">New Delhi, India</span>
-          
+
           <Link
             to="/contact"
             className="mt-4 md:mt-6 text-[10px] font-mono text-white hover:text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-2 group w-fit"
@@ -629,23 +626,23 @@ const Home = () => {
                 <div className="relative w-24 h-24 flex items-center justify-center">
                   <svg className="w-full h-full transform -rotate-90">
                     <circle cx="48" cy="48" r="42" stroke="rgba(255,255,255,0.03)" strokeWidth="5" fill="transparent" />
-                    <motion.circle 
-                      cx="48" 
-                      cy="48" 
-                      r="42" 
-                      stroke="#22d3ee" 
-                      strokeWidth="5" 
-                      fill="transparent" 
-                      strokeDasharray={42 * 2 * Math.PI} 
+                    <motion.circle
+                      cx="48"
+                      cy="48"
+                      r="42"
+                      stroke="#22d3ee"
+                      strokeWidth="5"
+                      fill="transparent"
+                      strokeDasharray={42 * 2 * Math.PI}
                       initial={{ strokeDashoffset: 42 * 2 * Math.PI }}
-                      whileInView={{ strokeDashoffset: 42 * 2 * Math.PI * (1 - 0.98) }}
+                      whileInView={{ strokeDashoffset: 42 * 2 * Math.PI * (1 - 0.90) }}
                       viewport={{ once: true }}
                       transition={{ duration: 1.5, ease: "easeOut" }}
                       strokeLinecap="round"
                     />
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-2xl font-black text-white tracking-tighter">98<span className="text-cyan-400 text-xs">%</span></span>
+                    <span className="text-2xl font-black text-white tracking-tighter">90+<span className="text-cyan-400 text-xs">+</span></span>
                   </div>
                 </div>
                 <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">Lighthouse score</span>

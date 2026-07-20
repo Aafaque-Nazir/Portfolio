@@ -98,7 +98,7 @@ const About = () => {
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none opacity-20" />
               
               <div className="relative z-10 flex flex-col gap-1">
-                <span className="text-3xl font-black text-white tracking-tighter">98<span className="text-cyan-500 text-lg">/100</span></span>
+                <span className="text-3xl font-black text-white tracking-tighter">90<span className="text-cyan-500 text-lg">+</span></span>
                 <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Performance</span>
               </div>
               <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
