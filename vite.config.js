@@ -16,7 +16,9 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor_react: ['react', 'react-dom', 'react-router-dom'],
-          vendor_motion: ['framer-motion']
+          vendor_motion: ['framer-motion'],
+          vendor_icons: ['react-icons'],
+          vendor_utils: ['react-helmet-async', 'lenis']
         }
       }
     }

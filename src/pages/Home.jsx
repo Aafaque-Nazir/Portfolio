@@ -49,7 +49,7 @@ const BentoCard = ({ children, className = "", title, headerAction, colSpan = "c
     >
       {/* Spotlight Border */}
       <motion.div
-        className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] pointer-events-none"
+        className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] pointer-events-none hidden md:block"
         style={{
           background: useTransform(
             [mouseX, mouseY],
@@ -61,7 +61,7 @@ const BentoCard = ({ children, className = "", title, headerAction, colSpan = "c
       <div className="relative h-full w-full bg-[#09090b] rounded-[1.95rem] border border-white/5 p-4 md:p-5 flex flex-col justify-between overflow-hidden">
         {/* Spotlight Inner */}
         <motion.div
-          className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[1.95rem]"
+          className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[1.95rem] hidden md:block"
           style={{
             background: useTransform(
               [mouseX, mouseY],
@@ -124,6 +124,8 @@ const ProjectDeckModule = () => {
             <img
               src={currentProject.image}
               alt={currentProject.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover rounded-2xl transition-transform duration-700 group-hover/project:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
@@ -473,14 +475,23 @@ const Home = () => {
               {/* Massive Typography */}
               <div className="relative mb-6">
                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] font-black tracking-tighter text-white leading-[0.9]">
-                  <div className="overflow-hidden flex flex-wrap">
+                  {/* Mobile View (CSS animation) */}
+                  <div className="overflow-hidden flex flex-wrap md:hidden animate-[fadeInUp_0.8s_ease-out_forwards]">
+                    <span className="inline-block">AAFAQUE</span>
+                  </div>
+                  <div className="overflow-hidden flex flex-wrap mt-2 md:hidden animate-[fadeInUp_0.8s_ease-out_0.2s_forwards] opacity-0">
+                    <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-white drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">NAZIR</span>
+                  </div>
+
+                  {/* Desktop View (Framer Motion) */}
+                  <div className="overflow-hidden hidden md:flex flex-wrap">
                     {firstName.map((char, index) => (
                       <motion.span key={index} variants={charVariants} className="inline-block">
                         {char}
                       </motion.span>
                     ))}
                   </div>
-                  <div className="overflow-hidden flex flex-wrap mt-2">
+                  <div className="overflow-hidden hidden md:flex flex-wrap mt-2">
                     {lastName.map((char, index) => (
                       <motion.span
                         key={index}

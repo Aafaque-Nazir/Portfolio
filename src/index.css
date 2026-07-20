@@ -21,6 +21,17 @@
 .animate-sheen {
   animation: sheen 1s ease-in-out infinite;
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 html, body {
   overflow-x: hidden;
   max-width: 100%;
@@ -40,11 +51,6 @@ body {
   background-color: black;
 }
 
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-}
 
 /* Custom Text Selection */
 *::selection {

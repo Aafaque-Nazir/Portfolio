@@ -11,6 +11,8 @@ const GlobalBackground = () => {
     let animationFrameId;
     let width, height;
     let isVisible = true;
+    let isMobile = false;
+    let lastRenderTime = 0;
 
     // --- DATA STRUCTURES ---
     let paths = []; // { points: [{x,y}], length }
@@ -36,7 +38,7 @@ const GlobalBackground = () => {
       dots = [];
       trailers = [];
 
-      const isMobile = width < 768;
+      isMobile = width < 768;
       
       // 4 Corners: TL, TR, BL, BR
       const corners = [
@@ -119,7 +121,17 @@ const GlobalBackground = () => {
       return points[points.length - 1];
     };
 
-    const render = () => {
+    const render = (time) => {
+      if (isVisible) animationFrameId = requestAnimationFrame(render);
+
+      if (isMobile) {
+        if (!time) time = performance.now();
+        const elapsed = time - lastRenderTime;
+        const fpsInterval = 1000 / 30; // 30 FPS on mobile
+        if (elapsed < fpsInterval) return;
+        lastRenderTime = time - (elapsed % fpsInterval);
+      }
+
       ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, width, height);
 
@@ -178,18 +190,19 @@ const GlobalBackground = () => {
             ctx.stroke();
 
             // Head Glow (Simpler circle)
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = "rgba(34, 211, 238, 0.8)";
+            if (!isMobile) {
+              ctx.shadowBlur = 15;
+              ctx.shadowColor = "rgba(34, 211, 238, 0.8)";
+            }
             ctx.fillStyle = "#ffffff";
             ctx.beginPath();
             ctx.arc(head.x, head.y, t.width * 1.2, 0, Math.PI * 2);
             ctx.fill();
-            ctx.shadowBlur = 0;
+            if (!isMobile) ctx.shadowBlur = 0;
           }
         }
       });
 
-      if (isVisible) animationFrameId = requestAnimationFrame(render);
     };
 
     const handleResize = () => initializeCanvas();

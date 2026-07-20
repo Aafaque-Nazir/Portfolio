@@ -7,6 +7,11 @@ const SmoothScroll = () => {
     const lenisRef = useRef(null);
 
     useEffect(() => {
+        // Skip Lenis on touch devices as native scroll is already optimized
+        if (typeof window !== "undefined" && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+            return;
+        }
+
         const lenis = new Lenis({
             duration: 1.5, // Slower duration for smoother feel
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing

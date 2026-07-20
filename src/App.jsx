@@ -1,11 +1,10 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import SEO from "./components/SEO";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import SmoothScroll from "./components/SmoothScroll";
-import CustomCursor from "./components/ui/CustomCursor";
-import { motion, AnimatePresence } from "framer-motion";
+import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
@@ -18,7 +17,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 // Page Transition Wrapper
 const PageWrapper = ({ children, sectionName }) => {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -27,7 +26,7 @@ const PageWrapper = ({ children, sectionName }) => {
     >
       <SEO section={sectionName} />
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -40,13 +39,14 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
+    <LazyMotion features={domAnimation}>
+      <m.div
+        initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
       className="relative min-h-screen overflow-x-hidden bg-black"
     >
-      <CustomCursor />
+
       <SmoothScroll />
       <Navbar />
 
@@ -80,7 +80,8 @@ function App() {
       </main>
 
       <Footer />
-    </motion.div>
+      </m.div>
+    </LazyMotion>
   );
 }
 
