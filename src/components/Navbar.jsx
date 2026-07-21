@@ -129,7 +129,7 @@ export default function Navbar() {
               ))}
               <div className="w-[1px] h-4 bg-white/10 mx-2" />
               <a
-                href="/AafaqueNazirCV.pdf"
+                href="/Aafaque_Nazir_Resume.pdf"
                 download
                 aria-label="Download CV"
                 title="Download CV"
@@ -163,7 +163,7 @@ export default function Navbar() {
 
                 <div className="flex items-center gap-1 pl-1 border-l border-white/20">
                   <a
-                    href="/AafaqueNazirCV.pdf"
+                    href="/Aafaque_Nazir_Resume.pdf"
                     download
                     aria-label="Download CV"
                     className="flex items-center justify-center p-1.5 text-white/80 hover:text-cyan-400 transition-colors"
@@ -240,7 +240,7 @@ export default function Navbar() {
                 <motion.div variants={itemVariants} className="pt-4 border-t border-white/10 flex flex-col gap-4">
                   {/* Download CV */}
                   <a
-                    href="/AafaqueNazirCV.pdf"
+                    href="/Aafaque_Nazir_Resume.pdf"
                     download
                     className="flex items-center justify-center gap-2 w-full text-white/70 hover:text-cyan-400 transition-all duration-300 border border-white/10 hover:border-cyan-500/30 rounded-xl py-2.5 text-[10px] font-bold tracking-widest uppercase bg-gradient-to-b from-white/5 to-white/[0.01] hover:shadow-[0_4px_12px_rgba(34,211,238,0.05)]"
                   >
