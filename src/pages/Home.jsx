@@ -187,10 +187,10 @@ const InteractiveStackModule = () => {
               key={cat.id}
               onClick={() => !cat.locked && setActiveCategory(cat.id)}
               className={`py-2 px-3 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider text-center md:text-left border transition-all flex items-center justify-center md:justify-start gap-2 ${cat.locked
-                  ? "bg-white/[0.01] text-gray-600 border-white/5 cursor-not-allowed opacity-60"
-                  : activeCategory === cat.id
-                    ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
-                    : "bg-white/[0.01] text-gray-500 border-white/5 hover:border-white/10 hover:text-white cursor-pointer"
+                ? "bg-white/[0.01] text-gray-600 border-white/5 cursor-not-allowed opacity-60"
+                : activeCategory === cat.id
+                  ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+                  : "bg-white/[0.01] text-gray-500 border-white/5 hover:border-white/10 hover:text-white cursor-pointer"
                 }`}
               title={cat.locked ? "Unlock full view in Skills page" : ""}
             >
@@ -266,8 +266,8 @@ const RecommenderModule = () => {
                   key={type}
                   onClick={() => setProjectType(type)}
                   className={`flex-1 py-2 rounded-xl text-[9px] font-bold uppercase tracking-wider border transition-all ${projectType === type
-                      ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
-                      : "bg-white/[0.01] text-slate-400 border-white/5 hover:border-white/10 hover:text-white"
+                    ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
+                    : "bg-white/[0.01] text-slate-400 border-white/5 hover:border-white/10 hover:text-white"
                     }`}
                 >
                   {type}
@@ -284,8 +284,8 @@ const RecommenderModule = () => {
                   key={time}
                   onClick={() => setTimeline(time)}
                   className={`flex-1 py-2 rounded-xl text-[9px] font-bold uppercase tracking-wider border transition-all ${timeline === time
-                      ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
-                      : "bg-white/[0.01] text-slate-400 border-white/5 hover:border-white/10 hover:text-white"
+                    ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
+                    : "bg-white/[0.01] text-slate-400 border-white/5 hover:border-white/10 hover:text-white"
                     }`}
                 >
                   {time === "Urgent" ? "⚡ Urgent" : "📅 Standard"}
