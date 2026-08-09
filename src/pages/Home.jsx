@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaGithub, FaArrowRight, FaEnvelope, FaWhatsapp, FaStar, FaLock } from "react-icons/fa";
+import { FaGithub, FaArrowRight, FaStar, FaLock } from "react-icons/fa";
 import GlobalBackground from "../components/GlobalBackground";
 import { SplitText } from "../components/ui/SplitText";
 import { projects } from "../data/projects";
@@ -85,15 +85,17 @@ const BentoCard = ({ children, className = "", title, headerAction, colSpan = "c
   );
 };
 
-
-// 2. Project Deck Module - Fully Responsive for Mobile and Tablets
+// ─────────────────────────────────────────────────────────────────
+// 2. Project Deck Module — Shows top 3 only, drives to /projects
+// Psychology: Scarcity + FOMO — "there's more you haven't seen"
+// ─────────────────────────────────────────────────────────────────
 const ProjectDeckModule = () => {
   const [shuffledProjects, setShuffledProjects] = useState([]);
   const [activeIdx, setActiveIdx] = useState(0);
+  const TEASER_COUNT = 3;
 
   useEffect(() => {
-    // Shuffle all projects on mount
-    const shuffled = [...projects].sort(() => Math.random() - 0.5);
+    const shuffled = [...projects].sort(() => Math.random() - 0.5).slice(0, TEASER_COUNT);
     setShuffledProjects(shuffled);
   }, []);
 
@@ -120,6 +122,7 @@ const ProjectDeckModule = () => {
           transition={{ duration: 0.3 }}
           className="relative h-full w-full flex flex-col group/project pt-2"
         >
+          {/* Project Image */}
           <div className="relative w-full h-[160px] md:h-[55%] overflow-hidden rounded-2xl bg-zinc-950 shrink-0 mb-4 md:mb-6 border border-white/5">
             <img
               src={currentProject.image}
@@ -131,22 +134,23 @@ const ProjectDeckModule = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
           </div>
 
+          {/* Project Info */}
           <div className="flex flex-col justify-between flex-grow">
             <div>
               <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">{currentProject.title}</h4>
               <p className="text-xs md:text-sm text-slate-400 font-light line-clamp-2 mt-2 leading-relaxed">{currentProject.description}</p>
-              <div className="flex flex-wrap gap-2 mt-4">
-                {currentProject.techStack.slice(0, 3).map((tech, idx) => (
-                  <span key={idx} className="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-md text-[9px] font-mono font-bold text-cyan-400 tracking-wider uppercase">
-                    {tech}
-                  </span>
-                ))}
-              </div>
             </div>
 
+            {/* Bottom: Dot indicators + "See All" CTA */}
             <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between shrink-0">
-              <Link to={`/projects/${currentProject.id}`} className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-white hover:text-cyan-400 group/link transition-colors">
-                Explore Case Study <FaArrowRight className="group-hover/link:translate-x-1 transition-transform" />
+              <div className="flex items-center gap-2">
+                {shuffledProjects.map((_, i) => (
+                  <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === activeIdx ? "bg-cyan-400 shadow-[0_0_6px_#22d3ee]" : "bg-white/10"}`} />
+                ))}
+                <span className="text-[9px] font-mono text-slate-600 ml-1">of {projects.length}</span>
+              </div>
+              <Link to="/projects" className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-cyan-400 hover:text-white group/link transition-colors">
+                See All Projects <FaArrowRight className="group-hover/link:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -156,9 +160,13 @@ const ProjectDeckModule = () => {
   );
 };
 
-// 3. Interactive Stack Explorer Module
+// ─────────────────────────────────────────────────────────────────
+// 3. Interactive Stack Explorer — Shows top 5 only, drives to /skills
+// Psychology: Iceberg Effect — showing the tip implies massive depth
+// ─────────────────────────────────────────────────────────────────
 const InteractiveStackModule = () => {
   const [activeCategory, setActiveCategory] = useState("Frontend");
+  const VISIBLE_COUNT = 5;
 
   const categories = [
     { name: "Frontend", id: "Frontend", locked: false },
@@ -167,7 +175,8 @@ const InteractiveStackModule = () => {
     { name: "AI", id: "AI", locked: true }
   ];
 
-  const skillsByCategory = allSkills.filter(s => s.category === activeCategory).slice(0, 8);
+  const skillsByCategory = allSkills.filter(s => s.category === activeCategory).slice(0, VISIBLE_COUNT);
+  const totalSkills = allSkills.length;
 
   return (
     <BentoCard
@@ -175,12 +184,13 @@ const InteractiveStackModule = () => {
       rowSpan="row-span-1"
       title="Core Technologies"
       headerAction={
-        <Link to="/skills" className="flex items-center gap-1.5 text-[9px] font-mono text-slate-500 hover:text-cyan-400 uppercase tracking-widest transition-colors group">
-          View All <FaArrowRight className="group-hover:translate-x-1 transition-transform" size={8} />
+        <Link to="/skills" className="flex items-center gap-1.5 text-[9px] font-mono text-cyan-400 hover:text-white uppercase tracking-widest transition-colors group font-bold">
+          +{totalSkills - VISIBLE_COUNT} More <FaArrowRight className="group-hover:translate-x-1 transition-transform" size={8} />
         </Link>
       }
     >
       <div className="flex flex-col md:flex-row h-full gap-4 md:gap-6 pt-2">
+        {/* Category Tabs */}
         <div className="grid grid-cols-2 md:flex md:flex-col gap-2 shrink-0 md:w-40 justify-center">
           {categories.map(cat => (
             <button
@@ -192,7 +202,7 @@ const InteractiveStackModule = () => {
                   ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
                   : "bg-white/[0.01] text-gray-500 border-white/5 hover:border-white/10 hover:text-white cursor-pointer"
                 }`}
-              title={cat.locked ? "Unlock full view in Skills page" : ""}
+              title={cat.locked ? "Explore full stack on Skills page" : ""}
             >
               {cat.name}
               {cat.locked && <FaLock className="text-[8px] text-gray-500" />}
@@ -200,8 +210,9 @@ const InteractiveStackModule = () => {
           ))}
         </div>
 
-        <div className="flex-grow flex items-center justify-center border-t md:border-t-0 md:border-l border-white/5 pt-4 md:pt-0 md:pl-6 relative">
-          <div className="grid grid-cols-4 gap-3 md:gap-4 w-full">
+        {/* Skills Grid */}
+        <div className="flex-grow flex flex-col items-center justify-center border-t md:border-t-0 md:border-l border-white/5 pt-4 md:pt-0 md:pl-6 relative gap-4">
+          <div className="grid grid-cols-5 gap-3 md:gap-4 w-full">
             {skillsByCategory.map((tech) => (
               <div
                 key={tech.name}
@@ -213,117 +224,69 @@ const InteractiveStackModule = () => {
               </div>
             ))}
           </div>
+          <Link to="/skills" className="text-[9px] font-mono text-slate-500 hover:text-cyan-400 transition-colors uppercase tracking-widest">
+            Explore full tech stack →
+          </Link>
         </div>
       </div>
     </BentoCard>
   );
 };
 
-// 4. Estimator Module
+// ─────────────────────────────────────────────────────────────────
+// 4. Service Teaser — Simple tiles, drives to /services
+// Psychology: Choice Simplification — 3 easy doors, not a complex calculator
+// ─────────────────────────────────────────────────────────────────
 const RecommenderModule = () => {
-  const [projectType, setProjectType] = useState("Website");
-  const [timeline, setTimeline] = useState("Normal");
-
-  const getRecommendation = () => {
-    if (projectType === "Website") {
-      return {
-        title: "High-Converting Website",
-        deliverables: ["Custom UI design", "SEO Optimization", "100% Speed Target"],
-        timeline: timeline === "Urgent" ? "2 Weeks (Express)" : "3 Weeks",
-        urgencyFee: timeline === "Urgent" ? "Express Priority" : "Standard Model",
-        linkState: "High-Converting Websites"
-      };
-    } else if (projectType === "E-Commerce") {
-      return {
-        title: "Custom Online Store",
-        deliverables: ["Stripe Integration", "Inventory Tracking", "WhatsApp Sync"],
-        timeline: timeline === "Urgent" ? "3 Weeks (Express)" : "4 Weeks",
-        urgencyFee: timeline === "Urgent" ? "Express Priority" : "Standard Model",
-        linkState: "Custom Online Stores"
-      };
-    } else {
-      return {
-        title: "Custom Web App",
-        deliverables: ["Interactive Dashboard", "Secure DB Setup", "Real-Time Engine"],
-        timeline: timeline === "Urgent" ? "4 Weeks (Express)" : "6 Weeks",
-        urgencyFee: timeline === "Urgent" ? "Express Priority" : "Standard Model",
-        linkState: "Custom Web Apps"
-      };
-    }
-  };
-
-  const rec = getRecommendation();
+  const services = [
+    { title: "Websites", desc: "Conversion-focused, animated, fast", linkState: "High-Converting Websites", icon: "🌐" },
+    { title: "E-Commerce", desc: "Custom storefronts, payments, inventory", linkState: "Custom Online Stores", icon: "🛒" },
+    { title: "Web Apps", desc: "Dashboards, SaaS, real-time systems", linkState: "Custom Web Apps", icon: "⚡" },
+  ];
 
   return (
-    <BentoCard colSpan="col-span-1 md:col-span-2" rowSpan="row-span-2" title="Estimate Project">
+    <BentoCard colSpan="col-span-1 md:col-span-2" rowSpan="row-span-2" title="Services">
       <div className="flex flex-col h-full justify-between py-1 text-white">
-        <div className="space-y-4">
-          <div>
-            <label className="text-[8px] font-mono text-gray-500 uppercase tracking-widest block mb-2 font-bold">Project Type</label>
-            <div className="flex gap-2">
-              {["Website", "E-Commerce", "Web App"].map(type => (
-                <button
-                  key={type}
-                  onClick={() => setProjectType(type)}
-                  className={`flex-1 py-2 rounded-xl text-[9px] font-bold uppercase tracking-wider border transition-all ${projectType === type
-                    ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
-                    : "bg-white/[0.01] text-slate-400 border-white/5 hover:border-white/10 hover:text-white"
-                    }`}
-                >
-                  {type}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <label className="text-[8px] font-mono text-gray-500 uppercase tracking-widest block mb-2 font-bold">Timeline</label>
-            <div className="flex gap-2">
-              {["Urgent", "Normal"].map(time => (
-                <button
-                  key={time}
-                  onClick={() => setTimeline(time)}
-                  className={`flex-1 py-2 rounded-xl text-[9px] font-bold uppercase tracking-wider border transition-all ${timeline === time
-                    ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
-                    : "bg-white/[0.01] text-slate-400 border-white/5 hover:border-white/10 hover:text-white"
-                    }`}
-                >
-                  {time === "Urgent" ? "⚡ Urgent" : "📅 Standard"}
-                </button>
-              ))}
-            </div>
-          </div>
+        <div className="mb-4">
+          <h4 className="text-lg font-black text-white uppercase tracking-tight">What do you need?</h4>
+          <p className="text-[10px] text-slate-500 mt-1 font-mono">Pick a service to learn more</p>
         </div>
 
-        <div className="my-4 p-4 rounded-2xl bg-white/[0.01] border border-white/5 flex-grow flex flex-col justify-center">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-black text-cyan-400 uppercase tracking-tight">{rec.title}</span>
-            <span className="text-[8px] font-mono text-orange-400 bg-orange-950/20 px-2.5 py-0.5 rounded-full border border-orange-500/20">{rec.urgencyFee}</span>
-          </div>
-          <p className="text-[9px] font-mono text-gray-500">Timeline: {rec.timeline}</p>
-          <ul className="mt-3 space-y-1.5">
-            {rec.deliverables.map((d, i) => (
-              <li key={i} className="text-[10px] text-slate-300 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                {d}
-              </li>
-            ))}
-          </ul>
+        <div className="flex flex-col gap-3 flex-grow justify-center">
+          {services.map((s) => (
+            <Link
+              key={s.title}
+              to="/services"
+              state={{ plan: s.linkState }}
+              className="group/svc flex items-center gap-4 p-4 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-cyan-500/20 hover:bg-cyan-500/[0.03] transition-all duration-300"
+            >
+              <span className="text-2xl shrink-0">{s.icon}</span>
+              <div className="flex-grow min-w-0">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-sm font-black text-white uppercase tracking-tight group-hover/svc:text-cyan-400 transition-colors">{s.title}</span>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-1 line-clamp-1">{s.desc}</p>
+              </div>
+              <FaArrowRight className="text-[10px] text-slate-600 group-hover/svc:text-cyan-400 group-hover/svc:translate-x-1 transition-all shrink-0" />
+            </Link>
+          ))}
         </div>
 
         <Link
-          to="/contact"
-          state={{ plan: rec.linkState }}
-          className="w-full py-3 bg-cyan-400 hover:bg-cyan-300 text-black font-black uppercase tracking-wider text-[10px] rounded-xl flex items-center justify-center gap-2 group transition-all shrink-0"
+          to="/services"
+          className="mt-4 w-full py-3 bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 text-white hover:text-cyan-400 font-bold uppercase tracking-wider text-[10px] rounded-xl flex items-center justify-center gap-2 group/all transition-all shrink-0"
         >
-          Get a Quote <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px]" />
+          Explore All Services <FaArrowRight className="group-hover/all:translate-x-1 transition-transform text-[8px]" />
         </Link>
       </div>
     </BentoCard>
   );
 };
 
-// 5. Contact Node with Dynamic Local Clock
+// ─────────────────────────────────────────────────────────────────
+// 5. Contact Node — Clock + single CTA only, drives to /contact
+// Psychology: Commitment Escalation — page visit = micro-commitment
+// ─────────────────────────────────────────────────────────────────
 const ContactNodeModule = () => {
   const [time, setTime] = useState("");
 
@@ -344,102 +307,65 @@ const ContactNodeModule = () => {
   }, []);
 
   return (
-    <BentoCard colSpan="col-span-1 md:col-span-2" rowSpan="row-span-1" title="Get in Touch">
-      <div className="flex flex-col md:flex-row h-full gap-6 pt-2 items-center">
+    <BentoCard colSpan="col-span-1 md:col-span-2" rowSpan="row-span-1" title="Availability">
+      <div className="flex flex-col md:flex-row h-full gap-5 pt-2 items-center">
+        {/* Clock + Status */}
         <div className="flex-grow w-full">
-          <span className="text-[8px] font-mono text-gray-500 uppercase tracking-widest block mb-1">My Time (IST)</span>
+          <span className="text-[8px] font-mono text-gray-500 uppercase tracking-widest block mb-1">My Local Time (IST)</span>
           <h4 className="text-2xl md:text-3xl font-mono font-black text-cyan-400 tracking-tighter">{time || "00:00:00"}</h4>
-          <span className="text-[9px] font-mono text-slate-500 uppercase block mt-1">New Delhi, India</span>
-
-          <Link
-            to="/contact"
-            className="mt-4 md:mt-6 text-[10px] font-mono text-white hover:text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-2 group w-fit"
-          >
-            Start a Project
-            <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px]" />
-          </Link>
+          <div className="flex items-center gap-2 mt-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-[9px] font-mono text-emerald-400 uppercase tracking-wider">Available for Projects</span>
+          </div>
         </div>
 
-        <div className="flex flex-row md:flex-col gap-3 w-full md:w-48 shrink-0">
-          <a
-            href="mailto:aafaquebuisness@gmail.com"
-            className="flex-1 flex items-center gap-3 p-3 md:p-4 rounded-xl bg-white/[0.01] border border-white/5 hover:border-cyan-500/20 hover:bg-white/[0.03] transition-all group/link"
-          >
-            <FaEnvelope className="text-slate-500 text-lg group-hover/link:text-cyan-400 transition-colors" />
-            <div className="flex flex-col">
-              <span className="text-[8px] font-mono text-gray-500 uppercase leading-none">Email</span>
-              <span className="text-[10px] text-white font-medium mt-1">Send Email</span>
-            </div>
-          </a>
-
-          <a
-            href="https://wa.me/91XXXXXXXXXX"
-            target="_blank"
-            rel="noreferrer"
-            className="flex-1 flex items-center gap-3 p-3 md:p-4 rounded-xl bg-white/[0.01] border border-white/5 hover:border-emerald-500/20 hover:bg-white/[0.03] transition-all group/link"
-          >
-            <FaWhatsapp className="text-slate-500 text-lg group-hover/link:text-emerald-400 transition-colors" />
-            <div className="flex flex-col">
-              <span className="text-[8px] font-mono text-gray-500 uppercase leading-none">WhatsApp</span>
-              <span className="text-[10px] text-white font-medium mt-1">Direct Chat</span>
-            </div>
-          </a>
-        </div>
+        {/* Single CTA */}
+        <Link
+          to="/contact"
+          className="w-full md:w-auto px-8 py-3.5 bg-cyan-400 hover:bg-cyan-300 text-black font-black uppercase tracking-wider text-[10px] rounded-xl flex items-center justify-center gap-2 group/cta transition-all shrink-0 shadow-[0_0_20px_rgba(34,211,238,0.15)] hover:shadow-[0_0_30px_rgba(34,211,238,0.3)]"
+        >
+          Let's Talk <FaArrowRight className="group-hover/cta:translate-x-1 transition-transform text-[8px]" />
+        </Link>
       </div>
     </BentoCard>
   );
 };
 
-// 6. Testimonial Marquee Module
+// ─────────────────────────────────────────────────────────────────
+// 6. Rating Teaser — Stars + score only, drives to /about
+// Psychology: Social Proof Tease — rating without review creates curiosity
+// ─────────────────────────────────────────────────────────────────
 const TestimonialMarqueeModule = () => {
-  const reviews = [
-    { name: "Rahul M.", text: "Verified performance target optimization. Clean styling, smooth animations." },
-    { name: "Sneha K.", text: "One of the best visual detail developer portfolios. Render speeds are top level." },
-    { name: "Vikram S.", text: "Highly scalable systems from databases to neat responsive frontends." }
-  ];
-
-  const [activeIdx, setActiveIdx] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveIdx((prev) => (prev + 1) % reviews.length);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, [reviews.length]);
-
   return (
     <BentoCard colSpan="col-span-1" title="Client Reviews">
-      <div className="h-full w-full flex flex-col justify-between py-1 relative">
-        <div className="absolute top-0.5 right-1 text-yellow-400 flex gap-0.5">
-          {[...Array(5)].map((_, i) => <FaStar key={i} size={8} />)}
+      <div className="h-full w-full flex flex-col items-center justify-center gap-3 py-2">
+        {/* Star Rating */}
+        <div className="flex gap-1 text-yellow-400">
+          {[...Array(5)].map((_, i) => <FaStar key={i} size={16} />)}
         </div>
-        <div className="flex-grow flex flex-col justify-center pr-4 mt-2">
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={activeIdx}
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              transition={{ duration: 0.3 }}
-              className="text-[10px] text-slate-400 leading-normal italic line-clamp-3"
-            >
-              "{reviews[activeIdx].text}"
-            </motion.p>
-          </AnimatePresence>
+
+        {/* Score */}
+        <div className="text-center">
+          <span className="text-3xl font-black text-white tracking-tighter">5.0</span>
+          <p className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mt-1">Verified Reviews</p>
         </div>
-        <div className="flex items-center gap-1.5 pt-2 border-t border-white/5 shrink-0">
-          <div className="w-4 h-4 rounded-full bg-cyan-500/10 flex items-center justify-center text-[8px] font-black text-cyan-400">
-            {reviews[activeIdx].name[0]}
-          </div>
-          <div>
-            <span className="text-[9px] font-black text-white leading-none block">{reviews[activeIdx].name}</span>
-          </div>
-        </div>
+
+        {/* CTA to full reviews */}
+        <Link to="/about" className="text-[9px] font-mono text-cyan-400/70 hover:text-cyan-400 transition-colors uppercase tracking-widest flex items-center gap-1 group/rev mt-1">
+          Read reviews <FaArrowRight className="group-hover/rev:translate-x-1 transition-transform" size={8} />
+        </Link>
       </div>
     </BentoCard>
   );
 };
 
+
+// ═══════════════════════════════════════════════════════════════════
+// HOME PAGE COMPONENT
+// ═══════════════════════════════════════════════════════════════════
 const Home = () => {
   const firstName = "AAFAQUE".split("");
   const lastName = "NAZIR".split("");
@@ -590,13 +516,13 @@ const Home = () => {
               My Dashboard
             </h2>
             <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mt-4 leading-relaxed font-light">
-              A quick overview of my skills, recent projects, performance targets, and contact details.
+              A quick snapshot — explore each section for the full story.
             </p>
           </div>
 
           {/* Responsive CSS Grid: auto-rows applies only on tablet and desktop */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:auto-rows-[220px]">
-            {/* 1. Bio card */}
+            {/* 1. Bio card — shortened with /about CTA */}
             <BentoCard colSpan="col-span-1 md:col-span-2" title="About Me">
               <div className="flex items-start gap-4 h-full pt-2">
                 <div className="relative shrink-0">
@@ -608,14 +534,17 @@ const Home = () => {
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                   </span>
                 </div>
-                <div className="flex flex-col justify-between flex-grow">
+                <div className="flex flex-col justify-between flex-grow h-full">
                   <div>
                     <h4 className="text-base font-black text-white leading-tight">Aafaque Nazir</h4>
                     <span className="text-[9px] font-mono text-emerald-400 uppercase tracking-wider block mt-1">● Available for Freelance</span>
                     <p className="text-[11px] text-slate-400 mt-2.5 font-light leading-relaxed">
-                      I write high-fidelity systems from database design to visual UI. I aim for smooth rendering, robust API structures, and direct ROI for brands.
+                      Full-stack engineer crafting premium web experiences — from database architecture to pixel-perfect UI.
                     </p>
                   </div>
+                  <Link to="/about" className="inline-flex items-center gap-1.5 text-[9px] font-mono text-cyan-400/70 hover:text-cyan-400 uppercase tracking-widest transition-colors group/bio mt-3">
+                    Discover my story <FaArrowRight className="group-hover/bio:translate-x-1 transition-transform" size={8} />
+                  </Link>
                 </div>
               </div>
             </BentoCard>
@@ -649,21 +578,65 @@ const Home = () => {
               </div>
             </BentoCard>
 
-            {/* 3. Star Reviews Testimonial */}
+            {/* 3. Rating Teaser — drives to /about */}
             <TestimonialMarqueeModule />
 
-            {/* 4. Project Deck slider */}
+            {/* 4. Project Deck — top 3 teaser, drives to /projects */}
             <ProjectDeckModule />
 
-
-            {/* 6. Estimator interactive grid */}
+            {/* 5. Service Tiles — drives to /services */}
             <RecommenderModule />
 
-            {/* 7. Stack Category Switcher */}
+            {/* 6. Stack Explorer — top 5 teaser, drives to /skills */}
             <InteractiveStackModule />
 
-            {/* 8. Contact card with dyn clock */}
+            {/* 7. Contact — clock + CTA, drives to /contact */}
             <ContactNodeModule />
+          </div>
+        </section>
+
+        {/* 🧭 EXPLORE HUB — Navigation Safety Net */}
+        <section id="explore-hub" className="relative w-full max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-white/5">
+          <div className="text-center mb-12">
+            <span className="text-[10px] font-mono text-cyan-400/80 tracking-[0.3em] uppercase font-bold">Dive Deeper</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-white uppercase mt-2">
+              Explore More
+            </h2>
+            <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto mt-4 leading-relaxed font-light">
+              Each page tells a different part of the story. Pick one.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { title: "About", desc: "The engineer behind the code", path: "/about" },
+              { title: "Skills", desc: `${allSkills.length} technologies, 4 domains`, path: "/skills" },
+              { title: "Projects", desc: `${projects.length} live case studies`, path: "/projects" },
+              { title: "Services", desc: "Custom web solutions", path: "/services" },
+            ].map((item, idx) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+              >
+                <Link
+                  to={item.path}
+                  className="group/nav relative block p-6 rounded-2xl bg-[#09090b] border border-white/5 hover:border-white/10 hover:bg-zinc-900/80 transition-all duration-500 overflow-hidden"
+                >
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-black text-white uppercase tracking-tight">{item.title}</h3>
+                      <div className="w-8 h-8 rounded-full bg-white/[0.02] border border-white/5 flex items-center justify-center group-hover/nav:bg-white/10 group-hover/nav:border-white/10 transition-all duration-500">
+                        <FaArrowRight className="text-[10px] text-slate-500 group-hover/nav:text-white transition-colors" />
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-500 font-mono group-hover/nav:text-slate-400 transition-colors">{item.desc}</p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </section>
 

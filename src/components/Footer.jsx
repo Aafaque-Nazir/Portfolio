@@ -105,7 +105,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="text-gray-500 text-[10px] sm:text-xs font-mono tracking-wider flex items-center gap-2.5">
             <span>&copy; {new Date().getFullYear()} AAFAQUE NAZIR</span>
-            <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_5px_#22d3ee]" />
+            <span className="text-gray-600">&bull;</span>
             <span>ALL RIGHTS RESERVED</span>
           </div>
         </div>
