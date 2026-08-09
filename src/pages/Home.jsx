@@ -511,9 +511,8 @@ const Home = () => {
         {/* 🎛️ BENTO DASHBOARD */}
         <section id="dashboard" className="relative w-full max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-white/5">
           <div className="text-center mb-16">
-            <span className="text-[10px] font-mono text-cyan-400/80 tracking-[0.3em] uppercase font-bold">Overview</span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mt-2">
-              My Dashboard
+              Quick Look
             </h2>
             <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mt-4 leading-relaxed font-light">
               A quick snapshot — explore each section for the full story.
