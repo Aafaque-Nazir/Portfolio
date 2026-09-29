@@ -81,70 +81,77 @@ const About = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch mb-16">
-          {/* Left: Identity */}
-          <div className="flex flex-col h-full">
-            <AboutNode className="w-full h-full">
+          {/* Left: Identity & Quality Metrics */}
+          <div className="flex flex-col gap-6 h-full justify-between">
+            <AboutNode title="Background & Focus" className="flex-1">
               <p className="text-base sm:text-lg text-gray-200 font-light leading-relaxed mb-4">
                 <span className="text-white font-bold">Full-Stack Web Developer</span> focused on <span className="text-cyan-400 underline decoration-cyan-400/30 underline-offset-8">clean code & modern design</span>.
               </p>
-              <p className="text-sm sm:text-base text-gray-400 leading-relaxed font-light mb-6">
+              <p className="text-sm sm:text-base text-gray-400 leading-relaxed font-light mb-4">
                 I build fast, secure, and responsive web applications from the ground up using modern tools like <span className="text-white">React, Next.js, and Node.js</span>.
+              </p>
+              <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-light mb-6">
+                I bridge engineering and design — crafting responsive interfaces with clean code and reliable backend systems.
               </p>
               <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
                 <p className="text-xs font-mono text-cyan-400/80 italic">
-                  "Every detail matters — from backend queries to micro-interactions."
+                  "Every detail matters — from clean code to great user experience."
                 </p>
               </div>
             </AboutNode>
-          </div>
 
-          {/* Right: Philosophy */}
-          <div className="flex flex-col gap-6 h-full justify-between">
-            {/* Sleek Stats Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-between w-full py-5 px-6 bg-[#09090b] border border-white/10 rounded-2xl relative overflow-hidden group">
+            {/* Quality Standards & Metrics Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 px-5 bg-[#09090b] border border-white/10 hover:border-cyan-500/30 rounded-2xl relative overflow-hidden group transition-all duration-300">
               {/* Animated Glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none opacity-20" />
               
-              <div className="relative z-10 flex flex-col gap-1">
-                <span className="text-2xl sm:text-3xl font-black text-white font-mono tracking-tighter">100<span className="text-cyan-400 text-base">%</span></span>
-                <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">Responsive</span>
+              <div className="relative z-10 flex flex-col">
+                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">100<span className="text-cyan-400 text-xs sm:text-sm">%</span></span>
+                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mt-0.5">Responsive</span>
               </div>
               
-              <div className="relative z-10 flex flex-col gap-1">
-                <span className="text-2xl sm:text-3xl font-black text-white font-mono tracking-tighter">Fast</span>
-                <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">Page Speed</span>
+              <div className="relative z-10 flex flex-col">
+                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">&lt;1s</span>
+                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mt-0.5">Fast Load</span>
               </div>
               
-              <div className="relative z-10 flex flex-col gap-1">
-                <span className="text-2xl sm:text-3xl font-black text-white font-mono tracking-tighter">Clean</span>
-                <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">Structure</span>
+              <div className="relative z-10 flex flex-col">
+                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">Clean</span>
+                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mt-0.5">Code Quality</span>
               </div>
               
-              <div className="relative z-10 flex flex-col gap-1">
-                <span className="text-2xl sm:text-3xl font-black text-white font-mono tracking-tighter">Modern</span>
-                <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">Tech Stack</span>
+              <div className="relative z-10 flex flex-col">
+                <span className="text-xl sm:text-2xl font-black text-cyan-400 font-mono tracking-tighter">11<span className="text-white text-xs sm:text-sm">+</span></span>
+                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mt-0.5">Projects</span>
               </div>
             </div>
+          </div>
 
-            {/* Philosophy Card */}
-            <AboutNode title="Core Principles" className="flex-1">
-              <div className="space-y-5">
+          {/* Right: Core Principles */}
+          <div className="flex flex-col h-full">
+            <AboutNode title="Core Principles" className="w-full h-full flex flex-col justify-between">
+              <div className="space-y-6">
                 {[
                   {
                     label: "Full-Stack Development",
-                    desc: "Connecting frontend interfaces seamlessly with secure backend databases and APIs.",
-                    icon: "M13 10V3L4 14h7v7l9-11h-7z"
+                    desc: "Connecting frontend interfaces smoothly with secure backend databases, auth, and APIs.",
+                    icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
                   },
                   {
                     label: "Responsive Design",
                     desc: "Building layouts that adapt fluidly across mobile phones, tablets, and desktop screens.",
-                    icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    icon: "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
                   },
                   {
                     label: "Performance & UX",
-                    desc: "Focusing on fast load times, smooth scrolling, and clean component architecture.",
-                    icon: "M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4z"
+                    desc: "Focusing on fast load times, smooth interactions, and clean component structure.",
+                    icon: "M13 10V3L4 14h7v7l9-11h-7z"
+                  },
+                  {
+                    label: "Clean & Maintainable Code",
+                    desc: "Writing modular, scalable, and type-safe code designed for long-term maintainability.",
+                    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 group/item">

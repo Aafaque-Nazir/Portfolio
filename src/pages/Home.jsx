@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGithub, FaArrowRight } from "react-icons/fa";
+import { FaGithub, FaArrowRight, FaRocket, FaBolt } from "react-icons/fa";
+import { SiReact } from "react-icons/si";
 import { RiExternalLinkLine } from "react-icons/ri";
 import GlobalBackground from "../components/GlobalBackground";
 import { SplitText } from "../components/ui/SplitText";
@@ -164,24 +165,110 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* Minimal Highlight Bar */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-          <div className="pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
-            <div>
-              <span className="text-xl sm:text-2xl font-black text-white font-mono">{projects.length}+</span>
-              <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mt-0.5">Projects Built</p>
-            </div>
-            <div>
-              <span className="text-xl sm:text-2xl font-black text-cyan-400 font-mono">React / Next.js</span>
-              <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mt-0.5">Core Ecosystem</p>
-            </div>
-            <div>
-              <span className="text-xl sm:text-2xl font-black text-white font-mono">Clean Code</span>
-              <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mt-0.5">Maintainable & Modular</p>
-            </div>
-            <div>
-              <span className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">Responsive</span>
-              <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mt-0.5">Mobile & Desktop</p>
+        {/* Sleek Glassmorphic Bento Capsule */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
+          <div className="relative rounded-2xl border border-white/10 bg-zinc-950/70 backdrop-blur-xl p-3 sm:p-4 shadow-[0_8px_30px_rgb(0,0,0,0.5)] overflow-hidden">
+            {/* Ambient top highlight line */}
+            <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent pointer-events-none" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
+              {/* 01. Projects */}
+              <div
+                onClick={() => document.getElementById("featured-work")?.scrollIntoView({ behavior: "smooth" })}
+                className="group relative rounded-xl border border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.05] hover:border-cyan-500/30 p-4 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 group-hover:text-cyan-400 transition-colors">
+                    Portfolio
+                  </span>
+                  <div className="p-1.5 rounded-lg bg-white/[0.03] text-zinc-400 group-hover:text-cyan-400 group-hover:bg-cyan-500/10 transition-all">
+                    <FaRocket className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
+                      {projects.length}+
+                    </span>
+                    <span className="text-xs font-mono text-cyan-400 font-semibold">Projects</span>
+                  </div>
+                  <p className="text-xs text-zinc-400 mt-1 font-light">
+                    Built & deployed
+                  </p>
+                </div>
+              </div>
+
+              {/* 02. Tech Stack */}
+              <div className="group relative rounded-xl border border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.05] hover:border-cyan-500/30 p-4 transition-all duration-300 flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 group-hover:text-cyan-400 transition-colors">
+                    Tech Stack
+                  </span>
+                  <div className="p-1.5 rounded-lg bg-white/[0.03] text-zinc-400 group-hover:text-cyan-400 group-hover:bg-cyan-500/10 transition-all">
+                    <SiReact className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-lg sm:text-xl font-black font-mono text-cyan-400 tracking-tight">
+                      React & Next.js
+                    </span>
+                  </div>
+                  <p className="text-xs text-zinc-400 mt-1 font-light">
+                    TypeScript · Tailwind CSS
+                  </p>
+                </div>
+              </div>
+
+              {/* 03. Performance */}
+              <div className="group relative rounded-xl border border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.05] hover:border-cyan-500/30 p-4 transition-all duration-300 flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 group-hover:text-cyan-400 transition-colors">
+                    Performance
+                  </span>
+                  <div className="p-1.5 rounded-lg bg-white/[0.03] text-zinc-400 group-hover:text-cyan-400 group-hover:bg-cyan-500/10 transition-all">
+                    <FaBolt className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
+                      &lt;1s
+                    </span>
+                    <span className="text-xs font-mono text-cyan-400 font-semibold">Fast Load</span>
+                  </div>
+                  <p className="text-xs text-zinc-400 mt-1 font-light">
+                    Quick & responsive on all devices
+                  </p>
+                </div>
+              </div>
+
+              {/* 04. Availability */}
+              <Link
+                to="/contact"
+                className="group relative rounded-xl border border-cyan-500/20 bg-cyan-500/[0.03] hover:bg-cyan-500/[0.08] hover:border-cyan-500/40 p-4 transition-all duration-300 flex flex-col justify-between block cursor-pointer"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
+                    Availability
+                  </span>
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400"></span>
+                  </span>
+                </div>
+                <div>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-lg sm:text-xl font-black font-mono text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                      Open for Work
+                    </span>
+                  </div>
+                  <p className="text-xs text-zinc-400 mt-1 font-light flex items-center justify-between">
+                    <span>Freelance & Full-time</span>
+                    <span className="text-cyan-400 text-xs font-mono group-hover:translate-x-0.5 transition-transform">→</span>
+                  </p>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -523,7 +610,7 @@ const Home = () => {
               I am a web developer with a strong focus on modern frontend technologies like React, Next.js, and Tailwind CSS. I care deeply about writing clean, maintainable code and crafting interfaces that are fast, accessible, and intuitive.
             </p>
             <p className="text-xs md:text-sm text-gray-400 font-light leading-relaxed mb-6">
-              Whether building an entire application from scratch or polishing micro-interactions and animations, I focus on delivering solid, reliable results.
+              Whether building an entire application from scratch or polishing animations and user interactions, I focus on delivering solid, reliable results.
             </p>
             <Link
               to="/about"
