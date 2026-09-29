@@ -4,19 +4,19 @@ import { motion, AnimatePresence } from "framer-motion";
 const faqs = [
   {
     question: "Do you build websites from scratch or use templates?",
-    answer: "I build everything from scratch using modern frameworks like React and Next.js. This ensures your website is uniquely tailored to your brand, highly secure, lightning-fast, and deeply scalable."
+    answer: "I build websites from scratch using modern tools like React and Next.js. This ensures your website has clean code, loads quickly, and is tailored to your exact needs."
   },
   {
     question: "How long does it usually take to complete a project?",
-    answer: "A standard business website takes about 2-3 weeks, while complex web applications can take 4-8 weeks depending on the features. However, timelines are flexible, and we can deliver much faster if your project has an urgent deadline."
+    answer: "A standard website typically takes about 1-2 weeks, while larger web applications with database features take 3-6 weeks depending on the scope."
   },
   {
-    question: "Do you provide maintenance after the website goes live?",
-    answer: "Yes! I offer ongoing support and maintenance to ensure your website stays updated, secure, and performs optimally at all times."
+    question: "Do you provide support after the website goes live?",
+    answer: "Yes, I provide post-launch support to make sure everything runs smoothly, fix any issues, and help with updates."
   },
   {
-    question: "Will my website be mobile-friendly and SEO optimized?",
-    answer: "Absolutely. Every project I build is fully responsive (works perfectly on mobile, tablet, and desktop) and follows strict SEO best practices to help you rank on Google."
+    question: "Will my website be mobile-friendly and SEO ready?",
+    answer: "Yes, every site is designed to look great on mobile phones, tablets, and desktops, with proper SEO meta tags included."
   }
 ];
 
@@ -85,12 +85,12 @@ const FAQ = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
-      <div className="text-center mb-12">
+      <div className="text-center mb-10 max-w-xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-5xl font-black tracking-tighter text-white uppercase mb-4"
+          className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase mb-2"
         >
           Common Questions
         </motion.h2>
@@ -99,9 +99,9 @@ const FAQ = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-gray-400 font-mono text-xs md:text-sm tracking-widest uppercase"
+          className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed"
         >
-          Everything you need to know
+          Everything you need to know before getting started.
         </motion.p>
       </div>
 

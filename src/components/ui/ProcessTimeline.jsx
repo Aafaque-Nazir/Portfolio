@@ -5,25 +5,25 @@ import { FaComments, FaCode, FaPaintBrush, FaRocket } from "react-icons/fa";
 const steps = [
   {
     title: "Discovery & Planning",
-    description: "Understanding your business goals, target audience, and technical requirements. We define the project scope and set clear milestones.",
+    description: "Understanding your project goals, features, and timeline to define the scope and plan clear milestones.",
     icon: <FaComments />,
     color: "from-blue-500 to-cyan-400"
   },
   {
-    title: "Architecture & Design",
-    description: "Creating wireframes and selecting the optimal tech stack. I design scalable databases and intuitive, premium user interfaces.",
+    title: "Structure & Design",
+    description: "Planning site layout, choosing the right tools, and designing clean, intuitive user interfaces.",
     icon: <FaPaintBrush />,
     color: "from-cyan-400 to-emerald-400"
   },
   {
-    title: "Engineering",
-    description: "Writing clean, DRY, and scalable code. I build the frontend and backend with a focus on performance, security, and best practices.",
+    title: "Development",
+    description: "Writing clean, modular code for frontend and backend, with a focus on speed, responsiveness, and security.",
     icon: <FaCode />,
     color: "from-emerald-400 to-yellow-400"
   },
   {
-    title: "Delivery & Optimization",
-    description: "Rigorous testing, SEO optimization, and deploying to production. Achieving 100/100 Lighthouse scores and seamless handover.",
+    title: "Testing & Launch",
+    description: "Testing across browsers and devices, setting up SEO best practices, and deploying to production.",
     icon: <FaRocket />,
     color: "from-yellow-400 to-orange-500"
   }
@@ -31,14 +31,13 @@ const steps = [
 
 const ProcessTimeline = () => {
   return (
-    <div className="w-full max-w-5xl mx-auto py-24 px-4 relative">
-      <div className="text-center mb-16">
-
-        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4 uppercase">
+    <div className="w-full max-w-5xl mx-auto py-12 px-4 relative">
+      <div className="text-center mb-12 max-w-xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2 uppercase">
           How I Build
         </h2>
-        <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">
-          A structured, professional approach ensures every project is delivered on time, within budget, and to the highest engineering standards.
+        <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">
+          A clear, straightforward approach to build and deliver your website or application smoothly.
         </p>
       </div>
 
@@ -73,8 +72,8 @@ const ProcessTimeline = () => {
                   <div className="text-6xl font-black text-white/[0.03] absolute top-1/2 -translate-y-1/2 right-[55%]">0{index + 1}</div>
                   {isEven && (
                     <>
-                      <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
-                      <p className="text-slate-400 leading-relaxed">{step.description}</p>
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5">{step.title}</h3>
+                      <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">{step.description}</p>
                     </>
                   )}
                 </div>
@@ -94,8 +93,8 @@ const ProcessTimeline = () => {
                   </div>
                   
                   <div className={!isEven ? "block md:block" : "block md:hidden"}>
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 pt-2 md:pt-0">{step.title}</h3>
-                    <p className="text-slate-400 leading-relaxed text-sm md:text-base">{step.description}</p>
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 pt-2 md:pt-0">{step.title}</h3>
+                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">{step.description}</p>
                   </div>
                 </div>
 

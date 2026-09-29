@@ -25,13 +25,32 @@ const Footer = () => {
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
       
       <div className="container mx-auto px-6 relative z-10">
+        {/* Integrated Pre-Footer CTA */}
+        <div className="pb-12 mb-12 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div>
+            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Have a project in mind?
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-400 mt-1 font-light">
+              Feel free to reach out if you're looking for a developer or want to collaborate.
+            </p>
+          </div>
+          <Link
+            to="/contact"
+            className="group/cta inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-cyan-400 text-black font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(34,211,238,0.45)] shrink-0"
+          >
+            <span>Get in Touch</span>
+            <RiArrowRightLine className="text-sm group-hover/cta:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12">
           {/* Column 1: Brand & Business Details */}
           <div className="md:col-span-5 flex flex-col items-start gap-4">
             <div>
-              <h2 className="text-2xl md:text-3xl font-black text-white tracking-wider uppercase">
+              <span className="text-2xl md:text-3xl font-black text-white tracking-wider uppercase block">
                 Aafaque Nazir
-              </h2>
+              </span>
               <p className="text-gray-400 text-[10px] sm:text-xs tracking-[0.15em] mt-1.5 uppercase font-mono">
                 Independent Freelancer & Full-Stack Developer
               </p>
@@ -43,16 +62,16 @@ const Footer = () => {
                 <strong className="text-gray-300">Main Activity:</strong> Freelance Full-Stack Web Development, UI/UX Design & Digital Solutions.
               </p>
               <p>
-                <strong className="text-gray-300">Services Provided:</strong> Custom High-Converting Websites, E-Commerce Stores, and Full-Stack Web Applications.
+                <strong className="text-gray-300">Services Provided:</strong> Custom Websites, E-Commerce Stores, and Web Applications.
               </p>
             </div>
           </div>
 
           {/* Column 2: Quick Links — Using real route Links for Google crawlability */}
           <div className="md:col-span-3 flex flex-col gap-4">
-            <h3 className="text-white text-xs font-bold font-mono uppercase tracking-[0.2em] text-white/40">
+            <p className="text-white text-xs font-bold font-mono uppercase tracking-[0.2em] text-white/40">
               Quick Links
-            </h3>
+            </p>
             <ul className="grid grid-cols-2 md:grid-cols-1 gap-2.5">
               {navItems.map((item) => (
                 <li key={item.path}>
@@ -60,7 +79,7 @@ const Footer = () => {
                     to={item.path}
                     className="group inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-cyan-400 transition-all font-mono"
                   >
-                    <RiArrowRightLine className="text-[10px] opacity-0 -ml-3 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-cyan-400" />
+                    <RiArrowRightLine className="text-[10px] opacity-0 -ml-3 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)]" />
                     <span>{item.name}</span>
                   </Link>
                 </li>
@@ -70,9 +89,9 @@ const Footer = () => {
 
           {/* Column 3: Connect */}
           <div className="md:col-span-4 flex flex-col gap-4">
-            <h3 className="text-white text-xs font-bold font-mono uppercase tracking-[0.2em] text-white/40">
+            <p className="text-white text-xs font-bold font-mono uppercase tracking-[0.2em] text-white/40">
               Connect
-            </h3>
+            </p>
             <p className="text-gray-400 text-xs font-mono">
               Have an idea? Let's discuss.
             </p>

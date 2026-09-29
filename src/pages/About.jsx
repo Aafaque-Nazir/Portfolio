@@ -2,8 +2,6 @@
 import React from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
-import GlobalCTA from "../components/ui/GlobalCTA";
-import Testimonials from "../components/ui/Testimonial";
 import FAQ from "../components/ui/FAQ";
 
 const AboutNode = ({ children, title, className = "" }) => {
@@ -46,7 +44,7 @@ const AboutNode = ({ children, title, className = "" }) => {
           {title && (
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-[2px] bg-cyan-500 rounded-full" />
-              <h3 className="text-xs font-mono text-cyan-500 tracking-[0.3em] uppercase">{title}</h3>
+              <h2 className="text-xs font-mono text-cyan-500 tracking-[0.3em] uppercase">{title}</h2>
             </div>
           )}
           {children}
@@ -58,25 +56,36 @@ const AboutNode = ({ children, title, className = "" }) => {
 
 const About = () => {
   return (
-    <section id="about" aria-label="About Aafaque Nazir — Full-Stack Web Developer & Creative Engineer" className="relative w-full min-h-[100svh] flex flex-col justify-center items-center px-4 bg-black pt-24 lg:pt-32 pb-12">
+    <section id="about" aria-label="About Aafaque Nazir — Full-Stack Web Developer & Creative Engineer" className="relative w-full min-h-[100svh] flex flex-col justify-start items-center px-4 bg-black pt-28 sm:pt-32 pb-16">
       <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col h-full justify-center">
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        {/* Header Section: Unified Page H1 */}
+        <div className="text-center mb-8 max-w-xl mx-auto">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase mb-2.5"
+          >
+            About Me
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed"
+          >
+            My background, engineering philosophy, and how I approach building modern web experiences.
+          </motion.p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
           {/* Left: Identity */}
           <div className="flex flex-col">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="mb-4 lg:mb-6"
-            >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase mb-4 md:pl-8">
-                About Me
-              </h2>
-            </motion.div>
-
-            <AboutNode className="max-w-xl">
-              <p className="text-xl lg:text-2xl text-gray-300 font-light leading-relaxed mb-6">
-                <span className="text-white font-bold">Full-Stack Web Developer</span> with a passion for <span className="text-cyan-500 underline decoration-white/20 underline-offset-8">scalable architecture & modern design</span>.
+            <AboutNode className="w-full">
+              <p className="text-lg sm:text-xl text-gray-300 font-light leading-relaxed mb-5">
+                <span className="text-white font-bold">Full-Stack Web Developer</span> focused on <span className="text-cyan-500 underline decoration-white/20 underline-offset-8">clean code & modern design</span>.
               </p>
               <p className="text-sm lg:text-base text-gray-500 leading-relaxed font-light mb-6">
                 I build fast, secure, and responsive web applications from the ground up using modern tools like <span className="text-white">React, Next.js, and Node.js</span>.
@@ -98,46 +107,46 @@ const About = () => {
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none opacity-20" />
               
               <div className="relative z-10 flex flex-col gap-1">
-                <span className="text-3xl font-black text-white tracking-tighter">90<span className="text-cyan-500 text-lg">+</span></span>
-                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Performance</span>
-              </div>
-              <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
-              
-              <div className="relative z-10 flex flex-col gap-1">
-                <span className="text-3xl font-black text-white tracking-tighter">60<span className="text-cyan-500 text-lg">FPS</span></span>
-                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Render Target</span>
-              </div>
-              <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
-              
-              <div className="relative z-10 flex flex-col gap-1">
-                <span className="text-3xl font-black text-white tracking-tighter">Zero</span>
-                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Vulns</span>
-              </div>
-              <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
-              
-              <div className="relative z-10 flex flex-col gap-1">
                 <span className="text-3xl font-black text-white tracking-tighter">100<span className="text-cyan-500 text-lg">%</span></span>
-                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Scalable</span>
+                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Responsive</span>
+              </div>
+              <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
+              
+              <div className="relative z-10 flex flex-col gap-1">
+                <span className="text-3xl font-black text-white tracking-tighter">Fast</span>
+                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Page Speed</span>
+              </div>
+              <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
+              
+              <div className="relative z-10 flex flex-col gap-1">
+                <span className="text-3xl font-black text-white tracking-tighter">Clean</span>
+                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Code Structure</span>
+              </div>
+              <div className="w-[1px] bg-white/5 hidden lg:block self-stretch" />
+              
+              <div className="relative z-10 flex flex-col gap-1">
+                <span className="text-3xl font-black text-white tracking-tighter">Modern</span>
+                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Tech Stack</span>
               </div>
             </div>
 
             {/* Philosophy Card */}
-            <AboutNode title="Engineering Philosophy">
+            <AboutNode title="Core Principles">
               <div className="space-y-6">
                 {[
                   {
-                    label: "Full-Stack Mastery",
-                    desc: "Building robust architectures from secure databases to beautiful UIs.",
+                    label: "Full-Stack Development",
+                    desc: "Connecting frontend interfaces seamlessly with secure backend databases and APIs.",
                     icon: "M13 10V3L4 14h7v7l9-11h-7z"
                   },
                   {
-                    label: "Pixel Perfect",
-                    desc: "Turning beautiful designs into high-quality, responsive client-side code.",
+                    label: "Responsive Design",
+                    desc: "Building layouts that adapt fluidly across mobile phones, tablets, and desktop screens.",
                     icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                   },
                   {
-                    label: "High Performance",
-                    desc: "Fast APIs, optimized databases, and smooth 60fps frontend experiences.",
+                    label: "Performance & UX",
+                    desc: "Focusing on fast load times, smooth scrolling, and clean component architecture.",
                     icon: "M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4z"
                   }
                 ].map((item, i) => (
@@ -148,7 +157,7 @@ const About = () => {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-sm sm:text-base font-black text-white uppercase tracking-wider mb-1 group-hover/item:text-cyan-400 transition-colors">{item.label}</h4>
+                      <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider mb-1 group-hover/item:text-cyan-400 transition-colors">{item.label}</h3>
                       <p className="text-xs sm:text-sm text-gray-500 leading-relaxed font-light">{item.desc}</p>
                     </div>
                   </div>
@@ -159,11 +168,7 @@ const About = () => {
         </div>
       </div>
 
-      <Testimonials />
       <FAQ />
-
-      {/* Global Call to Action */}
-      <GlobalCTA />
     </section>
   );
 };

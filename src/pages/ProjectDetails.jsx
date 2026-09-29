@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { projects } from "../data/projects";
-import GlobalCTA from "../components/ui/GlobalCTA";
 import ProgressiveImage from "../components/ui/ProgressiveImage";
-import { RiArrowLeftLine, RiExternalLinkLine, RiCheckboxCircleFill } from "react-icons/ri";
+import { RiArrowLeftLine, RiExternalLinkLine, RiArrowRightLine } from "react-icons/ri";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -23,146 +22,161 @@ const ProjectDetails = () => {
 
   if (!project) return null;
 
+  // Next / Prev project navigation
+  const currentIndex = projects.findIndex((p) => p.id === project.id);
+  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
+  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
+
   return (
-    <div className="min-h-screen bg-black pt-24 md:pt-32 pb-0">
-      <div className="max-w-5xl mx-auto px-4 md:px-8 mb-20">
+    <div className="min-h-screen bg-black pt-28 md:pt-32 pb-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
-        {/* Breadcrumb */}
-        <div className="inline-flex items-center gap-3 text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] mb-12 md:mb-16">
+        {/* Top Navigation Row */}
+        <div className="flex items-center justify-between gap-4 mb-6">
           <Link 
             to="/projects" 
-            className="group flex items-center gap-2 text-slate-500 hover:text-cyan-400 transition-colors"
+            className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-white/10 hover:border-cyan-400/50 text-slate-200 hover:text-white text-xs font-mono font-medium transition-all duration-200"
           >
-            <RiArrowLeftLine className="text-sm group-hover:-translate-x-1 transition-transform" />
-            <span>Projects</span>
+            <RiArrowLeftLine className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)] group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Projects</span>
           </Link>
-          <span className="text-white/20">/</span>
-          <span className="text-cyan-400/80">{project.title}</span>
+
+          <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider">
+            {project.category}
+          </span>
         </div>
 
-        {/* Header Content */}
-        <div className="mb-16">
-          <div className="flex items-center gap-2.5 mb-6">
-            <span className="text-cyan-400 text-lg">{project.icon}</span>
-            <span className="text-[10px] font-mono tracking-[0.2em] text-cyan-400 uppercase">
-              // {project.category}
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-none mb-8">
+        {/* Project Header: Clean, balanced sizing */}
+        <div className="mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
             {project.title}
           </h1>
-          <p className="text-base md:text-lg text-slate-400 font-light leading-relaxed max-w-3xl">
+          <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed mt-2 max-w-3xl">
             {project.description}
           </p>
         </div>
 
-        {/* Hero Image */}
-        <motion.div 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden mb-20 border border-white/5 shadow-[0_0_50px_rgba(34,211,238,0.05)]"
-        >
-          <ProgressiveImage 
-            src={project.image} 
-            alt={project.title} 
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-        </motion.div>
-
-        {/* Two-Column Details Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 mb-24 items-start">
+        {/* 2-Column Content Grid: Project Info & Compact Preview */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-10">
           
-          {/* Left Column: Narrative (Challenge & Solution) */}
-          <div className="md:col-span-8 space-y-16">
-            {/* Problem */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6"
-            >
-              <div className="flex items-center gap-4">
-                <span className="text-[10px] md:text-xs font-mono tracking-widest text-cyan-400 font-bold uppercase bg-cyan-400/10 px-3 py-1 rounded-full border border-cyan-400/20">
-                  01
-                </span>
-                <h3 className="text-xl md:text-2xl font-black tracking-tight text-white uppercase">
-                  The Challenge
-                </h3>
+          {/* Left Column (7 cols): The Problem & The Solution */}
+          <div className="lg:col-span-7 flex flex-col gap-4">
+            {/* Problem Card */}
+            <div className="p-5 sm:p-6 rounded-xl bg-zinc-950/70 border border-white/5">
+              <div className="flex items-center gap-2 mb-2.5">
+                <span className="w-2 h-2 rounded-full bg-orange-400" />
+                <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
+                  The Problem
+                </h2>
               </div>
-              <div className="pl-4 md:pl-6 border-l border-white/10">
-                <p className="text-base md:text-lg text-slate-300 font-light leading-relaxed">
-                  {project.problem}
-                </p>
-              </div>
-            </motion.div>
+              <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
+                {project.problem}
+              </p>
+            </div>
 
-            {/* Solution */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6"
-            >
-              <div className="flex items-center gap-4">
-                <span className="text-[10px] md:text-xs font-mono tracking-widest text-cyan-400 font-bold uppercase bg-cyan-400/10 px-3 py-1 rounded-full border border-cyan-400/20">
-                  02
-                </span>
-                <h3 className="text-xl md:text-2xl font-black tracking-tight text-white uppercase">
+            {/* Solution Card */}
+            <div className="p-5 sm:p-6 rounded-xl bg-zinc-950/70 border border-white/5">
+              <div className="flex items-center gap-2 mb-2.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
                   The Solution
-                </h3>
+                </h2>
               </div>
-              <div className="pl-4 md:pl-6 border-l border-cyan-400/30">
-                <p className="text-base md:text-lg text-slate-300 font-light leading-relaxed">
-                  {project.solution}
-                </p>
-              </div>
-            </motion.div>
+              <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
+                {project.solution}
+              </p>
+            </div>
           </div>
 
-          {/* Right Column: Sleek Sidebar Meta Card */}
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="md:col-span-4 border border-white/5 bg-white/[0.01] rounded-2xl p-6 md:p-8 space-y-8"
-          >
-            {/* Tech Stack */}
-            <div>
-              <h4 className="text-[10px] font-mono tracking-widest text-slate-500 uppercase mb-4">Technologies</h4>
-              <div className="flex flex-wrap gap-2">
-                {project.techStack.map((tech, idx) => (
-                  <span key={idx} className="px-3 py-1 bg-white/5 border border-white/5 rounded-full text-[10px] font-mono text-slate-300">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+          {/* Right Column (5 cols): Compact Image Preview & Actions */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            {/* Compact Image Card (Controlled height, never blows up screen) */}
+            <div className="rounded-xl border border-white/10 bg-zinc-950 p-3 flex items-center justify-center overflow-hidden">
+              <ProgressiveImage 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-48 sm:h-56 rounded-lg bg-black/50"
+                imgClassName="w-full h-full object-contain rounded-lg"
+              />
             </div>
 
-            {/* CTA Link */}
-            <div className="pt-6 border-t border-white/5">
-              <a 
-                href={project.link} 
-                target="_blank" 
-                rel="noreferrer"
-                className="group relative w-full py-3.5 bg-cyan-400 hover:bg-cyan-300 text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Launch Site <RiExternalLinkLine className="text-sm" />
+            {/* Meta & Tech Stack Card */}
+            <div className="p-4 rounded-xl bg-zinc-950/70 border border-white/5 space-y-3">
+              <div>
+                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block mb-2">
+                  Technologies Used
                 </span>
-                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
-              </a>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 rounded bg-white/[0.04] border border-white/5 text-[11px] font-mono text-slate-300"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Live Demo Action */}
+              {project.link && (
+                <div className="pt-2 border-t border-white/5">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 shadow-sm"
+                  >
+                    <span>Launch Live Site</span>
+                    <RiExternalLinkLine className="text-sm" />
+                  </a>
+                </div>
+              )}
             </div>
-          </motion.div>
+          </div>
+        </div>
+
+        {/* Bottom Pagination: Fully Responsive */}
+        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+          {prevProject ? (
+            <Link
+              to={`/projects/${prevProject.id}`}
+              className="group inline-flex items-center justify-between sm:justify-start gap-2 px-3.5 py-2.5 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 hover:border-cyan-400/40 text-slate-300 hover:text-white transition-all w-full sm:w-auto"
+            >
+              <span className="flex items-center gap-2">
+                <RiArrowLeftLine className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)] group-hover:-translate-x-1 transition-transform" />
+                <span className="text-slate-500">Prev:</span>
+                <span className="font-medium text-white">{prevProject.title}</span>
+              </span>
+            </Link>
+          ) : (
+            <div className="hidden sm:block" />
+          )}
+
+          <Link
+            to="/projects"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-cyan-400/10 hover:bg-cyan-400/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 hover:text-white font-medium transition-all w-full sm:w-auto"
+          >
+            <span>All Projects</span>
+          </Link>
+
+          {nextProject ? (
+            <Link
+              to={`/projects/${nextProject.id}`}
+              className="group inline-flex items-center justify-between sm:justify-end gap-2 px-3.5 py-2.5 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 hover:border-cyan-400/40 text-slate-300 hover:text-white transition-all w-full sm:w-auto"
+            >
+              <span className="flex items-center gap-2">
+                <span className="text-slate-500">Next:</span>
+                <span className="font-medium text-white">{nextProject.title}</span>
+                <RiArrowRightLine className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)] group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+          ) : (
+            <div className="hidden sm:block" />
+          )}
         </div>
 
       </div>
-
-      {/* Global CTA at the bottom */}
-      <GlobalCTA />
     </div>
   );
 };

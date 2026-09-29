@@ -26,23 +26,23 @@ const SEO = ({ title, description, keywords, image, section }) => {
   const siteTitle = "Aafaque Nazir — Web Developer in Navi Mumbai | React & Next.js Expert";
 
   const defaultDescription =
-    "Looking for a web developer in Navi Mumbai? Aafaque Nazir builds high-performance websites, SaaS platforms, and interactive web apps using React & Next.js. Websites starting from ₹8,999.";
+    "Aafaque Nazir is a full-stack web developer building clean, responsive websites and web applications using React, Next.js, and modern technologies.";
 
   // ──────────────────────────────────────────────────
-  // CLIENT-FOCUSED descriptions per section
+  // Descriptions per section
   // ──────────────────────────────────────────────────
   const sectionDescriptions = {
-    home: "Looking for a web developer in Navi Mumbai? Aafaque Nazir builds stunning, high-performance websites and web applications using React, Next.js, and modern technologies. Websites starting from ₹8,999.",
+    home: "Aafaque Nazir is a full-stack web developer building clean, responsive websites, e-commerce stores, and web applications using React and Next.js.",
     about:
-      "About Aafaque Nazir — a freelance web developer based in Navi Mumbai, India. Specializing in custom website development, SaaS platforms, and interactive web experiences with React & Next.js.",
+      "About Aafaque Nazir — full-stack web developer based in Navi Mumbai, India, specializing in modern web development with React, Node.js, and Next.js.",
     skills:
-      "Technical expertise in React, Next.js, TypeScript, Node.js, Tailwind CSS, GSAP, Framer Motion, Supabase, PostgreSQL, and modern web development technologies.",
+      "Technical skills and tools: React, Next.js, TypeScript, Node.js, Tailwind CSS, PostgreSQL, Supabase, and modern web development technologies.",
     projects:
-      "Web development portfolio by Aafaque Nazir — showcasing SaaS dashboards, ecommerce platforms, business websites, and interactive web applications built for clients across India.",
+      "Web development portfolio by Aafaque Nazir — showcasing web apps, online stores, landing pages, and interactive projects.",
     services:
-      "Affordable web development services in Navi Mumbai — Business Software (SaaS), Digital Stores (E-Comm) from ₹24,999, and Conversion Websites from ₹8,999. Hire a professional web developer today.",
+      "Web development services by Aafaque Nazir — Custom Websites, E-Commerce Stores, and Full-Stack Web Applications.",
     contact:
-      "Hire Aafaque Nazir — freelance web developer in Navi Mumbai. Get a free consultation for your website project. Available for businesses, startups, and agencies across India.",
+      "Get in touch with Aafaque Nazir for web development projects, freelance work, or collaborations.",
   };
 
   // ──────────────────────────────────────────────────
@@ -64,12 +64,12 @@ const SEO = ({ title, description, keywords, image, section }) => {
   };
 
   const sectionTitles = {
-    home: "Aafaque Nazir — Web Developer in Navi Mumbai | React & Next.js Expert",
-    about: "About Aafaque Nazir — Freelance Web Developer India",
-    skills: "Technical Skills — React, Next.js, TypeScript, Node.js",
-    projects: "Portfolio & Case Studies — Web Development Projects",
-    services: "Web Development Services — Websites Starting ₹8,999",
-    contact: "Hire a Web Developer — Contact Aafaque Nazir",
+    home: "Aafaque Nazir — Full-Stack Web Developer",
+    about: "About — Aafaque Nazir | Web Developer",
+    skills: "Skills & Technologies — Aafaque Nazir",
+    projects: "Projects & Portfolio — Aafaque Nazir",
+    services: "Services & Solutions — Aafaque Nazir",
+    contact: "Contact — Get in Touch with Aafaque Nazir",
   };
 
   const resolvedTitle = title
@@ -175,21 +175,12 @@ const SEO = ({ title, description, keywords, image, section }) => {
         name: "Aafaque Nazir — Web Development Services",
         url: siteUrl,
         description:
-          "Professional web development services in Navi Mumbai — Business Software (SaaS), Digital Stores (E-Comm), and Conversion Websites. Affordable pricing for businesses and startups.",
+          "Web development services — Custom Websites, E-Commerce Stores, and Web Applications.",
         provider: {
           "@type": "Person",
           name: "Aafaque Nazir",
           url: siteUrl,
         },
-        areaServed: [
-          { "@type": "City", name: "Navi Mumbai" },
-          { "@type": "City", name: "Mumbai" },
-          { "@type": "State", name: "Maharashtra" },
-          { "@type": "Country", name: "India" },
-        ],
-        priceRange: "₹8,999 - ₹24,999+",
-        telephone: "+91-93256-29256",
-        email: "aafaquenazir@gmail.com",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Navi Mumbai",
@@ -204,31 +195,27 @@ const SEO = ({ title, description, keywords, image, section }) => {
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
-                name: "Conversion Websites",
+                name: "Websites & Landing Pages",
                 description:
-                  "Conversion-focused, highly animated landing pages designed to turn visitors into leads. Starting from ₹8,999.",
+                  "Custom responsive websites and landing pages built with clean code and modern design.",
               },
-              price: "8999",
-              priceCurrency: "INR",
             },
             {
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
-                name: "Digital Stores (E-Comm)",
+                name: "Custom Online Stores",
                 description:
-                  "Custom e-commerce platforms and WhatsApp-based ordering systems with seamless user flows. Starting from ₹24,999.",
+                  "Custom e-commerce storefronts with product browsing, shopping cart, and smooth checkout.",
               },
-              price: "24999",
-              priceCurrency: "INR",
             },
             {
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
-                name: "Business Software (SaaS)",
+                name: "Web Applications",
                 description:
-                  "Scalable SaaS platforms, admin dashboards, and custom portals built to automate and manage your entire business.",
+                  "Full-stack web applications and client dashboards with database and authentication integration.",
               },
             },
           ],
