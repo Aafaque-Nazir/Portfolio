@@ -78,7 +78,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-12 px-4 sm:px-6 relative z-10">
+    <div className="w-full max-w-3xl mx-auto py-8 relative z-10">
       {/* Injecting SEO Schema directly into the head/page for Google Bots */}
       <script
         type="application/ld+json"
@@ -99,7 +99,7 @@ const FAQ = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed"
+          className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed"
         >
           Everything you need to know before getting started.
         </motion.p>

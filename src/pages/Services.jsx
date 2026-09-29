@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { FaLaptopCode, FaServer, FaCheck, FaShoppingCart, FaArrowRight, FaStar } from "react-icons/fa";
 import ProcessTimeline from "../components/ui/ProcessTimeline";
 
 const ServiceCard = ({ pkg }) => {
+  const navigate = useNavigate();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -13,6 +14,10 @@ const ServiceCard = ({ pkg }) => {
     const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
+  };
+
+  const handleCardClick = () => {
+    navigate("/contact", { state: { plan: pkg.title } });
   };
 
   const isHighlight = pkg.highlight;
@@ -23,7 +28,17 @@ const ServiceCard = ({ pkg }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       onMouseMove={handleMouseMove}
-      className={`group relative rounded-2xl overflow-hidden transition-all duration-300 w-full h-full flex flex-col ${
+      onClick={handleCardClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleCardClick();
+        }
+      }}
+      aria-label={`Inquire about ${pkg.title}`}
+      className={`group relative rounded-2xl overflow-hidden transition-all duration-300 w-full h-full flex flex-col cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 hover:-translate-y-1 ${
         isHighlight
           ? "border-2 border-cyan-400/60 shadow-[0_0_35px_rgba(34,211,238,0.18)]"
           : "border border-white/10 hover:border-cyan-500/30"
@@ -37,8 +52,8 @@ const ServiceCard = ({ pkg }) => {
         }}
       />
 
-      {/* Card Content Container (Uniform height, compact padding, 100% level alignment) */}
-      <div className={`relative z-10 h-full flex flex-col p-5 sm:p-6 bg-[#09090b] justify-between ${
+      {/* Card Content Container */}
+      <div className={`relative z-10 h-full flex flex-col p-6 sm:p-7 bg-[#09090b] justify-between ${
         isHighlight ? "bg-gradient-to-b from-cyan-950/30 via-[#09090b] to-[#09090b]" : ""
       }`}>
         <div className="flex-1 flex flex-col">
@@ -53,7 +68,7 @@ const ServiceCard = ({ pkg }) => {
             </div>
 
             {pkg.benefitTag && (
-              <span className={`inline-flex items-center gap-1 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+              <span className={`inline-flex items-center gap-1 text-xs font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
                 isHighlight
                   ? "text-cyan-300 bg-cyan-950/70 border-cyan-500/40 shadow-[0_0_12px_rgba(34,211,238,0.25)]"
                   : "text-zinc-400 bg-white/[0.03] border-white/10"
@@ -66,21 +81,21 @@ const ServiceCard = ({ pkg }) => {
 
           {/* Title & Description */}
           <div className="mb-4">
-            <span className="text-[10px] font-mono text-cyan-400 font-semibold uppercase tracking-wider block mb-1">
+            <span className="text-xs font-mono text-cyan-400 font-semibold uppercase tracking-wider block mb-1">
               For {pkg.recommendedFor}
             </span>
-            <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-1.5 group-hover:text-cyan-300 transition-colors">
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-cyan-300 transition-colors">
               {pkg.title}
             </h2>
-            <p className="text-xs text-zinc-400 leading-relaxed font-light">
+            <p className="text-sm text-zinc-400 leading-relaxed font-light">
               {pkg.description}
             </p>
           </div>
 
-          {/* Features List (Compact, equal 4 items per card, all glowing ticks) */}
-          <div className="space-y-2.5 mb-5 flex-1 pt-3 border-t border-white/5">
+          {/* Features List */}
+          <div className="space-y-3 mb-6 flex-1 pt-4 border-t border-white/5">
             {pkg.features.map((feature, idx) => (
-              <div key={idx} className="flex items-center gap-2.5 text-xs">
+              <div key={idx} className="flex items-center gap-2.5 text-sm">
                 <span className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-cyan-500/20 text-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.5)]">
                   <FaCheck size={7} />
                 </span>
@@ -92,12 +107,13 @@ const ServiceCard = ({ pkg }) => {
           </div>
         </div>
 
-        {/* Action Button: Consistent Height, Glowing Arrow on ALL Cards */}
-        <div className="pt-3 border-t border-white/5 mt-auto">
+        {/* Action Button */}
+        <div className="pt-4 border-t border-white/5 mt-auto">
           <Link
             to="/contact"
             state={{ plan: pkg.title }}
-            className={`group/btn relative w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-mono font-bold text-xs uppercase tracking-wider transition-all duration-300 ${
+            onClick={(e) => e.stopPropagation()}
+            className={`group/btn relative w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-mono font-bold text-xs uppercase tracking-wider transition-all duration-300 ${
               isHighlight
                 ? "bg-gradient-to-r from-cyan-400 to-cyan-300 hover:from-cyan-300 hover:to-cyan-200 text-zinc-950 shadow-[0_0_22px_rgba(34,211,238,0.45)] hover:shadow-[0_0_30px_rgba(34,211,238,0.65)]"
                 : "bg-zinc-900/90 hover:bg-zinc-800 text-white border border-white/10 hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]"
@@ -173,20 +189,20 @@ const Services = () => {
       {/* Global Background Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-cyan-500/[0.03] blur-[120px] pointer-events-none rounded-full" />
 
-      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 z-10 flex flex-col items-center">
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10 flex flex-col items-center">
 
         {/* Header Section: Unified Page H1 */}
-        <div className="text-center mb-10 sm:mb-12 max-w-xl mx-auto">
+        <div className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase mb-3">
             Services & Solutions
           </h1>
-          <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">
+          <p className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed">
             Clean, modern web development services tailored to help your brand or business build a fast, reliable online presence.
           </p>
         </div>
 
         {/* 3-Column Service Cards (Compact, Perfectly Aligned) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full items-stretch mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full items-stretch mb-16">
           {packages.map((pkg, idx) => (
             <ServiceCard key={idx} pkg={pkg} />
           ))}

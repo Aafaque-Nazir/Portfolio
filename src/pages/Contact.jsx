@@ -80,7 +80,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" aria-label="Contact Aafaque Nazir — Get in touch for web development services" className="relative w-full pt-28 sm:pt-32 pb-16 flex flex-col justify-start items-center px-4 bg-black">
+    <section id="contact" aria-label="Contact Aafaque Nazir — Get in touch for web development services" className="relative w-full pt-28 sm:pt-32 pb-16 flex flex-col justify-start items-center bg-black">
       <Toaster
         theme="dark"
         position="top-center"
@@ -96,14 +96,14 @@ const Contact = () => {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col justify-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
         {/* Header Section */}
-        <div className="text-center mb-8 max-w-xl mx-auto">
+        <div className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase mb-2.5"
+            className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase mb-3"
           >
             Contact Me
           </motion.h1>
@@ -112,7 +112,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed"
+            className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed"
           >
             Have a project in mind, need a modern website, or want to collaborate? Send a message below or connect directly.
           </motion.p>
@@ -142,8 +142,8 @@ const Contact = () => {
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 relative z-10 w-full">
                 {/* Name & Email Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider block">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-mono font-bold text-zinc-300 uppercase tracking-wider block">
                       Name
                     </label>
                     <input
@@ -157,14 +157,14 @@ const Contact = () => {
                       }`}
                     />
                     {errors.name && (
-                      <span className="block text-[11px] text-red-400 font-mono mt-1">
+                      <span className="block text-xs text-red-400 font-mono mt-1">
                         {errors.name.message}
                       </span>
                     )}
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider block">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-mono font-bold text-zinc-300 uppercase tracking-wider block">
                       Email
                     </label>
                     <input
@@ -178,7 +178,7 @@ const Contact = () => {
                       }`}
                     />
                     {errors.email && (
-                      <span className="block text-[11px] text-red-400 font-mono mt-1">
+                      <span className="block text-xs text-red-400 font-mono mt-1">
                         {errors.email.message}
                       </span>
                     )}
@@ -187,8 +187,8 @@ const Contact = () => {
 
                 {/* Phone & Service Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider block">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-mono font-bold text-zinc-300 uppercase tracking-wider block">
                       Phone / WhatsApp
                     </label>
                     <input
@@ -202,14 +202,14 @@ const Contact = () => {
                       }`}
                     />
                     {errors.phone && (
-                      <span className="block text-[11px] text-red-400 font-mono mt-1">
+                      <span className="block text-xs text-red-400 font-mono mt-1">
                         {errors.phone.message}
                       </span>
                     )}
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider block">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-mono font-bold text-zinc-300 uppercase tracking-wider block">
                       Service Needed
                     </label>
                     <div className="relative">
@@ -232,7 +232,7 @@ const Contact = () => {
                       </div>
                     </div>
                     {errors.service && (
-                      <span className="block text-[11px] text-red-400 font-mono mt-1">
+                      <span className="block text-xs text-red-400 font-mono mt-1">
                         {errors.service.message}
                       </span>
                     )}
@@ -240,8 +240,8 @@ const Contact = () => {
                 </div>
 
                 {/* Message Field */}
-                <div className="space-y-1">
-                  <label className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider block">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-mono font-bold text-zinc-300 uppercase tracking-wider block">
                     Message
                   </label>
                   <textarea
@@ -339,7 +339,7 @@ const Contact = () => {
                     <FaEnvelope size={16} />
                   </div>
                   <div className="font-mono text-left">
-                    <span className="block text-[9px] text-zinc-500 uppercase tracking-wider mb-0.5">Email</span>
+                    <span className="block text-xs text-zinc-400 uppercase tracking-wider mb-0.5">Email</span>
                     <span className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">aafaquenazir@gmail.com</span>
                   </div>
                 </div>
@@ -363,7 +363,7 @@ const Contact = () => {
                     <FaWhatsapp size={18} />
                   </div>
                   <div className="font-mono text-left">
-                    <span className="block text-[9px] text-zinc-500 uppercase tracking-wider mb-0.5">WhatsApp</span>
+                    <span className="block text-xs text-zinc-400 uppercase tracking-wider mb-0.5">WhatsApp</span>
                     <span className="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">+91 93256 29256</span>
                   </div>
                 </div>

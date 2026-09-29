@@ -24,14 +24,14 @@ const Footer = () => {
       {/* Ambient Top Glow Line */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Integrated Pre-Footer CTA */}
         <div className="pb-12 mb-12 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
             <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
               Have a project in mind?
             </h3>
-            <p className="text-xs sm:text-sm text-gray-400 mt-1 font-light">
+            <p className="text-sm text-gray-400 mt-1 font-light">
               Feel free to reach out if you're looking for a developer or want to collaborate.
             </p>
           </div>
@@ -51,18 +51,18 @@ const Footer = () => {
               <span className="text-2xl md:text-3xl font-black text-white tracking-wider uppercase block">
                 Aafaque Nazir
               </span>
-              <p className="text-gray-400 text-[10px] sm:text-xs tracking-[0.15em] mt-1.5 uppercase font-mono">
+              <p className="text-gray-400 text-xs tracking-[0.15em] mt-1.5 uppercase font-mono">
                 Independent Freelancer & Full-Stack Developer
               </p>
             </div>
 
-            <div className="text-gray-500 text-[11px] sm:text-xs font-mono max-w-sm mt-1 leading-relaxed space-y-2">
+            <div className="text-gray-400 text-xs font-mono max-w-sm mt-1 leading-relaxed space-y-2">
               <p>
-                <strong className="text-gray-300">Business Name:</strong> Aafaque Nazir<br/>
-                <strong className="text-gray-300">Main Activity:</strong> Freelance Full-Stack Web Development, UI/UX Design & Digital Solutions.
+                <strong className="text-gray-200">Business Name:</strong> Aafaque Nazir<br/>
+                <strong className="text-gray-200">Main Activity:</strong> Freelance Full-Stack Web Development, UI/UX Design & Digital Solutions.
               </p>
               <p>
-                <strong className="text-gray-300">Services Provided:</strong> Custom Websites, E-Commerce Stores, and Web Applications.
+                <strong className="text-gray-200">Services Provided:</strong> Custom Websites, E-Commerce Stores, and Web Applications.
               </p>
             </div>
           </div>

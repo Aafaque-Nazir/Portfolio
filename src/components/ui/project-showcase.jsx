@@ -1,13 +1,31 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProgressiveImage from "./ProgressiveImage";
 import { RiFolder3Fill, RiArrowLeftLine, RiExternalLinkLine } from "react-icons/ri";
 import { projects } from "../../data/projects";
 
 function ProjectCard({ project }) {
+    const navigate = useNavigate();
+
+    const handleCardClick = () => {
+        navigate(`/projects/${project.id}`);
+    };
+
     return (
-        <div className="group relative w-full h-full bg-[#09090b] border border-white/10 hover:border-cyan-500/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
+        <div
+            onClick={handleCardClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleCardClick();
+                }
+            }}
+            aria-label={`View case study for ${project.title}`}
+            className="group relative w-full h-full bg-[#09090b] border border-white/10 hover:border-cyan-500/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+        >
 
             {/* Feature Image with Controlled Compact Proportions */}
             <div className="relative w-full h-36 sm:h-40 overflow-hidden bg-zinc-950 border-b border-white/5 flex items-center justify-center p-3">
@@ -24,7 +42,7 @@ function ProjectCard({ project }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/80 via-transparent to-transparent pointer-events-none" />
 
                 {/* Category Pill */}
-                <span className="absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-md border border-white/10 text-[9px] font-mono text-cyan-400 uppercase tracking-wider">
+                <span className="absolute top-2.5 left-2.5 z-20 px-2.5 py-0.5 rounded-md bg-black/80 backdrop-blur-md border border-white/10 text-[10px] font-mono text-cyan-400 uppercase tracking-wider font-semibold">
                     {project.category}
                 </span>
             </div>
@@ -35,7 +53,7 @@ function ProjectCard({ project }) {
                     <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-1">
                         {project.title}
                     </h3>
-                    <p className="text-xs text-zinc-400 font-light mt-1.5 line-clamp-2 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-zinc-400 font-light mt-1.5 line-clamp-2 leading-relaxed">
                         {project.description}
                     </p>
 
@@ -44,13 +62,13 @@ function ProjectCard({ project }) {
                         {project.techStack.slice(0, 3).map((tech, idx) => (
                             <span
                                 key={idx}
-                                className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/5 text-[10px] font-mono text-slate-300"
+                                className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/5 text-[10px] sm:text-xs font-mono text-slate-300"
                             >
                                 {tech}
                             </span>
                         ))}
                         {project.techStack.length > 3 && (
-                            <span className="px-1.5 py-0.5 rounded bg-white/[0.02] border border-white/5 text-[9px] font-mono text-slate-500">
+                            <span className="px-1.5 py-0.5 rounded bg-white/[0.02] border border-white/5 text-[10px] font-mono text-slate-500">
                                 +{project.techStack.length - 3}
                             </span>
                         )}
@@ -61,6 +79,7 @@ function ProjectCard({ project }) {
                 <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-2">
                     <Link
                         to={`/projects/${project.id}`}
+                        onClick={(e) => e.stopPropagation()}
                         className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 transition-colors group/link"
                     >
                         <span>Case Study</span>
@@ -72,10 +91,11 @@ function ProjectCard({ project }) {
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 hover:text-white text-[11px] font-mono font-medium transition-all"
+                            onClick={(e) => e.stopPropagation()}
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 hover:text-white text-xs font-mono font-medium transition-all"
                         >
                             <span>Live Demo</span>
-                            <RiExternalLinkLine className="text-[10px]" />
+                            <RiExternalLinkLine className="text-xs" />
                         </a>
                     )}
                 </div>
@@ -107,7 +127,7 @@ export function ProjectShowcase({ selectedFolder: externalFolder, setSelectedFol
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.98, filter: "blur(6px)" }}
                         transition={{ duration: 0.35 }}
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto relative z-10"
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto relative z-10"
                     >
                         {folders.map((folder) => (
                             <motion.div
@@ -149,7 +169,7 @@ export function ProjectShowcase({ selectedFolder: externalFolder, setSelectedFol
                                             <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
                                                 <RiFolder3Fill className="text-base" />
                                             </div>
-                                            <span className="text-[10px] font-mono font-medium text-slate-400 bg-white/[0.03] border border-white/10 px-2 py-0.5 rounded-full">
+                                            <span className="text-xs font-mono font-medium text-slate-400 bg-white/[0.03] border border-white/10 px-2.5 py-0.5 rounded-full">
                                                 {folder.projects.length} {folder.projects.length === 1 ? 'project' : 'projects'}
                                             </span>
                                         </div>
@@ -159,7 +179,7 @@ export function ProjectShowcase({ selectedFolder: externalFolder, setSelectedFol
                                         </h2>
 
                                         <div className="flex items-center justify-between pt-3 border-t border-white/5">
-                                            <span className="text-[11px] font-mono text-slate-400 group-hover:text-cyan-300 transition-colors">
+                                            <span className="text-xs font-mono text-slate-400 group-hover:text-cyan-300 transition-colors">
                                                 Explore Folder
                                             </span>
                                             <RiArrowLeftLine className="rotate-180 text-xs text-cyan-400 drop-shadow-[0_0_6px_rgba(34,211,238,0.8)] group-hover:translate-x-1 transition-transform" />
@@ -177,7 +197,7 @@ export function ProjectShowcase({ selectedFolder: externalFolder, setSelectedFol
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 15, scale: 0.98 }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative bg-zinc-950/70 backdrop-blur-2xl border border-white/10 rounded-2xl w-full max-w-5xl mx-auto shadow-2xl overflow-hidden z-20"
+                        className="relative bg-zinc-950/70 backdrop-blur-2xl border border-white/10 rounded-2xl w-full max-w-6xl mx-auto shadow-2xl overflow-hidden z-20"
                     >
                         {/* Top Accent Line */}
                         <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
@@ -201,7 +221,7 @@ export function ProjectShowcase({ selectedFolder: externalFolder, setSelectedFol
                                 <h2 className="text-sm sm:text-base font-bold text-white tracking-tight">
                                     {selectedFolder.name}
                                 </h2>
-                                <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/70 border border-cyan-500/30 px-2 py-0.5 rounded-full">
+                                <span className="text-xs font-mono text-cyan-300 bg-cyan-950/70 border border-cyan-500/30 px-2.5 py-0.5 rounded-full">
                                     {selectedFolder.projects.length} {selectedFolder.projects.length === 1 ? 'project' : 'projects'}
                                 </span>
                             </div>

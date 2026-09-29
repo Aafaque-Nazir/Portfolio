@@ -51,7 +51,7 @@ export function TechCard({ tech, index }) {
             {/* Terminal Tooltip */}
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center z-50 pointer-events-none translate-y-2 group-hover:translate-y-0 min-w-max">
                 <div className="bg-black/95 border border-white/10 px-2.5 py-1 rounded-md shadow-xl">
-                    <span className="text-[9px] font-mono font-black text-white tracking-[0.1em] uppercase whitespace-nowrap">
+                    <span className="text-xs font-mono font-bold text-white tracking-wider uppercase whitespace-nowrap">
                         {tech.name}
                     </span>
                 </div>

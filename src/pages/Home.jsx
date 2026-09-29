@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGithub, FaArrowRight } from "react-icons/fa";
 import { RiExternalLinkLine } from "react-icons/ri";
 import GlobalBackground from "../components/GlobalBackground";
@@ -28,6 +28,7 @@ const charVariants = {
 };
 
 const Home = () => {
+  const navigate = useNavigate();
   const firstName = "AAFAQUE".split("");
   const lastName = "NAZIR".split("");
 
@@ -57,7 +58,7 @@ const Home = () => {
           <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-cyan-400/10 rounded-full blur-[120px] opacity-20" />
         </div>
 
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 flex-grow flex flex-col justify-center">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex flex-col justify-center">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -164,7 +165,7 @@ const Home = () => {
         </div>
 
         {/* Minimal Highlight Bar */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 mt-10">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
           <div className="pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
             <div>
               <span className="text-xl sm:text-2xl font-black text-white font-mono">{projects.length}+</span>
@@ -189,7 +190,7 @@ const Home = () => {
       {/* ─────────────────────────────────────────────────────────────
           2. FEATURED PROJECTS
       ────────────────────────────────────────────────────────────── */}
-      <section id="featured-work" className="relative w-full max-w-6xl mx-auto px-6 md:px-12 py-20 border-t border-white/5">
+      <section id="featured-work" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-white/5">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
@@ -218,7 +219,17 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group relative flex flex-col bg-[#09090b] border border-white/5 hover:border-cyan-500/30 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)]"
+              onClick={() => navigate(`/projects/${project.id}`)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  navigate(`/projects/${project.id}`);
+                }
+              }}
+              aria-label={`View details for ${project.title}`}
+              className="group relative flex flex-col bg-[#09090b] border border-white/5 hover:border-cyan-500/30 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
               {/* Media Preview (Compact & proportional) */}
               <div className="relative w-full h-36 sm:h-40 overflow-hidden bg-zinc-950 border-b border-white/5 flex items-center justify-center p-3">
@@ -235,13 +246,13 @@ const Home = () => {
               {/* Card Body */}
               <div className="p-4 sm:p-5 flex flex-col justify-between flex-grow">
                 <div>
-                  <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-wider block mb-1">
+                  <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider block mb-1">
                     {project.category}
                   </span>
                   <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-xs text-slate-400 font-light mt-2 line-clamp-2 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-400 font-light mt-2 line-clamp-2 leading-relaxed">
                     {project.description}
                   </p>
 
@@ -250,7 +261,7 @@ const Home = () => {
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/5 text-[10px] font-mono text-slate-300"
+                        className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/5 text-[10px] sm:text-xs font-mono text-slate-300"
                       >
                         {tech}
                       </span>
@@ -262,6 +273,7 @@ const Home = () => {
                 <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3">
                   <Link
                     to={`/projects/${project.id}`}
+                    onClick={(e) => e.stopPropagation()}
                     className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-cyan-300 transition-colors group/link"
                   >
                     <span>View Details</span>
@@ -273,6 +285,7 @@ const Home = () => {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 hover:text-white text-xs font-mono font-medium transition-all duration-200"
                     >
                       <span>Live Demo</span>
@@ -308,7 +321,7 @@ const Home = () => {
       {/* ─────────────────────────────────────────────────────────────
           3. SKILLS & TECHNOLOGIES
       ────────────────────────────────────────────────────────────── */}
-      <section id="tech-stack" className="relative w-full max-w-6xl mx-auto px-6 md:px-12 py-20 border-t border-white/5">
+      <section id="tech-stack" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-white/5">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
             Skills & Technologies
@@ -357,7 +370,7 @@ const Home = () => {
                   <p className="text-xs font-mono font-medium text-white group-hover:text-cyan-300 transition-colors">
                     {tech.name}
                   </p>
-                  <span className="text-[9px] font-mono text-slate-500">
+                  <span className="text-xs font-mono text-slate-500">
                     {tech.category}
                   </span>
                 </div>
@@ -380,7 +393,7 @@ const Home = () => {
       {/* ─────────────────────────────────────────────────────────────
           4. WHAT I DO (SERVICES)
       ────────────────────────────────────────────────────────────── */}
-      <section id="services-preview" className="relative w-full max-w-6xl mx-auto px-6 md:px-12 py-20 border-t border-white/5">
+      <section id="services-preview" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-white/5">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
@@ -402,17 +415,30 @@ const Home = () => {
 
         {/* 3 Simple Service Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="p-6 rounded-2xl bg-[#09090b] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col justify-between">
+          <div
+            onClick={() => navigate("/services", { state: { plan: "Websites & Landing Pages" } })}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                navigate("/services", { state: { plan: "Websites & Landing Pages" } });
+              }
+            }}
+            aria-label="Learn more about Websites"
+            className="p-6 rounded-2xl bg-[#09090b] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+          >
             <div>
               <div className="text-2xl mb-4">🌐</div>
               <h3 className="text-xl font-bold text-white mb-2">Websites</h3>
-              <p className="text-xs md:text-sm text-slate-400 font-light leading-relaxed mb-4">
+              <p className="text-sm text-slate-400 font-light leading-relaxed mb-4">
                 Clean, modern landing pages and portfolio websites designed to look great, load fast, and be fully responsive on mobile.
               </p>
             </div>
             <Link
               to="/services"
               state={{ plan: "Websites & Landing Pages" }}
+              onClick={(e) => e.stopPropagation()}
               className="group/link inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
             >
               <span>Learn more</span>
@@ -420,17 +446,30 @@ const Home = () => {
             </Link>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#09090b] border border-cyan-500/20 transition-all flex flex-col justify-between">
+          <div
+            onClick={() => navigate("/services", { state: { plan: "Custom Web Applications" } })}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                navigate("/services", { state: { plan: "Custom Web Applications" } });
+              }
+            }}
+            aria-label="Learn more about Web Applications"
+            className="p-6 rounded-2xl bg-[#09090b] border border-cyan-500/20 hover:border-cyan-500/40 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+          >
             <div>
               <div className="text-2xl mb-4">⚡</div>
               <h3 className="text-xl font-bold text-white mb-2">Web Applications</h3>
-              <p className="text-xs md:text-sm text-slate-400 font-light leading-relaxed mb-4">
+              <p className="text-sm text-slate-400 font-light leading-relaxed mb-4">
                 Custom full-stack web apps, admin dashboards, and portals with databases (PostgreSQL/Supabase) and authentication.
               </p>
             </div>
             <Link
               to="/services"
               state={{ plan: "Custom Web Applications" }}
+              onClick={(e) => e.stopPropagation()}
               className="group/link inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
             >
               <span>Learn more</span>
@@ -438,17 +477,30 @@ const Home = () => {
             </Link>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#09090b] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col justify-between">
+          <div
+            onClick={() => navigate("/services", { state: { plan: "Custom Online Stores" } })}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                navigate("/services", { state: { plan: "Custom Online Stores" } });
+              }
+            }}
+            aria-label="Learn more about E-Commerce Stores"
+            className="p-6 rounded-2xl bg-[#09090b] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+          >
             <div>
               <div className="text-2xl mb-4">🛒</div>
               <h3 className="text-xl font-bold text-white mb-2">E-Commerce Stores</h3>
-              <p className="text-xs md:text-sm text-slate-400 font-light leading-relaxed mb-4">
+              <p className="text-sm text-slate-400 font-light leading-relaxed mb-4">
                 Online storefronts with product browsing, shopping carts, instant search, and smooth checkout flows.
               </p>
             </div>
             <Link
               to="/services"
               state={{ plan: "Custom Online Stores" }}
+              onClick={(e) => e.stopPropagation()}
               className="group/link inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
             >
               <span>Learn more</span>
@@ -461,7 +513,7 @@ const Home = () => {
       {/* ─────────────────────────────────────────────────────────────
           5. ABOUT ME (GENUINE & CLEAN, NO FAKE TESTIMONIALS)
       ────────────────────────────────────────────────────────────── */}
-      <section id="about-teaser" className="relative w-full max-w-6xl mx-auto px-6 md:px-12 py-20 border-t border-white/5">
+      <section id="about-teaser" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-white/5">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-7">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white mb-4">
@@ -513,7 +565,7 @@ const Home = () => {
       {/* ─────────────────────────────────────────────────────────────
           6. COMMON QUESTIONS (FAQ)
       ────────────────────────────────────────────────────────────── */}
-      <section id="faq-section" className="relative w-full max-w-6xl mx-auto px-6 md:px-12 py-16 border-t border-white/5">
+      <section id="faq-section" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/5">
         <FAQ />
       </section>
 

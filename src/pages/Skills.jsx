@@ -66,7 +66,7 @@ const SkillCategoryCard = ({ title, description, skillsList, index }) => {
         <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mb-2">
           {title}
         </h2>
-        <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-light max-w-lg">
+        <p className="text-sm text-slate-300 leading-relaxed font-light max-w-lg">
           {description}
         </p>
       </div>
@@ -92,10 +92,10 @@ export default function Skills() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-cyan-500/[0.02] blur-[150px] pointer-events-none" />
 
       {/* Main Container */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         
         {/* Header Section: Unified Page H1 */}
-        <div className="text-center mb-10 sm:mb-12 max-w-xl mx-auto">
+        <div className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed"
+            className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed"
           >
             Technologies and tools I use to build fast, scalable, and responsive web applications.
           </motion.p>
@@ -133,7 +133,7 @@ export default function Skills() {
         </div>
 
         {/* Principles Section */}
-        <div className="w-full text-center mb-10 max-w-xl mx-auto">
+        <div className="w-full text-center mb-10 max-w-2xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -146,7 +146,7 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed"
+            className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed"
           >
             Coding guidelines followed on every single project.
           </motion.p>
@@ -167,7 +167,7 @@ export default function Skills() {
                 <pr.icon className="text-sm" aria-hidden="true" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-white uppercase mb-1.5 tracking-wide">{pr.title}</h3>
-              <p className="text-xs text-slate-400 leading-relaxed font-light">{pr.description}</p>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">{pr.description}</p>
             </motion.div>
           ))}
         </div>

@@ -33,10 +33,10 @@ const ProjectDetails = () => {
       {/* Dynamic Project SEO */}
       <SEO project={project} />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Navigation Row */}
-        <div className="flex items-center justify-between gap-4 mb-6">
+        <div className="flex items-center justify-between gap-4 mb-8">
           <Link 
             to="/projects" 
             className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-white/10 hover:border-cyan-400/50 text-slate-200 hover:text-white text-xs font-mono font-medium transition-all duration-200"
@@ -45,76 +45,76 @@ const ProjectDetails = () => {
             <span>Back to Projects</span>
           </Link>
 
-          <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider">
+          <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider font-semibold">
             {project.category}
           </span>
         </div>
 
         {/* Project Header: Clean, balanced sizing */}
-        <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
+        <div className="mb-10 max-w-3xl">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight uppercase mb-3">
             {project.title}
           </h1>
-          <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed mt-2 max-w-3xl">
+          <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
             {project.description}
           </p>
         </div>
 
         {/* 2-Column Content Grid: Project Info & Compact Preview */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-10">
           
           {/* Left Column (7 cols): The Problem & The Solution */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
+          <div className="lg:col-span-7 flex flex-col gap-5">
             {/* Problem Card */}
-            <div className="p-5 sm:p-6 rounded-xl bg-zinc-950/70 border border-white/5">
-              <div className="flex items-center gap-2 mb-2.5">
-                <span className="w-2 h-2 rounded-full bg-orange-400" />
-                <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
+            <div className="p-6 sm:p-7 rounded-2xl bg-zinc-950/70 border border-white/10">
+              <div className="flex items-center gap-2.5 mb-3">
+                <span className="w-2.5 h-2.5 rounded-full bg-orange-400" />
+                <h2 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-white">
                   The Problem
                 </h2>
               </div>
-              <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
                 {project.problem}
               </p>
             </div>
 
             {/* Solution Card */}
-            <div className="p-5 sm:p-6 rounded-xl bg-zinc-950/70 border border-white/5">
-              <div className="flex items-center gap-2 mb-2.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
+            <div className="p-6 sm:p-7 rounded-2xl bg-zinc-950/70 border border-white/10">
+              <div className="flex items-center gap-2.5 mb-3">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                <h2 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-white">
                   The Solution
                 </h2>
               </div>
-              <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
                 {project.solution}
               </p>
             </div>
           </div>
 
           {/* Right Column (5 cols): Compact Image Preview & Actions */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            {/* Compact Image Card (Controlled height, never blows up screen) */}
-            <div className="rounded-xl border border-white/10 bg-zinc-950 p-3 flex items-center justify-center overflow-hidden">
+          <div className="lg:col-span-5 flex flex-col gap-5">
+            {/* Compact Image Card */}
+            <div className="rounded-2xl border border-white/10 bg-zinc-950 p-4 flex items-center justify-center overflow-hidden">
               <ProgressiveImage 
                 src={project.image} 
                 alt={project.title} 
-                className="w-full h-48 sm:h-56 rounded-lg bg-black/50"
-                imgClassName="w-full h-full object-contain rounded-lg"
+                className="w-full h-48 sm:h-56 rounded-xl bg-black/50"
+                imgClassName="w-full h-full object-contain rounded-xl"
               />
             </div>
 
             {/* Meta & Tech Stack Card */}
-            <div className="p-4 rounded-xl bg-zinc-950/70 border border-white/5 space-y-3">
+            <div className="p-6 rounded-2xl bg-zinc-950/70 border border-white/10 space-y-4">
               <div>
-                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block mb-2">
+                <span className="text-xs font-mono text-slate-400 uppercase tracking-wider block mb-2.5">
                   Technologies Used
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded bg-white/[0.04] border border-white/5 text-[11px] font-mono text-slate-300"
+                      className="px-2.5 py-1 rounded bg-white/[0.04] border border-white/5 text-xs font-mono text-slate-300"
                     >
                       {tech}
                     </span>
