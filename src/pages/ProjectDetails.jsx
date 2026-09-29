@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { projects } from "../data/projects";
 import ProgressiveImage from "../components/ui/ProgressiveImage";
+import SEO from "../components/SEO";
 import { RiArrowLeftLine, RiExternalLinkLine, RiArrowRightLine } from "react-icons/ri";
 
 const ProjectDetails = () => {
@@ -29,6 +30,9 @@ const ProjectDetails = () => {
 
   return (
     <div className="min-h-screen bg-black pt-28 md:pt-32 pb-16">
+      {/* Dynamic Project SEO */}
+      <SEO project={project} />
+
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
         {/* Top Navigation Row */}

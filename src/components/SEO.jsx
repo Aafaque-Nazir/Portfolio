@@ -2,98 +2,98 @@ import { Helmet } from "react-helmet-async";
 import PropTypes from "prop-types";
 
 /**
- * Advanced SEO component — Optimized for CLIENT ACQUISITION, not developer ego.
+ * Advanced SEO Component
  *
- * Keyword Strategy:
- * - Primary: "web developer Navi Mumbai", "hire web developer India"
- * - Secondary: "React developer", "Next.js developer", "website development services"
- * - Long-tail: "affordable web developer Mumbai", "SaaS development India"
- * - Intent-based: "need a website", "build my website", "website for my business"
- *
- * Schema Strategy:
- * - Person (for Knowledge Panel)
- * - WebSite (for sitelinks)
- * - WebPage (for rich snippets)
- * - ProfessionalService (for service section — local pack eligibility)
- * - BreadcrumbList (for navigation breadcrumbs in SERPs)
- * - FAQPage (for FAQ rich results — bonus SERP real estate)
+ * Strategic Focus:
+ * 1. High-Intent Client Acquisition ("freelance web developer India", "hire React developer", "Next.js web developer")
+ * 2. Complete Project-Level Indexing (each project receives unique canonical, meta, OG image, and WebApplication schema)
+ * 3. Rich Snippets: Person, WebSite, WebPage, ProfessionalService, BreadcrumbList, FAQPage, WebApplication
+ * 4. Local + Global Search Optimization (Navi Mumbai / Mumbai / India / Worldwide Remote)
  */
-const SEO = ({ title, description, keywords, image, section }) => {
+const SEO = ({ title, description, keywords, image, url, section, project }) => {
   const siteName = "Aafaque Nazir";
   const siteUrl = "https://aafaque.in";
   const defaultImage = `${siteUrl}/og-image.png`;
+  const currentDate = "2026-09-29";
 
-  const siteTitle = "Aafaque Nazir — Web Developer in Navi Mumbai | React & Next.js Expert";
-
+  const defaultSiteTitle = "Aafaque Nazir — Freelance Web Developer India | React & Next.js Expert";
   const defaultDescription =
-    "Aafaque Nazir is a full-stack web developer building clean, responsive websites and web applications using React, Next.js, and modern technologies.";
+    "Looking to hire a freelance web developer in India? Aafaque Nazir builds fast, modern, and responsive websites, e-commerce stores, and full-stack web applications using React & Next.js.";
 
-  // ──────────────────────────────────────────────────
-  // Descriptions per section
-  // ──────────────────────────────────────────────────
-  const sectionDescriptions = {
-    home: "Aafaque Nazir is a full-stack web developer building clean, responsive websites, e-commerce stores, and web applications using React and Next.js.",
-    about:
-      "About Aafaque Nazir — full-stack web developer based in Navi Mumbai, India, specializing in modern web development with React, Node.js, and Next.js.",
-    skills:
-      "Technical skills and tools: React, Next.js, TypeScript, Node.js, Tailwind CSS, PostgreSQL, Supabase, and modern web development technologies.",
-    projects:
-      "Web development portfolio by Aafaque Nazir — showcasing web apps, online stores, landing pages, and interactive projects.",
-    services:
-      "Web development services by Aafaque Nazir — Custom Websites, E-Commerce Stores, and Full-Stack Web Applications.",
-    contact:
-      "Get in touch with Aafaque Nazir for web development projects, freelance work, or collaborations.",
+  // Section-specific metadata
+  const sectionMeta = {
+    home: {
+      title: "Aafaque Nazir — Freelance Web Developer India | React & Next.js Expert",
+      description:
+        "Looking to hire a freelance web developer in India? Aafaque Nazir builds fast, modern websites, custom e-commerce stores, and scalable SaaS web applications with React & Next.js.",
+      keywords:
+        "freelance web developer India, hire web developer India, React developer for hire, Next.js developer India, full stack web developer portfolio, custom website developer, web application developer Mumbai, frontend developer React, website development services India, hire freelance developer Mumbai",
+    },
+    about: {
+      title: "About Aafaque Nazir — Full-Stack Web Developer & Engineer",
+      description:
+        "Learn about Aafaque Nazir, an independent freelance web developer specializing in clean code, React, Next.js, and high-performance full-stack web applications.",
+      keywords:
+        "about Aafaque Nazir, freelance web developer background, full stack developer India, React developer portfolio, web engineer Mumbai, freelance frontend developer",
+    },
+    skills: {
+      title: "Skills & Modern Tech Stack — Aafaque Nazir | Web Developer",
+      description:
+        "Explore the technical skills and tooling of Aafaque Nazir: React, Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, Supabase, and REST APIs.",
+      keywords:
+        "React developer skills, Next.js developer tech stack, frontend skills portfolio, Node.js developer India, TypeScript developer portfolio, Supabase PostgreSQL developer",
+    },
+    projects: {
+      title: "Projects & Work Portfolio — Aafaque Nazir | Web Applications",
+      description:
+        "Explore custom web applications, online stores, and responsive websites built by Aafaque Nazir using React, Next.js, and modern backends.",
+      keywords:
+        "web development portfolio, React web app examples, Next.js portfolio projects, e-commerce website showcase, SaaS application examples, freelance web developer projects",
+    },
+    services: {
+      title: "Web Development Services — Custom Websites & Web Apps | Aafaque Nazir",
+      description:
+        "Professional web development services: responsive websites, custom e-commerce stores, and scalable full-stack web applications tailored for your business.",
+      keywords:
+        "web development services India, hire freelance web developer, custom website development, e-commerce store developer, web application development, website developer Mumbai",
+    },
+    contact: {
+      title: "Hire Aafaque Nazir — Contact for Web Development Projects",
+      description:
+        "Ready to start a website or web application project? Get in touch with Aafaque Nazir for freelance web development, project quotes, or collaborations.",
+      keywords:
+        "hire web developer India, contact web developer, get website quote, freelance developer contact, hire React developer, web development consultation India",
+    },
   };
 
-  // ──────────────────────────────────────────────────
-  // CLIENT-INTENT keywords per section
-  // Focus: What do CLIENTS search, not what developers search
-  // ──────────────────────────────────────────────────
-  const sectionKeywords = {
-    home: "web developer Navi Mumbai, hire web developer India, freelance web developer Mumbai, website developer near me, React developer for hire, Next.js developer India, affordable website developer, best web developer Navi Mumbai, custom website design Mumbai, web app development India, startup web developer, build my website India",
-    about:
-      "about Aafaque Nazir, freelance web developer Mumbai, experienced React developer India, full stack developer Navi Mumbai, professional website builder, web development freelancer India",
-    skills:
-      "React developer, Next.js expert, TypeScript developer, Node.js developer, Tailwind CSS, GSAP animations, Framer Motion, Supabase developer, PostgreSQL, full stack technologies India",
-    projects:
-      "web development portfolio India, website projects Mumbai, SaaS dashboard development, ecommerce website examples, business website showcase, React project portfolio, client website examples",
-    services:
-      "web development services Navi Mumbai, website cost India, affordable website development, hire React developer India, business website price, SaaS development services, lead generation website developer, ecommerce website development Mumbai, 3D website development, website for small business India",
-    contact:
-      "hire web developer Navi Mumbai, contact web developer India, freelance web developer for hire, get a website quote, web development consultation free, web developer WhatsApp contact",
-  };
+  // Determine dynamic values based on props or project
+  let resolvedTitle = defaultSiteTitle;
+  let resolvedDescription = defaultDescription;
+  let resolvedKeywords = sectionMeta.home.keywords;
+  let resolvedUrl = siteUrl;
+  let resolvedImage = defaultImage;
 
-  const sectionTitles = {
-    home: "Aafaque Nazir — Full-Stack Web Developer",
-    about: "About — Aafaque Nazir | Web Developer",
-    skills: "Skills & Technologies — Aafaque Nazir",
-    projects: "Projects & Portfolio — Aafaque Nazir",
-    services: "Services & Solutions — Aafaque Nazir",
-    contact: "Contact — Get in Touch with Aafaque Nazir",
-  };
-
-  const resolvedTitle = title
-    ? `${title} | ${siteName}`
-    : section && sectionTitles[section]
-      ? sectionTitles[section]
-      : siteTitle;
-
-  const resolvedDescription =
-    description ||
-    (section && sectionDescriptions[section]) ||
-    defaultDescription;
-
-  const resolvedKeywords =
-    keywords ||
-    (section && sectionKeywords[section]) ||
-    sectionKeywords.home;
-
-  // Canonical URL reflects the current page route
-  const resolvedUrl = section && section !== "home" ? `${siteUrl}/${section}` : `${siteUrl}/`;
-  const resolvedImage = image || defaultImage;
+  if (project) {
+    resolvedTitle = `${project.title} — ${project.category} Project | Aafaque Nazir`;
+    resolvedDescription = `${project.description} Built with ${project.techStack.join(", ")} by full-stack developer Aafaque Nazir.`;
+    resolvedKeywords = `${project.title}, ${project.category}, ${project.techStack.join(", ")}, web application case study, React project portfolio, Aafaque Nazir`;
+    resolvedUrl = `${siteUrl}/projects/${project.id}`;
+    resolvedImage = project.image ? (project.image.startsWith("http") ? project.image : `${siteUrl}${project.image}`) : defaultImage;
+  } else if (section && sectionMeta[section]) {
+    resolvedTitle = sectionMeta[section].title;
+    resolvedDescription = sectionMeta[section].description;
+    resolvedKeywords = sectionMeta[section].keywords;
+    resolvedUrl = section !== "home" ? `${siteUrl}/${section}` : `${siteUrl}/`;
+  } else if (title) {
+    resolvedTitle = `${title} | ${siteName}`;
+    if (description) resolvedDescription = description;
+    if (keywords) resolvedKeywords = keywords;
+    if (url) resolvedUrl = url;
+    if (image) resolvedImage = image;
+  }
 
   // ──────────────────────────────────────────────────
-  // JSON-LD: Person Schema — for Google Knowledge Panel
+  // JSON-LD: Person Schema (Knowledge Graph)
   // ──────────────────────────────────────────────────
   const personSchema = {
     "@context": "https://schema.org",
@@ -101,9 +101,9 @@ const SEO = ({ title, description, keywords, image, section }) => {
     name: "Aafaque Nazir",
     url: siteUrl,
     image: defaultImage,
-    jobTitle: "Web Developer & Software Engineer",
+    jobTitle: "Freelance Full-Stack Web Developer",
     description:
-      "Freelance web developer in Navi Mumbai specializing in React, Next.js, and modern web technologies. Building high-performance websites and web applications for businesses across India.",
+      "Freelance full-stack web developer building high-performance websites, e-commerce stores, and modern web applications using React, Next.js, and Node.js for clients in India and worldwide.",
     email: "mailto:aafaquenazir@gmail.com",
     telephone: "+91-93256-29256",
     address: {
@@ -124,20 +124,17 @@ const SEO = ({ title, description, keywords, image, section }) => {
       "TypeScript",
       "JavaScript",
       "Tailwind CSS",
-      "GSAP",
-      "Framer Motion",
       "Node.js",
       "Supabase",
       "PostgreSQL",
+      "E-Commerce Development",
       "UI/UX Design",
-      "Web Performance Optimization",
-      "Three.js",
-      "WebGL",
+      "Search Engine Optimization (SEO)",
     ],
   };
 
   // ──────────────────────────────────────────────────
-  // JSON-LD: WebSite Schema — for sitelinks search
+  // JSON-LD: WebSite Schema (Sitelinks Search)
   // ──────────────────────────────────────────────────
   const websiteSchema = {
     "@context": "https://schema.org",
@@ -150,7 +147,7 @@ const SEO = ({ title, description, keywords, image, section }) => {
   };
 
   // ──────────────────────────────────────────────────
-  // JSON-LD: WebPage Schema — per-section context
+  // JSON-LD: WebPage Schema (Page Level)
   // ──────────────────────────────────────────────────
   const webPageSchema = {
     "@context": "https://schema.org",
@@ -161,21 +158,21 @@ const SEO = ({ title, description, keywords, image, section }) => {
     isPartOf: { "@type": "WebSite", name: siteName, url: siteUrl },
     author: { "@type": "Person", name: "Aafaque Nazir" },
     inLanguage: "en",
-    dateModified: "2026-07-09",
+    dateModified: currentDate,
   };
 
   // ──────────────────────────────────────────────────
-  // JSON-LD: ProfessionalService — for local pack & Maps
+  // JSON-LD: ProfessionalService Schema (For Services)
   // ──────────────────────────────────────────────────
   const serviceSchema =
     section === "services"
       ? {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        name: "Aafaque Nazir — Web Development Services",
-        url: siteUrl,
+        name: "Aafaque Nazir — Freelance Web Development Services",
+        url: `${siteUrl}/services`,
         description:
-          "Web development services — Custom Websites, E-Commerce Stores, and Web Applications.",
+          "Professional web development services including custom websites, online e-commerce stores, and full-stack web applications.",
         provider: {
           "@type": "Person",
           name: "Aafaque Nazir",
@@ -187,6 +184,12 @@ const SEO = ({ title, description, keywords, image, section }) => {
           addressRegion: "Maharashtra",
           addressCountry: "IN",
         },
+        areaServed: [
+          { "@type": "Country", name: "India" },
+          { "@type": "AdministrativeArea", name: "Maharashtra" },
+          { "@type": "City", name: "Mumbai" },
+          { "@type": "City", name: "Navi Mumbai" },
+        ],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Web Development Services",
@@ -197,7 +200,7 @@ const SEO = ({ title, description, keywords, image, section }) => {
                 "@type": "Service",
                 name: "Websites & Landing Pages",
                 description:
-                  "Custom responsive websites and landing pages built with clean code and modern design.",
+                  "Custom responsive websites and landing pages built with clean code, fast loading speeds, and modern design.",
               },
             },
             {
@@ -206,16 +209,16 @@ const SEO = ({ title, description, keywords, image, section }) => {
                 "@type": "Service",
                 name: "Custom Online Stores",
                 description:
-                  "Custom e-commerce storefronts with product browsing, shopping cart, and smooth checkout.",
+                  "Custom e-commerce storefronts with product browsing, shopping cart, and smooth checkout experiences.",
               },
             },
             {
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
-                name: "Web Applications",
+                name: "Custom Web Applications",
                 description:
-                  "Full-stack web applications and client dashboards with database and authentication integration.",
+                  "Full-stack web applications and client dashboards with database and secure authentication integration.",
               },
             },
           ],
@@ -224,34 +227,75 @@ const SEO = ({ title, description, keywords, image, section }) => {
       : null;
 
   // ──────────────────────────────────────────────────
-  // JSON-LD: BreadcrumbList — for navigation breadcrumbs in SERPs
+  // JSON-LD: WebApplication / CreativeWork (For Individual Projects)
   // ──────────────────────────────────────────────────
+  const projectSchema = project
+    ? {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: project.title,
+      applicationCategory: "WebApplication",
+      operatingSystem: "All Web Browsers",
+      url: `${siteUrl}/projects/${project.id}`,
+      image: resolvedImage,
+      description: project.description,
+      author: {
+        "@type": "Person",
+        name: "Aafaque Nazir",
+        url: siteUrl,
+      },
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    }
+    : null;
+
+  // ──────────────────────────────────────────────────
+  // JSON-LD: BreadcrumbList (For Google SERP breadcrumbs)
+  // ──────────────────────────────────────────────────
+  const breadcrumbItems = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteUrl,
+    },
+  ];
+
+  if (project) {
+    breadcrumbItems.push(
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Projects",
+        item: `${siteUrl}/projects`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: project.title,
+        item: `${siteUrl}/projects/${project.id}`,
+      }
+    );
+  } else if (section && section !== "home") {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name: section.charAt(0).toUpperCase() + section.slice(1),
+      item: `${siteUrl}/${section}`,
+    });
+  }
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
-      },
-      ...(section && section !== "home"
-        ? [
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: section.charAt(0).toUpperCase() + section.slice(1),
-            item: `${siteUrl}/${section}`,
-          },
-        ]
-        : []),
-    ],
+    itemListElement: breadcrumbItems,
   };
 
   // ──────────────────────────────────────────────────
-  // JSON-LD: FAQPage — bonus SERP real estate on home section
-  // These FAQs target common client search queries
+  // JSON-LD: FAQPage Schema (Real, Genuine FAQs)
   // ──────────────────────────────────────────────────
   const faqSchema =
     section === "home" || section === "services"
@@ -261,26 +305,26 @@ const SEO = ({ title, description, keywords, image, section }) => {
         mainEntity: [
           {
             "@type": "Question",
-            name: "How much does a website cost in India?",
+            name: "How long does it usually take to complete a web project?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Website development starts from ₹8,999 for conversion websites, ₹24,999 for digital stores (e-comm), and custom pricing for business software (SaaS). Prices vary based on features and complexity.",
+              text: "A standard website typically takes about 1-2 weeks, while larger web applications with database features take 3-6 weeks depending on the scope.",
             },
           },
           {
             "@type": "Question",
-            name: "How long does it take to build a website?",
+            name: "Do you build websites from scratch or use templates?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "A conversion website typically takes 1-2 weeks. Digital stores (e-comm) take 2-4 weeks. Business software (SaaS) and full-stack web apps take 4-8 weeks depending on complexity.",
+              text: "I build websites from scratch using modern tools like React and Next.js. This ensures your website has clean code, loads quickly, and is tailored to your exact needs.",
             },
           },
           {
             "@type": "Question",
-            name: "Do you build websites for businesses in Navi Mumbai?",
+            name: "Do you work with clients outside your local area?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Yes! I'm a freelance web developer based in Navi Mumbai, Maharashtra. I build websites for businesses, startups, and agencies across Navi Mumbai, Mumbai, and all of India. Remote clients worldwide are also welcome.",
+              text: "Yes! While I am based in Navi Mumbai, Maharashtra, I work with clients, startups, and businesses remotely across India and internationally.",
             },
           },
           {
@@ -288,7 +332,7 @@ const SEO = ({ title, description, keywords, image, section }) => {
             name: "What technologies do you use for web development?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "I specialize in React, Next.js, TypeScript, Tailwind CSS, Node.js, Supabase, PostgreSQL, and modern frontend technologies including GSAP and Framer Motion for animations, and Three.js for 3D web experiences.",
+              text: "I specialize in React, Next.js, JavaScript, TypeScript, Tailwind CSS, Node.js, Supabase, PostgreSQL, and modern frontend animation libraries like Framer Motion.",
             },
           },
         ],
@@ -306,58 +350,43 @@ const SEO = ({ title, description, keywords, image, section }) => {
       <meta name="rating" content="general" />
       <meta name="theme-color" content="#000000" />
 
-      {/* Geo-Location — Local SEO for "near me" searches */}
+      {/* Geo-Location Tags for Local SEO */}
       <meta name="geo.region" content="IN-MH" />
       <meta name="geo.placename" content="Navi Mumbai" />
       <meta name="geo.position" content="19.1027;73.1092" />
       <meta name="ICBM" content="19.1027, 73.1092" />
 
       {/* Open Graph / Facebook / LinkedIn / WhatsApp */}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={project ? "article" : "website"} />
       <meta property="og:url" content={resolvedUrl} />
       <meta property="og:title" content={resolvedTitle} />
       <meta property="og:description" content={resolvedDescription} />
       <meta property="og:image" content={resolvedImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Aafaque Nazir — Web Developer in Navi Mumbai" />
+      <meta property="og:image:alt" content={resolvedTitle} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:locale" content="en_IN" />
 
-      {/* Twitter / X */}
+      {/* Twitter / X Card */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={resolvedUrl} />
       <meta name="twitter:title" content={resolvedTitle} />
       <meta name="twitter:description" content={resolvedDescription} />
       <meta name="twitter:image" content={resolvedImage} />
-      <meta name="twitter:image:alt" content="Aafaque Nazir — Web Developer in Navi Mumbai" />
+      <meta name="twitter:image:alt" content={resolvedTitle} />
 
-      {/* Canonical — ALWAYS the root URL for a single-page app */}
+      {/* Strict Canonical URL — Unique for every single route & project */}
       <link rel="canonical" href={resolvedUrl} />
 
-      {/* JSON-LD Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify(personSchema)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(websiteSchema)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(webPageSchema)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </script>
-      {serviceSchema && (
-        <script type="application/ld+json">
-          {JSON.stringify(serviceSchema)}
-        </script>
-      )}
-      {faqSchema && (
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </script>
-      )}
+      {/* Structured Data: JSON-LD */}
+      <script type="application/ld+json">{JSON.stringify(personSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(webPageSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      {serviceSchema && <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>}
+      {projectSchema && <script type="application/ld+json">{JSON.stringify(projectSchema)}</script>}
+      {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
     </Helmet>
   );
 };
@@ -369,6 +398,14 @@ SEO.propTypes = {
   image: PropTypes.string,
   url: PropTypes.string,
   section: PropTypes.string,
+  project: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    title: PropTypes.string,
+    category: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    techStack: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 export default SEO;

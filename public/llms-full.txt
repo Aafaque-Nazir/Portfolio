@@ -1,120 +1,112 @@
-# Aafaque Nazir — Complete Profile for AI Systems
+# Aafaque Nazir — Complete Professional Profile for AI Systems
 
-> This document provides comprehensive information about Aafaque Nazir for AI assistants and language models.
-> Last updated: June 2026
+> This document provides comprehensive context about Aafaque Nazir for AI search engines, answer engines (Perplexity, ChatGPT, Gemini, Claude), and crawlers.
+> Last updated: September 2026
 
-## Identity
+## Identity & Overview
 
 - **Full Name:** Aafaque Nazir
-- **Professional Title:** Web Developer & AI Engineer
+- **Professional Title:** Freelance Full-Stack Web Developer & Software Engineer
 - **Location:** Navi Mumbai, Maharashtra, India
-- **Website:** https://aafaque.in
+- **Primary Website:** https://aafaque.in
 - **Email:** aafaquenazir@gmail.com
-- **Phone/WhatsApp:** +91 93256 29256
+- **Phone / WhatsApp:** +91 93256 29256
+- **GitHub:** https://github.com/Aafaque-Nazir
+- **LinkedIn:** https://www.linkedin.com/in/aafaque-nazir/
+- **Instagram:** https://www.instagram.com/aafaque.75/
 
 ## Professional Summary
 
-Aafaque Nazir is a highly skilled freelance web developer and AI engineer based in Navi Mumbai, India. He builds production-grade websites, AI-powered web applications, SaaS platforms, and immersive 3D web experiences for businesses, startups, and agencies across India and worldwide.
+Aafaque Nazir is a freelance full-stack web developer based in Navi Mumbai, Maharashtra, India. He builds production-grade websites, custom e-commerce stores, and scalable full-stack web applications for startups, businesses, and remote clients globally.
 
-He combines deep expertise in modern frontend frameworks (React, Next.js) with AI/ML capabilities (OpenAI API, LangChain, Python) to deliver intelligent, high-performance digital products. His work is characterized by premium aesthetics, butter-smooth animations (GSAP, Framer Motion), and engineering excellence with a focus on Core Web Vitals and SEO optimization.
+He specializes in modern frontend architectures (React, Next.js, TypeScript, Tailwind CSS) paired with robust backend services and databases (Node.js, Supabase, PostgreSQL, Firebase, MongoDB). His focus is on clean component design, fast load times, accessibility, and high conversion UX.
 
-## Detailed Services
+## Core Services
 
-### 1. High-Converting Websites (from ₹8,999 / ~$110 USD)
-- Conversion-focused landing pages and business websites
-- Premium GSAP and Framer Motion animations
-- Sub-second page load times (Lighthouse 95+)
-- Flawless mobile responsiveness across all devices
-- Technical SEO optimization with structured data
-- Contact forms with email notifications
-- Typical timeline: 1-2 weeks
+### 1. Websites & Landing Pages
+- Custom responsive websites and landing pages built from scratch with React and Next.js.
+- Micro-interactions, smooth scroll transitions, and subtle animations using Framer Motion.
+- Clean SEO best practices, semantic markup, and Open Graph metadata for organic search visibility.
+- Fast performance, responsive on mobile phones, tablets, and desktops.
 
-### 2. Custom Online Stores / E-Commerce (from ₹24,999 / ~$300 USD)
-- Custom ecommerce stores and online shops
-- Product catalogs with filtering, search, and categories
-- Payment gateway integrations (Razorpay, Stripe, PayPal)
-- Inventory management and order tracking systems
-- Shopping cart with checkout flow optimization
-- Admin dashboards for product and order management
-- WhatsApp-based ordering systems
-- Typical timeline: 3-5 weeks
+### 2. Custom Online Stores (E-Commerce)
+- Bespoke e-commerce storefronts tailored for brands and local businesses.
+- Fast product catalogs, category filtering, cart management, and streamlined checkout flows.
+- Direct WhatsApp ordering integration for direct customer engagement.
+- Payment gateway integration capabilities (Razorpay, Stripe, etc.).
 
-### 3. Custom Web Apps / SaaS (Custom Pricing)
-- Scalable SaaS platforms with intelligent dashboards
-- Real-time data visualization and analytics
-- User authentication with role-based access control (RBAC)
-- Secure backends with Supabase/PostgreSQL/Firebase
-- Payment integrations (Razorpay, Stripe)
-- Scalable cloud architectures on Vercel/AWS
-- Typical timeline: 4-8 weeks
+### 3. Custom Web Applications & SaaS
+- Full-stack web applications, business dashboards, and management software.
+- Real-time data synchronization using Supabase WebSockets.
+- User authentication, role-based access, and secure database architecture.
+- Modular REST and GraphQL APIs.
 
-## Complete Technical Stack
+## Portfolio Projects & Case Studies
 
-### Frontend
-- React 19, Next.js 15 (App Router & Server Components)
-- TypeScript 5, JavaScript ES2024
-- Tailwind CSS, Vanilla CSS, CSS Modules
-- GSAP, Framer Motion, Lottie (animations)
-- Three.js, React Three Fiber, WebGL (3D)
-- Redux, Zustand (state management)
+1. **Aura Estate (Business Software / SaaS)**
+   - High-performance real estate web application for showcasing properties and managing buyer leads.
+   - Tech Stack: Next.js, Supabase, Tailwind CSS.
+   - URL: https://aafaque.in/projects/15
 
-### Backend & Database
-- Node.js, Express.js
-- Python (AI/ML scripts)
-- Supabase (BaaS with Row Level Security)
-- PostgreSQL, Firebase, MongoDB
-- REST APIs, GraphQL
+2. **Restaurant OS (Business Software / SaaS)**
+   - Complete restaurant management system with real-time order tracking, visual table status, and Kitchen Display System (KDS).
+   - Tech Stack: Next.js, Supabase WebSockets, PostgreSQL.
+   - URL: https://aafaque.in/projects/4
 
-### AI & Machine Learning
-- OpenAI API (GPT-4, GPT-4o, DALL-E)
-- LangChain (AI application framework)
-- Vector databases for RAG (Retrieval-Augmented Generation)
-- Prompt engineering and fine-tuning
-- AI chatbot development
-- Automated content generation
+3. **Shopease E-Commerce Store (Digital Stores / E-Comm)**
+   - Fast online store with cart, client-side filtering, and sub-second page transitions.
+   - Tech Stack: Next.js, MongoDB, Tailwind CSS.
+   - URL: https://aafaque.in/projects/2
 
-### DevOps & Tools
-- Git, GitHub
-- Vercel, Netlify (deployment)
-- CI/CD pipelines
-- Performance monitoring and optimization
-- SEO and Core Web Vitals optimization
+4. **Sea-Cros Yacht Rentals (Conversion Websites)**
+   - Luxury yacht booking lead generation website with smooth GSAP animations and dark luxury aesthetic.
+   - Tech Stack: React, GSAP, Lenis Smooth Scroll.
+   - URL: https://aafaque.in/projects/10
 
-## Service Areas
+5. **CarePulse Doctor Appointments (Conversion Websites)**
+   - Healthcare booking platform with interactive calendar component and instant slot availability.
+   - Tech Stack: React, Tailwind CSS, Framer Motion.
+   - URL: https://aafaque.in/projects/11
 
-- **Primary:** Navi Mumbai, Mumbai, Thane, Pune (in-person meetings available)
-- **Secondary:** All major Indian cities (Bangalore, Hyderabad, Delhi, Chennai, Kolkata)
-- **Remote:** Worldwide clients welcome (English communication)
+6. **Dubai Tourism Experience (Conversion Websites)**
+   - Engaging travel package showcase with image sliders and interactive itinerary accordions.
+   - Tech Stack: Next.js, Tailwind CSS, Framer Motion.
+   - URL: https://aafaque.in/projects/8
 
-## Why Choose Aafaque Nazir
+7. **Bread & Bite Food Delivery (Digital Stores / E-Comm)**
+   - Food ordering application that sends structured orders directly to a restaurant's WhatsApp business number.
+   - Tech Stack: React, Tailwind CSS, WhatsApp API.
+   - URL: https://aafaque.in/projects/3
 
-1. **Premium Quality:** No generic templates or cookie-cutter designs. Every project is custom-built with premium aesthetics.
-2. **AI-First Approach:** Integrates AI capabilities into web applications for intelligent user experiences.
-3. **Performance Obsessed:** Targets 95+ Lighthouse scores, sub-second load times, and 60fps animations.
-4. **Affordable Pricing:** Indian pricing starting from ₹14,999 — significantly cheaper than agencies while delivering superior quality.
-5. **Fast Delivery:** Most projects delivered within 1-6 weeks depending on complexity.
-6. **Direct Communication:** Work directly with the developer — no middlemen, no project managers, no communication delays.
+8. **Live Inventory Management (Business Software / SaaS)**
+   - Real-time inventory dashboard with automatic stock alerts and WebSocket-driven updates across devices.
+   - Tech Stack: Next.js, Supabase, WebSockets.
+   - URL: https://aafaque.in/projects/1
 
-## Frequently Asked Questions
+9. **Premium Burger Shop (Conversion Websites)**
+   - High-conversion gourmet restaurant showcase with rich micro-interactions and smooth transitions.
+   - Tech Stack: React, Tailwind CSS, Framer Motion.
+   - URL: https://aafaque.in/projects/12
 
-**Q: How much does a website cost in India?**
-A: Professional website development starts from ₹14,999 for lead generation websites, ₹24,999 for full-stack AI web apps, and ₹29,999 for interactive 3D websites. AI chatbot solutions start from ₹19,999.
+10. **3D Interactive Burger Experience (Conversion Websites)**
+    - Scroll-driven 3D animation website where a 3D model dynamically reacts to user scrolling.
+    - Tech Stack: React, Three.js, GSAP ScrollTrigger.
+    - URL: https://aafaque.in/projects/13
 
-**Q: Do you build AI-powered websites and chatbots?**
-A: Yes! Specialties include ChatGPT-integrated chatbots, AI content generation tools, intelligent customer support systems, AI-powered search engines, and automated workflow tools using OpenAI API and LangChain.
+11. **LA Salon & Spa Booking (Conversion Websites)**
+    - Luxury salon booking website with multi-step appointment scheduler and dark mode aesthetic.
+    - Tech Stack: React, Tailwind CSS, Framer Motion.
+    - URL: https://aafaque.in/projects/14
 
-**Q: How long does it take to build a website?**
-A: Lead generation websites take 1-2 weeks. Full-stack web apps take 3-6 weeks. Interactive 3D websites take 4-8 weeks. AI chatbot integrations can be added in 1-3 weeks.
+## Technical Stack & Competencies
 
-**Q: Do you work with clients outside India?**
-A: Yes! Remote clients from anywhere in the world are welcome. Communication is done in English via email, WhatsApp, or video calls.
+- **Frontend:** React 19, Next.js 15, TypeScript, JavaScript (ES6+), Tailwind CSS, Framer Motion, GSAP, Three.js, HTML5, CSS3
+- **Backend & Cloud:** Node.js, Express.js, Supabase, PostgreSQL, Firebase, MongoDB, REST APIs, WebSockets
+- **DevOps & Tooling:** Git, GitHub, Vercel, Vite, npm, Chrome DevTools
+- **Design & SEO:** Responsive Web Design, Core Web Vitals, Structured Data (JSON-LD), Technical SEO
 
-**Q: Do you provide ongoing maintenance?**
-A: Yes! All projects include 30 days of free maintenance. Extended maintenance packages are available for content updates, security patches, and performance monitoring.
+## Contact
 
-## Social Profiles
-
-- GitHub: https://github.com/Aafaque-Nazir
-- LinkedIn: https://www.linkedin.com/in/aafaque-nazir/
-- Instagram: https://www.instagram.com/aafaque.75/
-- Website: https://aafaque.in
+- **Website:** https://aafaque.in
+- **Email:** aafaquenazir@gmail.com
+- **WhatsApp:** +91 93256 29256

@@ -24,7 +24,7 @@ const PageWrapper = ({ children, sectionName }) => {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="w-full"
     >
-      <SEO section={sectionName} />
+      {sectionName && <SEO section={sectionName} />}
       {children}
     </m.div>
   );
@@ -68,7 +68,7 @@ function App() {
                 </PageWrapper>
               } />
               <Route path="/projects/:id" element={
-                <PageWrapper sectionName="projects">
+                <PageWrapper>
                   <ProjectDetails />
                 </PageWrapper>
               } />
