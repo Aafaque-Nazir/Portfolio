@@ -28,6 +28,20 @@ export const projects = [
     },
 */
     {
+        id: 17,
+        title: "Al Raheeq Tourism",
+        description: "Full-stack travel booking & UAE visa portal with express applications, worldwide flight ticketing, and direct WhatsApp inquiry flow.",
+        image: "/al-raheeq-tourism-thumbnail.webp",
+        link: "https://amazing-gingersnap-abde2e.netlify.app/",
+        icon: <RiPlaneFill />,
+        category: "Conversion Websites",
+        techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Netlify Edge"],
+        status: "Live",
+        problem: "Travel agencies in Dubai often rely on manual walk-in or offline inquiries, resulting in missed leads and poor organic search visibility.",
+        solution: "Engineered a high-speed travel portal using Next.js App Router and Netlify Edge. Features express visa processing selectors, live travel package itineraries, multi-currency display, and a direct WhatsApp booking engine with rich structured Schema markup.",
+        lighthouse: { perf: 98, access: 100, seo: 100, bp: 100 }
+    },
+    {
         id: 15,
         title: "Aura Estate",
         description: "A high-performance, full-stack real estate web application designed for showcasing premium properties and managing prospective buyer leads.",
@@ -40,6 +54,20 @@ export const projects = [
         problem: "Real estate agencies struggle with disconnected systems for showcasing properties and managing prospective leads, leading to lost sales opportunities.",
         solution: "Developed a comprehensive full-stack solution featuring a stunning UI for property showcases and a robust administrative dashboard for efficient property and lead management.",
         lighthouse: { perf: 100, access: 100, seo: 100, bp: 100 }
+    },
+    {
+        id: 1,
+        title: "Inventory Management",
+        description: "Real-time inventory dashboard with stock levels, alerts, and live data updates.",
+        image: "/inventory-mgmt-thumbnail.webp",
+        link: "https://nvntory-mgm.vercel.app/",
+        icon: <RiSignalTowerFill />,
+        category: "Business Software (SaaS)",
+        techStack: ["Next.js", "Supabase", "WebSockets", "Payment Integration"],
+        status: "Live",
+        problem: "Businesses lose money due to stockouts or overstocking because they rely on manual, outdated spreadsheet tracking.",
+        solution: "Developed a live inventory dashboard. Integrated Supabase WebSockets to ensure that when an item is sold or restocked, the dashboard updates instantly across all devices.",
+        lighthouse: { perf: 98, access: 100, seo: 100, bp: 100 }
     },
     {
         id: 4,
@@ -124,20 +152,6 @@ export const projects = [
         problem: "Small local restaurants cannot afford the high commission fees of major food delivery platforms.",
         solution: "Created a lightweight React app that handles the entire menu and cart system locally, then elegantly formats the order and sends it directly to the restaurant's WhatsApp business number.",
         lighthouse: { perf: 100, access: 100, seo: 100, bp: 100 }
-    },
-    {
-        id: 1,
-        title: "Inventory Management",
-        description: "Real-time inventory dashboard with stock levels, alerts, and live data updates.",
-        image: "/inventory-mgmt-thumbnail.webp",
-        link: "https://nvntory-mgm.vercel.app/",
-        icon: <RiSignalTowerFill />,
-        category: "Business Software (SaaS)",
-        techStack: ["Next.js", "Supabase", "WebSockets", "Payment Integration"],
-        status: "Live",
-        problem: "Businesses lose money due to stockouts or overstocking because they rely on manual, outdated spreadsheet tracking.",
-        solution: "Developed a live inventory dashboard. Integrated Supabase WebSockets to ensure that when an item is sold or restocked, the dashboard updates instantly across all devices.",
-        lighthouse: { perf: 98, access: 100, seo: 100, bp: 100 }
     },
     {
         id: 12,

@@ -29,16 +29,7 @@ const ServiceCard = ({ pkg }) => {
       viewport={{ once: true }}
       onMouseMove={handleMouseMove}
       onClick={handleCardClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleCardClick();
-        }
-      }}
-      aria-label={`Inquire about ${pkg.title}`}
-      className={`group relative rounded-2xl overflow-hidden transition-all duration-300 w-full h-full flex flex-col cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 hover:-translate-y-1 ${
+      className={`group relative rounded-2xl overflow-hidden transition-all duration-300 w-full h-full flex flex-col cursor-pointer hover:-translate-y-1 ${
         isHighlight
           ? "border-2 border-cyan-400/60 shadow-[0_0_35px_rgba(34,211,238,0.18)]"
           : "border border-white/10 hover:border-cyan-500/30"

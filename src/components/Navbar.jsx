@@ -79,9 +79,8 @@ export default function Navbar() {
       </AnimatePresence>
 
       <motion.header
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 1, y: 0 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
         className="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
         {/* Dynamic Island Pill Container - Upgraded Glassmorphism, Glows & Inner Shadow */}

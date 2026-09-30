@@ -18,10 +18,10 @@ const Contact = lazy(() => import("./pages/Contact"));
 const PageWrapper = ({ children, sectionName }) => {
   return (
     <m.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 1, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -16 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       className="w-full"
     >
       {sectionName && <SEO section={sectionName} />}

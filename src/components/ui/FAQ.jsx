@@ -24,12 +24,14 @@ const FAQItem = ({ faq, isOpen, onClick }) => {
   return (
     <div className="border border-white/5 bg-zinc-950/40 backdrop-blur-sm rounded-2xl overflow-hidden transition-colors hover:border-cyan-500/20">
       <button
+        type="button"
         onClick={onClick}
-        className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+        aria-expanded={isOpen}
+        className="w-full flex items-center justify-between p-6 text-left focus:outline-none group"
       >
-        <h3 className={`text-sm md:text-base font-bold transition-colors ${isOpen ? "text-cyan-400" : "text-white group-hover:text-cyan-300"}`}>
+        <span className={`text-sm md:text-base font-bold transition-colors ${isOpen ? "text-cyan-400" : "text-white group-hover:text-cyan-300"}`}>
           {faq.question}
-        </h3>
+        </span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}

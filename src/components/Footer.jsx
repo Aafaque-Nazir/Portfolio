@@ -72,12 +72,12 @@ const Footer = () => {
             <p className="text-white text-xs font-bold font-mono uppercase tracking-[0.2em] text-white/40">
               Quick Links
             </p>
-            <ul className="grid grid-cols-2 md:grid-cols-1 gap-2.5">
+            <ul className="grid grid-cols-2 md:grid-cols-1 gap-2">
               {navItems.map((item) => (
                 <li key={item.path}>
                   <Link
                     to={item.path}
-                    className="group inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-cyan-400 transition-all font-mono"
+                    className="group inline-flex items-center gap-1.5 py-2 min-h-[44px] text-xs text-gray-400 hover:text-cyan-400 transition-all font-mono"
                   >
                     <RiArrowRightLine className="text-[10px] opacity-0 -ml-3 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)]" />
                     <span>{item.name}</span>
@@ -95,7 +95,7 @@ const Footer = () => {
             <p className="text-gray-400 text-xs font-mono">
               Have an idea? Let's discuss.
             </p>
-            <div className="flex gap-4 mb-2">
+            <div className="flex gap-3 mb-2">
               {[
                 { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white hover:border-white hover:bg-white/5", label: "Visit Aafaque Nazir's GitHub" },
                 { icon: RiLinkedinFill, href: "https://www.linkedin.com/in/aafaque-nazir/", color: "hover:text-cyan-400 hover:border-cyan-500/20 hover:bg-cyan-500/5", label: "Visit Aafaque Nazir's LinkedIn" },
@@ -107,7 +107,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  className={`w-10 h-10 rounded-xl border border-white/5 bg-white/[0.02] flex items-center justify-center text-gray-400 transition-all duration-300 hover:scale-105 ${item.color}`}
+                  className={`w-12 h-12 rounded-xl border border-white/5 bg-white/[0.02] flex items-center justify-center text-gray-400 transition-all duration-300 hover:scale-105 ${item.color}`}
                 >
                   <item.icon className="text-xl" />
                 </a>

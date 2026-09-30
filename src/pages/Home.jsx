@@ -102,40 +102,25 @@ const Home = () => {
             </div>
 
             {/* Subtitle */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mb-6 font-mono"
-            >
+            <div className="mb-6 font-mono">
               <SplitText
                 type="words"
-                delay={0.4}
+                delay={0}
                 className="text-cyan-400 text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase font-bold"
               >
                 WEB DEVELOPER & FRONTEND ENGINEER
               </SplitText>
-            </motion.div>
+            </div>
 
             {/* Normal, honest description */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="max-w-2xl mb-8"
-            >
+            <div className="max-w-2xl mb-8">
               <p className="text-gray-300 text-base md:text-lg leading-relaxed font-light border-l-2 border-cyan-500/40 pl-4">
                 I build fast, responsive websites and modern web applications with clean code, smooth interactions, and thoughtful design.
               </p>
-            </motion.div>
+            </div>
 
             {/* Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex items-center gap-2 sm:gap-3 flex-nowrap"
-            >
+            <div className="flex items-center gap-2 sm:gap-3 flex-nowrap">
               <Link
                 to="/contact"
                 className="px-3.5 py-2.5 sm:px-6 sm:py-3 bg-white hover:bg-cyan-300 text-black font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-full transition-all duration-300 flex items-center gap-1.5 sm:gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)] whitespace-nowrap shrink-0"
@@ -161,7 +146,7 @@ const Home = () => {
               >
                 <FaGithub className="text-base sm:text-lg" />
               </a>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
 
@@ -252,10 +237,9 @@ const Home = () => {
                   <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
                     Availability
                   </span>
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400"></span>
-                  </span>
+                  <div className="p-1.5 rounded-lg bg-white/[0.03] text-zinc-400 group-hover:text-cyan-400 group-hover:bg-cyan-500/10 transition-all">
+                    <RiExternalLinkLine className="w-3.5 h-3.5" />
+                  </div>
                 </div>
                 <div>
                   <div className="flex items-baseline gap-1.5">
@@ -307,27 +291,18 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               onClick={() => navigate(`/projects/${project.id}`)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  navigate(`/projects/${project.id}`);
-                }
-              }}
-              aria-label={`View details for ${project.title}`}
-              className="group relative flex flex-col bg-[#09090b] border border-white/5 hover:border-cyan-500/30 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="group relative flex flex-col bg-[#09090b] border border-white/5 hover:border-cyan-500/30 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] cursor-pointer"
             >
-              {/* Media Preview (Compact & proportional) */}
-              <div className="relative w-full h-36 sm:h-40 overflow-hidden bg-zinc-950 border-b border-white/5 flex items-center justify-center p-3">
+              {/* Media Preview (Edge-to-edge proportional 16:9) */}
+              <div className="relative w-full aspect-video sm:h-44 overflow-hidden bg-zinc-950 border-b border-white/5">
                 <img
                   src={project.image}
                   alt={project.title}
                   loading="lazy"
                   decoding="async"
-                  width="384"
-                  height="160"
-                  className="w-full h-full object-contain p-1 transition-transform duration-500 group-hover:scale-105"
+                  width="800"
+                  height="450"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/80 via-transparent to-transparent pointer-events-none" />
               </div>
@@ -425,9 +400,9 @@ const Home = () => {
               <button
                 key={category}
                 onClick={() => setActiveSkillTab(category)}
-                className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-all duration-200 ${
+                className={`min-h-[40px] px-5 py-2 rounded-full text-xs font-mono font-medium transition-all duration-200 ${
                   activeSkillTab === category
-                    ? "bg-cyan-400 text-black"
+                    ? "bg-cyan-400 text-black shadow-[0_0_15px_rgba(34,211,238,0.3)]"
                     : "bg-white/[0.03] text-gray-400 border border-white/5 hover:text-white"
                 }`}
               >
@@ -506,16 +481,7 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div
             onClick={() => navigate("/services", { state: { plan: "Websites & Landing Pages" } })}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                navigate("/services", { state: { plan: "Websites & Landing Pages" } });
-              }
-            }}
-            aria-label="Learn more about Websites"
-            className="p-6 rounded-2xl bg-[#09090b] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="p-6 rounded-2xl bg-[#09090b] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1"
           >
             <div>
               <div className="text-2xl mb-4">🌐</div>
@@ -537,16 +503,7 @@ const Home = () => {
 
           <div
             onClick={() => navigate("/services", { state: { plan: "Custom Web Applications" } })}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                navigate("/services", { state: { plan: "Custom Web Applications" } });
-              }
-            }}
-            aria-label="Learn more about Web Applications"
-            className="p-6 rounded-2xl bg-[#09090b] border border-cyan-500/20 hover:border-cyan-500/40 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="p-6 rounded-2xl bg-[#09090b] border border-cyan-500/20 hover:border-cyan-500/40 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1"
           >
             <div>
               <div className="text-2xl mb-4">⚡</div>
@@ -568,16 +525,7 @@ const Home = () => {
 
           <div
             onClick={() => navigate("/services", { state: { plan: "Custom Online Stores" } })}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                navigate("/services", { state: { plan: "Custom Online Stores" } });
-              }
-            }}
-            aria-label="Learn more about E-Commerce Stores"
-            className="p-6 rounded-2xl bg-[#09090b] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="p-6 rounded-2xl bg-[#09090b] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1"
           >
             <div>
               <div className="text-2xl mb-4">🛒</div>

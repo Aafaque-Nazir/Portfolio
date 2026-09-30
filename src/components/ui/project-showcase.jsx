@@ -15,27 +15,18 @@ function ProjectCard({ project }) {
     return (
         <div
             onClick={handleCardClick}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    handleCardClick();
-                }
-            }}
-            aria-label={`View case study for ${project.title}`}
-            className="group relative w-full h-full bg-[#09090b] border border-white/10 hover:border-cyan-500/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="group relative w-full h-full bg-[#09090b] border border-white/10 hover:border-cyan-500/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] cursor-pointer"
         >
 
             {/* Feature Image with Controlled Compact Proportions */}
-            <div className="relative w-full h-36 sm:h-40 overflow-hidden bg-zinc-950 border-b border-white/5 flex items-center justify-center p-3">
+            <div className="relative w-full aspect-video sm:h-44 overflow-hidden bg-zinc-950 border-b border-white/5">
                 <ProgressiveImage
                     src={project.image}
                     alt={project.title}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full flex items-center justify-center"
-                    imgClassName="w-full h-full object-contain p-1 transform transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-cover object-top transform transition-transform duration-500 group-hover:scale-105"
                 />
 
                 {/* Subtle gradient vignette */}

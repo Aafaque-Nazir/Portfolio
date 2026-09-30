@@ -14,7 +14,7 @@ export function SplitText({ children, className = "", delay = 0, type = "words" 
   }
 
   const container = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: (i = 1) => ({
       opacity: 1,
       transition: { staggerChildren: 0.05, delayChildren: delay * i },
@@ -32,8 +32,8 @@ export function SplitText({ children, className = "", delay = 0, type = "words" 
       },
     },
     hidden: {
-      opacity: 0,
-      y: 20,
+      opacity: 1,
+      y: 0,
     },
   };
 
