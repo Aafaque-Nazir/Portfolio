@@ -12,28 +12,43 @@ const SmoothScroll = () => {
             return;
         }
 
-        const lenis = new Lenis({
-            duration: 1.5, // Slower duration for smoother feel
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing
-            direction: "vertical",
-            gestureDirection: "vertical",
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
+        let animationFrameId;
+        let isCleanedUp = false;
 
-        lenisRef.current = lenis;
+        const initLenis = () => {
+            if (isCleanedUp) return;
 
-        // Expose to window so other components can use lenis.scrollTo()
-        window.lenis = lenis;
+            const lenis = new Lenis({
+                duration: 1.4,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: "vertical",
+                gestureDirection: "vertical",
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
 
-        const raf = (time) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
+            lenisRef.current = lenis;
+            window.lenis = lenis;
+
+            const raf = (time) => {
+                if (isCleanedUp) return;
+                lenis.raf(time);
+                animationFrameId = requestAnimationFrame(raf);
+            };
+
+            animationFrameId = requestAnimationFrame(raf);
         };
 
-        requestAnimationFrame(raf);
+        // Defer Lenis initialization so it doesn't compete with initial hydration and paint
+        const timeoutId = setTimeout(() => {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(initLenis);
+            } else {
+                initLenis();
+            }
+        }, 150);
 
         const handleResize = () => {
             if (lenisRef.current) lenisRef.current.resize();
@@ -41,10 +56,15 @@ const SmoothScroll = () => {
         window.addEventListener("resize", handleResize, { passive: true });
 
         return () => {
+            isCleanedUp = true;
+            clearTimeout(timeoutId);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
             window.removeEventListener("resize", handleResize);
-            lenis.destroy();
+            if (lenisRef.current) {
+                lenisRef.current.destroy();
+                lenisRef.current = null;
+            }
             delete window.lenis;
-            lenisRef.current = null;
         };
     }, []);
 

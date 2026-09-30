@@ -6,18 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- Google Tag Manager — Deferred to after page load for performance -->
-  <script>window.addEventListener('load', function() {
-    (function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-M35WBZJ7');
-  });</script>
+  <!-- Google Tag Manager — Non-blocking deferred loading on interaction or idle -->
+  <script>
+    (function() {
+      var gtmLoaded = false;
+      function loadGTM() {
+        if (gtmLoaded) return;
+        gtmLoaded = true;
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || []; w[l].push({
+            'gtm.start': new Date().getTime(), event: 'gtm.js'
+          }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+              'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M35WBZJ7');
+      }
+      var events = ['scroll', 'keydown', 'touchstart', 'click'];
+      events.forEach(function(e) {
+        window.addEventListener(e, loadGTM, { once: true, passive: true });
+      });
+      if ('requestIdleCallback' in window) {
+        window.addEventListener('load', function() {
+          requestIdleCallback(function() { setTimeout(loadGTM, 3500); });
+        });
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(loadGTM, 4000);
+        });
+      }
+    })();
+  </script>
   <!-- End Google Tag Manager -->
+
+  <!-- Canonical URL — Direct static baseline for crawlers & Lighthouse -->
+  <link rel="canonical" href="https://aafaque.in/" />
 
   <!-- Primary Meta Tags — High-Intent Client Acquisition -->
   <title>Aafaque Nazir — Freelance Web Developer India | React & Next.js Specialist</title>
@@ -108,7 +130,23 @@
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div id="root"></div>
+  <div id="root">
+    <!-- Critical CSS & Hero Pre-render — Eliminates CSR blank-screen delay for sub-second FCP & LCP -->
+    <div style="min-height:92vh;background:#000;color:#fff;display:flex;flex-direction:column;justify-content:center;padding:112px 20px 48px;max-width:1152px;margin:0 auto;box-sizing:border-box;font-family:'JetBrains Mono',monospace,sans-serif;">
+      <div style="max-width:768px;">
+        <h1 style="font-size:clamp(2.75rem,8vw,5.5rem);font-weight:900;line-height:0.95;letter-spacing:-0.04em;margin:0 0 16px 0;color:#ffffff;">
+          <span>AAFAQUE</span><br />
+          <span style="color:#22d3ee;">NAZIR</span>
+        </h1>
+        <div style="font-size:clamp(0.85rem,2.5vw,1.1rem);color:#22d3ee;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px;font-weight:700;">
+          Freelance Web Developer
+        </div>
+        <p style="font-size:clamp(0.95rem,2vw,1.15rem);color:#94a3b8;line-height:1.6;margin:0 0 28px 0;max-width:600px;font-weight:300;">
+          I design &amp; develop modern, high-performance websites, e-commerce stores, and full-stack web applications with React &amp; Next.js.
+        </p>
+      </div>
+    </div>
+  </div>
   <script type="module" src="/src/main.jsx"></script>
 
   <!--

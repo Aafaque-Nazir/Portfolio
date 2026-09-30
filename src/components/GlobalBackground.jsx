@@ -212,19 +212,28 @@ const GlobalBackground = () => {
       resizeTimer = setTimeout(initializeCanvas, 150);
     };
 
-    // Defer initialization to after initial paint so FCP & LCP are not blocked
-    const initTimer = setTimeout(() => {
+    const initWorld = () => {
       initializeCanvas();
       window.addEventListener("resize", handleResize, { passive: true });
       const observer = new IntersectionObserver(([entry]) => {
+        const wasVisible = isVisible;
         isVisible = entry.isIntersecting;
-        if (isVisible) render();
+        if (isVisible && !wasVisible) render();
       });
       observer.observe(canvas);
-    }, 60);
+    };
+
+    let idleId;
+    let timerId;
+    if ('requestIdleCallback' in window) {
+      idleId = requestIdleCallback(initWorld, { timeout: 1500 });
+    } else {
+      timerId = setTimeout(initWorld, 200);
+    }
 
     return () => {
-      clearTimeout(initTimer);
+      if (idleId && 'cancelIdleCallback' in window) cancelIdleCallback(idleId);
+      if (timerId) clearTimeout(timerId);
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);

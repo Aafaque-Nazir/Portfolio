@@ -42,7 +42,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
-  background-attachment: fixed;
   font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-display: swap;
   font-optical-sizing: auto;
@@ -50,6 +49,12 @@ body {
   font-style: normal;
   font-variation-settings: "wdth" 100;
   background-color: black;
+}
+
+@media (min-width: 1024px) {
+  body {
+    background-attachment: fixed;
+  }
 }
 
 

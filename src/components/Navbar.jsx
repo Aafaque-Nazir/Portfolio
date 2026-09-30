@@ -185,6 +185,7 @@ export default function Navbar() {
                 <span className="text-white/60 font-black tracking-[0.3em] uppercase text-[9px] font-mono">Navigation</span>
                 <button
                   onClick={toggleMenu}
+                  aria-label="Close navigation menu"
                   className="text-white/85 bg-white/5 p-2 rounded-full border border-white/10 hover:text-cyan-400 hover:border-cyan-500/30 transition-all active:scale-95"
                 >
                   <FaTimes size={12} />
@@ -240,6 +241,7 @@ export default function Navbar() {
                   <a
                     href="/Aafaque_Nazir_Resume.pdf"
                     download
+                    aria-label="Download Aafaque Nazir Resume"
                     className="flex items-center justify-center gap-2 w-full text-white/70 hover:text-cyan-400 transition-all duration-300 border border-white/10 hover:border-cyan-500/30 rounded-xl py-2.5 text-[10px] font-bold tracking-widest uppercase bg-gradient-to-b from-white/5 to-white/[0.01] hover:shadow-[0_4px_12px_rgba(34,211,238,0.05)]"
                   >
                     <PiReadCvLogoFill size={14} />
@@ -249,15 +251,16 @@ export default function Navbar() {
                   {/* Social links */}
                   <div className="flex justify-center gap-3">
                     {[
-                      { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white hover:border-white/20 hover:bg-white/5" },
-                      { icon: RiLinkedinFill, href: "https://www.linkedin.com/in/aafaque-nazir/", color: "hover:text-cyan-400 hover:border-cyan-500/20 hover:bg-cyan-500/5" },
-                      { icon: RiInstagramLine, href: "https://www.instagram.com/aafaque.75/", color: "hover:text-pink-500 hover:border-pink-500/20 hover:bg-pink-500/5" }
+                      { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white hover:border-white/20 hover:bg-white/5", label: "Visit GitHub Profile" },
+                      { icon: RiLinkedinFill, href: "https://www.linkedin.com/in/aafaque-nazir/", color: "hover:text-cyan-400 hover:border-cyan-500/20 hover:bg-cyan-500/5", label: "Visit LinkedIn Profile" },
+                      { icon: RiInstagramLine, href: "https://www.instagram.com/aafaque.75/", color: "hover:text-pink-500 hover:border-pink-500/20 hover:bg-pink-500/5", label: "Visit Instagram Profile" }
                     ].map((item, i) => (
                       <a
                         key={i}
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={item.label}
                         className={`text-white/40 transition-all duration-300 hover:scale-105 p-2 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-center ${item.color}`}
                       >
                         <item.icon size={18} />
