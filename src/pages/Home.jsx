@@ -293,8 +293,8 @@ const Home = () => {
               onClick={() => navigate(`/projects/${project.id}`)}
               className="group relative flex flex-col bg-[#09090b] border border-white/5 hover:border-cyan-500/30 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] cursor-pointer"
             >
-              {/* Media Preview (Edge-to-edge proportional 16:9) */}
-              <div className="relative w-full aspect-video sm:h-44 overflow-hidden bg-zinc-950 border-b border-white/5">
+              {/* Media Preview (Proportional 16:9, centered logo without clipping) */}
+              <div className="relative w-full aspect-video overflow-hidden bg-zinc-950 border-b border-white/5">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -302,9 +302,9 @@ const Home = () => {
                   decoding="async"
                   width="800"
                   height="450"
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/40 via-transparent to-transparent pointer-events-none" />
               </div>
 
               {/* Card Body */}

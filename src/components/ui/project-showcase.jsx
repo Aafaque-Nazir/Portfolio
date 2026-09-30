@@ -18,19 +18,19 @@ function ProjectCard({ project }) {
             className="group relative w-full h-full bg-[#09090b] border border-white/10 hover:border-cyan-500/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] cursor-pointer"
         >
 
-            {/* Feature Image with Controlled Compact Proportions */}
-            <div className="relative w-full aspect-video sm:h-44 overflow-hidden bg-zinc-950 border-b border-white/5">
+            {/* Feature Image with Controlled Proportions (Centered Logo Fit) */}
+            <div className="relative w-full aspect-video overflow-hidden bg-zinc-950 border-b border-white/5">
                 <ProgressiveImage
                     src={project.image}
                     alt={project.title}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full"
-                    imgClassName="w-full h-full object-cover object-top transform transition-transform duration-500 group-hover:scale-105"
+                    imgClassName="w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-105"
                 />
 
                 {/* Subtle gradient vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/30 via-transparent to-transparent pointer-events-none" />
 
                 {/* Category Pill */}
                 <span className="absolute top-2.5 left-2.5 z-20 px-2.5 py-0.5 rounded-md bg-black/80 backdrop-blur-md border border-white/10 text-[10px] font-mono text-cyan-400 uppercase tracking-wider font-semibold">
