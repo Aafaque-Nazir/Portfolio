@@ -12,10 +12,10 @@ import FAQ from "../components/ui/FAQ";
 
 // Animation Variants
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
   },
 };
 
@@ -134,19 +134,19 @@ const Home = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex flex-wrap items-center gap-3"
+              className="flex items-center gap-2 sm:gap-3 flex-nowrap"
             >
               <Link
                 to="/contact"
-                className="px-6 py-3 bg-white hover:bg-cyan-300 text-black font-bold text-xs uppercase tracking-wider rounded-full transition-all duration-300 flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                className="px-3.5 py-2.5 sm:px-6 sm:py-3 bg-white hover:bg-cyan-300 text-black font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-full transition-all duration-300 flex items-center gap-1.5 sm:gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)] whitespace-nowrap shrink-0"
               >
                 <span>Get in Touch</span>
-                <FaArrowRight className="w-3 h-3" />
+                <FaArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
               </Link>
 
               <button
                 onClick={() => document.getElementById("featured-work")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-6 py-3 rounded-full border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] hover:border-cyan-400/40 text-gray-300 hover:text-white text-xs font-mono tracking-wider transition-all duration-300 flex items-center gap-2"
+                className="px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-full border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] hover:border-cyan-400/40 text-gray-300 hover:text-white text-[11px] sm:text-xs font-mono tracking-wider transition-all duration-300 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap shrink-0"
               >
                 <span>View Projects</span>
                 <span className="text-cyan-400">↓</span>
@@ -157,9 +157,9 @@ const Home = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit GitHub"
-                className="p-3 rounded-full border border-white/10 bg-white/[0.02] hover:bg-cyan-500/10 hover:border-cyan-400/50 hover:text-white text-gray-400 transition-all flex items-center justify-center shrink-0"
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-white/10 bg-white/[0.02] hover:bg-cyan-500/10 hover:border-cyan-400/50 hover:text-white text-gray-400 transition-all flex items-center justify-center shrink-0"
               >
-                <FaGithub size={18} />
+                <FaGithub className="text-base sm:text-lg" />
               </a>
             </motion.div>
           </motion.div>
@@ -325,6 +325,8 @@ const Home = () => {
                   alt={project.title}
                   loading="lazy"
                   decoding="async"
+                  width="384"
+                  height="160"
                   className="w-full h-full object-contain p-1 transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/80 via-transparent to-transparent pointer-events-none" />

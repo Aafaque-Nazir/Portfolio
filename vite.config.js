@@ -14,11 +14,21 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor_react: ['react', 'react-dom', 'react-router-dom'],
-          vendor_motion: ['framer-motion'],
-          vendor_icons: ['react-icons'],
-          vendor_utils: ['react-helmet-async', 'lenis']
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react-dom') || id.includes('react-router-dom') || id.includes('/react/')) {
+              return 'vendor-react';
+            }
+            if (id.includes('framer-motion')) {
+              return 'vendor-motion';
+            }
+            if (id.includes('react-icons')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('react-helmet-async') || id.includes('lenis')) {
+              return 'vendor-utils';
+            }
+          }
         }
       }
     }

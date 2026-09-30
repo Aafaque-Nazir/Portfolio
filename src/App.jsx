@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar";
 import SmoothScroll from "./components/SmoothScroll";
 import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion";
 
-const Home = lazy(() => import("./pages/Home"));
+import Home from "./pages/Home";
 const About = lazy(() => import("./pages/About"));
 const Skills = lazy(() => import("./pages/Skills"));
 const Project = lazy(() => import("./pages/Project"));
@@ -18,10 +18,10 @@ const Contact = lazy(() => import("./pages/Contact"));
 const PageWrapper = ({ children, sectionName }) => {
   return (
     <m.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      exit={{ opacity: 0, y: -16 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className="w-full"
     >
       {sectionName && <SEO section={sectionName} />}
@@ -40,24 +40,18 @@ function App() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <m.div
-        initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
-      className="relative min-h-screen overflow-x-hidden bg-black"
-    >
+      <div className="relative min-h-screen overflow-x-hidden bg-black">
+        <SmoothScroll />
+        <Navbar />
 
-      <SmoothScroll />
-      <Navbar />
-
-      <main>
-        <Suspense fallback={
-          <div className="w-full min-h-screen flex items-center justify-center py-20 text-cyan-500/50 mix-blend-screen text-xs uppercase font-mono tracking-widest">
-            <span className="animate-pulse">Loading...</span>
-          </div>
-        }>
-          {/* AnimatePresence for Page Transitions */}
-          <AnimatePresence mode="wait">
+        <main>
+          <Suspense fallback={
+            <div className="w-full min-h-screen flex items-center justify-center py-20 text-cyan-500/50 mix-blend-screen text-xs uppercase font-mono tracking-widest">
+              <span className="animate-pulse">Loading...</span>
+            </div>
+          }>
+            {/* AnimatePresence for Page Transitions — initial={false} skips cold-boot delay */}
+            <AnimatePresence mode="wait" initial={false}>
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageWrapper sectionName="home"><Home /></PageWrapper>} />
               <Route path="/about" element={<PageWrapper sectionName="about"><About /></PageWrapper>} />
@@ -80,7 +74,7 @@ function App() {
       </main>
 
       <Footer />
-      </m.div>
+      </div>
     </LazyMotion>
   );
 }

@@ -189,34 +189,44 @@ const GlobalBackground = () => {
             ctx.lineTo(head.x, head.y);
             ctx.stroke();
 
-            // Head Glow (Simpler circle)
-            if (!isMobile) {
-              ctx.shadowBlur = 15;
-              ctx.shadowColor = "rgba(34, 211, 238, 0.8)";
-            }
+            // Head Glow — Fast dual-pass circle (zero CPU shadowBlur penalty)
+            ctx.fillStyle = "rgba(34, 211, 238, 0.4)";
+            ctx.beginPath();
+            ctx.arc(head.x, head.y, t.width * 2.4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Inner bright core
             ctx.fillStyle = "#ffffff";
             ctx.beginPath();
             ctx.arc(head.x, head.y, t.width * 1.2, 0, Math.PI * 2);
             ctx.fill();
-            if (!isMobile) ctx.shadowBlur = 0;
           }
         }
       });
 
     };
 
-    const handleResize = () => initializeCanvas();
-    initializeCanvas();
-    window.addEventListener("resize", handleResize);
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry.isIntersecting;
-      if (isVisible) render();
-    });
-    observer.observe(canvas);
+    let resizeTimer;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(initializeCanvas, 150);
+    };
+
+    // Defer initialization to after initial paint so FCP & LCP are not blocked
+    const initTimer = setTimeout(() => {
+      initializeCanvas();
+      window.addEventListener("resize", handleResize, { passive: true });
+      const observer = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) render();
+      });
+      observer.observe(canvas);
+    }, 60);
 
     return () => {
+      clearTimeout(initTimer);
+      clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
-      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

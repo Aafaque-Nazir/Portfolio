@@ -35,15 +35,13 @@ const SmoothScroll = () => {
 
         requestAnimationFrame(raf);
 
-        // Crucial fix: Dynamically observe the body for layout changes!
-        // This ensures the scroll boundary perfectly adjusts even after components change shapes.
-        const resizeObserver = new ResizeObserver(() => {
-             lenis.resize(); // Force recalculate document height bounding boxes
-        });
-        resizeObserver.observe(document.body);
+        const handleResize = () => {
+            if (lenisRef.current) lenisRef.current.resize();
+        };
+        window.addEventListener("resize", handleResize, { passive: true });
 
         return () => {
-            resizeObserver.disconnect();
+            window.removeEventListener("resize", handleResize);
             lenis.destroy();
             delete window.lenis;
             lenisRef.current = null;
@@ -54,6 +52,7 @@ const SmoothScroll = () => {
     useEffect(() => {
         if (lenisRef.current) {
             lenisRef.current.scrollTo(0, { immediate: true });
+            lenisRef.current.resize();
         }
     }, [location.pathname]);
 
