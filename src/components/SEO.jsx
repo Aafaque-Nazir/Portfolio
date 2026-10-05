@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
  * 3. Rich Snippets: Person, WebSite, WebPage, ProfessionalService, BreadcrumbList, FAQPage, WebApplication
  * 4. Local + Global Search Optimization (Navi Mumbai / Mumbai / India / Worldwide Remote)
  */
-const SEO = ({ title, description, keywords, image, url, section, project }) => {
+const SEO = ({ title, description, keywords, image, url, section, project, blogPost }) => {
   const siteName = "Aafaque Nazir";
   const siteUrl = "https://aafaque.in";
   const defaultImage = `${siteUrl}/og-image.png`;
@@ -64,16 +64,29 @@ const SEO = ({ title, description, keywords, image, url, section, project }) => 
       keywords:
         "hire web developer India, contact web developer, get website quote, freelance developer contact, hire React developer, web development consultation India",
     },
+    blog: {
+      title: "Web Engineering Blog & Architecture Guides — Aafaque Nazir",
+      description:
+        "High-intent web development articles, React 19 and Next.js performance deep dives, database design, and production engineering insights by Aafaque Nazir.",
+      keywords:
+        "web development blog, React 19 architecture, Next.js 15 guides, Core Web Vitals optimization, Supabase vs Firebase, full stack engineering India, freelance developer blog",
+    },
   };
 
-  // Determine dynamic values based on props or project
+  // Determine dynamic values based on props, project, or blogPost
   let resolvedTitle = defaultSiteTitle;
   let resolvedDescription = defaultDescription;
   let resolvedKeywords = sectionMeta.home.keywords;
   let resolvedUrl = siteUrl;
   let resolvedImage = defaultImage;
 
-  if (project) {
+  if (blogPost) {
+    resolvedTitle = `${blogPost.title} — Aafaque Nazir`;
+    resolvedDescription = blogPost.description;
+    resolvedKeywords = `${blogPost.tags ? blogPost.tags.join(", ") : ""}, web development guide, React developer India, Aafaque Nazir`;
+    resolvedUrl = `${siteUrl}/blog/${blogPost.slug}`;
+    resolvedImage = defaultImage;
+  } else if (project) {
     resolvedTitle = `${project.title} — ${project.category} Project | Aafaque Nazir`;
     resolvedDescription = `${project.description} Built with ${project.techStack.join(", ")} by full-stack developer Aafaque Nazir.`;
     resolvedKeywords = `${project.title}, ${project.category}, ${project.techStack.join(", ")}, web application case study, React project portfolio, Aafaque Nazir`;
@@ -253,6 +266,40 @@ const SEO = ({ title, description, keywords, image, url, section, project }) => 
     : null;
 
   // ──────────────────────────────────────────────────
+  // JSON-LD: BlogPosting Schema (For Blog Articles)
+  // ──────────────────────────────────────────────────
+  const blogPostingSchema = blogPost
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: blogPost.title,
+        description: blogPost.description,
+        image: resolvedImage,
+        datePublished: blogPost.publishedAt,
+        dateModified: blogPost.updatedAt || blogPost.publishedAt,
+        author: {
+          "@type": "Person",
+          name: blogPost.author?.name || "Aafaque Nazir",
+          url: siteUrl,
+        },
+        publisher: {
+          "@type": "Person",
+          name: "Aafaque Nazir",
+          url: siteUrl,
+          logo: {
+            "@type": "ImageObject",
+            url: defaultImage,
+          },
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": resolvedUrl,
+        },
+        keywords: blogPost.tags ? blogPost.tags.join(", ") : undefined,
+      }
+    : null;
+
+  // ──────────────────────────────────────────────────
   // JSON-LD: BreadcrumbList (For Google SERP breadcrumbs)
   // ──────────────────────────────────────────────────
   const breadcrumbItems = [
@@ -264,7 +311,22 @@ const SEO = ({ title, description, keywords, image, url, section, project }) => 
     },
   ];
 
-  if (project) {
+  if (blogPost) {
+    breadcrumbItems.push(
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${siteUrl}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: blogPost.title,
+        item: `${siteUrl}/blog/${blogPost.slug}`,
+      }
+    );
+  } else if (project) {
     breadcrumbItems.push(
       {
         "@type": "ListItem",
@@ -298,7 +360,20 @@ const SEO = ({ title, description, keywords, image, url, section, project }) => 
   // JSON-LD: FAQPage Schema (Real, Genuine FAQs)
   // ──────────────────────────────────────────────────
   const faqSchema =
-    section === "home" || section === "services"
+    blogPost?.faqs && blogPost.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: blogPost.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : section === "home" || section === "services"
       ? {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -357,7 +432,7 @@ const SEO = ({ title, description, keywords, image, url, section, project }) => 
       <meta name="ICBM" content="19.1027, 73.1092" />
 
       {/* Open Graph / Facebook / LinkedIn / WhatsApp */}
-      <meta property="og:type" content={project ? "article" : "website"} />
+      <meta property="og:type" content={blogPost || project ? "article" : "website"} />
       <meta property="og:url" content={resolvedUrl} />
       <meta property="og:title" content={resolvedTitle} />
       <meta property="og:description" content={resolvedDescription} />
@@ -384,6 +459,7 @@ const SEO = ({ title, description, keywords, image, url, section, project }) => 
       <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(webPageSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      {blogPostingSchema && <script type="application/ld+json">{JSON.stringify(blogPostingSchema)}</script>}
       {serviceSchema && <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>}
       {projectSchema && <script type="application/ld+json">{JSON.stringify(projectSchema)}</script>}
       {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
@@ -405,6 +481,26 @@ SEO.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string,
     techStack: PropTypes.arrayOf(PropTypes.string),
+  }),
+  blogPost: PropTypes.shape({
+    id: PropTypes.string,
+    slug: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    publishedAt: PropTypes.string,
+    updatedAt: PropTypes.string,
+    author: PropTypes.shape({
+      name: PropTypes.string,
+      role: PropTypes.string,
+      bio: PropTypes.string,
+    }),
+    faqs: PropTypes.arrayOf(
+      PropTypes.shape({
+        question: PropTypes.string,
+        answer: PropTypes.string,
+      })
+    ),
   }),
 };
 

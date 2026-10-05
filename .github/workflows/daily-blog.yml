@@ -1,0 +1,51 @@
+name: Daily Automated High-Intent Blog Publisher
+
+on:
+  schedule:
+    # Runs daily at 04:00 UTC (09:30 AM IST)
+    - cron: '0 4 * * *'
+  # Allows manual triggering from GitHub Actions UI anytime
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Blog Generator Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "::warning::GEMINI_API_KEY secret is not configured in repository settings. Skipping daily post generation."
+            exit 0
+          fi
+          node scripts/generate-blog.js
+
+      - name: Commit and Push New Blog Post
+        run: |
+          git config --global user.name "Aafaque Blog Bot"
+          git config --global user.email "bot@aafaque.in"
+          
+          # Check for changes in blog files
+          if git status --porcelain | grep -E "src/data/blogs.js|public/sitemap.xml|public/llms-full.txt"; then
+            git add src/data/blogs.js public/sitemap.xml public/llms-full.txt
+            git commit -m "content: publish daily automated engineering blog [skip ci]"
+            git push
+            echo "🚀 New high-intent blog post pushed successfully. Netlify will auto-deploy!"
+          else
+            echo "ℹ️ No new changes detected."
+          fi

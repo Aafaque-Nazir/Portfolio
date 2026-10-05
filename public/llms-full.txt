@@ -105,6 +105,19 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 - **DevOps & Tooling:** Git, GitHub, Vercel, Vite, npm, Chrome DevTools
 - **Design & SEO:** Responsive Web Design, Core Web Vitals, Structured Data (JSON-LD), Technical SEO
 
+## Engineering Articles & Architectural Guides (Blog)
+
+- **Blog Index:** https://aafaque.in/blog
+- **React 19 vs Next.js 15: Which Architecture Should You Choose in 2026?**
+  URL: https://aafaque.in/blog/react-19-vs-nextjs-15-architecture-guide-2026
+  Summary: Breakdown of when to choose lightweight Vite SPA vs Next.js 15 SSR, Core Web Vitals benchmarks, and client project advice.
+- **How to Fix Core Web Vitals in React: Lowering INP and LCP Below 200ms**
+  URL: https://aafaque.in/blog/how-to-fix-core-web-vitals-react-inp-lcp
+  Summary: Engineering playbook to pass Google Core Web Vitals (sub-200ms INP) using React 19 startTransition and atomic state.
+- **Why Modern Startups Are Choosing Supabase Over Firebase in 2026**
+  URL: https://aafaque.in/blog/why-startups-choose-supabase-over-firebase-2026
+  Summary: Comparative analysis of relational PostgreSQL, ACID transactions, and Row-Level Security vs NoSQL Firestore.
+
 ## Contact
 
 - **Website:** https://aafaque.in
