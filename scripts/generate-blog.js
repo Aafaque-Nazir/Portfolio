@@ -1,6 +1,6 @@
 /**
  * Automated High-Intent Engineering Blog Generator
- * Powered by Google Gemini 2.5 / 1.5 Flash (Free Tier)
+ * Powered by Google Gemini 3.8 / Flash (Free Tier)
  * 
  * Features:
  * - High-intent search topic queue (Next.js, React 19, Supabase, Core Web Vitals, E-Commerce, etc.)
@@ -223,26 +223,53 @@ DO NOT wrap with markdown backticks if possible, return raw valid JSON.
 `;
 
 async function generate() {
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const models = [
+    process.env.GEMINI_MODEL,
+    "gemini-3.8-flash",
+    "gemini-2.5-flash",
+    "gemini-1.5-flash",
+  ].filter(Boolean);
+  const candidateModels = [...new Set(models)];
 
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: {
-        responseMimeType: "application/json",
-        temperature: 0.7,
-      },
-    }),
-  });
+  let data;
+  let lastError;
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Gemini API error (${response.status}): ${errorText}`);
+  for (const model of candidateModels) {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            temperature: 0.7,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        lastError = new Error(`Gemini API error (${response.status}) on model ${model}: ${errorText}`);
+        console.warn(`⚠️ Model "${model}" returned HTTP ${response.status}. Trying next fallback model...`);
+        continue;
+      }
+
+      data = await response.json();
+      console.log(`🤖 Successfully generated response using model: ${model}`);
+      break;
+    } catch (err) {
+      lastError = err;
+      console.warn(`⚠️ Failed request with model "${model}":`, err.message);
+    }
   }
 
-  const data = await response.json();
+  if (!data) {
+    throw lastError || new Error("Failed to generate blog content across all Gemini models.");
+  }
+
   const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
   if (!rawText) {
