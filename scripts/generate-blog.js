@@ -222,21 +222,45 @@ Strict Requirements:
 DO NOT wrap with markdown backticks if possible, return raw valid JSON.
 `;
 
-async function generate() {
-  const models = [
-    process.env.GEMINI_MODEL,
-    "gemini-3.8-flash",
-    "gemini-2.5-flash",
-    "gemini-1.5-flash",
-  ].filter(Boolean);
-  const candidateModels = [...new Set(models)];
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  let data;
-  let lastError;
+async function getCandidateModels(apiKey) {
+  const preferred = process.env.GEMINI_MODEL ? [process.env.GEMINI_MODEL] : [];
 
-  for (const model of candidateModels) {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+    if (res.ok) {
+      const data = await res.json();
+      const available = (data.models || [])
+        .filter((m) => m.supportedGenerationMethods?.includes("generateContent"))
+        .map((m) => m.name.replace(/^models\//, ""))
+        .filter((name) => !name.includes("embedding") && !name.includes("aqa") && !name.includes("imagen"));
 
+      if (available.length > 0) {
+        // Prioritize preferred, then gemini-3.8-flash, then other flash models, then pro
+        available.sort((a, b) => {
+          if (a === "gemini-3.8-flash") return -1;
+          if (b === "gemini-3.8-flash") return 1;
+          if (a.includes("3.8") && !b.includes("3.8")) return -1;
+          if (!a.includes("3.8") && b.includes("3.8")) return 1;
+          if (a.includes("flash") && !b.includes("flash")) return -1;
+          if (!a.includes("flash") && b.includes("flash")) return 1;
+          return 0;
+        });
+        return [...new Set([...preferred, ...available])];
+      }
+    }
+  } catch (err) {
+    console.warn("Could not query dynamic models list:", err.message);
+  }
+
+  return [...new Set([...preferred, "gemini-3.8-flash", "gemini-2.5-pro", "gemini-2.0-flash"])];
+}
+
+async function generateWithModel(model, prompt, apiKey, maxRetries = 3) {
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -250,24 +274,64 @@ async function generate() {
         }),
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        lastError = new Error(`Gemini API error (${response.status}) on model ${model}: ${errorText}`);
-        console.warn(`⚠️ Model "${model}" returned HTTP ${response.status}. Trying next fallback model...`);
-        continue;
+      if (response.ok) {
+        return await response.json();
       }
 
-      data = await response.json();
-      console.log(`🤖 Successfully generated response using model: ${model}`);
-      break;
+      const status = response.status;
+      const errorText = await response.text();
+
+      // If 404 (model deprecated / not found), fail fast to next model
+      if (status === 404) {
+        console.warn(`⚠️ Model "${model}" returned HTTP 404 (not found).`);
+        return null;
+      }
+
+      // If 503 (Overloaded / Service Unavailable) or 429 (Rate Limit) or 5xx: retry with backoff
+      if (status === 503 || status === 429 || status >= 500) {
+        if (attempt < maxRetries) {
+          const delayMs = attempt * 3000 + Math.floor(Math.random() * 1500);
+          console.warn(`⚠️ Model "${model}" returned HTTP ${status} (overloaded). Retrying in ${(delayMs / 1000).toFixed(1)}s (attempt ${attempt}/${maxRetries})...`);
+          await sleep(delayMs);
+          continue;
+        }
+      }
+
+      console.warn(`⚠️ Model "${model}" failed with HTTP ${status}: ${errorText}`);
+      return null;
     } catch (err) {
-      lastError = err;
-      console.warn(`⚠️ Failed request with model "${model}":`, err.message);
+      if (attempt < maxRetries) {
+        const delayMs = attempt * 2500;
+        console.warn(`⚠️ Network glitch on "${model}": ${err.message}. Retrying in ${(delayMs / 1000).toFixed(1)}s...`);
+        await sleep(delayMs);
+      } else {
+        console.warn(`⚠️ Network error on model "${model}":`, err.message);
+        return null;
+      }
     }
   }
 
+  return null;
+}
+
+async function generate() {
+  const candidateModels = await getCandidateModels(apiKey);
+  console.log(`📋 Candidate models: ${candidateModels.slice(0, 5).join(", ")}`);
+
+  let data = null;
+
+  for (const model of candidateModels) {
+    console.log(`🤖 Requesting generation from: ${model}...`);
+    data = await generateWithModel(model, prompt, apiKey, 3);
+    if (data) {
+      console.log(`✅ Successfully generated response using model: ${model}`);
+      break;
+    }
+    console.warn(`⏭️ Falling back to next candidate model...`);
+  }
+
   if (!data) {
-    throw lastError || new Error("Failed to generate blog content across all Gemini models.");
+    throw new Error("Failed to generate blog content across all Gemini models. Server capacity may be temporarily exhausted; please retry shortly.");
   }
 
   const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
