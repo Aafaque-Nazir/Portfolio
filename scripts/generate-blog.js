@@ -254,7 +254,7 @@ async function getCandidateModels(apiKey) {
     console.warn("Could not query dynamic models list:", err.message);
   }
 
-  return [...new Set([...preferred, "gemini-3.8-flash", "gemini-2.5-pro", "gemini-2.0-flash"])];
+  return [...new Set([...preferred, "gemini-3.8-flash", "gemini-2.0-flash", "gemini-2.0-flash-exp"])];
 }
 
 async function generateWithModel(model, prompt, apiKey, maxRetries = 3) {
