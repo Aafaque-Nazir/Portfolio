@@ -44,6 +44,7 @@ jobs:
           if git status --porcelain | grep -E "src/data/blogs.js|public/sitemap.xml|public/llms-full.txt"; then
             git add src/data/blogs.js public/sitemap.xml public/llms-full.txt
             git commit -m "content: publish daily automated engineering blog"
+            git pull --rebase origin main
             git push
             echo "🚀 New high-intent blog post pushed successfully. Netlify will auto-deploy!"
           else
