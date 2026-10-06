@@ -1,5 +1,102 @@
 export const blogs = [
   {
+    "id": "building-real-time-web-apps-react-19-websockets",
+    "slug": "building-real-time-web-apps-react-19-websockets",
+    "title": "Building Real-Time Web Applications with React 19 and WebSockets",
+    "description": "Master real-time web app architecture using React 19, WebSockets, and Supabase Realtime. Build scalable, high-performance systems with clean TypeScript code.",
+    "publishedAt": "2026-10-06",
+    "updatedAt": "2026-10-06",
+    "readTime": "7 min read",
+    "category": "Real-Time & Full-Stack",
+    "tags": [
+      "React 19",
+      "WebSockets",
+      "Supabase",
+      "TypeScript",
+      "Real-Time Architecture"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Building real-time web applications with React 19 and WebSockets involves leveraging concurrent rendering features alongside persistent TCP connections or managed PostgreSQL channels via Supabase Realtime to synchronize state instantly across clients.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "How does React 19 improve real-time application performance?",
+        "answer": "React 19 introduces advanced concurrent rendering capabilities, improved state management hooks, and optimized action handling that reduce UI jank and re-render overhead when handling high-frequency WebSocket data streams."
+      },
+      {
+        "question": "Should I use raw WebSockets or Supabase Realtime for my React SaaS?",
+        "answer": "While raw WebSockets offer granular protocol control, Supabase Realtime abstracts away connection management, auto-reconnection logic, and database change replication over WebSockets, saving dozens of hours in backend development."
+      },
+      {
+        "question": "How can I hire Aafaque Nazir to build a real-time web app?",
+        "answer": "You can explore available development packages on the [Services](/services) page or directly [get in touch for a consultation](/contact) to discuss your project scope."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Architecting Real-Time Systems in the React 19 Era"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern web applications demand instantaneous data synchronization. Whether you are building live dashboard metrics, collaborative editing tools, or active kitchen display systems like those in [Restaurant OS](/projects/11), polling REST endpoints is no longer viable. We need robust, low-latency bi-directional channels."
+      },
+      {
+        "type": "paragraph",
+        "text": "With the release of React 19, state updates triggered by incoming WebSocket frames can be neatly isolated using Actions and concurrent features, ensuring your primary UI thread remains silky smooth even under heavy message load."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Production-Ready Custom Hook for WebSocket Management",
+        "code": "import { useEffect, useRef, useState, useCallback } from 'react';\n\ninterface UseWebSocketOptions<T> {\n  url: string;\n  onMessage: (data: T) => void;\n  reconnectInterval?: number;\n}\n\nexport function useWebSocket<T>({ url, onMessage, reconnectInterval = 3000 }: UseWebSocketOptions<T>) {\n  const [isConnected, setIsConnected] = useState(false);\n  const wsRef = useRef<WebSocket | null>(null);\n\n  const connect = useCallback(() => {\n    const ws = new WebSocket(url);\n    wsRef.current = ws;\n\n    ws.onopen = () => setIsConnected(true);\n    ws.onclose = () => {\n      setIsConnected(false);\n      setTimeout(connect, reconnectInterval);\n    };\n    ws.onmessage = (event) => {\n      try {\n        const parsed = JSON.parse(event.data) as T;\n        onMessage(parsed);\n      } catch (err) {\n        console.error('Failed to parse incoming WebSocket message', err);\n      }\n    };\n  }, [url, onMessage, reconnectInterval]);\n\n  useEffect(() => {\n    connect();\n    return () => {\n      wsRef.current?.close();\n    };\n  }, [connect]);\n\n  const send = useCallback((data: unknown) => {\n    if (wsRef.current?.readyState === WebSocket.OPEN) {\n      wsRef.current.send(JSON.stringify(data));\n    }\n  }, []);\n\n  return { isConnected, send };\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Engineering Insight on Reconnection Logic",
+        "text": "Always implement exponential backoff algorithms for production WebSocket reconnection handlers to prevent DDoS-ing your own server infrastructure during sudden network partitions."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Scaling Up with Supabase Realtime in React Apps"
+      },
+      {
+        "type": "paragraph",
+        "text": "When building multi-tenant SaaS products such as [Aura Estate](/projects/15), managing your own WebSocket cluster can introduce unnecessary infrastructure complexity. Supabase Realtime turns your PostgreSQL database into a reactive data source out of the box."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Broadcast channel events directly between connected clients with sub-50ms latency.",
+          "Listen to Postgres database changes (INSERT, UPDATE, DELETE) securely via Row Level Security (RLS).",
+          "Track user presence in real-time rooms without configuring custom Redis pub/sub backends."
+        ]
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Subscribing to Postgres Changes in React 19",
+        "code": "import { useEffect, useState } from 'react';\nimport { createClient } from '@supabase/supabase-js';\n\nconst supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);\n\nexport function useLiveTableData<T>(table: string) {\n  const [data, setData] = useState<T[]>([]);\n\n  useEffect(() => {\n    // Fetch initial state\n    supabase.from(table).select('*').then(({ data }) => {\n      if (data) setData(data as T[]);\n    });\n\n    // Subscribe to changes\n    const channel = supabase\n      .channel(`${table}-changes`)\n      .on('postgres_changes', { event: '*', schema: 'public', table }, (payload) => {\n        setData((current) => {\n          if (payload.eventType === 'INSERT') return [...current, payload.new as T];\n          if (payload.eventType === 'DELETE') return current.filter((item: any) => item.id !== payload.old.id);\n          if (payload.eventType === 'UPDATE') return current.map((item: any) => item.id === payload.new.id ? payload.new : item);\n          return current;\n        });\n      })\n      .subscribe();\n\n    return () => {\n      supabase.removeChannel(channel);\n    };\n  }, [table]);\n\n  return data;\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications with robust real-time synchronization. [Hire Aafaque Nazir](/services) or [get in touch for a consultation](/contact) to discuss your architecture requirements."
+      }
+    ]
+  },
+  {
     id: "react-19-vs-nextjs-15-architecture-guide-2026",
     slug: "react-19-vs-nextjs-15-architecture-guide-2026",
     title: "React 19 vs Next.js 15: Which Architecture Should You Choose for Web Apps in 2026?",

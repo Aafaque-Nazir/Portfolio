@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **Building Real-Time Web Applications with React 19 and WebSockets**
+  URL: https://aafaque.in/blog/building-real-time-web-apps-react-19-websockets
+  Summary: Master real-time web app architecture using React 19, WebSockets, and Supabase Realtime. Build scalable, high-performance systems with clean TypeScript code.
 - **React 19 vs Next.js 15: Which Architecture Should You Choose in 2026?**
   URL: https://aafaque.in/blog/react-19-vs-nextjs-15-architecture-guide-2026
   Summary: Breakdown of when to choose lightweight Vite SPA vs Next.js 15 SSR, Core Web Vitals benchmarks, and client project advice.
