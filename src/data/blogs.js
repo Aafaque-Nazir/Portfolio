@@ -454,11 +454,6 @@ export const getBlogBySlug = (slug) => {
   return blogs.find((b) => b.slug === slug || b.id === slug);
 };
 
-export const getAllBlogTags = () => {
-  const set = new Set();
-  blogs.forEach((b) => b.tags?.forEach((t) => set.add(t)));
-  return Array.from(set);
-};
 
 export const getAllBlogCategories = () => {
   const set = new Set();
