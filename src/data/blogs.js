@@ -3,6 +3,106 @@ export const blogs = [
     "id": "building-real-time-web-applications-react-19-websockets",
     "slug": "building-real-time-web-applications-react-19-websockets",
     "title": "Building Real-Time Web Applications with React 19 and WebSockets",
+    "description": "Master real-time web app architecture using React 19, WebSockets, and Supabase. Learn patterns for low-latency state synchronization and resilient connections.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-07",
+    "readTime": "7 min read",
+    "category": "Real-Time & Full-Stack",
+    "tags": [
+      "React 19",
+      "WebSockets",
+      "Supabase",
+      "Full-Stack",
+      "Real-Time Architecture"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Building real-time web apps with React 19 and WebSockets requires managing connection lifecycle hooks efficiently alongside server-side event emitters like Supabase Realtime to synchronize state with sub-50ms latency.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "How does React 19 improve real-time state management?",
+        "answer": "React 19 introduces streamlined hook patterns, improved concurrent rendering, and better action states that reduce unnecessary re-renders when handling high-frequency WebSocket or Supabase Realtime payloads."
+      },
+      {
+        "question": "Should I use native WebSockets or managed services like Supabase Realtime?",
+        "answer": "Managed services like Supabase Realtime abstract connection pooling, authentication, and Postgres replication change streams, significantly reducing custom infrastructure overhead compared to native WebSocket servers."
+      },
+      {
+        "question": "How do you handle WebSocket reconnections gracefully in production?",
+        "answer": "Production-grade WebSocket clients should implement exponential backoff reconnection strategies, heartbeat ping-pong intervals to drop dead sockets, and local optimistic updates with conflict resolution."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Architecting Low-Latency Full-Stack Applications"
+      },
+      {
+        "type": "paragraph",
+        "text": "Traditional request-response cycles fall short when engineering applications that demand instantaneous updates—such as live dashboards, collaborative workspaces, or point-of-sale systems like [Restaurant OS](/projects/11). By combining React 19's concurrent features with persistent event channels, developers can achieve resilient, low-latency data streams."
+      },
+      {
+        "type": "paragraph",
+        "text": "When scaling architectures that handle heavy database writes and real-time read broadcasts, pairing a robust PostgreSQL backend with managed pub-sub layers like Supabase Realtime ensures clean separation of concerns, similar to patterns used in high-throughput products like [Aura Estate](/projects/15)."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Implementing Supabase Realtime with React 19 Hooks"
+      },
+      {
+        "type": "paragraph",
+        "text": "The following production-ready pattern demonstrates how to encapsulate a real-time database subscription inside a custom React hook. This ensures subscriptions are properly torn down on unmount and incoming payloads update local state without blocking the main UI thread."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Custom React 19 Hook for Real-Time Subscriptions",
+        "code": "import { useEffect, useState, useTransition } from 'react';\nimport { createClient } from '@supabase/supabase-js';\n\nconst supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);\n\nexport function useRealtimeData<T>(table: string, initialData: T[]) {\n  const [data, setData] = useState<T[]>(initialData);\n  const [, startTransition] = useTransition();\n\n  useEffect(() => {\n    const channel = supabase\n      .channel(`${table}-changes`)\n      .on('postgres_changes', { event: '*', schema: 'public', table }, (payload) => {\n        startTransition(() => {\n          if (payload.eventType === 'INSERT') {\n            setData((prev) => [payload.new as T, ...prev]);\n          } else if (payload.eventType === 'DELETE') {\n            setData((prev) => prev.filter((item: any) => item.id !== payload.old.id));\n          }\n        });\n      })\n      .subscribe();\n\n    return () => {\n      supabase.removeChannel(channel);\n    };\n  }, [table]);\n\n  return data;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Performance Optimization Tip",
+        "text": "Always wrap state mutations originating from high-frequency WebSocket events inside React's `startTransition` or concurrent APIs. This prevents UI jank and keeps critical user inputs responsive."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Resilient Connection Management & Fallbacks"
+      },
+      {
+        "type": "paragraph",
+        "text": "Network instability is a given in real-world deployments. Whether you are building financial trackers, booking engines like [Al Raheeq Tourism](/projects/17), or enterprise internal tooling, your real-time layer must account for dropped connections."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Implement heartbeat ping/pong frames every 30 seconds to detect silent connection drops.",
+          "Use exponential backoff algorithms with jitter for automatic reconnection attempts.",
+          "Cache critical state locally using IndexedDB to provide offline-first capability."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications. [Hire Aafaque Nazir](/services) or [get in touch for a consultation](/contact)."
+      }
+    ]
+  },
+  {
+    "id": "building-real-time-web-applications-react-19-websockets",
+    "slug": "building-real-time-web-applications-react-19-websockets",
+    "title": "Building Real-Time Web Applications with React 19 and WebSockets",
     "description": "Master real-time web application architecture using React 19, WebSockets, and Supabase Realtime. Learn production-grade patterns from senior full-stack developer Aafaque Nazir.",
     "publishedAt": "2026-10-06",
     "updatedAt": "2026-10-06",
