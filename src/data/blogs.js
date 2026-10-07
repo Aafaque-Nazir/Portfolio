@@ -1,5 +1,112 @@
 export const blogs = [
   {
+    "id": "building-real-time-web-applications-react-19-websockets",
+    "slug": "building-real-time-web-applications-react-19-websockets",
+    "title": "Building Real-Time Web Applications with React 19 and WebSockets",
+    "description": "Master real-time web application architecture using React 19, WebSockets, and Supabase Realtime. Learn production-grade patterns from senior full-stack developer Aafaque Nazir.",
+    "publishedAt": "2026-10-06",
+    "updatedAt": "2026-10-06",
+    "readTime": "8 min read",
+    "category": "Real-Time & Full-Stack",
+    "tags": [
+      "React 19",
+      "WebSockets",
+      "Supabase",
+      "TypeScript",
+      "Real-Time Architecture"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Building real-time web applications with React 19 and WebSockets involves establishing a persistent TCP connection using custom hooks alongside server-sent events or Supabase Realtime channels, enabling instant bidirectional state synchronization without polling overhead.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "How does React 19 improve real-time state updates?",
+        "answer": "React 19 introduces streamlined asynchronous transitions and cleaner concurrent rendering hooks, allowing high-frequency WebSocket message payloads to update component state smoothly without blocking the main UI thread."
+      },
+      {
+        "question": "Should I use native WebSockets or Supabase Realtime for my SaaS app?",
+        "answer": "Native WebSockets offer fine-grained control over custom binary protocols, whereas Supabase Realtime abstracts WebSocket management entirely, automatically broadcasting PostgreSQL database changes directly to authorized React clients."
+      },
+      {
+        "question": "How do I prevent memory leaks when managing WebSocket connections in React 19?",
+        "answer": "Always encapsulate your socket instance inside a dedicated custom hook, manage connection lifecycles within useEffect clean-up functions, and properly unregister channel event listeners when components unmount."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Architecting Low-Latency Real-Time Systems"
+      },
+      {
+        "type": "paragraph",
+        "text": "Building robust real-time features requires shifting our mental model from traditional request-response HTTP cycles to persistent bidirectional event streams. In modern full-stack engineering—whether you are developing high-throughput dashboards like [Restaurant OS](/projects/11) or data-heavy property platforms like [Aura Estate](/projects/15)—network efficiency and state synchronization are paramount."
+      },
+      {
+        "type": "paragraph",
+        "text": "With React 19, the core rendering pipeline is optimized for concurrent updates, making it exceptionally well-suited for processing high-frequency WebSocket data frames. However, raw sockets alone require careful handling of reconnection logic, heartbeat intervals, and payload validation."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Production-grade WebSocket custom hook in TypeScript",
+        "code": "import { useEffect, useRef, useState, useCallback } from 'react';\n\ninterface UseWebSocketOptions<T> {\n  url: string;\n  onMessage: (data: T) => void;\n  reconnectInterval?: number;\n}\n\nexport function useWebSocket<T>({ url, onMessage, reconnectInterval = 3000 }: UseWebSocketOptions<T>) {\n  const [isConnected, setIsConnected] = useState(false);\n  const socketRef = useRef<WebSocket | null>(null);\n\n  const connect = useCallback(() => {\n    const ws = new WebSocket(url);\n    socketRef.current = ws;\n\n    ws.onopen = () => setIsConnected(true);\n    ws.onclose = () => {\n      setIsConnected(false);\n      setTimeout(connect, reconnectInterval);\n    };\n    ws.onmessage = (event) => {\n      try {\n        const parsed: T = JSON.parse(event.data);\n        onMessage(parsed);\n      } catch (err) {\n        console.error('Failed to parse incoming WebSocket message', err);\n      }\n    };\n  }, [url, onMessage, reconnectInterval]);\n\n  useEffect(() => {\n    connect();\n    return () => {\n      socketRef.current?.close();\n    };\n  }, [connect]);\n\n  const send = useCallback((data: unknown) => {\n    if (socketRef.current?.readyState === WebSocket.OPEN) {\n      socketRef.current.send(JSON.stringify(data));\n    }\n  }, []);\n\n  return { isConnected, send };\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Architectural Insight",
+        "text": "Always implement exponential backoff algorithms for WebSocket reconnection logic in production to prevent overwhelming your server cluster during localized network outages."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Leveraging Supabase Realtime in React 19"
+      },
+      {
+        "type": "paragraph",
+        "text": "While native WebSockets give you raw power, managed infrastructure like Supabase Realtime dramatically accelerates feature delivery. By broadcasting PostgreSQL database mutations straight to client subscribers, you eliminate the need to write custom Node.js WebSocket gateway servers."
+      },
+      {
+        "type": "paragraph",
+        "text": "This pattern powers rapid transactional platforms like [Al Raheeq Tourism](/projects/17), where booking statuses and availability counters must update instantly across multiple concurrent browser sessions without page reloads."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Subscribing to table changes with Supabase Realtime in React 19",
+        "code": "import { useEffect, useState } from 'react';\nimport { createClient } from '@supabase/supabase-js';\n\nconst supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);\n\nexport function useLiveBookings() {\n  const [bookings, setBookings] = useState<any[]>([]);\n\n  useEffect(() => {\n    // Fetch initial state\n    supabase.from('bookings').select('*').then(({ data }) => {\n      if (data) setBookings(data);\n    });\n\n    // Listen to realtime changes\n    const channel = supabase\n      .channel('schema-db-changes')\n      .on(\n        'postgres_changes',\n        { event: '*', schema: 'public', table: 'bookings' },\n        (payload) => {\n          if (payload.eventType === 'INSERT') {\n            setBookings((prev) => [payload.new, ...prev]);\n          } else if (payload.eventType === 'UPDATE') {\n            setBookings((prev) => prev.map((item) => (item.id === payload.new.id ? payload.new : item)));\n          }\n        }\n      )\n      .subscribe();\n\n    return () => {\n      supabase.removeChannel(channel);\n    };\n  }, []);\n\n  return bookings;\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Best Practices for Scalable Real-Time Applications"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Throttle high-frequency UI state updates using requestAnimationFrame or lodash debounce to avoid frame drops.",
+          "Secure your WebSocket channels using JWT authentication passed during the initial handshake phase.",
+          "Implement optimistic UI updates on the React client side before awaiting server acknowledgement for maximum perceived performance.",
+          "Monitor connection health via regular ping-pong heartbeat frames to automatically prune dead sockets."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications with modern tech stacks. [Hire Aafaque Nazir](/services) or [get in touch for a consultation](/contact) to discuss your next real-time project."
+      }
+    ]
+  },
+  {
     "id": "building-real-time-web-apps-react-19-websockets",
     "slug": "building-real-time-web-apps-react-19-websockets",
     "title": "Building Real-Time Web Applications with React 19 and WebSockets",
