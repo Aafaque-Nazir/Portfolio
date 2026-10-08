@@ -1,5 +1,136 @@
 export const blogs = [
   {
+    "id": "react-19-websockets-real-time-architecture",
+    "slug": "react-19-websockets-real-time-architecture",
+    "title": "Building Real-Time Web Applications with React 19 and WebSockets: A Production Architecture Guide",
+    "description": "Architect high-performance real-time web applications using React 19 hooks, optimistic mutations, WebSockets, and Supabase Realtime without memory leaks.",
+    "publishedAt": "2026-10-08",
+    "updatedAt": "2026-10-08",
+    "readTime": "8 min read",
+    "category": "Real-Time & Full-Stack",
+    "tags": [
+      "React 19",
+      "WebSockets",
+      "Supabase",
+      "System Architecture",
+      "TypeScript"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To build scalable real-time apps in React 19, decouple socket lifecycle management from rendering using an external state store, handle bidirectional events with native WebSockets or Supabase Realtime, and leverage React 19's useOptimistic hook to render updates instantaneously prior to server acknowledgment.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "Why should you avoid keeping WebSocket connection instances inside standard React 19 useState?",
+        "answer": "Storing WebSocket instances directly in useState or top-level component scopes triggers excessive re-renders on every connection heartbeat or socket status change. It also risks re-opening duplicate connections during StrictMode lifecycles. Instead, manage sockets via singleton modules or external store subscriptions with useEffect synchronization."
+      },
+      {
+        "question": "How does React 19 useOptimistic simplify real-time UI states?",
+        "answer": "React 19's useOptimistic hook provides an ergonomic API to immediately display projected state updates (such as posted chat messages, auction bids, or order status shifts) while background WebSocket payloads or Server Actions complete round trips, auto-reverting if the server emits an error event."
+      },
+      {
+        "question": "When should you choose Supabase Realtime over raw WebSockets?",
+        "answer": "Raw WebSockets via ws or Socket.io give granular transport-level control for custom microservices, but Supabase Realtime delivers Postgres Change Data Capture (CDC), channel presence, and Row-Level Security (RLS) out-of-the-box, dramatically reducing boilerplate for data-driven SaaS platforms."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Pitfalls of Traditional Real-Time React Architectures"
+      },
+      {
+        "type": "paragraph",
+        "text": "Most developers build real-time React features by naively attaching event listeners inside arbitrary component `useEffect` hooks. As the system scales to handle hundreds of concurrent events per second, this approach inevitably triggers cascade re-renders, orphaned socket listeners, and memory leaks. In mission-critical dashboards—such as the live POS kitchen display engine built for [Restaurant OS](/projects/11)—every order transmission must be non-blocking, strictly ordered, and resilient against network flapping."
+      },
+      {
+        "type": "paragraph",
+        "text": "React 19 introduces critical improvements to concurrent rendering and server transitions, but it also penalizes uncoordinated side effects. To maintain high throughput and sub-50ms visual updates, your frontend architecture must isolate connection persistence from component trees, using reactive boundaries solely for downstream data consumption."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Architecting an Isolated WebSocket Connection Manager"
+      },
+      {
+        "type": "paragraph",
+        "text": "The foundation of a reliable real-time architecture is a singleton socket manager that implements automatic backoff reconnection, heartbeat telemetry, and event subscriber multicasting. The React tree consumes snapshots using `useSyncExternalStore` rather than internal component lifecycle state."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "WebSocket Manager with External Store Integration (TypeScript)",
+        "code": "type SocketMessage<T = unknown> = {\n  type: string;\n  payload: T;\n  timestamp: number;\n};\n\nclass RealtimeSocketClient {\n  private ws: WebSocket | null = null;\n  private listeners: Set<() => void> = new Set();\n  private state: { connected: boolean; lastPayload: SocketMessage | null } = {\n    connected: false,\n    lastPayload: null,\n  };\n  private retryAttempts = 0;\n\n  constructor(private readonly url: string) {}\n\n  connect() {\n    if (this.ws?.readyState === WebSocket.OPEN) return;\n\n    this.ws = new WebSocket(this.url);\n\n    this.ws.onopen = () => {\n      this.retryAttempts = 0;\n      this.state = { ...this.state, connected: true };\n      this.emitChange();\n    };\n\n    this.ws.onmessage = (event) => {\n      const parsed: SocketMessage = JSON.parse(event.data);\n      this.state = { ...this.state, lastPayload: parsed };\n      this.emitChange();\n    };\n\n    this.ws.onclose = () => {\n      this.state = { ...this.state, connected: false };\n      this.emitChange();\n      this.reconnect();\n    };\n  }\n\n  private reconnect() {\n    const timeout = Math.min(1000 * Math.pow(2, this.retryAttempts), 15000);\n    this.retryAttempts++;\n    setTimeout(() => this.connect(), timeout);\n  }\n\n  subscribe = (listener: () => void) => {\n    this.listeners.add(listener);\n    return () => this.listeners.delete(listener);\n  };\n\n  getSnapshot = () => this.state;\n\n  private emitChange() {\n    for (const listener of this.listeners) listener();\n  }\n\n  send(type: string, payload: unknown) {\n    if (this.ws?.readyState === WebSocket.OPEN) {\n      this.ws.send(JSON.stringify({ type, payload, timestamp: Date.now() }));\n    }\n  }\n}\n\nexport const socketClient = new RealtimeSocketClient(\n  process.env.NEXT_PUBLIC_WS_ENDPOINT || 'wss://api.domain.com/ws'\n);"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Leveraging React 19 useOptimistic for Instant Feedback"
+      },
+      {
+        "type": "paragraph",
+        "text": "In transactional SaaS environments—like the multi-tenant lead management interface engineered for [Aura Estate](/projects/15)—waiting for a full WebSocket round-trip before updating the interface degrades UX. React 19's `useOptimistic` hook provides a native way to project state changes instantly while delegating validation to incoming event acknowledgments."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Implementing Optimistic UI with React 19 and WebSockets",
+        "code": "'use client';\n\nimport { useOptimistic, useTransition, useSyncExternalStore } from 'react';\nimport { socketClient } from '@/lib/realtime-client';\n\ninterface LiveEvent {\n  id: string;\n  status: 'PENDING' | 'CONFIRMED' | 'REJECTED';\n  action: string;\n}\n\nexport function OrderStatusStream({ initialEvents }: { initialEvents: LiveEvent[] }) {\n  const [isPending, startTransition] = useTransition();\n  const realtimeState = useSyncExternalStore(\n    socketClient.subscribe,\n    socketClient.getSnapshot\n  );\n\n  const [optimisticEvents, setOptimisticEvent] = useOptimistic(\n    initialEvents,\n    (current, update: LiveEvent) => [update, ...current.filter((e) => e.id !== update.id)]\n  );\n\n  const handleBroadcastUpdate = (orderId: string, nextStatus: 'CONFIRMED' | 'REJECTED') => {\n    startTransition(async () => {\n      // 1. Immediately reflect optimistic state\n      setOptimisticEvent({\n        id: orderId,\n        status: nextStatus,\n        action: 'UPDATE_STATUS',\n      });\n\n      // 2. Dispatch via socket client\n      socketClient.send('STATUS_TRANSITION', { orderId, nextStatus });\n    });\n  };\n\n  return (\n    <div className=\"space-y-4\">\n      <div className=\"flex items-center gap-2 text-xs\">\n        <span className={`w-2 h-2 rounded-full ${realtimeState.connected ? 'bg-emerald-500' : 'bg-rose-500'}`} />\n        {realtimeState.connected ? 'Socket Connected' : 'Reconnecting...'}\n      </div>\n      <ul className=\"divide-y divide-neutral-800\">\n        {optimisticEvents.map((evt) => (\n          <li key={evt.id} className=\"py-2 flex justify-between\">\n            <span>Order #{evt.id}</span>\n            <span className=\"font-mono font-semibold\">{evt.status}</span>\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Architecture Insight",
+        "text": "Never mix client-side heartbeat timers with React component state. Keep heartbeat intervals strictly encapsulated within your singleton client. This prevents unmounting and remounting components from duplicating ping payloads across active tunnels."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Scaling Real-Time Sync with Supabase Postgres CDC"
+      },
+      {
+        "type": "paragraph",
+        "text": "When building multi-regional applications that demand strict authorization, maintaining your own WebSocket cluster (handling pub/sub across Redis instances) introduces substantial infrastructure overhead. For data-intensive platforms, Supabase Realtime acts as a battle-tested abstraction. By listening directly to Postgres Write-Ahead Logs (WAL), changes made via regular REST or Server Actions automatically broadcast to subscribed frontend clients while adhering to Row-Level Security (RLS)."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "Postgres Publication Configuration for Supabase CDC",
+        "code": "-- Enable replication publication on selected business entities\nALTER PUBLICATION supabase_realtime ADD TABLE customer_inquiries;\n\n-- Ensure RLS policies restrict real-time payload leaking\nALTER TABLE customer_inquiries ENABLE ROW LEVEL SECURITY;\n\nCREATE POLICY \"Users read authorized tenancy records\"\nON customer_inquiries\nFOR SELECT\nUSING (auth.uid() = tenant_admin_id);"
+      },
+      {
+        "type": "paragraph",
+        "text": "High-conversion workflows—like the instantaneous multi-step inquiry channels built for [Al Raheeq Tourism](/projects/17)—benefit from Supabase Presence channels to monitor active advisor availability alongside database change listeners."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Best Practices for Real-Time React Systems"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Enforce strict message idempotency: attach unique client mutation IDs to payloads to deduplicate responses during reconnection intervals.",
+          "Implement message batching: throttle UI rendering with requestAnimationFrame when handling bursts of over 50 events per second.",
+          "Graceful degradation: ensure your data fetching strategy seamlessly falls back to standard HTTP polling if the WebSocket connection is blocked by corporate proxies.",
+          "Secure the channel: authenticate WebSockets via short-lived JWTs exchanged during the initial handshake, and auto-disconnect sessions on token expiration."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing Real-Time Features in Your Web App?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Building a high-throughput, low-latency web application requires careful full-stack architecture—from database indexing and socket transport down to zero-jank React rendering. Whether you need an end-to-end real-time dashboard or performance tuning for your existing stack, explore my [full-stack engineering services](/services) or [schedule a direct technical consultation](/contact) to discuss your product requirements."
+      }
+    ]
+  },
+  {
     "id": "building-real-time-web-applications-react-19-websockets",
     "slug": "building-real-time-web-applications-react-19-websockets",
     "title": "Building Real-Time Web Applications with React 19 and WebSockets",
