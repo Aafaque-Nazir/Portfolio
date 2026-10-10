@@ -2,6 +2,119 @@ export const blogs = [
   {
     "id": "building-real-time-web-applications-react-19-websockets",
     "slug": "building-real-time-web-applications-react-19-websockets",
+    "title": "Building Production Real-Time Web Applications with React 19 and WebSockets",
+    "description": "Architect scalable real-time React 19 apps using native WebSockets, Supabase Realtime, and concurrent transitions to eliminate lag and socket leaks.",
+    "publishedAt": "2026-10-10",
+    "updatedAt": "2026-10-10",
+    "readTime": "8 min read",
+    "category": "Real-Time & Full-Stack",
+    "tags": [
+      "React 19 WebSockets",
+      "real-time web app architecture",
+      "Supabase realtime React",
+      "TypeScript",
+      "System Architecture"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Building real-time apps with React 19 requires decoupling raw WebSocket subscriptions from React render lifecycles using external event buses, synchronizing state with useSyncExternalStore, and wrapping burst updates in startTransition to prevent UI thread lockups.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "How does React 19 improve handling of high-frequency WebSocket streams?",
+        "answer": "React 19 optimizes high-throughput streams by leveraging concurrent transitions and native Actions. Wrapping socket payload dispatches into startTransition prevents rapid background socket bursts from dropping animation frames, prioritizing primary UI user interactions while batched renders run non-blockingly."
+      },
+      {
+        "question": "Why should you avoid storing active WebSocket instances directly in React state?",
+        "answer": "Storing raw WebSocket connections in component state triggers unnecessary re-renders on status changes and risks reconnection loops during React StrictMode mount/unmount cycles. Managing sockets inside a singleton client module and exposing state via useSyncExternalStore ensures clean cleanup and zero socket leaks."
+      },
+      {
+        "question": "When should you use raw WebSockets versus Supabase Realtime in production?",
+        "answer": "Raw WebSockets are ideal for ultra-low latency, custom binary protocols, or ephemeral messaging like collaborative canvases. Supabase Realtime excels when real-time updates directly mirror relational PostgreSQL database changes (CDC), automated auth state, or multi-tenant presence sync."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Architectural Bottlenecks of Real-Time React"
+      },
+      {
+        "type": "paragraph",
+        "text": "Most real-time React dashboards suffer from two critical architectural anti-patterns: co-locating connection lifecycles inside UI components and updating reactive state on every inbound frame. Under production load—such as live order streams in [Restaurant OS](/projects/11)—inbound bursts of 50-100 frames per second saturate the JavaScript main thread, starving user inputs and triggering cascading re-renders across the DOM tree."
+      },
+      {
+        "type": "paragraph",
+        "text": "In modern [real-time web app architecture](/services), the transport layer must be fully isolated from React's component tree. The socket manages connection states, heartbeats, and exponential backoff independently, publishing normalized payloads into an external store that React consumes selectively via specialized hooks."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Subscribing via useSyncExternalStore & Concurrent Transitions"
+      },
+      {
+        "type": "paragraph",
+        "text": "React 19 enforces strict state consistency under concurrent rendering. Storing streaming data with simple `useState` leads to visual tearing or discarded states. Instead, implement `useSyncExternalStore` bound to an isolated socket client, and defer high-frequency array appends using `startTransition`."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Typed WebSocket Singleton with React 19 State Synchronization",
+        "code": "import { useSyncExternalStore, startTransition } from 'react';\n\ntype OrderEvent = { id: string; status: 'pending' | 'preparing' | 'served'; amount: number };\n\nclass RealtimeSocketClient {\n  private ws: WebSocket | null = null;\n  private subscribers = new Set<() => void>();\n  private state: OrderEvent[] = [];\n\n  constructor(private url: string) {}\n\n  connect() {\n    if (this.ws?.readyState === WebSocket.OPEN) return;\n    this.ws = new WebSocket(this.url);\n\n    this.ws.onmessage = (event) => {\n      const payload: OrderEvent = JSON.parse(event.data);\n      // Batch state updates into non-blocking transitions\n      startTransition(() => {\n        this.state = [payload, ...this.state.slice(0, 99)];\n        this.notify();\n      });\n    };\n\n    this.ws.onclose = () => {\n      setTimeout(() => this.connect(), 3000); // Reconnect backoff\n    };\n  }\n\n  subscribe = (callback: () => void) => {\n    this.subscribers.add(callback);\n    return () => this.subscribers.delete(callback);\n  };\n\n  getSnapshot = () => this.state;\n\n  private notify() {\n    this.subscribers.forEach((cb) => cb());\n  }\n}\n\nexport const orderSocket = new RealtimeSocketClient('wss://api.domain.com/orders/stream');\norderSocket.connect();\n\nexport function useLiveOrders() {\n  return useSyncExternalStore(\n    orderSocket.subscribe,\n    orderSocket.getSnapshot,\n    () => [] // Server snapshot for SSR/Hydration\n  );\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Zero-Leak Architecture",
+        "text": "By keeping the socket client instance outside the React lifecycle, mounting and unmounting view layers does not trigger unnecessary TCP teardowns or SSL handshakes, maintaining constant streaming throughput."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Scaling with Supabase Realtime & PostgreSQL Change Data Capture"
+      },
+      {
+        "type": "paragraph",
+        "text": "For enterprise platforms requiring transactional consistency, writing custom socket servers creates technical debt around state persistence and authentication. In multi-tenant database applications like [Aura Estate](/projects/15), leveraging **Supabase realtime React** integrations provides row-level security (RLS) checked change-data-capture (CDC) directly over WebSockets."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "PostgreSQL Broadcast Subscription with Supabase in React 19",
+        "code": "import { useEffect, useState } from 'react';\nimport { createClient } from '@supabase/supabase-js';\n\nconst supabase = createClient(\n  process.env.NEXT_PUBLIC_SUPABASE_URL!,\n  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!\n);\n\nexport function useLiveInventory(propertyId: string) {\n  const [occupancy, setOccupancy] = useState<number | null>(null);\n\n  useEffect(() => {\n    const channel = supabase\n      .channel(`property:${propertyId}`)\n      .on(\n        'postgres_changes',\n        {\n          event: 'UPDATE',\n          schema: 'public',\n          table: 'units',\n          filter: `property_id=eq.${propertyId}`,\n        },\n        (payload) => {\n          setOccupancy(payload.new.occupancy_rate);\n        }\n      )\n      .subscribe();\n\n    return () => {\n      supabase.removeChannel(channel);\n    };\n  }, [propertyId]);\n\n  return occupancy;\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Core Engineering Checklist for Real-Time React Systems"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Isolate transport connections from component lifecycles to prevent rapid connection thrashing under React 19 StrictMode.",
+          "Buffer high-throughput messages using circular arrays or windowing algorithms before updating UI subscribers.",
+          "Implement explicit heartbeat timeouts on client and server to detect ghost disconnections behind corporate proxies.",
+          "Enforce token renewal interceptors inside socket reconnection loops to avoid silent authentication failures.",
+          "Wrap real-time canvas or table state updates in React 19 startTransition to guarantee 60fps input responsiveness."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Building mission-critical, low-latency applications requires resilient transport layers, sound database architecture, and frictionless UI performance. Whether you are launching a real-time analytics suite, a high-converting platform like [Al Raheeq Tourism](/projects/17), or a bespoke enterprise solution, I can help engineer your infrastructure. Explore my [Full-Stack Web Development Services](/services) or [get in touch for an engineering consultation](/contact)."
+      }
+    ]
+  },
+  {
+    "id": "building-real-time-web-applications-react-19-websockets",
+    "slug": "building-real-time-web-applications-react-19-websockets",
     "title": "Building Resilient Real-Time Web Applications with React 19 and WebSockets",
     "description": "Architect sub-50ms real-time React 19 apps using WebSockets and Supabase Realtime. Master concurrency primitives, external stores, and optimistic updates.",
     "publishedAt": "2026-10-09",
