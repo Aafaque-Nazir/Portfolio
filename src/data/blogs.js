@@ -1,5 +1,124 @@
 export const blogs = [
   {
+    "id": "react-19-websockets-real-time-architecture",
+    "slug": "react-19-websockets-real-time-architecture",
+    "title": "Building Real-Time Web Applications with React 19 and WebSockets: Production Architecture",
+    "description": "Architect scalable real-time systems using React 19, WebSockets, and Supabase Realtime. Learn optimistic sync patterns, reconnection strategies, and state design.",
+    "publishedAt": "2026-10-11",
+    "updatedAt": "2026-10-11",
+    "readTime": "8 min read",
+    "category": "Real-Time & Full-Stack",
+    "tags": [
+      "React 19 WebSockets",
+      "real-time web app architecture",
+      "Supabase realtime React",
+      "TypeScript",
+      "System Design"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Building real-time web applications with React 19 requires pairing bidirectional WebSocket or Supabase Realtime channels with React 19's useOptimistic and Action transitions. This decouples local UI responsiveness from network round-trips while maintaining deterministic state reconciliation across concurrent clients.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "Why use React 19's useOptimistic hook with WebSockets instead of direct state mutation?",
+        "answer": "React 19's useOptimistic creates deterministic temporary state updates during server transitions. When an outgoing WebSocket action is initiated, the UI renders the projected state immediately; once the remote server acknowledges or mutates the payload via the persistent socket, React gracefully reconciles the optimistic state without layout thrashing or race-condition rollbacks."
+      },
+      {
+        "question": "When should you choose Supabase Realtime over custom WebSocket servers?",
+        "answer": "Supabase Realtime is ideal when real-time updates map directly to PostgreSQL database changes (WAL/CDC) and broadcast channels with built-in row-level security (RLS). Custom WebSocket clusters (built on Bun, Node.js ws, or Go) become necessary when managing sub-millisecond in-memory game loops, binary audio streaming, or specialized pub/sub topologies requiring custom broker sharding."
+      },
+      {
+        "question": "How do you avoid zombie connections and memory leaks in React 19?",
+        "answer": "Manage WebSocket lifecycles outside of individual UI leaf components by lifting connection state to a persistent module-level client or custom React context. Use explicit cleanup handlers on unmount, implement heartbeat ping/pong guards, and leverage exponential backoff with maximum jitter to prevent thundering herd reconnection storms on the server."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Evolution of Real-Time Frontends: Why React 19 Changes the Model"
+      },
+      {
+        "type": "paragraph",
+        "text": "For years, integrating persistent full-duplex channels (such as raw WebSockets, Server-Sent Events, or managed providers) into React forced engineers into defensive patterns. We managed global stores via Redux middleware, bound socket dispatchers into heavy context wrappers, and manually synchronized local optimistic UI states against server delivery receipts. React 19 simplifies this paradigm by introducing first-class Actions, native optimistic hooks, and decoupled transition management that natively align with asynchronous, multi-actor event streams."
+      },
+      {
+        "type": "paragraph",
+        "text": "When building low-latency business systems—such as live kitchen ticket routing in [Restaurant OS](/projects/11) or concurrent property bidding interfaces in [Aura Estate](/projects/15)—network latency cannot dictate UI responsiveness. With React 19 WebSockets integration, incoming push notifications and outgoing user mutations coexist without triggering waterfall re-renders or conflicting client states."
+      },
+      {
+        "type": "callout",
+        "title": "Protocol Architecture Note",
+        "text": "Do not treat WebSockets as a replacement for REST or Server Actions. In production architectures, use transactional HTTP/Server Actions for data-mutating writes with strict validation, and utilize WebSockets (or Supabase Realtime) as a broadcast pipe for optimistic state reconciliation and cross-client telemetry."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Engineering an Optimistic Real-Time Channel with React 19"
+      },
+      {
+        "type": "paragraph",
+        "text": "The primary friction point in real-time web app architecture is handling transient states while awaiting WebSocket acknowledgment. React 19 resolves this via the useOptimistic hook combined with startTransition. Below is a production-grade TypeScript implementation illustrating a shared broadcast channel with instant optimistic rendering and socket rollback capability."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "useRealtimeStream.ts — Type-safe optimistic WebSocket synchronization in React 19",
+        "code": "import { useState, useEffect, useOptimistic, useTransition, useCallback } from 'react';\n\ninterface LiveEvent {\n  id: string;\n  userId: string;\n  payload: string;\n  timestamp: number;\n  pending?: boolean;\n}\n\nexport function useRealtimeFeed(socketUrl: string, initialEvents: LiveEvent[]) {\n  const [events, setEvents] = useState<LiveEvent[]>(initialEvents);\n  const [isPending, startTransition] = useTransition();\n  const [socket, setSocket] = useState<WebSocket | null>(null);\n\n  // React 19 optimistic state primitive\n  const [optimisticEvents, setOptimisticEvent] = useOptimistic(\n    events,\n    (current, newEvent: LiveEvent) => [...current, { ...newEvent, pending: true }]\n  );\n\n  useEffect(() => {\n    const ws = new WebSocket(socketUrl);\n\n    ws.onmessage = (event: MessageEvent) => {\n      const incoming: LiveEvent = JSON.parse(event.data);\n      startTransition(() => {\n        setEvents((prev) => {\n          // Reconcile optimistic ID against server confirmation\n          const filtered = prev.filter((item) => item.id !== incoming.id);\n          return [...filtered, incoming];\n        });\n      });\n    };\n\n    setSocket(ws);\n    return () => {\n      ws.close();\n    };\n  }, [socketUrl]);\n\n  const broadcast = useCallback(\n    (text: string) => {\n      if (!socket || socket.readyState !== WebSocket.OPEN) return;\n      \n      const tempId = crypto.randomUUID();\n      const optimisticPayload: LiveEvent = {\n        id: tempId,\n        userId: 'current-user',\n        payload: text,\n        timestamp: Date.now(),\n      };\n\n      // Dispatch optimistic write immediately\n      startTransition(async () => {\n        setOptimisticEvent(optimisticPayload);\n        socket.send(JSON.stringify(optimisticPayload));\n      });\n    },\n    [socket, setOptimisticEvent]\n  );\n\n  return { events: optimisticEvents, broadcast, isPending };\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Scaling Real-Time Streams: Supabase Realtime & PostgreSQL CDC"
+      },
+      {
+        "type": "paragraph",
+        "text": "Maintaining a custom WebSocket cluster requires handling sticky sessions, load balancers, and cross-node communication via Redis Pub/Sub. When rapid time-to-market and rock-solid relational consistency are critical, Supabase Realtime abstracts cluster orchestration by listening directly to PostgreSQL Change Data Capture (CDC) via the logical decoding engine."
+      },
+      {
+        "type": "paragraph",
+        "text": "For transactional workflows like the multi-tier booking platform built for [Al Raheeq Tourism](/projects/17), database-driven realtime events ensure that every connected customer sees up-to-the-second slot availability and pricing updates without custom message broker overhead."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "supabaseRealtimeSubscriber.ts — Postgres CDC integration inside React 19",
+        "code": "import { useEffect, useState, useTransition } from 'react';\nimport { createClient } from '@supabase/supabase-js';\n\nconst supabase = createClient(\n  process.env.NEXT_PUBLIC_SUPABASE_URL!,\n  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!\n);\n\nexport function useOrderStream(tenantId: string) {\n  const [orders, setOrders] = useState<Record<string, any>[]>([]);\n  const [, startTransition] = useTransition();\n\n  useEffect(() => {\n    const channel = supabase\n      .channel(`tenant-orders-${tenantId}`)\n      .on(\n        'postgres_changes',\n        {\n          event: '*',\n          schema: 'public',\n          table: 'orders',\n          filter: `tenant_id=eq.${tenantId}`,\n        },\n        (payload) => {\n          startTransition(() => {\n            if (payload.eventType === 'INSERT') {\n              setOrders((prev) => [payload.new, ...prev]);\n            } else if (payload.eventType === 'UPDATE') {\n              setOrders((prev) =>\n                prev.map((o) => (o.id === payload.new.id ? payload.new : o))\n              );\n            } else if (payload.eventType === 'DELETE') {\n              setOrders((prev) => prev.filter((o) => o.id === payload.old.id));\n            }\n          });\n        }\n      )\n      .subscribe();\n\n    return () => {\n      supabase.removeChannel(channel);\n    };\n  }, [tenantId]);\n\n  return orders;\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Resilience Patterns: Reconnection, Heartbeats, and State Reconciliation"
+      },
+      {
+        "type": "paragraph",
+        "text": "Real-time client stability depends heavily on network resilience edge cases. Mobile devices switch between Wi-Fi and 5G cellular antennas, laptops close their lids, and edge connections drop unexpectedly. A production socket setup must handle connection loss systematically:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Jittered Exponential Backoff: Prevent socket storms on your backend by multiplying reconnection delay with randomized jitter (e.g., min(1000 * 2^attempt + rand(0, 1000), 30000)).",
+          "Deterministic Heartbeats: Execute an application-level ping/pong frame every 25 seconds to identify silent TCP deadlocks that evade OS-level socket timeout triggers.",
+          "Sequence Number Sync: When a client reconnects, query missed events from a durable database queue using a last_seen_sequence_id cursor instead of pulling the complete dataset from scratch."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing Real-Time Infrastructure in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Whether you are migrating legacy polling architectures to WebSockets, integrating Supabase Realtime into Next.js/React 19 applications, or engineering low-latency systems with microsecond sync, I can help architect and build your platform. Check out my full spectrum of [development services](/services) or [reach out directly for an engineering consultation](/contact)."
+      }
+    ]
+  },
+  {
     "id": "building-real-time-web-applications-react-19-websockets",
     "slug": "building-real-time-web-applications-react-19-websockets",
     "title": "Building Production Real-Time Web Applications with React 19 and WebSockets",
