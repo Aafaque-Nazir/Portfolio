@@ -144,7 +144,7 @@ export const projects = [
         title: "Food Delivery App",
         description: "Online food ordering website with menu, cart, and orders sent directly to WhatsApp.",
         image: "/food-delivery-thumbnail.webp",
-        link: "https://bread-and-bite.netlify.app/",
+        link: "https://breadandbite.in/",
         icon: <RiMotorbikeFill />,
         category: "Digital Stores (E-Comm)",
         techStack: ["React", "Tailwind CSS", "WhatsApp API"],
