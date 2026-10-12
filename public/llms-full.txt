@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **Building Real-Time Web Applications with React 19 and WebSockets: A Production Architecture Guide**
+  URL: https://aafaque.in/blog/react-19-websockets-real-time-architecture
+  Summary: Architect high-performance real-time web applications using React 19 hooks, optimistic mutations, WebSockets, and Supabase Realtime without memory leaks.
 - **Building Real-Time Web Applications with React 19 and WebSockets**
   URL: https://aafaque.in/blog/building-real-time-web-applications-react-19-websockets
   Summary: Master real-time web application architecture using React 19, WebSockets, and Supabase Realtime. Learn production-grade patterns from senior full-stack developer Aafaque Nazir.
