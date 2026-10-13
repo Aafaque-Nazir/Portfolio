@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **Architecting a Headless E-Commerce Store with Next.js and Tailwind CSS for Sub-Second Conversions**
+  URL: https://aafaque.in/blog/high-converting-headless-ecommerce-nextjs-tailwind
+  Summary: Master building a fast online store under 1 second using Next.js App Router, Tailwind CSS, and headless commerce architectures to maximize checkout conversions.
 - **Building Real-Time Web Applications with React 19 and WebSockets**
   URL: https://aafaque.in/blog/building-real-time-web-apps-react-19-websockets
   Summary: Master real-time web app architecture using React 19, WebSockets, and Supabase Realtime. Build scalable, high-performance systems with clean TypeScript code.
