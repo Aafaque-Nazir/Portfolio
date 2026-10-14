@@ -77,6 +77,13 @@
     <priority>0.85</priority>
   </url>
 
+  <url>
+    <loc>https://aafaque.in/blog/react-19-server-actions-vs-traditional-api-routes</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Project Detail Pages (Programmatic SEO & Case Studies) -->
   <url>
     <loc>https://aafaque.in/projects/17</loc>
