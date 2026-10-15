@@ -38,60 +38,19 @@
   </script>
   <!-- End Google Tag Manager -->
 
-  <!-- Canonical URL — Direct static baseline for crawlers & Lighthouse -->
-  <link rel="canonical" href="https://aafaque.in/" />
+  <!--
+      Canonical URL, OG tags, Twitter tags, robots, description, and all
+      page-specific meta are managed EXCLUSIVELY by the React SEO component
+      via react-helmet-async. NO static duplicates here — duplicate canonicals
+      were causing Google to treat every SPA route as a copy of '/'.
+  -->
 
-  <!-- Primary Meta Tags — High-Intent Client Acquisition -->
+  <!-- Static baseline title (overridden per-route by React Helmet) -->
   <title>Aafaque Nazir — Freelance Web Developer India | React & Next.js Specialist</title>
-  <meta name="description"
-    content="Looking to hire a freelance web developer in India? Aafaque Nazir builds fast, modern websites, custom e-commerce stores, and full-stack web applications with React & Next.js." />
-  <meta name="keywords"
-    content="freelance web developer India, hire web developer India, React developer for hire, Next.js developer India, full stack web developer portfolio, custom website developer, web application developer Mumbai, frontend developer React, website development services India, hire freelance developer Mumbai" />
-  <meta name="author" content="Aafaque Nazir" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="rating" content="general" />
   <meta name="theme-color" content="#000000" />
-
-  <!-- Geo-Location for Local SEO — Critical for "near me" searches -->
-  <meta name="geo.region" content="IN-MH" />
-  <meta name="geo.placename" content="Navi Mumbai" />
-  <meta name="geo.position" content="19.1027;73.1092" />
-  <meta name="ICBM" content="19.1027, 73.1092" />
 
   <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="W14Pv-NcsPzb_7dv0h8kaQw9eM2h7bCSvBjiH1f_QMI" />
-
-  <!--
-      JSON-LD Structured Data is handled EXCLUSIVELY by the React SEO component
-      via react-helmet-async. No static duplicates here.
-    -->
-
-  <!--
-      Canonical URL is handled EXCLUSIVELY by the React SEO component
-      via react-helmet-async. No static duplicate here.
-    -->
-
-  <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://aafaque.in/" />
-  <meta property="og:title" content="Aafaque Nazir — Freelance Web Developer India" />
-  <meta property="og:description"
-    content="Looking to hire a freelance web developer in India? Aafaque Nazir builds fast, modern websites, custom e-commerce stores, and web applications using React & Next.js." />
-  <meta property="og:image" content="https://aafaque.in/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Aafaque Nazir — Freelance Web Developer India" />
-  <meta property="og:site_name" content="Aafaque Nazir" />
-  <meta property="og:locale" content="en_IN" />
-
-  <!-- Twitter / X Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://aafaque.in/" />
-  <meta name="twitter:title" content="Aafaque Nazir — Freelance Web Developer India | React & Next.js" />
-  <meta name="twitter:description"
-    content="Looking to hire a freelance web developer in India? High-performance websites, online stores, and web apps built with React & Next.js." />
-  <meta name="twitter:image" content="https://aafaque.in/og-image.png" />
-  <meta name="twitter:image:alt" content="Aafaque Nazir — Freelance Web Developer India" />
 
   <!-- Favicon and PWA Manifest -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -101,6 +60,10 @@
   <!-- AI Search Optimization — llms.txt for ChatGPT, Perplexity, Gemini, Claude -->
   <link rel="help" type="text/markdown" href="/llms.txt" />
   <link rel="help" type="text/markdown" href="/llms-full.txt" />
+
+  <!-- International & Language Signals -->
+  <link rel="alternate" hreflang="en" href="https://aafaque.in/" />
+  <link rel="alternate" hreflang="x-default" href="https://aafaque.in/" />
 
   <!-- DNS Prefetch & Preconnect for Performance -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -117,11 +80,6 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap"
       rel="stylesheet" />
   </noscript>
-
-  <!--
-      JSON-LD Structured Data is handled EXCLUSIVELY by the React SEO component
-      via react-helmet-async. No static duplicates here.
-    -->
 </head>
 
 <body class="bg-black text-white scroll-smooth">
@@ -187,6 +145,17 @@
         <li><a href="/projects/14" style="color:#22d3ee;text-decoration:none">→ LA Salon &amp; Spa — Luxury Spa Appointment Booking Portal</a></li>
       </ul>
 
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:#fff">Engineering Guides &amp; Architecture Articles</h3>
+      <ul style="color:#a3a3a3;line-height:2.2;padding-left:20px;margin-bottom:32px;list-style:none">
+        <li><a href="/blog/partial-prerendering-nextjs-ppr-architecture" style="color:#22d3ee;text-decoration:none">→ Partial Prerendering (PPR) in Next.js: Blending Static Speed with Dynamic Real-Time Data</a></li>
+        <li><a href="/blog/react-19-server-actions-vs-traditional-api-routes" style="color:#22d3ee;text-decoration:none">→ React 19 Server Actions vs Traditional API Routes: Production Migration &amp; Best Practices</a></li>
+        <li><a href="/blog/high-converting-headless-ecommerce-nextjs-tailwind" style="color:#22d3ee;text-decoration:none">→ Architecting a Headless E-Commerce Store with Next.js and Tailwind CSS for Sub-Second Conversions</a></li>
+        <li><a href="/blog/building-real-time-web-apps-react-19-websockets" style="color:#22d3ee;text-decoration:none">→ Building Real-Time Web Applications with React 19 and WebSockets</a></li>
+        <li><a href="/blog/react-19-vs-nextjs-15-architecture-guide-2026" style="color:#22d3ee;text-decoration:none">→ React 19 vs Next.js 15: Which Architecture Should You Choose in 2026?</a></li>
+        <li><a href="/blog/how-to-fix-core-web-vitals-react-inp-lcp" style="color:#22d3ee;text-decoration:none">→ How to Fix Core Web Vitals in React: Lowering INP and LCP Below 200ms</a></li>
+        <li><a href="/blog/why-startups-choose-supabase-over-firebase-2026" style="color:#22d3ee;text-decoration:none">→ Why Modern Startups Are Choosing Supabase Over Firebase in 2026</a></li>
+      </ul>
+
       <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:#fff">Technical Expertise</h3>
       <p style="color:#a3a3a3;margin-bottom:32px;line-height:1.7">
         React, Next.js, TypeScript, JavaScript, Tailwind CSS, GSAP, Framer Motion, Node.js, Supabase, PostgreSQL, MongoDB, Redux, Three.js, Git, Vercel
@@ -199,6 +168,7 @@
           <li><a href="/skills" style="color:#22d3ee;text-decoration:none">Technical Skills &amp; Stack</a></li>
           <li><a href="/projects" style="color:#22d3ee;text-decoration:none">Portfolio &amp; Client Projects</a></li>
           <li><a href="/services" style="color:#22d3ee;text-decoration:none">Web Development Services</a></li>
+          <li><a href="/blog" style="color:#22d3ee;text-decoration:none">Engineering Blog &amp; Architectural Guides</a></li>
           <li><a href="/contact" style="color:#22d3ee;text-decoration:none">Hire Me — Contact &amp; Inquiries</a></li>
         </ul>
       </nav>

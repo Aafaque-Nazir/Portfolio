@@ -14,7 +14,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
   const siteName = "Aafaque Nazir";
   const siteUrl = "https://aafaque.in";
   const defaultImage = `${siteUrl}/og-image.png`;
-  const currentDate = "2026-09-29";
+  const currentDate = new Date().toISOString().split("T")[0];
 
   const defaultSiteTitle = "Aafaque Nazir — Freelance Web Developer India | React & Next.js Expert";
   const defaultDescription =
