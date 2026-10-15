@@ -84,6 +84,13 @@
     <priority>0.85</priority>
   </url>
 
+  <url>
+    <loc>https://aafaque.in/blog/partial-prerendering-nextjs-ppr-architecture</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Project Detail Pages (Programmatic SEO & Case Studies) -->
   <url>
     <loc>https://aafaque.in/projects/17</loc>
