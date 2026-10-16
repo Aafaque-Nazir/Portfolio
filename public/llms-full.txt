@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **Why Lightweight React SPAs with Vite Beat Complex Meta-Frameworks for Local Business Apps**
+  URL: https://aafaque.in/blog/vite-react-spas-beat-meta-frameworks-local-business
+  Summary: Discover why lean React SPAs powered by Vite outperform complex meta-frameworks for local business apps, ensuring sub-second loads and instant mobile orders.
 - **Partial Prerendering (PPR) in Next.js: Blending Static Speed with Dynamic Real-Time Data**
   URL: https://aafaque.in/blog/partial-prerendering-nextjs-ppr-architecture
   Summary: Master Partial Prerendering (PPR) in Next.js. Learn how to combine static edge shells with dynamic React Suspense streaming for optimal Core Web Vitals.
