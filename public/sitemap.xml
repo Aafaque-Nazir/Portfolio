@@ -3,7 +3,7 @@
   <!-- Core Navigation Pages -->
   <url>
     <loc>https://aafaque.in/</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -39,12 +39,18 @@
   </url>
   <url>
     <loc>https://aafaque.in/blog</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Blog Posts -->
+  <url>
+    <loc>https://aafaque.in/blog/reverse-engineering-2026-ai-tools-techniques-roadmap</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
   <url>
     <loc>https://aafaque.in/blog/partial-prerendering-nextjs-ppr-architecture</loc>
     <lastmod>2026-10-15</lastmod>
