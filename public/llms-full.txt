@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **The React Compiler in Production: How Automatic Memoization Eliminates useMemo and useCallback**
+  URL: https://aafaque.in/blog/react-compiler-production-guide
+  Summary: Discover how the React Compiler automates memoization in React 19, eliminating the need for manual useMemo and useCallback hooks in high-performance applications.
 - **Why Lightweight React SPAs with Vite Beat Complex Meta-Frameworks for Local Business Apps**
   URL: https://aafaque.in/blog/vite-react-spas-beat-meta-frameworks-local-business
   Summary: Discover why lean React SPAs powered by Vite outperform complex meta-frameworks for local business apps, ensuring sub-second loads and instant mobile orders.

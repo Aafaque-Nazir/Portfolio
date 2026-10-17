@@ -1,5 +1,105 @@
 export const blogs = [
   {
+    "id": "react-compiler-production-guide",
+    "slug": "react-compiler-production-guide",
+    "title": "The React Compiler in Production: How Automatic Memoization Eliminates useMemo and useCallback",
+    "description": "Discover how the React Compiler automates memoization in React 19, eliminating the need for manual useMemo and useCallback hooks in high-performance applications.",
+    "publishedAt": "2026-10-17",
+    "updatedAt": "2026-10-17",
+    "readTime": "7 min read",
+    "category": "Frontend Development",
+    "tags": [
+      "React 19",
+      "React Compiler",
+      "Performance Optimization",
+      "TypeScript"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "The React Compiler is a build-time tool in React 19 that automatically analyzes component logic and inserts memoization primitives under the hood, safely eliminating the need for manual useMemo and useCallback hooks.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "Do I need to delete all existing useMemo and useCallback hooks when upgrading?",
+        "answer": "No. The React Compiler is designed to gracefully handle codebases that still contain manual memoization hooks, though you can safely remove them over time as the compiler handles reactivity automatically."
+      },
+      {
+        "question": "How does the React Compiler integrate into existing build pipelines?",
+        "answer": "The compiler integrates as a Babel plugin or directly through framework integrations like Next.js or Vite, running during your standard build or development server compilation step."
+      },
+      {
+        "question": "Does automatic memoization affect server-side rendering (SSR)?",
+        "answer": "Yes, positively. By optimizing component re-render trees at build time, it reduces unnecessary render cycles both on the server and during client-side hydration."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Architectural Shift: Moving Beyond Manual Optimization"
+      },
+      {
+        "type": "paragraph",
+        "text": "For years, React developers spent countless hours debugging unnecessary re-renders, instrumenting performance profiles, and scattering useMemo and useCallback across their component trees. While effective when applied correctly, manual memoization introduces human error, increases cognitive overhead, and often leads to premature optimization or missed performance bottlenecks. When architecting complex state-heavy platforms such as our [Inventory Management / InvMaster OS](/projects/1), managing granular memoization across thousands of dynamic rows and real-time godown routing logic becomes exceptionally tedious."
+      },
+      {
+        "type": "paragraph",
+        "text": "The React Compiler changes the paradigm entirely. Operating as a static analysis tool during the build phase, it understands JavaScript semantics and React's reactivity model intimately. It analyzes component data flow, determines value mutability, and automatically wraps expressions in memoization boundaries where appropriate."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "How Automatic Memoization Works Under the Hood"
+      },
+      {
+        "type": "paragraph",
+        "text": "Unlike runtime hooks that rely on manual dependency arrays specified by the developer, the React Compiler tracks fine-grained variable reads and writes. It breaks down components into reactive dependency graphs and injects conditional memoization checks only when input values have genuinely changed."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Standard React code before and after compiler optimization",
+        "code": "// Before: Manual hooks required\nfunction ProductTable({ items, onSelect }) {\n  const sortedItems = useMemo(() => {\n    return [...items].sort((a, b) => a.name.localeCompare(b.name));\n  }, [items]);\n\n  const handleRowClick = useCallback((id) => {\n    onSelect(id);\n  }, [onSelect]);\n\n  return <Table data={sortedItems} onClick={handleRowClick} />;\n}\n\n// After: Clean, declarative React 19 code with zero memo hooks\nfunction ProductTable({ items, onSelect }) {\n  const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));\n  const handleRowClick = (id) => onSelect(id);\n\n  return <Table data={sortedItems} onClick={handleRowClick} />;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Engineering Takeaway",
+        "text": "By relying on the compiler rather than manual dependency arrays, you eliminate the risk of stale closures and missing dependency bugs that frequently plague large-scale React applications."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Best Practices for Writing Compiler-Friendly Code"
+      },
+      {
+        "type": "paragraph",
+        "text": "To get the maximum benefit from the React Compiler, your codebase must adhere to standard React rules of data immutability and side-effect management. Breaking these rules will cause the compiler to bail out of optimizing specific components."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Never mutate props or state directly; always return new object or array references.",
+          "Keep rendering logic pure and free of side-effects (move mutations into useEffect or event handlers).",
+          "Adopt strict TypeScript types to help the static analyzer infer data flow accurately.",
+          "Run the official ESLint plugin for the React Compiler to catch non-compliant patterns early in development."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer based in Navi Mumbai, I help businesses modernize their tech stacks and build exceptionally fast, production-ready web applications. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your next project."
+      }
+    ]
+  },
+  {
     "id": "reverse-engineering-adobe-open-source-artcraft-ai-clones",
     "slug": "reverse-engineering-adobe-open-source-artcraft-ai-clones",
     "title": "Reverse Engineering Adobe into Free Open Source: The Viral ArtCraft Movement, Rust, AI Clean-Room Clones, and the Fall of SaaS Moats",
