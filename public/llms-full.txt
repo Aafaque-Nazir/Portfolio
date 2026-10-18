@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **Passing Interaction to Next Paint (INP): How to Break Up Long JavaScript Tasks with scheduler.yield()**
+  URL: https://aafaque.in/blog/passing-inp-break-up-long-tasks-scheduler-yield
+  Summary: Fix Interaction to Next Paint (INP) issues by breaking up heavy JavaScript tasks using scheduler.yield(). Master main-thread cooperative scheduling in modern apps.
 - **The React Compiler in Production: How Automatic Memoization Eliminates useMemo and useCallback**
   URL: https://aafaque.in/blog/react-compiler-production-guide
   Summary: Discover how the React Compiler automates memoization in React 19, eliminating the need for manual useMemo and useCallback hooks in high-performance applications.
