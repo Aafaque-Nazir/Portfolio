@@ -182,25 +182,25 @@ export default function BlogPost() {
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 origin-left z-50 shadow-[0_0_10px_rgba(34,211,238,0.8)]"
       />
 
-      <div className="relative min-h-screen bg-black text-white pt-28 sm:pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="relative min-h-screen bg-black text-white pt-20 sm:pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         {/* Subtle Ambient background glow matching ProjectDetails */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-cyan-500/[0.02] blur-[150px] pointer-events-none -z-0" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[380px] bg-cyan-500/[0.02] blur-[140px] pointer-events-none -z-0" />
 
         <article className="max-w-4xl mx-auto relative z-10">
-          {/* Top Navigation Row matching ProjectDetails.jsx */}
-          <div className="flex items-center justify-between gap-4 mb-6">
+          {/* Top Navigation Row */}
+          <nav aria-label="Breadcrumb" className="flex items-center justify-between text-xs font-mono mb-6">
             <Link 
               to="/blog" 
-              className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-white/10 hover:border-cyan-400/50 text-slate-200 hover:text-white text-xs font-mono font-medium transition-all duration-200"
+              className="group inline-flex items-center gap-1.5 text-zinc-400 hover:text-white transition-colors"
             >
-              <RiArrowLeftLine className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)] group-hover:-translate-x-1 transition-transform" />
-              <span>Back to Blog</span>
+              <RiArrowLeftLine className="transition-transform group-hover:-translate-x-0.5" />
+              <span>Articles</span>
             </Link>
 
-            <span className="text-[10px] font-mono font-medium uppercase tracking-wider text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-md border border-cyan-500/20">
+            <span className="text-zinc-500 uppercase tracking-widest text-[11px]">
               {post.category}
             </span>
-          </div>
+          </nav>
 
           {/* Article Header: Unified font sizing */}
           <header className="mb-8 space-y-4">
