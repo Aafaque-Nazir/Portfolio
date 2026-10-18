@@ -133,7 +133,7 @@ const Services = () => {
       description: "Custom websites and landing pages built to look modern, load fast, and be fully responsive on all devices.",
       features: [
         "Custom Responsive Design",
-        "Smooth Animations & Micro-interactions",
+        "Smooth Animations & Fast UI",
         "Fast Loading Speeds",
         "SEO Best Practices & Meta Tags",
       ],

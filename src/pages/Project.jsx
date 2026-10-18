@@ -6,7 +6,7 @@ const Project = () => {
   const [selectedFolder, setSelectedFolder] = useState(null);
 
   return (
-    <div id="projects" className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black text-white pt-28 sm:pt-32 pb-20">
+    <div id="projects" className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black text-white pt-20 sm:pt-24 pb-16">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-grid-white/[0.02] -z-[1] pointer-events-none" />
 
@@ -20,12 +20,12 @@ const Project = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25 }}
-              className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto"
+              className="text-center mb-7 sm:mb-8 max-w-2xl mx-auto"
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase mb-3">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white uppercase mb-2">
                 My Projects
               </h1>
-              <p className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed">
+              <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">
                 A collection of web applications and sites built with modern frameworks, clean code, and responsive design.
               </p>
             </motion.div>

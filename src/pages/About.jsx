@@ -56,7 +56,7 @@ const AboutNode = ({ children, title, className = "" }) => {
 
 const About = () => {
   return (
-    <section id="about" aria-label="About Aafaque Nazir — Full-Stack Web Developer & Creative Engineer" className="relative w-full min-h-[100svh] flex flex-col justify-start items-center bg-black pt-28 sm:pt-32 pb-16">
+    <section id="about" aria-label="About Aafaque Nazir — Full-Stack Web Developer" className="relative w-full min-h-[100svh] flex flex-col justify-start items-center bg-black pt-28 sm:pt-32 pb-16">
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col justify-start">
 
         {/* Header Section: Unified Page H1 */}
@@ -76,7 +76,7 @@ const About = () => {
             transition={{ delay: 0.1 }}
             className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed"
           >
-            My background, engineering philosophy, and how I approach building modern web experiences.
+            My background, how I work, and how I build modern websites and web applications.
           </motion.p>
         </div>
 
@@ -91,7 +91,7 @@ const About = () => {
                 I build fast, secure, and responsive web applications from the ground up using modern tools like <span className="text-white">React, Next.js, and Node.js</span>.
               </p>
               <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-light mb-6">
-                I bridge engineering and design — crafting responsive interfaces with clean code and reliable backend systems.
+                I build responsive, fast websites with clean frontend code and reliable backend systems.
               </p>
               <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
                 <p className="text-xs font-mono text-cyan-400/80 italic">
