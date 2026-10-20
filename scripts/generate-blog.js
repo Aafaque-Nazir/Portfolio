@@ -340,13 +340,17 @@ Strict Requirements:
 3. Include real, clean, modern code snippets (TypeScript, React 19, or SQL).
 4. Include an AEO Quick Answer (1-2 sentences direct answer for Perplexity and SearchGPT).
 5. Include 3 structured FAQs for Google FAQ schema.
-6. Return ONLY valid JSON adhering precisely to this structure:
+6. Strict SEO Character Lengths (to prevent Ahrefs & Google SERP warnings):
+   - "seoTitle": Strictly between 45 and 55 characters (maximum 58 characters). Concise, punchy, high-CTR for Google <title>.
+   - "description": Strictly between 130 and 150 characters (MUST NEVER exceed 155 characters). Clear, keyword-rich summary.
+7. Return ONLY valid JSON adhering precisely to this structure:
 
 {
   "id": "url-friendly-slug",
   "slug": "url-friendly-slug",
-  "title": "Compelling, High-CTR Engineering Title",
-  "description": "150-160 characters search-optimized meta description",
+  "title": "Authoritative, High-Intent Engineering Headline",
+  "seoTitle": "Punchy SERP Title (45-55 chars max)",
+  "description": "Crisp 130-150 chars meta description without fluff",
   "publishedAt": "${new Date().toISOString().split("T")[0]}",
   "updatedAt": "${new Date().toISOString().split("T")[0]}",
   "readTime": "7 min read",
@@ -555,6 +559,26 @@ async function generate() {
   }
 
   console.log(`✅ Successfully generated: "${blogObj.title}" (slug: ${blogObj.slug})`);
+
+  // Programmatic SEO Guardrails for Ahrefs & Google SERP Compliance
+  if (!blogObj.seoTitle) {
+    blogObj.seoTitle = blogObj.title.length <= 55
+      ? blogObj.title
+      : blogObj.title.slice(0, 52).replace(/\s+\S*$/, "") + "...";
+  } else if (blogObj.seoTitle.length > 55) {
+    blogObj.seoTitle = blogObj.seoTitle.slice(0, 52).replace(/\s+\S*$/, "") + "...";
+  }
+
+  // Ensure description is strictly <= 150 chars (never triggers 'Meta description too long')
+  if (!blogObj.description || blogObj.description.length > 150) {
+    console.log(`⚠️ Sanitizing description length from ${blogObj.description?.length || 0} to <= 150 chars`);
+    blogObj.description = blogObj.description
+      ? blogObj.description.slice(0, 147).replace(/\s+\S*$/, "") + "..."
+      : "High-performance web architecture guide by freelance full-stack developer Aafaque Nazir.";
+  }
+
+  console.log(`🎯 SEO Title (${blogObj.seoTitle.length} chars): "${blogObj.seoTitle}"`);
+  console.log(`🎯 Description (${blogObj.description.length} chars): "${blogObj.description}"`);
 
   // 3. Inject blog into src/data/blogs.js
   // Insert at the beginning of the blogs array
