@@ -38,16 +38,30 @@
   </script>
   <!-- End Google Tag Manager -->
 
-  <!--
-      Canonical URL, OG tags, Twitter tags, robots, description, and all
-      page-specific meta are managed EXCLUSIVELY by the React SEO component
-      via react-helmet-async. NO static duplicates here — duplicate canonicals
-      were causing Google to treat every SPA route as a copy of '/'.
-  -->
-
-  <!-- Static baseline title (overridden per-route by React Helmet) -->
-  <title>Aafaque Nazir — Freelance Web Developer India | React & Next.js Specialist</title>
+  <!-- Baseline Meta & SEO (under 60 chars title, 150 chars description) -->
+  <title>Aafaque Nazir — Freelance Web Developer India</title>
+  <meta name="description" content="Aafaque Nazir is a freelance full-stack web developer building high-performance websites, e-commerce stores, and custom web apps with React & Next.js." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#000000" />
+
+  <!-- Canonical URL Baseline (React Helmet updates dynamically per route) -->
+  <link rel="canonical" href="https://aafaque.in/" />
+
+  <!-- Open Graph Baseline for Social Sharing & Ahrefs Crawler -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aafaque.in/" />
+  <meta property="og:title" content="Aafaque Nazir — Freelance Web Developer India" />
+  <meta property="og:description" content="Aafaque Nazir is a freelance full-stack web developer building high-performance websites, e-commerce stores, and custom web apps with React & Next.js." />
+  <meta property="og:image" content="https://aafaque.in/og-image.png" />
+  <meta property="og:site_name" content="Aafaque Nazir" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter / X Card Baseline -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://aafaque.in/" />
+  <meta name="twitter:title" content="Aafaque Nazir — Freelance Web Developer India" />
+  <meta name="twitter:description" content="Aafaque Nazir is a freelance full-stack web developer building high-performance websites, e-commerce stores, and custom web apps with React & Next.js." />
+  <meta name="twitter:image" content="https://aafaque.in/og-image.png" />
 
   <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="W14Pv-NcsPzb_7dv0h8kaQw9eM2h7bCSvBjiH1f_QMI" />
@@ -60,10 +74,6 @@
   <!-- AI Search Optimization — llms.txt for ChatGPT, Perplexity, Gemini, Claude -->
   <link rel="help" type="text/markdown" href="/llms.txt" />
   <link rel="help" type="text/markdown" href="/llms-full.txt" />
-
-  <!-- International & Language Signals -->
-  <link rel="alternate" hreflang="en" href="https://aafaque.in/" />
-  <link rel="alternate" hreflang="x-default" href="https://aafaque.in/" />
 
   <!-- DNS Prefetch & Preconnect for Performance -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -95,10 +105,10 @@
     <!-- Critical CSS & Hero Pre-render — Eliminates CSR blank-screen delay for sub-second FCP & LCP -->
     <div style="min-height:92vh;background:#000;color:#fff;display:flex;flex-direction:column;justify-content:center;padding:112px 20px 48px;max-width:1152px;margin:0 auto;box-sizing:border-box;font-family:'JetBrains Mono',monospace,sans-serif;">
       <div style="max-width:768px;">
-        <h1 style="font-size:clamp(2.75rem,8vw,5.5rem);font-weight:900;line-height:0.95;letter-spacing:-0.04em;margin:0 0 16px 0;color:#ffffff;">
+        <div role="heading" aria-level="1" style="font-size:clamp(2.75rem,8vw,5.5rem);font-weight:900;line-height:0.95;letter-spacing:-0.04em;margin:0 0 16px 0;color:#ffffff;">
           <span>AAFAQUE</span><br />
           <span style="color:#22d3ee;">NAZIR</span>
-        </h1>
+        </div>
         <div style="font-size:clamp(0.85rem,2.5vw,1.1rem);color:#22d3ee;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px;font-weight:700;">
           Freelance Web Developer
         </div>
@@ -170,6 +180,11 @@
           <li><a href="/about" style="color:#22d3ee;text-decoration:none">About Aafaque Nazir</a></li>
           <li><a href="/skills" style="color:#22d3ee;text-decoration:none">Technical Skills &amp; Stack</a></li>
           <li><a href="/projects" style="color:#22d3ee;text-decoration:none">Portfolio &amp; Client Projects</a></li>
+          <li><a href="/projects/1" style="color:#22d3ee;text-decoration:none">Case Study: Inventory Management OS</a></li>
+          <li><a href="/projects/4" style="color:#22d3ee;text-decoration:none">Case Study: Restaurant OS &amp; Kitchen Display</a></li>
+          <li><a href="/projects/3" style="color:#22d3ee;text-decoration:none">Case Study: Bread &amp; Bite WhatsApp Ordering</a></li>
+          <li><a href="/projects/17" style="color:#22d3ee;text-decoration:none">Case Study: Al Raheeq Tourism UAE Portal</a></li>
+          <li><a href="/projects/2" style="color:#22d3ee;text-decoration:none">Case Study: Shopease Headless E-Commerce</a></li>
           <li><a href="/services" style="color:#22d3ee;text-decoration:none">Web Development Services</a></li>
           <li><a href="/blog" style="color:#22d3ee;text-decoration:none">Engineering Blog &amp; Architectural Guides</a></li>
           <li><a href="/contact" style="color:#22d3ee;text-decoration:none">Hire Me — Contact &amp; Inquiries</a></li>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ProjectShowcase } from "../components/ui/project-showcase";
+import { projects } from "../data/projects";
 
 const Project = () => {
   const [selectedFolder, setSelectedFolder] = useState(null);
@@ -31,6 +33,18 @@ const Project = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Semantic Crawlable Links for Search Engines & Accessibility — Eliminates Orphan Pages */}
+        <nav aria-label="Projects directory index" className="sr-only">
+          <h2>All Portfolio Projects</h2>
+          <ul>
+            {projects.map((p) => (
+              <li key={p.id}>
+                <Link to={`/projects/${p.id}`}>{p.title} — {p.description}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         {/* Project Grid / Folders */}
         <div className="w-full">
