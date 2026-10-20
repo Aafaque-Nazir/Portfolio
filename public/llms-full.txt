@@ -108,6 +108,12 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **Reducing JavaScript Bundle Size by 60% with Modern Tree-Shaking and Dynamic Imports**
+  URL: https://aafaque.in/blog/reducing-javascript-bundle-size-tree-shaking-dynamic-imports
+  Summary: Learn how to reduce React and Next.js bundle sizes by 60% using dead-code elimination, ESM tree-shaking, and route-driven dynamic code-splitting patterns.
+- **Passing Interaction to Next Paint (INP): How to Break Up Long JavaScript Tasks with scheduler.yield()**
+  URL: https://aafaque.in/blog/passing-inp-break-up-long-tasks-scheduler-yield
+  Summary: Fix Interaction to Next Paint (INP) issues by breaking up heavy JavaScript tasks using scheduler.yield(). Master main-thread cooperative scheduling in modern apps.
 - **Reverse Engineering Adobe into Free Open Source: The Viral ArtCraft Movement, Rust, AI Clean-Room Clones, and the Fall of SaaS Moats**
   URL: https://aafaque.in/blog/reverse-engineering-adobe-open-source-artcraft-ai-clones
   Summary: How software engineer Brandon Thomas used Rust and Claude to build ArtCraft—open-source clean-room clones of Adobe Photoshop (PhotoCraft), Premiere (FilmCraft), and Illustrator—and why AI-assisted reverse engineering is breaking proprietary software monopolies.
