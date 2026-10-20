@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
  * 3. Rich Snippets: Person, WebSite, WebPage, ProfessionalService, BreadcrumbList, FAQPage, WebApplication
  * 4. Local + Global Search Optimization (Navi Mumbai / Mumbai / India / Worldwide Remote)
  */
-const SEO = ({ title, description, keywords, image, url, section, project, blogPost }) => {
+const SEO = ({ title, description, keywords, image, url, section, project, blogPost, noindex = false }) => {
   const siteName = "Aafaque Nazir";
   const siteUrl = "https://aafaque.in";
   const defaultImage = `${siteUrl}/og-image.png`;
@@ -70,6 +70,12 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
         "High-intent web development articles, React 19 and Next.js performance deep dives, database design, and production engineering insights by Aafaque Nazir.",
       keywords:
         "web development blog, React 19 architecture, Next.js 15 guides, Core Web Vitals optimization, Supabase vs Firebase, full stack engineering India, freelance developer blog",
+    },
+    notFound: {
+      title: "404: Page Not Found — Aafaque Nazir",
+      description:
+        "The page you are looking for does not exist or has been moved. Explore portfolio projects, services, or blog articles by Aafaque Nazir.",
+      keywords: "404 page not found, aafaque nazir",
     },
   };
 
@@ -421,7 +427,14 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
       <meta name="description" content={resolvedDescription} />
       <meta name="keywords" content={resolvedKeywords} />
       <meta name="author" content="Aafaque Nazir" />
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta
+        name="robots"
+        content={
+          noindex || section === "notFound"
+            ? "noindex, follow"
+            : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        }
+      />
       <meta name="rating" content="general" />
       <meta name="theme-color" content="#000000" />
 

@@ -15,6 +15,7 @@ const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Page Transition Wrapper
 const PageWrapper = ({ children, sectionName }) => {
@@ -72,6 +73,7 @@ function App() {
               <Route path="/blog" element={<PageWrapper sectionName="blog"><Blog /></PageWrapper>} />
               <Route path="/blog/:slug" element={<PageWrapper><BlogPost /></PageWrapper>} />
               <Route path="/contact" element={<PageWrapper sectionName="contact"><Contact /></PageWrapper>} />
+              <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
             </Routes>
           </AnimatePresence>
         </Suspense>
