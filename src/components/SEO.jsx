@@ -18,63 +18,63 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
 
   const defaultSiteTitle = "Aafaque Nazir — Freelance Web Developer India";
   const defaultDescription =
-    "Looking to hire a freelance web developer in India? Aafaque Nazir builds fast, modern, and responsive websites, e-commerce stores, and full-stack web applications using React & Next.js.";
+    "Hire freelance web developer Aafaque Nazir in India. Specializing in high-performance websites, Next.js apps, e-commerce stores, and modern web apps.";
 
-  // Section-specific metadata
+  // Section-specific metadata (strictly under 155 chars to prevent SERP truncation & Ahrefs warnings)
   const sectionMeta = {
     home: {
       title: "Aafaque Nazir — Freelance Web Developer India",
       description:
-        "Looking to hire a freelance web developer in India? Aafaque Nazir builds fast, modern websites, custom e-commerce stores, and scalable SaaS web applications with React & Next.js.",
+        "Hire freelance web developer Aafaque Nazir in India. Specializing in high-performance websites, Next.js apps, e-commerce stores, and modern web apps.",
       keywords:
         "freelance web developer India, hire web developer India, React developer for hire, Next.js developer India, full stack web developer portfolio, custom website developer, web application developer Mumbai, frontend developer React, website development services India, hire freelance developer Mumbai",
     },
     about: {
       title: "About Aafaque Nazir — Full-Stack Web Developer",
       description:
-        "Learn about Aafaque Nazir, an independent freelance web developer specializing in clean code, React, Next.js, and high-performance full-stack web applications.",
+        "About Aafaque Nazir: freelance full-stack developer specializing in clean code, React, Next.js, and high-performance web applications across India.",
       keywords:
         "about Aafaque Nazir, freelance web developer background, full stack developer India, React developer portfolio, web engineer Mumbai, freelance frontend developer",
     },
     skills: {
       title: "Skills & Modern Tech Stack — Aafaque Nazir",
       description:
-        "Explore the technical skills and tooling of Aafaque Nazir: React, Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, Supabase, and REST APIs.",
+        "Explore technical skills of Aafaque Nazir: React, Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, Supabase, and modern web architectures.",
       keywords:
         "React developer skills, Next.js developer tech stack, frontend skills portfolio, Node.js developer India, TypeScript developer portfolio, Supabase PostgreSQL developer",
     },
     projects: {
       title: "Projects & Work Portfolio — Aafaque Nazir",
       description:
-        "Explore custom web applications, online stores, and responsive websites built by Aafaque Nazir using React, Next.js, and modern backends.",
+        "Explore custom web applications, e-commerce stores, and responsive websites built by Aafaque Nazir using React, Next.js, and modern backends.",
       keywords:
         "web development portfolio, React web app examples, Next.js portfolio projects, e-commerce website showcase, SaaS application examples, freelance web developer projects",
     },
     services: {
       title: "Web Development Services — Aafaque Nazir",
       description:
-        "Professional web development services: responsive websites, custom e-commerce stores, and scalable full-stack web applications tailored for your business.",
+        "Professional web development services: responsive websites, custom e-commerce stores, and scalable full-stack web applications tailored for your brand.",
       keywords:
         "web development services India, hire freelance web developer, custom website development, e-commerce store developer, web application development, website developer Mumbai",
     },
     contact: {
       title: "Hire Aafaque Nazir — Web Developer India",
       description:
-        "Ready to start a website or web application project? Get in touch with Aafaque Nazir for freelance web development, project quotes, or collaborations.",
+        "Ready to start your web project? Contact freelance developer Aafaque Nazir for website development, project quotes, or engineering consultations.",
       keywords:
         "hire web developer India, contact web developer, get website quote, freelance developer contact, hire React developer, web development consultation India",
     },
     blog: {
       title: "Web Engineering Blog — Aafaque Nazir",
       description:
-        "High-intent web development articles, React 19 and Next.js performance deep dives, database design, and production engineering insights by Aafaque Nazir.",
+        "Web engineering blog by Aafaque Nazir: React 19, Next.js performance deep dives, database design, Core Web Vitals, and real-world system architecture.",
       keywords:
         "web development blog, React 19 architecture, Next.js 15 guides, Core Web Vitals optimization, Supabase vs Firebase, full stack engineering India, freelance developer blog",
     },
     notFound: {
       title: "404: Page Not Found — Aafaque Nazir",
       description:
-        "The page you are looking for does not exist or has been moved. Explore portfolio projects, services, or blog articles by Aafaque Nazir.",
+        "The page you are looking for does not exist. Explore portfolio projects, web development services, or architecture blog articles by Aafaque Nazir.",
       keywords: "404 page not found, aafaque nazir",
     },
   };
@@ -87,14 +87,27 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
   let resolvedImage = defaultImage;
 
   if (blogPost) {
-    resolvedTitle = blogPost.title.length > 55 ? blogPost.title : `${blogPost.title} — Aafaque Nazir`;
-    resolvedDescription = blogPost.description;
+    // Keep title under 60 chars for Google SERP & Ahrefs
+    if (blogPost.seoTitle) {
+      resolvedTitle = blogPost.seoTitle.length > 55 ? blogPost.seoTitle : `${blogPost.seoTitle} — Aafaque Nazir`;
+    } else if (blogPost.title.length > 58) {
+      resolvedTitle = `${blogPost.title.slice(0, 55)}...`;
+    } else {
+      resolvedTitle = `${blogPost.title} — Aafaque Nazir`;
+    }
+
+    // Keep description strictly <= 155 chars
+    resolvedDescription = blogPost.description && blogPost.description.length > 155
+      ? `${blogPost.description.slice(0, 151)}...`
+      : blogPost.description;
+
     resolvedKeywords = `${blogPost.tags ? blogPost.tags.join(", ") : ""}, web development guide, React developer India, Aafaque Nazir`;
     resolvedUrl = `${siteUrl}/blog/${blogPost.slug}`;
     resolvedImage = defaultImage;
   } else if (project) {
     resolvedTitle = `${project.title} | Case Study — Aafaque Nazir`;
-    resolvedDescription = `${project.description} Built with ${project.techStack.join(", ")} by full-stack developer Aafaque Nazir.`;
+    const projDesc = project.description;
+    resolvedDescription = projDesc.length > 155 ? `${projDesc.slice(0, 151)}...` : projDesc;
     resolvedKeywords = `${project.title}, ${project.category}, ${project.techStack.join(", ")}, web application case study, React project portfolio, Aafaque Nazir`;
     resolvedUrl = `${siteUrl}/projects/${project.id}`;
     resolvedImage = project.image ? (project.image.startsWith("http") ? project.image : `${siteUrl}${project.image}`) : defaultImage;
@@ -278,9 +291,9 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
     ? {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        headline: blogPost.title,
-        description: blogPost.description,
-        image: resolvedImage,
+        headline: blogPost.title && blogPost.title.length > 105 ? `${blogPost.title.slice(0, 102)}...` : blogPost.title,
+        description: resolvedDescription,
+        image: [resolvedImage],
         datePublished: blogPost.publishedAt,
         dateModified: blogPost.updatedAt || blogPost.publishedAt,
         author: {
@@ -289,7 +302,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
           url: siteUrl,
         },
         publisher: {
-          "@type": "Person",
+          "@type": "Organization",
           name: "Aafaque Nazir",
           url: siteUrl,
           logo: {
@@ -499,6 +512,7 @@ SEO.propTypes = {
     id: PropTypes.string,
     slug: PropTypes.string,
     title: PropTypes.string,
+    seoTitle: PropTypes.string,
     description: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
     publishedAt: PropTypes.string,

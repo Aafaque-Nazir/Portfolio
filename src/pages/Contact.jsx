@@ -286,9 +286,9 @@ const Contact = () => {
                   <div className="flex-grow border-t border-white/10" />
                 </div>
 
-                {/* Calendly Booking Button */}
+                {/* Direct WhatsApp Call Scheduling (replaces 404 dead link) */}
                 <a
-                  href="https://calendly.com/aafaquebuisness/15min"
+                  href="https://wa.me/919325629256?text=Hi%20Aafaque,%20I'd%20like%20to%20schedule%20a%20quick%20call%20about%20a%20project."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 hover:border-cyan-400/40 text-zinc-200 hover:text-white font-mono font-bold py-3 px-4 rounded-xl text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all group"

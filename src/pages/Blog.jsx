@@ -106,10 +106,10 @@ export default function Blog() {
         ) : (
           <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredBlogs.map((post) => (
-              <article
+              <Link
                 key={post.id}
-                onClick={() => navigate(`/blog/${post.slug}`)}
-                className="group relative rounded-xl p-5 bg-zinc-950 border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/40 transition-all duration-200 flex flex-col justify-between cursor-pointer"
+                to={`/blog/${post.slug}`}
+                className="group relative rounded-xl p-5 bg-zinc-950 border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/40 transition-all duration-200 flex flex-col justify-between cursor-pointer no-underline block"
               >
                 <div>
                   {/* Top Row: Clean Category Label & Read Time */}
@@ -158,7 +158,7 @@ export default function Blog() {
                     </span>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         )}
