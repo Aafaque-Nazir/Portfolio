@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **Reverse Engineering Adobe into Free Open Source: The Viral ArtCraft Movement, Rust, AI Clean-Room Clones, and the Fall of SaaS Moats**
+  URL: https://aafaque.in/blog/reverse-engineering-adobe-open-source-artcraft-ai-clones
+  Summary: How software engineer Brandon Thomas used Rust and Claude to build ArtCraft—open-source clean-room clones of Adobe Photoshop (PhotoCraft), Premiere (FilmCraft), and Illustrator—and why AI-assisted reverse engineering is breaking proprietary software monopolies.
 - **The React Compiler in Production: How Automatic Memoization Eliminates useMemo and useCallback**
   URL: https://aafaque.in/blog/react-compiler-production-guide
   Summary: Discover how the React Compiler automates memoization in React 19, eliminating the need for manual useMemo and useCallback hooks in high-performance applications.
