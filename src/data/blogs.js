@@ -1,5 +1,133 @@
 export const blogs = [
   {
+    "id": "sub-second-lcp-http-103-early-hints-avif-images",
+    "slug": "sub-second-lcp-http-103-early-hints-avif-images",
+    "title": "Sub-Second LCP: Accelerating Largest Contentful Paint with HTTP 103 Early Hints and AVIF Images",
+    "seoTitle": "Fix LCP: HTTP 103 Early Hints and AVIF Images",
+    "description": "Achieve sub-second Largest Contentful Paint using HTTP 103 Early Hints, Edge CDN preloading, and next-gen AVIF image optimization pipelines.",
+    "publishedAt": "2026-10-20",
+    "updatedAt": "2026-10-20",
+    "readTime": "7 min read",
+    "category": "Performance Engineering",
+    "tags": [
+      "Web Vitals",
+      "Next.js",
+      "Edge Computing",
+      "Performance",
+      "Image Optimization"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To achieve a sub-second Largest Contentful Paint (LCP), stream HTTP 103 Early Hints from edge runtimes to instruct the browser to warm critical connections and download the LCP hero resource before SSR HTML computation finishes, paired with responsive AVIF encoding at q=65 to reduce payload weight by over 50%.",
+    "relatedProjectId": 17,
+    "faqs": [
+      {
+        "question": "How does HTTP 103 Early Hints differ from standard HTML preload tags?",
+        "answer": "Standard HTML preloads require the browser to wait for the server to generate and deliver the initial HTML document before parsing starts. HTTP 103 Early Hints are dispatched by the edge proxy immediately upon receiving the request, allowing parallel network requests for critical assets while the origin server computes the dynamic SSR payload."
+      },
+      {
+        "question": "Why is AVIF preferred over WebP for critical LCP hero images?",
+        "answer": "AVIF utilizes the AV1 video codec's intra-frame compression, yielding 20% to 30% smaller file sizes than WebP at identical structural similarity (SSIM) indexes, especially in high-frequency detail zones. This drastically curtails resource load duration over throttled 4G connections."
+      },
+      {
+        "question": "Does fetchpriority='high' eliminate the need for Early Hints?",
+        "answer": "No. While fetchpriority='high' reorders resource priority within the browser's internal task queue once discovered in the DOM, HTTP 103 Early Hints triggers the network fetch hundreds of milliseconds earlier during the server's Time To First Byte (TTFB) phase."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Anatomy of LCP Bottlenecks in Modern Edge Architectures"
+      },
+      {
+        "type": "paragraph",
+        "text": "Largest Contentful Paint (LCP) is rarely a rendering engine flaw; it is an orchestrational network failure. When auditing client web platforms—such as our high-concurrency travel booking engine for [Al Raheeq Tourism](/projects/17)—we consistently observe LCP penalties stemming from sequential waterfall execution: TTFB wait time, followed by HTML parser discovery, CSSOM blocking, and lastly the late-stage discovery of dynamic hero images."
+      },
+      {
+        "type": "paragraph",
+        "text": "To cut LCP below 800ms globally, engineering teams must overlap resource download time directly with server-side computation. Combining edge-streamed HTTP 103 Early Hints with advanced AVIF compression pipelines eliminates this waterfall, warming TCP/TLS connections and downloading imagery before the main document stream concludes."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Implementing HTTP 103 Early Hints at the Edge"
+      },
+      {
+        "type": "paragraph",
+        "text": "HTTP 103 Early Hints allows an intermediate CDN edge worker (such as Cloudflare Workers or Netlify Edge) to return informational 1xx responses containing Link headers while the origin database resolves slow queries or hydrates complex layouts."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "Edge Worker emitting HTTP 103 Early Hints for LCP images",
+        "code": "export default {\n  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {\n    const url = new URL(request.url);\n\n    // Match root landing and critical landing routes\n    if (url.pathname === \"/\" || url.pathname.startsWith(\"/tours\")) {\n      const lcpImage = \"/static/hero-dubai-skyline.avif\";\n      \n      // Stream informational 103 response immediately\n      const earlyHints = new Headers({\n        Link: `<${lcpImage}>; rel=preload; as=image; type=image/avif; fetchpriority=high`,\n      });\n\n      // Dispatch early hints through cloudflare/native edge APIs\n      // @ts-ignore\n      if (typeof ctx.writeEarlyHints === \"function\") {\n        // @ts-ignore\n        ctx.writeEarlyHints(earlyHints);\n      }\n    }\n\n    // Forward request to SSR Origin (Next.js / Node.js)\n    const response = await fetch(request);\n    return response;\n  },\n};"
+      },
+      {
+        "type": "callout",
+        "title": "Zero-Overhead Parsing",
+        "text": "Browsers ignore 103 Link headers they do not support or cannot fulfill. When properly configured with HTTP/2 or HTTP/3 multiplexing, the client reuses the exact same transport socket established for the primary HTML request."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "High-Efficiency Image Pipelines: Sharp and AVIF Parameters"
+      },
+      {
+        "type": "paragraph",
+        "text": "Transcoding raw photography into AVIF is not merely about choosing the extension. Applying suboptimal chroma subsampling or excessive effort parameters can introduce encoding artifacts or massive server build times. We configure our Node.js asset build scripts using libvips via Sharp to target the optimal perceptual threshold (SSIM > 0.98)."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "Production Node.js build transformation script for LCP heroes",
+        "code": "import sharp from \"sharp\";\nimport { promises as fs } from \"fs\";\n\nexport async function optimizeLcpHero(inputPath: string, outputPath: string) {\n  const buffer = await fs.readFile(inputPath);\n\n  await sharp(buffer)\n    .resize({\n      width: 1440,\n      withoutEnlargement: true,\n      fit: \"inside\",\n    })\n    .avif({\n      quality: 68,\n      effort: 7, // High compression effort balance\n      chromaSubsampling: \"4:2:0\",\n      lossless: false,\n    })\n    .toFile(outputPath);\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Front-End DOM Implementation with React 19"
+      },
+      {
+        "type": "paragraph",
+        "text": "In modern React architectures, declaring explicit fetchpriority attributes and ensuring proper responsive sizing prevents layout thrashing (CLS) while reinforcing the early hint preload directive. Avoid wrapping above-the-fold hero elements in lazy-loading wrappers."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Responsive LCP Hero component with high fetch priority",
+        "code": "import React from \"react\";\n\ninterface HeroProps {\n  title: string;\n  heroAvifSrc: string;\n  fallbackWebpSrc: string;\n}\n\nexport const CriticalLcpHero: React.FC<HeroProps> = ({\n  title,\n  heroAvifSrc,\n  fallbackWebpSrc,\n}) => {\n  return (\n    <section className=\"relative w-full min-h-[500px] overflow-hidden bg-neutral-950\">\n      <picture>\n        <source\n          type=\"image/avif\"\n          srcSet={`${heroAvifSrc}?w=768 768w, ${heroAvifSrc}?w=1440 1440w`}\n          sizes=\"(max-width: 768px) 100vw, 1440px\"\n        />\n        <source\n          type=\"image/webp\"\n          srcSet={`${fallbackWebpSrc}?w=768 768w, ${fallbackWebpSrc}?w=1440 1440w`}\n          sizes=\"(max-width: 768px) 100vw, 1440px\"\n        />\n        <img\n          src={fallbackWebpSrc}\n          alt={title}\n          // @ts-ignore - React 19 native fetchPriority support\n          fetchPriority=\"high\"\n          loading=\"eager\"\n          decoding=\"async\"\n          width={1440}\n          height={810}\n          className=\"absolute inset-0 h-full w-full object-cover object-center\"\n        />\n      </picture>\n      <div className=\"relative z-10 p-8 text-white\">\n        <h1 className=\"text-4xl font-extrabold tracking-tight\">{title}</h1>\n      </div>\n    </section>\n  );\n};"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Architectural Checklist for Core Web Vitals Audits"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Eliminate client-side redirects on LCP paths; each 301/302 adds an entire RTT loop.",
+          "Ensure CDN cache headers include 'stale-while-revalidate' to insulate edge latency against dynamic origin cold starts.",
+          "Inline critical path CSS directly into the document head to unlock sub-50ms First Contentful Paint (FCP).",
+          "Strip third-party tag management containers from executing prior to the window 'load' event."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Whether you are rebuilding an enterprise portal or looking to resolve sub-optimal Core Web Vitals on an existing platform, enterprise performance demands precise edge tuning. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) directly to audit and optimize your infrastructure."
+      }
+    ]
+  },
+  {
     "id": "reducing-javascript-bundle-size-tree-shaking-dynamic-imports",
     "slug": "reducing-javascript-bundle-size-tree-shaking-dynamic-imports",
     "title": "Reducing JavaScript Bundle Size by 60% with Modern Tree-Shaking and Dynamic Imports",
