@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **Eliminating Cumulative Layout Shift (CLS): Modern Font Fallbacks and CSS Aspect-Ratio Strategies**
+  URL: https://aafaque.in/blog/eliminating-cls-font-fallbacks-aspect-ratio
+  Summary: Learn how to fix Cumulative Layout Shift (CLS) using size-adjust font fallbacks and modern CSS aspect-ratio properties for flawless Core Web Vitals.
 - **Sub-Second LCP: Accelerating Largest Contentful Paint with HTTP 103 Early Hints and AVIF Images**
   URL: https://aafaque.in/blog/sub-second-lcp-http-103-early-hints-avif-images
   Summary: Achieve sub-second Largest Contentful Paint using HTTP 103 Early Hints, Edge CDN preloading, and next-gen AVIF image optimization pipelines.

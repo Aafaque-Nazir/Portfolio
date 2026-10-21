@@ -1,5 +1,114 @@
 export const blogs = [
   {
+    "id": "eliminating-cls-font-fallbacks-aspect-ratio",
+    "slug": "eliminating-cls-font-fallbacks-aspect-ratio",
+    "title": "Eliminating Cumulative Layout Shift (CLS): Modern Font Fallbacks and CSS Aspect-Ratio Strategies",
+    "seoTitle": "Fixing CLS: Modern Font Fallbacks & CSS Aspect-Ratio",
+    "description": "Learn how to fix Cumulative Layout Shift (CLS) using size-adjust font fallbacks and modern CSS aspect-ratio properties for flawless Core Web Vitals.",
+    "publishedAt": "2026-10-21",
+    "updatedAt": "2026-10-21",
+    "readTime": "7 min read",
+    "category": "Performance Engineering",
+    "tags": [
+      "Performance Engineering",
+      "Core Web Vitals",
+      "CSS Aspect Ratio",
+      "Web Fonts",
+      "React 19"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Eliminate Cumulative Layout Shift (CLS) caused by web fonts and media elements by configuring CSS font descriptor overrides (size-adjust, ascent-override) and applying explicit CSS aspect-ratio containers to prevent late-loading content reflows.",
+    "relatedProjectId": 8,
+    "faqs": [
+      {
+        "question": "What is the main cause of layout shifts from web fonts?",
+        "answer": "When a custom web font downloads, the browser falls back to a system font. Because system fonts and custom fonts have different character metrics, swapping them when the web font loads causes text blocks to reflow, shifting surrounding layout elements."
+      },
+      {
+        "question": "How does CSS aspect-ratio prevent layout shifts?",
+        "answer": "The CSS aspect-ratio property reserves exact dimensional space for images, video embeds, and dynamic containers before media files finish downloading, stopping the browser from recalculating layout once assets load."
+      },
+      {
+        "question": "How can I fix CLS in my custom web applications?",
+        "answer": "You can fix CLS by implementing size-adjust descriptors in your @font-face rules, reserving space for dynamic images using aspect-ratio, and ensuring all viewports are styled with performance engineering best practices. If you need expert implementation, [Get in touch with Aafaque](/contact) for custom performance optimization."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Root Cause of Visual Instability: Fonts and Media"
+      },
+      {
+        "type": "paragraph",
+        "text": "Core Web Vitals measure user-centric loading performance, with Cumulative Layout Shift (CLS) acting as the definitive metric for visual stability. When building complex interactive interfaces—such as the luxury itineraries found in [Dubai Tour / TourWeb](/projects/8) or immersive 3D showcases like [3D Burger Experience / Smoked & Seared](/projects/13)—unstable layouts severely degrade user experience and conversion rates. Two primary culprits drive unexpected layout shifts: Flash of Unstyled Text (FOUT) caused by uncalibrated font fallbacks, and zero-dimension media containers that reflow once images or carousels finish fetching."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Precision Font Metric Overrides with @font-face"
+      },
+      {
+        "type": "paragraph",
+        "text": "Historically, developers experienced severe layout jumps when a custom font loaded and replaced the fallback font. Modern CSS allows us to normalize fallback metrics using descriptor properties like `size-adjust`, `ascent-override`, `descent-override`, and `line-gap-override`. By calculating exact metric adjustments matching our primary web font against system fonts, we eliminate the visual delta between font swaps."
+      },
+      {
+        "type": "code",
+        "language": "css",
+        "caption": "Configuring precise font metric overrides in CSS",
+        "code": "@font-face {\n  font-family: 'InterFallback';\n  src: local('Arial');\n  size-adjust: 102.5%;\n  ascent-override: 95%;\n  descent-override: 25%;\n  line-gap-override: 0%;\n}\n\nbody {\n  font-family: 'Inter', 'InterFallback', sans-serif;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Engineering Benchmark",
+        "text": "Using automated font metric calculators reduces font-induced CLS scores to absolute zero, keeping INP and CLS well within Google's recommended thresholds."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Eliminating Media Shifts with CSS Aspect-Ratio"
+      },
+      {
+        "type": "paragraph",
+        "text": "Reserving layout space for dynamic images, product cards, and responsive wrappers was previously cumbersome, often requiring the deprecated padding-bottom percentage hack. Today, native CSS `aspect-ratio` guarantees the browser reserves the exact proportional box model before the asset payloads arrive from Netlify Edge or CDN servers."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "React component utilizing native aspect-ratio styling",
+        "code": "export function ResponsiveTourCard({ imageUrl, title }: { imageUrl: string; title: string }) {\n  return (\n    <div className=\"overflow-hidden rounded-xl bg-slate-900 border border-slate-800\">\n      <div className=\"relative w-full aspect-[16/9] bg-slate-800\">\n        <img\n          src={imageUrl}\n          alt={title}\n          loading=\"lazy\"\n          className=\"absolute inset-0 h-full w-full object-cover\"\n        />\n      </div>\n      <div className=\"p-4\">\n        <h3 className=\"text-lg font-semibold text-white\">{title}</h3>\n      </div>\n    </div>\n  );\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Actionable Checklist for Zero Layout Shift"
+      },
+      {
+        "list": [
+          "Define explicit width and height attributes or CSS aspect-ratio on all images, video embeds, and SVG elements.",
+          "Implement size-adjust descriptors in your CSS @font-face declarations for all custom typography.",
+          "Avoid injecting dynamic content above existing viewport content unless triggered by direct user interaction.",
+          "Audit rendering performance across mobile and desktop viewports using automated Lighthouse and WebPageTest pipelines."
+        ],
+        "type": "list"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications optimized for speed and conversion. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your engineering roadmap."
+      }
+    ]
+  },
+  {
     "id": "sub-second-lcp-http-103-early-hints-avif-images",
     "slug": "sub-second-lcp-http-103-early-hints-avif-images",
     "title": "Sub-Second LCP: Accelerating Largest Contentful Paint with HTTP 103 Early Hints and AVIF Images",
