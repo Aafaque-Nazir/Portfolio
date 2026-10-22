@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { motion, useScroll, useSpring } from "framer-motion";
 import {
   RiCalendarLine,
@@ -115,7 +115,6 @@ const CodeSnippet = ({ code, language, caption }) => {
 
 export default function BlogPost() {
   const { slug } = useParams();
-  const navigate = useNavigate();
   const post = getBlogBySlug(slug);
 
   const [copiedLink, setCopiedLink] = useState(false);

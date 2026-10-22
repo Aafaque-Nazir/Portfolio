@@ -1,8 +1,20 @@
 # Robots.txt for aafaque.in
 # Last updated: 2026-10-15
 
-# ─── Standard Crawlers ───
+# ─── Standard Search Crawlers ───
 User-agent: *
+Allow: /
+Disallow: /Aafaque_Nazir_Resume.pdf
+
+User-agent: Googlebot
+Allow: /
+Disallow: /Aafaque_Nazir_Resume.pdf
+
+User-agent: AhrefsBot
+Allow: /
+Disallow: /Aafaque_Nazir_Resume.pdf
+
+User-agent: SemrushBot
 Allow: /
 Disallow: /Aafaque_Nazir_Resume.pdf
 

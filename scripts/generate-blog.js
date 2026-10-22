@@ -13,6 +13,7 @@
 
 import fs from "fs";
 import path from "path";
+import process from "process";
 import { fileURLToPath } from "url";
 import { blogs as currentBlogs } from "../src/data/blogs.js";
 
