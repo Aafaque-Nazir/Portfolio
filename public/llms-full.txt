@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **The Speculation Rules API: Instantaneous Multi-Page Navigation for High-Conversion Web Apps**
+  URL: https://aafaque.in/blog/speculation-rules-api-instant-navigation
+  Summary: Master the Speculation Rules API to achieve instant zero-millisecond page transitions and boost high-intent web conversion rates.
 - **Eliminating Cumulative Layout Shift (CLS): Modern Font Fallbacks and CSS Aspect-Ratio Strategies**
   URL: https://aafaque.in/blog/eliminating-cls-font-fallbacks-aspect-ratio
   Summary: Learn how to fix Cumulative Layout Shift (CLS) using size-adjust font fallbacks and modern CSS aspect-ratio properties for flawless Core Web Vitals.
