@@ -226,9 +226,9 @@ const GlobalBackground = () => {
     let idleId;
     let timerId;
     if ('requestIdleCallback' in window) {
-      idleId = requestIdleCallback(initWorld, { timeout: 1500 });
+      idleId = requestIdleCallback(initWorld, { timeout: 2500 });
     } else {
-      timerId = setTimeout(initWorld, 200);
+      timerId = setTimeout(initWorld, 1200);
     }
 
     return () => {

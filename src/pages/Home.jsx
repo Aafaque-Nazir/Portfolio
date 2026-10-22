@@ -19,19 +19,8 @@ const containerVariants = {
   },
 };
 
-const charVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
 const Home = () => {
   const navigate = useNavigate();
-  const firstName = "AAFAQUE".split("");
-  const lastName = "NAZIR".split("");
 
   // Skills filter
   const [activeSkillTab, setActiveSkillTab] = useState("Frontend");
@@ -69,34 +58,13 @@ const Home = () => {
             {/* Title / Name */}
             <div className="relative mb-4">
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.8rem] font-black tracking-tighter text-white leading-[0.9]">
-                {/* Mobile */}
-                <div className="overflow-hidden flex flex-wrap md:hidden">
+                <div className="overflow-hidden flex flex-wrap">
                   <span className="inline-block">AAFAQUE</span>
                 </div>
-                <div className="overflow-hidden flex flex-wrap mt-2 md:hidden">
-                  <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-white">
+                <div className="overflow-hidden flex flex-wrap mt-2">
+                  <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-white drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">
                     NAZIR
                   </span>
-                </div>
-
-                {/* Desktop */}
-                <div className="overflow-hidden hidden md:flex flex-wrap">
-                  {firstName.map((char, index) => (
-                    <motion.span key={index} variants={charVariants} className="inline-block">
-                      {char}
-                    </motion.span>
-                  ))}
-                </div>
-                <div className="overflow-hidden hidden md:flex flex-wrap mt-2">
-                  {lastName.map((char, index) => (
-                    <motion.span
-                      key={index}
-                      variants={charVariants}
-                      className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-white drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
                 </div>
               </h1>
             </div>

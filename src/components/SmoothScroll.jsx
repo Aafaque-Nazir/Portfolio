@@ -48,7 +48,7 @@ const SmoothScroll = () => {
             } else {
                 initLenis();
             }
-        }, 150);
+        }, 500);
 
         const handleResize = () => {
             if (lenisRef.current) lenisRef.current.resize();

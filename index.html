@@ -91,8 +91,34 @@
       rel="stylesheet" />
   </noscript>
 
-  <!-- Ahrefs Web Analytics -->
-  <script src="https://analytics.ahrefs.com/analytics.js" data-key="xzmDNwZ54EuvoHfJ9lOlrg" async></script>
+  <!-- Ahrefs Web Analytics — Non-blocking deferred loading on interaction or idle -->
+  <script>
+    (function() {
+      var ahrefsLoaded = false;
+      function loadAhrefs() {
+        if (ahrefsLoaded) return;
+        ahrefsLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://analytics.ahrefs.com/analytics.js';
+        s.dataset.key = 'xzmDNwZ54EuvoHfJ9lOlrg';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      var events = ['scroll', 'keydown', 'touchstart', 'click'];
+      events.forEach(function(e) {
+        window.addEventListener(e, loadAhrefs, { once: true, passive: true });
+      });
+      if ('requestIdleCallback' in window) {
+        window.addEventListener('load', function() {
+          requestIdleCallback(function() { setTimeout(loadAhrefs, 3000); });
+        });
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(loadAhrefs, 3500);
+        });
+      }
+    })();
+  </script>
 </head>
 
 <body class="bg-black text-white scroll-smooth">
