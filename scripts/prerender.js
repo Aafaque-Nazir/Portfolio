@@ -164,8 +164,8 @@ const staticRoutes = [
     lead: "Independent web engineer building fast, scalable websites, e-commerce platforms, and SaaS applications with React, Next.js, and Supabase.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Engineering Philosophy</h2>
-        <p style="margin-bottom:16px;">I build software with high standards: sub-second page loads, accessible UI, and production-ready architectures that drive real business inquiries.</p>
+        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Approach & Quality</h2>
+        <p style="margin-bottom:16px;">I build software with high standards: fast page loads, accessible UI, and reliable setups that help businesses grow.</p>
         <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Core Tech Stack</h2>
         <p style="margin-bottom:16px;">React 19, Next.js 15, TypeScript, Tailwind CSS, PostgreSQL, Supabase, Node.js, and modern edge deployments.</p>
         <a href="/contact" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-top:12px;">Get In Touch</a>
@@ -193,8 +193,8 @@ const staticRoutes = [
     title: "Skills & Modern Tech Stack — Aafaque Nazir",
     description:
       "Explore technical skills of Aafaque Nazir: React, Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, Supabase, and modern web architectures.",
-    h1: "Technical Skills & Production Tech Stack",
-    lead: "Expertise in building scalable, secure, and blazing-fast web applications with modern frontend and backend tooling.",
+    h1: "Technical Skills & Tech Stack",
+    lead: "Building fast, secure, and responsive web applications with modern frontend and backend tools.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
         <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Frontend Architecture</h2>
@@ -212,11 +212,11 @@ const staticRoutes = [
     description:
       "Professional web development services: responsive websites, custom e-commerce stores, and scalable full-stack web applications tailored for your brand.",
     h1: "Professional Web Development Services",
-    lead: "Tailored engineering solutions designed for high conversion, search visibility, and frictionless user experiences.",
+    lead: "Custom web development services designed for fast performance, clear navigation, and great user experiences.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">1. High-Performance Websites & Landing Pages</h2>
-        <p style="margin-bottom:16px;">Lightning-fast, visually captivating websites crafted with Next.js and Tailwind CSS that turn visitors into paying clients.</p>
+        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">1. Modern Websites & Landing Pages</h2>
+        <p style="margin-bottom:16px;">Fast, clean, and responsive websites built with Next.js and Tailwind CSS to showcase your brand effectively.</p>
         <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">2. E-Commerce Stores & WhatsApp Ordering</h2>
         <p style="margin-bottom:16px;">Direct checkout and WhatsApp-integrated ordering portals for brands and local businesses looking to maximize sales without high app commissions.</p>
         <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">3. Custom Full-Stack Web Applications & SaaS</h2>
@@ -241,8 +241,8 @@ const staticRoutes = [
     title: "Projects & Work Portfolio — Aafaque Nazir",
     description:
       "Explore custom web applications, e-commerce stores, and responsive websites built by Aafaque Nazir using React, Next.js, and modern backends.",
-    h1: "Featured Work & Engineering Case Studies",
-    lead: "A curated collection of production web applications, client portals, and headless e-commerce storefronts.",
+    h1: "Featured Work & Projects",
+    lead: "A collection of web applications, client projects, and online stores I have built.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
         <ul style="list-style:none;padding:0;">
@@ -286,11 +286,11 @@ const staticRoutes = [
   },
   {
     route: "/blog",
-    title: "Web Engineering Blog — Aafaque Nazir",
+    title: "Web Development Blog — Aafaque Nazir",
     description:
-      "Web engineering blog by Aafaque Nazir: React 19, Next.js performance deep dives, database design, Core Web Vitals, and real-world system architecture.",
-    h1: "Web Engineering & Software Architecture Blog",
-    lead: "Practical guides and technical deep-dives on high-performance React, Next.js architectures, databases, and Core Web Vitals.",
+      "Web development blog by Aafaque Nazir: React 19, Next.js performance guides, database design, Core Web Vitals, and real-world tips.",
+    h1: "Articles & Guides",
+    lead: "Practical guides and tips on React, Next.js, databases, and web performance.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
         <ul style="list-style:none;padding:0;">

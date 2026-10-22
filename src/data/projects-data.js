@@ -2,7 +2,7 @@ export const projectsData = [
   {
     id: 17,
     title: "Al Raheeq Tourism",
-    description: "Dubai travel booking & UAE visa web portal engineered with Next.js, featuring flight ticketing, tour package itineraries, and direct WhatsApp inquiry flow.",
+    description: "Dubai travel booking & UAE visa website built with Next.js, featuring flight ticketing, tour package itineraries, and direct WhatsApp booking.",
     image: "/al-raheeq-tourism-thumbnail.webp",
     link: "https://amazing-gingersnap-abde2e.netlify.app/",
     iconType: "plane",
@@ -30,7 +30,7 @@ export const projectsData = [
   {
     id: 1,
     title: "Inventory Management",
-    description: "Real-time warehouse inventory dashboard engineered with Next.js, Supabase, and WebSockets for instant live stock updates, search, and low-stock alerts.",
+    description: "Real-time warehouse inventory dashboard built with Next.js, Supabase, and WebSockets for instant live stock updates, search, and low-stock alerts.",
     image: "/inventory-mgmt-thumbnail.webp",
     link: "https://nvntory-mgm.vercel.app/",
     iconType: "tower",
@@ -58,7 +58,7 @@ export const projectsData = [
   {
     id: 2,
     title: "E-Commerce Store",
-    description: "High-speed headless e-commerce storefront featuring instant product filtering, Redux cart state, sub-second page loads, and seamless checkout experience.",
+    description: "Fast e-commerce online store featuring instant product filtering, Redux cart state, quick page loads, and a smooth checkout experience.",
     image: "/ecommerce-thumbnail.webp",
     link: "https://shopease-aafaque.netlify.app/",
     iconType: "cart",

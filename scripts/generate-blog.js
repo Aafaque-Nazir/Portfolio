@@ -38,28 +38,28 @@ const TOPIC_QUEUE = [
     relatedProjectId: 4, // Restaurant OS (Corner Cafe) - live table QR orders dispatching tickets to kitchen display screens
   },
   {
-    topic: "How to Build a High-Converting Headless E-Commerce Store with Next.js and Tailwind CSS",
-    category: "E-Commerce Engineering",
-    targetKeywords: ["headless ecommerce Next.js", "artisanal store react tailwind", "fast online store under 1 second"],
-    relatedProjectId: 2, // Shopease (Oud & Attar) - pure perfume oils boutique with sub-second page loads & instant cart
+    topic: "How to Build a Fast E-Commerce Store with Next.js and Tailwind CSS",
+    category: "E-Commerce",
+    targetKeywords: ["headless ecommerce Next.js", "online store react tailwind", "fast online store under 1 second"],
+    relatedProjectId: 2, // Shopease (Oud & Attar) - boutique perfume store with fast page loads & instant cart
   },
   {
     topic: "React 19 Server Actions vs Traditional API Routes: Production Migration & Best Practices",
-    category: "Architecture & Frameworks",
+    category: "Frameworks & Tools",
     targetKeywords: ["react 19 server actions vs api routes", "next js form mutations", "server actions security zod"],
     relatedProjectId: 17, // Al Raheeq Tourism - express UAE tourist visa applications & booking forms with Zod validation
   },
   {
     topic: "Partial Prerendering (PPR) in Next.js: Blending Static Speed with Dynamic Real-Time Data",
-    category: "Architecture & Frameworks",
+    category: "Frameworks & Tools",
     targetKeywords: ["next js partial prerendering ppr", "streaming dynamic components suspense", "nextjs performance optimization"],
     relatedProjectId: 1, // InvMaster OS - static godown console frame with dynamic streaming stock counts & dispatch feeds
   },
   {
     topic: "Why Lightweight React SPAs with Vite Beat Complex Meta-Frameworks for Local Business Apps",
-    category: "Architecture & Frameworks",
+    category: "Frameworks & Tools",
     targetKeywords: ["vite vs nextjs small business", "lightweight react web app", "fast mobile menu ordering"],
-    relatedProjectId: 3, // Bread & Bite - lightweight Vite + React local food ordering web app with zero serverless cold starts
+    relatedProjectId: 3, // Bread & Bite - lightweight Vite + React local food ordering web app with zero cold starts
   },
   {
     topic: "The React Compiler in Production: How Automatic Memoization Eliminates useMemo and useCallback",
@@ -68,36 +68,36 @@ const TOPIC_QUEUE = [
     relatedProjectId: 1, // InvMaster OS - eliminating render lags across complex wholesale stock tables with hundreds of SKUs
   },
 
-  // Cluster 2: Performance Engineering & Core Web Vitals
+  // Cluster 2: Performance & Web Vitals
   {
     topic: "Passing Interaction to Next Paint (INP): How to Break Up Long JavaScript Tasks with scheduler.yield()",
-    category: "Performance Engineering",
+    category: "Web Performance",
     targetKeywords: ["how to fix inp core web vitals", "scheduler yield javascript", "lower interaction to next paint react"],
-    relatedProjectId: 4, // Restaurant OS - tactile instantaneous table taps and live menu order additions under 50ms
+    relatedProjectId: 4, // Restaurant OS - fast table taps and live menu order additions
   },
   {
     topic: "Reducing JavaScript Bundle Size by 60% with Modern Tree-Shaking and Dynamic Imports",
-    category: "Performance Engineering",
+    category: "Web Performance",
     targetKeywords: ["reduce react bundle size", "dynamic import optimization nextjs", "frontend performance code splitting"],
-    relatedProjectId: 15, // Aura Estate - lazy loading high-res luxury property maps, valuation calculators, and media sliders
+    relatedProjectId: 15, // Aura Estate - lazy loading property maps, calculators, and media sliders
   },
   {
-    topic: "Sub-Second LCP: Accelerating Largest Contentful Paint with HTTP 103 Early Hints and AVIF Images",
-    category: "Performance Engineering",
+    topic: "Fast Page Loads: Improving Largest Contentful Paint with HTTP 103 Early Hints and AVIF Images",
+    category: "Web Performance",
     targetKeywords: ["fix lcp largest contentful paint", "http 103 early hints nextjs", "image optimization web vitals"],
-    relatedProjectId: 17, // Al Raheeq Tourism - delivering worldwide flight and desert safari hero banners in under 800ms
+    relatedProjectId: 17, // Al Raheeq Tourism - delivering flight and desert safari hero banners quickly
   },
   {
     topic: "Eliminating Cumulative Layout Shift (CLS): Modern Font Fallbacks and CSS Aspect-Ratio Strategies",
-    category: "Performance Engineering",
+    category: "Web Performance",
     targetKeywords: ["fix cls cumulative layout shift", "zero layout shift web fonts", "core web vitals cls guide"],
-    relatedProjectId: 8, // Dubai Tour - seamless tour package card reveals and responsive itinerary hero images
+    relatedProjectId: 8, // Dubai Tour - smooth tour package card reveals and responsive itinerary hero images
   },
   {
-    topic: "The Speculation Rules API: Instantaneous Multi-Page Navigation for High-Conversion Web Apps",
-    category: "Performance Engineering",
-    targetKeywords: ["speculation rules api instant navigation", "prerender next page chrome", "multi page conversion optimization"],
-    relatedProjectId: 17, // Al Raheeq Tourism - instantaneous prerendering between /services, /packages, and visa details
+    topic: "The Speculation Rules API: Instant Multi-Page Navigation for Fast Web Apps",
+    category: "Web Performance",
+    targetKeywords: ["speculation rules api instant navigation", "prerender next page chrome", "fast page navigation"],
+    relatedProjectId: 17, // Al Raheeq Tourism - instant prerendering between /services, /packages, and visa details
   },
 
   // Cluster 3: Full-Stack SaaS & Database Engineering (PostgreSQL / Supabase)
@@ -242,25 +242,25 @@ const TOPIC_QUEUE = [
     relatedProjectId: 13, // 3D Burger Experience - dynamic WebGL 3D burger model disassembling and rotating smoothly on scroll
   },
   {
-    topic: "Creating Luxury Brand Experiences: Smooth Scrolling with Lenis and Cinematic Transitions in React",
-    category: "UI/UX & Animation",
-    targetKeywords: ["lenis smooth scroll react", "cinematic web design agency aesthetic", "luxury website interactions"],
-    relatedProjectId: 10, // Yacht Rentals (Sea Cross) - Mumbai Gateway of India luxury charter site with Lenis smooth scroll
+    topic: "Smooth Scrolling with Lenis and Clean Transitions in React",
+    category: "UI & Animation",
+    targetKeywords: ["lenis smooth scroll react", "clean web design", "website interactions"],
+    relatedProjectId: 10, // Yacht Rentals (Sea Cross) - Mumbai Gateway of India charter site with Lenis smooth scroll
   },
   {
     topic: "Designing Interactive Before-and-After Comparison Sliders and Medical Booking Flows in React",
-    category: "UI/UX & Animation",
-    targetKeywords: ["before after image slider react", "dental clinic web design conversion", "medical booking flow ui"],
-    relatedProjectId: 11, // CarePulse (Aura Dental Studio) - the exact 50/50 split interactive transformation slider for veneers & smile makeovers
+    category: "UI & Animation",
+    targetKeywords: ["before after image slider react", "dental clinic web design", "medical booking flow ui"],
+    relatedProjectId: 11, // CarePulse (Aura Dental Studio) - the 50/50 split interactive transformation slider for smiles
   },
   {
-    topic: "Multi-Step Luxury Service Booking: Designing Frictionless Appointment Flows in React",
-    category: "UI/UX & Animation",
-    targetKeywords: ["multi step booking form react", "salon spa appointment ui", "frictionless conversion checkout"],
+    topic: "Multi-Step Booking: Designing Smooth Appointment Flows in React",
+    category: "UI & Animation",
+    targetKeywords: ["multi step booking form react", "salon spa appointment ui", "appointment flow react"],
     relatedProjectId: 14, // LA Salon & Spa (Lumina Aura) - multi-step appointment scheduler with service selection, stylist choice, and time slots
   },
 
-  // Cluster 8: AI-Powered Web Applications & Search Engine Optimization (AEO)
+  // Cluster 8: AI-Powered Web Applications & Search Engines
   {
     topic: "Integrating the Vercel AI SDK into React 19: Streaming AI Chat, Generative UI, and Tool Calling",
     category: "AI & Full-Stack",
@@ -268,16 +268,16 @@ const TOPIC_QUEUE = [
     relatedProjectId: 1, // InvMaster OS - smart natural language stock prediction assistant: 'Which items are expiring this month?'
   },
   {
-    topic: "Answer Engine Optimization (AEO): How to Structure Web Apps for Citations in Perplexity, SearchGPT, and Google AI Overviews",
+    topic: "How to Structure Web Apps with Schema Markup for Modern Search Engines",
     category: "SEO & Growth",
-    targetKeywords: ["answer engine optimization aeo web dev", "rank in perplexity searchgpt", "schema markup json ld rich snippets"],
-    relatedProjectId: 17, // Al Raheeq Tourism - structured JSON-LD Schema markup for TravelAgency and FAQPage driving AI engine citations
+    targetKeywords: ["schema markup json ld rich snippets", "search engine optimization", "structured data web apps"],
+    relatedProjectId: 17, // Al Raheeq Tourism - structured JSON-LD Schema markup for TravelAgency and FAQPage
   },
   {
     topic: "Building Lightweight Vector Search in PostgreSQL with pgvector for Real-Time Semantic Recommendations",
     category: "AI & Full-Stack",
     targetKeywords: ["pgvector postgresql vector search", "ai product recommendations supabase", "embeddings search react app"],
-    relatedProjectId: 2, // Shopease (Oud & Attar) - semantic similarity search matching customer scent preferences with artisanal attars
+    relatedProjectId: 2, // Shopease (Oud & Attar) - similarity search matching customer scent preferences
   }
 ];
 
@@ -322,28 +322,41 @@ Target Keywords: ${chosenTopic.targetKeywords.join(", ")}
 Related Portfolio Project ID: ${chosenTopic.relatedProjectId}
 
 Strict Requirements:
-1. High-intent, problem-solving, architectural tone. Avoid generic fluff, hype words, or basic introductions.
+1. STRICT NO FANCY JARGON POLICY (MANDATORY):
+   - Never use corporate buzzwords, pretentious vocabulary, or marketing hype.
+   - FORBIDDEN WORDS & PHRASES:
+     "bespoke", "synergy", "synergistic", "paradigm", "sub-second", "frictionless", "seamless", "seamlessly",
+     "cutting-edge", "state-of-the-art", "game-changing", "transformative", "revolutionary", "architecting",
+     "leveraging", "moat", "moats", "high-converting", "testament", "delve", "elevate", "hyper-scale",
+     "unparalleled", "unrivaled", "holistic", "turnkey", "robust", "spearheading".
+   - Tone: Direct, honest, pragmatic, and clear. Write like a real senior software engineer explaining practical solutions to a client or peer developer.
+   - Use simple, human language:
+     * Instead of "bespoke", use "custom".
+     * Instead of "sub-second", use "fast" or "under 1 second".
+     * Instead of "frictionless" or "seamless", use "smooth", "clean", or "reliable".
+     * Instead of "architecting" or "leveraging", use "building", "designing", or "using".
+     * Instead of "high-converting", use "effective", "fast", or "high-performing".
 2. In-text contextual backlinks to Aafaque's projects and pages. Use ONLY the correct project ID and real project name from this verified directory:
    - ID 1: [Inventory Management / InvMaster OS](/projects/1) -> Wholesale & Godown Inventory OS with multi-godown routing, FEFO batch & expiry tracking, mobile camera barcode scanner, and 1-click WhatsApp GST invoice dispatch.
-   - ID 2: [Shopease / Oud & Attar](/projects/2) -> Artisanal fragrance & pure perfume oils e-commerce store with sub-second client-side filtering, instant slide-out cart, and URL search param state sync.
+   - ID 2: [Shopease / Oud & Attar](/projects/2) -> Fragrance e-commerce store with fast client-side filtering, instant slide-out cart, and URL search param state sync.
    - ID 3: [Bread & Bite](/projects/3) -> Zero-commission cloud kitchen in Navi Mumbai with lightweight React digital menu, client-side cart, and direct WhatsApp business order dispatch.
    - ID 4: [Restaurant OS / Corner Cafe](/projects/4) -> Contactless restaurant operating system with table QR-code scanning, real-time Kitchen Display System (KDS), and waiter/staff management portal.
-   - ID 8: [Dubai Tour / TourWeb](/projects/8) -> Dubai luxury tour packages with interactive Framer Motion itinerary accordions, image carousels, and instant hotel pickup.
-   - ID 10: [Yacht Rentals / Sea Cross](/projects/10) -> Ultra-luxury yacht charter in Mumbai Gateway of India with Lenis smooth scrolling, GSAP cinematic typography, and high-ticket VIP inquiry flow.
-   - ID 11: [CarePulse / Aura Dental Studio](/projects/11) -> Manhattan dental & smile studio with interactive 50/50 Before & After comparison slider, 3D scan showcase, and online consultation booking.
-   - ID 12: [Premium Burger Shop / H5 Texes Burger](/projects/12) -> Retro-modern gourmet burger brand with bespoke design tokens, merchandise showcase, and multi-outlet inquiry system.
-   - ID 13: [3D Burger Experience / Smoked & Seared](/projects/13) -> Immersive Three.js 3D WebGL burger model that rotates and disassembles dynamically on scroll via GSAP ScrollTrigger.
-   - ID 14: [LA Salon & Spa / Lumina Aura](/projects/14) -> Luxury unisex salon & spa with fluid WebGL background canvas, editorial design, and frictionless multi-step appointment booking.
-   - ID 15: [Aura Estate](/projects/15) -> Exclusive off-market real estate portal (Beverly Hills, Mayfair, Monaco, Dubai) with multi-parameter property search, valuation calculator, and Supabase PostgreSQL.
+   - ID 8: [Dubai Tour / TourWeb](/projects/8) -> Dubai tour packages with interactive itinerary accordions, image carousels, and instant hotel pickup.
+   - ID 10: [Yacht Rentals / Sea Cross](/projects/10) -> Luxury yacht charter in Mumbai Gateway of India with Lenis smooth scrolling and direct VIP inquiry booking.
+   - ID 11: [CarePulse / Aura Dental Studio](/projects/11) -> Dental & smile studio with interactive 50/50 Before & After comparison slider, 3D scan showcase, and online consultation booking.
+   - ID 12: [Premium Burger Shop / H5 Texes Burger](/projects/12) -> Gourmet burger brand with custom design tokens, menu showcase, and multi-outlet inquiry system.
+   - ID 13: [3D Burger Experience / Smoked & Seared](/projects/13) -> 3D WebGL burger model that rotates and disassembles dynamically on scroll via GSAP ScrollTrigger.
+   - ID 14: [LA Salon & Spa / Lumina Aura](/projects/14) -> Salon & spa website with smooth multi-step appointment booking.
+   - ID 15: [Aura Estate](/projects/15) -> Real estate web portal with property search, valuation calculator, and Supabase PostgreSQL.
    - ID 17: [Al Raheeq Tourism](/projects/17) -> Deira Dubai licensed travel agency with express UAE tourist visa selector, worldwide flight ticketing, Netlify Edge delivery, and rich Schema.org structured data.
    - Freelance Services: [Full-Stack Web Development Services](/services)
    - Contact / Hire: [Get in touch with Aafaque](/contact)
 3. Include real, clean, modern code snippets (TypeScript, React 19, or SQL).
-4. Include an AEO Quick Answer (1-2 sentences direct answer for Perplexity and SearchGPT).
+4. Include an AEO Quick Answer (1-2 sentences direct answer for Perplexity and SearchGPT without buzzwords).
 5. Include 3 structured FAQs for Google FAQ schema.
 6. Strict SEO Character Lengths (to prevent Ahrefs & Google SERP warnings):
    - "seoTitle": Strictly between 45 and 55 characters (maximum 58 characters). Concise, punchy, high-CTR for Google <title>.
-   - "description": Strictly between 130 and 150 characters (MUST NEVER exceed 155 characters). Clear, keyword-rich summary.
+   - "description": Strictly between 130 and 150 characters (MUST NEVER exceed 155 characters). Clear, keyword-rich summary without buzzwords.
 7. Return ONLY valid JSON adhering precisely to this structure:
 
 {
@@ -559,7 +572,48 @@ async function generate() {
     throw err;
   }
 
-  console.log(`✅ Successfully generated: "${blogObj.title}" (slug: ${blogObj.slug})`);
+  // Automatic Jargon Sanitizer: ensures fancy buzzwords never make it into the site
+  function cleanJargon(val) {
+    if (typeof val === "string") {
+      return val
+        .replace(/\bbespoke\b/gi, "custom")
+        .replace(/\bsub-second\b/gi, "fast")
+        .replace(/\bfrictionless\b/gi, "smooth")
+        .replace(/\bseamlessly\b/gi, "smoothly")
+        .replace(/\bseamless\b/gi, "smooth")
+        .replace(/\barchitecting\b/gi, "building")
+        .replace(/\bleveraging\b/gi, "using")
+        .replace(/\bleverage\b/gi, "use")
+        .replace(/\bparadigm shift\b/gi, "major shift")
+        .replace(/\bparadigm\b/gi, "pattern")
+        .replace(/\bcutting-edge\b/gi, "modern")
+        .replace(/\bstate-of-the-art\b/gi, "modern")
+        .replace(/\bgame-changing\b/gi, "practical")
+        .replace(/\bhigh-converting\b/gi, "high-performing")
+        .replace(/\binstantaneous\b/gi, "instant")
+        .replace(/\bhyper-scale\b/gi, "large scale")
+        .replace(/\bultra-performant\b/gi, "high-performance")
+        .replace(/\bdelve into\b/gi, "explore")
+        .replace(/\bdelve\b/gi, "look into")
+        .replace(/\btestament to\b/gi, "proof of")
+        .replace(/\btestament\b/gi, "example");
+    }
+    if (Array.isArray(val)) {
+      return val.map(cleanJargon);
+    }
+    if (val && typeof val === "object") {
+      const sanitized = {};
+      for (const [k, v] of Object.entries(val)) {
+        sanitized[k] = cleanJargon(v);
+      }
+      return sanitized;
+    }
+    return val;
+  }
+
+  blogObj = cleanJargon(blogObj);
+
+  console.log(`✅ Successfully generated & sanitized: "${blogObj.title}" (slug: ${blogObj.slug})`);
 
   // Programmatic SEO Guardrails for Ahrefs & Google SERP Compliance
   if (!blogObj.seoTitle) {
