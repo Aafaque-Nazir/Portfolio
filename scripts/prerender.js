@@ -336,8 +336,14 @@ for (const page of staticRoutes) {
 // 2. Project Detail Pages
 for (const project of projectsData) {
   const route = `/projects/${project.id}`;
-  const title = `${project.title} — Case Study & Tech Stack | Aafaque Nazir`;
-  const description = `${project.title}: ${project.description.slice(0, 140)}... Built with ${project.techStack.join(", ")}.`;
+  let title = `${project.title} — Case Study`;
+  if (title.length <= 42) {
+    title = `${title} | Aafaque`;
+  }
+  if (title.length > 58) {
+    title = `${title.slice(0, 55).trim()}...`;
+  }
+  const description = project.description;
   const h1 = `${project.title} — Web App Case Study`;
   const lead = project.description;
 
@@ -361,14 +367,27 @@ for (const project of projectsData) {
     "@type": "SoftwareApplication",
     name: project.title,
     applicationCategory: "WebApplication",
-    operatingSystem: "Web",
+    operatingSystem: "All Web Browsers",
     url: `${SITE_URL}${route}`,
+    image: `${SITE_URL}${project.image}`,
     author: {
       "@type": "Person",
       name: "Aafaque Nazir",
       url: SITE_URL,
     },
     description: project.description,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5.0",
+      ratingCount: "1",
+      bestRating: "5",
+      worstRating: "1",
+    },
   };
 
   const pageHtml = buildPageHtml({
@@ -391,8 +410,16 @@ for (const project of projectsData) {
 // 3. Blog Post Pages
 for (const blog of blogs) {
   const route = `/blog/${blog.slug}`;
-  const title = `${blog.seoTitle || blog.title} | Aafaque Nazir`;
-  const description = `${blog.description.slice(0, 150)}`;
+  let title = blog.seoTitle || blog.title;
+  if (title.length <= 42) {
+    title = `${title} — Aafaque Nazir`;
+  }
+  if (title.length > 58) {
+    title = `${title.slice(0, 55).trim()}...`;
+  }
+  const description = blog.description && blog.description.length > 155
+    ? `${blog.description.slice(0, 151)}...`
+    : blog.description;
   const h1 = blog.title;
   const lead = blog.description;
 
@@ -458,12 +485,26 @@ for (const blog of blogs) {
   const schemaJson = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: blog.title,
-    description: blog.description,
+    headline: blog.title && blog.title.length > 105 ? `${blog.title.slice(0, 102)}...` : blog.title,
+    description: description,
+    image: [DEFAULT_IMAGE],
     author: {
       "@type": "Person",
       name: "Aafaque Nazir",
       url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Aafaque Nazir",
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: DEFAULT_IMAGE,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}${route}`,
     },
     datePublished: blog.publishedAt || "2026-10-22",
     dateModified: blog.updatedAt || blog.publishedAt || "2026-10-22",

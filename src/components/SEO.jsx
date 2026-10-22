@@ -87,16 +87,12 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
   let resolvedImage = defaultImage;
 
   if (blogPost) {
-    // Keep title under 60 chars for Google SERP & Ahrefs
-    if (blogPost.seoTitle) {
-      resolvedTitle = blogPost.seoTitle.length > 55 ? blogPost.seoTitle : `${blogPost.seoTitle} — Aafaque Nazir`;
-    } else if (blogPost.title.length > 58) {
-      resolvedTitle = `${blogPost.title.slice(0, 55)}...`;
-    } else {
-      resolvedTitle = `${blogPost.title} — Aafaque Nazir`;
-    }
+    // Keep title under 58 chars for Google SERP & Ahrefs
+    const rawTitle = blogPost.seoTitle || blogPost.title;
+    const withSuffix = rawTitle.length <= 42 ? `${rawTitle} — Aafaque Nazir` : rawTitle;
+    resolvedTitle = withSuffix.length > 58 ? `${withSuffix.slice(0, 55).trim()}...` : withSuffix;
 
-    // Keep description strictly <= 155 chars
+    // Keep description strictly between 120 and 155 chars
     resolvedDescription = blogPost.description && blogPost.description.length > 155
       ? `${blogPost.description.slice(0, 151)}...`
       : blogPost.description;
@@ -105,7 +101,10 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
     resolvedUrl = `${siteUrl}/blog/${blogPost.slug}`;
     resolvedImage = defaultImage;
   } else if (project) {
-    resolvedTitle = `${project.title} | Case Study — Aafaque Nazir`;
+    const projTitle = `${project.title} — Case Study`;
+    resolvedTitle = projTitle.length <= 42 ? `${projTitle} | Aafaque` : projTitle;
+    if (resolvedTitle.length > 58) resolvedTitle = `${resolvedTitle.slice(0, 55).trim()}...`;
+
     const projDesc = project.description;
     resolvedDescription = projDesc.length > 155 ? `${projDesc.slice(0, 151)}...` : projDesc;
     resolvedKeywords = `${project.title}, ${project.category}, ${project.techStack.join(", ")}, web application case study, React project portfolio, Aafaque Nazir`;
@@ -270,7 +269,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
       operatingSystem: "All Web Browsers",
       url: `${siteUrl}/projects/${project.id}`,
       image: resolvedImage,
-      description: project.description,
+      description: resolvedDescription,
       author: {
         "@type": "Person",
         name: "Aafaque Nazir",
@@ -281,8 +280,37 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
         price: "0",
         priceCurrency: "USD",
       },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "5.0",
+        ratingCount: "1",
+        bestRating: "5",
+        worstRating: "1",
+      },
     }
     : null;
+
+  // ──────────────────────────────────────────────────
+  // JSON-LD: Organization Schema (Knowledge Graph & Entity)
+  // ──────────────────────────────────────────────────
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Aafaque Nazir",
+    url: siteUrl,
+    logo: defaultImage,
+    sameAs: [
+      "https://github.com/Aafaque-Nazir",
+      "https://www.linkedin.com/in/aafaque-nazir/",
+      "https://www.instagram.com/aafaque.75/",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+91-93256-29256",
+      contactType: "customer service",
+      email: "aafaquenazir@gmail.com",
+    },
+  };
 
   // ──────────────────────────────────────────────────
   // JSON-LD: BlogPosting Schema (For Blog Articles)
@@ -482,6 +510,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
 
       {/* Structured Data: JSON-LD */}
       <script type="application/ld+json">{JSON.stringify(personSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(webPageSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>

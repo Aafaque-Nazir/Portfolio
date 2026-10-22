@@ -2,7 +2,7 @@ export const projectsData = [
   {
     id: 17,
     title: "Al Raheeq Tourism",
-    description: "Travel booking and UAE visa portal with flight ticketing and direct WhatsApp inquiry flow.",
+    description: "Dubai travel booking & UAE visa web portal engineered with Next.js, featuring flight ticketing, tour package itineraries, and direct WhatsApp inquiry flow.",
     image: "/al-raheeq-tourism-thumbnail.webp",
     link: "https://amazing-gingersnap-abde2e.netlify.app/",
     iconType: "plane",
@@ -16,7 +16,7 @@ export const projectsData = [
   {
     id: 3,
     title: "Bread & Bite",
-    description: "Online food ordering website with menu, cart, and orders sent directly to WhatsApp.",
+    description: "Fast online food ordering web app with interactive digital menu, instant cart management, and automated order delivery notifications sent directly to WhatsApp.",
     image: "/food-delivery-thumbnail.webp",
     link: "https://breadandbite.in/",
     iconType: "motorbike",
@@ -30,7 +30,7 @@ export const projectsData = [
   {
     id: 1,
     title: "Inventory Management",
-    description: "Real-time inventory dashboard with live stock levels, low-stock alerts, and fast search.",
+    description: "Real-time warehouse inventory dashboard engineered with Next.js, Supabase, and WebSockets for instant live stock updates, search, and low-stock alerts.",
     image: "/inventory-mgmt-thumbnail.webp",
     link: "https://nvntory-mgm.vercel.app/",
     iconType: "tower",
@@ -44,7 +44,7 @@ export const projectsData = [
   {
     id: 4,
     title: "Restaurant OS",
-    description: "Restaurant management system with live orders, table tracking, and a kitchen display screen.",
+    description: "Real-time restaurant order management platform with interactive table tracker, live kitchen display screens, and instant ticket processing for rush hours.",
     image: "/restaurant-os-thumbnail.webp",
     link: "https://korner-kafe.netlify.app/",
     iconType: "tower",
@@ -58,7 +58,7 @@ export const projectsData = [
   {
     id: 2,
     title: "E-Commerce Store",
-    description: "Fast online clothing store with shopping cart, filters, and sub-second page loads.",
+    description: "High-speed headless e-commerce storefront featuring instant product filtering, Redux cart state, sub-second page loads, and seamless checkout experience.",
     image: "/ecommerce-thumbnail.webp",
     link: "https://shopease-aafaque.netlify.app/",
     iconType: "cart",
@@ -72,7 +72,7 @@ export const projectsData = [
   {
     id: 10,
     title: "Yacht Rentals",
-    description: "Yacht rental website with smooth scroll animations, gallery, and an inquiry booking form.",
+    description: "Luxury yacht charter showcase website built with smooth Lenis scroll animations, interactive photo galleries, and instant booking inquiry forms.",
     image: "/yacht-booking-thumbnail.webp",
     link: "https://sea-cros.netlify.app",
     iconType: "ship",
@@ -86,7 +86,7 @@ export const projectsData = [
   {
     id: 11,
     title: "CarePulse",
-    description: "Doctor appointment booking website with an interactive calendar and live slot availability.",
+    description: "Modern doctor appointment booking platform featuring interactive calendar views, real-time doctor availability slots, and quick online confirmations.",
     image: "/doctor-booking-thumbnail.webp",
     link: "https://dockyy.netlify.app",
     iconType: "pulse",
@@ -100,7 +100,7 @@ export const projectsData = [
   {
     id: 8,
     title: "Dubai Tour",
-    description: "Dubai tour package booking website with image sliders and day-by-day itineraries.",
+    description: "Interactive travel package showcase with responsive itinerary sliders, tour highlights, and WhatsApp booking integration built with Next.js.",
     image: "/dubai-tourism-thumbnail.webp",
     link: "https://dubai-tt.netlify.app/",
     iconType: "plane",
@@ -114,7 +114,7 @@ export const projectsData = [
   {
     id: 15,
     title: "Aura Estate",
-    description: "Real estate website for showcasing properties, searching by location, and managing buyer inquiries.",
+    description: "Full-stack real estate web platform featuring searchable property listings, location filtering, and an integrated admin dashboard for lead capture.",
     image: "/aura-estate-thumbnail.webp",
     link: "https://aura-e-state.netlify.app",
     iconType: "building",
@@ -128,7 +128,7 @@ export const projectsData = [
   {
     id: 12,
     title: "Premium Burger Shop",
-    description: "Restaurant website for a burger shop with food photography, menu, and location details.",
+    description: "Interactive restaurant website featuring high-resolution food photography, modern animation effects, and a dynamic menu designed for local diners.",
     image: "/burger-shxp-thumbnail.webp",
     link: "https://burger-shxp.netlify.app",
     iconType: "restaurant",
@@ -142,7 +142,7 @@ export const projectsData = [
   {
     id: 13,
     title: "3D Burger Experience",
-    description: "Interactive 3D animation website where a burger dynamically builds itself as you scroll.",
+    description: "Engaging scroll-driven 3D web experience built with Three.js and GSAP ScrollTrigger, featuring real-time interactive 3D model assembly.",
     image: "/3d-burger-thumbnail.webp",
     link: "https://3d-burger.netlify.app",
     iconType: "restaurant",
@@ -156,7 +156,7 @@ export const projectsData = [
   {
     id: 14,
     title: "LA Salon & Spa",
-    description: "Salon and spa booking website with appointment scheduling and a clean dark-mode design.",
+    description: "Elegant dark-mode appointment scheduling portal allowing clients to select stylists, customized salon services, and time slots with ease.",
     image: "/la-salon-thumbnail.webp",
     link: "https://la-salon.netlify.app",
     iconType: "pulse",
