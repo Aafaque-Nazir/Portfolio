@@ -52,16 +52,17 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Skills", path: "/skills" },
-    { name: "Projects", path: "/projects" },
-    { name: "Services", path: "/services" },
-    { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about/" },
+    { name: "Skills", path: "/skills/" },
+    { name: "Projects", path: "/projects/" },
+    { name: "Services", path: "/services/" },
+    { name: "Blog", path: "/blog/" },
+    { name: "Contact", path: "/contact/" },
   ];
 
+  const currentPath = location.pathname.endsWith("/") ? location.pathname : `${location.pathname}/`;
   const activeItemName = navItems.find(
-    (item) => item.path === location.pathname
+    (item) => item.path === currentPath || item.path === location.pathname
   )?.name || "Menu";
 
   return (

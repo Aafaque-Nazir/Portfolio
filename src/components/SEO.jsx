@@ -16,60 +16,60 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
   const defaultImage = `${siteUrl}/og-image.png`;
   const currentDate = new Date().toISOString().split("T")[0];
 
-  const defaultSiteTitle = "Aafaque Nazir — Freelance Web Developer India";
+  const defaultSiteTitle = "Aafaque Nazir — Web Developer in Navi Mumbai";
   const defaultDescription =
-    "Hire freelance web developer Aafaque Nazir in India. Specializing in high-performance websites, Next.js apps, e-commerce stores, and modern web apps.";
+    "Aafaque Nazir is a freelance web developer in Navi Mumbai, India. Building fast websites, custom web apps, and e-commerce stores with React & Next.js.";
 
-  // Section-specific metadata (strictly under 155 chars to prevent SERP truncation & Ahrefs warnings)
+  // Section-specific metadata (strictly under 58 chars title, 130-155 chars description)
   const sectionMeta = {
     home: {
-      title: "Aafaque Nazir — Freelance Web Developer India",
+      title: "Aafaque Nazir — Web Developer in Navi Mumbai",
       description:
-        "Hire freelance web developer Aafaque Nazir in India. Specializing in high-performance websites, Next.js apps, e-commerce stores, and modern web apps.",
+        "Aafaque Nazir is a freelance web developer in Navi Mumbai, India. Building fast websites, custom web apps, and e-commerce stores with React & Next.js.",
       keywords:
-        "freelance web developer India, hire web developer India, React developer for hire, Next.js developer India, full stack web developer portfolio, custom website developer, web application developer Mumbai, frontend developer React, website development services India, hire freelance developer Mumbai",
+        "web developer Navi Mumbai, freelance web developer Navi Mumbai, web developer Mumbai, hire React developer Navi Mumbai, Next.js developer India, freelance developer Mumbai, website development Navi Mumbai",
     },
     about: {
-      title: "About Aafaque Nazir — Full-Stack Web Developer",
+      title: "About Aafaque Nazir — Web Developer Navi Mumbai",
       description:
-        "About Aafaque Nazir: freelance full-stack developer specializing in clean code, React, Next.js, and high-performance web applications across India.",
+        "About Aafaque Nazir, web developer in Navi Mumbai, India. Crafting fast, responsive web apps and business websites with React, Next.js, and Supabase.",
       keywords:
-        "about Aafaque Nazir, freelance web developer background, full stack developer India, React developer portfolio, web engineer Mumbai, freelance frontend developer",
+        "about Aafaque Nazir, web developer Navi Mumbai, freelance developer Navi Mumbai, full stack developer Mumbai, React developer India, web engineer Navi Mumbai",
     },
     skills: {
       title: "Skills & Modern Tech Stack — Aafaque Nazir",
       description:
-        "Explore technical skills of Aafaque Nazir: React, Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, Supabase, and modern web architectures.",
+        "Technical skills of Aafaque Nazir, web developer in Navi Mumbai, India: React 19, Next.js, TypeScript, Tailwind CSS, PostgreSQL, Supabase, and Node.js.",
       keywords:
-        "React developer skills, Next.js developer tech stack, frontend skills portfolio, Node.js developer India, TypeScript developer portfolio, Supabase PostgreSQL developer",
+        "React developer skills, Next.js developer tech stack, frontend skills portfolio, Node.js developer Navi Mumbai, TypeScript developer portfolio, Supabase developer India",
     },
     projects: {
       title: "Projects & Work Portfolio — Aafaque Nazir",
       description:
-        "Explore custom web applications, e-commerce stores, and responsive websites built by Aafaque Nazir using React, Next.js, and modern backends.",
+        "Explore custom web applications, e-commerce stores, and responsive websites built by Aafaque Nazir for clients in Navi Mumbai, India, and worldwide.",
       keywords:
-        "web development portfolio, React web app examples, Next.js portfolio projects, e-commerce website showcase, SaaS application examples, freelance web developer projects",
+        "web development portfolio, React web app examples, Next.js portfolio projects, e-commerce website showcase, web developer Navi Mumbai projects",
     },
     services: {
-      title: "Web Development Services — Aafaque Nazir",
+      title: "Web Development Services — Navi Mumbai & India",
       description:
-        "Professional web development services: responsive websites, custom e-commerce stores, and scalable full-stack web applications tailored for your brand.",
+        "Web development services in Navi Mumbai & Mumbai: fast business websites, e-commerce stores, and custom React & Next.js web applications.",
       keywords:
-        "web development services India, hire freelance web developer, custom website development, e-commerce store developer, web application development, website developer Mumbai",
+        "web development services Navi Mumbai, website developer Navi Mumbai, hire web developer Mumbai, e-commerce developer Navi Mumbai, custom web application India",
     },
     contact: {
-      title: "Hire Aafaque Nazir — Web Developer India",
+      title: "Hire Aafaque Nazir — Web Developer Navi Mumbai",
       description:
-        "Ready to start your web project? Contact freelance developer Aafaque Nazir for website development, project quotes, or engineering consultations.",
+        "Contact Aafaque Nazir, freelance web developer in Navi Mumbai, India. Available for custom website projects, e-commerce stores, and web app consultations.",
       keywords:
-        "hire web developer India, contact web developer, get website quote, freelance developer contact, hire React developer, web development consultation India",
+        "hire web developer Navi Mumbai, contact web developer, get website quote Navi Mumbai, freelance developer contact Mumbai, hire React developer Navi Mumbai",
     },
     blog: {
-      title: "Web Engineering Blog — Aafaque Nazir",
+      title: "Web Development Blog — Aafaque Nazir",
       description:
-        "Web engineering blog by Aafaque Nazir: React 19, Next.js performance deep dives, database design, Core Web Vitals, and real-world system architecture.",
+        "Web development blog by Aafaque Nazir: practical guides on React 19, Next.js performance, databases, Core Web Vitals, and modern software design.",
       keywords:
-        "web development blog, React 19 architecture, Next.js 15 guides, Core Web Vitals optimization, Supabase vs Firebase, full stack engineering India, freelance developer blog",
+        "web development blog, React 19 guides, Next.js 15 performance, Core Web Vitals optimization, full stack engineering Navi Mumbai, web developer blog India",
     },
     notFound: {
       title: "404: Page Not Found — Aafaque Nazir",
@@ -83,7 +83,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
   let resolvedTitle = defaultSiteTitle;
   let resolvedDescription = defaultDescription;
   let resolvedKeywords = sectionMeta.home.keywords;
-  let resolvedUrl = siteUrl;
+  let resolvedUrl = `${siteUrl}/`;
   let resolvedImage = defaultImage;
 
   if (blogPost) {
@@ -98,7 +98,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
       : blogPost.description;
 
     resolvedKeywords = `${blogPost.tags ? blogPost.tags.join(", ") : ""}, web development guide, React developer India, Aafaque Nazir`;
-    resolvedUrl = `${siteUrl}/blog/${blogPost.slug}`;
+    resolvedUrl = `${siteUrl}/blog/${blogPost.slug}/`;
     resolvedImage = defaultImage;
   } else if (project) {
     const projTitle = `${project.title} — Case Study`;
@@ -108,18 +108,18 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
     const projDesc = project.description;
     resolvedDescription = projDesc.length > 155 ? `${projDesc.slice(0, 151)}...` : projDesc;
     resolvedKeywords = `${project.title}, ${project.category}, ${project.techStack.join(", ")}, web application case study, React project portfolio, Aafaque Nazir`;
-    resolvedUrl = `${siteUrl}/projects/${project.id}`;
+    resolvedUrl = `${siteUrl}/projects/${project.id}/`;
     resolvedImage = project.image ? (project.image.startsWith("http") ? project.image : `${siteUrl}${project.image}`) : defaultImage;
   } else if (section && sectionMeta[section]) {
     resolvedTitle = sectionMeta[section].title;
     resolvedDescription = sectionMeta[section].description;
     resolvedKeywords = sectionMeta[section].keywords;
-    resolvedUrl = section !== "home" ? `${siteUrl}/${section}` : `${siteUrl}/`;
+    resolvedUrl = section !== "home" ? `${siteUrl}/${section}/` : `${siteUrl}/`;
   } else if (title) {
     resolvedTitle = `${title} | ${siteName}`;
     if (description) resolvedDescription = description;
     if (keywords) resolvedKeywords = keywords;
-    if (url) resolvedUrl = url;
+    if (url) resolvedUrl = url.endsWith("/") ? url : `${url}/`;
     if (image) resolvedImage = image;
   }
 
@@ -354,7 +354,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: siteUrl,
+      item: `${siteUrl}/`,
     },
   ];
 
@@ -364,13 +364,13 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: `${siteUrl}/blog`,
+        item: `${siteUrl}/blog/`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: blogPost.title,
-        item: `${siteUrl}/blog/${blogPost.slug}`,
+        item: `${siteUrl}/blog/${blogPost.slug}/`,
       }
     );
   } else if (project) {
@@ -379,13 +379,13 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
         "@type": "ListItem",
         position: 2,
         name: "Projects",
-        item: `${siteUrl}/projects`,
+        item: `${siteUrl}/projects/`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: project.title,
-        item: `${siteUrl}/projects/${project.id}`,
+        item: `${siteUrl}/projects/${project.id}/`,
       }
     );
   } else if (section && section !== "home") {
@@ -393,7 +393,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
       "@type": "ListItem",
       position: 2,
       name: section.charAt(0).toUpperCase() + section.slice(1),
-      item: `${siteUrl}/${section}`,
+      item: `${siteUrl}/${section}/`,
     });
   }
 

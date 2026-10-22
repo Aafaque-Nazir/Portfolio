@@ -16,7 +16,7 @@ export const projectsData = [
   {
     id: 3,
     title: "Bread & Bite",
-    description: "Fast online food ordering web app with interactive digital menu, instant cart management, and automated order delivery notifications sent directly to WhatsApp.",
+    description: "Online food ordering web app with interactive digital menu, instant cart, and automated order delivery notifications sent directly to WhatsApp.",
     image: "/food-delivery-thumbnail.webp",
     link: "https://breadandbite.in/",
     iconType: "motorbike",

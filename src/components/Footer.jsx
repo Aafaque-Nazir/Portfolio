@@ -9,12 +9,12 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Skills", path: "/skills" },
-    { name: "Projects", path: "/projects" },
-    { name: "Services", path: "/services" },
-    { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about/" },
+    { name: "Skills", path: "/skills/" },
+    { name: "Projects", path: "/projects/" },
+    { name: "Services", path: "/services/" },
+    { name: "Blog", path: "/blog/" },
+    { name: "Contact", path: "/contact/" },
   ];
 
   return (
@@ -37,7 +37,7 @@ const Footer = () => {
             </p>
           </div>
           <Link
-            to="/contact"
+            to="/contact/"
             className="group/cta inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-cyan-400 text-black font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(34,211,238,0.45)] shrink-0"
           >
             <span>Get in Touch</span>
@@ -53,14 +53,15 @@ const Footer = () => {
                 Aafaque Nazir
               </span>
               <p className="text-gray-400 text-xs tracking-[0.15em] mt-1.5 uppercase font-mono">
-                Independent Freelancer & Full-Stack Developer
+                Web Developer in Navi Mumbai &amp; Mumbai, India
               </p>
             </div>
 
             <div className="text-gray-400 text-xs font-mono max-w-sm mt-1 leading-relaxed space-y-2">
               <p>
                 <strong className="text-gray-200">Business Name:</strong> Aafaque Nazir<br/>
-                <strong className="text-gray-200">Main Activity:</strong> Freelance Full-Stack Web Development, UI/UX Design & Digital Solutions.
+                <strong className="text-gray-200">Location:</strong> Navi Mumbai, Maharashtra, India<br/>
+                <strong className="text-gray-200">Main Activity:</strong> Freelance Web Development, UI/UX Design &amp; Web Applications.
               </p>
               <p>
                 <strong className="text-gray-200">Services Provided:</strong> Custom Websites, E-Commerce Stores, and Web Applications.

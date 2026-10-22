@@ -49,7 +49,8 @@ function buildPageHtml({
   ogImage = DEFAULT_IMAGE,
   ogType = "website",
 }) {
-  const fullUrl = `${SITE_URL}${route === "/" ? "" : route}`;
+  const normalizedRoute = route === "/" ? "/" : route.endsWith("/") ? route : `${route}/`;
+  const fullUrl = `${SITE_URL}${normalizedRoute}`;
   let html = masterTemplate;
 
   // 1. Replace Title
@@ -156,31 +157,31 @@ function buildPageHtml({
 // ─────────────────────────────────────────────────────────────────────────────
 const staticRoutes = [
   {
-    route: "/about",
-    title: "About Aafaque Nazir — Full-Stack Web Developer",
+    route: "/about/",
+    title: "About Aafaque Nazir — Web Developer Navi Mumbai",
     description:
-      "About Aafaque Nazir: freelance full-stack developer specializing in clean code, React, Next.js, and high-performance web applications across India.",
-    h1: "About Aafaque Nazir — Full-Stack Web Developer",
-    lead: "Independent web engineer building fast, scalable websites, e-commerce platforms, and SaaS applications with React, Next.js, and Supabase.",
+      "About Aafaque Nazir, web developer in Navi Mumbai, India. Crafting fast, responsive web apps and business websites with React, Next.js, and Supabase.",
+    h1: "About Aafaque Nazir — Web Developer in Navi Mumbai",
+    lead: "Independent web developer in Navi Mumbai building fast, scalable websites, e-commerce platforms, and SaaS applications with React, Next.js, and Supabase.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
         <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Approach & Quality</h2>
         <p style="margin-bottom:16px;">I build software with high standards: fast page loads, accessible UI, and reliable setups that help businesses grow.</p>
         <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Core Tech Stack</h2>
         <p style="margin-bottom:16px;">React 19, Next.js 15, TypeScript, Tailwind CSS, PostgreSQL, Supabase, Node.js, and modern edge deployments.</p>
-        <a href="/contact" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-top:12px;">Get In Touch</a>
+        <a href="/contact/" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-top:12px;">Get In Touch</a>
       </div>
     `,
     schemaJson: {
       "@context": "https://schema.org",
       "@type": "AboutPage",
       name: "About Aafaque Nazir",
-      url: "https://aafaque.in/about",
+      url: "https://aafaque.in/about/",
       mainEntity: {
         "@type": "Person",
         name: "Aafaque Nazir",
         jobTitle: "Freelance Full-Stack Web Developer",
-        url: "https://aafaque.in",
+        url: "https://aafaque.in/",
         sameAs: [
           "https://github.com/Aafaque-Nazir",
           "https://www.linkedin.com/in/aafaque-nazir/",
@@ -189,10 +190,10 @@ const staticRoutes = [
     },
   },
   {
-    route: "/skills",
+    route: "/skills/",
     title: "Skills & Modern Tech Stack — Aafaque Nazir",
     description:
-      "Explore technical skills of Aafaque Nazir: React, Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, Supabase, and modern web architectures.",
+      "Technical skills of Aafaque Nazir, web developer in Navi Mumbai, India: React 19, Next.js, TypeScript, Tailwind CSS, PostgreSQL, Supabase, and Node.js.",
     h1: "Technical Skills & Tech Stack",
     lead: "Building fast, secure, and responsive web applications with modern frontend and backend tools.",
     extraContentHtml: `
@@ -207,11 +208,11 @@ const staticRoutes = [
     `,
   },
   {
-    route: "/services",
-    title: "Web Development Services — Aafaque Nazir",
+    route: "/services/",
+    title: "Web Development Services — Navi Mumbai & India",
     description:
-      "Professional web development services: responsive websites, custom e-commerce stores, and scalable full-stack web applications tailored for your brand.",
-    h1: "Professional Web Development Services",
+      "Web development services in Navi Mumbai & Mumbai: fast business websites, e-commerce stores, and custom React & Next.js web applications.",
+    h1: "Web Development Services in Navi Mumbai & India",
     lead: "Custom web development services designed for fast performance, clear navigation, and great user experiences.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
@@ -221,7 +222,7 @@ const staticRoutes = [
         <p style="margin-bottom:16px;">Direct checkout and WhatsApp-integrated ordering portals for brands and local businesses looking to maximize sales without high app commissions.</p>
         <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">3. Custom Full-Stack Web Applications & SaaS</h2>
         <p style="margin-bottom:16px;">Real-time inventory systems, booking portals, kitchen displays, and internal administrative dashboards with PostgreSQL and Supabase.</p>
-        <a href="/contact" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-top:12px;">Request a Quote</a>
+        <a href="/contact/" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-top:12px;">Request a Quote</a>
       </div>
     `,
     schemaJson: {
@@ -231,16 +232,16 @@ const staticRoutes = [
       provider: {
         "@type": "Person",
         name: "Aafaque Nazir",
-        url: "https://aafaque.in",
+        url: "https://aafaque.in/",
       },
-      areaServed: ["India", "Worldwide Remote"],
+      areaServed: ["Navi Mumbai", "Mumbai", "India", "Worldwide Remote"],
     },
   },
   {
-    route: "/projects",
+    route: "/projects/",
     title: "Projects & Work Portfolio — Aafaque Nazir",
     description:
-      "Explore custom web applications, e-commerce stores, and responsive websites built by Aafaque Nazir using React, Next.js, and modern backends.",
+      "Explore custom web applications, e-commerce stores, and responsive websites built by Aafaque Nazir for clients in Navi Mumbai, India, and worldwide.",
     h1: "Featured Work & Projects",
     lead: "A collection of web applications, client projects, and online stores I have built.",
     extraContentHtml: `
@@ -250,7 +251,7 @@ const staticRoutes = [
             .map(
               (p) => `
             <li style="margin-bottom:14px;border-bottom:1px solid #1e293b;padding-bottom:12px;">
-              <a href="/projects/${p.id}" style="color:#22d3ee;text-decoration:none;font-weight:700;font-size:1.1rem;">→ ${escapeHtml(
+              <a href="/projects/${p.id}/" style="color:#22d3ee;text-decoration:none;font-weight:700;font-size:1.1rem;">→ ${escapeHtml(
                 p.title
               )}</a>
               <span style="color:#64748b;font-size:0.85rem;margin-left:8px;">(${escapeHtml(
@@ -268,27 +269,27 @@ const staticRoutes = [
     `,
   },
   {
-    route: "/contact",
-    title: "Hire Aafaque Nazir — Web Developer India",
+    route: "/contact/",
+    title: "Hire Aafaque Nazir — Web Developer Navi Mumbai",
     description:
-      "Ready to start your web project? Contact freelance developer Aafaque Nazir for website development, project quotes, or engineering consultations.",
+      "Contact Aafaque Nazir, freelance web developer in Navi Mumbai, India. Available for custom website projects, e-commerce stores, and web app consultations.",
     h1: "Start Your Web Project — Contact Aafaque Nazir",
     lead: "Have a project in mind or looking for a dedicated full-stack developer? Let's discuss your timeline, tech requirements, and deliverables.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
         <p style="margin-bottom:12px;">Email: <a href="mailto:aafaquenazir@gmail.com" style="color:#22d3ee;">aafaquenazir@gmail.com</a></p>
-        <p style="margin-bottom:12px;">WhatsApp: <a href="https://wa.me/919325629256" style="color:#22d3ee;">+91 93256 29256</a></p>
+        <p style="margin-bottom:12px;">WhatsApp: <a href="https://api.whatsapp.com/send?phone=919325629256" style="color:#22d3ee;">+91 93256 29256</a></p>
         <p style="margin-bottom:12px;">GitHub: <a href="https://github.com/Aafaque-Nazir" style="color:#22d3ee;">github.com/Aafaque-Nazir</a></p>
         <p style="margin-bottom:24px;">LinkedIn: <a href="https://www.linkedin.com/in/aafaque-nazir/" style="color:#22d3ee;">linkedin.com/in/aafaque-nazir</a></p>
-        <a href="https://wa.me/919325629256?text=Hi%20Aafaque,%20I'd%20like%20to%20discuss%20a%20project" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;">Message on WhatsApp</a>
+        <a href="https://api.whatsapp.com/send?phone=919325629256&text=Hi%20Aafaque,%20I'd%20like%20to%20discuss%20a%20project" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;">Message on WhatsApp</a>
       </div>
     `,
   },
   {
-    route: "/blog",
+    route: "/blog/",
     title: "Web Development Blog — Aafaque Nazir",
     description:
-      "Web development blog by Aafaque Nazir: React 19, Next.js performance guides, database design, Core Web Vitals, and real-world tips.",
+      "Web development blog by Aafaque Nazir: practical guides on React 19, Next.js performance, databases, Core Web Vitals, and modern software design.",
     h1: "Articles & Guides",
     lead: "Practical guides and tips on React, Next.js, databases, and web performance.",
     extraContentHtml: `
@@ -298,7 +299,7 @@ const staticRoutes = [
             .map(
               (b) => `
             <li style="margin-bottom:16px;border-bottom:1px solid #1e293b;padding-bottom:14px;">
-              <a href="/blog/${b.slug}" style="color:#22d3ee;text-decoration:none;font-weight:700;font-size:1.15rem;">→ ${escapeHtml(
+              <a href="/blog/${b.slug}/" style="color:#22d3ee;text-decoration:none;font-weight:700;font-size:1.15rem;">→ ${escapeHtml(
                 b.title
               )}</a>
               <div style="font-size:0.8rem;color:#64748b;margin:4px 0;">${escapeHtml(
@@ -327,7 +328,8 @@ console.log("🚀 Starting static pre-rendering for SEO...");
 // 1. Static Pages
 for (const page of staticRoutes) {
   const pageHtml = buildPageHtml(page);
-  const targetDir = path.join(distDir, page.route.slice(1));
+  const cleanRoute = page.route.replace(/^\/|\/$/g, "");
+  const targetDir = path.join(distDir, cleanRoute);
   fs.mkdirSync(targetDir, { recursive: true });
   fs.writeFileSync(path.join(targetDir, "index.html"), pageHtml, "utf-8");
   count++;
@@ -335,11 +337,8 @@ for (const page of staticRoutes) {
 
 // 2. Project Detail Pages
 for (const project of projectsData) {
-  const route = `/projects/${project.id}`;
-  let title = `${project.title} — Case Study`;
-  if (title.length <= 42) {
-    title = `${title} | Aafaque`;
-  }
+  const route = `/projects/${project.id}/`;
+  let title = `${project.title} — Case Study | Aafaque`;
   if (title.length > 58) {
     title = `${title.slice(0, 55).trim()}...`;
   }
@@ -357,7 +356,7 @@ for (const project of projectsData) {
       <p style="margin-bottom:16px;">${escapeHtml(project.techStack.join(" • "))}</p>
       <p style="margin-top:16px;">
         ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-right:12px;">Visit Live Project</a>` : ""}
-        <a href="/projects" style="color:#22d3ee;text-decoration:none;">← Back to all projects</a>
+        <a href="/projects/" style="color:#22d3ee;text-decoration:none;">← Back to all projects</a>
       </p>
     </div>
   `;
@@ -409,7 +408,7 @@ for (const project of projectsData) {
 
 // 3. Blog Post Pages
 for (const blog of blogs) {
-  const route = `/blog/${blog.slug}`;
+  const route = `/blog/${blog.slug}/`;
   let title = blog.seoTitle || blog.title;
   if (title.length <= 42) {
     title = `${title} — Aafaque Nazir`;
@@ -477,7 +476,7 @@ for (const blog of blogs) {
       ${sectionsHtml}
       ${faqsHtml}
       <div style="margin-top:32px;border-top:1px solid #1e293b;padding-top:16px;">
-        <a href="/blog" style="color:#22d3ee;text-decoration:none;">← Back to all articles</a>
+        <a href="/blog/" style="color:#22d3ee;text-decoration:none;">← Back to all articles</a>
       </div>
     </div>
   `;

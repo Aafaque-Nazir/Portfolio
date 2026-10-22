@@ -253,9 +253,9 @@ export default function BlogPost() {
                   {copiedLink ? <RiCheckLine size={15} className="text-green-400" /> : <RiFileCopyLine size={15} />}
                 </button>
                 <a
-                  href={`https://wa.me/?text=${encodeURIComponent(post.title + " " + currentUrl)}`}
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(post.title + " " + currentUrl)}`}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   aria-label="Share on WhatsApp"
                   className="p-2 rounded-xl bg-white/[0.03] hover:bg-green-500/20 text-zinc-400 hover:text-green-400 transition-colors border border-white/5"
                 >
@@ -264,7 +264,7 @@ export default function BlogPost() {
                 <a
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(currentUrl)}`}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   aria-label="Share on X"
                   className="p-2 rounded-xl bg-white/[0.03] hover:bg-white/15 text-zinc-400 hover:text-white transition-colors border border-white/5"
                 >
@@ -273,7 +273,7 @@ export default function BlogPost() {
                 <a
                   href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   aria-label="Share on LinkedIn"
                   className="p-2 rounded-xl bg-white/[0.03] hover:bg-cyan-500/20 text-zinc-400 hover:text-cyan-400 transition-colors border border-white/5"
                 >
