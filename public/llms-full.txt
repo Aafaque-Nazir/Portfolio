@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **Building Multi-Tenant SaaS Dashboards with PostgreSQL Row-Level Security**
+  URL: https://aafaque.in/blog/multi-tenant-saas-postgresql-row-level-security
+  Summary: Learn how to isolate tenant data in multi-tenant SaaS dashboards using PostgreSQL row-level security and Supabase for safe, scalable data access.
 - **The Speculation Rules API: Instantaneous Multi-Page Navigation for High-Conversion Web Apps**
   URL: https://aafaque.in/blog/speculation-rules-api-instant-navigation
   Summary: Master the Speculation Rules API to achieve instant zero-millisecond page transitions and boost high-intent web conversion rates.

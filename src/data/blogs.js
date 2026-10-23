@@ -1,5 +1,122 @@
 export const blogs = [
   {
+    "id": "multi-tenant-saas-postgresql-row-level-security",
+    "slug": "multi-tenant-saas-postgresql-row-level-security",
+    "title": "Building Multi-Tenant SaaS Dashboards with PostgreSQL Row-Level Security",
+    "seoTitle": "Multi-Tenant SaaS with PostgreSQL Row-Level Security",
+    "description": "Learn how to isolate tenant data in multi-tenant SaaS dashboards using PostgreSQL row-level security and Supabase for safe, scalable data access.",
+    "publishedAt": "2026-10-23",
+    "updatedAt": "2026-10-23",
+    "readTime": "7 min read",
+    "category": "Backend & Database",
+    "tags": [
+      "PostgreSQL",
+      "Supabase",
+      "SaaS Architecture",
+      "Database Security",
+      "SQL"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "PostgreSQL Row-Level Security (RLS) enforces multi-tenancy directly at the database engine level by evaluating access rules on every query. Tying tenant identifiers to authenticated session claims prevents accidental cross-tenant data leaks without relying on repetitive application-level filter queries.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "Does PostgreSQL Row-Level Security slow down database queries?",
+        "answer": "RLS adds a slight query planning overhead, usually under 2 milliseconds, because PostgreSQL injects the policy filter into the query tree. Adding a composite index on (tenant_id, id) or (tenant_id, created_at) makes the performance virtually identical to a manual WHERE clause."
+      },
+      {
+        "question": "Why choose row-level security over separate schemas for each tenant?",
+        "answer": "Separate schemas increase operational complexity when running migrations across hundreds of tenants. Shared tables with RLS simplify database migrations, reduce connection pool overhead, and keep infrastructure costs low while providing reliable data isolation."
+      },
+      {
+        "question": "How do you handle connection pooling with session-based RLS?",
+        "answer": "When using transaction poolers like PgBouncer or Supabase Supavisor, avoid session-level SET statements. Instead, pass tenant metadata through JWT claims using auth.jwt() or set configuration values scoped specifically to the current transaction with SET LOCAL."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Hidden Risk of Application-Level Multi-Tenancy"
+      },
+      {
+        "type": "paragraph",
+        "text": "Most SaaS developers start multi-tenancy by adding an org_id column to every table and appending WHERE org_id = current_org to every ORM query. This approach works in early prototypes, but it introduces a major security risk. A single omitted WHERE clause in a complex JOIN, dashboard export, or background job immediately leaks private customer data across tenant boundaries."
+      },
+      {
+        "type": "paragraph",
+        "text": "When building multi-tenant tools like [Inventory Management / InvMaster OS](/projects/1), godown operators and wholesale managers require strict data boundaries. Managers at one warehouse must never view orders, batch numbers, or profit margins belonging to another client. PostgreSQL Row-Level Security (RLS) solves this problem by moving access rules out of the application code and into the database engine itself."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "How PostgreSQL Row-Level Security Works"
+      },
+      {
+        "type": "paragraph",
+        "text": "PostgreSQL Row-Level Security works like an automatic, mandatory filter applied to every SELECT, INSERT, UPDATE, and DELETE query. Once enabled on a table, all rows become invisible by default to non-superuser roles until you write explicit permissive policies."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "Enabling RLS and establishing tenant isolation policies",
+        "code": "-- 1. Enable RLS on your target table\nALTER TABLE warehouse_orders ENABLE ROW LEVEL SECURITY;\n\n-- 2. Force RLS for table owners to avoid accidental bypass in development\nALTER TABLE warehouse_orders FORCE ROW LEVEL SECURITY;\n\n-- 3. Create a policy for selecting tenant rows\nCREATE POLICY select_tenant_orders ON warehouse_orders\n  FOR SELECT\n  USING (\n    org_id = NULLIF(current_setting('app.current_org_id', true), '')::uuid\n  );\n\n-- 4. Create a policy for inserting rows matching the tenant context\nCREATE POLICY insert_tenant_orders ON warehouse_orders\n  FOR INSERT\n  WITH CHECK (\n    org_id = NULLIF(current_setting('app.current_org_id', true), '')::uuid\n  );"
+      },
+      {
+        "type": "callout",
+        "title": "Why FORCE ROW LEVEL SECURITY matters",
+        "text": "By default, table owners and superusers bypass RLS. If your web server connects to PostgreSQL using the table owner role, RLS policies will be skipped entirely. Running ALTER TABLE ... FORCE ROW LEVEL SECURITY ensures that even the table owner follows your tenant boundaries."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Integrating RLS with Supabase and JSON Web Tokens"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you are using Supabase or PostgREST, authentication runs via JSON Web Tokens (JWT). Rather than setting session variables on each transaction, PostgreSQL inspects the claims inside the authenticated request token. You can embed the tenant organization ID directly in the JWT metadata during user sign-in."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "Reading tenant IDs directly from Supabase JWT claims",
+        "code": "-- Helper function to read the active organization ID from the JWT\nCREATE OR REPLACE FUNCTION auth.get_org_id() \nRETURNS uuid \nLANGUAGE sql \nSTABLE \nAS $$\n  SELECT COALESCE(\n    (nullif(current_setting('request.jwt.claims', true), '')::jsonb -> 'app_metadata' ->> 'org_id')::uuid,\n    NULL\n  );\n$$;\n\n-- Policy using the helper function\nCREATE POLICY tenant_isolation_policy ON warehouse_inventory\n  FOR ALL\n  USING (org_id = auth.get_org_id())\n  WITH CHECK (org_id = auth.get_org_id());"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Query Performance and Indexing Strategies"
+      },
+      {
+        "type": "paragraph",
+        "text": "Because PostgreSQL appends RLS policy expressions to every query condition, poor indexing can cause sequential table scans. To keep dashboard queries fast under heavy traffic, structure your indexes so the tenant identifier is always the leading column."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Always create a composite index starting with org_id: CREATE INDEX idx_orders_org_created ON warehouse_orders (org_id, created_at DESC).",
+          "Mark policy functions as STABLE or IMMUTABLE so the PostgreSQL query planner evaluates them once per query instead of once per row.",
+          "Avoid subqueries inside RLS USING expressions whenever possible; use JWT claims or indexed foreign-key lookups instead.",
+          "Run EXPLAIN ANALYZE on your critical dashboard queries to ensure PostgreSQL selects the composite index and avoids sequential scans."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Designing multi-tenant database systems requires practical decisions around data safety, query speed, and clean code. Through my [Full-Stack Web Development Services](/services), I help companies build reliable SaaS backends, clear database models, and responsive web dashboards. [Get in touch with Aafaque](/contact) to discuss your application architecture."
+      }
+    ]
+  },
+  {
     "id": "speculation-rules-api-instant-navigation",
     "slug": "speculation-rules-api-instant-navigation",
     "title": "The Speculation Rules API: Fast Multi-Page Navigation for Modern Web Apps",
