@@ -1,5 +1,154 @@
 export const blogs = [
   {
+    "id": "postgresql-vs-mongodb-order-management",
+    "slug": "postgresql-vs-mongodb-order-management",
+    "title": "PostgreSQL vs MongoDB for Business Applications: Why Relational Data Wins for Order Management",
+    "seoTitle": "PostgreSQL vs MongoDB: Relational Wins for Orders",
+    "description": "Compare PostgreSQL and MongoDB for order management. See why ACID transactions, strict schemas, and SQL keep inventory data accurate.",
+    "publishedAt": "2026-10-24",
+    "updatedAt": "2026-10-24",
+    "readTime": "7 min read",
+    "category": "Backend & Database",
+    "tags": [
+      "PostgreSQL",
+      "MongoDB",
+      "Database Architecture",
+      "Inventory Systems",
+      "SQL"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "For order processing and inventory tracking, PostgreSQL beats MongoDB because strict foreign keys, immediate consistency, and row-level locks prevent inventory overselling and orphaned records at the database level.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "Can MongoDB handle ACID transactions for e-commerce orders?",
+        "answer": "MongoDB supports multi-document ACID transactions since version 4.0, but they carry noticeable performance overhead, require replica sets, and lack strict foreign key enforcement to protect referential integrity."
+      },
+      {
+        "question": "Why is PostgreSQL preferred over NoSQL for inventory management?",
+        "answer": "PostgreSQL provides row-level locking (SELECT FOR UPDATE), check constraints, and atomic multi-table mutations. This stops race conditions when two customers buy the last item at the exact same moment."
+      },
+      {
+        "question": "When should an engineering team choose MongoDB over PostgreSQL?",
+        "answer": "MongoDB fits projects with rapidly changing schemas without relationships, such as content management systems, event logging, sensor feeds, and unstructured document catalogs."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The True Cost of Schemaless Design in Financial Workflows"
+      },
+      {
+        "type": "paragraph",
+        "text": "When developers start building an e-commerce or ERP platform, MongoDB often looks attractive. You can dump an order payload straight from a JSON request body into a collection without defining tables, foreign keys, or column types. Early velocity feels quick, but problems emerge the moment two users try to purchase the same inventory unit simultaneously, or when an order line item references a product that an admin deleted five seconds ago."
+      },
+      {
+        "type": "paragraph",
+        "text": "Order management is not an unstructured document problem. It is an accounting problem. An order consists of ledgers, tax totals, item reserves, discounts, and shipment tracking. In real production workloads, relational integrity is not optional. When I built the multi-warehouse system in [Inventory Management / InvMaster OS](/projects/1), relying on PostgreSQL constraints made the difference between clean inventory ledgers and stock discrepancies."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Preventing Race Conditions: Row-Level Locking in PostgreSQL"
+      },
+      {
+        "type": "paragraph",
+        "text": "The classic bug in high-traffic checkout flows is the stock oversell. If a product has 3 units remaining and two checkout workers query the database at the same millisecond, both read a balance of 3. Both approve the checkout, deduct 2 units, and write back a balance of 1. You sold 4 items with only 3 on the shelf."
+      },
+      {
+        "type": "paragraph",
+        "text": "In PostgreSQL, you prevent this using explicit row-level locks with SELECT ... FOR UPDATE or by running atomic balance updates with strict CHECK constraints directly on the table schema."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "Atomic Stock Deduction with Row Locking in PostgreSQL",
+        "code": "-- Step 1: Ensure inventory never drops below zero at the database level\nALTER TABLE warehouse_stock\n  ADD CONSTRAINT stock_non_negative CHECK (available_quantity >= 0);\n\n-- Step 2: Atomic checkout transaction\nBEGIN;\n\n-- Lock the specific product row for this warehouse\nSELECT id, available_quantity\nFROM warehouse_stock\nWHERE product_id = 'prod_8829'\n  AND godown_id = 'wh_mumbai_01'\nFOR UPDATE;\n\n-- Deduct the requested items atomically\nUPDATE warehouse_stock\nSET available_quantity = available_quantity - 2,\n    updated_at = NOW()\nWHERE product_id = 'prod_8829'\n  AND godown_id = 'wh_mumbai_01';\n\n-- Insert the immutable order item row\nINSERT INTO order_items (order_id, product_id, quantity, unit_price)\nVALUES ('ord_10492', 'prod_8829', 2, 1499.00);\n\nCOMMIT;"
+      },
+      {
+        "type": "callout",
+        "title": "Database Enforced Invariants",
+        "text": "Notice the stock_non_negative check constraint. Even if your application server crashes or has an undiscovered concurrency bug, PostgreSQL rejects any write that results in negative stock."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Document Nesting vs. Relational Normalization"
+      },
+      {
+        "type": "paragraph",
+        "text": "MongoDB teams frequently embed order line items inside a parent order document. While reading an entire order in one query is straightforward, modifying an existing order creates hidden risks:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Partial Refunds: Updating a nested array element in a large MongoDB document requires positional operators that make audit logging and diffing difficult.",
+          "Data Duplication: If you embed product names and SKUs inside orders to preserve historical accuracy, you must write custom logic to handle SKU migrations without breaking old records.",
+          "No True Foreign Keys: MongoDB cannot stop an application bug from writing an order item containing a nonexistent product ID or an invalid tax code."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "In PostgreSQL, normalized tables for orders, line items, payments, and shipments give you exact historical clarity. For fields that actually benefit from flexible structures, like payment gateway raw webhooks or carrier shipping metadata, PostgreSQL provides native JSONB columns with GIN indexing. This gives you document flexibility without sacrificing ACID guarantees for core balances."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "TypeScript Implementation: Safe Order Creation"
+      },
+      {
+        "type": "paragraph",
+        "text": "Here is how to structure a clean, production-ready checkout handler in Node.js using a PostgreSQL connection pool and parameterized transactions:"
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "Safe Multi-Item Order Transaction in TypeScript",
+        "code": "import { PoolClient } from 'pg';\nimport { pool } from './db';\n\ninterface CartItem {\n  productId: string;\n  quantity: number;\n  price: number;\n}\n\nexport async function processOrder(\n  customerId: string,\n  godownId: string,\n  items: CartItem[]\n): Promise<{ orderId: string }> {\n  const client: PoolClient = await pool.connect();\n\n  try {\n    await client.query('BEGIN');\n\n    // 1. Create order parent\n    const orderRes = await client.query(\n      `INSERT INTO orders (customer_id, status, created_at)\n       VALUES ($1, 'confirmed', NOW())\n       RETURNING id`,\n      [customerId]\n    );\n    const orderId = orderRes.rows[0].id;\n\n    // 2. Lock and reserve stock for each item in sorted order to avoid deadlocks\n    const sortedItems = [...items].sort((a, b) => a.productId.localeCompare(b.productId));\n\n    for (const item of sortedItems) {\n      const stockRes = await client.query(\n        `UPDATE warehouse_stock\n         SET available_quantity = available_quantity - $1\n         WHERE product_id = $2 AND godown_id = $3 AND available_quantity >= $1\n         RETURNING available_quantity`,\n        [item.quantity, item.productId, godownId]\n      );\n\n      if (stockRes.rowCount === 0) {\n        throw new Error(`Insufficient stock for product ID: ${item.productId}`);\n      }\n\n      await client.query(\n        `INSERT INTO order_items (order_id, product_id, quantity, unit_price)\n         VALUES ($1, $2, $3, $4)`,\n        [orderId, item.productId, item.quantity, item.price]\n      );\n    }\n\n    await client.query('COMMIT');\n    return { orderId };\n  } catch (err) {\n    await client.query('ROLLBACK');\n    throw err;\n  } finally {\n    client.release();\n  }\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "When MongoDB Still Works Well"
+      },
+      {
+        "type": "paragraph",
+        "text": "MongoDB is not a bad tool; it is simply misused when applied to relational financial ledgers. MongoDB performs well in areas such as:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Unstructured Product Attribute Catalogs: Products with dozens of varying attributes like electronics and apparel specifications.",
+          "High-Volume Event Ingestion: Logging user clicks, analytics beacons, or real-time IoT status updates that do not need relational joins.",
+          "Rapid Prototyping: Early proofs of concept where domain entities change daily and data consistency bugs do not carry financial liability."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "However, once customer payments, multi-location stock routing, and tax invoices come into play, PostgreSQL remains the dependable choice for backends."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Designing Your Application Database?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Picking the wrong database structure early in development can slow down feature delivery and cause data loss during sales spikes. I design and build fast, reliable web backends and inventory management systems tailored to your business needs."
+      },
+      {
+        "type": "paragraph",
+        "text": "Explore my [Full-Stack Web Development Services](/services) to see how we can collaborate, or [get in touch with Aafaque](/contact) to discuss your next web application."
+      }
+    ]
+  },
+  {
     "id": "multi-tenant-saas-postgresql-row-level-security",
     "slug": "multi-tenant-saas-postgresql-row-level-security",
     "title": "Building Multi-Tenant SaaS Dashboards with PostgreSQL Row-Level Security",

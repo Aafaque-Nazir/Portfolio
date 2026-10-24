@@ -150,6 +150,13 @@
     <priority>0.85</priority>
   </url>
 
+  <url>
+    <loc>https://aafaque.in/blog/postgresql-vs-mongodb-order-management</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Project Detail Pages (Programmatic SEO & Case Studies) -->
   <url>
     <loc>https://aafaque.in/projects/17/</loc>

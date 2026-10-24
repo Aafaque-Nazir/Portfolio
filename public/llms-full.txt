@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **PostgreSQL vs MongoDB for Business Applications: Why Relational Data Wins for Order Management**
+  URL: https://aafaque.in/blog/postgresql-vs-mongodb-order-management
+  Summary: Compare PostgreSQL and MongoDB for order management. See why ACID transactions, strict schemas, and SQL keep inventory data accurate.
 - **Building Multi-Tenant SaaS Dashboards with PostgreSQL Row-Level Security**
   URL: https://aafaque.in/blog/multi-tenant-saas-postgresql-row-level-security
   Summary: Learn how to isolate tenant data in multi-tenant SaaS dashboards using PostgreSQL row-level security and Supabase for safe, scalable data access.
