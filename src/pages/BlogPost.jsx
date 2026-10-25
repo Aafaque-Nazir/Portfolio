@@ -11,36 +11,23 @@ import {
   RiWhatsappFill,
   RiTwitterXFill,
   RiLinkedinFill,
-  RiSparklingFill,
   RiQuestionLine,
   RiArrowDownSLine,
   RiCodeSSlashLine,
   RiExternalLinkLine,
-  RiLightbulbFlashLine,
   RiListCheck2,
-  RiShieldFlashLine,
-  RiAlertLine,
-  RiInformationLine,
-  RiFlowChart,
   RiShareLine
 } from "react-icons/ri";
 import SEO from "../components/SEO";
 import { getBlogBySlug, blogs } from "../data/blogs";
 import { projects } from "../data/projects";
 
-// Enhanced helper to parse markdown links [text](url) and inline code `code`
+// Parse markdown links [text](url) and inline code `code`
 const renderFormattedText = (text) => {
   if (!text) return null;
 
-  // First handle inline code `code`
-  const codeRegex = /`([^`]+)`/g;
-  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-
-  // Simple parser that splits and replaces
   const parts = [];
   let lastIdx = 0;
-  
-  // Combined regex for [text](url) and `code`
   const combinedRegex = /(\[([^\]]+)\]\(([^)]+)\)|`([^`]+)`)/g;
   let match;
 
@@ -50,7 +37,6 @@ const renderFormattedText = (text) => {
     }
 
     if (match[2] && match[3]) {
-      // It's a markdown link
       const label = match[2];
       const href = match[3];
 
@@ -59,7 +45,7 @@ const renderFormattedText = (text) => {
           <Link
             key={match.index}
             to={href}
-            className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 decoration-cyan-400/40 hover:decoration-cyan-400 font-medium transition-colors"
+            className="text-zinc-200 hover:text-white underline underline-offset-4 decoration-zinc-600 hover:decoration-zinc-300 transition-colors"
           >
             {label}
           </Link>
@@ -71,18 +57,17 @@ const renderFormattedText = (text) => {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 decoration-cyan-400/40 hover:decoration-cyan-400 font-medium transition-colors"
+            className="text-zinc-200 hover:text-white underline underline-offset-4 decoration-zinc-600 hover:decoration-zinc-300 transition-colors"
           >
             {label}
           </a>
         );
       }
     } else if (match[4]) {
-      // It's inline code
       parts.push(
         <code
           key={match.index}
-          className="px-1.5 py-0.5 mx-0.5 rounded-md bg-white/[0.08] text-cyan-300 font-mono text-xs border border-white/5"
+          className="px-1.5 py-0.5 rounded bg-zinc-900 text-zinc-300 font-mono text-xs border border-zinc-800"
         >
           {match[4]}
         </code>
@@ -99,7 +84,7 @@ const renderFormattedText = (text) => {
   return parts;
 };
 
-// Sleek macOS-styled Code block with copy button and language tag
+// Clean, quiet code snippet with minimal header
 const CodeSnippet = ({ code, language, caption }) => {
   const [copied, setCopied] = useState(false);
 
@@ -110,306 +95,199 @@ const CodeSnippet = ({ code, language, caption }) => {
   };
 
   return (
-    <div className="my-6 rounded-2xl overflow-hidden border border-white/10 bg-[#090a0f] shadow-2xl transition-all hover:border-white/15">
-      {/* Terminal Title Bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-white/[0.03] border-b border-white/5">
-        <div className="flex items-center gap-3">
-          {/* macOS Window Controls */}
-          <div className="flex items-center gap-1.5" aria-hidden="true">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]/80 inline-block" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]/80 inline-block" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]/80 inline-block" />
-          </div>
-
-          <div className="h-3.5 w-px bg-white/10 hidden sm:block" />
-
-          <div className="flex items-center gap-2 text-xs font-mono">
-            <RiCodeSSlashLine className="text-cyan-400" size={14} />
-            <span className="text-zinc-300 font-semibold tracking-wider uppercase text-[11px]">
-              {language || "code"}
-            </span>
-            {caption && (
-              <span className="text-zinc-500 font-sans text-xs hidden sm:inline">
-                &bull; {caption}
-              </span>
-            )}
-          </div>
+    <div className="my-6 rounded-xl overflow-hidden border border-zinc-800/80 bg-[#0a0b0e]">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-zinc-950/70 border-b border-zinc-800 text-xs font-mono">
+        <div className="flex items-center gap-2 text-zinc-500">
+          <RiCodeSSlashLine size={13} />
+          <span className="uppercase text-[11px] text-zinc-400">{language || "code"}</span>
+          {caption && <span className="text-zinc-600 font-sans hidden sm:inline">· {caption}</span>}
         </div>
 
         <button
           onClick={handleCopy}
           aria-label="Copy code snippet"
-          className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white transition-all text-[11px] font-mono border border-white/5 cursor-pointer active:scale-95"
+          className="flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
         >
           {copied ? (
             <>
               <RiCheckLine className="text-emerald-400" size={13} />
-              <span className="text-emerald-400 font-medium">Copied!</span>
+              <span className="text-emerald-400">Copied</span>
             </>
           ) : (
             <>
-              <RiFileCopyLine size={13} />
+              <RiFileCopyLine size={12} />
               <span>Copy</span>
             </>
           )}
         </button>
       </div>
 
-      {/* Code Area */}
-      <pre className="p-4 sm:p-5 overflow-x-auto text-xs sm:text-sm font-mono text-cyan-100/90 leading-relaxed scrollbar-none selection:bg-cyan-500/30">
+      <pre className="p-4 sm:p-5 overflow-x-auto text-xs sm:text-sm font-mono text-zinc-300 leading-relaxed scrollbar-none">
         <code>{code}</code>
       </pre>
     </div>
   );
 };
 
-// Visual Stats / Metrics Grid Component
+// Clean Architectural Metrics Panel (Monochrome & Legible)
 const StatsGrid = ({ items }) => {
   if (!items || items.length === 0) return null;
 
-  const accentStyles = {
-    rose: "border-rose-500/30 bg-rose-950/15 text-rose-400",
-    amber: "border-amber-500/30 bg-amber-950/15 text-amber-400",
-    emerald: "border-emerald-500/30 bg-emerald-950/15 text-emerald-400",
-    cyan: "border-cyan-500/30 bg-cyan-950/15 text-cyan-400",
-    blue: "border-blue-500/30 bg-blue-950/15 text-blue-400"
-  };
-
   return (
-    <div className="my-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-      {items.map((stat, i) => {
-        const style = accentStyles[stat.accent] || accentStyles.cyan;
-        return (
-          <div
-            key={i}
-            className={`p-4 rounded-2xl border ${style} backdrop-blur-sm transition-all hover:scale-[1.02] flex flex-col justify-between`}
-          >
-            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 mb-1">
-              {stat.label}
-            </div>
-            <div className="text-xl sm:text-2xl font-black font-mono tracking-tight my-1">
-              {stat.value}
-            </div>
-            {stat.desc && (
-              <div className="text-xs text-zinc-400 font-sans mt-1 line-clamp-2">
-                {stat.desc}
-              </div>
-            )}
+    <div className="my-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      {items.map((stat, i) => (
+        <div
+          key={i}
+          className="p-4 rounded-xl border border-zinc-800/80 bg-zinc-950/60 flex flex-col justify-between"
+        >
+          <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 mb-1">
+            {stat.label}
           </div>
-        );
-      })}
+          <div className="text-xl sm:text-2xl font-mono font-semibold text-zinc-100 my-0.5">
+            {stat.value}
+          </div>
+          {stat.desc && (
+            <div className="text-xs text-zinc-400 font-light mt-1">
+              {stat.desc}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
 
-// Architecture / Flow Diagram Component
+// Wireframe Architecture & Execution Flow
 const ArchitectureDiagram = ({ title, nodes, caption }) => {
   if (!nodes || nodes.length === 0) return null;
 
-  const nodeColorMap = {
-    threat: "border-rose-500/40 bg-rose-950/30 text-rose-300",
-    vulnerable: "border-amber-500/40 bg-amber-950/30 text-amber-300",
-    critical: "border-red-500/50 bg-red-950/40 text-red-300",
-    neutral: "border-zinc-700 bg-zinc-900/60 text-zinc-300",
-    secure: "border-emerald-500/40 bg-emerald-950/30 text-emerald-300",
-    client: "border-cyan-500/40 bg-cyan-950/30 text-cyan-300"
-  };
-
   return (
-    <div className="my-8 rounded-2xl border border-white/10 bg-[#09090d] p-5 sm:p-6 shadow-2xl">
-      <div className="flex items-center gap-2 mb-4 text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">
-        <RiFlowChart size={15} />
-        <span>{title || "Architecture & Execution Flow"}</span>
+    <div className="my-8 rounded-xl border border-zinc-800/80 bg-zinc-950/60 p-5 sm:p-6">
+      <div className="text-xs font-mono font-medium uppercase tracking-wider text-zinc-400 mb-4">
+        {title || "Architecture Flow"}
       </div>
 
-      {/* Responsive Diagram Nodes */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-        {nodes.map((node, i) => {
-          const colorClass = nodeColorMap[node.type] || nodeColorMap.neutral;
-          return (
-            <React.Fragment key={i}>
-              <div className={`flex-1 p-3.5 rounded-xl border ${colorClass} text-center flex flex-col justify-center min-h-[80px] shadow-sm`}>
-                <div className="text-[10px] font-mono opacity-60 uppercase mb-0.5">
-                  Step {node.step || `0${i + 1}`}
-                </div>
-                <div className="font-bold text-xs sm:text-sm tracking-tight text-white">
-                  {node.label}
-                </div>
-                {node.sub && (
-                  <div className="text-[11px] font-sans opacity-75 mt-0.5 line-clamp-2">
-                    {node.sub}
-                  </div>
-                )}
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
+        {nodes.map((node, i) => (
+          <React.Fragment key={i}>
+            <div className="flex-1 p-3.5 rounded-lg border border-zinc-800 bg-zinc-900/50 text-center flex flex-col justify-center min-h-[72px]">
+              <div className="text-[10px] font-mono text-zinc-500 uppercase mb-0.5">
+                Step {node.step || `0${i + 1}`}
               </div>
-
-              {/* Connecting arrow */}
-              {i < nodes.length - 1 && (
-                <div className="flex items-center justify-center text-zinc-600 md:rotate-0 rotate-90 py-1 md:py-0">
-                  <span className="text-cyan-400/80 font-mono text-sm font-bold">&rarr;</span>
+              <div className="font-medium text-xs sm:text-sm text-zinc-200">
+                {node.label}
+              </div>
+              {node.sub && (
+                <div className="text-[11px] text-zinc-400 mt-0.5">
+                  {node.sub}
                 </div>
               )}
-            </React.Fragment>
-          );
-        })}
+            </div>
+
+            {i < nodes.length - 1 && (
+              <div className="flex items-center justify-center text-zinc-600 md:rotate-0 rotate-90 py-1 md:py-0 font-mono text-xs">
+                &rarr;
+              </div>
+            )}
+          </React.Fragment>
+        ))}
       </div>
 
       {caption && (
-        <p className="mt-4 pt-3 border-t border-white/5 text-[11px] text-zinc-400 font-mono text-center">
-          &bull; {caption}
+        <p className="mt-4 pt-3 border-t border-zinc-800 text-xs text-zinc-500 font-mono text-center">
+          {caption}
         </p>
       )}
     </div>
   );
 };
 
-// Sequential Step-by-Step Tutorial Cards
+// Sequential Numbered Steps
 const StepsPlaybook = ({ title, items }) => {
   if (!items || items.length === 0) return null;
 
   return (
-    <div className="my-8 space-y-4">
+    <div className="my-8 space-y-3.5">
       {title && (
-        <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 mb-2">
-          <RiListCheck2 size={16} />
+        <div className="text-xs font-mono font-medium uppercase tracking-wider text-zinc-400 mb-3 flex items-center gap-2">
+          <RiListCheck2 size={15} />
           <span>{title}</span>
         </div>
       )}
 
-      <div className="space-y-3.5">
-        {items.map((item, idx) => (
-          <div
-            key={idx}
-            className="p-5 rounded-2xl border border-white/10 bg-[#09090d] hover:border-white/15 transition-all flex gap-4 items-start"
-          >
-            <div className="w-8 h-8 rounded-xl bg-cyan-400/10 border border-cyan-400/30 text-cyan-400 font-mono font-black text-xs flex items-center justify-center shrink-0">
-              {item.step || `0${idx + 1}`}
-            </div>
-            <div className="flex-1 space-y-2">
-              <h4 className="text-sm sm:text-base font-bold text-white tracking-tight">
-                {item.title}
-              </h4>
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
-                {renderFormattedText(item.desc)}
-              </p>
-              {item.code && (
-                <div className="mt-2.5 rounded-xl bg-black/60 border border-white/5 p-3 font-mono text-xs text-cyan-300 overflow-x-auto">
-                  <code>{item.code}</code>
-                </div>
-              )}
-            </div>
+      {items.map((item, idx) => (
+        <div
+          key={idx}
+          className="p-5 rounded-xl border border-zinc-800/80 bg-zinc-950/60 flex gap-4 items-start"
+        >
+          <div className="text-xs font-mono font-semibold text-zinc-500 shrink-0 mt-0.5">
+            {item.step || `0${idx + 1}`}
           </div>
-        ))}
-      </div>
+          <div className="flex-1 space-y-1.5">
+            <h4 className="text-sm sm:text-base font-semibold text-zinc-200">
+              {item.title}
+            </h4>
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-light">
+              {renderFormattedText(item.desc)}
+            </p>
+            {item.code && (
+              <div className="mt-2 rounded-lg bg-black/80 border border-zinc-800 p-2.5 font-mono text-xs text-zinc-300 overflow-x-auto">
+                <code>{item.code}</code>
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-// Callout with distinct severity variants
+// Minimal Editorial Callout
 const CalloutBox = ({ title, text, variant = "info" }) => {
-  // Infer variant from title if not explicitly provided
-  let effectiveVariant = variant;
-  const lowerTitle = (title || "").toLowerCase();
-  if (lowerTitle.includes("critical") || lowerTitle.includes("security") || lowerTitle.includes("alert")) {
-    effectiveVariant = "critical";
-  } else if (lowerTitle.includes("warning") || lowerTitle.includes("caution")) {
-    effectiveVariant = "warning";
-  } else if (lowerTitle.includes("tip") || lowerTitle.includes("best practice")) {
-    effectiveVariant = "tip";
-  }
-
-  const config = {
-    critical: {
-      border: "border-rose-500/40 bg-rose-950/20",
-      textCol: "text-rose-300",
-      badgeCol: "text-rose-400 bg-rose-950/80 border-rose-500/40",
-      icon: <RiShieldFlashLine size={16} className="text-rose-400" />
-    },
-    warning: {
-      border: "border-amber-500/40 bg-amber-950/20",
-      textCol: "text-amber-200/90",
-      badgeCol: "text-amber-400 bg-amber-950/80 border-amber-500/40",
-      icon: <RiAlertLine size={16} className="text-amber-400" />
-    },
-    tip: {
-      border: "border-emerald-500/40 bg-emerald-950/20",
-      textCol: "text-emerald-200/90",
-      badgeCol: "text-emerald-400 bg-emerald-950/80 border-emerald-500/40",
-      icon: <RiLightbulbFlashLine size={16} className="text-emerald-400" />
-    },
-    info: {
-      border: "border-cyan-500/40 bg-cyan-950/20",
-      textCol: "text-cyan-200/90",
-      badgeCol: "text-cyan-400 bg-cyan-950/80 border-cyan-500/40",
-      icon: <RiInformationLine size={16} className="text-cyan-400" />
-    }
-  };
-
-  const current = config[effectiveVariant] || config.info;
+  const isAlert = variant === "critical" || (title && title.toLowerCase().includes("alert"));
+  const borderColor = isAlert ? "border-amber-500/70" : "border-zinc-500";
 
   return (
-    <div className={`my-6 p-5 rounded-2xl border ${current.border} shadow-lg transition-all`}>
-      <div className="flex items-center gap-2 mb-2 font-mono text-xs font-bold uppercase tracking-wider">
-        {current.icon}
-        <span className="text-white">{title}</span>
-      </div>
-      <p className={`text-xs sm:text-sm leading-relaxed font-light ${current.textCol}`}>
+    <div className={`my-6 p-4 sm:p-5 rounded-r-xl border-l-2 ${borderColor} bg-zinc-900/30 border border-zinc-800`}>
+      {title && (
+        <div className="text-xs font-mono font-medium uppercase tracking-wider text-zinc-300 mb-1.5">
+          {title}
+        </div>
+      )}
+      <p className="text-xs sm:text-sm leading-relaxed text-zinc-300 font-light">
         {renderFormattedText(text)}
       </p>
     </div>
   );
 };
 
-// Comparison table with status pills
+// Clean Data Comparison Table
 const ComparisonTable = ({ headers, rows }) => {
   return (
-    <div className="my-8 overflow-x-auto rounded-2xl border border-white/10 bg-[#09090b] shadow-2xl">
+    <div className="my-8 overflow-x-auto rounded-xl border border-zinc-800/80 bg-zinc-950/60">
       <table className="w-full text-left text-xs sm:text-sm">
-        <thead className="bg-white/[0.04] border-b border-white/10 text-cyan-400 font-mono uppercase tracking-wider">
+        <thead className="border-b border-zinc-800 text-zinc-400 font-mono text-xs uppercase tracking-wider">
           <tr>
             {headers.map((h, i) => (
-              <th key={i} className="p-3.5 sm:p-4 font-bold">
+              <th key={i} className="p-3.5 font-medium">
                 {h}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-white/5 font-sans">
+        <tbody className="divide-y divide-zinc-800">
           {rows.map((row, rIdx) => (
-            <tr key={rIdx} className="hover:bg-white/[0.02] transition-colors">
-              {row.map((cell, cIdx) => {
-                // Auto status pill badge detection
-                let isPill = false;
-                let pillStyle = "";
-                if (typeof cell === "string") {
-                  if (cell.startsWith("✓") || cell.includes("Fixed") || cell.includes("Supported")) {
-                    isPill = true;
-                    pillStyle = "text-emerald-400 bg-emerald-950/60 border border-emerald-500/30";
-                  } else if (cell.startsWith("✗") || cell.includes("Vulnerable") || cell.includes("Critical")) {
-                    isPill = true;
-                    pillStyle = "text-rose-400 bg-rose-950/60 border border-rose-500/30";
-                  } else if (cell.includes("⚠️") || cell.includes("Workaround") || cell.includes("Partial")) {
-                    isPill = true;
-                    pillStyle = "text-amber-400 bg-amber-950/60 border border-amber-500/30";
-                  }
-                }
-
-                return (
-                  <td
-                    key={cIdx}
-                    className={`p-3.5 sm:p-4 text-zinc-300 ${
-                      cIdx === 0 ? "font-semibold text-white font-mono" : ""
-                    }`}
-                  >
-                    {isPill ? (
-                      <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-mono font-medium ${pillStyle}`}>
-                        {cell}
-                      </span>
-                    ) : (
-                      renderFormattedText(cell)
-                    )}
-                  </td>
-                );
-              })}
+            <tr key={rIdx} className="hover:bg-zinc-900/30 transition-colors">
+              {row.map((cell, cIdx) => (
+                <td
+                  key={cIdx}
+                  className={`p-3.5 text-zinc-300 ${
+                    cIdx === 0 ? "font-medium text-zinc-200 font-mono" : ""
+                  }`}
+                >
+                  {renderFormattedText(cell)}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -426,7 +304,6 @@ export default function BlogPost() {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [activeHeadingId, setActiveHeadingId] = useState("");
 
-  // Reading progress bar
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -434,12 +311,10 @@ export default function BlogPost() {
     restDelta: 0.001,
   });
 
-  // Current post index for Prev/Next
   const currentIndex = blogs.findIndex((b) => b.slug === slug || b.id === slug);
   const prevPost = currentIndex > 0 ? blogs[currentIndex - 1] : null;
   const nextPost = currentIndex < blogs.length - 1 ? blogs[currentIndex + 1] : null;
 
-  // Match related project if specified
   const relatedProject = post?.relatedProjectId
     ? projects.find((p) => p.id === post.relatedProjectId)
     : null;
@@ -464,7 +339,6 @@ export default function BlogPost() {
     }
   };
 
-  // Extract headings for Table of Contents
   const headings = post?.sections
     ? post.sections
         .filter((sec) => sec.type === "heading" && sec.level === 2)
@@ -474,7 +348,6 @@ export default function BlogPost() {
         }))
     : [];
 
-  // Scroll spy effect for Table of Contents
   useEffect(() => {
     if (typeof window === "undefined" || headings.length === 0) return;
 
@@ -500,15 +373,15 @@ export default function BlogPost() {
   if (!post) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 pt-24">
-        <h1 className="text-3xl font-bold mb-4 font-mono">Article Not Found</h1>
-        <p className="text-zinc-400 text-sm mb-6">
-          The requested engineering article could not be located.
+        <h1 className="text-2xl font-semibold mb-3 font-mono">Article Not Found</h1>
+        <p className="text-zinc-500 text-sm mb-6">
+          The requested engineering article does not exist.
         </p>
         <Link
           to="/blog"
-          className="px-6 py-2.5 rounded-full bg-cyan-400 text-black font-bold text-xs uppercase tracking-wider font-mono hover:bg-cyan-300 transition-colors"
+          className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-mono hover:text-white transition-colors"
         >
-          Back to Articles
+          ← Return to Writing
         </Link>
       </div>
     );
@@ -518,164 +391,124 @@ export default function BlogPost() {
     <>
       <SEO blogPost={post} />
 
-      {/* Top Reading Progress Bar */}
+      {/* Top Reading Progress Bar (Subtle 1px line) */}
       <motion.div
         style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 origin-left z-50 shadow-[0_0_12px_rgba(34,211,238,0.9)]"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-zinc-300 origin-left z-50 opacity-90"
       />
 
-      <div className="relative min-h-screen bg-black text-white pt-20 sm:pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-        {/* Subtle Ambient background glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-cyan-500/[0.03] blur-[150px] pointer-events-none -z-0" />
-
-        <article className="max-w-4xl mx-auto relative z-10">
-          {/* Top Breadcrumb Navigation Row */}
-          <nav aria-label="Breadcrumb" className="flex items-center justify-between text-xs font-mono mb-6">
+      <div className="min-h-screen bg-black text-white pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+        <article className="max-w-3xl mx-auto">
+          
+          {/* Top Breadcrumb Row */}
+          <nav aria-label="Breadcrumb" className="flex items-center justify-between text-xs font-mono text-zinc-500 mb-8">
             <Link 
               to="/blog" 
-              className="group inline-flex items-center gap-1.5 text-zinc-400 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 hover:text-zinc-300 transition-colors"
             >
-              <RiArrowLeftLine className="transition-transform group-hover:-translate-x-0.5" />
-              <span>All Articles</span>
+              <RiArrowLeftLine size={13} />
+              <span>Writing</span>
             </Link>
 
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="text-cyan-400 uppercase tracking-widest text-[11px] font-semibold">
-                {post.category}
-              </span>
-            </div>
+            <span className="uppercase tracking-wider text-zinc-400">
+              {post.category}
+            </span>
           </nav>
 
           {/* Article Header */}
-          <header className="mb-8 space-y-4">
-            <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
-              <div className="flex items-center gap-1.5">
-                <RiCalendarLine size={13} className="text-cyan-400" />
-                <span>{post.publishedAt}</span>
-              </div>
-              <span>&bull;</span>
-              <div className="flex items-center gap-1.5">
-                <RiTimeLine size={13} className="text-cyan-400" />
-                <span>{post.readTime}</span>
-              </div>
-            </div>
-
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black text-white tracking-tight leading-snug">
+          <header className="mb-10 space-y-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-zinc-100 tracking-tight leading-tight">
               {post.title}
             </h1>
 
-            <p className="text-zinc-300 text-sm sm:text-base font-light leading-relaxed">
+            <p className="text-zinc-400 text-base sm:text-lg font-light leading-relaxed">
               {post.description}
             </p>
 
-            {/* Author info pill & Social Share Row */}
-            <div className="pt-4 border-t border-b border-white/10 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <img
-                  src={post.author.avatar || "/og-image.png"}
-                  alt={post.author.name}
-                  className="w-10 h-10 rounded-full border border-cyan-400/40 object-cover bg-zinc-800"
-                />
-                <div>
-                  <div className="text-xs sm:text-sm font-bold text-white tracking-wide flex items-center gap-1.5">
-                    <span>{post.author.name}</span>
-                    <span className="px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-400 text-[10px] font-mono border border-cyan-500/20">
-                      Verified
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-zinc-400 font-mono">
-                    {post.author.role}
-                  </div>
-                </div>
+            {/* Author Attribution & Date Strip */}
+            <div className="pt-4 border-t border-b border-zinc-800 py-3.5 flex items-center justify-between text-xs font-mono text-zinc-500">
+              <div className="flex items-center gap-2">
+                <span className="text-zinc-300 font-medium">{post.author.name}</span>
+                <span>·</span>
+                <span>{post.publishedAt}</span>
+                <span>·</span>
+                <span>{post.readTime}</span>
               </div>
 
-              {/* Share Actions */}
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-mono text-zinc-500 mr-1 hidden sm:inline">Share:</span>
+              {/* Share actions */}
+              <div className="flex items-center gap-3">
                 <button
                   onClick={handleCopyLink}
-                  aria-label="Copy link to article"
+                  aria-label="Copy link"
                   title="Copy link"
-                  className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/10 text-zinc-300 hover:text-white transition-all border border-white/5 active:scale-95 cursor-pointer"
+                  className="hover:text-zinc-200 transition-colors cursor-pointer"
                 >
-                  {copiedLink ? <RiCheckLine size={15} className="text-emerald-400" /> : <RiFileCopyLine size={15} />}
+                  {copiedLink ? <RiCheckLine size={14} className="text-emerald-400" /> : <RiFileCopyLine size={14} />}
                 </button>
-                <a
-                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(post.title + " " + currentUrl)}`}
-                  target="_blank"
-                  rel="nofollow noopener noreferrer"
-                  aria-label="Share on WhatsApp"
-                  className="p-2 rounded-xl bg-white/[0.04] hover:bg-emerald-500/20 text-zinc-300 hover:text-emerald-400 transition-all border border-white/5"
-                >
-                  <RiWhatsappFill size={15} />
-                </a>
                 <a
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(currentUrl)}`}
                   target="_blank"
                   rel="nofollow noopener noreferrer"
                   aria-label="Share on X"
-                  className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/15 text-zinc-300 hover:text-white transition-all border border-white/5"
+                  className="hover:text-zinc-200 transition-colors"
                 >
-                  <RiTwitterXFill size={15} />
+                  <RiTwitterXFill size={14} />
                 </a>
                 <a
                   href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`}
                   target="_blank"
                   rel="nofollow noopener noreferrer"
                   aria-label="Share on LinkedIn"
-                  className="p-2 rounded-xl bg-white/[0.04] hover:bg-cyan-500/20 text-zinc-300 hover:text-cyan-400 transition-all border border-white/5"
+                  className="hover:text-zinc-200 transition-colors"
                 >
-                  <RiLinkedinFill size={15} />
+                  <RiLinkedinFill size={14} />
                 </a>
-                <button
-                  onClick={handleNativeShare}
-                  aria-label="Share natively"
-                  className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/15 text-zinc-300 hover:text-white transition-all border border-white/5 sm:hidden"
+                <a
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(post.title + " " + currentUrl)}`}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  aria-label="Share on WhatsApp"
+                  className="hover:text-zinc-200 transition-colors"
                 >
-                  <RiShareLine size={15} />
-                </button>
+                  <RiWhatsappFill size={14} />
+                </a>
               </div>
             </div>
           </header>
 
-          {/* AI Quick Answer / Executive Takeaways (High-end Glassmorphic Card) */}
+          {/* Executive Summary / Key Takeaways */}
           {post.quickAnswer && (
-            <div className="mb-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-cyan-950/30 via-zinc-950 to-black border-l-4 border-cyan-400 border border-white/10 shadow-[0_0_30px_rgba(34,211,238,0.06)] relative overflow-hidden">
-              <div className="flex items-center gap-2 mb-2 text-cyan-300 font-mono text-xs font-bold uppercase tracking-wider">
-                <RiSparklingFill size={14} className="text-cyan-400 animate-pulse" />
-                <span>Executive Summary & Quick Answer</span>
+            <div className="mb-10 p-5 rounded-xl border border-zinc-800/80 border-l-2 border-l-zinc-400 bg-zinc-950/60">
+              <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-medium mb-2">
+                Executive Summary
               </div>
-              <p className="text-zinc-200 text-xs sm:text-sm leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
                 {renderFormattedText(post.quickAnswer)}
               </p>
             </div>
           )}
 
-          {/* Table of Contents (Sticky navigation with active section indicator) */}
+          {/* Table of Contents */}
           {headings.length > 0 && (
-            <div className="mb-10 p-5 rounded-2xl bg-[#09090d] border border-white/10 shadow-lg">
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 mb-3.5 flex items-center gap-2">
-                <RiListCheck2 className="text-cyan-400" size={16} />
-                <span>Table of Contents</span>
+            <div className="mb-10 p-5 rounded-xl border border-zinc-800 bg-zinc-950/40">
+              <div className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-3 flex items-center gap-2">
+                <RiListCheck2 size={14} />
+                <span>Contents</span>
               </div>
-              <ul className="space-y-2">
+              <ul className="space-y-1.5">
                 {headings.map((h) => {
                   const isActive = activeHeadingId === h.id;
                   return (
                     <li key={h.id}>
                       <a
                         href={`#${h.id}`}
-                        className={`text-xs sm:text-sm transition-all flex items-center gap-2.5 py-1 ${
+                        className={`text-xs sm:text-sm transition-colors block py-0.5 ${
                           isActive
-                            ? "text-cyan-300 font-medium translate-x-1"
-                            : "text-zinc-400 hover:text-zinc-200"
+                            ? "text-zinc-100 font-medium translate-x-1"
+                            : "text-zinc-500 hover:text-zinc-300"
                         }`}
                       >
-                        <span className={`font-mono text-xs ${isActive ? "text-cyan-400" : "text-zinc-600"}`}>
-                          &rarr;
-                        </span>
-                        <span>{h.title}</span>
+                        {h.title}
                       </a>
                     </li>
                   );
@@ -684,8 +517,8 @@ export default function BlogPost() {
             </div>
           )}
 
-          {/* Article Body Content */}
-          <div className="space-y-8 text-zinc-300 leading-relaxed font-light text-sm sm:text-base">
+          {/* Body Prose Content */}
+          <div className="space-y-7 text-zinc-300 leading-relaxed font-light text-sm sm:text-base">
             {post.sections.map((section, idx) => {
               if (section.type === "heading") {
                 const headingId = `heading-${post.sections.slice(0, idx + 1).filter((s) => s.type === "heading" && s.level === 2).length - 1}`;
@@ -694,7 +527,7 @@ export default function BlogPost() {
                     <h2
                       id={headingId}
                       key={idx}
-                      className="text-xl sm:text-2xl lg:text-3xl font-bold text-white pt-6 tracking-tight scroll-mt-24 border-b border-white/5 pb-3"
+                      className="text-xl sm:text-2xl font-semibold text-zinc-100 pt-8 tracking-tight scroll-mt-24 border-b border-zinc-800 pb-2.5"
                     >
                       {section.title}
                     </h2>
@@ -703,7 +536,7 @@ export default function BlogPost() {
                 return (
                   <h3
                     key={idx}
-                    className="text-lg sm:text-xl font-bold text-white pt-4 tracking-tight"
+                    className="text-lg sm:text-xl font-medium text-zinc-200 pt-5 tracking-tight"
                   >
                     {section.title}
                   </h3>
@@ -777,13 +610,10 @@ export default function BlogPost() {
 
               if (section.type === "list") {
                 return (
-                  <ul key={idx} className="space-y-3 my-4 pl-1">
+                  <ul key={idx} className="space-y-2.5 my-4 pl-4 list-disc text-zinc-400">
                     {section.items.map((item, itemIdx) => (
-                      <li key={itemIdx} className="flex items-start gap-3 text-xs sm:text-sm text-zinc-300">
-                        <span className="w-5 h-5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
-                          ✓
-                        </span>
-                        <span className="leading-relaxed">{renderFormattedText(item)}</span>
+                      <li key={itemIdx} className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                        {renderFormattedText(item)}
                       </li>
                     ))}
                   </ul>
@@ -794,94 +624,65 @@ export default function BlogPost() {
             })}
           </div>
 
-          {/* Related Case Study Project Card (High-intent Contextual Internal Linking) */}
+          {/* Case Study Reference */}
           {relatedProject && (
-            <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-zinc-900 via-[#0a0a0c] to-black border border-cyan-500/30 relative overflow-hidden shadow-[0_0_35px_rgba(34,211,238,0.1)]">
-              <div className="flex items-center justify-between gap-3 mb-4">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-cyan-400 bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-500/40">
-                  Featured Case Study Mentioned In This Article
-                </span>
-                <span className="text-xs font-mono text-emerald-400 font-bold">
-                  ⚡ 98+ Lighthouse
-                </span>
+            <div className="mt-14 p-6 rounded-2xl border border-zinc-800/80 bg-zinc-950/60">
+              <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 mb-2">
+                Related Project Architecture
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between">
-                <div className="space-y-2 max-w-xl">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-100">
                     {relatedProject.title}
                   </h3>
-                  <p className="text-zinc-400 text-xs sm:text-sm line-clamp-2">
+                  <p className="text-xs text-zinc-400 line-clamp-2 max-w-lg mt-1 font-light">
                     {relatedProject.solution || relatedProject.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {relatedProject.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-[10px] font-mono text-zinc-300 bg-white/5 px-2.5 py-0.5 rounded border border-white/10"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
                 </div>
-
-                <div className="flex flex-col sm:flex-row gap-2.5 shrink-0 w-full sm:w-auto">
-                  <Link
-                    to={`/projects/${relatedProject.id}`}
-                    className="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-bold text-xs uppercase tracking-wider text-center transition-all shadow-[0_0_15px_rgba(34,211,238,0.3)] font-mono"
-                  >
-                    View Project Case Study
-                  </Link>
-                  {relatedProject.link && (
-                    <a
-                      href={relatedProject.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider text-center transition-all border border-white/10 inline-flex items-center justify-center gap-1.5 font-mono"
-                    >
-                      <span>Live Site</span>
-                      <RiExternalLinkLine size={13} />
-                    </a>
-                  )}
-                </div>
+                <Link
+                  to={`/projects/${relatedProject.id}`}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors text-xs font-mono whitespace-nowrap shrink-0"
+                >
+                  <span>View case study</span>
+                  <RiArrowRightLine size={13} />
+                </Link>
               </div>
             </div>
           )}
 
-          {/* Structured FAQ Section (AEO and Google FAQ Rich Snippets) */}
+          {/* Structured FAQs */}
           {post.faqs && post.faqs.length > 0 && (
-            <div className="mt-14 pt-10 border-t border-white/10">
-              <div className="flex items-center gap-2 mb-2 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider">
-                <RiQuestionLine size={16} />
+            <div className="mt-14 pt-8 border-t border-zinc-800">
+              <div className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-2 flex items-center gap-1.5">
+                <RiQuestionLine size={14} />
                 <span>Frequently Asked Questions</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-6">
-                Key Technical Questions Answered
+              <h3 className="text-xl font-semibold text-zinc-100 tracking-tight mb-6">
+                Technical Details
               </h3>
 
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {post.faqs.map((faq, idx) => {
                   const isOpen = openFaqIndex === idx;
                   return (
                     <div
                       key={idx}
-                      className="rounded-2xl border border-white/10 bg-[#09090d] overflow-hidden transition-colors"
+                      className="rounded-xl border border-zinc-800 bg-zinc-950/40 overflow-hidden"
                     >
                       <button
                         onClick={() => setOpenFaqIndex(isOpen ? -1 : idx)}
-                        className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-semibold text-white hover:text-cyan-300 transition-colors text-sm sm:text-base cursor-pointer"
+                        className="w-full p-4 text-left flex items-center justify-between gap-4 font-medium text-zinc-200 hover:text-white transition-colors text-sm cursor-pointer"
                       >
                         <span>{faq.question}</span>
                         <RiArrowDownSLine
-                          className={`text-cyan-400 shrink-0 transition-transform duration-300 ${
+                          className={`text-zinc-500 shrink-0 transition-transform duration-200 ${
                             isOpen ? "rotate-180" : ""
                           }`}
-                          size={20}
+                          size={18}
                         />
                       </button>
                       {isOpen && (
-                        <div className="px-4 sm:px-5 pb-5 text-xs sm:text-sm text-zinc-300 font-light leading-relaxed border-t border-white/5 pt-3">
+                        <div className="px-4 pb-4 text-xs sm:text-sm text-zinc-400 font-light leading-relaxed border-t border-zinc-800/60 pt-3">
                           {renderFormattedText(faq.answer)}
                         </div>
                       )}
@@ -892,72 +693,51 @@ export default function BlogPost() {
             </div>
           )}
 
-          {/* Author Bio Card & Direct Conversion Callout */}
-          <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-zinc-950 via-[#0a0a0e] to-black border border-white/10 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-2xl">
-            <img
-              src={post.author.avatar || "/og-image.png"}
-              alt={post.author.name}
-              className="w-20 h-20 rounded-2xl border border-cyan-400/40 object-cover bg-zinc-800 shrink-0"
-            />
-            <div className="space-y-2.5 text-center sm:text-left flex-1">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <h4 className="text-lg font-bold text-white flex items-center justify-center sm:justify-start gap-2">
-                    <span>{post.author.name}</span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
-                      Independent Engineer
-                    </span>
-                  </h4>
-                  <p className="text-xs text-zinc-400 font-mono mt-0.5">{post.author.role}</p>
-                </div>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-bold text-xs uppercase tracking-wider transition-all font-mono shadow-[0_0_15px_rgba(34,211,238,0.25)]"
-                >
-                  <span>Consult Architecture</span>
-                  <RiArrowRightLine size={13} />
-                </Link>
-              </div>
-              <p className="text-xs text-zinc-400 leading-relaxed font-light">
-                {post.author.bio} Need an audit or hands-on assistance building scalable React/Next.js architectures or hardening server stacks? Let's build together.
-              </p>
+          {/* Author Note */}
+          <div className="mt-14 p-6 rounded-2xl border border-zinc-800 bg-zinc-950/40 flex items-center justify-between gap-4">
+            <div>
+              <h4 className="text-sm font-semibold text-zinc-200">{post.author.name}</h4>
+              <p className="text-xs text-zinc-500 font-mono">{post.author.role}</p>
             </div>
+            <Link
+              to="/contact"
+              className="px-3.5 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors text-xs font-mono"
+            >
+              Get in touch →
+            </Link>
           </div>
 
-          {/* Prev / Next Article Navigation */}
-          <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Prev / Next Navigation */}
+          <div className="mt-12 pt-8 border-t border-zinc-800 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {prevPost ? (
               <Link
                 to={`/blog/${prevPost.slug}`}
-                className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 transition-all group flex flex-col"
+                className="p-4 rounded-xl border border-zinc-800 hover:border-zinc-750 transition-colors group flex flex-col"
               >
-                <span className="text-[10px] font-mono text-zinc-500 uppercase flex items-center gap-1 mb-1">
-                  <RiArrowLeftLine /> Previous Article
+                <span className="text-[10px] font-mono text-zinc-500 uppercase mb-1">
+                  ← Previous
                 </span>
-                <span className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-2">
+                <span className="text-xs sm:text-sm font-medium text-zinc-300 group-hover:text-white transition-colors line-clamp-1">
                   {prevPost.title}
                 </span>
               </Link>
-            ) : (
-              <div />
-            )}
+            ) : <div />}
 
             {nextPost ? (
               <Link
                 to={`/blog/${nextPost.slug}`}
-                className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 transition-all group flex flex-col sm:text-right"
+                className="p-4 rounded-xl border border-zinc-800 hover:border-zinc-750 transition-colors group flex flex-col sm:text-right"
               >
-                <span className="text-[10px] font-mono text-zinc-500 uppercase flex items-center sm:justify-end gap-1 mb-1">
-                  Next Article <RiArrowRightLine />
+                <span className="text-[10px] font-mono text-zinc-500 uppercase mb-1">
+                  Next →
                 </span>
-                <span className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-2">
+                <span className="text-xs sm:text-sm font-medium text-zinc-300 group-hover:text-white transition-colors line-clamp-1">
                   {nextPost.title}
                 </span>
               </Link>
-            ) : (
-              <div />
-            )}
+            ) : <div />}
           </div>
+
         </article>
       </div>
     </>
