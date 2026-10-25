@@ -381,7 +381,7 @@ export default function BlogPost() {
           to="/blog"
           className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-mono hover:text-white transition-colors"
         >
-          ← Return to Writing
+          ← Return to Articles
         </Link>
       </div>
     );
@@ -407,7 +407,7 @@ export default function BlogPost() {
               className="inline-flex items-center gap-1.5 hover:text-zinc-300 transition-colors"
             >
               <RiArrowLeftLine size={13} />
-              <span>Writing</span>
+              <span>Articles & Guides</span>
             </Link>
 
             <span className="uppercase tracking-wider text-zinc-400">
