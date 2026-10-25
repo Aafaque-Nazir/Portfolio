@@ -1,5 +1,136 @@
 export const blogs = [
   {
+    "id": "websockets-vs-server-sent-events-dashboards",
+    "slug": "websockets-vs-server-sent-events-dashboards",
+    "title": "WebSockets vs Server-Sent Events: Choosing the Right Protocol for Live Dashboards",
+    "seoTitle": "WebSockets vs SSE: Live Dashboard Guide (2026)",
+    "description": "Compare WebSockets and Server-Sent Events for real-time dashboards. Learn connection costs, auto-reconnect, and code implementations.",
+    "publishedAt": "2026-10-25",
+    "updatedAt": "2026-10-25",
+    "readTime": "7 min read",
+    "category": "Real-Time & Full-Stack",
+    "tags": [
+      "WebSockets",
+      "Server-Sent Events",
+      "Real-Time",
+      "Full-Stack",
+      "Node.js"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Use Server-Sent Events (SSE) when your dashboard only needs one-way data updates from server to client over standard HTTP. Choose WebSockets only when you require two-way, low-latency communication like interactive chat, collaborative whiteboards, or multiplayer gaming.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "Does Server-Sent Events work through corporate firewalls and proxies?",
+        "answer": "Yes. SSE runs over standard HTTP or HTTPS (port 80 or 443), so enterprise firewalls, load balancers, and reverse proxies handle it without custom protocol upgrade configurations required by WebSockets."
+      },
+      {
+        "question": "Can I send binary data over Server-Sent Events?",
+        "answer": "No. The SSE specification only supports UTF-8 encoded text streams. If you need to send binary data like audio chunks or raw canvas buffers, encode them in base64 or use WebSockets instead."
+      },
+      {
+        "question": "How do WebSockets and SSE handle connection drops?",
+        "answer": "SSE has native browser reconnection built into the EventSource API along with last-event-id tracking. WebSockets do not have built-in auto-reconnect, meaning you must write custom retry loops and state reconciliation logic."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Real Problem with Real-Time Dashboards"
+      },
+      {
+        "type": "paragraph",
+        "text": "Most development teams reach for WebSockets the moment a product manager asks for live metrics. Whether you are displaying stock updates, delivery driver coordinates, or live orders in a restaurant kitchen, the default impulse is full-duplex TCP connections. In production, this default choice often adds unnecessary operational complexity."
+      },
+      {
+        "type": "paragraph",
+        "text": "When building [Restaurant OS / Corner Cafe](/projects/4), I evaluated both protocols for the live Kitchen Display System (KDS). Kitchen staff needed instant ticket updates as customers ordered from their phones via QR codes. The tickets moved in one direction: from database changes straight to the kitchen screen. Standard HTTP POST requests handled ticket status updates. In scenarios like this, opening a two-way socket pipe to every client adds maintenance overhead without performance gain."
+      },
+      {
+        "type": "callout",
+        "title": "Core Protocol Difference",
+        "text": "WebSockets upgrade an HTTP handshake into a stateful, bidirectional TCP connection. Server-Sent Events (SSE) maintain a long-lived, one-way HTTP response stream from server to client with zero protocol switching."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Feature Matrix: WebSockets vs SSE"
+      },
+      {
+        "type": "paragraph",
+        "text": "Understanding the technical boundaries of each protocol prevents major rewrites later in your project lifecycle:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Directionality: WebSockets are full-duplex (server to client and client to server). SSE is strictly half-duplex (server to client).",
+          "Transport Layer: WebSockets require a protocol switch from HTTP to ws:// or wss://. SSE runs over plain HTTP/1.1 or HTTP/2.",
+          "Automatic Reconnection: SSE has native reconnection built into browser browsers via the EventSource API. WebSockets require client-side heartbeat and reconnect libraries.",
+          "Event ID Recovery: SSE natively supports the 'Last-Event-ID' header, allowing the server to replay missed messages after drops. WebSockets require custom tracking logic.",
+          "Load Balancing: WebSockets demand sticky sessions or reverse-proxy bypass rules. SSE streams cleanly through standard NGINX, Cloudflare, or AWS ALBs like regular HTTP requests."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Building a Server-Sent Events Endpoint"
+      },
+      {
+        "type": "paragraph",
+        "text": "Creating an SSE endpoint in Node.js or Next.js Route Handlers requires three standard headers: 'text/event-stream', 'no-cache', and 'keep-alive'. Here is a production-ready route handler:"
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "app/api/kds-stream/route.ts (Next.js App Router)",
+        "code": "import { NextRequest } from 'next/server';\n\nexport const dynamic = 'force-dynamic';\n\nexport async function GET(req: NextRequest) {\n  const encoder = new TextEncoder();\n  let intervalId: NodeJS.Timeout;\n\n  const stream = new ReadableStream({\n    start(controller) {\n      // Send initial connection confirmation\n      controller.enqueue(encoder.encode(`event: connected\\ndata: {\"status\":\"ready\"}\\n\\n`));\n\n      // Mock live order metric dispatch every 3 seconds\n      intervalId = setInterval(() => {\n        const payload = JSON.stringify({\n          timestamp: Date.now(),\n          activeOrders: Math.floor(Math.random() * 20) + 1,\n          avgCookTimeMinutes: 14,\n        });\n\n        controller.enqueue(encoder.encode(`event: metrics\\ndata: ${payload}\\n\\n`));\n      }, 3000);\n    },\n    cancel() {\n      clearInterval(intervalId);\n    },\n  });\n\n  return new Response(stream, {\n    headers: {\n      'Content-Type': 'text/event-stream',\n      'Cache-Control': 'no-cache, no-transform',\n      'Connection': 'keep-alive',\n    },\n  });\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Consuming the SSE Stream in React 19"
+      },
+      {
+        "type": "paragraph",
+        "text": "The browser-native EventSource API makes consuming real-time events straightforward without installing third-party client libraries:"
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "components/LiveKdsMetrics.tsx",
+        "code": "'use client';\n\nimport { useEffect, useState } from 'react';\n\ninterface MetricData {\n  timestamp: number;\n  activeOrders: number;\n  avgCookTimeMinutes: number;\n}\n\nexport function LiveKdsMetrics() {\n  const [metrics, setMetrics] = useState<MetricData | null>(null);\n  const [connected, setConnected] = useState(false);\n\n  useEffect(() => {\n    const eventSource = new EventSource('/api/kds-stream');\n\n    eventSource.addEventListener('connected', () => {\n      setConnected(true);\n    });\n\n    eventSource.addEventListener('metrics', (event) => {\n      const parsed: MetricData = JSON.parse(event.data);\n      setMetrics(parsed);\n    });\n\n    eventSource.onerror = () => {\n      // Browser will automatically retry connecting\n      setConnected(false);\n    };\n\n    return () => {\n      eventSource.close();\n    };\n  }, []);\n\n  return (\n    <div className=\"p-4 border rounded-md\">\n      <div className=\"flex items-center gap-2\">\n        <span className={`h-2.5 w-2.5 rounded-full ${connected ? 'bg-emerald-500' : 'bg-red-500'}`} />\n        <p className=\"text-sm font-medium\">{connected ? 'Live Stream Active' : 'Reconnecting...'}</p>\n      </div>\n      {metrics && (\n        <div className=\"mt-4 grid grid-cols-2 gap-4 text-center\">\n          <div className=\"bg-slate-50 p-3 rounded\">\n            <span className=\"text-2xl font-bold\">{metrics.activeOrders}</span>\n            <p className=\"text-xs text-slate-500\">Active Kitchen Orders</p>\n          </div>\n          <div className=\"bg-slate-50 p-3 rounded\">\n            <span className=\"text-2xl font-bold\">{metrics.avgCookTimeMinutes}m</span>\n            <p className=\"text-xs text-slate-500\">Avg Cook Time</p>\n          </div>\n        </div>\n      )}\n    </div>\n  );\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "When Are WebSockets Actually Required?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Despite the simplicity of SSE, WebSockets remain necessary when you have high-frequency data traveling both ways over a single pipe. Good examples include multi-user collaborative editors, live multi-party audio, financial order books, and real-time multiplayer games. If your client needs to push dozens of messages per second to the server, establishing an ongoing bidirectional socket saves HTTP header overhead."
+      },
+      {
+        "type": "paragraph",
+        "text": "However, for 90% of web dashboards, monitoring screens, and operational portals, data only flows downward. In those cases, SSE combined with standard HTTP POST endpoints provides cleaner architecture, less server memory pressure, and zero proxy complications."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Whether you are building a live operational dashboard, an inventory tracker, or a customer portal, picking the right network protocol prevents expensive refactors. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your application architecture."
+      }
+    ]
+  },
+  {
     "id": "postgresql-vs-mongodb-order-management",
     "slug": "postgresql-vs-mongodb-order-management",
     "title": "PostgreSQL vs MongoDB for Business Applications: Why Relational Data Wins for Order Management",

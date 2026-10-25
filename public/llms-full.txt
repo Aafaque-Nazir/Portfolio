@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog
+- **WebSockets vs Server-Sent Events: Choosing the Right Protocol for Live Dashboards**
+  URL: https://aafaque.in/blog/websockets-vs-server-sent-events-dashboards
+  Summary: Compare WebSockets and Server-Sent Events for real-time dashboards. Learn connection costs, auto-reconnect, and code implementations.
 - **PostgreSQL vs MongoDB for Business Applications: Why Relational Data Wins for Order Management**
   URL: https://aafaque.in/blog/postgresql-vs-mongodb-order-management
   Summary: Compare PostgreSQL and MongoDB for order management. See why ACID transactions, strict schemas, and SQL keep inventory data accurate.
