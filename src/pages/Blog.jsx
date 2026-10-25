@@ -8,44 +8,23 @@ import {
 } from "react-icons/ri";
 import { blogs } from "../data/blogs";
 
-const CATEGORIES = [
-  "All",
-  "Security & Architecture",
-  "Performance Engineering",
-  "Backend & Database",
-  "Architecture & Frameworks",
-  "Real-Time & Full-Stack",
-];
-
 export default function Blog() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const featuredPost = blogs[0];
 
   const filteredBlogs = useMemo(() => {
-    let result = blogs;
-
-    // Filter by Category
-    if (selectedCategory !== "All") {
-      result = result.filter((post) => post.category === selectedCategory);
-    }
-
-    // Filter by Search Query
     const q = searchQuery.toLowerCase().trim();
-    if (q) {
-      result = result.filter((post) => {
-        return (
-          post.title.toLowerCase().includes(q) ||
-          post.description.toLowerCase().includes(q) ||
-          post.category?.toLowerCase().includes(q) ||
-          post.tags?.some((t) => t.toLowerCase().includes(q))
-        );
-      });
-    }
-
-    return result;
-  }, [searchQuery, selectedCategory]);
+    if (!q) return blogs;
+    return blogs.filter((post) => {
+      return (
+        post.title.toLowerCase().includes(q) ||
+        post.description.toLowerCase().includes(q) ||
+        post.category?.toLowerCase().includes(q) ||
+        post.tags?.some((t) => t.toLowerCase().includes(q))
+      );
+    });
+  }, [searchQuery]);
 
   return (
     <div id="blog" className="min-h-screen bg-black text-white pt-24 pb-20">
@@ -62,7 +41,7 @@ export default function Blog() {
         </header>
 
         {/* Featured Story: Understated Editorial Lead */}
-        {!searchQuery && selectedCategory === "All" && featuredPost && (
+        {!searchQuery && featuredPost && (
           <section className="mb-14">
             <Link
               to={`/blog/${featuredPost.slug}`}
@@ -109,72 +88,36 @@ export default function Blog() {
           </section>
         )}
 
-        {/* Category Filter Tabs & Search: Minimalist Strip */}
-        <div className="mb-10 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800/80 pb-3">
-            {/* Minimalist Tabs */}
-            <nav className="flex items-center gap-5 overflow-x-auto scrollbar-none py-1" aria-label="Category filter">
-              {CATEGORIES.map((cat) => {
-                const isSelected = selectedCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`text-xs font-mono transition-colors whitespace-nowrap cursor-pointer pb-2 -mb-3 border-b-2 ${
-                      isSelected
-                        ? "text-zinc-100 font-medium border-zinc-300"
-                        : "text-zinc-500 hover:text-zinc-300 border-transparent"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </nav>
-
-            {/* Quiet Search Input */}
-            <div className="relative flex items-center min-w-[240px]">
-              <RiSearchLine
-                className="absolute left-3 text-zinc-500 pointer-events-none"
-                size={14}
-              />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search articles..."
-                className="w-full pl-9 pr-8 py-1.5 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-200 placeholder-zinc-500 text-xs font-mono focus:outline-none focus:border-zinc-600 transition-colors"
-                aria-label="Search articles"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-2.5 p-0.5 text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer"
-                  aria-label="Clear search"
-                >
-                  <RiCloseLine size={14} />
-                </button>
-              )}
-            </div>
+        {/* Clean Article Header Strip & Search */}
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+          <div className="text-xs font-mono text-zinc-500">
+            {filteredBlogs.length} {filteredBlogs.length === 1 ? "Article" : "Articles"}
+            {searchQuery && ` matching "${searchQuery}"`}
           </div>
 
-          {(searchQuery || selectedCategory !== "All") && (
-            <div className="flex items-center justify-between text-xs font-mono text-zinc-500 pt-1">
-              <span>
-                {filteredBlogs.length} {filteredBlogs.length === 1 ? "article" : "articles"} found
-                {selectedCategory !== "All" && ` in ${selectedCategory}`}
-              </span>
+          <div className="relative flex items-center w-full sm:max-w-xs">
+            <RiSearchLine
+              className="absolute left-3 text-zinc-500 pointer-events-none"
+              size={14}
+            />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search articles..."
+              className="w-full pl-9 pr-8 py-1.5 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-200 placeholder-zinc-500 text-xs font-mono focus:outline-none focus:border-zinc-600 transition-colors"
+              aria-label="Search articles"
+            />
+            {searchQuery && (
               <button
-                onClick={() => {
-                  setSearchQuery("");
-                  setSelectedCategory("All");
-                }}
-                className="text-zinc-400 hover:text-zinc-200 underline cursor-pointer"
+                onClick={() => setSearchQuery("")}
+                className="absolute right-2.5 p-0.5 text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer"
+                aria-label="Clear search"
               >
-                Reset filters
+                <RiCloseLine size={14} />
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {/* Article Grid / Stream: Clean Editorial Cards */}
@@ -183,16 +126,13 @@ export default function Blog() {
             <RiArticleLine className="mx-auto text-2xl text-zinc-600 mb-2" />
             <p className="text-zinc-300 text-sm font-medium">No articles match your query</p>
             <p className="text-zinc-500 text-xs font-mono mt-1">
-              Try a different keyword or reset filters.
+              Try a different keyword or reset search.
             </p>
             <button
-              onClick={() => {
-                setSearchQuery("");
-                setSelectedCategory("All");
-              }}
+              onClick={() => setSearchQuery("")}
               className="mt-4 px-3 py-1.5 rounded-md text-xs font-mono bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 transition-colors cursor-pointer"
             >
-              Reset
+              Reset Search
             </button>
           </div>
         ) : (
