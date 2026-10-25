@@ -446,9 +446,11 @@ for (const blog of blogs) {
     ? blog.sections
         .map((s) => {
           if (s.type === "heading") {
-            return `<h2 style="font-size:1.35rem;color:#22d3ee;margin:28px 0 10px 0;">${escapeHtml(
+            const tag = s.level === 3 ? "h3" : "h2";
+            const color = s.level === 3 ? "#e2e8f0" : "#22d3ee";
+            return `<${tag} style="font-size:${s.level === 3 ? "1.15rem" : "1.35rem"};color:${color};margin:28px 0 10px 0;">${escapeHtml(
               s.title
-            )}</h2>`;
+            )}</${tag}>`;
           }
           if (s.type === "paragraph") {
             return `<p style="margin-bottom:14px;color:#cbd5e1;line-height:1.75;">${escapeHtml(
@@ -459,6 +461,91 @@ for (const blog of blogs) {
             return `<pre style="background:#0f172a;padding:16px;border-radius:6px;overflow-x:auto;font-family:monospace;color:#38bdf8;margin:16px 0;"><code>${escapeHtml(
               s.code
             )}</code></pre>`;
+          }
+          if (s.type === "stats") {
+            const items = s.items || [];
+            return `
+              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;margin:20px 0;">
+                ${items.map(item => `
+                  <div style="background:#090a0f;border:1px solid #1e293b;padding:14px;border-radius:8px;">
+                    <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;font-family:monospace;">${escapeHtml(item.label)}</div>
+                    <div style="font-size:1.4rem;font-weight:900;color:#22d3ee;margin:4px 0;font-family:monospace;">${escapeHtml(item.value)}</div>
+                    ${item.desc ? `<div style="font-size:0.8rem;color:#cbd5e1;">${escapeHtml(item.desc)}</div>` : ""}
+                  </div>
+                `).join("")}
+              </div>
+            `;
+          }
+          if (s.type === "diagram") {
+            const nodes = s.nodes || [];
+            return `
+              <div style="background:#090a0f;border:1px solid #1e293b;padding:18px;border-radius:8px;margin:20px 0;">
+                <div style="font-size:0.85rem;font-weight:700;color:#22d3ee;margin-bottom:12px;font-family:monospace;">${escapeHtml(s.title || "Architecture Flow")}</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+                  ${nodes.map((n, ni) => `
+                    <div style="background:#0f172a;border:1px solid #334155;padding:8px 12px;border-radius:6px;font-size:0.8rem;">
+                      <strong style="color:#fff;">${escapeHtml(n.label)}</strong>
+                      ${n.sub ? `<span style="display:block;font-size:0.7rem;color:#94a3b8;">${escapeHtml(n.sub)}</span>` : ""}
+                    </div>
+                    ${ni < nodes.length - 1 ? `<span style="color:#22d3ee;font-weight:bold;">&rarr;</span>` : ""}
+                  `).join("")}
+                </div>
+                ${s.caption ? `<div style="margin-top:10px;font-size:0.75rem;color:#94a3b8;font-family:monospace;">• ${escapeHtml(s.caption)}</div>` : ""}
+              </div>
+            `;
+          }
+          if (s.type === "steps") {
+            const items = s.items || [];
+            return `
+              <div style="margin:20px 0;">
+                ${s.title ? `<div style="font-size:1.1rem;font-weight:700;color:#22d3ee;margin-bottom:12px;">${escapeHtml(s.title)}</div>` : ""}
+                ${items.map(st => `
+                  <div style="background:#090a0f;border:1px solid #1e293b;padding:14px;border-radius:8px;margin-bottom:10px;">
+                    <div style="font-weight:700;color:#fff;font-size:0.95rem;margin-bottom:4px;">${escapeHtml(st.step || "")} - ${escapeHtml(st.title)}</div>
+                    <div style="color:#cbd5e1;font-size:0.85rem;line-height:1.6;">${escapeHtml(st.desc)}</div>
+                    ${st.code ? `<pre style="background:#000;color:#22d3ee;padding:10px;border-radius:4px;font-size:0.8rem;margin-top:8px;overflow-x:auto;"><code>${escapeHtml(st.code)}</code></pre>` : ""}
+                  </div>
+                `).join("")}
+              </div>
+            `;
+          }
+          if (s.type === "callout") {
+            return `
+              <div style="background:#0f172a;border-left:3px solid #22d3ee;padding:14px 18px;margin:18px 0;border-radius:0 6px 6px 0;">
+                <div style="color:#22d3ee;font-weight:700;font-size:0.85rem;margin-bottom:4px;text-transform:uppercase;font-family:monospace;">${escapeHtml(s.title)}</div>
+                <div style="color:#cbd5e1;font-size:0.85rem;line-height:1.6;">${escapeHtml(s.text)}</div>
+              </div>
+            `;
+          }
+          if (s.type === "comparison") {
+            const headers = s.headers || [];
+            const rows = s.rows || [];
+            return `
+              <div style="overflow-x:auto;margin:20px 0;">
+                <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+                  <thead>
+                    <tr style="background:#0f172a;border-bottom:1px solid #334155;">
+                      ${headers.map(h => `<th style="padding:10px;text-align:left;color:#22d3ee;">${escapeHtml(h)}</th>`).join("")}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${rows.map(r => `
+                      <tr style="border-bottom:1px solid #1e293b;">
+                        ${(r || []).map(c => `<td style="padding:10px;color:#cbd5e1;">${escapeHtml(c)}</td>`).join("")}
+                      </tr>
+                    `).join("")}
+                  </tbody>
+                </table>
+              </div>
+            `;
+          }
+          if (s.type === "list") {
+            const items = s.items || [];
+            return `
+              <ul style="margin:16px 0;padding-left:20px;color:#cbd5e1;">
+                ${items.map(it => `<li style="margin-bottom:8px;line-height:1.6;">${escapeHtml(it)}</li>`).join("")}
+              </ul>
+            `;
           }
           return "";
         })

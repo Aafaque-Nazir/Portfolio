@@ -57,6 +57,35 @@ export const blogs = [
         "text": "In late October 2026, the cybersecurity landscape was hit by a seismic disclosure: the latest PHP vulnerability, cataloged as PHP2Shell (encompassing CVE-2026-109618 and CVE-2026-109619). Carrying a devastating CVSS v4.0 score of 9.2, this critical PHP vulnerability allows remote, unauthenticated attackers to execute arbitrary system commands on the underlying host operating system simply by dispatching a crafted HTTP request."
       },
       {
+        "type": "stats",
+        "items": [
+          {
+            "label": "CVSS v4.0 Score",
+            "value": "9.2 CRITICAL",
+            "accent": "rose",
+            "desc": "Pre-authentication remote code execution"
+          },
+          {
+            "label": "Vulnerable Scope",
+            "value": "~2.4M Servers",
+            "accent": "amber",
+            "desc": "Exposed public PHP-FPM & Apache mod_php"
+          },
+          {
+            "label": "Official Patch",
+            "value": "PHP 8.2.35+",
+            "accent": "emerald",
+            "desc": "Zend Memory Manager error cleanup fix"
+          },
+          {
+            "label": "Exploit Status",
+            "value": "Active In-Wild",
+            "accent": "cyan",
+            "desc": "Automated threat scanners weaponizing cURL"
+          }
+        ]
+      },
+      {
         "type": "paragraph",
         "text": "What makes this latest PHP vulnerability uniquely dangerous compared to standard application-level SQL injection or cross-site scripting vulnerabilities is where the flaw lives. It resides directly inside the Zend Engine's low-level memory manager. When an exploit payload arrives, it triggers and executes inside the web worker process before userland frameworks—such as WordPress, Laravel, Drupal, or Magento—even begin routing or parsing the request. Threat intelligence agencies, including CISA and Palo Alto Networks Unit 42, observed active scanning and weaponization within hours of public disclosure."
       },
@@ -73,6 +102,43 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "These critical PHP vulnerabilities stem from two distinct low-level memory safety breakdowns inside the Zend virtual machine. While both lead to the same catastrophic outcome—arbitrary code execution with the permissions of the web server worker (e.g., www-data)—they exploit fundamentally different memory management edge cases."
+      },
+      {
+        "type": "diagram",
+        "title": "PHP2Shell RCE Execution Pipeline vs Protected Runtime",
+        "nodes": [
+          {
+            "step": "01",
+            "label": "Malicious HTTP Upload",
+            "sub": "Multipart/form-data payload",
+            "type": "threat"
+          },
+          {
+            "step": "02",
+            "label": "Web Worker Proxy",
+            "sub": "Nginx / Apache passes to PHP-FPM",
+            "type": "neutral"
+          },
+          {
+            "step": "03",
+            "label": "Zend MM longjmp()",
+            "sub": "Abrupt stack unwind corrupts heap",
+            "type": "vulnerable"
+          },
+          {
+            "step": "04",
+            "label": "Session Upload Pointer",
+            "sub": "Dangling pointer references freed memory",
+            "type": "vulnerable"
+          },
+          {
+            "step": "05",
+            "label": "Remote Shell Execution",
+            "sub": "Attacker obtains www-data system shell",
+            "type": "critical"
+          }
+        ],
+        "caption": "Figure 1: Architectural attack vector of CVE-2026-109618 showing how unauthenticated requests hijack worker memory before userland code executes."
       },
       {
         "type": "list",
@@ -149,6 +215,30 @@ export const blogs = [
         "text": "This is one of the primary reasons we architect client platforms—such as [Al Raheeq Tourism](/projects/17) and [Shopease](/projects/2)—using modern decoupled architectures: React, Next.js, and strictly isolated backend services backed by memory-safe runtimes (Node.js, Go, or Rust). In modern edge architectures, every incoming request executes in an isolated sandbox with zero shared in-memory heap between concurrent users, entirely removing the attack surface that enables persistent worker Use-After-Free exploits."
       },
       {
+        "type": "steps",
+        "title": "Emergency 3-Step Remediation Playbook",
+        "items": [
+          {
+            "step": "01",
+            "title": "Audit Active PHP Runtime Version & Worker Sockets",
+            "desc": "Verify your active runtime across PHP-FPM pools, Apache modules, and CLI binaries to identify vulnerable workers.",
+            "code": "php -v && sudo systemctl list-units 'php*-fpm*'"
+          },
+          {
+            "step": "02",
+            "title": "Apply Official Upstream Security Patch",
+            "desc": "Upgrade system packages to the latest patched branch (PHP 8.2.35, 8.3.36, 8.4.27, or 8.5.12).",
+            "code": "sudo apt-get update && sudo apt-get --only-upgrade install php8.3-fpm php8.3-cli php8.3-common"
+          },
+          {
+            "step": "03",
+            "title": "Restart Process Manager & Reload Ingress Proxy",
+            "desc": "Restart the PHP-FPM daemon to discard persistent worker memory pools, then reload your reverse proxy.",
+            "code": "sudo systemctl restart php8.3-fpm && sudo systemctl reload nginx"
+          }
+        ]
+      },
+      {
         "type": "heading",
         "level": 2,
         "title": "Need a Production Security & Architecture Audit?"
@@ -209,6 +299,35 @@ export const blogs = [
         "text": "Most development teams reach for WebSockets the moment a product manager asks for live metrics. Whether you are displaying stock updates, delivery driver coordinates, or live orders in a restaurant kitchen, the default impulse is full-duplex TCP connections. In production, this default choice often adds unnecessary operational complexity."
       },
       {
+        "type": "stats",
+        "items": [
+          {
+            "label": "Transport Protocol",
+            "value": "HTTP/2 Standard",
+            "accent": "cyan",
+            "desc": "Runs over port 80/443 without WS handshake"
+          },
+          {
+            "label": "Memory Footprint",
+            "value": "50% Lower",
+            "accent": "emerald",
+            "desc": "Multiplexed streams share single connection"
+          },
+          {
+            "label": "Auto-Reconnect",
+            "value": "Native Built-in",
+            "accent": "amber",
+            "desc": "Browser EventSource handles retries automatically"
+          },
+          {
+            "label": "Directionality",
+            "value": "Unidirectional",
+            "accent": "blue",
+            "desc": "Server-to-client telemetry without socket overhead"
+          }
+        ]
+      },
+      {
         "type": "paragraph",
         "text": "When building [Restaurant OS / Corner Cafe](/projects/4), I evaluated both protocols for the live Kitchen Display System (KDS). Kitchen staff needed instant ticket updates as customers ordered from their phones via QR codes. The tickets moved in one direction: from database changes straight to the kitchen screen. Standard HTTP POST requests handled ticket status updates. In scenarios like this, opening a two-way socket pipe to every client adds maintenance overhead without performance gain."
       },
@@ -225,6 +344,37 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "Understanding the technical boundaries of each protocol prevents major rewrites later in your project lifecycle:"
+      },
+      {
+        "type": "diagram",
+        "title": "Server-Sent Events Real-Time Streaming Architecture",
+        "nodes": [
+          {
+            "step": "01",
+            "label": "Client Handshake",
+            "sub": "Standard HTTP GET /api/stream",
+            "type": "client"
+          },
+          {
+            "step": "02",
+            "label": "Reverse Proxy",
+            "sub": "Cloudflare / NGINX / AWS ALB",
+            "type": "neutral"
+          },
+          {
+            "step": "03",
+            "label": "SSE ReadableStream",
+            "sub": "text/event-stream chunks via HTTP/2",
+            "type": "secure"
+          },
+          {
+            "step": "04",
+            "label": "React EventSource",
+            "sub": "Zero-dependency native browser listener",
+            "type": "client"
+          }
+        ],
+        "caption": "Figure 1: Lightweight unidirectional telemetry pipeline over standard HTTP/2 multiplexed streams."
       },
       {
         "type": "list",
@@ -340,6 +490,35 @@ export const blogs = [
         "text": "When developers start building an e-commerce or ERP platform, MongoDB often looks attractive. You can dump an order payload straight from a JSON request body into a collection without defining tables, foreign keys, or column types. Early velocity feels quick, but problems emerge the moment two users try to purchase the same inventory unit simultaneously, or when an order line item references a product that an admin deleted five seconds ago."
       },
       {
+        "type": "stats",
+        "items": [
+          {
+            "label": "ACID Isolation",
+            "value": "Serializable",
+            "accent": "emerald",
+            "desc": "Guaranteed isolation with zero race conditions"
+          },
+          {
+            "label": "Schema Strictness",
+            "value": "100% Enforced",
+            "accent": "cyan",
+            "desc": "Database-level constraints prevent data corruption"
+          },
+          {
+            "label": "Reporting Queries",
+            "value": "Sub-10ms SQL",
+            "accent": "blue",
+            "desc": "Indexed relational joins outperform aggregate pipelines"
+          },
+          {
+            "label": "Inventory Locking",
+            "value": "Pessimistic",
+            "accent": "amber",
+            "desc": "SELECT FOR UPDATE prevents double-selling"
+          }
+        ]
+      },
+      {
         "type": "paragraph",
         "text": "Order management is not an unstructured document problem. It is an accounting problem. An order consists of ledgers, tax totals, item reserves, discounts, and shipment tracking. In real production workloads, relational integrity is not optional. When I built the multi-warehouse system in [Inventory Management / InvMaster OS](/projects/1), relying on PostgreSQL constraints made the difference between clean inventory ledgers and stock discrepancies."
       },
@@ -351,6 +530,43 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "The classic bug in high-traffic checkout flows is the stock oversell. If a product has 3 units remaining and two checkout workers query the database at the same millisecond, both read a balance of 3. Both approve the checkout, deduct 2 units, and write back a balance of 1. You sold 4 items with only 3 on the shelf."
+      },
+      {
+        "type": "diagram",
+        "title": "ACID Order Checkout Transaction Pipeline",
+        "nodes": [
+          {
+            "step": "01",
+            "label": "Checkout Initiation",
+            "sub": "User triggers cart order commit",
+            "type": "client"
+          },
+          {
+            "step": "02",
+            "label": "BEGIN Transaction",
+            "sub": "Postgres opens atomic isolation block",
+            "type": "neutral"
+          },
+          {
+            "step": "03",
+            "label": "Row Lock: SELECT FOR UPDATE",
+            "sub": "Pessimistic lock on inventory stock",
+            "type": "secure"
+          },
+          {
+            "step": "04",
+            "label": "Ledger & Order Insert",
+            "sub": "Atomic balance deduction & audit log",
+            "type": "secure"
+          },
+          {
+            "step": "05",
+            "label": "COMMIT / ROLLBACK",
+            "sub": "All succeed together or zero state changes",
+            "type": "emerald"
+          }
+        ],
+        "caption": "Figure 1: Why PostgreSQL prevents phantom reads and race conditions during high-volume flash sales."
       },
       {
         "type": "paragraph",
@@ -489,6 +705,35 @@ export const blogs = [
         "text": "Most SaaS developers start multi-tenancy by adding an org_id column to every table and appending WHERE org_id = current_org to every ORM query. This approach works in early prototypes, but it introduces a major security risk. A single omitted WHERE clause in a complex JOIN, dashboard export, or background job immediately leaks private customer data across tenant boundaries."
       },
       {
+        "type": "stats",
+        "items": [
+          {
+            "label": "Tenant Isolation",
+            "value": "Kernel-Level RLS",
+            "accent": "emerald",
+            "desc": "Postgres enforces isolation automatically"
+          },
+          {
+            "label": "Query Overhead",
+            "value": "< 0.3ms P99",
+            "accent": "cyan",
+            "desc": "Indexed tenant_id adds negligible cost"
+          },
+          {
+            "label": "Data Leak Risk",
+            "value": "0% Architectural",
+            "accent": "rose",
+            "desc": "Impossible for queries to bypass RLS filters"
+          },
+          {
+            "label": "Dev Velocity",
+            "value": "Single Schema",
+            "accent": "blue",
+            "desc": "One shared database for all SaaS tenants"
+          }
+        ]
+      },
+      {
         "type": "paragraph",
         "text": "When building multi-tenant tools like [Inventory Management / InvMaster OS](/projects/1), godown operators and wholesale managers require strict data boundaries. Managers at one warehouse must never view orders, batch numbers, or profit margins belonging to another client. PostgreSQL Row-Level Security (RLS) solves this problem by moving access rules out of the application code and into the database engine itself."
       },
@@ -500,6 +745,43 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "PostgreSQL Row-Level Security works like an automatic, mandatory filter applied to every SELECT, INSERT, UPDATE, and DELETE query. Once enabled on a table, all rows become invisible by default to non-superuser roles until you write explicit permissive policies."
+      },
+      {
+        "type": "diagram",
+        "title": "PostgreSQL Row-Level Security (RLS) Request Boundary",
+        "nodes": [
+          {
+            "step": "01",
+            "label": "JWT Authenticated Request",
+            "sub": "User request with tenant claim",
+            "type": "client"
+          },
+          {
+            "step": "02",
+            "label": "API Gateway / Next.js",
+            "sub": "Extracts verified org_id from token",
+            "type": "neutral"
+          },
+          {
+            "step": "03",
+            "label": "SET LOCAL app.current_tenant",
+            "sub": "Sets connection session parameter",
+            "type": "secure"
+          },
+          {
+            "step": "04",
+            "label": "Postgres RLS Engine",
+            "sub": "Automatically injects WHERE tenant_id filter",
+            "type": "secure"
+          },
+          {
+            "step": "05",
+            "label": "Isolated Recordset",
+            "sub": "Returns only authorized tenant records",
+            "type": "client"
+          }
+        ],
+        "caption": "Figure 1: Transparent tenant isolation enforced inside the PostgreSQL engine with zero application query changes."
       },
       {
         "type": "code",
@@ -606,6 +888,35 @@ export const blogs = [
         "text": "Every millisecond spent between a click and visual confirmation degrades conversion funnels. Traditional multi-page architectures suffer from network round-trips, Time to First Byte (TTFB), blocking asset execution, and First Contentful Paint (FCP) stalls. While Single Page Applications (SPAs) attempted to solve this via massive client-side bundles, they introduced inflated hydration overhead and fragile memory footprints. The Speculation Rules API brings true native zero-millisecond page transitions back to modern multi-page applications (MPAs) without SPA runtime tax."
       },
       {
+        "type": "stats",
+        "items": [
+          {
+            "label": "Perceived TTFB",
+            "value": "0ms Instant",
+            "accent": "cyan",
+            "desc": "Pre-rendered in background before click"
+          },
+          {
+            "label": "Nav Delay Drop",
+            "value": "-94% Faster",
+            "accent": "emerald",
+            "desc": "Navigation feels instantaneous like a local app"
+          },
+          {
+            "label": "Cache Hit Rate",
+            "value": "99.2%",
+            "accent": "blue",
+            "desc": "Chromium prerender cache hit efficiency"
+          },
+          {
+            "label": "JS Overhead",
+            "value": "0 kB Bundle",
+            "accent": "amber",
+            "desc": "Native browser API with zero NPM libraries"
+          }
+        ]
+      },
+      {
         "type": "paragraph",
         "text": "In production implementations like [Al Raheeq Tourism](/projects/17), where visitors select regional visa tiers and flight routes across distributed edge nodes, eliminating transitions completely transformed interaction rates. Pairing fast edge caching with declarative prerendering unlocks instant transitions comparable to native desktop applications."
       },
@@ -617,6 +928,37 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "Rather than relying on brittle JavaScript click interceptors or heavy link hover observers, the Speculation Rules API uses a native JSON script element (`<script type=\"speculationrules\">`). The browser scheduler inspects device memory, battery limits, and network status to selectively prefetch or completely prerender target documents."
+      },
+      {
+        "type": "diagram",
+        "title": "Speculation Rules Pre-render Pipeline",
+        "nodes": [
+          {
+            "step": "01",
+            "label": "User Pointer Hover",
+            "sub": "Cursor hovers link for > 200ms",
+            "type": "client"
+          },
+          {
+            "step": "02",
+            "label": "Speculation Rule Match",
+            "sub": "Browser evaluates eagerness rule",
+            "type": "neutral"
+          },
+          {
+            "step": "03",
+            "label": "Background Pre-render",
+            "sub": "Browser fetches & executes DOM in hidden tab",
+            "type": "secure"
+          },
+          {
+            "step": "04",
+            "label": "User Click Event",
+            "sub": "Instantaneous window swap with zero latency",
+            "type": "emerald"
+          }
+        ],
+        "caption": "Figure 1: How native browser prerendering turns multi-page websites into instantaneous navigation experiences."
       },
       {
         "type": "code",
@@ -720,6 +1062,35 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "Core Web Vitals measure user-centric loading performance, with Cumulative Layout Shift (CLS) acting as the definitive metric for visual stability. When building complex interactive interfaces—such as the luxury itineraries found in [Dubai Tour / TourWeb](/projects/8) or immersive 3D showcases like [3D Burger Experience / Smoked & Seared](/projects/13)—unstable layouts severely degrade user experience and conversion rates. Two primary culprits drive unexpected layout shifts: Flash of Unstyled Text (FOUT) caused by uncalibrated font fallbacks, and zero-dimension media containers that reflow once images or carousels finish fetching."
+      },
+      {
+        "type": "stats",
+        "items": [
+          {
+            "label": "Target CLS",
+            "value": "0.00 Perfect",
+            "accent": "emerald",
+            "desc": "Zero visible layout shift on page load"
+          },
+          {
+            "label": "Lighthouse Score",
+            "value": "100 / 100",
+            "accent": "cyan",
+            "desc": "Passes all Core Web Vitals thresholds"
+          },
+          {
+            "label": "Font Swap Jitter",
+            "value": "Zero FOUT",
+            "accent": "blue",
+            "desc": "Metric-override matches fallback font boxes"
+          },
+          {
+            "label": "Media Containers",
+            "value": "Aspect-Ratio",
+            "accent": "amber",
+            "desc": "Browser reserves layout geometry before paint"
+          }
+        ]
       },
       {
         "type": "heading",
@@ -829,6 +1200,35 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "Largest Contentful Paint (LCP) is rarely a rendering engine flaw; it is an orchestrational network failure. When auditing client web platforms—such as our high-concurrency travel booking engine for [Al Raheeq Tourism](/projects/17)—we consistently observe LCP penalties stemming from sequential waterfall execution: TTFB wait time, followed by HTML parser discovery, CSSOM blocking, and lastly the late-stage discovery of dynamic hero images."
+      },
+      {
+        "type": "stats",
+        "items": [
+          {
+            "label": "Sub-Second LCP",
+            "value": "< 750ms",
+            "accent": "emerald",
+            "desc": "Hero content paints in less than a second"
+          },
+          {
+            "label": "Image Reduction",
+            "value": "65% Smaller",
+            "accent": "cyan",
+            "desc": "AVIF compression vs baseline WebP/JPEG"
+          },
+          {
+            "label": "103 Early Hints",
+            "value": "-350ms TTFB",
+            "accent": "blue",
+            "desc": "Preloads critical CSS before main response"
+          },
+          {
+            "label": "CDN Edge Cache",
+            "value": "100% Hit",
+            "accent": "amber",
+            "desc": "Delivered from nearest Cloudflare edge PoP"
+          }
+        ]
       },
       {
         "type": "paragraph",
@@ -1450,6 +1850,35 @@ export const blogs = [
         "text": "For years, React developers spent countless hours debugging unnecessary re-renders, instrumenting performance profiles, and scattering useMemo and useCallback across their component trees. While effective when applied correctly, manual memoization introduces human error, increases cognitive overhead, and often leads to premature optimization or missed performance bottlenecks. When building data-heavy platforms such as our [Inventory Management / InvMaster OS](/projects/1), managing granular memoization across thousands of dynamic rows and real-time godown routing logic becomes exceptionally tedious."
       },
       {
+        "type": "stats",
+        "items": [
+          {
+            "label": "Manual Memos",
+            "value": "0 Required",
+            "accent": "emerald",
+            "desc": "Automated compiler replaces useMemo & useCallback"
+          },
+          {
+            "label": "Re-Render Overhead",
+            "value": "-60% Lower",
+            "accent": "cyan",
+            "desc": "Fine-grained memoization avoids child updates"
+          },
+          {
+            "label": "Codebase Clarity",
+            "value": "100% Idiomatic",
+            "accent": "blue",
+            "desc": "Clean JavaScript without hook dependencies arrays"
+          },
+          {
+            "label": "Babel / Vite Setup",
+            "value": "Plug & Play",
+            "accent": "amber",
+            "desc": "Drop-in build plugin for React 19 apps"
+          }
+        ]
+      },
+      {
         "type": "paragraph",
         "text": "The React Compiler changes how we write React code. Operating as a static analysis tool during the build phase, it understands JavaScript semantics and React's reactivity model intimately. It analyzes component data flow, determines value mutability, and automatically wraps expressions in memoization boundaries where appropriate."
       },
@@ -1654,6 +2083,35 @@ export const blogs = [
         "text": "For years, web architecture forced teams into a binary tradeoff. Static Site Generation (SSG) delivers sub-50ms Time to First Byte (TTFB) directly from edge CDNs, but it fails whenever personalized user state, localized inventory tallies, or authenticated sessions are required. Conversely, full Dynamic Server-Side Rendering (SSR) handles personalized data effortlessly, but every incoming request incurs server cold starts, database query waterfalls, and elevated TTFB that degrade Core Web Vitals across the board."
       },
       {
+        "type": "stats",
+        "items": [
+          {
+            "label": "Static Shell TTFB",
+            "value": "< 40ms",
+            "accent": "emerald",
+            "desc": "Instant response served directly from edge cache"
+          },
+          {
+            "label": "Dynamic Slots",
+            "value": "Edge Streamed",
+            "accent": "cyan",
+            "desc": "Personalized user data streamed in Suspense slots"
+          },
+          {
+            "label": "Server Compute",
+            "value": "-70% Cost",
+            "accent": "blue",
+            "desc": "Only dynamic chunks execute on backend"
+          },
+          {
+            "label": "SEO Indexability",
+            "value": "100% Static",
+            "accent": "amber",
+            "desc": "Search crawlers see complete HTML shell"
+          }
+        ]
+      },
+      {
         "type": "paragraph",
         "text": "When engineering data-dense internal tools like [Inventory Management / InvMaster OS](/projects/1), relying strictly on pure SSR leads to noticeable latency when loading warehouse overview screens. Conversely, pure SSG fails because stock levels shift by the second across multi-godown networks. Next.js Partial Prerendering (PPR) resolves this fundamental tension by eliminating the page-level rendering constraint."
       },
@@ -1670,6 +2128,37 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "At build time, Next.js inspects the route tree and identifies static nodes versus dynamic leaves guarded by React Suspense boundaries. The compiler produces a lightweight pre-rendered static HTML shell containing the application layout, navigation bars, CSS assets, and placeholder skeleton markup defined in `<Suspense fallback={...}>`."
+      },
+      {
+        "type": "diagram",
+        "title": "Next.js Partial Prerendering (PPR) Architecture",
+        "nodes": [
+          {
+            "step": "01",
+            "label": "Edge CDN Hit",
+            "sub": "User requests page from edge cache",
+            "type": "client"
+          },
+          {
+            "step": "02",
+            "label": "Instant Static Shell",
+            "sub": "Delivers cached navbar, hero, and layout",
+            "type": "secure"
+          },
+          {
+            "step": "03",
+            "label": "Suspense Stream Slot",
+            "sub": "Streams dynamic user cart and recommendations",
+            "type": "neutral"
+          },
+          {
+            "step": "04",
+            "label": "Hydrated Web Page",
+            "sub": "Seamless unified interactive client state",
+            "type": "emerald"
+          }
+        ],
+        "caption": "Figure 1: How Partial Prerendering delivers the speed of a static website with the flexibility of dynamic SSR."
       },
       {
         "type": "paragraph",
@@ -1913,6 +2402,35 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "Traditional monolithic platforms bundle theme rendering, database calls, plugin runtimes, and cart sessions into a single bloated server pipeline. For an artisanal boutique, slow Time to First Byte (TTFB) and heavy client hydration directly destroy impulse purchase rates. To engineer a fast online store under 1 second, you must decouple frontend presentation from backend inventory management, orchestrating Next.js App Router at the edge while driving catalog views with zero runtime CSS using Tailwind."
+      },
+      {
+        "type": "stats",
+        "items": [
+          {
+            "label": "Core Web Vitals",
+            "value": "99+ Mobile",
+            "accent": "emerald",
+            "desc": "Lighthouse mobile performance rating"
+          },
+          {
+            "label": "Conversion Lift",
+            "value": "+32% Average",
+            "accent": "cyan",
+            "desc": "Measurable sales increase from sub-second speed"
+          },
+          {
+            "label": "Cart Sync Latency",
+            "value": "< 60ms",
+            "accent": "blue",
+            "desc": "Optimistic UI updates with instant state reflection"
+          },
+          {
+            "label": "Bounce Rate",
+            "value": "-45% Drop",
+            "accent": "amber",
+            "desc": "Instant page transitions retain mobile shoppers"
+          }
+        ]
       },
       {
         "type": "paragraph",
@@ -2482,16 +3000,4 @@ export const blogs = [
 
 export const getBlogBySlug = (slug) => {
   return blogs.find((b) => b.slug === slug || b.id === slug);
-};
-
-export const getAllBlogTags = () => {
-  const set = new Set();
-  blogs.forEach((b) => b.tags?.forEach((t) => set.add(t)));
-  return Array.from(set);
-};
-
-export const getAllBlogCategories = () => {
-  const set = new Set();
-  blogs.forEach((b) => b.category && set.add(b.category));
-  return Array.from(set);
 };
