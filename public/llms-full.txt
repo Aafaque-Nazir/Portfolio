@@ -107,9 +107,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 
 ## Engineering Articles & Architectural Guides (Blog)
 
-- **PHP2Shell: Inside the Critical Pre-Auth RCE Vulnerabilities in PHP Core (CVE-2026-109618 & CVE-2026-109619)**
+- **PHP2Shell: Inside the Latest PHP Vulnerability & Critical Security Flaws (CVE-2026-109618 & CVE-2026-109619)**
   URL: https://aafaque.in/blog/php2shell-vulnerability-cve-2026-109618-rce-breakdown
-  Summary: Architectural breakdown of PHP2Shell (CVE-2026-109618/19): the pre-auth PHP core RCE hitting WordPress, Laravel, and millions of production servers.
+  Summary: Architectural breakdown of the latest PHP vulnerability (PHP2Shell): how to apply the emergency PHP patch and fix critical PHP security vulnerabilities.
 
 - **Blog Index:** https://aafaque.in/blog
 - **WebSockets vs Server-Sent Events: Choosing the Right Protocol for Live Dashboards**
