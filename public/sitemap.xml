@@ -46,6 +46,12 @@
 
   <!-- Blog Posts -->
   <url>
+    <loc>https://aafaque.in/blog/php2shell-vulnerability-cve-2026-109618-rce-breakdown/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://aafaque.in/blog/reverse-engineering-adobe-open-source-artcraft-ai-clones/</loc>
     <lastmod>2026-10-17</lastmod>
     <changefreq>weekly</changefreq>
