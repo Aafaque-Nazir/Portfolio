@@ -1,5 +1,120 @@
 export const blogs = [
   {
+    "id": "database-connection-pooling-pgbouncer-supabase",
+    "slug": "database-connection-pooling-pgbouncer-supabase",
+    "title": "Database Connection Pooling at Scale: Configuring PgBouncer and Supabase Connection Pools",
+    "seoTitle": "PgBouncer & Supabase Connection Pooling Guide",
+    "description": "Learn how to configure PgBouncer and Supabase connection pools to prevent database timeouts in serverless Next.js apps.",
+    "publishedAt": "2026-10-26",
+    "updatedAt": "2026-10-26",
+    "readTime": "7 min read",
+    "category": "Backend & Database",
+    "tags": [
+      "PostgreSQL",
+      "PgBouncer",
+      "Supabase",
+      "Serverless",
+      "Database"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Database connection pooling uses a proxy like PgBouncer or Supabase Supavisor to keep a small set of open PostgreSQL connections, serving thousands of serverless requests without exhausting database RAM or hitting max_connections errors.",
+    "relatedProjectId": 15,
+    "faqs": [
+      {
+        "question": "Why do serverless Next.js apps crash PostgreSQL databases?",
+        "answer": "Each serverless function instance opens its own TCP connection. Under sudden traffic spikes, hundreds of concurrent instances hit the database at once, exceeding PostgreSQL max_connections and crashing the instance with out-of-memory errors."
+      },
+      {
+        "question": "What is the difference between Session and Transaction pool modes?",
+        "answer": "Session mode holds a database connection for the full lifetime of a client connection, supporting prepared statements and session variables. Transaction mode returns the connection to the pool as soon as a single transaction completes, allowing hundreds of serverless requests to share a tiny pool of connections."
+      },
+      {
+        "question": "When should you use the direct port 5432 versus pool port 6543 in Supabase?",
+        "answer": "Use port 5432 for running database schema migrations and long batch jobs via Prisma or Drizzle. Use port 6543 (transaction mode) for production serverless routes, API endpoints, and web traffic."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Serverless Connection Exhaustion Problem"
+      },
+      {
+        "type": "paragraph",
+        "text": "Every PostgreSQL connection consumes roughly 5 to 10 MB of RAM on your database server. In a traditional Node.js deployment running on a single long-lived container, your server opens 10 to 20 persistent connections and shares them across requests. But modern platforms like Vercel and AWS Lambda spin up new container instances for every concurrent request."
+      },
+      {
+        "type": "paragraph",
+        "text": "If 400 users hit your web app simultaneously, 400 isolated serverless functions launch. Each tries to open a direct PostgreSQL connection. If your database instance has a max_connections limit set to 100, 300 requests instantly fail with connection rejected or fatal: remaining connection slots are reserved errors. We resolved this exact issue when building [Aura Estate](/projects/15), a high-traffic real estate platform where property searches and valuation queries execute under heavy concurrent traffic."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "How PgBouncer and Supabase Connection Pools Work"
+      },
+      {
+        "type": "paragraph",
+        "text": "A connection pooler acts as a lightweight proxy between your application and your PostgreSQL database. Instead of your serverless workers talking directly to port 5432, they connect to the pooler on port 6543. The pooler keeps a fixed, healthy set of open database connections (for example, 15 to 25 connections) and queues or reallocates them instantly as incoming web requests arrive."
+      },
+      {
+        "type": "callout",
+        "title": "Key Rule for Serverless Apps",
+        "text": "Always configure PgBouncer or Supabase Supavisor in Transaction Mode for web endpoints. Session mode ties an actual database connection to the client until disconnect, defeating the purpose of serverless connection pooling."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Configuring Prisma and Drizzle with Supabase Pooling"
+      },
+      {
+        "type": "paragraph",
+        "text": "When using an ORM like Prisma or Drizzle in serverless production, you need two distinct connection strings in your environment variables: one for migration runs and one for daily application traffic."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "db.ts - Supabase connection pool setup with Drizzle and Postgres.js",
+        "code": "import { drizzle } from 'drizzle-orm/postgres-js';\nimport postgres from 'postgres';\n\n// Transaction pooler connection string (Port 6543)\n// Add ?pgbouncer=true or prepare=false to prevent prepared statement errors\nconst connectionString = process.env.DATABASE_URL!;\n\n// Configure client with max 1 connection per serverless function instance\nconst client = postgres(connectionString, {\n  max: 1,\n  idle_timeout: 20,\n  connect_timeout: 10,\n  prepare: false, // Required for PgBouncer / Supabase transaction mode\n});\n\nexport const db = drizzle(client);"
+      },
+      {
+        "type": "paragraph",
+        "text": "Notice the prepare: false flag. Because PgBouncer in transaction mode assigns queries to different backend connections dynamically, prepared statements cached on connection A will fail if a follow-up query runs on connection B. Turning off client-side statement preparation ensures zero runtime errors."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Setting Proper Pool Sizes in Production"
+      },
+      {
+        "type": "paragraph",
+        "text": "To keep your database fast and avoid timeouts, use these practical settings in your database configuration:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Set pool_mode = transaction in pgbouncer.ini to free slots immediately after each query finishes.",
+          "Set default_pool_size to roughly (2 * CPU Cores) + Disk spindles. For an 8-core database server, a pool size of 20 to 25 yields peak query throughput.",
+          "Keep serverless client connections to max: 1 per instance so ephemeral containers do not hoard idle connections.",
+          "Set statement_timeout = '15s' on the database level to kill runaway queries before they lock up pooled connections."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If your application is experiencing database crashes, connection timeouts, or slow query spikes under high traffic, I can help audit and optimize your database tier. Check out my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to build a stable, scalable infrastructure."
+      }
+    ]
+  },
+  {
     "id": "php2shell-vulnerability-cve-2026-109618-rce-breakdown",
     "slug": "php2shell-vulnerability-cve-2026-109618-rce-breakdown",
     "title": "PHP2Shell: Inside the Latest PHP Vulnerability & Critical Security Flaws (CVE-2026-109618 & CVE-2026-109619)",
