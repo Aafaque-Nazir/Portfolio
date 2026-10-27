@@ -1,5 +1,131 @@
 export const blogs = [
   {
+    "id": "offline-first-indexeddb-postgresql-sync",
+    "slug": "offline-first-indexeddb-postgresql-sync",
+    "title": "Offline-First Web Apps: Synchronizing IndexedDB with PostgreSQL",
+    "seoTitle": "Offline-First React: IndexedDB to PostgreSQL Sync",
+    "description": "Learn how to build offline-first web apps with React, IndexedDB, and PostgreSQL using optimistic UI updates and background synchronization queues.",
+    "publishedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
+    "readTime": "7 min read",
+    "category": "Architecture & Frameworks",
+    "tags": [
+      "IndexedDB",
+      "PostgreSQL",
+      "React",
+      "Offline First",
+      "Optimistic UI"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Offline-first web apps store data locally in IndexedDB and apply updates instantly to the UI before sending them to PostgreSQL. When network connectivity drops, mutations queue locally and replay in order once the client reconnects.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "What is an offline-first web app?",
+        "answer": "An offline-first web app treats the local device as the primary source of truth for reads and writes. It writes data to local storage like IndexedDB first so the interface responds instantly, then synchronizes changes with a remote database like PostgreSQL in the background."
+      },
+      {
+        "question": "How do optimistic UI updates work with IndexedDB?",
+        "answer": "When a user submits an action, the app immediately writes the new record to IndexedDB with a pending status and updates the UI state. A background service worker or queue manager attempts to send the mutation to the server. If the request fails, the local record remains queued until the network is back."
+      },
+      {
+        "question": "How do you handle conflict resolution between IndexedDB and PostgreSQL?",
+        "answer": "Most operational tools use either timestamp-based Last-Write-Wins (LWW) or version vector comparisons. For critical business data like inventory or table tickets, the server checks an updated_at or version column and rejects stale writes, prompting the client to merge the latest snapshot."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Real-World Apps Need Local-First Architecture"
+      },
+      {
+        "type": "paragraph",
+        "text": "Most web apps treat the cloud database as the immediate gatekeeper for every single user click. When a user clicks a button, the app shows a spinner, waits 200 to 800 milliseconds for a roundtrip network request, and blocks interaction until the server responds. If the network drops or the connection is flaky, the app crashes or shows an error dialog."
+      },
+      {
+        "type": "paragraph",
+        "text": "This request-response pattern fails in operational environments like warehouses, retail counters, and busy dining rooms. When building [Restaurant OS / Corner Cafe](/projects/4), waitstaff and kitchen staff could not afford to lose order tickets when restaurant Wi-Fi dipped during rush hours. The solution was an offline-first architecture: write immediately to browser IndexedDB, update the UI with zero delay, and sync mutations to cloud PostgreSQL through a reliable background queue."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Client Mutation Queue Pattern"
+      },
+      {
+        "type": "paragraph",
+        "text": "To keep the interface responsive without losing data, we separate local state writes from network requests. Every write operation generates two records inside IndexedDB: the entity itself in a local table, and a sync task inside an outbox queue table."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Local mutation queue and optimistic write handler in TypeScript",
+        "code": "import Dexie, { type Table } from 'dexie';\n\ninterface OrderItem {\n  id: string;\n  name: string;\n  quantity: number;\n  price: number;\n}\n\ninterface LocalOrder {\n  id: string;\n  tableNumber: number;\n  items: OrderItem[];\n  status: 'pending' | 'synced' | 'failed';\n  clientUpdatedAt: number;\n}\n\ninterface SyncQueueItem {\n  id: string;\n  entity: 'orders';\n  action: 'INSERT' | 'UPDATE' | 'DELETE';\n  payload: Record<string, unknown>;\n  createdAt: number;\n  attempts: number;\n}\n\nclass AppDatabase extends Dexie {\n  orders!: Table<LocalOrder, string>;\n  syncQueue!: Table<SyncQueueItem, string>;\n\n  constructor() {\n    super('RestaurantDB');\n    this.version(1).stores({\n      orders: 'id, tableNumber, status, clientUpdatedAt',\n      syncQueue: 'id, entity, createdAt, attempts'\n    });\n  }\n}\n\nexport const db = new AppDatabase();\n\nexport async function createOrderOptimistic(orderData: Omit<LocalOrder, 'status' | 'clientUpdatedAt'>) {\n  const now = Date.now();\n  const newOrder: LocalOrder = {\n    ...orderData,\n    status: 'pending',\n    clientUpdatedAt: now\n  };\n\n  const queueTask: SyncQueueItem = {\n    id: crypto.randomUUID(),\n    entity: 'orders',\n    action: 'INSERT',\n    payload: newOrder as unknown as Record<string, unknown>,\n    createdAt: now,\n    attempts: 0\n  };\n\n  // Atomic transaction ensures outbox item exists if local record exists\n  await db.transaction('rw', [db.orders, db.syncQueue], async () => {\n    await db.orders.put(newOrder);\n    await db.syncQueue.put(queueTask);\n  });\n\n  return newOrder;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Atomicity Matters in Browser Storage",
+        "text": "Never write to your data store and sync queue in separate unbundled operations. Always wrap the local entity update and the outbox entry in an IndexedDB transaction. If the browser tab closes mid-write, you avoid orphaned UI states that never reach the server."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Idempotent Server Ingestion with PostgreSQL"
+      },
+      {
+        "type": "paragraph",
+        "text": "When the client reconnects, the background worker replays queued tasks. Because mobile networks drop packets intermittently, the server might receive the same mutation multiple times. The backend ingestion endpoint must be completely idempotent."
+      },
+      {
+        "type": "paragraph",
+        "text": "We handle this in PostgreSQL by using UUIDs generated on the client, checking transaction version timestamps, and applying ON CONFLICT clauses to prevent duplicate inserts or out-of-order overwrites."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "Idempotent PostgreSQL upsert query with optimistic concurrency control",
+        "code": "-- Schema definition\nCREATE TABLE IF NOT EXISTS orders (\n  id UUID PRIMARY KEY,\n  table_number INT NOT NULL,\n  items JSONB NOT NULL DEFAULT '[]'::jsonb,\n  status VARCHAR(32) NOT NULL DEFAULT 'received',\n  client_updated_at BIGINT NOT NULL,\n  server_updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);\n\n-- Batch ingestion statement with timestamp safety\nINSERT INTO orders (id, table_number, items, status, client_updated_at, server_updated_at)\nVALUES ($1, $2, $3, $4, $5, NOW())\nON CONFLICT (id) DO UPDATE\nSET\n  table_number = EXCLUDED.table_number,\n  items = EXCLUDED.items,\n  status = EXCLUDED.status,\n  client_updated_at = EXCLUDED.client_updated_at,\n  server_updated_at = NOW()\nWHERE orders.client_updated_at < EXCLUDED.client_updated_at;\n-- Stale writes arriving out of sequence are ignored without throwing an error"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Sync Worker Lifecycle and Network Reconnection"
+      },
+      {
+        "type": "paragraph",
+        "text": "React components should not manage network listeners directly. Instead, a dedicated sync engine handles synchronization using three triggers: immediate execution on mutation creation, the browser window online event, and an exponential backoff timer for failed requests."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Client writes directly to IndexedDB in less than 5 milliseconds, immediately reflecting changes on screen.",
+          "The background runner reads the outbox table sorted by createdAt ascending to preserve causal ordering.",
+          "Payloads are posted in batches of 10 to 50 items to minimize HTTP connection overhead.",
+          "On HTTP 200, the runner marks the local order status as synced and deletes the queue item.",
+          "On HTTP 5xx or network drop, the attempts counter increments and retries use an exponential backoff."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Building dependable offline-first web applications requires deep care around state management, edge cases, and database constraints. Whether you are building an operational dashboard, inventory tool, or POS system, I can help design and build a clean solution."
+      },
+      {
+        "type": "paragraph",
+        "text": "Take a look at my [Full-Stack Web Development Services](/services) or [get in touch directly](/contact) to discuss your product requirements."
+      }
+    ]
+  },
+  {
     "id": "database-connection-pooling-pgbouncer-supabase",
     "slug": "database-connection-pooling-pgbouncer-supabase",
     "title": "Database Connection Pooling at Scale: Configuring PgBouncer and Supabase Connection Pools",
