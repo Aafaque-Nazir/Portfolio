@@ -1302,7 +1302,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Core Web Vitals measure user-centric loading performance, with Cumulative Layout Shift (CLS) acting as the definitive metric for visual stability. When building complex interactive interfaces—such as the luxury itineraries found in [Dubai Tour / TourWeb](/projects/8) or immersive 3D showcases like [3D Burger Experience / Smoked & Seared](/projects/13)—unstable layouts severely degrade user experience and conversion rates. Two primary culprits drive unexpected layout shifts: Flash of Unstyled Text (FOUT) caused by uncalibrated font fallbacks, and zero-dimension media containers that reflow once images or carousels finish fetching."
+        "text": "Core Web Vitals measure user-centric loading performance, with Cumulative Layout Shift (CLS) acting as the definitive metric for visual stability. When building complex interactive interfaces—such as the luxury itineraries found in [Dubai Tour / TourWeb](/projects/8) or immersive 3D showcases like [3D Burger Website / Smoked & Seared](/projects/13)—unstable layouts severely degrade user experience and conversion rates. Two primary culprits drive unexpected layout shifts: Flash of Unstyled Text (FOUT) caused by uncalibrated font fallbacks, and zero-dimension media containers that reflow once images or carousels finish fetching."
       },
       {
         "type": "stats",

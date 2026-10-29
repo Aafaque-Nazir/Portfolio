@@ -239,7 +239,7 @@ const TOPIC_QUEUE = [
     topic: "Integrating Three.js and GSAP ScrollTrigger in React for Immersive 3D Product Showcases",
     category: "UI/UX & Animation",
     targetKeywords: ["three js react scroll animation", "gsap scrolltrigger 3d web experience", "interactive 3d canvas performance"],
-    relatedProjectId: 13, // 3D Burger Experience - dynamic WebGL 3D burger model disassembling and rotating smoothly on scroll
+    relatedProjectId: 13, // 3D Burger Website - dynamic WebGL 3D burger model disassembling and rotating smoothly on scroll
   },
   {
     topic: "Smooth Scrolling with Lenis and Clean Transitions in React",
@@ -345,7 +345,7 @@ Strict Requirements:
    - ID 10: [Yacht Rentals / Sea Cross](/projects/10) -> Luxury yacht charter in Mumbai Gateway of India with Lenis smooth scrolling and direct VIP inquiry booking.
    - ID 11: [CarePulse / Aura Dental Studio](/projects/11) -> Dental & smile studio with interactive 50/50 Before & After comparison slider, 3D scan showcase, and online consultation booking.
    - ID 12: [Premium Burger Shop / H5 Texes Burger](/projects/12) -> Gourmet burger brand with custom design tokens, menu showcase, and multi-outlet inquiry system.
-   - ID 13: [3D Burger Experience / Smoked & Seared](/projects/13) -> 3D WebGL burger model that rotates and disassembles dynamically on scroll via GSAP ScrollTrigger.
+   - ID 13: [3D Burger Website / Smoked & Seared](/projects/13) -> 3D WebGL burger model that rotates and disassembles dynamically on scroll via GSAP ScrollTrigger.
    - ID 14: [LA Salon & Spa / Lumina Aura](/projects/14) -> Salon & spa website with smooth multi-step appointment booking.
    - ID 15: [Aura Estate](/projects/15) -> Real estate web portal with property search, valuation calculator, and Supabase PostgreSQL.
    - ID 17: [Al Raheeq Tourism](/projects/17) -> Deira Dubai licensed travel agency with express UAE tourist visa selector, worldwide flight ticketing, Netlify Edge delivery, and rich Schema.org structured data.

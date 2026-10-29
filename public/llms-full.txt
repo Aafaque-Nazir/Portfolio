@@ -88,7 +88,7 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
    - Tech Stack: React, Tailwind CSS, Framer Motion.
    - URL: https://aafaque.in/projects/12
 
-10. **3D Interactive Burger Experience (Conversion Websites)**
+10. **3D Burger Website (Conversion Websites)**
     - Scroll-driven 3D animation website where a 3D model dynamically reacts to user scrolling.
     - Tech Stack: React, Three.js, GSAP ScrollTrigger.
     - URL: https://aafaque.in/projects/13

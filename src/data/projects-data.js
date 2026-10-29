@@ -141,7 +141,7 @@ export const projectsData = [
   },
   {
     id: 13,
-    title: "3D Burger Experience",
+    title: "3D Burger Website",
     description: "Engaging scroll-driven 3D web experience built with Three.js and GSAP ScrollTrigger, featuring real-time interactive 3D model assembly.",
     image: "/3d-burger-thumbnail.webp",
     link: "https://3d-burger.netlify.app",
