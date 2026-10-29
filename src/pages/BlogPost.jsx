@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, useScroll, useSpring } from "framer-motion";
 import {
@@ -16,7 +16,6 @@ import {
   RiCodeSSlashLine,
   RiExternalLinkLine,
   RiListCheck2,
-  RiShareLine
 } from "react-icons/ri";
 import SEO from "../components/SEO";
 import { getBlogBySlug, blogs } from "../data/blogs";
@@ -327,26 +326,16 @@ export default function BlogPost() {
     setTimeout(() => setCopiedLink(false), 2000);
   };
 
-  const handleNativeShare = () => {
-    if (typeof navigator !== "undefined" && navigator.share && post) {
-      navigator.share({
-        title: post.title,
-        text: post.description,
-        url: currentUrl
-      }).catch(() => {});
-    } else {
-      handleCopyLink();
-    }
-  };
-
-  const headings = post?.sections
-    ? post.sections
-        .filter((sec) => sec.type === "heading" && sec.level === 2)
-        .map((sec, idx) => ({
-          title: sec.title,
-          id: `heading-${idx}`,
-        }))
-    : [];
+  const headings = useMemo(() => {
+    return post?.sections
+      ? post.sections
+          .filter((sec) => sec.type === "heading" && sec.level === 2)
+          .map((sec, idx) => ({
+            title: sec.title,
+            id: `heading-${idx}`,
+          }))
+      : [];
+  }, [post?.sections]);
 
   useEffect(() => {
     if (typeof window === "undefined" || headings.length === 0) return;
