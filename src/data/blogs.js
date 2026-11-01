@@ -1,5 +1,128 @@
 export const blogs = [
   {
+    "id": "zero-commission-food-delivery-react-whatsapp",
+    "slug": "zero-commission-food-delivery-react-whatsapp",
+    "title": "Zero-Commission Food Delivery: Building Direct WhatsApp Ordering for Restaurants with React",
+    "seoTitle": "Build a Zero-Commission WhatsApp Food App in React",
+    "description": "Build a zero-commission food delivery app using React and WhatsApp. Eliminate third-party aggregator fees with direct customer ordering.",
+    "publishedAt": "2026-11-01",
+    "updatedAt": "2026-11-01",
+    "readTime": "7 min read",
+    "category": "E-Commerce Engineering",
+    "tags": [
+      "React",
+      "TypeScript",
+      "WhatsApp API",
+      "Food Tech",
+      "E-Commerce"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "A zero-commission WhatsApp food ordering web app lets diners build their cart on a fast React menu and dispatches a structured order payload directly to the restaurant's WhatsApp number, cutting out 20% to 30% delivery aggregator commissions without expensive server infrastructure.",
+    "relatedProjectId": 3,
+    "faqs": [
+      {
+        "question": "How does a WhatsApp food ordering web app work without a database?",
+        "answer": "The client browser maintains the cart state locally in memory and localStorage. When the user confirms the order, the React app serializes the cart items, delivery details, and totals into an encoded text message and opens a prefilled WhatsApp chat via the wa.me deep-link protocol."
+      },
+      {
+        "question": "Can customers make online payments before sending the WhatsApp message?",
+        "answer": "Yes. You can integrate UPI intent links, Razorpay, or Stripe payment links directly into the React checkout before generating the WhatsApp order payload, attaching the payment reference ID inside the final text summary."
+      },
+      {
+        "question": "What happens if a restaurant receives multiple orders at once on WhatsApp?",
+        "answer": "Restaurants can run WhatsApp Business with quick replies, automated greeting templates, and multi-agent web access. For larger volumes, incoming orders can be synced to a central kitchen display system such as the one built for Restaurant OS / Corner Cafe."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The High Cost of Food Delivery Aggregators"
+      },
+      {
+        "type": "paragraph",
+        "text": "Food delivery aggregators like Zomato, Swiggy, and Uber Eats charge restaurants between 22% and 35% in commission fees on every order. For an independent restaurant or cloud kitchen with average net operating margins of 12% to 18%, this fee structure destroys profitability unless menu prices are inflated significantly on the app. When restaurants raise third-party prices, repeat customers feel the squeeze, while the restaurant never gains ownership of customer phone numbers or order history."
+      },
+      {
+        "type": "paragraph",
+        "text": "Direct ordering via WhatsApp solves both issues. In markets across India, Southeast Asia, and Latin America, WhatsApp is already installed on virtually every smartphone. When I built the digital ordering platform for [Bread & Bite](/projects/3), a cloud kitchen in Navi Mumbai, the goal was simple: provide a fast, app-like digital menu in React that compiles the customer's cart and sends a clean, structured order message straight to the kitchen's WhatsApp Business account with zero middleman cuts."
+      },
+      {
+        "type": "callout",
+        "title": "Economic Reality",
+        "text": "On an average daily turnover of ₹25,000 in delivery sales, a 25% aggregator commission costs a restaurant ₹1,87,500 every single month. Direct WhatsApp ordering keeps that cash inside the business."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "System Architecture: Static Client-Side Cart vs. WhatsApp Deep Linking"
+      },
+      {
+        "type": "paragraph",
+        "text": "Many software teams overcomplicate direct ordering by building native iOS/Android apps or complex server backends with real-time sockets. For standard delivery operations, this creates needless maintenance overhead and slows down loading times. Customers will not download a 60MB native mobile app just to order two burgers from a local eatery."
+      },
+      {
+        "type": "paragraph",
+        "text": "A lightweight, statically hosted React application running on a global CDN loads in less than 800 milliseconds on a mobile 4G connection. The entire cart state, modifier calculations, and delivery validation run client-side. Once the user enters their delivery address and taps 'Order via WhatsApp', the application executes an encoded URI string using the official WhatsApp Click-to-Chat schema (`https://wa.me/<number>?text=<encoded_text>`)."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "TypeScript interface and order payload serializer for WhatsApp dispatch",
+        "code": "export interface CartItem {\n  id: string;\n  name: string;\n  variant?: string;\n  price: number;\n  quantity: number;\n  notes?: string;\n}\n\nexport interface OrderPayload {\n  customerName: string;\n  phone: string;\n  address: string;\n  landmark?: string;\n  paymentMethod: 'COD' | 'UPI';\n  items: CartItem[];\n  subtotal: number;\n  deliveryFee: number;\n  grandTotal: number;\n}\n\nexport function generateWhatsAppMessage(order: OrderPayload): string {\n  const dateStr = new Date().toLocaleString('en-IN', {\n    timeZone: 'Asia/Kolkata',\n    dateStyle: 'short',\n    timeStyle: 'short'\n  });\n\n  let text = `*NEW ORDER - BREAD & BITE*\\n`;\n  text += `Time: ${dateStr}\\n`;\n  text += `--------------------------------\\n`;\n  text += `*Customer Details:*\\n`;\n  text += `Name: ${order.customerName}\\n`;\n  text += `Phone: ${order.phone}\\n`;\n  text += `Address: ${order.address}${order.landmark ? ` (Near ${order.landmark})` : ''}\\n`;\n  text += `Payment: ${order.paymentMethod}\\n`;\n  text += `--------------------------------\\n`;\n  text += `*Order Items:*\\n`;\n\n  order.items.forEach((item, index) => {\n    const itemTotal = item.price * item.quantity;\n    text += `${index + 1}. ${item.name}${item.variant ? ` (${item.variant})` : ''} x ${item.quantity} = ₹${itemTotal}\\n`;\n    if (item.notes) {\n      text += `   _Note: ${item.notes}_\\n`;\n    }\n  });\n\n  text += `--------------------------------\\n`;\n  text += `Subtotal: ₹${order.subtotal}\\n`;\n  text += `Delivery: ₹${order.deliveryFee}\\n`;\n  text += `*Total Amount: ₹${order.grandTotal}*\\n`;\n  text += `--------------------------------\\n`;\n  text += `Please reply with *CONFIRM* to begin preparation.`;\n\n  return encodeURIComponent(text);\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Triggering the WhatsApp Client Safely Across Mobile and Desktop"
+      },
+      {
+        "type": "paragraph",
+        "text": "Opening WhatsApp from a web browser requires attention to device context. On mobile devices (iOS Safari and Android Chrome), calling `window.open` inside an asynchronous event handler can trigger popup blockers. You should generate the URI synchronously within the submit button's click boundary."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "React hook handling checkout submission and clean deep-linking",
+        "code": "import { useState } from 'react';\nimport { generateWhatsAppMessage, OrderPayload } from './orderUtils';\n\nconst RESTAURANT_WHATSAPP_NUMBER = '919325629256';\n\nexport function useWhatsAppCheckout() {\n  const [isSubmitting, setIsSubmitting] = useState(false);\n\n  const dispatchOrder = (order: OrderPayload) => {\n    setIsSubmitting(true);\n    try {\n      const encodedMessage = generateWhatsAppMessage(order);\n      const deepLink = `https://wa.me/${RESTAURANT_WHATSAPP_NUMBER}?text=${encodedMessage}`;\n      \n      // Direct location change ensures mobile OS intercepts the link directly into native WhatsApp\n      window.location.href = deepLink;\n    } catch (err) {\n      console.error('Failed to dispatch order:', err);\n      alert('Could not open WhatsApp. Please try again or call the restaurant directly.');\n    } finally {\n      setIsSubmitting(false);\n    }\n  };\n\n  return { dispatchOrder, isSubmitting };\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Scaling Beyond Simple Text: Integrating With In-Store Systems"
+      },
+      {
+        "type": "paragraph",
+        "text": "While small takeaway spots can manage orders directly on their phone screen, busier outlets need integration with a kitchen ticket workflow. In our production builds, we offer two paths:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Hybrid Webhook Dispatch: Simultaneously dispatch the WhatsApp message to the customer while sending a background JSON payload to Supabase or Firebase. This populates a real-time Kitchen Display System (KDS), similar to our build for [Restaurant OS / Corner Cafe](/projects/4).",
+          "WhatsApp Business Cloud API: Ingest incoming customer confirmations automatically, trigger thermal receipt printing on an in-kitchen ESC/POS printer, and reply with automated order status updates over WhatsApp without human intervention."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "This hybrid approach gives restaurants the zero-commission advantage of direct consumer relations while keeping back-of-house kitchen operations orderly and reliable."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you manage a restaurant, cloud kitchen, or retail store and want to eliminate platform commissions with a custom web menu, explore my [full-stack web development services](/services) or [get in touch with Aafaque Nazir directly](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
     "id": "why-slow-websites-kill-conversions-speed-roi",
     "slug": "why-slow-websites-kill-conversions-speed-roi",
     "title": "Why Slow Websites Kill Conversions: How a 500ms Speed Improvement Boosts Revenue by 20%",
