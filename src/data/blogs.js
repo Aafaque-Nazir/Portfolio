@@ -1,5 +1,103 @@
 export const blogs = [
   {
+    "id": "shopify-vs-custom-nextjs-storefront",
+    "slug": "shopify-vs-custom-nextjs-storefront",
+    "title": "Shopify vs Custom Next.js Storefront: When Should E-Commerce Brands Go Headless?",
+    "seoTitle": "Shopify vs Custom Next.js Storefront Guide",
+    "description": "Compare Shopify standard themes with custom Next.js headless storefronts. Learn performance, cost, and technical tradeoffs for scaling brands.",
+    "publishedAt": "2026-11-02",
+    "updatedAt": "2026-11-02",
+    "readTime": "7 min read",
+    "category": "E-Commerce Engineering",
+    "tags": [
+      "Next.js",
+      "Shopify",
+      "Headless Commerce",
+      "React",
+      "E-Commerce"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Go headless with a custom Next.js storefront when your brand requires unique user interfaces, fast page transitions, and complex third-party data integrations that standard Shopify themes cannot handle efficiently.",
+    "relatedProjectId": 2,
+    "faqs": [
+      {
+        "question": "What is a headless Shopify setup?",
+        "answer": "A headless Shopify setup uses Shopify strictly as the back-end database for products, orders, and customer accounts, while building the front-end user interface independently using frameworks like Next.js."
+      },
+      {
+        "question": "Is Next.js faster than a standard Shopify theme?",
+        "answer": "Yes, a custom Next.js storefront can deliver instant client-side route transitions and optimized asset delivery, resulting in faster load times compared to heavy Liquid themes loaded with numerous third-party apps."
+      },
+      {
+        "question": "When should an e-commerce brand avoid going headless?",
+        "answer": "Brands should avoid headless commerce if they have limited technical budgets, rely heavily on frequent updates from third-party Shopify apps, or lack internal development resources to maintain custom code."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Understanding the Architectural Shift"
+      },
+      {
+        "type": "paragraph",
+        "text": "When building online stores, standard Shopify themes handle both the back-end database and the front-end rendering through Liquid templates. This works well for getting started quickly. However, as catalog sizes grow and specific custom design needs emerge, standard themes often become slow due to bloated third-party JavaScript apps injected into the DOM. Going headless separates the presentation layer from the e-commerce engine."
+      },
+      {
+        "type": "paragraph",
+        "text": "In practice, this means using Next.js to fetch products via the Shopify Storefront API and rendering pages statically or via incremental static regeneration. For example, projects like [Shopease / Oud & Attar](/projects/2) demonstrate how client-side filtering and URL state syncing provide instant product discovery without full page reloads."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Performance and Conversion Tradeoffs"
+      },
+      {
+        "type": "paragraph",
+        "text": "Performance directly impacts sales. Standard Shopify stores often suffer from Core Web Vitals penalties caused by tracking scripts and app widgets running synchronously in the browser. A custom Next.js frontend gives developers direct control over bundle sizes, image optimization, and script loading priorities."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Fetching products from Shopify Storefront API in Next.js",
+        "code": "import { GraphQLClient, gql } from 'graphql-request';\n\nconst storefrontClient = new GraphQLClient(`https://${process.env.SHOPIFY_STORE_DOMAIN}/api/2024-01/graphql.json`, {\n  headers: {\n    'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!,\n    'Content-Type': 'application/json',\n  },\n});\n\nconst PRODUCTS_QUERY = gql`\n  query getProducts($first: Int!) {\n    products(first: $first) {\n      edges {\n        node {\n          id\n          title\n          handle\n          priceRange {\n            minVariantPrice {\n              amount\n              currencyCode\n            }\n          }\n        }\n      }\n    }\n  }\n`;\n\nexport async function getStoreProducts(first = 10) {\n  const data = await storefrontClient.request(PRODUCTS_QUERY, { first });\n  return data;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Engineering Reality Check",
+        "text": "Headless setups require dedicated hosting for your front-end (such as Vercel or Netlify) and ongoing code maintenance. Do not adopt headless architecture solely for buzzwords; adopt it only when your user experience requirements exceed standard theme capabilities."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Core Checklist: When to Choose Headless Next.js"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Your brand requires complex interactive UI components, custom 3D viewers, or highly specific animations.",
+          "You manage multiple regional storefronts or multi-brand catalogs that need to share a unified front-end codebase.",
+          "Your current Shopify store fails Core Web Vitals checks due to unavoidable third-party app bloat.",
+          "You have engineering support available to maintain React components, API webhooks, and deployment pipelines."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications and custom e-commerce interfaces. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
     "id": "zero-commission-food-delivery-react-whatsapp",
     "slug": "zero-commission-food-delivery-react-whatsapp",
     "title": "Zero-Commission Food Delivery: Building Direct WhatsApp Ordering for Restaurants with React",
