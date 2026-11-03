@@ -1,5 +1,116 @@
 export const blogs = [
   {
+    "id": "automating-gst-invoices-whatsapp-business-api",
+    "slug": "automating-gst-invoices-whatsapp-business-api",
+    "title": "Automating GST Invoices and Retailer Notifications with WhatsApp Business API Integration",
+    "seoTitle": "Automating GST Invoices via WhatsApp API | Aafaque...",
+    "description": "Learn how to build a reliable backend pipeline to auto-generate GST invoices and dispatch PDF copies directly via the official WhatsApp Business API.",
+    "publishedAt": "2026-11-03",
+    "updatedAt": "2026-11-03",
+    "readTime": "7 min read",
+    "category": "Backend & Database",
+    "tags": [
+      "WhatsApp API",
+      "GST Invoicing",
+      "Node.js",
+      "PostgreSQL",
+      "Backend Development"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Automating GST invoicing and WhatsApp dispatch involves generating a compliant tax PDF on your backend, uploading it to Meta's servers, and calling the WhatsApp Cloud API template endpoint with the recipient's phone number and media ID.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "Which WhatsApp API is required to send automated PDF invoices?",
+        "answer": "You must use the official WhatsApp Business Cloud API provided by Meta. Unofficial WhatsApp wrappers or web-scraping scripts often lead to permanent phone number bans."
+      },
+      {
+        "question": "How do you calculate and attach GST data to invoices programmatically?",
+        "answer": "GST calculations (CGST, SGST, IGST) are handled in the backend database using state codes and item-level HSN codes before generating the final HTML/PDF invoice."
+      },
+      {
+        "question": "Can I integrate this automated billing into my existing inventory system?",
+        "answer": "Yes. As implemented in my [Inventory Management / InvMaster OS](/projects/1) project, billing triggers can be tied directly to order completion events in your database."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Problem with Manual Wholesale Billing"
+      },
+      {
+        "type": "paragraph",
+        "text": "For wholesale distributors and retail godowns, manual billing is slow and prone to human error. Accountants generate GST invoices in desktop software, export PDFs manually, open WhatsApp Web, search for the retailer's phone number, attach the file, and type a confirmation message. When processing hundreds of orders daily, this routine wastes hours of labor and introduces calculation mistakes."
+      },
+      {
+        "type": "paragraph",
+        "text": "To solve this bottleneck, modern backend systems must handle invoicing and dispatch in one continuous transaction. When an order is confirmed, the system should compute tax breakdowns, generate a PDF, store the record in PostgreSQL, and push the document to the retailer's phone via the official Meta cloud infrastructure."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Architecture and Workflow Design"
+      },
+      {
+        "type": "paragraph",
+        "text": "When building wholesale management tools like [Inventory Management / InvMaster OS](/projects/1), I structure the billing pipeline into four distinct asynchronous steps:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Order State Change: Database trigger or queue worker detects a fulfilled order.",
+          "PDF Generation: Node.js renders a compliant tax invoice using a headless browser or template engine.",
+          "Media Upload: The PDF is uploaded to the Meta Graph API to secure a unique media ID.",
+          "Template Dispatch: A pre-approved WhatsApp message template containing order metadata and the document reference is sent to the retailer."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Node.js Code Implementation for WhatsApp Dispatch"
+      },
+      {
+        "type": "paragraph",
+        "text": "Below is a production-tested TypeScript snippet showing how to send a document message using the official WhatsApp Cloud API."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "Sending a PDF invoice via WhatsApp Cloud API",
+        "code": "import axios from 'axios';\n\ninterface InvoiceDispatchPayload {\n  recipientPhone: string;\n  mediaId: string;\n  invoiceNumber: string;\n  customerName: string;\n}\n\nexport async function sendWhatsAppInvoice({\n  recipientPhone,\n  mediaId,\n  invoiceNumber,\n  customerName\n}: InvoiceDispatchPayload): Promise<boolean> {\n  const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;\n  const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;\n\n  const url = `https://graph.facebook.com/v19.0/${phoneNumberId}/messages`;\n\n  try {\n    const response = await axios.post(\n      url,\n      {\n        messaging_product: 'whatsapp',\n        to: recipientPhone,\n        type: 'document',\n        document: {\n          id: mediaId,\n          caption: `Hello ${customerName}, here is your official tax invoice #${invoiceNumber}. Thank you for your business!`,\n          filename: `Invoice-${invoiceNumber}.pdf`\n        }\n      },\n      {\n        headers: {\n          Authorization: `Bearer ${accessToken}`,\n          'Content-Type': 'application/json'\n        }\n      }\n    );\n\n    return response.status === 200;\n  } catch (error) {\n    console.error('Failed to dispatch WhatsApp invoice:', error.response?.data || error.message);\n    return false;\n  }\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Engineering Best Practice",
+        "text": "Always wrap your external API calls in robust retry queues (such as BullMQ with Redis). Network hiccups between your server and Meta's Graph API should never cause a dropped customer invoice."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Ensuring Compliance and Reliability"
+      },
+      {
+        "type": "paragraph",
+        "text": "GST invoices in India require specific fields including HSN/SAC codes, state supply codes, digital signatures or QR codes where applicable, and precise tax splitting. Storing the generated invoice payload in your database ensures you have an immutable audit trail for tax filing."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you are looking to integrate automated WhatsApp billing, inventory workflows, or custom backend services into your business, I can help design and build it. [Explore my web development services](/services) or [get in touch with Aafaque for a project consultation](/contact)."
+      }
+    ]
+  },
+  {
     "id": "shopify-vs-custom-nextjs-storefront",
     "slug": "shopify-vs-custom-nextjs-storefront",
     "title": "Shopify vs Custom Next.js Storefront: When Should E-Commerce Brands Go Headless?",
