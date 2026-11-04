@@ -1,5 +1,107 @@
 export const blogs = [
   {
+    "id": "building-fast-react-product-filters-url-state",
+    "slug": "building-fast-react-product-filters-url-state",
+    "title": "Building Fast Multi-Faceted Product Filters with React and URL State",
+    "seoTitle": "React E-Commerce Filters with URL State Sync",
+    "description": "Learn how to build instant, responsive product filters in React with clean URL search parameters state synchronization.",
+    "publishedAt": "2026-11-04",
+    "updatedAt": "2026-11-04",
+    "readTime": "7 min read",
+    "category": "E-Commerce Engineering",
+    "tags": [
+      "React",
+      "TypeScript",
+      "E-Commerce",
+      "URL State",
+      "Web Performance"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To build fast product filters in React, store filter states directly in URL search parameters rather than local component state. This allows users to share links, refresh pages without losing their filter choices, and enables instant client-side filtering.",
+    "relatedProjectId": 2,
+    "faqs": [
+      {
+        "question": "Why store e-commerce filter state in URL search parameters?",
+        "answer": "Storing filters in URL query parameters ensures that user selections persist on page refresh, makes browser back and forward buttons work correctly, and allows users to share direct links to filtered product lists."
+      },
+      {
+        "question": "How do you prevent UI lag when a user clicks multiple filters quickly?",
+        "answer": "You can prevent lag by keeping filter calculations on the client side for small to medium product catalogs, using React's useTransition hook to keep the interface responsive, and debouncing text search inputs."
+      },
+      {
+        "question": "Is client-side product filtering fast enough for large stores?",
+        "answer": "Client-side filtering is extremely fast for catalogs up to a few thousand items, running in milliseconds. For catalogs with tens of thousands of items, filtering should happen on the server, while the URL still holds the parameters."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Problem with Local Component State in Filters"
+      },
+      {
+        "type": "paragraph",
+        "text": "When building online stores, developers often store filter choices like category, price range, and color inside React's local useState hook. While this works initially, it creates poor user experiences. When a user reloads the page, shares the URL with a friend, or clicks the browser back button, all their filter choices disappear because the URL did not change."
+      },
+      {
+        "type": "paragraph",
+        "text": "In projects like [Shopease / Oud & Attar](/projects/2), keeping URL search parameters in sync with filter selections solved this issue entirely. Users can bookmark exact search criteria or share URLs that open the catalog with the exact same filters applied."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Writing a Clean URL State Sync Hook in React"
+      },
+      {
+        "type": "paragraph",
+        "text": "To synchronize filter state with the URL without causing unnecessary re-renders or sluggish page navigation, we can use React Router's useSearchParams hook or native browser APIs. Here is a production-tested pattern for managing multi-faceted filters cleanly."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Custom hook for syncing product filters with URL search parameters",
+        "code": "import { useSearchParams } from 'react-router-dom';\nimport { useCallback } from 'react';\n\ninterface FilterState {\n  category: string;\n  minPrice: number;\n  maxPrice: number;\n  inStock: boolean;\n}\n\nexport function useProductFilters() {\n  const [searchParams, setSearchParams] = useSearchParams();\n\n  const filters: FilterState = {\n    category: searchParams.get('category') || 'all',\n    minPrice: Number(searchParams.get('minPrice')) || 0,\n    maxPrice: Number(searchParams.get('maxPrice')) || 10000,\n    inStock: searchParams.get('inStock') === 'true',\n  };\n\n  const setFilter = useCallback(\n    (key: keyof FilterState, value: string | number | boolean) => {\n      const newParams = new URLSearchParams(searchParams);\n      if (value === 'all' || value === 0 || value === false) {\n        newParams.delete(key);\n      } else {\n        newParams.set(key, String(value));\n      }\n      setSearchParams(newParams, { replace: true });\n    },\n    [searchParams, setSearchParams]\n  );\n\n  return { filters, setFilter };\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Performance Tip on History Navigation",
+        "text": "Notice the { replace: true } option in setSearchParams. For rapid filter toggles, using replace prevents cluttering the browser history stack with every single checkbox click, keeping the back button useful for leaving the page entirely."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Best Practices for Fast Product Filtering"
+      },
+      {
+        "type": "paragraph",
+        "text": "To keep product filtering snappy and responsive, follow these practical guidelines during development:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Debounce text search inputs by 300ms to avoid filtering arrays on every single keystroke.",
+          "Memoize heavy filter and sort operations using useMemo to prevent unnecessary calculations on unrelated re-renders.",
+          "Keep filter option counts updated dynamically so users do not click filters that yield zero results.",
+          "Design mobile filter panels to slide out cleanly without blocking the main thread."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications, e-commerce stores, and custom software. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project."
+      }
+    ]
+  },
+  {
     "id": "automating-gst-invoices-whatsapp-business-api",
     "slug": "automating-gst-invoices-whatsapp-business-api",
     "title": "Automating GST Invoices and Retailer Notifications with WhatsApp Business API Integration",
