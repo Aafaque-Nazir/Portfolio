@@ -139,7 +139,7 @@ const GlobalBackground = () => {
       ctx.lineCap = "butt";
       ctx.lineJoin = "miter";
       ctx.lineWidth = 0.8;
-      ctx.strokeStyle = "rgba(14, 116, 144, 0.15)"; 
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.04)"; 
 
       paths.forEach(p => {
         ctx.beginPath();
@@ -150,7 +150,7 @@ const GlobalBackground = () => {
 
       // --- Draw Logic Pads ---
       dots.forEach(d => {
-        ctx.fillStyle = "rgba(34, 211, 238, 0.25)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
         ctx.fillRect(d.x - d.size/2, d.y - d.size/2, d.size, d.size);
       });
 
@@ -171,8 +171,8 @@ const GlobalBackground = () => {
             const tail = getPointAtDist(p.points, dStart);
 
             const grad = ctx.createLinearGradient(tail.x, tail.y, head.x, head.y);
-            grad.addColorStop(0, "rgba(6, 182, 212, 0)");
-            grad.addColorStop(1, "rgba(34, 211, 238, 0.7)");
+            grad.addColorStop(0, "rgba(255, 255, 255, 0)");
+            grad.addColorStop(1, "rgba(255, 255, 255, 0.45)");
 
             ctx.lineWidth = t.width;
             ctx.strokeStyle = grad;
@@ -190,7 +190,7 @@ const GlobalBackground = () => {
             ctx.stroke();
 
             // Head Glow — Fast dual-pass circle (zero CPU shadowBlur penalty)
-            ctx.fillStyle = "rgba(34, 211, 238, 0.4)";
+            ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
             ctx.beginPath();
             ctx.arc(head.x, head.y, t.width * 2.4, 0, Math.PI * 2);
             ctx.fill();

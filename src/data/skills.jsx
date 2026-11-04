@@ -38,7 +38,7 @@ export const allSkills = [
   { icon: SiNextdotjs, name: "Next.js", color: "#ffffff", category: "Frontend" },
   { icon: SiTypescript, name: "TypeScript", color: "#3178C6", category: "Frontend" },
   { icon: SiJavascript, name: "JavaScript", color: "#F0DB4F", category: "Frontend" },
-  { icon: SiTailwindcss, name: "Tailwind CSS", color: "#06B6D4", category: "Frontend" },
+  { icon: SiTailwindcss, name: "Tailwind CSS", color: "#A1A1AA", category: "Frontend" },
   { icon: SiFramer, name: "Framer Motion", color: "#ffffff", category: "Frontend" },
   { icon: SiGreensock, name: "GSAP", color: "#88CE02", category: "Frontend" },
   { icon: SiRedux, name: "Redux", color: "#764ABC", category: "Frontend" },

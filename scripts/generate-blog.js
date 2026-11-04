@@ -91,7 +91,7 @@ const TOPIC_QUEUE = [
     topic: "Eliminating Cumulative Layout Shift (CLS): Modern Font Fallbacks and CSS Aspect-Ratio Strategies",
     category: "Web Performance",
     targetKeywords: ["fix cls cumulative layout shift", "zero layout shift web fonts", "core web vitals cls guide"],
-    relatedProjectId: 8, // Dubai Tour - smooth tour package card reveals and responsive itinerary hero images
+    relatedProjectId: 17, // Al Raheeq Tourism - smooth visa package card reveals and responsive itinerary hero images
   },
   {
     topic: "The Speculation Rules API: Instant Multi-Page Navigation for Fast Web Apps",
@@ -233,7 +233,7 @@ const TOPIC_QUEUE = [
     topic: "Building 60fps Micro-Animations in React Using Framer Motion Without Layout Thrashing",
     category: "UI/UX & Animation",
     targetKeywords: ["framer motion performance", "60fps react animations", "smooth layout animations"],
-    relatedProjectId: 8, // Dubai Tour - interactive travel accordion itineraries and image transitions running at constant 60fps
+    relatedProjectId: 14, // LA Salon & Spa - interactive appointment booking and smooth step transitions running at constant 60fps
   },
   {
     topic: "Integrating Three.js and GSAP ScrollTrigger in React for Immersive 3D Product Showcases",
@@ -341,7 +341,6 @@ Strict Requirements:
    - ID 2: [Shopease / Oud & Attar](/projects/2) -> Fragrance e-commerce store with fast client-side filtering, instant slide-out cart, and URL search param state sync.
    - ID 3: [Bread & Bite](/projects/3) -> Zero-commission cloud kitchen in Navi Mumbai with lightweight React digital menu, client-side cart, and direct WhatsApp business order dispatch.
    - ID 4: [Restaurant OS / Corner Cafe](/projects/4) -> Contactless restaurant operating system with table QR-code scanning, real-time Kitchen Display System (KDS), and waiter/staff management portal.
-   - ID 8: [Dubai Tour / TourWeb](/projects/8) -> Dubai tour packages with interactive itinerary accordions, image carousels, and instant hotel pickup.
    - ID 10: [Yacht Rentals / Sea Cross](/projects/10) -> Luxury yacht charter in Mumbai Gateway of India with Lenis smooth scrolling and direct VIP inquiry booking.
    - ID 11: [CarePulse / Aura Dental Studio](/projects/11) -> Dental & smile studio with interactive 50/50 Before & After comparison slider, 3D scan showcase, and online consultation booking.
    - ID 12: [Premium Burger Shop / H5 Texes Burger](/projects/12) -> Gourmet burger brand with custom design tokens, menu showcase, and multi-outlet inquiry system.

@@ -36,13 +36,6 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
       keywords:
         "about Aafaque Nazir, web developer Navi Mumbai, freelance developer Navi Mumbai, full stack developer Mumbai, React developer India, web engineer Navi Mumbai",
     },
-    skills: {
-      title: "Skills & Modern Tech Stack — Aafaque Nazir",
-      description:
-        "Technical skills of Aafaque Nazir, web developer in Navi Mumbai, India: React 19, Next.js, TypeScript, Tailwind CSS, PostgreSQL, Supabase, and Node.js.",
-      keywords:
-        "React developer skills, Next.js developer tech stack, frontend skills portfolio, Node.js developer Navi Mumbai, TypeScript developer portfolio, Supabase developer India",
-    },
     projects: {
       title: "Projects & Work Portfolio — Aafaque Nazir",
       description:
@@ -229,7 +222,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
-                name: "Websites & Landing Pages",
+                name: "Websites",
                 description:
                   "Custom responsive websites and landing pages built with clean code, fast loading speeds, and modern design.",
               },

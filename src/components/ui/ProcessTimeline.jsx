@@ -1,103 +1,95 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaComments, FaCode, FaPaintBrush, FaRocket } from "react-icons/fa";
+import {
+  MessageSquare,
+  Layout,
+  Code2,
+  CheckCircle2,
+} from "lucide-react";
 
 const steps = [
   {
-    title: "Discovery & Planning",
-    description: "Understanding your project goals, features, and timeline to define the scope and plan clear milestones.",
-    icon: <FaComments />,
-    color: "from-blue-500 to-cyan-400"
+    title: "Discovery & Scope",
+    description: "Understanding your project goals, user requirements, and timeline to define clean deliverables and milestones.",
+    icon: <MessageSquare size={18} />,
   },
   {
-    title: "Structure & Design",
-    description: "Planning site layout, choosing the right tools, and designing clean, intuitive user interfaces.",
-    icon: <FaPaintBrush />,
-    color: "from-cyan-400 to-emerald-400"
+    title: "Architecture & UI",
+    description: "Planning the data structure, component hierarchy, and building an accessible, responsive interface.",
+    icon: <Layout size={18} />,
   },
   {
-    title: "Development",
-    description: "Writing clean, modular code for frontend and backend, with a focus on speed, responsiveness, and security.",
-    icon: <FaCode />,
-    color: "from-emerald-400 to-yellow-400"
+    title: "Development & Testing",
+    description: "Writing clean, modular code with React/Next.js and backend integrations, focusing on performance and reliability.",
+    icon: <Code2 size={18} />,
   },
   {
-    title: "Testing & Launch",
-    description: "Testing across browsers and devices, setting up SEO best practices, and deploying to production.",
-    icon: <FaRocket />,
-    color: "from-yellow-400 to-orange-500"
-  }
+    title: "Deployment & Delivery",
+    description: "Configuring production builds, SEO metadata, automated deployments, and post-launch verification.",
+    icon: <CheckCircle2 size={18} />,
+  },
 ];
 
 const ProcessTimeline = () => {
   return (
     <div className="w-full max-w-5xl mx-auto py-12 px-4 relative">
       <div className="text-center mb-12 max-w-2xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2.5 uppercase">
+        <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2 uppercase font-sans">
           How I Build
         </h2>
-        <p className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed">
+        <p className="text-zinc-400 text-sm sm:text-base font-normal leading-relaxed font-sans">
           A clear, straightforward approach to build and deliver your website or application smoothly.
         </p>
       </div>
 
       <div className="relative max-w-4xl mx-auto">
         {/* Background Vertical Line */}
-        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-white/[0.05] -translate-x-1/2 rounded-full" />
-        
-        {/* Animated Gradient Line */}
-        <motion.div 
-          initial={{ height: 0 }}
-          whileInView={{ height: "100%" }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="absolute left-6 md:left-1/2 top-0 w-1 bg-gradient-to-b from-cyan-400 to-transparent -translate-x-1/2 rounded-full origin-top" 
-        />
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
 
-        <div className="flex flex-col gap-12 md:gap-20">
+        <div className="flex flex-col gap-10 md:gap-14">
           {steps.map((step, index) => {
             const isEven = index % 2 === 0;
             return (
-              <motion.div 
+              <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
                 className="relative flex flex-col md:flex-row items-start md:items-center w-full"
               >
-                
                 {/* Desktop Left Side */}
-                <div className={`hidden md:block w-1/2 pr-12 text-right ${isEven ? "" : "opacity-0 invisible"}`}>
-                  <div className="text-6xl font-black text-white/[0.03] absolute top-1/2 -translate-y-1/2 right-[55%]">0{index + 1}</div>
+                <div className={`hidden md:block w-1/2 pr-10 text-right ${isEven ? "" : "opacity-0 invisible"}`}>
+                  <div className="text-5xl font-mono font-black text-white/[0.04] absolute top-1/2 -translate-y-1/2 right-[54%]">
+                    0{index + 1}
+                  </div>
                   {isEven && (
                     <>
-                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{step.title}</h3>
-                      <p className="text-sm text-slate-300 leading-relaxed font-light">{step.description}</p>
+                      <h3 className="text-lg font-bold text-white mb-1.5 font-sans">{step.title}</h3>
+                      <p className="text-sm text-zinc-400 leading-relaxed font-normal font-sans">{step.description}</p>
                     </>
                   )}
                 </div>
 
-                {/* Center Icon */}
-                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-black border-2 border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.8)] overflow-hidden z-20 group hover:border-cyan-400 transition-all duration-300">
-                  <span className="text-xl md:text-2xl text-slate-300 group-hover:text-cyan-400 group-hover:scale-110 transition-all duration-300 relative z-10">
-                    {step.icon}
-                  </span>
+                {/* Center Node Icon */}
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-11 md:h-11 rounded-full bg-zinc-950 border border-white/15 flex items-center justify-center text-zinc-300 shadow-[0_4px_16px_rgba(0,0,0,0.8)] z-20">
+                  {step.icon}
                 </div>
 
                 {/* Mobile Content & Desktop Right Side */}
-                <div className={`w-full md:w-1/2 pl-20 md:pl-12 ${!isEven ? "md:text-left" : "md:opacity-0 md:invisible"}`}>
-                  <div className="text-5xl font-black text-white/[0.03] absolute top-2 right-4 md:hidden">0{index + 1}</div>
-                  <div className="hidden md:block text-6xl font-black text-white/[0.03] absolute top-1/2 -translate-y-1/2 left-[55%]">
+                <div className={`w-full md:w-1/2 pl-16 md:pl-10 ${!isEven ? "md:text-left" : "md:opacity-0 md:invisible"}`}>
+                  <div className="text-4xl font-mono font-black text-white/[0.04] absolute top-1 right-2 md:hidden">
+                    0{index + 1}
+                  </div>
+                  <div className="hidden md:block text-5xl font-mono font-black text-white/[0.04] absolute top-1/2 -translate-y-1/2 left-[54%]">
                     {!isEven ? `0${index + 1}` : ""}
                   </div>
-                  
+
                   <div className={!isEven ? "block md:block" : "block md:hidden"}>
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2 pt-2 md:pt-0">{step.title}</h3>
-                    <p className="text-sm text-slate-300 leading-relaxed font-light">{step.description}</p>
+                    <h3 className="text-lg font-bold text-white mb-1.5 font-sans">{step.title}</h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed font-normal font-sans">{step.description}</p>
                   </div>
                 </div>
-
               </motion.div>
             );
           })}

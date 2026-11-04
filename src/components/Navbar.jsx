@@ -7,6 +7,7 @@ import {
   RiArrowRightLine
 } from "react-icons/ri";
 import { PiReadCvLogoFill } from "react-icons/pi";
+import { Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -50,10 +51,13 @@ export default function Navbar() {
     setMenuOpen((prev) => !prev);
   };
 
+  const openCommandPalette = () => {
+    window.dispatchEvent(new CustomEvent("openCommandMenu"));
+  };
+
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about/" },
-    { name: "Skills", path: "/skills/" },
     { name: "Projects", path: "/projects/" },
     { name: "Services", path: "/services/" },
     { name: "Blog", path: "/blog/" },
@@ -75,7 +79,7 @@ export default function Navbar() {
             animate={{ opacity: 0.6 }}
             exit={{ opacity: 0 }}
             onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 lg:hidden"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-40 lg:hidden"
           />
         )}
       </AnimatePresence>
@@ -83,32 +87,34 @@ export default function Navbar() {
       <motion.header
         initial={{ opacity: 1, y: 0 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+        className="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none select-none"
       >
-        {/* Dynamic Island Pill Container - Upgraded Glassmorphism, Glows & Inner Shadow */}
+        {/* Dynamic Island Pill Container — Hairline 1px Obsidian Border & Clean Depth */}
         <motion.div
           layout
           transition={{
             type: "spring",
-            stiffness: 320,
-            damping: 28,
+            stiffness: 340,
+            damping: 30,
             mass: 0.75
           }}
-          style={{ borderRadius: menuOpen ? "28px" : "9999px" }}
-          className={`flex flex-col bg-gradient-to-b from-zinc-900/95 to-black/98 backdrop-blur-3xl border border-white/15 shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_40px_rgba(0,0,0,0.6),0_0_30px_rgba(34,211,238,0.06)] pointer-events-auto overflow-hidden transition-shadow duration-500 hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.2),0_12px_45px_rgba(0,0,0,0.7),0_0_30px_rgba(34,211,238,0.12)] ${menuOpen ? "w-[calc(100vw-32px)] max-w-[360px] p-5" : "px-2 py-1.5"
-            }`}
+          style={{ borderRadius: menuOpen ? "24px" : "9999px" }}
+          className={`flex flex-col bg-zinc-950/90 backdrop-blur-2xl border border-white/[0.12] shadow-[0_16px_40px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.08)] pointer-events-auto overflow-hidden transition-all duration-300 select-none ${
+            menuOpen ? "w-[calc(100vw-32px)] max-w-[360px] p-5" : "px-2.5 py-1.5"
+          }`}
         >
-          {/* Top Row / Resting State (Always visible) */}
-          <div className="flex items-center justify-between w-full">
+          {/* Top Row / Resting State */}
+          <div className="flex items-center justify-between w-full gap-2">
 
             {/* Desktop Navbar Menu (Hidden on Mobile) */}
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-1 select-none">
               {navItems.map((item) => (
                 <NavLink
                   key={item.name}
                   to={item.path}
                   className={({ isActive }) =>
-                    `relative px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 block group uppercase ${isActive ? "text-white" : "text-white/50 hover:text-white"
+                    `relative px-4 py-1.5 rounded-full text-xs font-medium tracking-wide transition-colors block uppercase select-none ${
+                      isActive ? "text-white" : "text-zinc-400 hover:text-zinc-100"
                     }`
                   }
                 >
@@ -117,65 +123,89 @@ export default function Navbar() {
                       {isActive && (
                         <motion.div
                           layoutId="activeNavTabPC"
-                          className="absolute inset-0 bg-white/10 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
-                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                          className="absolute inset-0 bg-white/[0.1] rounded-full border border-white/[0.08]"
+                          transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                         >
-                          <div className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80" />
+                          <div className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-white/90" />
                         </motion.div>
                       )}
-                      <span className="relative z-10">{item.name}</span>
+                      <span className="relative z-10 select-none pointer-events-none">{item.name}</span>
                     </>
                   )}
                 </NavLink>
               ))}
-              <div className="w-[1px] h-4 bg-white/10 mx-2" />
+
+              <div className="w-[1px] h-3.5 bg-white/10 mx-1.5" />
+
+              {/* Command Palette Trigger Badge */}
+              <button
+                type="button"
+                onClick={openCommandPalette}
+                className="flex items-center gap-2 px-2.5 py-1 rounded-full text-xs text-zinc-400 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] transition-all cursor-pointer active:scale-95 select-none"
+                title="Search & Commands (Ctrl+K)"
+                aria-label="Search and commands"
+              >
+                <Search size={12} className="text-zinc-400" />
+                <kbd className="text-[10px] font-mono text-zinc-400 bg-white/5 px-1 py-0.2 rounded border border-white/10">
+                  ⌘K
+                </kbd>
+              </button>
+
+              {/* Resume download */}
               <a
                 href="/Aafaque_Nazir_Resume.pdf"
                 download
-                aria-label="Download CV"
-                title="Download CV"
-                className="relative px-3 py-2 rounded-full text-white/50 hover:text-cyan-400 transition-all duration-300 block group"
+                aria-label="Download Resume"
+                title="Download Resume PDF"
+                className="relative p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/5 transition-all select-none"
               >
-                <PiReadCvLogoFill size={18} className="relative z-10" />
-                <div className="absolute inset-0 bg-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                <PiReadCvLogoFill size={16} />
               </a>
             </nav>
 
             {/* Mobile Bar View (Hidden on PC/Tablet when Expanded) */}
             {!menuOpen && (
-              <div className="lg:hidden flex items-center justify-between w-full gap-8 px-3 py-1">
+              <div className="lg:hidden flex items-center justify-between w-full gap-4 px-2 py-0.5 select-none">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-1.5 w-1.5 flex-shrink-0 items-center justify-center">
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
                   </span>
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={location.pathname}
-                      initial={{ y: 5, opacity: 0 }}
+                      initial={{ y: 4, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -5, opacity: 0 }}
-                      className="text-[10px] font-bold tracking-[0.2em] text-white/90 uppercase font-mono"
+                      exit={{ y: -4, opacity: 0 }}
+                      className="text-[10px] font-semibold tracking-wider text-zinc-200 uppercase font-mono select-none"
                     >
                       {activeItemName}
                     </motion.span>
                   </AnimatePresence>
                 </div>
 
-                <div className="flex items-center gap-1 pl-1 border-l border-white/20">
+                <div className="flex items-center gap-1 pl-2 border-l border-white/10">
+                  <button
+                    onClick={openCommandPalette}
+                    className="p-1.5 text-zinc-300 hover:text-white transition-colors"
+                    aria-label="Search"
+                    title="Search"
+                  >
+                    <Search size={14} />
+                  </button>
                   <a
                     href="/Aafaque_Nazir_Resume.pdf"
                     download
-                    aria-label="Download CV"
-                    className="flex items-center justify-center p-1.5 text-white/80 hover:text-cyan-400 transition-colors"
+                    aria-label="Download Resume"
+                    className="p-1.5 text-zinc-300 hover:text-white transition-colors"
                   >
-                    <PiReadCvLogoFill size={16} />
+                    <PiReadCvLogoFill size={14} />
                   </a>
                   <button
                     onClick={toggleMenu}
-                    className="flex items-center justify-center p-1.5 text-white/80 hover:text-cyan-400 transition-colors"
+                    className="p-1.5 text-zinc-300 hover:text-white transition-colors"
                     aria-label="Open Menu"
                   >
-                    <FaBars size={16} />
+                    <FaBars size={14} />
                   </button>
                 </div>
               </div>
@@ -183,12 +213,12 @@ export default function Navbar() {
 
             {/* Expanded Header View (Only visible when Expanded) */}
             {menuOpen && (
-              <div className="flex justify-between items-center w-full pb-3 border-b border-white/10">
-                <span className="text-white/60 font-black tracking-[0.3em] uppercase text-[9px] font-mono">Navigation</span>
+              <div className="flex justify-between items-center w-full pb-3 border-b border-white/10 select-none">
+                <span className="text-zinc-400 font-semibold tracking-wider uppercase text-[10px] font-mono">Navigation</span>
                 <button
                   onClick={toggleMenu}
                   aria-label="Close navigation menu"
-                  className="text-white/85 bg-white/5 p-2 rounded-full border border-white/10 hover:text-cyan-400 hover:border-cyan-500/30 transition-all active:scale-95"
+                  className="text-zinc-300 bg-white/5 p-1.5 rounded-full border border-white/10 hover:text-white transition-all active:scale-95"
                 >
                   <FaTimes size={12} />
                 </button>
@@ -196,7 +226,7 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Expanded State Content (Stagger-Animates in-place on Mobile) */}
+          {/* Expanded State Content (Mobile) */}
           <AnimatePresence>
             {menuOpen && (
               <motion.div
@@ -204,31 +234,47 @@ export default function Navbar() {
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
-                className="lg:hidden flex flex-col gap-4 mt-4 relative z-10 w-full"
+                className="lg:hidden flex flex-col gap-3 mt-3 relative z-10 w-full select-none"
               >
+                {/* Search trigger button in mobile menu */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    openCommandPalette();
+                  }}
+                  className="flex items-center justify-between w-full py-2.5 px-3 rounded-xl bg-white/[0.04] border border-white/10 text-xs text-zinc-300 hover:text-white"
+                >
+                  <span className="flex items-center gap-2">
+                    <Search size={14} className="text-zinc-400" />
+                    <span>Search or jump to...</span>
+                  </span>
+                  <kbd className="text-[10px] font-mono text-zinc-400 bg-white/5 px-1.5 py-0.5 rounded border border-white/10">⌘K</kbd>
+                </button>
+
                 {/* Navigation Links */}
-                <ul className="flex flex-col gap-1.5">
+                <ul className="flex flex-col gap-1">
                   {navItems.map((item) => (
                     <motion.li key={item.name} variants={itemVariants}>
                       <NavLink
                         to={item.path}
                         onClick={() => setMenuOpen(false)}
                         className={({ isActive }) =>
-                          `group relative flex items-center justify-between w-full py-2.5 px-4 text-base font-bold transition-all duration-300 rounded-xl ${isActive
-                            ? "text-white bg-white/5 border border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
-                            : "text-white/40 hover:text-white hover:bg-white/[0.02] border border-transparent"
+                          `group relative flex items-center justify-between w-full py-2 px-3 text-sm font-medium transition-all rounded-lg select-none ${isActive
+                            ? "text-white bg-white/[0.08] border border-white/10"
+                            : "text-zinc-400 hover:text-white hover:bg-white/[0.03] border border-transparent"
                           }`
                         }
                       >
                         {({ isActive }) => (
                           <>
-                            <span className="relative z-10 tracking-widest uppercase text-xs font-semibold">
+                            <span className="relative z-10 tracking-wide uppercase text-xs">
                               {item.name}
                             </span>
                             {isActive ? (
-                              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]" />
+                              <div className="w-1.5 h-1.5 rounded-full bg-white" />
                             ) : (
-                              <RiArrowRightLine className="text-[10px] text-white/20 group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-all" />
+                              <RiArrowRightLine className="text-[11px] text-zinc-600 group-hover:text-zinc-300 group-hover:translate-x-0.5 transition-all" />
                             )}
                           </>
                         )}
@@ -238,24 +284,24 @@ export default function Navbar() {
                 </ul>
 
                 {/* Footer block */}
-                <motion.div variants={itemVariants} className="pt-4 border-t border-white/10 flex flex-col gap-4">
+                <motion.div variants={itemVariants} className="pt-3 border-t border-white/10 flex flex-col gap-3">
                   {/* Download CV */}
                   <a
                     href="/Aafaque_Nazir_Resume.pdf"
                     download
                     aria-label="Download Aafaque Nazir Resume"
-                    className="flex items-center justify-center gap-2 w-full text-white/70 hover:text-cyan-400 transition-all duration-300 border border-white/10 hover:border-cyan-500/30 rounded-xl py-2.5 text-[10px] font-bold tracking-widest uppercase bg-gradient-to-b from-white/5 to-white/[0.01] hover:shadow-[0_4px_12px_rgba(34,211,238,0.05)]"
+                    className="flex items-center justify-center gap-2 w-full text-zinc-300 hover:text-white transition-all border border-white/10 hover:border-white/20 rounded-lg py-2 text-[11px] font-medium tracking-wide uppercase bg-white/[0.03]"
                   >
                     <PiReadCvLogoFill size={14} />
-                    <span>Download CV</span>
+                    <span>Download Resume PDF</span>
                   </a>
 
                   {/* Social links */}
-                  <div className="flex justify-center gap-3">
+                  <div className="flex justify-center gap-2">
                     {[
-                      { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", color: "hover:text-white hover:border-white/20 hover:bg-white/5", label: "Visit GitHub Profile" },
-                      { icon: RiLinkedinFill, href: "https://www.linkedin.com/in/aafaque-nazir/", color: "hover:text-cyan-400 hover:border-cyan-500/20 hover:bg-cyan-500/5", label: "Visit LinkedIn Profile" },
-                      { icon: RiInstagramLine, href: "https://www.instagram.com/aafaque.75/", color: "hover:text-pink-500 hover:border-pink-500/20 hover:bg-pink-500/5", label: "Visit Instagram Profile" }
+                      { icon: RiGithubFill, href: "https://github.com/Aafaque-Nazir", label: "Visit GitHub Profile" },
+                      { icon: RiLinkedinFill, href: "https://www.linkedin.com/in/aafaque-nazir/", label: "Visit LinkedIn Profile" },
+                      { icon: RiInstagramLine, href: "https://www.instagram.com/aafaque.75/", label: "Visit Instagram Profile" }
                     ].map((item, i) => (
                       <a
                         key={i}
@@ -263,14 +309,14 @@ export default function Navbar() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={item.label}
-                        className={`text-white/40 transition-all duration-300 hover:scale-105 p-2 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-center ${item.color}`}
+                        className="text-zinc-400 hover:text-white transition-all p-2 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-center hover:bg-white/[0.06]"
                       >
-                        <item.icon size={18} />
+                        <item.icon size={16} />
                       </a>
                     ))}
                   </div>
 
-                  <div className="text-[9px] text-white/30 font-mono tracking-widest text-center mt-1 uppercase">
+                  <div className="text-[9px] text-zinc-500 font-mono tracking-wider text-center uppercase">
                     &copy; {new Date().getFullYear()} AAFAQUE NAZIR
                   </div>
                 </motion.div>

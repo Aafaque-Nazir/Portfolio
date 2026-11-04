@@ -22,22 +22,22 @@ const faqs = [
 
 const FAQItem = ({ faq, isOpen, onClick }) => {
   return (
-    <div className="border border-white/5 bg-zinc-950/40 backdrop-blur-sm rounded-2xl overflow-hidden transition-colors hover:border-cyan-500/20">
+    <div className={`backdrop-blur-sm rounded-2xl overflow-hidden transition-all ${isOpen ? "border border-white/20 bg-zinc-950/80 shadow-[0_4px_20px_rgba(0,0,0,0.5)]" : "border border-white/5 bg-zinc-950/40 hover:border-white/15"}`}>
       <button
         type="button"
         onClick={onClick}
         aria-expanded={isOpen}
-        className="w-full flex items-center justify-between p-6 text-left focus:outline-none group"
+        className="w-full flex items-center justify-between p-5 text-left focus:outline-none group cursor-pointer"
       >
-        <span className={`text-sm md:text-base font-bold transition-colors ${isOpen ? "text-cyan-400" : "text-white group-hover:text-cyan-300"}`}>
+        <span className={`text-sm md:text-base font-semibold transition-colors ${isOpen ? "text-white font-bold" : "text-zinc-300 group-hover:text-white"}`}>
           {faq.question}
         </span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="flex-shrink-0 ml-4 text-cyan-500"
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+          className="flex-shrink-0 ml-4 text-zinc-400 group-hover:text-white"
         >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </motion.div>
@@ -49,10 +49,10 @@ const FAQItem = ({ faq, isOpen, onClick }) => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="p-6 pt-0 text-gray-400 text-sm md:text-base font-light leading-relaxed">
+            <div className="p-5 pt-0 text-zinc-400 text-sm font-light leading-relaxed">
               {faq.answer}
             </div>
           </motion.div>
@@ -80,16 +80,16 @@ const FAQ = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto py-8 relative z-10">
+    <div className="w-full max-w-3xl mx-auto py-2 relative z-10">
       {/* Injecting SEO Schema directly into the head/page for Google Bots */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      
-      <div className="text-center mb-10 max-w-xl mx-auto">
+
+      <div className="text-center mb-8 max-w-xl mx-auto">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase mb-2"
@@ -97,17 +97,17 @@ const FAQ = () => {
           Common Questions
         </motion.h2>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed"
+          transition={{ delay: 0.08 }}
+          className="text-zinc-400 text-sm font-light leading-relaxed"
         >
           Everything you need to know before getting started.
         </motion.p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {faqs.map((faq, index) => (
           <FAQItem
             key={index}

@@ -89,7 +89,7 @@ export default function Skills() {
       <div className="absolute inset-0 opacity-10 pointer-events-none z-0"
         style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '30px 30px' }}
       />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-cyan-500/[0.02] blur-[150px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-white/[0.01] blur-[150px] pointer-events-none" />
 
       {/* Main Container */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
@@ -161,9 +161,9 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-[#09090b] border border-white/5 rounded-2xl p-6 text-left hover:border-cyan-500/20 transition-colors duration-300"
+              className="bg-[#09090b] border border-white/5 rounded-2xl p-6 text-left hover:border-white/20 transition-colors duration-300"
             >
-              <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300 mb-4">
                 <pr.icon className="text-sm" aria-hidden="true" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-white uppercase mb-1.5 tracking-wide">{pr.title}</h3>

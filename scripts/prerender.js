@@ -130,7 +130,7 @@ function buildPageHtml({
   <div id="root">
     <div style="min-height:92vh;background:#000;color:#fff;display:flex;flex-direction:column;justify-content:center;padding:112px 20px 48px;max-width:1152px;margin:0 auto;box-sizing:border-box;font-family:'JetBrains Mono',monospace,sans-serif;">
       <nav aria-label="Breadcrumb" style="margin-bottom:16px;font-size:0.85rem;color:#94a3b8;">
-        <a href="/" style="color:#22d3ee;text-decoration:none;">Home</a> &gt; <span style="color:#fff;">${escapeHtml(
+        <a href="/" style="color:#ffffff;text-decoration:none;">Home</a> &gt; <span style="color:#fff;">${escapeHtml(
           h1
         )}</span>
       </nav>
@@ -165,11 +165,11 @@ const staticRoutes = [
     lead: "Independent web developer in Navi Mumbai building fast, scalable websites, e-commerce platforms, and SaaS applications with React, Next.js, and Supabase.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Approach & Quality</h2>
+        <h2 style="font-size:1.3rem;color:#ffffff;margin-bottom:8px;">Approach & Quality</h2>
         <p style="margin-bottom:16px;">I build software with high standards: fast page loads, accessible UI, and reliable setups that help businesses grow.</p>
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Core Tech Stack</h2>
+        <h2 style="font-size:1.3rem;color:#ffffff;margin-bottom:8px;">Core Tech Stack</h2>
         <p style="margin-bottom:16px;">React 19, Next.js 15, TypeScript, Tailwind CSS, PostgreSQL, Supabase, Node.js, and modern edge deployments.</p>
-        <a href="/contact/" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-top:12px;">Get In Touch</a>
+        <a href="/contact/" style="display:inline-block;padding:10px 20px;background:#ffffff;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-top:12px;">Get In Touch</a>
       </div>
     `,
     schemaJson: {
@@ -190,24 +190,6 @@ const staticRoutes = [
     },
   },
   {
-    route: "/skills/",
-    title: "Skills & Modern Tech Stack — Aafaque Nazir",
-    description:
-      "Technical skills of Aafaque Nazir, web developer in Navi Mumbai, India: React 19, Next.js, TypeScript, Tailwind CSS, PostgreSQL, Supabase, and Node.js.",
-    h1: "Technical Skills & Tech Stack",
-    lead: "Building fast, secure, and responsive web applications with modern frontend and backend tools.",
-    extraContentHtml: `
-      <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Frontend Architecture</h2>
-        <p style="margin-bottom:16px;">React 19, Next.js (App Router, Server Components), TypeScript, Tailwind CSS, Framer Motion, Lenis Smooth Scroll, Vite.</p>
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Backend & Databases</h2>
-        <p style="margin-bottom:16px;">Node.js, Express, PostgreSQL, Supabase, Prisma, MongoDB, REST & WebSockets.</p>
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Performance & SEO</h2>
-        <p style="margin-bottom:16px;">Core Web Vitals optimization (sub-200ms INP, LCP &lt; 1.5s), Schema.org JSON-LD, programmatic SEO, and edge caching.</p>
-      </div>
-    `,
-  },
-  {
     route: "/services/",
     title: "Web Development Services — Navi Mumbai & India",
     description:
@@ -216,13 +198,13 @@ const staticRoutes = [
     lead: "Custom web development services designed for fast performance, clear navigation, and great user experiences.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">1. Modern Websites & Landing Pages</h2>
+        <h2 style="font-size:1.3rem;color:#ffffff;margin-bottom:8px;">1. Modern Websites</h2>
         <p style="margin-bottom:16px;">Fast, clean, and responsive websites built with Next.js and Tailwind CSS to showcase your brand effectively.</p>
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">2. E-Commerce Stores & WhatsApp Ordering</h2>
+        <h2 style="font-size:1.3rem;color:#ffffff;margin-bottom:8px;">2. E-Commerce Stores & WhatsApp Ordering</h2>
         <p style="margin-bottom:16px;">Direct checkout and WhatsApp-integrated ordering portals for brands and local businesses looking to maximize sales without high app commissions.</p>
-        <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">3. Custom Full-Stack Web Applications & SaaS</h2>
+        <h2 style="font-size:1.3rem;color:#ffffff;margin-bottom:8px;">3. Custom Full-Stack Web Applications & SaaS</h2>
         <p style="margin-bottom:16px;">Real-time inventory systems, booking portals, kitchen displays, and internal administrative dashboards with PostgreSQL and Supabase.</p>
-        <a href="/contact/" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-top:12px;">Request a Quote</a>
+        <a href="/contact/" style="display:inline-block;padding:10px 20px;background:#ffffff;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-top:12px;">Request a Quote</a>
       </div>
     `,
     schemaJson: {
@@ -251,7 +233,7 @@ const staticRoutes = [
             .map(
               (p) => `
             <li style="margin-bottom:14px;border-bottom:1px solid #1e293b;padding-bottom:12px;">
-              <a href="/projects/${p.id}/" style="color:#22d3ee;text-decoration:none;font-weight:700;font-size:1.1rem;">→ ${escapeHtml(
+              <a href="/projects/${p.id}/" style="color:#ffffff;text-decoration:none;font-weight:700;font-size:1.1rem;">→ ${escapeHtml(
                 p.title
               )}</a>
               <span style="color:#64748b;font-size:0.85rem;margin-left:8px;">(${escapeHtml(
@@ -277,11 +259,11 @@ const staticRoutes = [
     lead: "Have a project in mind or looking for a dedicated full-stack developer? Let's discuss your timeline, tech requirements, and deliverables.",
     extraContentHtml: `
       <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
-        <p style="margin-bottom:12px;">Email: <a href="mailto:aafaquenazir@gmail.com" style="color:#22d3ee;">aafaquenazir@gmail.com</a></p>
-        <p style="margin-bottom:12px;">WhatsApp: <a href="https://api.whatsapp.com/send?phone=919325629256" style="color:#22d3ee;">+91 93256 29256</a></p>
-        <p style="margin-bottom:12px;">GitHub: <a href="https://github.com/Aafaque-Nazir" style="color:#22d3ee;">github.com/Aafaque-Nazir</a></p>
-        <p style="margin-bottom:24px;">LinkedIn: <a href="https://www.linkedin.com/in/aafaque-nazir/" style="color:#22d3ee;">linkedin.com/in/aafaque-nazir</a></p>
-        <a href="https://api.whatsapp.com/send?phone=919325629256&text=Hi%20Aafaque,%20I'd%20like%20to%20discuss%20a%20project" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;">Message on WhatsApp</a>
+        <p style="margin-bottom:12px;">Email: <a href="mailto:aafaquenazir@gmail.com" style="color:#ffffff;">aafaquenazir@gmail.com</a></p>
+        <p style="margin-bottom:12px;">WhatsApp: <a href="https://api.whatsapp.com/send?phone=919325629256" style="color:#ffffff;">+91 93256 29256</a></p>
+        <p style="margin-bottom:12px;">GitHub: <a href="https://github.com/Aafaque-Nazir" style="color:#ffffff;">github.com/Aafaque-Nazir</a></p>
+        <p style="margin-bottom:24px;">LinkedIn: <a href="https://www.linkedin.com/in/aafaque-nazir/" style="color:#ffffff;">linkedin.com/in/aafaque-nazir</a></p>
+        <a href="https://api.whatsapp.com/send?phone=919325629256&text=Hi%20Aafaque,%20I'd%20like%20to%20discuss%20a%20project" style="display:inline-block;padding:10px 20px;background:#ffffff;color:#000;font-weight:700;text-decoration:none;border-radius:4px;">Message on WhatsApp</a>
       </div>
     `,
   },
@@ -299,7 +281,7 @@ const staticRoutes = [
             .map(
               (b) => `
             <li style="margin-bottom:16px;border-bottom:1px solid #1e293b;padding-bottom:14px;">
-              <a href="/blog/${b.slug}/" style="color:#22d3ee;text-decoration:none;font-weight:700;font-size:1.15rem;">→ ${escapeHtml(
+              <a href="/blog/${b.slug}/" style="color:#ffffff;text-decoration:none;font-weight:700;font-size:1.15rem;">→ ${escapeHtml(
                 b.title
               )}</a>
               <div style="font-size:0.8rem;color:#64748b;margin:4px 0;">${escapeHtml(
@@ -348,15 +330,15 @@ for (const project of projectsData) {
 
   const extraContentHtml = `
     <div style="color:#cbd5e1;line-height:1.8;margin-top:24px;">
-      <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">The Problem</h2>
+      <h2 style="font-size:1.3rem;color:#ffffff;margin-bottom:8px;">The Problem</h2>
       <p style="margin-bottom:16px;">${escapeHtml(project.problem)}</p>
-      <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">The Engineering Solution</h2>
+      <h2 style="font-size:1.3rem;color:#ffffff;margin-bottom:8px;">The Engineering Solution</h2>
       <p style="margin-bottom:16px;">${escapeHtml(project.solution)}</p>
-      <h2 style="font-size:1.3rem;color:#22d3ee;margin-bottom:8px;">Technologies Used</h2>
+      <h2 style="font-size:1.3rem;color:#ffffff;margin-bottom:8px;">Technologies Used</h2>
       <p style="margin-bottom:16px;">${escapeHtml(project.techStack.join(" • "))}</p>
       <p style="margin-top:16px;">
-        ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:10px 20px;background:#22d3ee;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-right:12px;">Visit Live Project</a>` : ""}
-        <a href="/projects/" style="color:#22d3ee;text-decoration:none;">← Back to all projects</a>
+        ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:10px 20px;background:#ffffff;color:#000;font-weight:700;text-decoration:none;border-radius:4px;margin-right:12px;">Visit Live Project</a>` : ""}
+        <a href="/projects/" style="color:#ffffff;text-decoration:none;">← Back to all projects</a>
       </p>
     </div>
   `;
@@ -425,7 +407,7 @@ for (const blog of blogs) {
   const faqsHtml = blog.faqs && blog.faqs.length
     ? `
       <div style="margin-top:32px;border-top:1px solid #1e293b;padding-top:24px;">
-        <h2 style="font-size:1.4rem;color:#22d3ee;margin-bottom:16px;">Frequently Asked Questions</h2>
+        <h2 style="font-size:1.4rem;color:#ffffff;margin-bottom:16px;">Frequently Asked Questions</h2>
         ${blog.faqs
           .map(
             (faq) => `
@@ -447,7 +429,7 @@ for (const blog of blogs) {
         .map((s) => {
           if (s.type === "heading") {
             const tag = s.level === 3 ? "h3" : "h2";
-            const color = s.level === 3 ? "#e2e8f0" : "#22d3ee";
+            const color = s.level === 3 ? "#e2e8f0" : "#ffffff";
             return `<${tag} style="font-size:${s.level === 3 ? "1.15rem" : "1.35rem"};color:${color};margin:28px 0 10px 0;">${escapeHtml(
               s.title
             )}</${tag}>`;
@@ -469,7 +451,7 @@ for (const blog of blogs) {
                 ${items.map(item => `
                   <div style="background:#090a0f;border:1px solid #1e293b;padding:14px;border-radius:8px;">
                     <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;font-family:monospace;">${escapeHtml(item.label)}</div>
-                    <div style="font-size:1.4rem;font-weight:900;color:#22d3ee;margin:4px 0;font-family:monospace;">${escapeHtml(item.value)}</div>
+                    <div style="font-size:1.4rem;font-weight:900;color:#ffffff;margin:4px 0;font-family:monospace;">${escapeHtml(item.value)}</div>
                     ${item.desc ? `<div style="font-size:0.8rem;color:#cbd5e1;">${escapeHtml(item.desc)}</div>` : ""}
                   </div>
                 `).join("")}
@@ -480,14 +462,14 @@ for (const blog of blogs) {
             const nodes = s.nodes || [];
             return `
               <div style="background:#090a0f;border:1px solid #1e293b;padding:18px;border-radius:8px;margin:20px 0;">
-                <div style="font-size:0.85rem;font-weight:700;color:#22d3ee;margin-bottom:12px;font-family:monospace;">${escapeHtml(s.title || "Architecture Flow")}</div>
+                <div style="font-size:0.85rem;font-weight:700;color:#ffffff;margin-bottom:12px;font-family:monospace;">${escapeHtml(s.title || "Architecture Flow")}</div>
                 <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
                   ${nodes.map((n, ni) => `
                     <div style="background:#0f172a;border:1px solid #334155;padding:8px 12px;border-radius:6px;font-size:0.8rem;">
                       <strong style="color:#fff;">${escapeHtml(n.label)}</strong>
                       ${n.sub ? `<span style="display:block;font-size:0.7rem;color:#94a3b8;">${escapeHtml(n.sub)}</span>` : ""}
                     </div>
-                    ${ni < nodes.length - 1 ? `<span style="color:#22d3ee;font-weight:bold;">&rarr;</span>` : ""}
+                    ${ni < nodes.length - 1 ? `<span style="color:#ffffff;font-weight:bold;">&rarr;</span>` : ""}
                   `).join("")}
                 </div>
                 ${s.caption ? `<div style="margin-top:10px;font-size:0.75rem;color:#94a3b8;font-family:monospace;">• ${escapeHtml(s.caption)}</div>` : ""}
@@ -498,12 +480,12 @@ for (const blog of blogs) {
             const items = s.items || [];
             return `
               <div style="margin:20px 0;">
-                ${s.title ? `<div style="font-size:1.1rem;font-weight:700;color:#22d3ee;margin-bottom:12px;">${escapeHtml(s.title)}</div>` : ""}
+                ${s.title ? `<div style="font-size:1.1rem;font-weight:700;color:#ffffff;margin-bottom:12px;">${escapeHtml(s.title)}</div>` : ""}
                 ${items.map(st => `
                   <div style="background:#090a0f;border:1px solid #1e293b;padding:14px;border-radius:8px;margin-bottom:10px;">
                     <div style="font-weight:700;color:#fff;font-size:0.95rem;margin-bottom:4px;">${escapeHtml(st.step || "")} - ${escapeHtml(st.title)}</div>
                     <div style="color:#cbd5e1;font-size:0.85rem;line-height:1.6;">${escapeHtml(st.desc)}</div>
-                    ${st.code ? `<pre style="background:#000;color:#22d3ee;padding:10px;border-radius:4px;font-size:0.8rem;margin-top:8px;overflow-x:auto;"><code>${escapeHtml(st.code)}</code></pre>` : ""}
+                    ${st.code ? `<pre style="background:#000;color:#ffffff;padding:10px;border-radius:4px;font-size:0.8rem;margin-top:8px;overflow-x:auto;"><code>${escapeHtml(st.code)}</code></pre>` : ""}
                   </div>
                 `).join("")}
               </div>
@@ -511,8 +493,8 @@ for (const blog of blogs) {
           }
           if (s.type === "callout") {
             return `
-              <div style="background:#0f172a;border-left:3px solid #22d3ee;padding:14px 18px;margin:18px 0;border-radius:0 6px 6px 0;">
-                <div style="color:#22d3ee;font-weight:700;font-size:0.85rem;margin-bottom:4px;text-transform:uppercase;font-family:monospace;">${escapeHtml(s.title)}</div>
+              <div style="background:#0f172a;border-left:3px solid #ffffff;padding:14px 18px;margin:18px 0;border-radius:0 6px 6px 0;">
+                <div style="color:#ffffff;font-weight:700;font-size:0.85rem;margin-bottom:4px;text-transform:uppercase;font-family:monospace;">${escapeHtml(s.title)}</div>
                 <div style="color:#cbd5e1;font-size:0.85rem;line-height:1.6;">${escapeHtml(s.text)}</div>
               </div>
             `;
@@ -525,7 +507,7 @@ for (const blog of blogs) {
                 <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
                   <thead>
                     <tr style="background:#0f172a;border-bottom:1px solid #334155;">
-                      ${headers.map(h => `<th style="padding:10px;text-align:left;color:#22d3ee;">${escapeHtml(h)}</th>`).join("")}
+                      ${headers.map(h => `<th style="padding:10px;text-align:left;color:#ffffff;">${escapeHtml(h)}</th>`).join("")}
                     </tr>
                   </thead>
                   <tbody>
@@ -559,11 +541,11 @@ for (const blog of blogs) {
           blog.publishedAt || "2026-10-22"
         )} • ${escapeHtml(blog.readTime || "6 min read")}
       </div>
-      ${blog.quickAnswer ? `<div style="background:#0f172a;border-left:3px solid #22d3ee;padding:16px;margin-bottom:24px;border-radius:0 6px 6px 0;"><strong style="color:#22d3ee;">Quick Answer:</strong> <span style="color:#e2e8f0;">${escapeHtml(blog.quickAnswer)}</span></div>` : ""}
+      ${blog.quickAnswer ? `<div style="background:#0f172a;border-left:3px solid #ffffff;padding:16px;margin-bottom:24px;border-radius:0 6px 6px 0;"><strong style="color:#ffffff;">Quick Answer:</strong> <span style="color:#e2e8f0;">${escapeHtml(blog.quickAnswer)}</span></div>` : ""}
       ${sectionsHtml}
       ${faqsHtml}
       <div style="margin-top:32px;border-top:1px solid #1e293b;padding-top:16px;">
-        <a href="/blog/" style="color:#22d3ee;text-decoration:none;">← Back to all articles</a>
+        <a href="/blog/" style="color:#ffffff;text-decoration:none;">← Back to all articles</a>
       </div>
     </div>
   `;

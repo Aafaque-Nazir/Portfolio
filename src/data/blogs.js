@@ -1182,7 +1182,7 @@ export const blogs = [
           {
             "label": "Exploit Status",
             "value": "Active In-Wild",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "Automated threat scanners weaponizing cURL"
           }
         ]
@@ -1406,7 +1406,7 @@ export const blogs = [
           {
             "label": "Transport Protocol",
             "value": "HTTP/2 Standard",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "Runs over port 80/443 without WS handshake"
           },
           {
@@ -1603,7 +1603,7 @@ export const blogs = [
           {
             "label": "Schema Strictness",
             "value": "100% Enforced",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "Database-level constraints prevent data corruption"
           },
           {
@@ -1818,7 +1818,7 @@ export const blogs = [
           {
             "label": "Query Overhead",
             "value": "< 0.3ms P99",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "Indexed tenant_id adds negligible cost"
           },
           {
@@ -1995,7 +1995,7 @@ export const blogs = [
           {
             "label": "Perceived TTFB",
             "value": "0ms Instant",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "Pre-rendered in background before click"
           },
           {
@@ -2163,7 +2163,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Core Web Vitals measure user-centric loading performance, with Cumulative Layout Shift (CLS) acting as the definitive metric for visual stability. When building complex interactive interfaces—such as the luxury itineraries found in [Dubai Tour / TourWeb](/projects/8) or immersive 3D showcases like [3D Burger Website / Smoked & Seared](/projects/13)—unstable layouts severely degrade user experience and conversion rates. Two primary culprits drive unexpected layout shifts: Flash of Unstyled Text (FOUT) caused by uncalibrated font fallbacks, and zero-dimension media containers that reflow once images or carousels finish fetching."
+        "text": "Core Web Vitals measure user-centric loading performance, with Cumulative Layout Shift (CLS) acting as the definitive metric for visual stability. When building complex interactive interfaces—such as the travel itineraries found in [Al Raheeq Tourism](/projects/17) or immersive 3D showcases like [3D Burger Website / Smoked & Seared](/projects/13)—unstable layouts severely degrade user experience and conversion rates. Two primary culprits drive unexpected layout shifts: Flash of Unstyled Text (FOUT) caused by uncalibrated font fallbacks, and zero-dimension media containers that reflow once images or carousels finish fetching."
       },
       {
         "type": "stats",
@@ -2177,7 +2177,7 @@ export const blogs = [
           {
             "label": "Lighthouse Score",
             "value": "100 / 100",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "Passes all Core Web Vitals thresholds"
           },
           {
@@ -2315,7 +2315,7 @@ export const blogs = [
           {
             "label": "Image Reduction",
             "value": "65% Smaller",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "AVIF compression vs baseline WebP/JPEG"
           },
           {
@@ -2963,7 +2963,7 @@ export const blogs = [
           {
             "label": "Re-Render Overhead",
             "value": "-60% Lower",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "Fine-grained memoization avoids child updates"
           },
           {
@@ -3196,7 +3196,7 @@ export const blogs = [
           {
             "label": "Dynamic Slots",
             "value": "Edge Streamed",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "Personalized user data streamed in Suspense slots"
           },
           {
@@ -3517,7 +3517,7 @@ export const blogs = [
           {
             "label": "Conversion Lift",
             "value": "+32% Average",
-            "accent": "cyan",
+            "accent": "white",
             "desc": "Measurable sales increase from sub-second speed"
           },
           {
@@ -3846,7 +3846,7 @@ export const blogs = [
         "type": "code",
         "language": "tsx",
         "caption": "Next.js 15 Server Component with streaming suspense",
-        "code": "// app/packages/page.tsx - Zero client-side JS waterfall\nimport { Suspense } from \"react\";\nimport { PackageCatalog } from \"@/components/PackageCatalog\";\nimport { CatalogSkeleton } from \"@/components/CatalogSkeleton\";\n\nexport const metadata = {\n  title: \"Exclusive Dubai Tour Packages | Al Raheeq Tourism\",\n  description: \"Browse verified Dubai visa and holiday packages with instant confirmation.\"\n};\n\nexport default async function PackagesPage() {\n  return (\n    <main className=\"max-w-7xl mx-auto px-4 py-12\">\n      <h1 className=\"text-4xl font-extrabold text-white\">Curated Holiday Packages</h1>\n      <Suspense fallback={<CatalogSkeleton />}>\n        <PackageCatalog />\n      </Suspense>\n    </main>\n  );\n}"
+        "code": "// app/packages/page.tsx - Zero client-side JS waterfall\nimport { Suspense } from \"react\";\nimport { PackageCatalog } from \"@/components/PackageCatalog\";\nimport { CatalogSkeleton } from \"@/components/CatalogSkeleton\";\n\nexport const metadata = {\n  title: \"Exclusive UAE Holiday Packages | Al Raheeq Tourism\",\n  description: \"Browse verified Dubai visa and holiday packages with instant confirmation.\"\n};\n\nexport default async function PackagesPage() {\n  return (\n    <main className=\"max-w-7xl mx-auto px-4 py-12\">\n      <h1 className=\"text-4xl font-extrabold text-white\">Curated Holiday Packages</h1>\n      <Suspense fallback={<CatalogSkeleton />}>\n        <PackageCatalog />\n      </Suspense>\n    </main>\n  );\n}"
       },
       {
         "type": "heading",
@@ -3938,7 +3938,7 @@ export const blogs = [
         "type": "code",
         "language": "jsx",
         "caption": "Non-blocking search and filter using startTransition",
-        "code": "import { useState, useTransition } from \"react\";\n\nexport function ProductCatalogSearch({ items, onSelect }) {\n  const [searchTerm, setSearchTerm] = useState(\"\");\n  const [filteredItems, setFilteredItems] = useState(items);\n  const [isPending, startTransition] = useTransition();\n\n  const handleSearchChange = (e) => {\n    const query = e.target.value;\n    // 1. Immediate visual update for the input field\n    setSearchTerm(query);\n\n    // 2. Non-blocking deferred transition for 1000+ items\n    startTransition(() => {\n      const results = items.filter((item) =>\n        item.name.toLowerCase().includes(query.toLowerCase())\n      );\n      setFilteredItems(results);\n    });\n  };\n\n  return (\n    <div>\n      <input\n        type=\"text\"\n        value={searchTerm}\n        onChange={handleSearchChange}\n        placeholder=\"Search inventory...\"\n        className=\"px-4 py-2 bg-zinc-900 border border-white/10 rounded-xl\"\n      />\n      {isPending && <span className=\"text-xs text-cyan-400\">Filtering...</span>}\n      {/* Product List */}\n    </div>\n  );\n}"
+        "code": "import { useState, useTransition } from \"react\";\n\nexport function ProductCatalogSearch({ items, onSelect }) {\n  const [searchTerm, setSearchTerm] = useState(\"\");\n  const [filteredItems, setFilteredItems] = useState(items);\n  const [isPending, startTransition] = useTransition();\n\n  const handleSearchChange = (e) => {\n    const query = e.target.value;\n    // 1. Immediate visual update for the input field\n    setSearchTerm(query);\n\n    // 2. Non-blocking deferred transition for 1000+ items\n    startTransition(() => {\n      const results = items.filter((item) =>\n        item.name.toLowerCase().includes(query.toLowerCase())\n      );\n      setFilteredItems(results);\n    });\n  };\n\n  return (\n    <div>\n      <input\n        type=\"text\"\n        value={searchTerm}\n        onChange={handleSearchChange}\n        placeholder=\"Search inventory...\"\n        className=\"px-4 py-2 bg-zinc-900 border border-white/10 rounded-xl\"\n      />\n      {isPending && <span className=\"text-xs text-zinc-400\">Filtering...</span>}\n      {/* Product List */}\n    </div>\n  );\n}"
       },
       {
         "type": "heading",

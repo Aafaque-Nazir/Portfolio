@@ -1,14 +1,15 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { Toaster } from "sonner";
 import SEO from "./components/SEO";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import CommandMenu from "./components/CommandMenu";
 import SmoothScroll from "./components/SmoothScroll";
 import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion";
 
 import Home from "./pages/Home";
 const About = lazy(() => import("./pages/About"));
-const Skills = lazy(() => import("./pages/Skills"));
 const Project = lazy(() => import("./pages/Project"));
 const ProjectDetails = lazy(() => import("./pages/ProjectDetails"));
 const Services = lazy(() => import("./pages/Services"));
@@ -43,43 +44,44 @@ function App() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className="relative min-h-screen overflow-x-hidden bg-black">
+      <div className="relative min-h-screen overflow-x-hidden bg-black font-sans text-zinc-100 selection:bg-white/20 selection:text-white">
         <SmoothScroll />
         <Navbar />
+        <CommandMenu />
+        <Toaster position="bottom-right" richColors theme="dark" closeButton />
 
         <main>
           <Suspense fallback={
-            <div className="w-full min-h-screen flex items-center justify-center py-20 text-cyan-500/50 mix-blend-screen text-xs uppercase font-mono tracking-widest">
+            <div className="w-full min-h-screen flex items-center justify-center py-20 text-zinc-500 text-xs uppercase font-mono tracking-widest">
               <span className="animate-pulse">Loading...</span>
             </div>
           }>
             {/* AnimatePresence for Page Transitions — initial={false} skips cold-boot delay */}
             <AnimatePresence mode="wait" initial={false}>
-            <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<PageWrapper sectionName="home"><Home /></PageWrapper>} />
-              <Route path="/about" element={<PageWrapper sectionName="about"><About /></PageWrapper>} />
-              <Route path="/skills" element={<PageWrapper sectionName="skills"><Skills /></PageWrapper>} />
-              <Route path="/projects" element={
-                <PageWrapper sectionName="projects">
-                  <Project />
-                </PageWrapper>
-              } />
-              <Route path="/projects/:id" element={
-                <PageWrapper>
-                  <ProjectDetails />
-                </PageWrapper>
-              } />
-              <Route path="/services" element={<PageWrapper sectionName="services"><Services /></PageWrapper>} />
-              <Route path="/blog" element={<PageWrapper sectionName="blog"><Blog /></PageWrapper>} />
-              <Route path="/blog/:slug" element={<PageWrapper><BlogPost /></PageWrapper>} />
-              <Route path="/contact" element={<PageWrapper sectionName="contact"><Contact /></PageWrapper>} />
-              <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
-            </Routes>
-          </AnimatePresence>
-        </Suspense>
-      </main>
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<PageWrapper sectionName="home"><Home /></PageWrapper>} />
+                <Route path="/about" element={<PageWrapper sectionName="about"><About /></PageWrapper>} />
+                <Route path="/projects" element={
+                  <PageWrapper sectionName="projects">
+                    <Project />
+                  </PageWrapper>
+                } />
+                <Route path="/projects/:id" element={
+                  <PageWrapper>
+                    <ProjectDetails />
+                  </PageWrapper>
+                } />
+                <Route path="/services" element={<PageWrapper sectionName="services"><Services /></PageWrapper>} />
+                <Route path="/blog" element={<PageWrapper sectionName="blog"><Blog /></PageWrapper>} />
+                <Route path="/blog/:slug" element={<PageWrapper><BlogPost /></PageWrapper>} />
+                <Route path="/contact" element={<PageWrapper sectionName="contact"><Contact /></PageWrapper>} />
+                <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
+              </Routes>
+            </AnimatePresence>
+          </Suspense>
+        </main>
 
-      <Footer />
+        <Footer />
       </div>
     </LazyMotion>
   );

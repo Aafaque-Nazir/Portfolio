@@ -16,7 +16,7 @@ export default function NotFound() {
 
       <div className="relative min-h-[85vh] flex items-center justify-center bg-black text-white px-4 sm:px-6 lg:px-8 py-24 overflow-hidden">
         {/* Subtle Ambient Radial Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/[0.04] blur-[150px] pointer-events-none -z-0" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.01] blur-[150px] pointer-events-none -z-0" />
 
         <div className="max-w-xl w-full text-center relative z-10">
           {/* Status Badge */}
@@ -24,9 +24,9 @@ export default function NotFound() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/40 text-cyan-400 text-xs font-mono uppercase tracking-widest mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-zinc-300 text-xs font-mono uppercase tracking-widest mb-6"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
             <span>ERR_PAGE_NOT_FOUND</span>
           </motion.div>
 
@@ -67,7 +67,7 @@ export default function NotFound() {
           >
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-400 text-black font-semibold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-colors shadow-[0_0_20px_rgba(34,211,238,0.3)]"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-xs uppercase tracking-wider hover:bg-zinc-200 transition-colors shadow-sm"
             >
               <RiHomeLine size={15} />
               <span>Back to Home</span>
@@ -100,7 +100,7 @@ export default function NotFound() {
             Looking for something specific?{" "}
             <Link
               to="/contact"
-              className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 inline-flex items-center gap-1"
+              className="text-zinc-300 hover:text-white underline underline-offset-4 inline-flex items-center gap-1"
             >
               Contact Aafaque <RiArrowRightLine size={11} />
             </Link>

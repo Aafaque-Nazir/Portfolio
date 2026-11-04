@@ -15,9 +15,8 @@ function ProjectCard({ project }) {
     return (
         <div
             onClick={handleCardClick}
-            className="group relative w-full h-full bg-[#09090b] border border-white/10 hover:border-cyan-500/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] cursor-pointer"
+            className="group relative w-full h-full bg-zinc-950/80 border border-white/10 hover:border-white/25 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.7)] cursor-pointer"
         >
-
             {/* Feature Image with Controlled Proportions (Centered Logo Fit) */}
             <div className="relative w-full aspect-video overflow-hidden bg-zinc-950 border-b border-white/5">
                 <ProgressiveImage
@@ -30,10 +29,10 @@ function ProjectCard({ project }) {
                 />
 
                 {/* Subtle gradient vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/30 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent pointer-events-none" />
 
                 {/* Category Pill */}
-                <span className="absolute top-2.5 left-2.5 z-20 px-2.5 py-0.5 rounded-md bg-black/80 backdrop-blur-md border border-white/10 text-[10px] font-mono text-cyan-400 uppercase tracking-wider font-semibold">
+                <span className="absolute top-2.5 left-2.5 z-20 px-2.5 py-0.5 rounded-md bg-black/80 backdrop-blur-md border border-white/10 text-[10px] font-mono text-zinc-300 uppercase tracking-wider font-semibold">
                     {project.category}
                 </span>
             </div>
@@ -41,7 +40,7 @@ function ProjectCard({ project }) {
             {/* Details Block */}
             <div className="p-4 sm:p-5 flex flex-col justify-between flex-grow">
                 <div>
-                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-1">
+                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-zinc-100 transition-colors line-clamp-1">
                         {project.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-zinc-400 font-light mt-1.5 line-clamp-2 leading-relaxed">
@@ -53,13 +52,13 @@ function ProjectCard({ project }) {
                         {project.techStack.slice(0, 3).map((tech, idx) => (
                             <span
                                 key={idx}
-                                className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/5 text-[10px] sm:text-xs font-mono text-slate-300"
+                                className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/5 text-[10px] sm:text-xs font-mono text-zinc-300"
                             >
                                 {tech}
                             </span>
                         ))}
                         {project.techStack.length > 3 && (
-                            <span className="px-1.5 py-0.5 rounded bg-white/[0.02] border border-white/5 text-[10px] font-mono text-slate-500">
+                            <span className="px-1.5 py-0.5 rounded bg-white/[0.02] border border-white/5 text-[10px] font-mono text-zinc-500">
                                 +{project.techStack.length - 3}
                             </span>
                         )}
@@ -71,10 +70,10 @@ function ProjectCard({ project }) {
                     <Link
                         to={`/projects/${project.id}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 transition-colors group/link"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-zinc-300 hover:text-white transition-colors group/link"
                     >
                         <span>Case Study</span>
-                        <RiArrowLeftLine className="rotate-180 text-xs text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)] group-hover/link:translate-x-1 transition-transform" />
+                        <RiArrowLeftLine className="rotate-180 text-xs text-zinc-400 group-hover/link:text-white group-hover/link:translate-x-1 transition-all" />
                     </Link>
 
                     {project.link && (
@@ -83,7 +82,7 @@ function ProjectCard({ project }) {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 hover:text-white text-xs font-mono font-medium transition-all"
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-white/20 text-zinc-200 hover:text-white text-xs font-mono font-medium transition-all"
                         >
                             <span>Live Demo</span>
                             <RiExternalLinkLine className="text-xs" />
@@ -128,10 +127,10 @@ export function ProjectShowcase({ selectedFolder: externalFolder, setSelectedFol
                                 className="group relative cursor-pointer outline-none w-full"
                                 whileTap={{ scale: 0.98 }}
                             >
-                                <div className="relative w-full bg-[#09090b] border border-white/10 group-hover:border-cyan-500/30 rounded-2xl overflow-hidden transition-all duration-300 shadow-lg group-hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] group-hover:-translate-y-1">
+                                <div className="relative w-full bg-zinc-950/80 border border-white/10 group-hover:border-white/25 rounded-2xl overflow-hidden transition-all duration-300 shadow-lg group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.7)] group-hover:-translate-y-1">
 
                                     {/* Folder Tab Indicator */}
-                                    <div className="absolute top-0 left-6 w-24 h-1 bg-cyan-400 rounded-b shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
+                                    <div className="absolute top-0 left-6 w-20 h-0.5 bg-white/70 rounded-b" />
 
                                     {/* Thumbnail Preview Stack */}
                                     <div className="relative w-full h-28 overflow-hidden bg-zinc-950 border-b border-white/5">
@@ -157,23 +156,23 @@ export function ProjectShowcase({ selectedFolder: externalFolder, setSelectedFol
                                     {/* Content */}
                                     <div className="p-4 sm:p-5">
                                         <div className="flex items-center justify-between mb-2.5">
-                                            <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                                            <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300">
                                                 <RiFolder3Fill className="text-base" />
                                             </div>
-                                            <span className="text-xs font-mono font-medium text-slate-400 bg-white/[0.03] border border-white/10 px-2.5 py-0.5 rounded-full">
+                                            <span className="text-xs font-mono font-medium text-zinc-400 bg-white/[0.03] border border-white/10 px-2.5 py-0.5 rounded-full">
                                                 {folder.projects.length} {folder.projects.length === 1 ? 'project' : 'projects'}
                                             </span>
                                         </div>
 
-                                        <h2 className="text-base sm:text-lg font-bold text-white tracking-tight mb-3 group-hover:text-cyan-300 transition-colors">
+                                        <h2 className="text-base sm:text-lg font-bold text-white tracking-tight mb-3 group-hover:text-zinc-100 transition-colors">
                                             {folder.name}
                                         </h2>
 
                                         <div className="flex items-center justify-between pt-3 border-t border-white/5">
-                                            <span className="text-xs font-mono text-slate-400 group-hover:text-cyan-300 transition-colors">
+                                            <span className="text-xs font-mono text-zinc-400 group-hover:text-white transition-colors">
                                                 Explore Folder
                                             </span>
-                                            <RiArrowLeftLine className="rotate-180 text-xs text-cyan-400 drop-shadow-[0_0_6px_rgba(34,211,238,0.8)] group-hover:translate-x-1 transition-transform" />
+                                            <RiArrowLeftLine className="rotate-180 text-xs text-zinc-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
                                         </div>
                                     </div>
                                 </div>
@@ -188,10 +187,10 @@ export function ProjectShowcase({ selectedFolder: externalFolder, setSelectedFol
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 15, scale: 0.98 }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative bg-zinc-950/70 backdrop-blur-2xl border border-white/10 rounded-2xl w-full max-w-6xl mx-auto shadow-2xl overflow-hidden z-20"
+                        className="relative bg-zinc-950/80 backdrop-blur-2xl border border-white/10 rounded-2xl w-full max-w-6xl mx-auto shadow-2xl overflow-hidden z-20"
                     >
                         {/* Top Accent Line */}
-                        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
+                        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
                         {/* Compact Header Bar */}
                         <div className="relative z-30 px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-zinc-950/90 backdrop-blur-md">
@@ -199,20 +198,20 @@ export function ProjectShowcase({ selectedFolder: externalFolder, setSelectedFol
                                 whileHover={{ x: -2 }}
                                 whileTap={{ scale: 0.96 }}
                                 onClick={() => setSelectedFolder(null)}
-                                className="group/btn inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/10 hover:border-cyan-400/50 hover:bg-zinc-800 transition-all text-xs font-mono font-medium text-white shadow-sm"
+                                className="group/btn inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/10 hover:border-white/25 hover:bg-zinc-800 transition-all text-xs font-mono font-medium text-white shadow-sm"
                             >
-                                <RiArrowLeftLine className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)] group-hover/btn:-translate-x-0.5 transition-transform text-sm" />
+                                <RiArrowLeftLine className="text-zinc-400 group-hover/btn:text-white group-hover/btn:-translate-x-0.5 transition-all text-sm" />
                                 <span>All Categories</span>
                             </motion.button>
 
                             <div className="flex items-center gap-2.5">
-                                <div className="w-7 h-7 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                                <div className="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300">
                                     <RiFolder3Fill className="text-sm" />
                                 </div>
                                 <h2 className="text-sm sm:text-base font-bold text-white tracking-tight">
                                     {selectedFolder.name}
                                 </h2>
-                                <span className="text-xs font-mono text-cyan-300 bg-cyan-950/70 border border-cyan-500/30 px-2.5 py-0.5 rounded-full">
+                                <span className="text-xs font-mono text-zinc-300 bg-white/[0.04] border border-white/10 px-2.5 py-0.5 rounded-full">
                                     {selectedFolder.projects.length} {selectedFolder.projects.length === 1 ? 'project' : 'projects'}
                                 </span>
                             </div>

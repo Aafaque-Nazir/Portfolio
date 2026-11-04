@@ -28,7 +28,7 @@ export default function Blog() {
   return (
     <div id="blog" className="min-h-screen bg-black text-white pt-20 sm:pt-24 pb-16">
       {/* Background Ambient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[360px] bg-cyan-500/[0.02] blur-[130px] pointer-events-none -z-0" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[360px] bg-white/[0.01] blur-[130px] pointer-events-none -z-0" />
 
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
