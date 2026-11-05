@@ -1,5 +1,115 @@
 export const blogs = [
   {
+    "id": "auth-2026-session-cookies-vs-localstorage",
+    "slug": "auth-2026-session-cookies-vs-localstorage",
+    "title": "Full-Stack Authentication in 2026: Why Session Cookies Beat LocalStorage for Security",
+    "seoTitle": "Session Cookies vs LocalStorage: 2026 Auth Security",
+    "description": "Learn why httpOnly session cookies are the standard for web app security in 2026, protecting your React apps from XSS and token theft.",
+    "publishedAt": "2026-11-05",
+    "updatedAt": "2026-11-05",
+    "readTime": "7 min read",
+    "category": "Security & Architecture",
+    "tags": [
+      "Web Security",
+      "Next.js",
+      "React 19",
+      "Supabase"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "In 2026, httpOnly cookies are the standard for web security because they prevent JavaScript from accessing authentication tokens, which stops hackers from stealing sessions through Cross-Site Scripting (XSS) attacks.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "Is LocalStorage ever safe for storing auth tokens?",
+        "answer": "No. LocalStorage is accessible by any JavaScript running on your page. If a third-party script or a dependency is compromised, your users' tokens can be stolen instantly."
+      },
+      {
+        "question": "How do httpOnly cookies prevent Cross-Site Scripting (XSS)?",
+        "answer": "The 'httpOnly' flag tells the browser that the cookie should not be accessible via document.cookie. This means even if a malicious script runs on your site, it cannot read the session token."
+      },
+      {
+        "question": "Do cookies work with modern frameworks like React and Next.js?",
+        "answer": "Yes. Modern frameworks actually prefer cookies because they allow for Server-Side Rendering (SSR). The server can read the cookie to check authentication before the page even reaches the user's browser."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Shift in Web Authentication"
+      },
+      {
+        "type": "paragraph",
+        "text": "For years, many developers stored JWTs (JSON Web Tokens) in LocalStorage because it was easy to use with React. However, as web security threats have evolved, this approach has become a major risk. In 2026, the industry has moved back to server-managed session cookies for one simple reason: they are much harder to steal."
+      },
+      {
+        "type": "paragraph",
+        "text": "When I built the [Restaurant OS / Corner Cafe](/projects/4), security was the top priority. Handling staff logins and owner data required a system where a single malicious browser extension couldn't scrap user credentials. Using httpOnly cookies ensured that sensitive data stayed on the server and out of reach of client-side scripts."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why LocalStorage is a Security Risk"
+      },
+      {
+        "type": "paragraph",
+        "text": "LocalStorage is a public storage area for your domain. Any JavaScript running on your site—including your analytics tools, chat widgets, or ads—can read everything inside it. This makes it a prime target for Cross-Site Scripting (XSS) attacks. If a hacker finds one small vulnerability in your code, they can extract every logged-in user's token in seconds."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The httpOnly Cookie Solution"
+      },
+      {
+        "type": "paragraph",
+        "text": "By using cookies with the 'httpOnly' and 'Secure' flags, you create a wall between your authentication data and the browser's JavaScript environment. The browser handles sending the token to your API automatically, but it won't let any script touch it."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Setting a secure session cookie in Next.js 15+",
+        "code": "import { cookies } from 'next/headers';\n\nexport async function createSession(token: string) {\n  const cookieStore = await cookies();\n\n  cookieStore.set('session_id', token, {\n    httpOnly: true,\n    secure: true,\n    sameSite: 'strict',\n    path: '/',\n    maxAge: 60 * 60 * 24 * 7, // 1 week expiry\n  });\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Pro Tip: Use SameSite=Strict",
+        "text": "Always set the SameSite attribute to 'Strict' or 'Lax' to prevent Cross-Site Request Forgery (CSRF) attacks. This ensures the browser only sends the cookie if the request originates from your own website."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Better Performance with SSR"
+      },
+      {
+        "type": "paragraph",
+        "text": "Security isn't the only benefit. Cookies make Server-Side Rendering (SSR) much faster. Since the browser sends the cookie with the initial page request, your server knows who the user is immediately. You don't have to wait for the React app to load, check LocalStorage, and then fetch user data. This results in a fast, flicker-free experience for your users."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Implementing Secure Auth in Your Project"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you are starting a new project in 2026, avoid the temptation to use LocalStorage for tokens. Whether you are using Supabase, Auth0, or a custom backend, configure your middleware to handle cookies. This small architectural change protects your users and makes your application much more reliable."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications with a focus on security and performance. [Hire Aafaque Nazir](/services) for your next project or [get in touch for a consultation](/contact) to review your current authentication setup."
+      }
+    ]
+  },
+  {
     "id": "building-fast-react-product-filters-url-state",
     "slug": "building-fast-react-product-filters-url-state",
     "title": "Building Fast Multi-Faceted Product Filters with React and URL State",
