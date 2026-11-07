@@ -1,5 +1,146 @@
 export const blogs = [
   {
+    "id": "end-to-end-type-safety-typescript-zod-server-actions",
+    "slug": "end-to-end-type-safety-typescript-zod-server-actions",
+    "title": "End-to-End Type Safety Across Frontend and Backend with TypeScript, Zod, and Server Actions",
+    "seoTitle": "End-to-End Type Safety: TypeScript, Zod & Actions",
+    "description": "Learn how to build a type-safe full stack architecture using TypeScript, Zod validation, and Next.js Server Actions with zero runtime mismatch.",
+    "publishedAt": "2026-11-07",
+    "updatedAt": "2026-11-07",
+    "readTime": "7 min read",
+    "category": "Security & Architecture",
+    "tags": [
+      "TypeScript",
+      "Zod",
+      "Server Actions",
+      "Next.js",
+      "Web Security"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "End-to-end type safety connects client inputs and database operations using a single shared Zod schema. TypeScript verifies types during development, while Zod parses and validates data at runtime inside Server Actions, eliminating manual API typing and silent serialization bugs.",
+    "relatedProjectId": 17,
+    "faqs": [
+      {
+        "question": "Why is TypeScript alone not enough for full-stack type safety?",
+        "answer": "TypeScript performs compile-time checks only and is completely erased during JavaScript execution. It cannot protect your server against corrupted payloads, malformed JSON, or malicious requests at runtime without a runtime validator like Zod."
+      },
+      {
+        "question": "How do Server Actions eliminate API boilerplate?",
+        "answer": "Server Actions act as remote procedure calls (RPC). Instead of setting up API routes, writing manual fetch calls, and synchronizing request/response interfaces, you import and call the server function directly from your React component with full type inference."
+      },
+      {
+        "question": "What is the performance overhead of using Zod on the server?",
+        "answer": "Zod parsing overhead is negligible, typically running in fractions of a millisecond for typical business objects. The safety gains and prevention of broken database queries far outweigh the tiny CPU cost."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Fallacy of 'TypeScript Everywhere'"
+      },
+      {
+        "type": "paragraph",
+        "text": "Many web applications claim to be fully type-safe simply because both the frontend and backend are written in TypeScript. However, the network boundary represents a blind spot. When data moves from an HTML form across HTTP to a server, TypeScript types disappear. If an API endpoint casts incoming request bodies with 'as RequestPayload', you are trusting client input blindly."
+      },
+      {
+        "type": "paragraph",
+        "text": "Real end-to-end type safety requires two distinct mechanisms: static compile-time checking across codebases, and runtime validation at network boundaries. By pairing TypeScript with Zod and Next.js Server Actions, we can build a type-safe full stack architecture where data contracts are enforced strictly on both sides of the wire."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Step 1: Define a Single Source of Truth with Zod"
+      },
+      {
+        "type": "paragraph",
+        "text": "Rather than manually creating a TypeScript interface and a separate validation function, you define a single Zod schema. TypeScript then infers the static type directly from the runtime schema using 'z.infer'."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "lib/validations/booking.ts - Shared Schema Definition",
+        "code": "import { z } from \"zod\";\n\nexport const BookingSchema = z.object({\n  fullName: z.string().trim().min(3, \"Name must be at least 3 characters\").max(80),\n  email: z.string().trim().email(\"Please provide a valid email address\"),\n  phone: z.string().trim().regex(/^\\+?[1-9]\\d{7,14}$/, \"Invalid international phone number\"),\n  visaType: z.enum([\"tourist_30\", \"tourist_60\", \"transit\"]),\n  passengersCount: z.coerce.number().int().min(1).max(10),\n  travelDate: z.string().refine((date) => !isNaN(Date.parse(date)), {\n    message: \"Valid travel date required\",\n  }),\n});\n\nexport type BookingInput = z.infer<typeof BookingSchema>;"
+      },
+      {
+        "type": "paragraph",
+        "text": "This pattern ensures that changes to field names, validation constraints, or allowed enum values happen in exactly one place. If you add a field to the schema, TypeScript will immediately flag errors anywhere in your client forms or backend handlers where that field is omitted or mismatched."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Step 2: Enforcing Runtime Validation in Server Actions"
+      },
+      {
+        "type": "paragraph",
+        "text": "In Next.js, Server Actions allow you to run server code directly without exposing conventional REST endpoints. Because Server Actions accept FormData or JSON objects, validating inputs through your schema is simple and safe."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "app/actions/booking.ts - Type-Safe Server Action",
+        "code": "\"use server\";\n\nimport { BookingSchema } from \"@/lib/validations/booking\";\n\nexport type ActionState = {\n  success: boolean;\n  message: string;\n  errors?: Record<string, string[]>;\n};\n\nexport async function submitBookingAction(\n  prevState: ActionState,\n  formData: FormData\n): Promise<ActionState> {\n  const rawData = Object.fromEntries(formData.entries());\n  const validationResult = BookingSchema.safeParse(rawData);\n\n  if (!validationResult.success) {\n    return {\n      success: false,\n      message: \"Validation failed. Please verify your entries.\",\n      errors: validationResult.error.flatten().fieldErrors,\n    };\n  }\n\n  const cleanData = validationResult.data;\n\n  try {\n    // cleanData is fully typed as BookingInput\n    // Proceed to database write or payment gateway call\n    return {\n      success: true,\n      message: `Booking received for ${cleanData.fullName}. Processing request.`,\n    };\n  } catch (error) {\n    return {\n      success: false,\n      message: \"Database operation failed. Please try again later.\",\n    };\n  }\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Production Architecture Tip",
+        "text": "Never use 'BookingSchema.parse()' inside a server action unless you intend to trigger an uncaught boundary error. Always use 'BookingSchema.safeParse()'. It returns an object containing either the typed data or the structured error map without throwing unhandled exceptions."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Real-World Application: Handling Travel Registrations"
+      },
+      {
+        "type": "paragraph",
+        "text": "I implemented this exact end-to-end architecture on [Al Raheeq Tourism](/projects/17), a platform handling tourist visa requests and flight bookings. Travel applications require strict adherence to international passport standards and travel date validations. By sharing schemas between client validation and server actions, we eliminated form submission mismatches completely and prevented invalid submissions before touching downstream database tables."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Step 3: Connecting Client Forms with React 19 useActionState"
+      },
+      {
+        "type": "paragraph",
+        "text": "With React 19 and modern Next.js, handling server responses on the client side no longer requires complex state machines or third-party query wrappers for forms. The 'useActionState' hook handles pending states, error payloads, and successful responses with full type checking."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "components/booking-form.tsx - Client Component",
+        "code": "\"use client\";\n\nimport { useActionState } from \"react\";\nimport { submitBookingAction, type ActionState } from \"@/app/actions/booking\";\n\nconst initialState: ActionState = {\n  success: false,\n  message: \"\",\n};\n\nexport function BookingForm() {\n  const [state, formAction, isPending] = useActionState(submitBookingAction, initialState);\n\n  return (\n    <form action={formAction} className=\"space-y-4 max-w-md mx-auto\">\n      <div>\n        <label htmlFor=\"fullName\" className=\"block text-sm font-medium\">Full Name</label>\n        <input id=\"fullName\" name=\"fullName\" required className=\"border rounded p-2 w-full\" />\n        {state.errors?.fullName && (\n          <p className=\"text-red-500 text-xs mt-1\">{state.errors.fullName[0]}</p>\n        )}\n      </div>\n\n      <div>\n        <label htmlFor=\"email\" className=\"block text-sm font-medium\">Email</label>\n        <input id=\"email\" name=\"email\" type=\"email\" required className=\"border rounded p-2 w-full\" />\n        {state.errors?.email && (\n          <p className=\"text-red-500 text-xs mt-1\">{state.errors.email[0]}</p>\n        )}\n      </div>\n\n      <button\n        type=\"submit\"\n        disabled={isPending}\n        className=\"bg-blue-600 text-white py-2 px-4 rounded disabled:opacity-50\"\n      >\n        {isPending ? \"Submitting...\" : \"Book Application\"}\n      </button>\n\n      {state.message && (\n        <p className={`text-sm ${state.success ? \"text-green-600\" : \"text-red-600\"}`}>\n          {state.message}\n        </p>\n      )}\n    </form>\n  );\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Architectural Benefits of This Setup"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Zero API Sync Issues: You no longer need to maintain separate Swagger/OpenAPI files or manually keep client fetch types aligned with backend controllers.",
+          "Automatic Bundle Optimization: Zod schemas and validation rules only increase server bundle sizes when imported into server files; your client bundle remains lean.",
+          "Resilient Data Ingestion: Malformed JSON or tampered form fields are stopped at the action layer before they reach database drivers or third-party APIs.",
+          "Progressive Enhancement: Forms work natively with HTML form action semantics, ensuring submissions still complete even on unstable mobile network connections."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If your team is experiencing bugs caused by unsynchronized API types, unstable form handling, or insecure backend inputs, I can help audit your stack and implement clean type safety across your applications. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project."
+      }
+    ]
+  },
+  {
     "id": "defending-spas-against-xss-and-csrf",
     "slug": "defending-spas-against-xss-and-csrf",
     "title": "Defending Modern Single Page Applications Against Cross-Site Scripting (XSS) and CSRF Attacks",
