@@ -1,5 +1,128 @@
 export const blogs = [
   {
+    "id": "edge-rate-limiting-ddos-defense-apis",
+    "slug": "edge-rate-limiting-ddos-defense-apis",
+    "title": "Implementing Rate Limiting and DDoS Defense on Edge Networks for Public Web APIs",
+    "seoTitle": "Edge Rate Limiting & DDoS Defense for Web APIs",
+    "description": "Learn how to protect public web APIs from DDoS spikes and scraper abuse using edge workers, Upstash Redis sliding windows, and Next.js.",
+    "publishedAt": "2026-11-08",
+    "updatedAt": "2026-11-08",
+    "readTime": "7 min read",
+    "category": "Security & Architecture",
+    "tags": [
+      "api rate limiting edge workers",
+      "prevent ddos next js api",
+      "upstash redis rate limit react",
+      "Edge Computing",
+      "Web Security"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Edge rate limiting intercepts HTTP requests at global CDN nodes before they reach your origin database or compute server. By pairing edge workers with a distributed store like Upstash Redis using a sliding window algorithm, you block abusive traffic and volumetric DDoS spikes while keeping latency minimal.",
+    "relatedProjectId": 15,
+    "faqs": [
+      {
+        "question": "Why should rate limiting happen at the edge instead of the origin server?",
+        "answer": "When rate limiting runs on your primary server or database, abusive traffic still consumes compute cycles, memory, and database connections. Placing rate limiting on edge workers blocks malicious traffic at the CDN point of presence, preventing origin load and saving serverless execution costs."
+      },
+      {
+        "question": "Which rate-limiting algorithm is best for public APIs?",
+        "answer": "The sliding window counter algorithm is ideal. Unlike a fixed window counter, which allows twice the limit of requests across window boundaries, sliding window counters smooth out traffic spikes and stop boundary-burst exploits."
+      },
+      {
+        "question": "How do you identify clients behind shared NAT or dynamic IPs?",
+        "answer": "Use a compound key. Combine the client IP (from CF-Connecting-IP or X-Forwarded-For) with user agent hashes, API tokens, or session IDs. For anonymous public routes, prioritize IP plus browser fingerprinting headers."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Vulnerability of Origin-Bound API Defense"
+      },
+      {
+        "type": "paragraph",
+        "text": "Most developers implement rate limiting using an in-memory store like Express rate-limit or an internal Redis container running alongside their main backend. While this works for single-server hobby projects, it fails when traffic surges or when targeted by scrapers."
+      },
+      {
+        "type": "paragraph",
+        "text": "If a botnet floods your Next.js API routes with thousands of requests per second, each request still spins up a serverless function, consumes CPU time, and checks your database. By the time your backend responds with HTTP 429 Too Many Requests, your infrastructure bill has already climbed and legitimate users face high latency."
+      },
+      {
+        "type": "paragraph",
+        "text": "I encountered this exact problem while building [Aura Estate](/projects/15), a real estate portal with real-time property search and valuation estimates. Complex Supabase PostgreSQL queries for geospatial filters were vulnerable to aggressive scraping. Shifting rate checks to the network edge stopped unauthorized automated scrapers before they ever reached the database."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Setting Up Edge Rate Limiting with Upstash Redis and Next.js"
+      },
+      {
+        "type": "paragraph",
+        "text": "To stop DDoS attacks and brute-force traffic, your rate limiter needs to run on edge runtimes (such as Vercel Edge Middleware or Cloudflare Workers) and communicate with a low-latency database over HTTP REST rather than stateful TCP connections."
+      },
+      {
+        "type": "paragraph",
+        "text": "Upstash Redis works well here because it exposes an HTTP-based REST API that runs cleanly in lightweight edge environments without connection pool exhaustion. Here is a production-ready Next.js middleware implementation using a sliding window counter:"
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "middleware.ts - Edge rate limiting with Upstash Redis",
+        "code": "import { NextRequest, NextResponse } from 'next/server';\nimport { Ratelimit } from '@upstash/ratelimit';\nimport { Redis } from '@upstash/redis';\n\n// Initialize Upstash Redis with edge-friendly REST client\nconst redis = new Redis({\n  url: process.env.UPSTASH_REDIS_REST_URL!,\n  token: process.env.UPSTASH_REDIS_REST_TOKEN!,\n});\n\n// Create a sliding window limiter: 20 requests per 10 seconds\nconst ratelimit = new Ratelimit({\n  redis,\n  limiter: Ratelimit.slidingWindow(20, '10 s'),\n  analytics: true,\n  prefix: '@edge-limiter',\n});\n\nexport async function middleware(request: NextRequest) {\n  // Target only public API routes\n  if (!request.nextUrl.pathname.startsWith('/api/')) {\n    return NextResponse.next();\n  }\n\n  // Extract client IP address safely\n  const ip = request.ip ?? request.headers.get('x-forwarded-for')?.split(',')[0] ?? '127.0.0.1';\n  \n  // Limit based on client IP\n  const { success, limit, remaining, reset } = await ratelimit.limit(ip.trim());\n\n  if (!success) {\n    return new NextResponse(\n      JSON.stringify({\n        error: 'Too Many Requests',\n        message: 'Rate limit exceeded. Please wait before retrying.',\n      }),\n      {\n        status: 429,\n        headers: {\n          'Content-Type': 'application/json',\n          'X-RateLimit-Limit': limit.toString(),\n          'X-RateLimit-Remaining': remaining.toString(),\n          'X-RateLimit-Reset': reset.toString(),\n          'Retry-After': Math.ceil((reset - Date.now()) / 1000).toString(),\n        },\n      }\n    );\n  }\n\n  const response = NextResponse.next();\n  response.headers.set('X-RateLimit-Limit', limit.toString());\n  response.headers.set('X-RateLimit-Remaining', remaining.toString());\n  return response;\n}\n\nexport const config = {\n  matcher: '/api/:path*',\n};"
+      },
+      {
+        "type": "callout",
+        "title": "Sliding Window vs Fixed Window",
+        "text": "Fixed window algorithms reset counters at round clock intervals (e.g., top of the minute). An attacker can send 20 requests at 11:59:59 and another 20 at 12:00:00, pushing 40 requests in two seconds. The sliding window algorithm looks back at the preceding interval to keep request flow steady."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "DDoS Defense Layers Beyond Simple IP Throttling"
+      },
+      {
+        "type": "paragraph",
+        "text": "IP-based throttling alone cannot stop distributed attacks because modern botnets cycle through thousands of residential proxy IP addresses. A reliable defensive strategy requires layered checks at the edge network:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Header Validation: Drop requests immediately if standard headers like User-Agent or Accept are missing, or if they match known scraping utility defaults.",
+          "Payload Size Constraints: Reject POST/PUT payloads larger than 50KB directly at the edge to prevent memory bloat on compute nodes.",
+          "Challenge Handshakes: Use Cloudflare Turnstile or similar invisible challenges on sensitive endpoints to differentiate human users from headless scripts.",
+          "Tiered Limits: Apply tighter limits (e.g., 5 requests per minute) on write operations like form submissions or password resets, while allowing higher thresholds on cached read endpoints."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Handling Edge Cache Shields for Static and Dynamic APIs"
+      },
+      {
+        "type": "paragraph",
+        "text": "Rate limiting is only half the battle. If your API returns data that changes infrequently, pairing your rate limiter with an Edge Cache Shield via the Cache-Control s-maxage directive cuts database load down to almost zero."
+      },
+      {
+        "type": "paragraph",
+        "text": "When building high-traffic endpoints, setting 'Cache-Control: public, s-maxage=60, stale-while-revalidate=300' lets the edge network serve cached responses directly from edge memory. The request never touches your rate-limiting Redis store or your database, absorbing volumetric read attacks automatically."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Hardening Your Web Application?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Securing web applications requires practical engineering choices that prevent downtime without degrading user experience. Explore my [Full-Stack Web Development Services](/services) to see how I build secure, high-speed applications, or [get in touch with Aafaque](/contact) directly to discuss your project security requirements."
+      }
+    ]
+  },
+  {
     "id": "end-to-end-type-safety-typescript-zod-server-actions",
     "slug": "end-to-end-type-safety-typescript-zod-server-actions",
     "title": "End-to-End Type Safety Across Frontend and Backend with TypeScript, Zod, and Server Actions",
