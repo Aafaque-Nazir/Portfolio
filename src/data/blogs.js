@@ -1,5 +1,106 @@
 export const blogs = [
   {
+    "id": "mastering-tailwind-css-v4-oxide-engine-and-theme",
+    "slug": "mastering-tailwind-css-v4-oxide-engine-and-theme",
+    "title": "Mastering Tailwind CSS v4: The New Lightning-Fast Oxide Engine and CSS-First @theme Explained",
+    "seoTitle": "Mastering Tailwind CSS v4: Oxide Engine & @theme Guide",
+    "description": "Learn how Tailwind CSS v4 improves build speeds with the Rust-powered Oxide engine, replaces JS config with CSS-first @theme, and how to upgrade.",
+    "publishedAt": "2026-11-09",
+    "updatedAt": "2026-11-09",
+    "readTime": "7 min read",
+    "category": "Frontend Development",
+    "tags": [
+      "Tailwind CSS",
+      "CSS",
+      "Frontend Development",
+      "Performance"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Tailwind CSS v4 introduces the Rust-powered Oxide engine for extremely fast builds and replaces JavaScript configuration files with a CSS-first @theme directive.",
+    "relatedProjectId": 12,
+    "faqs": [
+      {
+        "question": "What is the main performance improvement in Tailwind CSS v4?",
+        "answer": "Tailwind CSS v4 introduces the Oxide engine written in Rust, which scans files and compiles CSS significantly faster than previous versions, often operating up to 10 times faster on large projects."
+      },
+      {
+        "question": "How do I configure custom colors and fonts in Tailwind v4?",
+        "answer": "Instead of modifying tailwind.config.js, Tailwind v4 uses standard CSS variables inside your main CSS file using the @theme directive."
+      },
+      {
+        "question": "Is tailwind.config.js still required in Tailwind v4?",
+        "answer": "No, tailwind.config.js is no longer required. All configuration, including content paths, plugins, and theme extensions, can now be handled directly inside your CSS file."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Tailwind CSS v4 Changes Everything"
+      },
+      {
+        "type": "paragraph",
+        "text": "For years, Tailwind v3 relied on a JavaScript configuration file and a Node.js-based scanner to generate utility classes. While effective, large codebases often suffered from build slowdowns during development. Tailwind CSS v4 completely rewrites the core engine in Rust, known as the Oxide engine. This native approach eliminates Node.js overhead during scanning and generates your stylesheets instantly. When building projects like the [Premium Burger Shop / H5 Texes Burger](/projects/12), keeping build times minimal helps maintain momentum during styling iterations."
+      },
+      {
+        "type": "paragraph",
+        "text": "Beyond raw speed, v4 cleans up project folder structures by removing the mandatory JavaScript configuration file. Everything now flows through standard CSS, aligning utility-first styling closer to native web standards."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Goodbye tailwind.config.js: Hello CSS-First @theme"
+      },
+      {
+        "type": "paragraph",
+        "text": "In older versions of Tailwind, custom design tokens lived in a separate JavaScript object. In v4, configuration moves directly into your main CSS entry file using the new `@theme` directive. This makes it trivial to map design tokens, fonts, and custom breakpoints without jumping between JavaScript and CSS files."
+      },
+      {
+        "type": "code",
+        "language": "css",
+        "caption": "Configuring design tokens in Tailwind v4 using CSS",
+        "code": "@import \"tailwindcss\";\n\n@theme {\n  --font-display: \"Inter\", sans-serif;\n  --color-brand-primary: #ff5722;\n  --color-brand-dark: #121212;\n  --breakpoint-3xl: 1920px;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Engineering Note",
+        "text": "Using native CSS variables inside the @theme block automatically registers them as utility classes, meaning `--color-brand-primary` immediately becomes available as `bg-brand-primary`, `text-brand-primary`, and `border-brand-primary`."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Step-by-Step Migration from v3 to v4"
+      },
+      {
+        "type": "paragraph",
+        "text": "Migrating an existing codebase from Tailwind v3 to v4 requires a few cleanups. Since PostCSS configuration changes and the import statement simplifies, you can complete the upgrade by following a few clear steps."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Uninstall old PostCSS plugins and install the new `@tailwindcss/postcss` package.",
+          "Replace the three traditional directives (`@tailwind base; @tailwind components; @tailwind utilities;`) with a single `@import \"tailwindcss\";` statement.",
+          "Move any custom values from `tailwind.config.js` into your CSS file inside the `@theme` block and delete the old config file.",
+          "Update source file path detection if your templates are outside the default automatic scanner paths."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications with modern tooling. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your next project."
+      }
+    ]
+  },
+  {
     "id": "edge-rate-limiting-ddos-defense-apis",
     "slug": "edge-rate-limiting-ddos-defense-apis",
     "title": "Implementing Rate Limiting and DDoS Defense on Edge Networks for Public Web APIs",
