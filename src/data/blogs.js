@@ -1,5 +1,121 @@
 export const blogs = [
   {
+    "id": "building-60fps-animations-framer-motion",
+    "slug": "building-60fps-animations-framer-motion",
+    "title": "Building 60fps Micro-Animations in React Using Framer Motion Without Layout Thrashing",
+    "seoTitle": "React 60fps Micro-Animations with Framer Motion",
+    "description": "Learn how to build smooth 60fps React micro-animations with Framer Motion by avoiding layout thrashing and animating only compositor properties.",
+    "publishedAt": "2026-11-10",
+    "updatedAt": "2026-11-10",
+    "readTime": "7 min read",
+    "category": "UI/UX & Animation",
+    "tags": [
+      "Framer Motion",
+      "React Performance",
+      "60fps",
+      "UI/UX"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To maintain 60fps in React with Framer Motion, animate only GPU-accelerated CSS properties like transform and opacity, and avoid triggering layout recalculations during active animation frames.",
+    "relatedProjectId": 14,
+    "faqs": [
+      {
+        "question": "Why do React animations lag and drop below 60fps?",
+        "answer": "Animations lag when they trigger browser style recalculations, layout reflows, and paint operations on every frame. Animating properties like width, height, margin, or top forces the browser to recalculate element geometry continuously."
+      },
+      {
+        "question": "How does Framer Motion help achieve 60fps performance?",
+        "answer": "Framer Motion simplifies GPU acceleration by default, handling animations through the browser composite thread when using transform and opacity properties. This bypasses layout and paint phases entirely for smoother playback."
+      },
+      {
+        "question": "Where can I see these performance techniques applied in a live project?",
+        "answer": "These exact performance patterns are utilized in the multi-step appointment booking flows built for the [LA Salon & Spa / Lumina Aura](/projects/14) project, ensuring fast user interactions."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Understanding Layout Thrashing in React Applications"
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "When building user interfaces in React, it is easy to trigger layout thrashing without realizing it. Layout thrashing happens when JavaScript repeatedly writes to layout properties and then immediately reads them back within the same frame. This forces the browser to synchronously recalculate geometry before moving to the next frame, causing stutter, dropped frames, and sluggish UI responses."
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "When building multi-step interfaces like the ones found in the [LA Salon & Spa / Lumina Aura](/projects/14) project, keeping frame rates locked at 60fps is critical. If your application feels choppy during page transitions or modal openings, users notice immediately. Fixing this requires shifting our animation strategy away from layout-bound CSS properties and moving entirely to compositor-only properties."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Golden Rule: Animate Only Transform and Opacity"
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "The browser rendering pipeline consists of three main phases: Layout, Paint, and Composite. Changing properties like height, width, padding, or position triggers the Layout phase. Changing color or background triggers the Paint phase. However, changing transform and opacity only triggers the Composite phase."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Bad: Triggers layout recalculations",
+        "code": "// Avoid animating width/height or top/left\n<motion.div\n  animate={{ width: 300, top: 20 }}\n  transition={{ duration: 0.3 }}\n/>"
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Good: Runs purely on the GPU composite thread",
+        "code": "// Use scale and translate for layout shifts\n<motion.div\n  animate={{ scaleX: 1.2, y: 20, opacity: 1 }}\n  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}\n/>"
+      },
+      {
+        "type": "callout",
+        "title": "Performance Benchmark Note",
+        "text": "Using scale instead of width eliminates layout shifts entirely. The browser paints the element once and simply stretches or moves its GPU texture layer across frames."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Managing React State Without Re-triggering Renders"
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "Another common pitfall is tying animation progress directly to React state updates. If you use standard useState hooks to track scroll position or mouse movement to drive animations, React will re-render the component tree on every tick. This starves the main thread and ruins animation smoothness."
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "Framer Motion solves this by using internal refs and direct DOM mutations for high-frequency animations. For complex component states or custom UI components, you can pair Framer Motion with standard React hooks efficiently."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Keep animation triggers decoupled from heavy state management loops.",
+          "Use CSS variables or Framer Motion's useMotionValue and useTransform hooks for continuous values.",
+          "Avoid inline anonymous objects in transition props which force unnecessary re-creations on every render."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "As an independent web developer, I build fast, production-ready web applications with clean animations and solid performance. [Full-Stack Web Development Services](/services) or [Get in touch with Aafaque](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
     "id": "mastering-tailwind-css-v4-oxide-engine-and-theme",
     "slug": "mastering-tailwind-css-v4-oxide-engine-and-theme",
     "title": "Mastering Tailwind CSS v4: The New Lightning-Fast Oxide Engine and CSS-First @theme Explained",
