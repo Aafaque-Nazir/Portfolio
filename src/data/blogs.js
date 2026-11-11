@@ -1,5 +1,111 @@
 export const blogs = [
   {
+    "id": "threejs-gsap-scrolltrigger-react-guide",
+    "slug": "threejs-gsap-scrolltrigger-react-guide",
+    "title": "Integrating Three.js and GSAP ScrollTrigger in React for 3D Product Showcases",
+    "seoTitle": "Three.js and GSAP ScrollTrigger in React Guide",
+    "description": "Learn how to connect Three.js with GSAP ScrollTrigger in React to build 60 FPS scroll-driven 3D product showcases without performance drops.",
+    "publishedAt": "2026-11-11",
+    "updatedAt": "2026-11-11",
+    "readTime": "7 min read",
+    "category": "UI/UX & Animation",
+    "tags": [
+      "Three.js",
+      "GSAP",
+      "React",
+      "WebGL",
+      "Performance"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To sync Three.js with GSAP ScrollTrigger in React, update 3D mesh properties directly inside a GSAP timeline tied to scroll progress and clean up the timeline within a useGSAP or useEffect hook. Limit canvas pixel ratio to 2 and run animations outside React state to maintain a steady 60 frames per second.",
+    "relatedProjectId": 13,
+    "faqs": [
+      {
+        "question": "How do you prevent GSAP ScrollTrigger from running twice in React Strict Mode?",
+        "answer": "Wrap your animations inside the useGSAP hook from @gsap/react or use gsap.context() inside a standard useEffect. This records all created triggers and automatically reverts them when the component unmounts, preventing duplicate pins and memory leaks."
+      },
+      {
+        "question": "Should you store scroll progress in React state to update Three.js models?",
+        "answer": "No. Storing scroll progress in React state triggers component re-renders on every scroll tick, causing severe frame drops. Instead, mutate Three.js mesh transforms directly via GSAP tweens using direct object references."
+      },
+      {
+        "question": "How do you maintain 60 FPS on mobile devices with 3D scroll animations?",
+        "answer": "Cap the device pixel ratio at Math.min(window.devicePixelRatio, 2), compress GLTF models using Draco or Meshopt, bake complex lighting into textures to reduce draw calls, and pause the Three.js render loop when the canvas scrolls out of the viewport."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Problem with Traditional Scroll-Driven 3D in React"
+      },
+      {
+        "type": "paragraph",
+        "text": "Adding 3D models to web applications often leads to choppy scrolling, drained laptop batteries, and janky mobile performance. Many developers attempt to synchronize Three.js scenes with the DOM by storing window scroll positions in React state or context. When state updates 60 times a second, React reconciles the virtual DOM on every frame, starving the GPU and dropping render rates to unplayable levels."
+      },
+      {
+        "type": "paragraph",
+        "text": "To build an effective interactive 3D product showcase, WebGL and DOM scroll tracking must operate on separate tracks. React mounts the canvas and sets up the component lifecycle, while GSAP ScrollTrigger directly writes transformations to Three.js mesh instances without re-rendering the React tree."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Building the Bridge Between GSAP and Three.js"
+      },
+      {
+        "type": "paragraph",
+        "text": "When building the interactive product view for the [3D Burger Website / Smoked & Seared](/projects/13), the goal was to disassemble individual ingredients—top bun, sesame seeds, cheese, patty, and bottom bun—as the visitor scrolls past distinct nutritional sections. Instead of re-rendering, we target the position, rotation, and scale of child meshes directly using GSAP timelines."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "BurgerScene.tsx: Direct mesh mutation with useGSAP and ScrollTrigger",
+        "code": "import React, { useRef } from 'react';\nimport { Canvas } from '@react-three/fiber';\nimport { useGLTF } from '@react-three/drei';\nimport gsap from 'gsap';\nimport { ScrollTrigger } from 'gsap/ScrollTrigger';\nimport { useGSAP } from '@gsap/react';\nimport * as THREE from 'three';\n\ngsap.registerPlugin(ScrollTrigger);\n\ninterface BurgerModelProps {\n  containerRef: React.RefObject<HTMLDivElement | null>;\n}\n\nfunction BurgerModel({ containerRef }: BurgerModelProps) {\n  const groupRef = useRef<THREE.Group>(null);\n  const topBunRef = useRef<THREE.Mesh>(null);\n  const pattyRef = useRef<THREE.Mesh>(null);\n  const bottomBunRef = useRef<THREE.Mesh>(null);\n\n  const { nodes, materials } = useGLTF('/models/burger.glb') as any;\n\n  useGSAP(\n    () => {\n      if (!groupRef.current || !containerRef.current) return;\n\n      const tl = gsap.timeline({\n        scrollTrigger: {\n          trigger: containerRef.current,\n          start: 'top top',\n          end: 'bottom bottom',\n          scrub: 1,\n        },\n      });\n\n      // Rotate the entire product during scroll\n      tl.to(groupRef.current.rotation, { y: Math.PI * 2, ease: 'none' }, 0);\n\n      // Explode layers vertically at specific scroll markers\n      if (topBunRef.current) {\n        tl.to(topBunRef.current.position, { y: 2.2, ease: 'power1.out' }, 0.2);\n      }\n      if (pattyRef.current) {\n        tl.to(pattyRef.current.position, { y: 0.5, ease: 'power1.out' }, 0.3);\n      }\n      if (bottomBunRef.current) {\n        tl.to(bottomBunRef.current.position, { y: -1.2, ease: 'power1.out' }, 0.2);\n      }\n    },\n    { scope: containerRef }\n  );\n\n  return (\n    <group ref={groupRef} dispose={null}>\n      <mesh ref={topBunRef} geometry={nodes.TopBun.geometry} material={materials.Bun} />\n      <mesh ref={pattyRef} geometry={nodes.Patty.geometry} material={materials.Meat} />\n      <mesh ref={bottomBunRef} geometry={nodes.BottomBun.geometry} material={materials.Bun} />\n    </group>\n  );\n}\n\nexport default function ProductShowcase() {\n  const containerRef = useRef<HTMLDivElement>(null);\n\n  return (\n    <div ref={containerRef} className=\"relative h-[300vh] bg-stone-900\">\n      <div className=\"sticky top-0 h-screen w-full\">\n        <Canvas\n          dpr={[1, 2]}\n          camera={{ position: [0, 0, 5], fov: 45 }}\n          gl={{ antialias: true, powerPreference: 'high-performance' }}\n        >\n          <ambientLight intensity={0.7} />\n          <directionalLight position={[10, 10, 5]} intensity={1.2} />\n          <BurgerModel containerRef={containerRef} />\n        </Canvas>\n      </div>\n    </div>\n  );\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Clean Scope Management",
+        "text": "Always pass scope to useGSAP. This ensures all ScrollTrigger instances and tweens created inside the component are purged from memory when navigating away, preventing browser lag on subsequent page visits."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Critical Performance Techniques for WebGL Canvases"
+      },
+      {
+        "type": "paragraph",
+        "text": "Interactive 3D can quickly overwhelm mobile GPUs if default canvas settings are left untouched. To guarantee a stable 60 FPS across mid-range phones and high-resolution displays like Apple Retina screens, follow these production rules:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Cap the Device Pixel Ratio: Never render at native 3x or 4x pixel ratios. Use dpr={[1, 2]} in your Canvas component to prevent the GPU from filling millions of unneeded pixels.",
+          "Use Compressed Assets: Convert GLTF files to GLB format and compress them using KTX2 textures and Draco geometry compression to cut download payloads from 25MB down to 2MB.",
+          "Bake Static Lighting: Calculate ambient occlusion and detailed shadows in Blender before export. Real-time dynamic shadows consume heavy frame budgets on mobile devices.",
+          "Implement Viewport Observers: Use IntersectionObserver to stop the requestAnimationFrame render loop entirely when the 3D canvas is scrolled off-screen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "For luxury travel experiences like [Yacht Rentals / Sea Cross](/projects/10), pairing smooth scroll libraries like Lenis with GSAP ScrollTrigger ensures the camera and mesh interpolations match human finger swipes without stutter."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you want to replace static product photography with interactive 3D web experiences that run smoothly across desktop and mobile devices, I can help design and build the front-end architecture. Check out my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
     "id": "building-60fps-animations-framer-motion",
     "slug": "building-60fps-animations-framer-motion",
     "title": "Building 60fps Micro-Animations in React Using Framer Motion Without Layout Thrashing",
