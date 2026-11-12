@@ -1,5 +1,122 @@
 export const blogs = [
   {
+    "id": "smooth-scrolling-lenis-react",
+    "slug": "smooth-scrolling-lenis-react",
+    "title": "Smooth Scrolling with Lenis and Clean Transitions in React",
+    "seoTitle": "Lenis Smooth Scroll in React: Complete Guide",
+    "description": "Learn how to integrate Lenis smooth scrolling in React with clean web design and reliable website interactions for high-performance apps.",
+    "publishedAt": "2026-11-12",
+    "updatedAt": "2026-11-12",
+    "readTime": "7 min read",
+    "category": "UI & Animation",
+    "tags": [
+      "Lenis",
+      "React",
+      "Smooth Scroll",
+      "Web Animation",
+      "Frontend"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Lenis is a lightweight JavaScript library that replaces native browser scrolling with inertial momentum physics, creating clean web design and smooth website interactions in React applications.",
+    "relatedProjectId": 10,
+    "faqs": [
+      {
+        "question": "Does Lenis work well with React and Next.js?",
+        "answer": "Yes. Lenis can be initialized inside a React useEffect hook or custom provider component, ensuring smooth scroll physics across routes while cleaning up event listeners on unmount."
+      },
+      {
+        "question": "How does Lenis affect mobile performance?",
+        "answer": "Lenis handles touch events efficiently, but you can configure it to disable or relax inertia on mobile devices to preserve native touch responsiveness and save CPU cycles."
+      },
+      {
+        "question": "Can I use Lenis with GSAP ScrollTrigger?",
+        "answer": "Yes. Lenis syncs cleanly with GSAP ScrollTrigger by updating the scroll position on every animation frame, ensuring your scroll-based animations stay perfectly aligned."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Native Browser Scrolling Falls Short"
+      },
+      {
+        "type": "paragraph",
+        "text": "Standard browser scroll behavior depends on operating system settings and hardware configurations. On Windows machines without precision trackpads, scrolling often feels abrupt and disjointed. When building high-end interfaces like the [Yacht Rentals / Sea Cross](/projects/10) platform, predictable and clean motion is crucial for creating a premium feel without hurting accessibility or performance."
+      },
+      {
+        "type": "paragraph",
+        "text": "To solve this, developers use inertial scroll libraries. Among modern options, Lenis stands out for its lightweight footprint, lack of heavy dependencies, and precise control over easing curves."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Setting Up Lenis in a React Application"
+      },
+      {
+        "type": "paragraph",
+        "text": "Integrating Lenis into a React component requires managing the requestAnimationFrame loop properly. Below is a clean, production-ready custom hook and provider setup that initializes Lenis and connects it with GSAP if your project requires scroll-triggered animations."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "React Lenis Provider Component",
+        "code": "import React, { useEffect } from 'react';\nimport Lenis from '@studio-freight/lenis';\n\ninterface SmoothScrollProps {\n  children: React.ReactNode;\n}\n\nexport default function SmoothScrollProvider({ children }: SmoothScrollProps) {\n  useEffect(() => {\n    const lenis = new Lenis({\n      duration: 1.2,\n      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),\n      direction: 'vertical',\n      gestureDirection: 'vertical',\n      smooth: true,\n      mouseMultiplier: 1,\n      smoothTouch: false,\n      touchMultiplier: 2,\n    });\n\n    function raf(time: number) {\n      lenis.raf(time);\n      requestAnimationFrame(raf);\n    }\n\n    requestAnimationFrame(raf);\n\n    return () => {\n      lenis.destroy();\n    };\n  }, []);\n\n  return <>{children}</>;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Performance Tip",
+        "text": "Always destroy the Lenis instance inside the useEffect cleanup function. Failing to remove event listeners on route changes can cause memory leaks in single-page applications."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Handling Anchor Links and Focus States"
+      },
+      {
+        "type": "paragraph",
+        "text": "A common pitfall with custom scroll libraries is broken anchor tag navigation and keyboard accessibility. Because Lenis intercepts default scroll behavior, standard HTML anchor jumps (`href=\"#section\"`) will not animate correctly out of the box."
+      },
+      {
+        "type": "paragraph",
+        "text": "To fix this, capture click events on internal anchor links and call the Lenis scrollTo method explicitly:"
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Handling Smooth Anchor Navigation",
+        "code": "const handleScrollTo = (targetId: string) => {\n  const targetElement = document.getElementById(targetId);\n  if (targetElement && lenisInstance) {\n    lenisInstance.scrollTo(targetElement, {\n      offset: 0,\n      duration: 1.5,\n      easing: (t) => 1 - Math.pow(1 - t, 3),\n    });\n  }\n};"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Checklist for Clean Web Design and Interactions"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Disable smooth touch scrolling on mobile devices if native momentum feels more natural to users.",
+          "Test keyboard navigation (Tab and Spacebar) to ensure focus outlines remain visible and scroll position updates correctly.",
+          "Combine Lenis with CSS will-change properties sparingly to prevent GPU layer bloat.",
+          "Ensure your website loads quickly across all devices before adding complex animation layers."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer based in Navi Mumbai, I build fast, production-ready web applications with clean animations and reliable user interfaces. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
     "id": "threejs-gsap-scrolltrigger-react-guide",
     "slug": "threejs-gsap-scrolltrigger-react-guide",
     "title": "Integrating Three.js and GSAP ScrollTrigger in React for 3D Product Showcases",
