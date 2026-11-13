@@ -1,5 +1,107 @@
 export const blogs = [
   {
+    "id": "before-after-slider-medical-booking-react",
+    "slug": "before-after-slider-medical-booking-react",
+    "title": "Designing Interactive Before-and-After Comparison Sliders and Medical Booking Flows in React",
+    "seoTitle": "React Before/After Sliders & Medical Booking UI",
+    "description": "Learn how to build a custom interactive before and after image comparison slider and multi-step medical appointment booking flow in React.",
+    "publishedAt": "2026-11-13",
+    "updatedAt": "2026-11-13",
+    "readTime": "7 min read",
+    "category": "UI & Animation",
+    "tags": [
+      "before after image slider react",
+      "dental clinic web design",
+      "medical booking flow ui",
+      "React 19",
+      "TypeScript"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "A React before-and-after image slider tracks pointer coordinates over a container to clip the top image width dynamically, while a medical booking flow uses controlled multi-step state validation to submit patient appointments reliably.",
+    "relatedProjectId": 11,
+    "faqs": [
+      {
+        "question": "How do you build a responsive before and after image slider in React?",
+        "answer": "You track mouse move and touch move events on a parent container, calculate the cursor offset percentage from the left boundary, and apply that percentage as the width of the top clipped image layer."
+      },
+      {
+        "question": "What is the best way to handle multi-step medical booking forms in React?",
+        "answer": "Use a local React state variable to track the active step index, validate user inputs at each step before allowing progression, and retain form data in a single parent state object until final submission."
+      },
+      {
+        "question": "Why are image comparison sliders important for dental and medical websites?",
+        "answer": "They provide instant visual proof of clinical procedures such as teeth whitening, orthodontics, or cosmetic surgery, helping patients build trust and decide to book a consultation."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Introduction to Dental Clinic Web Design and Visual Proof"
+      },
+      {
+        "type": "paragraph",
+        "text": "When building modern medical and dental websites, user trust is everything. Patients want to see real evidence of what a clinic can achieve before they schedule an appointment. During the development of [CarePulse / Aura Dental Studio](/projects/11), one of the primary client requirements was an interactive 50/50 before-and-after comparison slider that works smoothly on both desktop touchpads and mobile touch screens."
+      },
+      {
+        "type": "paragraph",
+        "text": "Many developers rely on heavy third-party UI packages for basic image comparisons. However, writing a lightweight, custom React component gives you full control over performance, bundle size, and touch event handling. Let us break down how to implement this cleanly using React 19 and TypeScript."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Building the Before-and-After Image Comparison Slider Component"
+      },
+      {
+        "type": "paragraph",
+        "text": "The core logic relies on tracking mouse and touch coordinates within the container bounds, converting those pixel values into a percentage, and applying that percentage to clip the top image element using CSS properties."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Custom React Before and After Slider Component",
+        "code": "import React, { useState, useRef, useCallback } from 'react';\n\ninterface ComparisonSliderProps {\n  beforeImage: string;\n  afterImage: string;\n  beforeLabel?: string;\n  afterLabel?: string;\n}\n\nexport const ComparisonSlider: React.FC<ComparisonSliderProps> = ({\n  beforeImage,\n  afterImage,\n  beforeLabel = 'Before',\n  afterLabel = 'After'\n}) => {\n  const [sliderPosition, setSliderPosition] = useState<number>(50);\n  const [isDragging, setIsDragging] = useState<boolean>(false);\n  const containerRef = useRef<HTMLDivElement>(null);\n\n  const handleMove = useCallback((clientX: number) => {\n    if (!containerRef.current) return;\n    const rect = containerRef.current.getBoundingClientRect();\n    const x = clientX - rect.left;\n    let percentage = (x / rect.width) * 100;\n\n    if (percentage < 0) percentage = 0;\n    if (percentage > 100) percentage = 100;\n\n    setSliderPosition(percentage);\n  }, []);\n\n  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {\n    handleMove(e.touches[0].clientX);\n  };\n\n  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {\n    if (!isDragging) return;\n    handleMove(e.clientX);\n  };\n\n  return (\n    <div\n      ref={containerRef}\n      className=\"relative w-full max-h-[500px] overflow-hidden select-none cursor-ew-resize rounded-2xl\"\n      onMouseMove={handleMouseMove}\n      onMouseUp={() => setIsDragging(false)}\n      onMouseLeave={() => setIsDragging(false)}\n      onTouchMove={handleTouchMove}\n    >\n      {/* After Image (Background) */}\n      <img\n        src={afterImage}\n        alt={afterLabel}\n        className=\"w-full h-auto object-cover block\"\n      />\n      <span className=\"absolute top-4 right-4 bg-black/70 text-white text-xs px-3 py-1 rounded-full\">\n        {afterLabel}\n      </span>\n\n      {/* Before Image (Clipped Layer) */}\n      <div\n        className=\"absolute inset-0 overflow-hidden\"\n        style={{ width: `${sliderPosition}%` }}\n      >\n        <img\n          src={beforeImage}\n          alt={beforeLabel}\n          className=\"absolute inset-0 w-full h-full object-cover max-w-none\"\n          style={{ width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '100%' }}\n        />\n        <span className=\"absolute top-4 left-4 bg-black/70 text-white text-xs px-3 py-1 rounded-full\">\n          {beforeLabel}\n        </span>\n      </div>\n\n      {/* Slider Handle Line & Button */}\n      <div\n        className=\"absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize\"\n        style={{ left: `${sliderPosition}%` }}\n        onMouseDown={() => setIsDragging(true)}\n        onTouchStart={() => setIsDragging(true)}\n      >\n        <div className=\"absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center text-gray-800 font-bold\">\n          ↔\n        </div>\n      </div>\n    </div>\n  );\n};"
+      },
+      {
+        "type": "callout",
+        "title": "Performance Optimization Note",
+        "text": "By calculating widths relative to container bounding client rectangles instead of forcing layout recalculations on every frame, this slider runs smoothly at 60 frames per second without lagging mobile devices."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Designing a Multi-Step Medical Booking Flow UI"
+      },
+      {
+        "type": "paragraph",
+        "text": "A complicated booking form causes patients to abandon their appointments before finishing. The key to a high-performing medical booking flow UI is breaking down information collection into small, digestible steps: selecting the treatment category, picking a date and time slot, and entering contact details."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Step 1: Choose procedure type (e.g., Dental Implant, Teeth Whitening, Routine Cleaning)",
+          "Step 2: Select preferred doctor and available time slot",
+          "Step 3: Collect patient contact info with inline form validation",
+          "Step 4: Show instant confirmation screen with calendar sync options"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications. If you need custom UI components or complete booking portals, [explore my full-stack web development services](/services) or [get in touch with Aafaque Nazir](/contact)."
+      }
+    ]
+  },
+  {
     "id": "smooth-scrolling-lenis-react",
     "slug": "smooth-scrolling-lenis-react",
     "title": "Smooth Scrolling with Lenis and Clean Transitions in React",
