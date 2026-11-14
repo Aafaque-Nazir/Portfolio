@@ -1,5 +1,104 @@
 export const blogs = [
   {
+    "id": "vercel-ai-sdk-react-19-streaming-chat",
+    "slug": "vercel-ai-sdk-react-19-streaming-chat",
+    "title": "Integrating the Vercel AI SDK into React 19: Streaming AI Chat, Generative UI, and Tool Calling",
+    "seoTitle": "Vercel AI SDK & React 19: Streaming Chat &...",
+    "description": "Learn how to build real-time streaming LLM chat interfaces, generative UI, and tool calling in React 19 with the Vercel AI SDK and Next.js.",
+    "publishedAt": "2026-11-14",
+    "updatedAt": "2026-11-14",
+    "readTime": "7 min read",
+    "category": "AI & Full-Stack",
+    "tags": [
+      "React 19",
+      "Vercel AI SDK",
+      "Next.js",
+      "TypeScript",
+      "LLM Streaming"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "The Vercel AI SDK combined with React 19 lets developers build real-time streaming text, dynamic generative UI components, and secure server-side tool calls with minimal boilerplate code.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "How do React 19 actions work with the Vercel AI SDK?",
+        "answer": "React 19 actions handle form submissions and state updates natively, allowing you to pass user messages directly into the useChat hook without manual event preventDefault plumbing."
+      },
+      {
+        "question": "What is generative UI in the Vercel AI SDK?",
+        "answer": "Generative UI allows the LLM to return rendered React components instead of plain text by using tools that map function calls to client-side UI components."
+      },
+      {
+        "question": "Can I use the Vercel AI SDK with custom backends?",
+        "answer": "Yes, while it integrates cleanly with Next.js API routes and server actions, you can use the AI SDK core package with Express, Fastify, or Node.js HTTP servers."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Setting Up the Environment with React 19 and Next.js"
+      },
+      {
+        "type": "paragraph",
+        "text": "React 19 introduces major improvements to client-side state management, form actions, and hook handling. When paired with the Vercel AI SDK, setting up a real-time chat interface takes very little code. For example, when building data-heavy tools like our [Inventory Management / InvMaster OS](/projects/1), adding AI assistants helps operators query godown stock levels using plain natural language."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Basic React 19 Chat Component using useChat",
+        "code": "'use client';\n\nimport { useChat } from '@ai-sdk/react';\n\nexport default function ChatComponent() {\n  const { messages, input, handleInputChange, handleSubmit } = useChat();\n\n  return (\n    <div className=\"flex flex-col h-full max-w-xl mx-auto p-4\">\n      <div className=\"flex-1 overflow-y-auto space-y-4 mb-4\">\n        {messages.map((m) => (\n          <div key={m.id} className={`p-3 rounded-lg ${m.role === 'user' ? 'bg-blue-100 text-right' : 'bg-gray-100'}`}>\n            <strong>{m.role === 'user' ? 'You: ' : 'AI: '}</strong>\n            {m.content}\n          </div>\n        ))}\n      </div>\n      <form onSubmit={handleSubmit} className=\"flex gap-2\">\n        <input\n          className=\"border rounded p-2 flex-1\"\n          value={input}\n          onChange={handleInputChange}\n          placeholder=\"Ask anything...\"\n        />\n        <button type=\"submit\" className=\"bg-blue-600 text-white px-4 py-2 rounded\">\n          Send\n        </button>\n      </form>\n    </div>\n  );\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Development Tip",
+        "text": "Always ensure your API routes handling the LLM streams are marked as edge runtime or nodejs runtime with streaming enabled so chunks reach the client instantly."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Implementing Server-Side Tool Calling"
+      },
+      {
+        "type": "paragraph",
+        "text": "Tool calling allows language models to execute specific JavaScript functions on your server to fetch live data. This bridges the gap between static LLM text generation and real-world database lookups."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "API Route with Tool Definition",
+        "code": "import { openai } from '@ai-sdk/openai';\nimport { streamText } from 'ai';\nimport { z } from 'zod';\n\nexport async function POST(req: Request) {\n  const { messages } = await req.json();\n\n  const result = await streamText({\n    model: openai('gpt-4o'),\n    messages,\n    tools: {\n      getStockLevel: {\n        description: 'Get stock level for a specific item code',\n        parameters: z.object({\n          itemCode: z.string().describe('The product SKU or item code'),\n        }),\n        execute: async ({ itemCode }) => {\n          // Connect to database and fetch stock\n          const stock = await fetchStockFromDB(itemCode);\n          return { itemCode, stock };\n        },\n      },\n    },\n  });\n\n  return result.toDataStreamResponse();\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Core Practices for Production AI Features"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Validate all tool inputs using Zod schemas on the server before running database queries.",
+          "Handle connection drops gracefully with built-in retry mechanisms in the AI SDK.",
+          "Keep system prompts concise to reduce time-to-first-token latency for users."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications. [Full-Stack Web Development Services](/services) or [Get in touch with Aafaque](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
     "id": "before-after-slider-medical-booking-react",
     "slug": "before-after-slider-medical-booking-react",
     "title": "Designing Interactive Before-and-After Comparison Sliders and Medical Booking Flows in React",
