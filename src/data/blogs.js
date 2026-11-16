@@ -1,5 +1,133 @@
 export const blogs = [
   {
+    "id": "pgvector-postgresql-vector-search-recommendations",
+    "slug": "pgvector-postgresql-vector-search-recommendations",
+    "title": "Building Lightweight Vector Search in PostgreSQL with pgvector for Real-Time Semantic Recommendations",
+    "seoTitle": "Lightweight Vector Search with PostgreSQL & pgvector",
+    "description": "Learn how to build fast semantic recommendations using PostgreSQL and pgvector without third-party vector databases or complex microservices.",
+    "publishedAt": "2026-11-16",
+    "updatedAt": "2026-11-16",
+    "readTime": "7 min read",
+    "category": "AI & Full-Stack",
+    "tags": [
+      "pgvector",
+      "PostgreSQL",
+      "Supabase",
+      "Embeddings",
+      "React"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "pgvector enables vector similarity search directly inside your relational PostgreSQL database using cosine or L2 distance. Storing text embeddings in a standard table allows you to query semantic recommendations in single-digit milliseconds alongside typical relational filters, eliminating the operational cost of dedicated vector engines.",
+    "relatedProjectId": 2,
+    "faqs": [
+      {
+        "question": "Why use pgvector instead of a standalone vector database like Pinecone?",
+        "answer": "pgvector lives directly inside your primary relational database. This allows you to join vector search results directly with real-time stock levels, user permissions, and price filters in a single query. It eliminates data sync lag and lowers infrastructure bills by avoiding a second managed service."
+      },
+      {
+        "question": "Which indexing method should I use: HNSW or IVFFlat?",
+        "answer": "Use HNSW (Hierarchical Navigable Small World) for almost all production web apps. It offers significantly higher queries per second and better recall without requiring you to rebuild the index as your dataset grows, unlike IVFFlat which needs periodic retraining."
+      },
+      {
+        "question": "How fast are pgvector queries on modest cloud servers?",
+        "answer": "On a database with tens of thousands of products and an HNSW index, cosine distance queries run in 5ms to 15ms. That speed is fast enough to run dynamic product recommendations on live product detail pages without caching."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Problem with Dedicated Vector Databases"
+      },
+      {
+        "type": "paragraph",
+        "text": "Many startups jump immediately to external vector databases when building AI features. While specialized tools work well for multi-million vector datasets, they introduce unnecessary complexity for typical web applications. Managing two databases means synchronizing product changes, handling eventual consistency bugs, and paying two monthly invoices."
+      },
+      {
+        "type": "paragraph",
+        "text": "When building e-commerce catalogs like [Shopease / Oud & Attar](/projects/2), recommendations must respect stock status, regional catalog availability, and category rules. If your vectors live in an external tool, you must query vectors first, extract IDs, and then query PostgreSQL to filter out out-of-stock items. With pgvector, this entire flow runs inside a single, fast SQL statement."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Configuring pgvector and HNSW in PostgreSQL"
+      },
+      {
+        "type": "paragraph",
+        "text": "To get started, enable the extension and define a vector column on your catalog table. For OpenAI's text-embedding-3-small model, the vector dimension is 1536."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "PostgreSQL schema with pgvector and HNSW index",
+        "code": "-- 1. Enable the pgvector extension\nCREATE EXTENSION IF NOT EXISTS vector;\n\n-- 2. Add an embedding column to your products table\nALTER TABLE products \nADD COLUMN IF NOT EXISTS embedding vector(1536);\n\n-- 3. Create an HNSW index for cosine distance queries\nCREATE INDEX IF NOT EXISTS products_embedding_hnsw_idx \nON products \nUSING hnsw (embedding vector_cosine_ops)\nWITH (m = 16, ef_construction = 64);\n\n-- 4. Fast RPC function for similarity search with stock filtering\nCREATE OR REPLACE FUNCTION match_related_products (\n  target_embedding vector(1536),\n  match_threshold float,\n  match_count int,\n  current_product_id bigint\n)\nRETURNS TABLE (\n  id bigint,\n  name text,\n  slug text,\n  price numeric,\n  similarity float\n)\nLANGUAGE sql STABLE\nAS $$\n  SELECT\n    p.id,\n    p.name,\n    p.slug,\n    p.price,\n    1 - (p.embedding <=> target_embedding) AS similarity\n  FROM products p\n  WHERE p.id <> current_product_id\n    AND p.is_in_stock = true\n    AND 1 - (p.embedding <=> target_embedding) > match_threshold\n  ORDER BY p.embedding <=> target_embedding\n  LIMIT match_count;\n$$;"
+      },
+      {
+        "type": "callout",
+        "title": "Index Choice Insight",
+        "text": "The operator <=> calculates cosine distance. In pgvector, cosine distance equals 1 minus the cosine similarity. An HNSW index using vector_cosine_ops allows your queries to scale to hundreds of thousands of rows while keeping query execution times well under 20 milliseconds."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Building the Embeddings Pipeline in TypeScript"
+      },
+      {
+        "type": "paragraph",
+        "text": "To keep embeddings updated, create a lightweight server-side utility that generates an embedding string whenever a product description or title updates. Here is a clean implementation using modern TypeScript."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "Product embedding generator with OpenAI",
+        "code": "import OpenAI from 'openai';\n\nconst openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });\n\ninterface ProductInput {\n  name: string;\n  category: string;\n  scentNotes?: string[];\n  description: string;\n}\n\nexport async function generateProductEmbedding(product: ProductInput): Promise<number[]> {\n  // Clean and format text payload for dense semantic coverage\n  const inputContent = [\n    `Product: ${product.name}`,\n    `Category: ${product.category}`,\n    product.scentNotes ? `Notes: ${product.scentNotes.join(', ')}` : '',\n    `Details: ${product.description}`\n  ].filter(Boolean).join('\\n');\n\n  const response = await openai.embeddings.create({\n    model: 'text-embedding-3-small',\n    input: inputContent,\n    encoding_format: 'float',\n  });\n\n  return response.data[0].embedding;\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Real-Time Recommendations in React 19"
+      },
+      {
+        "type": "paragraph",
+        "text": "Once your database function is active, consuming it from a Next.js or React Server Component is straightforward. You fetch matching products alongside the initial page payload, removing client-side layout shifts."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "React Server Component fetching semantic recommendations",
+        "code": "import { createClient } from '@supabase/supabase-js';\nimport Link from 'next/link';\n\ninterface RelatedProduct {\n  id: number;\n  name: string;\n  slug: string;\n  price: number;\n  similarity: number;\n}\n\nexport async function RelatedProductsSection({ \n  productId, \n  embedding \n}: { \n  productId: number;\n  embedding: number[]; \n}) {\n  const supabase = createClient(\n    process.env.NEXT_PUBLIC_SUPABASE_URL!,\n    process.env.SUPABASE_SERVICE_ROLE_KEY!\n  );\n\n  const { data: recommendations, error } = await supabase.rpc(\n    'match_related_products',\n    {\n      target_embedding: embedding,\n      match_threshold: 0.70,\n      match_count: 4,\n      current_product_id: productId,\n    }\n  );\n\n  if (error || !recommendations?.length) {\n    return null;\n  }\n\n  return (\n    <section className=\"mt-16 border-t border-zinc-200 pt-8 dark:border-zinc-800\">\n      <h3 className=\"text-lg font-semibold text-zinc-900 dark:text-zinc-100\">\n        You May Also Like\n      </h3>\n      <div className=\"mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4\">\n        {recommendations.map((item: RelatedProduct) => (\n          <Link\n            key={item.id}\n            href={`/products/${item.slug}`}\n            className=\"group rounded-lg border border-zinc-200 p-4 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600\"\n          >\n            <p className=\"font-medium text-zinc-800 group-hover:text-blue-600 dark:text-zinc-200\">\n              {item.name}\n            </p>\n            <p className=\"mt-1 text-sm text-zinc-500\">₹{item.price}</p>\n            <span className=\"mt-2 inline-block text-xs text-emerald-600 dark:text-emerald-400\">\n              {Math.round(item.similarity * 100)}% Match\n            </span>\n          </Link>\n        ))}\n      </div>\n    </section>\n  );\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Practical Production Best Practices"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Store the vector output directly in your products row so you do not need to re-encode the active item on every view.",
+          "Use HNSW index parameters (m = 16, ef_construction = 64) for balanced memory usage and index build times.",
+          "Always combine vector distance with practical SQL WHERE clauses like inventory counts and active flags.",
+          "Set maintenance_work_mem appropriately when building large indexes so PostgreSQL does not write intermediate sorting pages to disk."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing Vector Search in Your Application?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Whether you are building an e-commerce catalog, a knowledge base, or an internal search tool, keeping your AI pipeline simple saves money and reduces bugs. Explore my [Full-Stack Web Development Services](/services) to see how I help founders build reliable web apps, or [Get in touch with Aafaque](/contact) to discuss your project directly."
+      }
+    ]
+  },
+  {
     "id": "schema-markup-web-apps-guide",
     "slug": "schema-markup-web-apps-guide",
     "title": "How to Structure Web Apps with Schema Markup for Modern Search Engines",
