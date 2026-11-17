@@ -38,6 +38,7 @@ export default function NotFound() {
             className="text-7xl sm:text-9xl font-black font-mono tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-700 leading-none mb-4 select-none"
           >
             404
+            <span className="sr-only"> — Page Not Found</span>
           </motion.h1>
 
           <motion.p
@@ -74,7 +75,7 @@ export default function NotFound() {
             </Link>
 
             <Link
-              to="/projects"
+              to="/projects/"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 font-medium text-xs uppercase tracking-wider transition-colors"
             >
               <RiCompassLine size={15} />
@@ -82,7 +83,7 @@ export default function NotFound() {
             </Link>
 
             <Link
-              to="/blog"
+              to="/blog/"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 font-medium text-xs uppercase tracking-wider transition-colors"
             >
               <RiArticleLine size={15} />
@@ -99,7 +100,7 @@ export default function NotFound() {
           >
             Looking for something specific?{" "}
             <Link
-              to="/contact"
+              to="/contact/"
               className="text-zinc-300 hover:text-white underline underline-offset-4 inline-flex items-center gap-1"
             >
               Contact Aafaque <RiArrowRightLine size={11} />

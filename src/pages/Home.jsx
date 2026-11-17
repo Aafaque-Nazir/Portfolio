@@ -91,7 +91,7 @@ const Home = () => {
             {/* Action Buttons */}
             <div className="flex items-center gap-2 sm:gap-3 flex-nowrap">
               <Link
-                to="/contact"
+                to="/contact/"
                 className="px-4 py-2.5 sm:px-6 sm:py-3 bg-white hover:bg-zinc-200 text-black font-semibold text-xs uppercase tracking-wider rounded-full transition-all duration-200 flex items-center gap-2 whitespace-nowrap shrink-0 active:scale-95"
               >
                 <span>Get in Touch</span>
@@ -199,7 +199,7 @@ const Home = () => {
 
               {/* 04. Availability */}
               <Link
-                to="/contact"
+                to="/contact/"
                 className="group relative rounded-xl border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20 p-3.5 sm:p-4 transition-all duration-200 flex flex-col justify-between block cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2.5">
@@ -243,7 +243,7 @@ const Home = () => {
               Whether building an entire application from scratch or polishing animations and user interactions, I focus on delivering solid, reliable results.
             </p>
             <Link
-              to="/about"
+              to="/about/"
               className="inline-flex items-center gap-2 text-xs font-mono text-zinc-300 hover:text-white transition-colors"
             >
               <span>Read my full background and approach →</span>
@@ -294,7 +294,7 @@ const Home = () => {
           </div>
 
           <Link
-            to="/projects"
+            to="/projects/"
             className="group inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors self-start sm:self-end"
           >
             <span>View All ({projects.length}) Projects</span>
@@ -311,7 +311,7 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              onClick={() => navigate(`/projects/${project.id}`)}
+              onClick={() => navigate(`/projects/${project.id}/`)}
               className="group relative flex flex-col bg-zinc-950/80 border border-white/10 hover:border-white/25 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.7)] cursor-pointer"
             >
               {/* Media Preview (Proportional 16:9) */}
@@ -357,7 +357,7 @@ const Home = () => {
                 {/* Footer Actions */}
                 <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between gap-3">
                   <Link
-                    to={`/projects/${project.id}`}
+                    to={`/projects/${project.id}/`}
                     onClick={(e) => e.stopPropagation()}
                     className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-white transition-colors group/link"
                   >
@@ -394,7 +394,7 @@ const Home = () => {
             </p>
           </div>
           <Link
-            to="/projects"
+            to="/projects/"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-semibold text-xs uppercase tracking-wider transition-all shrink-0 active:scale-95"
           >
             <span>All Projects</span>
@@ -418,7 +418,7 @@ const Home = () => {
           </div>
 
           <Link
-            to="/services"
+            to="/services/"
             className="group inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors self-start sm:self-end"
           >
             <span>View All Services</span>
@@ -429,7 +429,7 @@ const Home = () => {
         {/* 3 Simple Service Cards with Crisp Vector Icons */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-4">
           <div
-            onClick={() => navigate("/services", { state: { plan: "Websites" } })}
+            onClick={() => navigate("/services/", { state: { plan: "Websites" } })}
             className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-white/25 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
           >
             <div>
@@ -442,7 +442,7 @@ const Home = () => {
               </p>
             </div>
             <Link
-              to="/services"
+              to="/services/"
               state={{ plan: "Websites" }}
               onClick={(e) => e.stopPropagation()}
               className="group/link inline-flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-white transition-colors"
@@ -453,7 +453,7 @@ const Home = () => {
           </div>
 
           <div
-            onClick={() => navigate("/services", { state: { plan: "Custom Web Applications" } })}
+            onClick={() => navigate("/services/", { state: { plan: "Custom Web Applications" } })}
             className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-white/25 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
           >
             <div>
@@ -466,7 +466,7 @@ const Home = () => {
               </p>
             </div>
             <Link
-              to="/services"
+              to="/services/"
               state={{ plan: "Custom Web Applications" }}
               onClick={(e) => e.stopPropagation()}
               className="group/link inline-flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-white transition-colors"
@@ -477,7 +477,7 @@ const Home = () => {
           </div>
 
           <div
-            onClick={() => navigate("/services", { state: { plan: "Custom Online Stores" } })}
+            onClick={() => navigate("/services/", { state: { plan: "Custom Online Stores" } })}
             className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-white/25 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
           >
             <div>
@@ -490,7 +490,7 @@ const Home = () => {
               </p>
             </div>
             <Link
-              to="/services"
+              to="/services/"
               state={{ plan: "Custom Online Stores" }}
               onClick={(e) => e.stopPropagation()}
               className="group/link inline-flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-white transition-colors"

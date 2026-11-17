@@ -9,7 +9,7 @@ function ProjectCard({ project }) {
     const navigate = useNavigate();
 
     const handleCardClick = () => {
-        navigate(`/projects/${project.id}`);
+        navigate(`/projects/${project.id}/`);
     };
 
     return (
@@ -68,7 +68,7 @@ function ProjectCard({ project }) {
                 {/* Card Actions: Case Study & Live Demo */}
                 <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-2">
                     <Link
-                        to={`/projects/${project.id}`}
+                        to={`/projects/${project.id}/`}
                         onClick={(e) => e.stopPropagation()}
                         className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-zinc-300 hover:text-white transition-colors group/link"
                     >

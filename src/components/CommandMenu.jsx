@@ -130,7 +130,7 @@ export default function CommandMenu() {
           </Command.Item>
 
           <Command.Item
-            onSelect={() => runCommand(() => navigate("/about"))}
+            onSelect={() => runCommand(() => navigate("/about/"))}
             className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
@@ -140,7 +140,7 @@ export default function CommandMenu() {
           </Command.Item>
 
           <Command.Item
-            onSelect={() => runCommand(() => navigate("/projects"))}
+            onSelect={() => runCommand(() => navigate("/projects/"))}
             className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
@@ -150,7 +150,7 @@ export default function CommandMenu() {
           </Command.Item>
 
           <Command.Item
-            onSelect={() => runCommand(() => navigate("/services"))}
+            onSelect={() => runCommand(() => navigate("/services/"))}
             className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
@@ -160,7 +160,7 @@ export default function CommandMenu() {
           </Command.Item>
 
           <Command.Item
-            onSelect={() => runCommand(() => navigate("/blog"))}
+            onSelect={() => runCommand(() => navigate("/blog/"))}
             className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
@@ -170,7 +170,7 @@ export default function CommandMenu() {
           </Command.Item>
 
           <Command.Item
-            onSelect={() => runCommand(() => navigate("/contact"))}
+            onSelect={() => runCommand(() => navigate("/contact/"))}
             className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
@@ -185,7 +185,7 @@ export default function CommandMenu() {
           {projects.map((p) => (
             <Command.Item
               key={p.id}
-              onSelect={() => runCommand(() => navigate(`/projects/${p.id}`))}
+              onSelect={() => runCommand(() => navigate(`/projects/${p.id}/`))}
               className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
             >
               <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
@@ -209,7 +209,7 @@ export default function CommandMenu() {
           {blogs.slice(0, 5).map((b) => (
             <Command.Item
               key={b.slug}
-              onSelect={() => runCommand(() => navigate(`/blog/${b.slug}`))}
+              onSelect={() => runCommand(() => navigate(`/blog/${b.slug}/`))}
               className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
             >
               <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">

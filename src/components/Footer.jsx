@@ -9,11 +9,11 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Projects", path: "/projects" },
-    { name: "Services", path: "/services" },
-    { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about/" },
+    { name: "Projects", path: "/projects/" },
+    { name: "Services", path: "/services/" },
+    { name: "Blog", path: "/blog/" },
+    { name: "Contact", path: "/contact/" },
   ];
 
   return (
@@ -75,7 +75,7 @@ const Footer = () => {
 
             <div className="flex items-center gap-3 shrink-0 w-full md:w-auto">
               <Link
-                to="/contact"
+                to="/contact/"
                 className="group/cta w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-zinc-200 text-black font-semibold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm active:scale-95 select-none"
               >
                 <span>Get in Touch</span>

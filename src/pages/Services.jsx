@@ -81,7 +81,7 @@ const ServiceCard = ({ pkg }) => {
         {/* Action Button */}
         <div className="pt-4 border-t border-white/5 mt-auto">
           <Link
-            to="/contact"
+            to="/contact/"
             state={{ plan: pkg.title }}
             onClick={(e) => e.stopPropagation()}
             className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-medium text-xs tracking-wide transition-all active:scale-[0.98] ${

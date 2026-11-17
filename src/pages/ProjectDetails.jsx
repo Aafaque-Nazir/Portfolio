@@ -38,7 +38,7 @@ const ProjectDetails = () => {
         {/* Minimal Editorial Navigation */}
         <nav aria-label="Breadcrumb" className="flex items-center justify-between text-xs font-mono mb-6">
           <Link 
-            to="/projects" 
+            to="/projects/" 
             className="group inline-flex items-center gap-1.5 text-zinc-400 hover:text-white transition-colors"
           >
             <RiArrowLeftLine className="transition-transform group-hover:-translate-x-0.5" />
@@ -138,7 +138,7 @@ const ProjectDetails = () => {
         <footer className="pt-6 border-t border-zinc-800/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 text-xs font-mono">
           {prevProject ? (
             <Link
-              to={`/projects/${prevProject.id}`}
+              to={`/projects/${prevProject.id}/`}
               className="group inline-flex items-center justify-between sm:justify-start gap-2 px-3.5 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white transition-all shadow-sm"
             >
               <span className="flex items-center gap-1.5 min-w-0">
@@ -154,7 +154,7 @@ const ProjectDetails = () => {
           )}
 
           <Link
-            to="/projects"
+            to="/projects/"
             className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white transition-all shadow-sm text-center"
           >
             All Projects
@@ -162,7 +162,7 @@ const ProjectDetails = () => {
 
           {nextProject ? (
             <Link
-              to={`/projects/${nextProject.id}`}
+              to={`/projects/${nextProject.id}/`}
               className="group inline-flex items-center justify-between sm:justify-end gap-2 px-3.5 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white transition-all shadow-sm"
             >
               <span className="flex items-center gap-1.5 min-w-0">

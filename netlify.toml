@@ -5,6 +5,19 @@
 [dev]
   command = "npm run dev"
 
+# Legacy 301 Redirects for Old/Moved Routes
+[[redirects]]
+  from = "/skills*"
+  to = "/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/8*"
+  to = "/projects/"
+  status = 301
+  force = true
+
 # SPA Fallback — Critical for SEO
 # Without this, /about, /services etc. return 404 to Google crawler
 [[redirects]]

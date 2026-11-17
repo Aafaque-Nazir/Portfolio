@@ -194,7 +194,9 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         name: "Aafaque Nazir — Freelance Web Development Services",
-        url: `${siteUrl}/services`,
+        url: `${siteUrl}/services/`,
+        image: defaultImage,
+        priceRange: "$$",
         description:
           "Professional web development services including custom websites, online e-commerce stores, and full-stack web applications.",
         provider: {
@@ -260,7 +262,7 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
       name: project.title,
       applicationCategory: "WebApplication",
       operatingSystem: "All Web Browsers",
-      url: `${siteUrl}/projects/${project.id}`,
+      url: `${siteUrl}/projects/${project.id}/`,
       image: resolvedImage,
       description: resolvedDescription,
       author: {

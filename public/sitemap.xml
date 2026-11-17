@@ -26,12 +26,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aafaque.in/skills/</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://aafaque.in/contact/</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -150,91 +144,91 @@
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/multi-tenant-saas-postgresql-row-level-security</loc>
+    <loc>https://aafaque.in/blog/multi-tenant-saas-postgresql-row-level-security/</loc>
     <lastmod>2026-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/postgresql-vs-mongodb-order-management</loc>
+    <loc>https://aafaque.in/blog/postgresql-vs-mongodb-order-management/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/websockets-vs-server-sent-events-dashboards</loc>
+    <loc>https://aafaque.in/blog/websockets-vs-server-sent-events-dashboards/</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/database-connection-pooling-pgbouncer-supabase</loc>
+    <loc>https://aafaque.in/blog/database-connection-pooling-pgbouncer-supabase/</loc>
     <lastmod>2026-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/offline-first-indexeddb-postgresql-sync</loc>
+    <loc>https://aafaque.in/blog/offline-first-indexeddb-postgresql-sync/</loc>
     <lastmod>2026-10-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/cost-of-hiring-freelance-full-stack-web-developer-india-2026</loc>
+    <loc>https://aafaque.in/blog/cost-of-hiring-freelance-full-stack-web-developer-india-2026/</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/freelance-developer-vs-web-agency-startup-roi</loc>
+    <loc>https://aafaque.in/blog/freelance-developer-vs-web-agency-startup-roi/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/custom-web-app-mvp-cost-2026</loc>
+    <loc>https://aafaque.in/blog/custom-web-app-mvp-cost-2026/</loc>
     <lastmod>2026-10-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/why-slow-websites-kill-conversions-speed-roi</loc>
+    <loc>https://aafaque.in/blog/why-slow-websites-kill-conversions-speed-roi/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/zero-commission-food-delivery-react-whatsapp</loc>
+    <loc>https://aafaque.in/blog/zero-commission-food-delivery-react-whatsapp/</loc>
     <lastmod>2026-11-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/shopify-vs-custom-nextjs-storefront</loc>
+    <loc>https://aafaque.in/blog/shopify-vs-custom-nextjs-storefront/</loc>
     <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/automating-gst-invoices-whatsapp-business-api</loc>
+    <loc>https://aafaque.in/blog/automating-gst-invoices-whatsapp-business-api/</loc>
     <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://aafaque.in/blog/building-fast-react-product-filters-url-state</loc>
+    <loc>https://aafaque.in/blog/building-fast-react-product-filters-url-state/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -279,12 +273,6 @@
   </url>
   <url>
     <loc>https://aafaque.in/projects/11/</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aafaque.in/projects/8/</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

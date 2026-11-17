@@ -318,7 +318,7 @@ export default function BlogPost() {
     ? projects.find((p) => p.id === post.relatedProjectId)
     : null;
 
-  const currentUrl = typeof window !== "undefined" ? window.location.href : `https://aafaque.in/blog/${slug}`;
+  const currentUrl = typeof window !== "undefined" ? window.location.href : `https://aafaque.in/blog/${slug}/`;
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(currentUrl);
@@ -367,7 +367,7 @@ export default function BlogPost() {
           The requested engineering article does not exist.
         </p>
         <Link
-          to="/blog"
+          to="/blog/"
           className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-mono hover:text-white transition-colors"
         >
           ← Return to Articles
@@ -392,7 +392,7 @@ export default function BlogPost() {
           {/* Top Breadcrumb Row */}
           <nav aria-label="Breadcrumb" className="flex items-center justify-between text-xs font-mono text-zinc-500 mb-8">
             <Link 
-              to="/blog" 
+              to="/blog/" 
               className="inline-flex items-center gap-1.5 hover:text-zinc-300 transition-colors"
             >
               <RiArrowLeftLine size={13} />
@@ -629,7 +629,7 @@ export default function BlogPost() {
                   </p>
                 </div>
                 <Link
-                  to={`/projects/${relatedProject.id}`}
+                  to={`/projects/${relatedProject.id}/`}
                   className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors text-xs font-mono whitespace-nowrap shrink-0"
                 >
                   <span>View case study</span>
@@ -689,7 +689,7 @@ export default function BlogPost() {
               <p className="text-xs text-zinc-500 font-mono">{post.author.role}</p>
             </div>
             <Link
-              to="/contact"
+              to="/contact/"
               className="px-3.5 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors text-xs font-mono"
             >
               Get in touch →
@@ -700,7 +700,7 @@ export default function BlogPost() {
           <div className="mt-12 pt-8 border-t border-zinc-800 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {prevPost ? (
               <Link
-                to={`/blog/${prevPost.slug}`}
+                to={`/blog/${prevPost.slug}/`}
                 className="p-4 rounded-xl border border-zinc-800 hover:border-zinc-750 transition-colors group flex flex-col"
               >
                 <span className="text-[10px] font-mono text-zinc-500 uppercase mb-1">
@@ -714,7 +714,7 @@ export default function BlogPost() {
 
             {nextPost ? (
               <Link
-                to={`/blog/${nextPost.slug}`}
+                to={`/blog/${nextPost.slug}/`}
                 className="p-4 rounded-xl border border-zinc-800 hover:border-zinc-750 transition-colors group flex flex-col sm:text-right"
               >
                 <span className="text-[10px] font-mono text-zinc-500 uppercase mb-1">

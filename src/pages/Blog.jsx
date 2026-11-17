@@ -103,7 +103,7 @@ export default function Blog() {
             {filteredBlogs.map((post) => (
               <Link
                 key={post.id}
-                to={`/blog/${post.slug}`}
+                to={`/blog/${post.slug}/`}
                 className="group relative rounded-xl p-5 bg-zinc-950 border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/40 transition-all duration-200 flex flex-col justify-between cursor-pointer no-underline block"
               >
                 <div>
