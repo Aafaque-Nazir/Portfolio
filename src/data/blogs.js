@@ -1,5 +1,143 @@
 export const blogs = [
   {
+    "id": "lenis-smooth-scroll-react-clean-transitions",
+    "slug": "lenis-smooth-scroll-react-clean-transitions",
+    "title": "Smooth Scrolling with Lenis and Clean Transitions in React",
+    "seoTitle": "Smooth Scrolling with Lenis and React Transitions",
+    "description": "Learn how to set up Lenis smooth scroll in React with clean page transitions, frame-rate syncing, and zero scroll lag on modern browsers.",
+    "publishedAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "readTime": "7 min read",
+    "category": "UI & Animation",
+    "tags": [
+      "React",
+      "Lenis",
+      "Web Animation",
+      "Clean Web Design",
+      "Frontend"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "To set up Lenis in React, wrap your layout with the ReactLenis component from lenis/react, configure damping and touch behavior, and sync the scroll tick with your animation loop or requestAnimationFrame.",
+    "relatedProjectId": 10,
+    "faqs": [
+      {
+        "question": "Does Lenis cause scroll lag or hurt mobile performance?",
+        "answer": "No. Unlike older scroll-jacking scripts from years ago, Lenis normalizes scroll delta on native threads without intercepting hardware touch events by default. On mobile devices, touch scrolling remains native unless you intentionally turn on touch smoothing."
+      },
+      {
+        "question": "How do you coordinate Lenis with GSAP ScrollTrigger?",
+        "answer": "You bind Lenis's scroll event to ScrollTrigger.update and use GSAP's ticker to drive Lenis's animation frame. This keeps scroll position calculations in exact sync and prevents jitter."
+      },
+      {
+        "question": "How do you respect accessibility preferences with smooth scrolling?",
+        "answer": "Check the window.matchMedia('(prefers-reduced-motion: reduce)') media query before initializing Lenis, or pass an option that stops the interpolation loop when reduced motion is preferred."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Native Smooth Scroll Falls Short in Modern Web Apps"
+      },
+      {
+        "type": "paragraph",
+        "text": "Native browser smooth scrolling (via CSS `scroll-behavior: smooth`) works fine for basic jump links, but it gives you zero control over duration, easing, or frame synchronization. When you pair native scroll with animated hero sections, sticky navigation bars, or pinned panels, scroll events fire asynchronously. The result is visual stutter, miscalculated bounding rects, and jerky animations."
+      },
+      {
+        "type": "paragraph",
+        "text": "For editorial layouts, high-end portfolios, and hospitality websites, this visual stutter ruins the user experience. In my work on [Yacht Rentals / Sea Cross](/projects/10), we needed high-resolution imagery and booking forms to glide naturally as the user navigates down the page. Lenis solves this by normalizing mouse wheel physics using linear interpolation (lerp) without locking or breaking native browser functionality."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Configuring Lenis in a Modern React Application"
+      },
+      {
+        "type": "paragraph",
+        "text": "The cleanest way to add Lenis to React 19 or Next.js App Router is through the official `lenis/react` package. It provides a lightweight context provider that handles setup, unmounting, and ref binding automatically."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "components/SmoothScrollProvider.tsx",
+        "code": "\"use client\";\n\nimport { ReactLenis } from \"lenis/react\";\nimport { useEffect, useState, type ReactNode } from \"react\";\n\ninterface SmoothScrollProviderProps {\n  children: ReactNode;\n}\n\nexport function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {\n  const [reducedMotion, setReducedMotion] = useState(false);\n\n  useEffect(() => {\n    const mediaQuery = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    setReducedMotion(mediaQuery.matches);\n\n    const handleChange = (e: MediaQueryListEvent) => {\n      setReducedMotion(e.matches);\n    };\n\n    mediaQuery.addEventListener(\"change\", handleChange);\n    return () => mediaQuery.removeEventListener(\"change\", handleChange);\n  }, []);\n\n  if (reducedMotion) {\n    return <>{children}</>;\n  }\n\n  return (\n    <ReactLenis\n      root\n      options={{\n        lerp: 0.1,\n        duration: 1.2,\n        smoothWheel: true,\n        wheelMultiplier: 1.0,\n        touchMultiplier: 1.0,\n        infinite: false,\n      }}\n    >\n      {children}\n    </ReactLenis>\n  );\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Respecting User Accessibility",
+        "text": "Smooth scroll can trigger motion sickness for sensitive visitors. Always check the prefers-reduced-motion media query. If enabled, bypass Lenis entirely and let the browser use standard instant scrolling."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Syncing Lenis with Route Transitions and Scroll Resets"
+      },
+      {
+        "type": "paragraph",
+        "text": "A common bug with custom scroll libraries in single-page applications is page transition desynchronization. When a user clicks an internal link, the router updates the DOM, but the scroll position either stays locked midway down the screen or snaps abruptly."
+      },
+      {
+        "type": "paragraph",
+        "text": "To fix this, access the Lenis instance using the `useLenis` hook and call `lenis.scrollTo(0, { immediate: true })` whenever the route pathname changes. This resets the virtual scroll physics immediately so the user starts at the top of the new page."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "hooks/useRouteScrollReset.ts",
+        "code": "\"use client\";\n\nimport { useEffect } from \"react\";\nimport { usePathname } from \"next/navigation\";\nimport { useLenis } from \"lenis/react\";\n\nexport function useRouteScrollReset() {\n  const pathname = usePathname();\n  const lenis = useLenis();\n\n  useEffect(() => {\n    if (!lenis) return;\n    \n    // Stop inertia from the previous page and snap to top\n    lenis.scrollTo(0, { immediate: true });\n  }, [pathname, lenis]);\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Coordinating Scroll Animations with WebGL and GSAP"
+      },
+      {
+        "type": "paragraph",
+        "text": "When combining Lenis with complex visual components—like the dynamic 3D food model on [3D Burger Website / Smoked & Seared](/projects/13)—you must sync your animation render loops. If GSAP runs on its own internal ticker while Lenis runs on a separate requestAnimationFrame loop, calculations drift apart, producing micro-jitters."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Feed Lenis scroll updates directly into GSAP ScrollTrigger using ScrollTrigger.update().",
+          "Use gsap.ticker.add to drive the Lenis instance so both tools share a unified time step.",
+          "Set lagSmoothing(0) in GSAP during critical transitions to prevent catch-up jumps on heavy render frames."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Practical Rules for Clean Website Interactions"
+      },
+      {
+        "type": "paragraph",
+        "text": "Smooth scrolling should remain invisible to the user. It should feel like a well-weighted physical dial rather than a sluggish delay. Follow these baseline rules on every project:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Never disable mouse wheel momentum completely; keep the lerp value between 0.08 and 0.12.",
+          "Never block native keyboard accessibility keys such as Space, Page Down, or Up/Down arrows.",
+          "Keep input fields, dropdown menus, and text areas inside non-scrolling or native overflow containers to avoid pointer drift.",
+          "Test on trackpads, mouse wheels, and mobile screens separately. Trackpad inertia already feels smooth natively, so avoid over-damping."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, clean web applications that balance striking UI interactions with solid core web vitals. You can explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your next web build."
+      }
+    ]
+  },
+  {
     "id": "pgvector-postgresql-vector-search-recommendations",
     "slug": "pgvector-postgresql-vector-search-recommendations",
     "title": "Building Lightweight Vector Search in PostgreSQL with pgvector for Real-Time Semantic Recommendations",
