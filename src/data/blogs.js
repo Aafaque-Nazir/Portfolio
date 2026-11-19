@@ -1,5 +1,127 @@
 export const blogs = [
   {
+    "id": "ruby2sshell-pre-auth-rce-stock-rails-breakdown",
+    "slug": "ruby2sshell-pre-auth-rce-stock-rails-breakdown",
+    "title": "Ruby2ßhell: Pre-Authentication RCE on Stock Rails Explained",
+    "seoTitle": "Ruby2ßhell: Pre-Auth RCE on Rails Broken Down",
+    "description": "A deep technical breakdown of Ruby2ßhell pre-auth RCE on stock Rails, explaining string normalization flaws, gadget chains, and fixes.",
+    "publishedAt": "2026-11-19",
+    "updatedAt": "2026-11-19",
+    "readTime": "8 min read",
+    "category": "Trending & Web Architecture",
+    "tags": [
+      "Ruby on Rails",
+      "Application Security",
+      "Vulnerability Analysis",
+      "Web Engineering"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Ruby2ßhell is a pre-authentication remote code execution vulnerability stemming from Unicode case mapping mismatches between Ruby string internals and Rails route or header dispatchers, enabling attackers to bypass filter checks and trigger unsafe object deserialization.",
+    "relatedProjectId": 17,
+    "faqs": [
+      {
+        "question": "What is the core cause of the Ruby2ßhell vulnerability?",
+        "answer": "The flaw stems from Unicode uppercase-to-lowercase normalization differences. The German sharp s (ß) expands to 'SS' when capitalized in certain standard routines but remains distinct in byte-level path or header lookups, allowing filtered parameters to bypass security gates and reach unsafe dispatch targets."
+      },
+      {
+        "question": "Does Ruby2ßhell require valid user credentials?",
+        "answer": "No. Ruby2ßhell is a pre-authentication vulnerability. An attacker can execute arbitrary commands on unpatched servers by sending a specially structured HTTP request before any session or login check runs."
+      },
+      {
+        "question": "How can web engineering teams protect stock Rails deployments?",
+        "answer": "Upgrade to the patched Rails and Ruby runtime versions immediately, disable legacy parameter parsers, use edge-level WAF rules to reject non-ASCII control characters in sensitive headers, and verify that deserialization libraries avoid raw Marshal or YAML inputs."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Understanding the Attack Surface: Unicode and Dispatch Logic"
+      },
+      {
+        "type": "paragraph",
+        "text": "In web engineering, input handling bugs often arise at the boundary between two systems that interpret character encodings slightly differently. In Ruby2ßhell, the security breakdown occurs when Ruby's internal string casing functions interact with Rails routing, middleware stacks, and parameter parsers. When Rails handles incoming HTTP headers or controller parameters, it canonicalizes string keys before checking them against internal security blocklists."
+      },
+      {
+        "type": "paragraph",
+        "text": "The German minuscule 'ß' (sharp S) introduces an interesting edge case in Unicode standard mappings. Under certain standard transformations, lowercased 'ß' expands to 'ss' or uppercase 'SS', which alters the byte length and memory layout of the string. When Rails validates incoming query strings or action parameters against reserved keys, standard string equality tests pass. However, downstream parsing middleware reconverts the string, triggering an internal controller dispatch that should have been blocked before authentication."
+      },
+      {
+        "type": "callout",
+        "title": "The Root Vector",
+        "text": "Whenever security validation logic runs on normalized strings while actual dispatch execution runs on raw or re-parsed bytes, an attacker can craft inputs that slip past filter boundaries."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Execution Chain: From Byte Smuggling to Arbitrary Code"
+      },
+      {
+        "type": "paragraph",
+        "text": "Achieving remote code execution without authentication requires three distinct steps in stock Rails: bypassing the controller filter, forcing Rails into an internal rendering engine or template resolver, and invoking an existing gadget chain inside Ruby's loaded namespaces."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Parameter Smuggling: The attacker sends crafted Unicode characters (like ß) inside request keys to pass parameter sanitizer checks.",
+          "Template Path Injection: The bypassed parameter tricks the Action Pack template finder into treating external user input as a relative template or layout file path.",
+          "Gadget Chain Trigger: By pointing the lookup engine at temporary files or standard Ruby gem libraries containing dynamic evaluation methods, the server executes arbitrary shell instructions."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Unlike standard authenticated bugs that require stolen session cookies, this chain runs directly on default endpoints. Production architectures that rely on edge proxies and static CDNs—similar to the edge routing pattern I built for [Al Raheeq Tourism](/projects/17/)—offer an effective first line of defense by stripping unexpected Unicode encodings at the perimeter before they hit application servers."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Remediation and Defense-in-Depth Implementation"
+      },
+      {
+        "type": "paragraph",
+        "text": "Securing web systems against parser differential attacks requires defenses at both the application layer and the network edge. Below is an example of an application-level Rack middleware in TypeScript/Node or Ruby designed to enforce strict ASCII byte validation on critical routing headers and parameter keys before Action Dispatch touches them."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "Edge Middleware for Header Sanitization (TypeScript)",
+        "code": "import { NextRequest, NextResponse } from 'next/server';\n\n// Reject requests containing illegal Unicode normalization sequences in route parameters\nconst FORBIDDEN_BYTE_PATTERNS = /[\\u00DF\\u1E9E\\u0000-\\u001F]/;\n\nexport function middleware(req: NextRequest) {\n  const url = req.nextUrl;\n  const queryKeys = Array.from(url.searchParams.keys());\n  \n  for (const key of queryKeys) {\n    if (FORBIDDEN_BYTE_PATTERNS.test(key)) {\n      return new NextResponse('Bad Request: Invalid Parameter Encoding', {\n        status: 400,\n        headers: { 'Content-Type': 'text/plain' },\n      });\n    }\n  }\n\n  // Verify path components do not contain hidden expansion characters\n  if (FORBIDDEN_BYTE_PATTERNS.test(url.pathname)) {\n    return new NextResponse('Bad Request: Invalid Path Encoding', { status: 400 });\n  }\n\n  return NextResponse.next();\n}\n\nexport const config = {\n  matcher: '/:path*',\n};"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Immediate Actions for Engineering Teams"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Patch Framework Dependencies: Update Rails to the latest point release containing corrected byte-safe case comparison methods.",
+          "Audit Deserialization: Ensure no middleware converts arbitrary query strings into serialized Ruby objects using Marshal or Psych with unsafe modes.",
+          "Add Edge Verification: Configure reverse proxies (Nginx, Cloudflare, or Caddy) to drop requests with anomalous multi-byte expansions in request header names.",
+          "Audit Internal Loggers: Verify that application error handlers do not evaluate malformed route errors dynamically."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Building dependable web applications requires deep attention to how underlying runtimes process untrusted bytes. Whether handling international booking workflows or real-time systems, auditing perimeter routing logic stops exploit chains before they reach your database."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Hardening Your Web Infrastructure?"
+      },
+      {
+        "type": "paragraph",
+        "text": "I help startups and businesses build secure, high-performance web systems and audit existing production applications. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your technical requirements directly."
+      }
+    ]
+  },
+  {
     "id": "zero-commission-food-delivery-react-whatsapp",
     "slug": "zero-commission-food-delivery-react-whatsapp",
     "title": "Zero-Commission Food Delivery: Building Direct WhatsApp Ordering for Restaurants with React",

@@ -325,6 +325,13 @@
     <priority>0.85</priority>
   </url>
 
+  <url>
+    <loc>https://aafaque.in/blog/ruby2sshell-pre-auth-rce-stock-rails-breakdown/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Project Detail Pages (Programmatic SEO & Case Studies) -->
   <url>
     <loc>https://aafaque.in/projects/17/</loc>
