@@ -337,19 +337,19 @@ Strict Requirements:
      * Instead of "architecting" or "leveraging", use "building", "designing", or "using".
      * Instead of "high-converting", use "effective", "fast", or "high-performing".
 2. In-text contextual backlinks to Aafaque's projects and pages. Use ONLY the correct project ID and real project name from this verified directory:
-   - ID 1: [Inventory Management / InvMaster OS](/projects/1) -> Wholesale & Godown Inventory OS with multi-godown routing, FEFO batch & expiry tracking, mobile camera barcode scanner, and 1-click WhatsApp GST invoice dispatch.
-   - ID 2: [Shopease / Oud & Attar](/projects/2) -> Fragrance e-commerce store with fast client-side filtering, instant slide-out cart, and URL search param state sync.
-   - ID 3: [Bread & Bite](/projects/3) -> Zero-commission cloud kitchen in Navi Mumbai with lightweight React digital menu, client-side cart, and direct WhatsApp business order dispatch.
-   - ID 4: [Restaurant OS / Corner Cafe](/projects/4) -> Contactless restaurant operating system with table QR-code scanning, real-time Kitchen Display System (KDS), and waiter/staff management portal.
-   - ID 10: [Yacht Rentals / Sea Cross](/projects/10) -> Luxury yacht charter in Mumbai Gateway of India with Lenis smooth scrolling and direct VIP inquiry booking.
-   - ID 11: [CarePulse / Aura Dental Studio](/projects/11) -> Dental & smile studio with interactive 50/50 Before & After comparison slider, 3D scan showcase, and online consultation booking.
-   - ID 12: [Premium Burger Shop / H5 Texes Burger](/projects/12) -> Gourmet burger brand with custom design tokens, menu showcase, and multi-outlet inquiry system.
-   - ID 13: [3D Burger Website / Smoked & Seared](/projects/13) -> 3D WebGL burger model that rotates and disassembles dynamically on scroll via GSAP ScrollTrigger.
-   - ID 14: [LA Salon & Spa / Lumina Aura](/projects/14) -> Salon & spa website with smooth multi-step appointment booking.
-   - ID 15: [Aura Estate](/projects/15) -> Real estate web portal with property search, valuation calculator, and Supabase PostgreSQL.
-   - ID 17: [Al Raheeq Tourism](/projects/17) -> Deira Dubai licensed travel agency with express UAE tourist visa selector, worldwide flight ticketing, Netlify Edge delivery, and rich Schema.org structured data.
-   - Freelance Services: [Full-Stack Web Development Services](/services)
-   - Contact / Hire: [Get in touch with Aafaque](/contact)
+   - ID 1: [Inventory Management / InvMaster OS](/projects/1/) -> Wholesale & Godown Inventory OS with multi-godown routing, FEFO batch & expiry tracking, mobile camera barcode scanner, and 1-click WhatsApp GST invoice dispatch.
+   - ID 2: [Shopease / Oud & Attar](/projects/2/) -> Fragrance e-commerce store with fast client-side filtering, instant slide-out cart, and URL search param state sync.
+   - ID 3: [Bread & Bite](/projects/3/) -> Zero-commission cloud kitchen in Navi Mumbai with lightweight React digital menu, client-side cart, and direct WhatsApp business order dispatch.
+   - ID 4: [Restaurant OS / Corner Cafe](/projects/4/) -> Contactless restaurant operating system with table QR-code scanning, real-time Kitchen Display System (KDS), and waiter/staff management portal.
+   - ID 10: [Yacht Rentals / Sea Cross](/projects/10/) -> Luxury yacht charter in Mumbai Gateway of India with Lenis smooth scrolling and direct VIP inquiry booking.
+   - ID 11: [CarePulse / Aura Dental Studio](/projects/11/) -> Dental & smile studio with interactive 50/50 Before & After comparison slider, 3D scan showcase, and online consultation booking.
+   - ID 12: [Premium Burger Shop / H5 Texes Burger](/projects/12/) -> Gourmet burger brand with custom design tokens, menu showcase, and multi-outlet inquiry system.
+   - ID 13: [3D Burger Website / Smoked & Seared](/projects/13/) -> 3D WebGL burger model that rotates and disassembles dynamically on scroll via GSAP ScrollTrigger.
+   - ID 14: [LA Salon & Spa / Lumina Aura](/projects/14/) -> Salon & spa website with smooth multi-step appointment booking.
+   - ID 15: [Aura Estate](/projects/15/) -> Real estate web portal with property search, valuation calculator, and Supabase PostgreSQL.
+   - ID 17: [Al Raheeq Tourism](/projects/17/) -> Deira Dubai licensed travel agency with express UAE tourist visa selector, worldwide flight ticketing, Netlify Edge delivery, and rich Schema.org structured data.
+   - Freelance Services: [Full-Stack Web Development Services](/services/)
+   - Contact / Hire: [Get in touch with Aafaque](/contact/)
 3. Include real, clean, modern code snippets (TypeScript, React 19, or SQL).
 4. Include an AEO Quick Answer (1-2 sentences direct answer for Perplexity and SearchGPT without buzzwords).
 5. Include 3 structured FAQs for Google FAQ schema.
@@ -435,7 +435,7 @@ Strict Requirements:
     },
     {
       "type": "paragraph",
-      "text": "As an independent web developer, I build fast, production-ready web applications. [Hire Aafaque Nazir](/services) or [get in touch for a consultation](/contact)."
+      "text": "As an independent web developer, I build fast, production-ready web applications. [Hire Aafaque Nazir](/services/) or [get in touch for a consultation](/contact/)."
     }
   ]
 }
@@ -656,7 +656,7 @@ async function generate() {
   const sitemapContent = fs.readFileSync(sitemapFilePath, "utf8");
   const sitemapInsertMarker = "  <!-- Project Detail Pages";
   const newSitemapEntry = `  <url>
-    <loc>https://aafaque.in/blog/${blogObj.slug}</loc>
+    <loc>https://aafaque.in/blog/${blogObj.slug}/</loc>
     <lastmod>${blogObj.publishedAt}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -674,7 +674,7 @@ async function generate() {
   // 5. Update public/llms-full.txt
   const llmsContent = fs.readFileSync(llmsFullFilePath, "utf8");
   const llmsMarker = "## Engineering Articles & Architectural Guides (Blog)\n\n- **Blog Index:** https://aafaque.in/blog";
-  const newLlmsEntry = `\n- **${blogObj.title}**\n  URL: https://aafaque.in/blog/${blogObj.slug}\n  Summary: ${blogObj.description}`;
+  const newLlmsEntry = `\n- **${blogObj.title}**\n  URL: https://aafaque.in/blog/${blogObj.slug}/\n  Summary: ${blogObj.description}`;
 
   if (llmsContent.includes(llmsMarker) && !llmsContent.includes(blogObj.slug)) {
     const updatedLlms = llmsContent.replace(llmsMarker, llmsMarker + newLlmsEntry);

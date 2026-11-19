@@ -50,7 +50,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building [Bread & Bite](/projects/3), a cloud kitchen based in Navi Mumbai, the primary goal was to reclaim these margins. Instead of routing local orders through an intermediary marketplace, we designed a direct ordering workflow where the customer browses a lightweight digital menu on their phone and dispatches the exact order directly to the kitchen's WhatsApp phone line."
+        "text": "When building [Bread & Bite](/projects/3/), a cloud kitchen based in Navi Mumbai, the primary goal was to reclaim these margins. Instead of routing local orders through an intermediary marketplace, we designed a direct ordering workflow where the customer browses a lightweight digital menu on their phone and dispatches the exact order directly to the kitchen's WhatsApp phone line."
       },
       {
         "type": "callout",
@@ -68,7 +68,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Similar to the structured menu presentation used in our [Premium Burger Shop / H5 Texes Burger](/projects/12) brand showcase and the table-ordering patterns in [Restaurant OS / Corner Cafe](/projects/4), this setup loads instantly even on weak 4G mobile connections. The customer's mobile device does the computational heavy lifting."
+        "text": "Similar to the structured menu presentation used in our [Premium Burger Shop / H5 Texes Burger](/projects/12/) brand showcase and the table-ordering patterns in [Restaurant OS / Corner Cafe](/projects/4/), this setup loads instantly even on weak 4G mobile connections. The customer's mobile device does the computational heavy lifting."
       },
       {
         "type": "list",
@@ -126,7 +126,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Whether you operate a fast-food outlet, an independent bakery, or a multi-brand cloud kitchen, building a custom direct ordering platform protects your operating margins and gives you direct access to your customer base. Take a look at my [Full-Stack Web Development Services](/services) to see how I build clean web solutions, or [get in touch with Aafaque](/contact) to discuss your food business requirements."
+        "text": "Whether you operate a fast-food outlet, an independent bakery, or a multi-brand cloud kitchen, building a custom direct ordering platform protects your operating margins and gives you direct access to your customer base. Take a look at my [Full-Stack Web Development Services](/services/) to see how I build clean web solutions, or [get in touch with Aafaque](/contact/) to discuss your food business requirements."
       }
     ]
   },
@@ -181,7 +181,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "For editorial layouts, high-end portfolios, and hospitality websites, this visual stutter ruins the user experience. In my work on [Yacht Rentals / Sea Cross](/projects/10), we needed high-resolution imagery and booking forms to glide naturally as the user navigates down the page. Lenis solves this by normalizing mouse wheel physics using linear interpolation (lerp) without locking or breaking native browser functionality."
+        "text": "For editorial layouts, high-end portfolios, and hospitality websites, this visual stutter ruins the user experience. In my work on [Yacht Rentals / Sea Cross](/projects/10/), we needed high-resolution imagery and booking forms to glide naturally as the user navigates down the page. Lenis solves this by normalizing mouse wheel physics using linear interpolation (lerp) without locking or breaking native browser functionality."
       },
       {
         "type": "heading",
@@ -229,7 +229,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When combining Lenis with complex visual components—like the dynamic 3D food model on [3D Burger Website / Smoked & Seared](/projects/13)—you must sync your animation render loops. If GSAP runs on its own internal ticker while Lenis runs on a separate requestAnimationFrame loop, calculations drift apart, producing micro-jitters."
+        "text": "When combining Lenis with complex visual components—like the dynamic 3D food model on [3D Burger Website / Smoked & Seared](/projects/13/)—you must sync your animation render loops. If GSAP runs on its own internal ticker while Lenis runs on a separate requestAnimationFrame loop, calculations drift apart, producing micro-jitters."
       },
       {
         "type": "list",
@@ -264,7 +264,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, clean web applications that balance striking UI interactions with solid core web vitals. You can explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your next web build."
+        "text": "As an independent web developer, I build fast, clean web applications that balance striking UI interactions with solid core web vitals. You can explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your next web build."
       }
     ]
   },
@@ -319,7 +319,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building e-commerce catalogs like [Shopease / Oud & Attar](/projects/2), recommendations must respect stock status, regional catalog availability, and category rules. If your vectors live in an external tool, you must query vectors first, extract IDs, and then query PostgreSQL to filter out out-of-stock items. With pgvector, this entire flow runs inside a single, fast SQL statement."
+        "text": "When building e-commerce catalogs like [Shopease / Oud & Attar](/projects/2/), recommendations must respect stock status, regional catalog availability, and category rules. If your vectors live in an external tool, you must query vectors first, extract IDs, and then query PostgreSQL to filter out out-of-stock items. With pgvector, this entire flow runs inside a single, fast SQL statement."
       },
       {
         "type": "heading",
@@ -392,7 +392,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Whether you are building an e-commerce catalog, a knowledge base, or an internal search tool, keeping your AI pipeline simple saves money and reduces bugs. Explore my [Full-Stack Web Development Services](/services) to see how I help founders build reliable web apps, or [Get in touch with Aafaque](/contact) to discuss your project directly."
+        "text": "Whether you are building an e-commerce catalog, a knowledge base, or an internal search tool, keeping your AI pipeline simple saves money and reduces bugs. Explore my [Full-Stack Web Development Services](/services/) to see how I help founders build reliable web apps, or [Get in touch with Aafaque](/contact/) to discuss your project directly."
       }
     ]
   },
@@ -446,7 +446,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "In projects like [Al Raheeq Tourism](/projects/17), integrating precise Schema.org types for travel agencies and local tours helps search engines display pricing, duration, and reviews directly in search results. Similar benefits apply when setting up e-commerce catalogs or local service portfolios."
+        "text": "In projects like [Al Raheeq Tourism](/projects/17/), integrating precise Schema.org types for travel agencies and local tours helps search engines display pricing, duration, and reviews directly in search results. Similar benefits apply when setting up e-commerce catalogs or local service portfolios."
       },
       {
         "type": "heading",
@@ -493,7 +493,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Proper technical setup makes a massive difference in how search engines index and rank web applications. If you need clean, high-performance implementation for your project, explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your requirements."
+        "text": "Proper technical setup makes a massive difference in how search engines index and rank web applications. If you need clean, high-performance implementation for your project, explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your requirements."
       }
     ]
   },
@@ -544,7 +544,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "React 19 introduces major improvements to client-side state management, form actions, and hook handling. When paired with the Vercel AI SDK, setting up a real-time chat interface takes very little code. For example, when building data-heavy tools like our [Inventory Management / InvMaster OS](/projects/1), adding AI assistants helps operators query godown stock levels using plain natural language."
+        "text": "React 19 introduces major improvements to client-side state management, form actions, and hook handling. When paired with the Vercel AI SDK, setting up a real-time chat interface takes very little code. For example, when building data-heavy tools like our [Inventory Management / InvMaster OS](/projects/1/), adding AI assistants helps operators query godown stock levels using plain natural language."
       },
       {
         "type": "code",
@@ -592,7 +592,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications. [Full-Stack Web Development Services](/services) or [Get in touch with Aafaque](/contact) to discuss your project requirements."
+        "text": "As an independent web developer, I build fast, production-ready web applications. [Full-Stack Web Development Services](/services/) or [Get in touch with Aafaque](/contact/) to discuss your project requirements."
       }
     ]
   },
@@ -643,7 +643,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building modern medical and dental websites, user trust is everything. Patients want to see real evidence of what a clinic can achieve before they schedule an appointment. During the development of [CarePulse / Aura Dental Studio](/projects/11), one of the primary client requirements was an interactive 50/50 before-and-after comparison slider that works smoothly on both desktop touchpads and mobile touch screens."
+        "text": "When building modern medical and dental websites, user trust is everything. Patients want to see real evidence of what a clinic can achieve before they schedule an appointment. During the development of [CarePulse / Aura Dental Studio](/projects/11/), one of the primary client requirements was an interactive 50/50 before-and-after comparison slider that works smoothly on both desktop touchpads and mobile touch screens."
       },
       {
         "type": "paragraph",
@@ -694,7 +694,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications. If you need custom UI components or complete booking portals, [explore my full-stack web development services](/services) or [get in touch with Aafaque Nazir](/contact)."
+        "text": "As an independent web developer, I build fast, production-ready web applications. If you need custom UI components or complete booking portals, [explore my full-stack web development services](/services/) or [get in touch with Aafaque Nazir](/contact/)."
       }
     ]
   },
@@ -745,7 +745,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Standard browser scroll behavior depends on operating system settings and hardware configurations. On Windows machines without precision trackpads, scrolling often feels abrupt and disjointed. When building high-end interfaces like the [Yacht Rentals / Sea Cross](/projects/10) platform, predictable and clean motion is crucial for creating a premium feel without hurting accessibility or performance."
+        "text": "Standard browser scroll behavior depends on operating system settings and hardware configurations. On Windows machines without precision trackpads, scrolling often feels abrupt and disjointed. When building high-end interfaces like the [Yacht Rentals / Sea Cross](/projects/10/) platform, predictable and clean motion is crucial for creating a premium feel without hurting accessibility or performance."
       },
       {
         "type": "paragraph",
@@ -811,7 +811,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer based in Navi Mumbai, I build fast, production-ready web applications with clean animations and reliable user interfaces. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project requirements."
+        "text": "As an independent web developer based in Navi Mumbai, I build fast, production-ready web applications with clean animations and reliable user interfaces. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your project requirements."
       }
     ]
   },
@@ -875,7 +875,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building the interactive product view for the [3D Burger Website / Smoked & Seared](/projects/13), the goal was to disassemble individual ingredients—top bun, sesame seeds, cheese, patty, and bottom bun—as the visitor scrolls past distinct nutritional sections. Instead of re-rendering, we target the position, rotation, and scale of child meshes directly using GSAP timelines."
+        "text": "When building the interactive product view for the [3D Burger Website / Smoked & Seared](/projects/13/), the goal was to disassemble individual ingredients—top bun, sesame seeds, cheese, patty, and bottom bun—as the visitor scrolls past distinct nutritional sections. Instead of re-rendering, we target the position, rotation, and scale of child meshes directly using GSAP timelines."
       },
       {
         "type": "code",
@@ -908,7 +908,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "For luxury travel experiences like [Yacht Rentals / Sea Cross](/projects/10), pairing smooth scroll libraries like Lenis with GSAP ScrollTrigger ensures the camera and mesh interpolations match human finger swipes without stutter."
+        "text": "For luxury travel experiences like [Yacht Rentals / Sea Cross](/projects/10/), pairing smooth scroll libraries like Lenis with GSAP ScrollTrigger ensures the camera and mesh interpolations match human finger swipes without stutter."
       },
       {
         "type": "heading",
@@ -917,7 +917,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If you want to replace static product photography with interactive 3D web experiences that run smoothly across desktop and mobile devices, I can help design and build the front-end architecture. Check out my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project requirements."
+        "text": "If you want to replace static product photography with interactive 3D web experiences that run smoothly across desktop and mobile devices, I can help design and build the front-end architecture. Check out my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your project requirements."
       }
     ]
   },
@@ -956,7 +956,7 @@ export const blogs = [
       },
       {
         "question": "Where can I see these performance techniques applied in a live project?",
-        "answer": "These exact performance patterns are utilized in the multi-step appointment booking flows built for the [LA Salon & Spa / Lumina Aura](/projects/14) project, ensuring fast user interactions."
+        "answer": "These exact performance patterns are utilized in the multi-step appointment booking flows built for the [LA Salon & Spa / Lumina Aura](/projects/14/) project, ensuring fast user interactions."
       }
     ],
     "sections": [
@@ -973,7 +973,7 @@ export const blogs = [
       {
         "type": "paragraph",
         "title": "",
-        "text": "When building multi-step interfaces like the ones found in the [LA Salon & Spa / Lumina Aura](/projects/14) project, keeping frame rates locked at 60fps is critical. If your application feels choppy during page transitions or modal openings, users notice immediately. Fixing this requires shifting our animation strategy away from layout-bound CSS properties and moving entirely to compositor-only properties."
+        "text": "When building multi-step interfaces like the ones found in the [LA Salon & Spa / Lumina Aura](/projects/14/) project, keeping frame rates locked at 60fps is critical. If your application feels choppy during page transitions or modal openings, users notice immediately. Fixing this requires shifting our animation strategy away from layout-bound CSS properties and moving entirely to compositor-only properties."
       },
       {
         "type": "heading",
@@ -1033,7 +1033,7 @@ export const blogs = [
       {
         "type": "paragraph",
         "title": "",
-        "text": "As an independent web developer, I build fast, production-ready web applications with clean animations and solid performance. [Full-Stack Web Development Services](/services) or [Get in touch with Aafaque](/contact) to discuss your project requirements."
+        "text": "As an independent web developer, I build fast, production-ready web applications with clean animations and solid performance. [Full-Stack Web Development Services](/services/) or [Get in touch with Aafaque](/contact/) to discuss your project requirements."
       }
     ]
   },
@@ -1083,7 +1083,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "For years, Tailwind v3 relied on a JavaScript configuration file and a Node.js-based scanner to generate utility classes. While effective, large codebases often suffered from build slowdowns during development. Tailwind CSS v4 completely rewrites the core engine in Rust, known as the Oxide engine. This native approach eliminates Node.js overhead during scanning and generates your stylesheets instantly. When building projects like the [Premium Burger Shop / H5 Texes Burger](/projects/12), keeping build times minimal helps maintain momentum during styling iterations."
+        "text": "For years, Tailwind v3 relied on a JavaScript configuration file and a Node.js-based scanner to generate utility classes. While effective, large codebases often suffered from build slowdowns during development. Tailwind CSS v4 completely rewrites the core engine in Rust, known as the Oxide engine. This native approach eliminates Node.js overhead during scanning and generates your stylesheets instantly. When building projects like the [Premium Burger Shop / H5 Texes Burger](/projects/12/), keeping build times minimal helps maintain momentum during styling iterations."
       },
       {
         "type": "paragraph",
@@ -1134,7 +1134,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications with modern tooling. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your next project."
+        "text": "As an independent web developer, I build fast, production-ready web applications with modern tooling. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your next project."
       }
     ]
   },
@@ -1193,7 +1193,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "I encountered this exact problem while building [Aura Estate](/projects/15), a real estate portal with real-time property search and valuation estimates. Complex Supabase PostgreSQL queries for geospatial filters were vulnerable to aggressive scraping. Shifting rate checks to the network edge stopped unauthorized automated scrapers before they ever reached the database."
+        "text": "I encountered this exact problem while building [Aura Estate](/projects/15/), a real estate portal with real-time property search and valuation estimates. Complex Supabase PostgreSQL queries for geospatial filters were vulnerable to aggressive scraping. Shifting rate checks to the network edge stopped unauthorized automated scrapers before they ever reached the database."
       },
       {
         "type": "heading",
@@ -1257,7 +1257,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Securing web applications requires practical engineering choices that prevent downtime without degrading user experience. Explore my [Full-Stack Web Development Services](/services) to see how I build secure, high-speed applications, or [get in touch with Aafaque](/contact) directly to discuss your project security requirements."
+        "text": "Securing web applications requires practical engineering choices that prevent downtime without degrading user experience. Explore my [Full-Stack Web Development Services](/services/) to see how I build secure, high-speed applications, or [get in touch with Aafaque](/contact/) directly to discuss your project security requirements."
       }
     ]
   },
@@ -1360,7 +1360,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "I implemented this exact end-to-end architecture on [Al Raheeq Tourism](/projects/17), a platform handling tourist visa requests and flight bookings. Travel applications require strict adherence to international passport standards and travel date validations. By sharing schemas between client validation and server actions, we eliminated form submission mismatches completely and prevented invalid submissions before touching downstream database tables."
+        "text": "I implemented this exact end-to-end architecture on [Al Raheeq Tourism](/projects/17/), a platform handling tourist visa requests and flight bookings. Travel applications require strict adherence to international passport standards and travel date validations. By sharing schemas between client validation and server actions, we eliminated form submission mismatches completely and prevented invalid submissions before touching downstream database tables."
       },
       {
         "type": "heading",
@@ -1398,7 +1398,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If your team is experiencing bugs caused by unsynchronized API types, unstable form handling, or insecure backend inputs, I can help audit your stack and implement clean type safety across your applications. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project."
+        "text": "If your team is experiencing bugs caused by unsynchronized API types, unstable form handling, or insecure backend inputs, I can help audit your stack and implement clean type safety across your applications. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your project."
       }
     ]
   },
@@ -1448,7 +1448,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Modern single page applications shift a massive amount of rendering logic to the client browser. While this creates fast user experiences, it also changes how security vulnerabilities manifest. When building complex business software like [Inventory Management / InvMaster OS](/projects/1), protecting user data and session integrity is non-negotiable. Two common attack vectors threaten client-heavy applications: Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF)."
+        "text": "Modern single page applications shift a massive amount of rendering logic to the client browser. While this creates fast user experiences, it also changes how security vulnerabilities manifest. When building complex business software like [Inventory Management / InvMaster OS](/projects/1/), protecting user data and session integrity is non-negotiable. Two common attack vectors threaten client-heavy applications: Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF)."
       },
       {
         "type": "paragraph",
@@ -1525,7 +1525,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications with security built into the core architecture. [Hire Aafaque Nazir](/services) or [get in touch for a consultation](/contact)."
+        "text": "As an independent web developer, I build fast, production-ready web applications with security built into the core architecture. [Hire Aafaque Nazir](/services/) or [get in touch for a consultation](/contact/)."
       }
     ]
   },
@@ -1579,7 +1579,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When I built the [Restaurant OS / Corner Cafe](/projects/4), security was the top priority. Handling staff logins and owner data required a system where a single malicious browser extension couldn't scrap user credentials. Using httpOnly cookies ensured that sensitive data stayed on the server and out of reach of client-side scripts."
+        "text": "When I built the [Restaurant OS / Corner Cafe](/projects/4/), security was the top priority. Handling staff logins and owner data required a system where a single malicious browser extension couldn't scrap user credentials. Using httpOnly cookies ensured that sensitive data stayed on the server and out of reach of client-side scripts."
       },
       {
         "type": "heading",
@@ -1635,7 +1635,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications with a focus on security and performance. [Hire Aafaque Nazir](/services) for your next project or [get in touch for a consultation](/contact) to review your current authentication setup."
+        "text": "As an independent web developer, I build fast, production-ready web applications with a focus on security and performance. [Hire Aafaque Nazir](/services/) for your next project or [get in touch for a consultation](/contact/) to review your current authentication setup."
       }
     ]
   },
@@ -1690,7 +1690,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "In projects like [Shopease / Oud & Attar](/projects/2), keeping URL search parameters in sync with filter selections solved this issue entirely. Users can bookmark exact search criteria or share URLs that open the catalog with the exact same filters applied."
+        "text": "In projects like [Shopease / Oud & Attar](/projects/2/), keeping URL search parameters in sync with filter selections solved this issue entirely. Users can bookmark exact search criteria or share URLs that open the catalog with the exact same filters applied."
       },
       {
         "type": "heading",
@@ -1737,7 +1737,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications, e-commerce stores, and custom software. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project."
+        "text": "As an independent web developer, I build fast, production-ready web applications, e-commerce stores, and custom software. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your project."
       }
     ]
   },
@@ -1777,7 +1777,7 @@ export const blogs = [
       },
       {
         "question": "Can I integrate this automated billing into my existing inventory system?",
-        "answer": "Yes. As implemented in my [Inventory Management / InvMaster OS](/projects/1) project, billing triggers can be tied directly to order completion events in your database."
+        "answer": "Yes. As implemented in my [Inventory Management / InvMaster OS](/projects/1/) project, billing triggers can be tied directly to order completion events in your database."
       }
     ],
     "sections": [
@@ -1801,7 +1801,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building wholesale management tools like [Inventory Management / InvMaster OS](/projects/1), I structure the billing pipeline into four distinct asynchronous steps:"
+        "text": "When building wholesale management tools like [Inventory Management / InvMaster OS](/projects/1/), I structure the billing pipeline into four distinct asynchronous steps:"
       },
       {
         "type": "list",
@@ -1848,7 +1848,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If you are looking to integrate automated WhatsApp billing, inventory workflows, or custom backend services into your business, I can help design and build it. [Explore my web development services](/services) or [get in touch with Aafaque for a project consultation](/contact)."
+        "text": "If you are looking to integrate automated WhatsApp billing, inventory workflows, or custom backend services into your business, I can help design and build it. [Explore my web development services](/services/) or [get in touch with Aafaque for a project consultation](/contact/)."
       }
     ]
   },
@@ -1903,7 +1903,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "In practice, this means using Next.js to fetch products via the Shopify Storefront API and rendering pages statically or via incremental static regeneration. For example, projects like [Shopease / Oud & Attar](/projects/2) demonstrate how client-side filtering and URL state syncing provide instant product discovery without full page reloads."
+        "text": "In practice, this means using Next.js to fetch products via the Shopify Storefront API and rendering pages statically or via incremental static regeneration. For example, projects like [Shopease / Oud & Attar](/projects/2/) demonstrate how client-side filtering and URL state syncing provide instant product discovery without full page reloads."
       },
       {
         "type": "heading",
@@ -1946,7 +1946,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications and custom e-commerce interfaces. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your project requirements."
+        "text": "As an independent web developer, I build fast, production-ready web applications and custom e-commerce interfaces. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your project requirements."
       }
     ]
   },
@@ -2001,7 +2001,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Direct ordering via WhatsApp solves both issues. In markets across India, Southeast Asia, and Latin America, WhatsApp is already installed on virtually every smartphone. When I built the digital ordering platform for [Bread & Bite](/projects/3), a cloud kitchen in Navi Mumbai, the goal was simple: provide a fast, app-like digital menu in React that compiles the customer's cart and sends a clean, structured order message straight to the kitchen's WhatsApp Business account with zero middleman cuts."
+        "text": "Direct ordering via WhatsApp solves both issues. In markets across India, Southeast Asia, and Latin America, WhatsApp is already installed on virtually every smartphone. When I built the digital ordering platform for [Bread & Bite](/projects/3/), a cloud kitchen in Navi Mumbai, the goal was simple: provide a fast, app-like digital menu in React that compiles the customer's cart and sends a clean, structured order message straight to the kitchen's WhatsApp Business account with zero middleman cuts."
       },
       {
         "type": "callout",
@@ -2054,7 +2054,7 @@ export const blogs = [
       {
         "type": "list",
         "items": [
-          "Hybrid Webhook Dispatch: Simultaneously dispatch the WhatsApp message to the customer while sending a background JSON payload to Supabase or Firebase. This populates a real-time Kitchen Display System (KDS), similar to our build for [Restaurant OS / Corner Cafe](/projects/4).",
+          "Hybrid Webhook Dispatch: Simultaneously dispatch the WhatsApp message to the customer while sending a background JSON payload to Supabase or Firebase. This populates a real-time Kitchen Display System (KDS), similar to our build for [Restaurant OS / Corner Cafe](/projects/4/).",
           "WhatsApp Business Cloud API: Ingest incoming customer confirmations automatically, trigger thermal receipt printing on an in-kitchen ESC/POS printer, and reply with automated order status updates over WhatsApp without human intervention."
         ]
       },
@@ -2069,7 +2069,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If you manage a restaurant, cloud kitchen, or retail store and want to eliminate platform commissions with a custom web menu, explore my [full-stack web development services](/services) or [get in touch with Aafaque Nazir directly](/contact) to discuss your project requirements."
+        "text": "If you manage a restaurant, cloud kitchen, or retail store and want to eliminate platform commissions with a custom web menu, explore my [full-stack web development services](/services/) or [get in touch with Aafaque Nazir directly](/contact/) to discuss your project requirements."
       }
     ]
   },
@@ -2155,7 +2155,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "To cut 500ms immediately, shift non-critical components out of the initial bundle and use server-side streaming. In my work on [Shopease / Oud & Attar](/projects/2), I built a fragrance e-commerce store with fast client-side filtering and an instant slide-out cart. Instead of bundling the slide-out cart and heavy checkout forms into the main bundle, we load them on demand when the customer interacts with the cart trigger."
+        "text": "To cut 500ms immediately, shift non-critical components out of the initial bundle and use server-side streaming. In my work on [Shopease / Oud & Attar](/projects/2/), I built a fragrance e-commerce store with fast client-side filtering and an instant slide-out cart. Instead of bundling the slide-out cart and heavy checkout forms into the main bundle, we load them on demand when the customer interacts with the cart trigger."
       },
       {
         "type": "code",
@@ -2207,7 +2207,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "I help growing businesses audit, rebuild, and optimize web applications for fast load times and clean user experiences. Check out my [Full-Stack Web Development Services](/services) to see how I work, or [get in touch with Aafaque](/contact) directly to discuss your performance bottlenecks and audit your site today."
+        "text": "I help growing businesses audit, rebuild, and optimize web applications for fast load times and clean user experiences. Check out my [Full-Stack Web Development Services](/services/) to see how I work, or [get in touch with Aafaque](/contact/) directly to discuss your performance bottlenecks and audit your site today."
       }
     ]
   },
@@ -2287,7 +2287,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "For example, when building [Restaurant OS / Corner Cafe](/projects/4), the scope went beyond a simple menu site. It included table-specific QR ordering, an interactive waiter terminal, and a real-time Kitchen Display System updating order tickets without manual page reloads. That tier of real-time workflow typically sits in Tier 2."
+        "text": "For example, when building [Restaurant OS / Corner Cafe](/projects/4/), the scope went beyond a simple menu site. It included table-specific QR ordering, an interactive waiter terminal, and a real-time Kitchen Display System updating order tickets without manual page reloads. That tier of real-time workflow typically sits in Tier 2."
       },
       {
         "type": "heading",
@@ -2366,7 +2366,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If you are planning to launch a web product, I can help you scope features, estimate delivery milestones, and write clean, maintainable code from day one. Explore my [Full-Stack Web Development Services](/services) to see how I build software, or [get in touch with Aafaque](/contact) to review your MVP requirements directly."
+        "text": "If you are planning to launch a web product, I can help you scope features, estimate delivery milestones, and write clean, maintainable code from day one. Explore my [Full-Stack Web Development Services](/services/) to see how I build software, or [get in touch with Aafaque](/contact/) to review your MVP requirements directly."
       }
     ]
   },
@@ -2444,7 +2444,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When I built [Inventory Management / InvMaster OS](/projects/1), the system required multi-godown routing, FEFO batch and expiry tracking, and instant WhatsApp GST invoice dispatch. Handling these operational workflows directly with the warehouse managers allowed us to refine table indexes and barcode scanner interactions on the fly, shipping the system weeks ahead of schedule."
+        "text": "When I built [Inventory Management / InvMaster OS](/projects/1/), the system required multi-godown routing, FEFO batch and expiry tracking, and instant WhatsApp GST invoice dispatch. Handling these operational workflows directly with the warehouse managers allowed us to refine table indexes and barcode scanner interactions on the fly, shipping the system weeks ahead of schedule."
       },
       {
         "type": "list",
@@ -2471,7 +2471,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If you are preparing to launch an MVP or rebuild an existing web application without agency markup, explore my [Full-Stack Web Development Services](/services) or [Get in touch with Aafaque](/contact) to review your product roadmap and build plan."
+        "text": "If you are preparing to launch an MVP or rebuild an existing web application without agency markup, explore my [Full-Stack Web Development Services](/services/) or [Get in touch with Aafaque](/contact/) to review your product roadmap and build plan."
       }
     ]
   },
@@ -2521,7 +2521,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When planning a new software project or website rebuild, development cost is usually the first question founders ask. India remains one of the top destinations for technical talent, but quotes can vary from ₹15,000 to ₹5,00,000 for what looks like the same brief. Understanding the real market rates helps you budget accurately and avoid cheap work that breaks in production. If you want custom engineering without agency overhead, working directly with a solo engineer via [Full-Stack Web Development Services](/services) gives you direct accountability."
+        "text": "When planning a new software project or website rebuild, development cost is usually the first question founders ask. India remains one of the top destinations for technical talent, but quotes can vary from ₹15,000 to ₹5,00,000 for what looks like the same brief. Understanding the real market rates helps you budget accurately and avoid cheap work that breaks in production. If you want custom engineering without agency overhead, working directly with a solo engineer via [Full-Stack Web Development Services](/services/) gives you direct accountability."
       },
       {
         "type": "paragraph",
@@ -2549,7 +2549,7 @@ export const blogs = [
         "items": [
           "High-Speed Marketing Website (5-8 pages): ₹35,000 - ₹75,000 ($450 - $950). Built with React, Next.js, or Astro with dynamic contact forms, clean animations, and high Core Web Vitals scores.",
           "Custom E-Commerce or Directory Site: ₹80,000 - ₹1,80,000 ($1,000 - $2,200). Includes product filtering, user sessions, payment gateway integration (Razorpay/Stripe), order databases, and admin dashboards.",
-          "Production Travel or Booking Platform: ₹1,20,000 - ₹2,50,000 ($1,500 - $3,000). A real-world example is [Al Raheeq Tourism](/projects/17), built for a licensed Dubai travel agency featuring express UAE visa selection, flight queries, dynamic schemas, and edge delivery.",
+          "Production Travel or Booking Platform: ₹1,20,000 - ₹2,50,000 ($1,500 - $3,000). A real-world example is [Al Raheeq Tourism](/projects/17/), built for a licensed Dubai travel agency featuring express UAE visa selection, flight queries, dynamic schemas, and edge delivery.",
           "Custom SaaS Application / Internal Tool: ₹2,00,000 - ₹5,00,000+ ($2,500 - $6,000+). Involves multi-tenant databases, role-based access control (RBAC), background job workers, reporting dashboards, and complex API integrations."
         ]
       },
@@ -2598,7 +2598,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If you are planning a new web application, customer portal, or website redesign, I provide upfront scopes, transparent milestone pricing, and clean production code. Check my [Full-Stack Web Development Services](/services) to see how I work, or [get in touch with Aafaque](/contact) directly on WhatsApp to discuss your project requirements."
+        "text": "If you are planning a new web application, customer portal, or website redesign, I provide upfront scopes, transparent milestone pricing, and clean production code. Check my [Full-Stack Web Development Services](/services/) to see how I work, or [get in touch with Aafaque](/contact/) directly on WhatsApp to discuss your project requirements."
       }
     ]
   },
@@ -2653,7 +2653,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "This request-response pattern fails in operational environments like warehouses, retail counters, and busy dining rooms. When building [Restaurant OS / Corner Cafe](/projects/4), waitstaff and kitchen staff could not afford to lose order tickets when restaurant Wi-Fi dipped during rush hours. The solution was an offline-first architecture: write immediately to browser IndexedDB, update the UI with zero delay, and sync mutations to cloud PostgreSQL through a reliable background queue."
+        "text": "This request-response pattern fails in operational environments like warehouses, retail counters, and busy dining rooms. When building [Restaurant OS / Corner Cafe](/projects/4/), waitstaff and kitchen staff could not afford to lose order tickets when restaurant Wi-Fi dipped during rush hours. The solution was an offline-first architecture: write immediately to browser IndexedDB, update the UI with zero delay, and sync mutations to cloud PostgreSQL through a reliable background queue."
       },
       {
         "type": "heading",
@@ -2724,7 +2724,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Take a look at my [Full-Stack Web Development Services](/services) or [get in touch directly](/contact) to discuss your product requirements."
+        "text": "Take a look at my [Full-Stack Web Development Services](/services/) or [get in touch directly](/contact/) to discuss your product requirements."
       }
     ]
   },
@@ -2779,7 +2779,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If 400 users hit your web app simultaneously, 400 isolated serverless functions launch. Each tries to open a direct PostgreSQL connection. If your database instance has a max_connections limit set to 100, 300 requests instantly fail with connection rejected or fatal: remaining connection slots are reserved errors. We resolved this exact issue when building [Aura Estate](/projects/15), a high-traffic real estate platform where property searches and valuation queries execute under heavy concurrent traffic."
+        "text": "If 400 users hit your web app simultaneously, 400 isolated serverless functions launch. Each tries to open a direct PostgreSQL connection. If your database instance has a max_connections limit set to 100, 300 requests instantly fail with connection rejected or fatal: remaining connection slots are reserved errors. We resolved this exact issue when building [Aura Estate](/projects/15/), a high-traffic real estate platform where property searches and valuation queries execute under heavy concurrent traffic."
       },
       {
         "type": "heading",
@@ -2839,7 +2839,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If your application is experiencing database crashes, connection timeouts, or slow query spikes under high traffic, I can help audit and optimize your database tier. Check out my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to build a stable, scalable infrastructure."
+        "text": "If your application is experiencing database crashes, connection timeouts, or slow query spikes under high traffic, I can help audit and optimize your database tier. Check out my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to build a stable, scalable infrastructure."
       }
     ]
   },
@@ -3056,7 +3056,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "This is one of the primary reasons we architect client platforms—such as [Al Raheeq Tourism](/projects/17) and [Shopease](/projects/2)—using modern decoupled architectures: React, Next.js, and strictly isolated backend services backed by memory-safe runtimes (Node.js, Go, or Rust). In modern edge architectures, every incoming request executes in an isolated sandbox with zero shared in-memory heap between concurrent users, entirely removing the attack surface that enables persistent worker Use-After-Free exploits."
+        "text": "This is one of the primary reasons we architect client platforms—such as [Al Raheeq Tourism](/projects/17/) and [Shopease](/projects/2/)—using modern decoupled architectures: React, Next.js, and strictly isolated backend services backed by memory-safe runtimes (Node.js, Go, or Rust). In modern edge architectures, every incoming request executes in an isolated sandbox with zero shared in-memory heap between concurrent users, entirely removing the attack surface that enables persistent worker Use-After-Free exploits."
       },
       {
         "type": "steps",
@@ -3089,7 +3089,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If your business relies on web infrastructure and you want to verify your defense against critical RCEs, eliminate single points of failure, or migrate legacy backends to fast, memory-safe modern web architectures, explore my verified [Full-Stack Web Development Services](/services) or [get in touch with Aafaque Nazir directly](/contact) for a production security and infrastructure audit."
+        "text": "If your business relies on web infrastructure and you want to verify your defense against critical RCEs, eliminate single points of failure, or migrate legacy backends to fast, memory-safe modern web architectures, explore my verified [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque Nazir directly](/contact/) for a production security and infrastructure audit."
       }
     ]
   },
@@ -3173,7 +3173,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building [Restaurant OS / Corner Cafe](/projects/4), I evaluated both protocols for the live Kitchen Display System (KDS). Kitchen staff needed instant ticket updates as customers ordered from their phones via QR codes. The tickets moved in one direction: from database changes straight to the kitchen screen. Standard HTTP POST requests handled ticket status updates. In scenarios like this, opening a two-way socket pipe to every client adds maintenance overhead without performance gain."
+        "text": "When building [Restaurant OS / Corner Cafe](/projects/4/), I evaluated both protocols for the live Kitchen Display System (KDS). Kitchen staff needed instant ticket updates as customers ordered from their phones via QR codes. The tickets moved in one direction: from database changes straight to the kitchen screen. Standard HTTP POST requests handled ticket status updates. In scenarios like this, opening a two-way socket pipe to every client adds maintenance overhead without performance gain."
       },
       {
         "type": "callout",
@@ -3280,7 +3280,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Whether you are building a live operational dashboard, an inventory tracker, or a customer portal, picking the right network protocol prevents expensive refactors. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your application architecture."
+        "text": "Whether you are building a live operational dashboard, an inventory tracker, or a customer portal, picking the right network protocol prevents expensive refactors. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your application architecture."
       }
     ]
   },
@@ -3364,7 +3364,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Order management is not an unstructured document problem. It is an accounting problem. An order consists of ledgers, tax totals, item reserves, discounts, and shipment tracking. In real production workloads, relational integrity is not optional. When I built the multi-warehouse system in [Inventory Management / InvMaster OS](/projects/1), relying on PostgreSQL constraints made the difference between clean inventory ledgers and stock discrepancies."
+        "text": "Order management is not an unstructured document problem. It is an accounting problem. An order consists of ledgers, tax totals, item reserves, discounts, and shipment tracking. In real production workloads, relational integrity is not optional. When I built the multi-warehouse system in [Inventory Management / InvMaster OS](/projects/1/), relying on PostgreSQL constraints made the difference between clean inventory ledgers and stock discrepancies."
       },
       {
         "type": "heading",
@@ -3495,7 +3495,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Explore my [Full-Stack Web Development Services](/services) to see how we can collaborate, or [get in touch with Aafaque](/contact) to discuss your next web application."
+        "text": "Explore my [Full-Stack Web Development Services](/services/) to see how we can collaborate, or [get in touch with Aafaque](/contact/) to discuss your next web application."
       }
     ]
   },
@@ -3579,7 +3579,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building multi-tenant tools like [Inventory Management / InvMaster OS](/projects/1), godown operators and wholesale managers require strict data boundaries. Managers at one warehouse must never view orders, batch numbers, or profit margins belonging to another client. PostgreSQL Row-Level Security (RLS) solves this problem by moving access rules out of the application code and into the database engine itself."
+        "text": "When building multi-tenant tools like [Inventory Management / InvMaster OS](/projects/1/), godown operators and wholesale managers require strict data boundaries. Managers at one warehouse must never view orders, batch numbers, or profit margins belonging to another client. PostgreSQL Row-Level Security (RLS) solves this problem by moving access rules out of the application code and into the database engine itself."
       },
       {
         "type": "heading",
@@ -3678,7 +3678,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Designing multi-tenant database systems requires practical decisions around data safety, query speed, and clean code. Through my [Full-Stack Web Development Services](/services), I help companies build reliable SaaS backends, clear database models, and responsive web dashboards. [Get in touch with Aafaque](/contact) to discuss your application architecture."
+        "text": "Designing multi-tenant database systems requires practical decisions around data safety, query speed, and clean code. Through my [Full-Stack Web Development Services](/services/), I help companies build reliable SaaS backends, clear database models, and responsive web dashboards. [Get in touch with Aafaque](/contact/) to discuss your application architecture."
       }
     ]
   },
@@ -3762,7 +3762,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "In production implementations like [Al Raheeq Tourism](/projects/17), where visitors select regional visa tiers and flight routes across distributed edge nodes, eliminating transitions completely transformed interaction rates. Pairing fast edge caching with declarative prerendering unlocks instant transitions comparable to native desktop applications."
+        "text": "In production implementations like [Al Raheeq Tourism](/projects/17/), where visitors select regional visa tiers and flight routes across distributed edge nodes, eliminating transitions completely transformed interaction rates. Pairing fast edge caching with declarative prerendering unlocks instant transitions comparable to native desktop applications."
       },
       {
         "type": "heading",
@@ -3837,7 +3837,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building transactional platforms—like real-time booking flows, custom inventory managers such as [Inventory Management / InvMaster OS](/projects/1), or artisanal e-commerce portals like [Shopease / Oud & Attar](/projects/2)—prerendering must be paired with HTTP headers that inform the origin server of speculative requests."
+        "text": "When building transactional platforms—like real-time booking flows, custom inventory managers such as [Inventory Management / InvMaster OS](/projects/1/), or artisanal e-commerce portals like [Shopease / Oud & Attar](/projects/2/)—prerendering must be paired with HTTP headers that inform the origin server of speculative requests."
       },
       {
         "type": "list",
@@ -3854,7 +3854,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Combining high-frequency edge delivery with native browser prerendering makes multi-page web applications fast and smooth to use. Explore specialized architectures across my [full-stack web development services](/services) or [get in touch with Aafaque](/contact) to build fast performance into your product."
+        "text": "Combining high-frequency edge delivery with native browser prerendering makes multi-page web applications fast and smooth to use. Explore specialized architectures across my [full-stack web development services](/services/) or [get in touch with Aafaque](/contact/) to build fast performance into your product."
       }
     ]
   },
@@ -3894,7 +3894,7 @@ export const blogs = [
       },
       {
         "question": "How can I fix CLS in my custom web applications?",
-        "answer": "You can fix CLS by implementing size-adjust descriptors in your @font-face rules, reserving space for dynamic images using aspect-ratio, and ensuring all viewports are styled with performance engineering best practices. If you need expert implementation, [Get in touch with Aafaque](/contact) for custom performance optimization."
+        "answer": "You can fix CLS by implementing size-adjust descriptors in your @font-face rules, reserving space for dynamic images using aspect-ratio, and ensuring all viewports are styled with performance engineering best practices. If you need expert implementation, [Get in touch with Aafaque](/contact/) for custom performance optimization."
       }
     ],
     "sections": [
@@ -3905,7 +3905,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Core Web Vitals measure user-centric loading performance, with Cumulative Layout Shift (CLS) acting as the definitive metric for visual stability. When building complex interactive interfaces—such as the travel itineraries found in [Al Raheeq Tourism](/projects/17) or immersive 3D showcases like [3D Burger Website / Smoked & Seared](/projects/13)—unstable layouts severely degrade user experience and conversion rates. Two primary culprits drive unexpected layout shifts: Flash of Unstyled Text (FOUT) caused by uncalibrated font fallbacks, and zero-dimension media containers that reflow once images or carousels finish fetching."
+        "text": "Core Web Vitals measure user-centric loading performance, with Cumulative Layout Shift (CLS) acting as the definitive metric for visual stability. When building complex interactive interfaces—such as the travel itineraries found in [Al Raheeq Tourism](/projects/17/) or immersive 3D showcases like [3D Burger Website / Smoked & Seared](/projects/13/)—unstable layouts severely degrade user experience and conversion rates. Two primary culprits drive unexpected layout shifts: Flash of Unstyled Text (FOUT) caused by uncalibrated font fallbacks, and zero-dimension media containers that reflow once images or carousels finish fetching."
       },
       {
         "type": "stats",
@@ -3992,7 +3992,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications optimized for speed and conversion. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your engineering roadmap."
+        "text": "As an independent web developer, I build fast, production-ready web applications optimized for speed and conversion. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your engineering roadmap."
       }
     ]
   },
@@ -4043,7 +4043,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Largest Contentful Paint (LCP) is rarely a rendering engine flaw; it is an orchestrational network failure. When auditing client web platforms—such as our high-concurrency travel booking engine for [Al Raheeq Tourism](/projects/17)—we consistently observe LCP penalties stemming from sequential waterfall execution: TTFB wait time, followed by HTML parser discovery, CSSOM blocking, and lastly the late-stage discovery of dynamic hero images."
+        "text": "Largest Contentful Paint (LCP) is rarely a rendering engine flaw; it is an orchestrational network failure. When auditing client web platforms—such as our high-concurrency travel booking engine for [Al Raheeq Tourism](/projects/17/)—we consistently observe LCP penalties stemming from sequential waterfall execution: TTFB wait time, followed by HTML parser discovery, CSSOM blocking, and lastly the late-stage discovery of dynamic hero images."
       },
       {
         "type": "stats",
@@ -4149,7 +4149,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Whether you are rebuilding an enterprise portal or looking to resolve sub-optimal Core Web Vitals on an existing platform, enterprise performance demands precise edge tuning. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) directly to audit and optimize your infrastructure."
+        "text": "Whether you are rebuilding an enterprise portal or looking to resolve sub-optimal Core Web Vitals on an existing platform, enterprise performance demands precise edge tuning. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) directly to audit and optimize your infrastructure."
       }
     ]
   },
@@ -4204,7 +4204,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "During the architecture and optimization of [Aura Estate](/projects/15)—an exclusive off-market real estate portal featuring complex multi-parameter property searches and dynamic valuation calculators—we faced this exact challenge. The initial build loaded map coordinate projections and heavy financial formulas on the landing page, inflating the initial JS payload to 840KB gzip. By diagnosing vendor barrel files and restructuring module evaluation, we pruned the client bundle down to 312KB gzip—a 62.8% reduction."
+        "text": "During the architecture and optimization of [Aura Estate](/projects/15/)—an exclusive off-market real estate portal featuring complex multi-parameter property searches and dynamic valuation calculators—we faced this exact challenge. The initial build loaded map coordinate projections and heavy financial formulas on the landing page, inflating the initial JS payload to 840KB gzip. By diagnosing vendor barrel files and restructuring module evaluation, we pruned the client bundle down to 312KB gzip—a 62.8% reduction."
       },
       {
         "type": "callout",
@@ -4237,11 +4237,11 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Not every interactive component needs to be present during Document Object Model hydration. On modern online stores and real estate websites, features such as property valuation calculators, SVG-heavy geospatial maps, and lead generation modals should only execute after user intent is confirmed. We applied this same architectural pattern when engineering [Shopease / Oud & Attar](/projects/2), separating fast search filtering from checkout drawers."
+        "text": "Not every interactive component needs to be present during Document Object Model hydration. On modern online stores and real estate websites, features such as property valuation calculators, SVG-heavy geospatial maps, and lead generation modals should only execute after user intent is confirmed. We applied this same architectural pattern when engineering [Shopease / Oud & Attar](/projects/2/), separating fast search filtering from checkout drawers."
       },
       {
         "type": "paragraph",
-        "text": "Below is the production TypeScript pattern implemented in [Aura Estate](/projects/15) to isolate the property valuation calculation engine into an asynchronous chunk that only loads when the client scrolls the element into the viewport or triggers calculation intent."
+        "text": "Below is the production TypeScript pattern implemented in [Aura Estate](/projects/15/) to isolate the property valuation calculation engine into an asynchronous chunk that only loads when the client scrolls the element into the viewport or triggers calculation intent."
       },
       {
         "type": "code",
@@ -4274,7 +4274,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "If your React or Next.js application is weighed down by sluggish mobile performance, low Lighthouse scores, or excessive client bundles, architectural code-splitting can restore instant interactivity. Explore my verified [Full-Stack Web Development Services](/services) or [get in touch with Aafaque Nazir directly](/contact) for a production performance audit and bundle optimization engagement."
+        "text": "If your React or Next.js application is weighed down by sluggish mobile performance, low Lighthouse scores, or excessive client bundles, architectural code-splitting can restore instant interactivity. Explore my verified [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque Nazir directly](/contact/) for a production performance audit and bundle optimization engagement."
       }
     ]
   },
@@ -4329,7 +4329,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "In production platforms like [Restaurant OS / Corner Cafe](/projects/4), where kitchen staff manage active orders across dynamic tables and high-frequency WebSockets fire batch state transitions, single synchronous operations can quickly monopolize the main thread for 180ms to 400ms. If a waiter attempts to select a table during this sync window, INP triggers a severe degradation warning."
+        "text": "In production platforms like [Restaurant OS / Corner Cafe](/projects/4/), where kitchen staff manage active orders across dynamic tables and high-frequency WebSockets fire batch state transitions, single synchronous operations can quickly monopolize the main thread for 180ms to 400ms. If a waiter attempts to select a table during this sync window, INP triggers a severe degradation warning."
       },
       {
         "type": "callout",
@@ -4386,7 +4386,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "In the [Restaurant OS / Corner Cafe](/projects/4) architecture, incoming shift closing audits require recalculating hundreds of line items, modifiers, tax tiers, and tip allocations across peak dining hours. Running this calculation synchronously caused noticeable click latency when waiters tapped quick-action buttons on mobile POS terminals."
+        "text": "In the [Restaurant OS / Corner Cafe](/projects/4/) architecture, incoming shift closing audits require recalculating hundreds of line items, modifiers, tax tiers, and tip allocations across peak dining hours. Running this calculation synchronously caused noticeable click latency when waiters tapped quick-action buttons on mobile POS terminals."
       },
       {
         "type": "paragraph",
@@ -4420,7 +4420,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Struggling with sub-optimal Core Web Vitals, degraded INP scores, or UI frame stutters on your production web application? Explore my comprehensive [Full-Stack Web Development Services](/services) or [get in touch with Aafaque Nazir directly](/contact) for a detailed frontend architecture audit and performance refactor."
+        "text": "Struggling with sub-optimal Core Web Vitals, degraded INP scores, or UI frame stutters on your production web application? Explore my comprehensive [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque Nazir directly](/contact/) for a detailed frontend architecture audit and performance refactor."
       }
     ]
   },
@@ -4613,7 +4613,7 @@ export const blogs = [
       {
         "type": "callout",
         "title": "Real-World Proof from My Portfolio",
-        "text": "In my own freelance projects, I see clients escaping SaaS lock-in every day: in [Restaurant OS / Corner Cafe](/projects/4), we replaced expensive third-party restaurant SaaS with a custom real-time ordering system; in [Bread & Bite](/projects/3), we eliminated 30% aggregator platform commissions with direct WhatsApp checkout; and in [Shopease](/projects/2), we delivered custom fast e-commerce without restrictive Shopify template constraints."
+        "text": "In my own freelance projects, I see clients escaping SaaS lock-in every day: in [Restaurant OS / Corner Cafe](/projects/4/), we replaced expensive third-party restaurant SaaS with a custom real-time ordering system; in [Bread & Bite](/projects/3/), we eliminated 30% aggregator platform commissions with direct WhatsApp checkout; and in [Shopease](/projects/2/), we delivered custom fast e-commerce without restrictive Shopify template constraints."
       },
       {
         "type": "heading",
@@ -4641,7 +4641,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent full-stack developer, I help startups, businesses, and agency founders turn ambitious software concepts into high-performance, production-ready reality. Explore my [Full-Stack Web Development Services](/services) or [get in touch directly](/contact) to discuss building your next digital asset."
+        "text": "As an independent full-stack developer, I help startups, businesses, and agency founders turn ambitious software concepts into high-performance, production-ready reality. Explore my [Full-Stack Web Development Services](/services/) or [get in touch directly](/contact/) to discuss building your next digital asset."
       }
     ]
   },
@@ -4691,7 +4691,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "For years, React developers spent countless hours debugging unnecessary re-renders, instrumenting performance profiles, and scattering useMemo and useCallback across their component trees. While effective when applied correctly, manual memoization introduces human error, increases cognitive overhead, and often leads to premature optimization or missed performance bottlenecks. When building data-heavy platforms such as our [Inventory Management / InvMaster OS](/projects/1), managing granular memoization across thousands of dynamic rows and real-time godown routing logic becomes exceptionally tedious."
+        "text": "For years, React developers spent countless hours debugging unnecessary re-renders, instrumenting performance profiles, and scattering useMemo and useCallback across their component trees. While effective when applied correctly, manual memoization introduces human error, increases cognitive overhead, and often leads to premature optimization or missed performance bottlenecks. When building data-heavy platforms such as our [Inventory Management / InvMaster OS](/projects/1/), managing granular memoization across thousands of dynamic rows and real-time godown routing logic becomes exceptionally tedious."
       },
       {
         "type": "stats",
@@ -4771,7 +4771,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer based in Navi Mumbai, I help businesses modernize their tech stacks and build exceptionally fast, production-ready web applications. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to discuss your next project."
+        "text": "As an independent web developer based in Navi Mumbai, I help businesses modernize their tech stacks and build exceptionally fast, production-ready web applications. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your next project."
       }
     ]
   },
@@ -4826,7 +4826,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building high-speed transactional interfaces like [Bread & Bite](/projects/3), where users on mobile devices expect instant tactile feedback when browsing items and dispatching orders, every millisecond counts. Heavy server runtimes introduce unnecessary TTFB (Time to First Byte) latency and bundle bloat that directly hurts conversion rates on patchy 4G and 5G mobile networks across Navi Mumbai and beyond."
+        "text": "When building high-speed transactional interfaces like [Bread & Bite](/projects/3/), where users on mobile devices expect instant tactile feedback when browsing items and dispatching orders, every millisecond counts. Heavy server runtimes introduce unnecessary TTFB (Time to First Byte) latency and bundle bloat that directly hurts conversion rates on patchy 4G and 5G mobile networks across Navi Mumbai and beyond."
       },
       {
         "type": "callout",
@@ -4873,7 +4873,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications tailored to your business goals. [Hire Aafaque Nazir](/services) or [get in touch for a consultation](/contact) to discuss your next high-performance web project."
+        "text": "As an independent web developer, I build fast, production-ready web applications tailored to your business goals. [Hire Aafaque Nazir](/services/) or [get in touch for a consultation](/contact/) to discuss your next high-performance web project."
       }
     ]
   },
@@ -4957,7 +4957,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When engineering data-dense internal tools like [Inventory Management / InvMaster OS](/projects/1), relying strictly on pure SSR leads to noticeable latency when loading warehouse overview screens. Conversely, pure SSG fails because stock levels shift by the second across multi-godown networks. Next.js Partial Prerendering (PPR) resolves this fundamental tension by eliminating the page-level rendering constraint."
+        "text": "When engineering data-dense internal tools like [Inventory Management / InvMaster OS](/projects/1/), relying strictly on pure SSR leads to noticeable latency when loading warehouse overview screens. Conversely, pure SSG fails because stock levels shift by the second across multi-godown networks. Next.js Partial Prerendering (PPR) resolves this fundamental tension by eliminating the page-level rendering constraint."
       },
       {
         "type": "callout",
@@ -5059,7 +5059,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Transitioning legacy SSR applications or complex enterprise dashboards to modern partial prerendering requires careful boundary isolation, database connection pooling, and layout optimization. As an independent web developer, I engineer fast, resilient web applications tailored for real-world load. Explore my [Full-Stack Web Development Services](/services) or [get in touch for a consultation](/contact) to audit and optimize your Next.js architecture."
+        "text": "Transitioning legacy SSR applications or complex enterprise dashboards to modern partial prerendering requires careful boundary isolation, database connection pooling, and layout optimization. As an independent web developer, I engineer fast, resilient web applications tailored for real-world load. Explore my [Full-Stack Web Development Services](/services/) or [get in touch for a consultation](/contact/) to audit and optimize your Next.js architecture."
       }
     ]
   },
@@ -5115,7 +5115,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Instead of treating server communication as network orchestration managed by the browser, Server Actions allow developers to define asynchronous server functions that run strictly on the Node.js or Edge runtime while being directly callable from UI event listeners and native `<form>` elements. When engineering high-conversion portals like [Al Raheeq Tourism](/projects/17), shifting from traditional API endpoints to Server Actions cut client runtime bundle overhead by 34% while natively supporting progressive enhancement for international travelers with unstable mobile connections."
+        "text": "Instead of treating server communication as network orchestration managed by the browser, Server Actions allow developers to define asynchronous server functions that run strictly on the Node.js or Edge runtime while being directly callable from UI event listeners and native `<form>` elements. When engineering high-conversion portals like [Al Raheeq Tourism](/projects/17/), shifting from traditional API endpoints to Server Actions cut client runtime bundle overhead by 34% while natively supporting progressive enhancement for international travelers with unstable mobile connections."
       },
       {
         "type": "heading",
@@ -5185,7 +5185,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "In our architectural execution on [Al Raheeq Tourism](/projects/17), we unified this pattern: Server Actions handle interactive visa inquiry submissions and immediate package revalidations, while dedicated Next.js Route Handlers ingest webhooks from airline ticketing partners and deliver dynamic XML sitemaps to edge crawlers."
+        "text": "In our architectural execution on [Al Raheeq Tourism](/projects/17/), we unified this pattern: Server Actions handle interactive visa inquiry submissions and immediate package revalidations, while dedicated Next.js Route Handlers ingest webhooks from airline ticketing partners and deliver dynamic XML sitemaps to edge crawlers."
       },
       {
         "type": "heading",
@@ -5194,7 +5194,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Migrating mission-critical legacy applications to React 19, App Router, and scalable Server Actions requires rigorous architectural discipline around validation, caching, and state synchronization. Explore my [Full-Stack Web Development Services](/services) to discover how we architect zero-latency platforms, or [get in touch directly with Aafaque](/contact) to schedule a code audit and systems consultation."
+        "text": "Migrating mission-critical legacy applications to React 19, App Router, and scalable Server Actions requires rigorous architectural discipline around validation, caching, and state synchronization. Explore my [Full-Stack Web Development Services](/services/) to discover how we architect zero-latency platforms, or [get in touch directly with Aafaque](/contact/) to schedule a code audit and systems consultation."
       }
     ]
   },
@@ -5278,7 +5278,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "We solved this exact bottleneck during the engineering of [Shopease / Oud & Attar](/projects/2), an artisanal store built with React and Tailwind CSS where shoppers navigate complex olfactory notes with instant client-side filtering and an instant slide-out mini-cart. When backend operations need dedicated warehouse routing, coupling your storefront with systems like [Inventory Management / InvMaster OS](/projects/1) allows real-time stock orchestration without polluting the customer-facing bundle."
+        "text": "We solved this exact bottleneck during the engineering of [Shopease / Oud & Attar](/projects/2/), an artisanal store built with React and Tailwind CSS where shoppers navigate complex olfactory notes with instant client-side filtering and an instant slide-out mini-cart. When backend operations need dedicated warehouse routing, coupling your storefront with systems like [Inventory Management / InvMaster OS](/projects/1/) allows real-time stock orchestration without polluting the customer-facing bundle."
       },
       {
         "type": "heading",
@@ -5332,7 +5332,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "For rapid food delivery and hyper-local setups, light client architectures can even bypass complex gateway checkouts completely. For instance, [Bread & Bite](/projects/3) utilizes a direct-to-WhatsApp order dispatch that eliminates checkout friction entirely for cloud kitchen operations."
+        "text": "For rapid food delivery and hyper-local setups, light client architectures can even bypass complex gateway checkouts completely. For instance, [Bread & Bite](/projects/3/) utilizes a direct-to-WhatsApp order dispatch that eliminates checkout friction entirely for cloud kitchen operations."
       },
       {
         "type": "heading",
@@ -5341,7 +5341,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Whether you are migrating from a bloated legacy Shopify theme to a headless Next.js architecture or engineering a custom artisanal storefront with custom checkout workflows, technical execution dictates your conversion rate. Explore my [Full-Stack Web Development Services](/services) or [get in touch with Aafaque](/contact) to build a fast online store designed for a great customer experience."
+        "text": "Whether you are migrating from a bloated legacy Shopify theme to a headless Next.js architecture or engineering a custom artisanal storefront with custom checkout workflows, technical execution dictates your conversion rate. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to build a fast online store designed for a great customer experience."
       }
     ]
   },
@@ -5396,7 +5396,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When building low-latency ordering interfaces like [Restaurant OS](/projects/4), WebSocket lifecycles must exist independently of UI render phases. The frontend connection should act as an autonomous event emitter, while React 19 components subscribe purely to localized slices of that stream."
+        "text": "When building low-latency ordering interfaces like [Restaurant OS](/projects/4/), WebSocket lifecycles must exist independently of UI render phases. The frontend connection should act as an autonomous event emitter, while React 19 components subscribe purely to localized slices of that stream."
       },
       {
         "type": "heading",
@@ -5440,7 +5440,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "For platforms handling transactional consistency alongside real-time updates—such as asset tracking in [Aura Estate](/projects/15)—managing custom Redis Pub/Sub clusters with raw Socket.io introduces substantial DevOps overhead. Supabase Realtime bridges this gap by offering three distinct transmission modes:"
+        "text": "For platforms handling transactional consistency alongside real-time updates—such as asset tracking in [Aura Estate](/projects/15/)—managing custom Redis Pub/Sub clusters with raw Socket.io introduces substantial DevOps overhead. Supabase Realtime bridges this gap by offering three distinct transmission modes:"
       },
       {
         "type": "list",
@@ -5474,7 +5474,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Whether you are building an order dispatch system, a multi-tenant SaaS dashboard, or a live collaborative workspace, building scalable real-time systems requires battle-tested engineering. Explore my [Full-Stack Web Development Services](/services) or [get in touch for an architectural consultation](/contact)."
+        "text": "Whether you are building an order dispatch system, a multi-tenant SaaS dashboard, or a live collaborative workspace, building scalable real-time systems requires battle-tested engineering. Explore my [Full-Stack Web Development Services](/services/) or [get in touch for an architectural consultation](/contact/)."
       }
     ]
   },
@@ -5528,7 +5528,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Having architected both high-traffic conversion portals like [Al Raheeq Tourism](/projects/17) using Next.js and real-time business tools like [Aura Estate](/projects/15), I frequently advise clients on whether a full-stack meta-framework is truly necessary or if a lean Single Page Application (SPA) with an edge backend is the superior choice."
+        "text": "Having architected both high-traffic conversion portals like [Al Raheeq Tourism](/projects/17/) using Next.js and real-time business tools like [Aura Estate](/projects/15/), I frequently advise clients on whether a full-stack meta-framework is truly necessary or if a lean Single Page Application (SPA) with an edge backend is the superior choice."
       },
       {
         "type": "heading",
@@ -5665,7 +5665,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "While building [Restaurant OS](/projects/4), our team had to ensure that waiters and chefs handling real-time order states experienced instant, 60fps tactile feedback even on budget mobile devices. Here is the exact performance playbook we used to achieve sub-100ms INP."
+        "text": "While building [Restaurant OS](/projects/4/), our team had to ensure that waiters and chefs handling real-time order states experienced instant, 60fps tactile feedback even on budget mobile devices. Here is the exact performance playbook we used to achieve sub-100ms INP."
       },
       {
         "type": "heading",
@@ -5712,7 +5712,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Is your website feeling sluggish or losing customers due to slow load times? [Get in touch with Aafaque Nazir](/contact) for a comprehensive frontend performance audit and speed optimization."
+        "text": "Is your website feeling sluggish or losing customers due to slow load times? [Get in touch with Aafaque Nazir](/contact/) for a comprehensive frontend performance audit and speed optimization."
       }
     ]
   },
@@ -5767,7 +5767,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "When developing [Aura Estate](/projects/15), a full-stack real estate platform with multi-tier agent permissions, dynamic property listings, and lead tracking, PostgreSQL backed by Supabase was the only architecture capable of handling complex relational queries with sub-10ms response times."
+        "text": "When developing [Aura Estate](/projects/15/), a full-stack real estate platform with multi-tier agent permissions, dynamic property listings, and lead tracking, PostgreSQL backed by Supabase was the only architecture capable of handling complex relational queries with sub-10ms response times."
       },
       {
         "type": "heading",
@@ -5836,7 +5836,7 @@ export const blogs = [
       },
       {
         "type": "paragraph",
-        "text": "Whether you need a custom e-commerce storefront, an internal business dashboard, or a scalable SaaS backend with Supabase and React, I provide full-cycle engineering from database architecture to smooth 60fps frontend implementation. [Explore my services](/services) or [start a conversation today](/contact)."
+        "text": "Whether you need a custom e-commerce storefront, an internal business dashboard, or a scalable SaaS backend with Supabase and React, I provide full-cycle engineering from database architecture to smooth 60fps frontend implementation. [Explore my services](/services/) or [start a conversation today](/contact/)."
       }
     ]
   }
