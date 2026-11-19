@@ -278,6 +278,260 @@ const TOPIC_QUEUE = [
     category: "AI & Full-Stack",
     targetKeywords: ["pgvector postgresql vector search", "ai product recommendations supabase", "embeddings search react app"],
     relatedProjectId: 2, // Shopease (Oud & Attar) - similarity search matching customer scent preferences
+  },
+
+  // ── Cluster 9: Advanced PostgreSQL, Database Engineering & Supabase ──
+  {
+    topic: "Diagnosing Slow PostgreSQL Queries: A Practical EXPLAIN ANALYZE Guide for Full-Stack Developers",
+    category: "Backend & Database",
+    targetKeywords: ["postgres explain analyze guide", "fix slow postgresql queries", "database indexing performance"],
+    relatedProjectId: 1, // InvMaster OS - query optimization across wholesale batch records
+  },
+  {
+    topic: "Implementing Full-Text Search in PostgreSQL with tsvector and GIN Indexes: Better Than Elasticsearch for Small Teams",
+    category: "Backend & Database",
+    targetKeywords: ["postgresql full text search gin index", "postgres tsvector search", "lightweight search engine postgres"],
+    relatedProjectId: 15, // Aura Estate - high-speed property search across locations and amenities
+  },
+  {
+    topic: "Zero-Downtime Database Schema Migrations in Production with Drizzle ORM and PostgreSQL",
+    category: "Backend & Database",
+    targetKeywords: ["zero downtime migrations postgresql", "drizzle orm production migration", "safe database migrations"],
+    relatedProjectId: 1, // InvMaster OS - live column migrations without table locking
+  },
+  {
+    topic: "Building Real-Time Appointment Slots and Double-Booking Prevention with PostgreSQL Row Locks",
+    category: "Backend & Database",
+    targetKeywords: ["prevent double booking postgresql", "row level locking appointment system", "concurrency control postgres"],
+    relatedProjectId: 14, // LA Salon & Spa - concurrency control for stylist time slots
+  },
+  {
+    topic: "Building Scalable Audit Logs in PostgreSQL for Compliance and Internal Enterprise Dashboards",
+    category: "Backend & Database",
+    targetKeywords: ["postgresql audit logging trigger", "enterprise audit trail database", "track row changes postgresql"],
+    relatedProjectId: 1, // InvMaster OS - automated audit trails for warehouse stock movements
+  },
+
+  // ── Cluster 10: E-Commerce, Stripe & WhatsApp Systems ──
+  {
+    topic: "Building Multi-Currency Stripe Checkout with Next.js 15 and Server Actions",
+    category: "E-Commerce Engineering",
+    targetKeywords: ["stripe multi currency checkout nextjs", "nextjs server actions stripe", "international ecommerce payments"],
+    relatedProjectId: 2, // Shopease - international currency conversion for fragrance orders
+  },
+  {
+    topic: "Handling Webhook Idempotency in Stripe and Razorpay: Preventing Double Charges and Duplicate Orders",
+    category: "Backend & Database",
+    targetKeywords: ["webhook idempotency best practices", "prevent double charges stripe", "razorpay webhook handler nodejs"],
+    relatedProjectId: 2, // Shopease - idempotent event deduplication on webhook retries
+  },
+  {
+    topic: "Building an Automated WhatsApp Abandoned Cart Recovery System with Node.js and Supabase Webhooks",
+    category: "E-Commerce Engineering",
+    targetKeywords: ["whatsapp abandoned cart recovery", "supabase webhooks whatsapp api", "ecommerce cart abandonment automation"],
+    relatedProjectId: 3, // Bread & Bite - recovering unfinished food orders on WhatsApp
+  },
+  {
+    topic: "Sub-150ms TTFB: Benchmarking Headless Shopify Against Custom Next.js E-Commerce Stores",
+    category: "E-Commerce Engineering",
+    targetKeywords: ["headless shopify performance benchmark", "custom nextjs ttfb under 150ms", "fastest ecommerce architecture"],
+    relatedProjectId: 2, // Shopease - sub-second load times eliminating cart drop-off
+  },
+  {
+    topic: "Preventing Race Conditions in E-Commerce Cart Checkout with Database Transactions",
+    category: "Backend & Database",
+    targetKeywords: ["prevent race conditions ecommerce cart", "acid database transactions inventory", "concurrency control checkout"],
+    relatedProjectId: 2, // Shopease - atomic inventory decrements preventing overselling
+  },
+  {
+    topic: "Micro-SaaS Pricing Architecture: Implementing Tiered Usage and Metered Billing with Stripe",
+    category: "E-Commerce Engineering",
+    targetKeywords: ["metered billing stripe nodejs", "tiered saas pricing architecture", "usage based billing full stack"],
+    relatedProjectId: 1, // InvMaster OS - multi-tier warehouse subscription billing
+  },
+
+  // ── Cluster 11: Web Performance & Core Web Vitals ──
+  {
+    topic: "Lowering Interaction to Next Paint Below 100ms: Taming Heavy React Component Trees",
+    category: "Web Performance",
+    targetKeywords: ["how to get 100 on inp", "lower interaction to next paint react", "react core web vitals optimization"],
+    relatedProjectId: 4, // Restaurant OS - instant tap response for busy waiters
+  },
+  {
+    topic: "Edge Caching Dynamic Web Content with Cloudflare Workers and Custom Cache-Control Directives",
+    category: "Web Performance",
+    targetKeywords: ["cloudflare workers edge caching", "cache control s-maxage stale-while-revalidate", "edge cdn dynamic caching"],
+    relatedProjectId: 17, // Al Raheeq Tourism - sub-50ms edge caching across GCC visitors
+  },
+  {
+    topic: "Modern Image Optimization: AVIF vs WebP vs Responsive SVG in High-Traffic Portals",
+    category: "Web Performance",
+    targetKeywords: ["avif vs webp benchmark", "responsive image optimization nextjs", "sharp image pipeline web vitals"],
+    relatedProjectId: 10, // Yacht Rentals - high-resolution yacht galleries loading under 800ms
+  },
+  {
+    topic: "Optimizing Google Tag Manager and Third-Party Tracking Scripts Without Destroying Total Blocking Time",
+    category: "Web Performance",
+    targetKeywords: ["optimize google tag manager performance", "lower total blocking time tbt", "defer third party scripts core web vitals"],
+    relatedProjectId: 17, // Al Raheeq Tourism - lazy-loading analytics on user interaction
+  },
+  {
+    topic: "Zero-Layout-Shift Web Typography: Custom CSS Font Metric Overrides and Local Font Loading",
+    category: "Web Performance",
+    targetKeywords: ["zero cls web fonts", "font metric overrides css size-adjust", "self host google fonts performance"],
+    relatedProjectId: 17, // Al Raheeq Tourism - zero CLS font rendering
+  },
+
+  // ── Cluster 12: Real-Time & Full-Stack Systems ──
+  {
+    topic: "Direct-to-R2 Presigned File Uploads in React and Next.js: Bypassing Serverless Size Limits",
+    category: "Real-Time & Full-Stack",
+    targetKeywords: ["cloudflare r2 presigned url upload", "s3 file upload nextjs", "direct client file upload react"],
+    relatedProjectId: 15, // Aura Estate - high-resolution property image uploads directly to R2
+  },
+  {
+    topic: "Building Real-Time Multi-Godown Stock Transfers with Optimistic UI in React 19",
+    category: "Real-Time & Full-Stack",
+    targetKeywords: ["optimistic ui react 19", "inventory transfer management react", "real time stock sync"],
+    relatedProjectId: 1, // InvMaster OS - instant local UI updates during network lag
+  },
+  {
+    topic: "Self-Hosting Next.js 15 with Docker and Coolify: Cutting Vercel Infrastructure Bills by 80%",
+    category: "Frameworks & Tools",
+    targetKeywords: ["self host nextjs coolify", "docker nextjs 15 vps", "cut vercel hosting costs"],
+    relatedProjectId: 1, // InvMaster OS - dedicated VPS deployment with Postgres
+  },
+  {
+    topic: "Real-Time Collaborative Notes and Shared Canvas with Supabase Broadcast Channels in React 19",
+    category: "Real-Time & Full-Stack",
+    targetKeywords: ["supabase realtime broadcast react", "collaborative web app react 19", "websocket canvas sync"],
+    relatedProjectId: 4, // Restaurant OS - multi-terminal kitchen and counter sync
+  },
+  {
+    topic: "Building Real-Time Push Notifications with Web Push API and VAPID Keys in Node.js",
+    category: "Real-Time & Full-Stack",
+    targetKeywords: ["web push notifications vapid nodejs", "in-browser push notifications react", "service worker push api"],
+    relatedProjectId: 4, // Restaurant OS - kitchen order alerts on Android & iOS web apps
+  },
+
+  // ── Cluster 13: Full-Stack Security & Zero Trust ──
+  {
+    topic: "Securing Next.js Server Actions: Defending Against Insecure Direct Object References and SSRF",
+    category: "Security & Architecture",
+    targetKeywords: ["nextjs server actions security", "prevent idor nextjs", "secure server actions zod validation"],
+    relatedProjectId: 17, // Al Raheeq Tourism - server-side authorization checks on booking actions
+  },
+  {
+    topic: "Content Security Policy (CSP) in Modern SPAs: Nonce Generation and Eliminating unsafe-inline",
+    category: "Security & Architecture",
+    targetKeywords: ["content security policy nextjs", "strict csp nonce react", "prevent xss with csp"],
+    relatedProjectId: 17, // Al Raheeq Tourism - strict CSP headers protecting passenger records
+  },
+  {
+    topic: "Implementing Refresh Token Rotation and Secure HttpOnly Cookie Sessions in Single Page Applications",
+    category: "Security & Architecture",
+    targetKeywords: ["refresh token rotation react", "httponly cookie auth architecture", "secure session storage spa"],
+    relatedProjectId: 4, // Restaurant OS - token rotation preventing session hijacking
+  },
+
+  // ── Cluster 14: Modern Frontend, UI/UX & Interactive Engineering ──
+  {
+    topic: "Dark Mode with Zero Flash of Unstyled Content (FOUC) in Vanilla Tailwind CSS and React",
+    category: "Frontend Development",
+    targetKeywords: ["zero fouc dark mode tailwind", "prevent dark mode flicker react", "clean dark mode implementation"],
+    relatedProjectId: 12, // Premium Burger Shop - instantaneous theme toggle
+  },
+  {
+    topic: "Building a Fast Barcode and QR Code Scanner on Mobile Browsers Using the HTML5 Barcode Detection API",
+    category: "Frontend Development",
+    targetKeywords: ["mobile camera barcode scanner react", "html5 barcode detection api", "in-browser qr code scanner web app"],
+    relatedProjectId: 1, // InvMaster OS - camera barcode scanning on phone browsers
+  },
+  {
+    topic: "Designing 60fps Drag-and-Drop Task Boards in React Without Layout Thrashing",
+    category: "UI/UX & Animation",
+    targetKeywords: ["react drag and drop performance", "60fps kanban board react", "smooth drag and drop web app"],
+    relatedProjectId: 4, // Restaurant OS - drag-and-drop table order tickets
+  },
+  {
+    topic: "Building a High-Speed Static Blog with Search State and URL Sync in Vite React",
+    category: "Frontend Development",
+    targetKeywords: ["fast static blog react vite", "instant search filter url sync", "prerendered spa blog performance"],
+    relatedProjectId: 17, // Al Raheeq Tourism - client-side instantaneous query search
+  },
+  {
+    topic: "Building a Client-Side PDF Generation Pipeline in React Without Server Overhead",
+    category: "Frontend Development",
+    targetKeywords: ["client side pdf generation react", "jspdf html2canvas fast pdf", "generate invoice pdf in browser"],
+    relatedProjectId: 1, // InvMaster OS - 1-click tax invoice PDF export in browser
+  },
+  {
+    topic: "Building Interactive Split-Screen 3D Product Demos with React Three Fiber and Drei",
+    category: "UI/UX & Animation",
+    targetKeywords: ["react three fiber 3d product demo", "r3f performance optimization", "webgl 3d canvas interactive showcase"],
+    relatedProjectId: 13, // 3D Burger Website - interactive scroll-linked 3D transforms
+  },
+  {
+    topic: "Building a Custom Lead Valuation and Quote Calculator with Animated Slider Controls in React",
+    category: "Conversion Engineering",
+    targetKeywords: ["custom quote calculator react", "interactive lead generation calculator", "animated slider pricing calculator"],
+    relatedProjectId: 15, // Aura Estate - real-time property valuation estimator
+  },
+  {
+    topic: "Migrating from Create React App to Vite: Step-by-Step Production Guide with Zero Downtime",
+    category: "Frameworks & Tools",
+    targetKeywords: ["migrate cra to vite", "create react app to vite migration guide", "speed up react build time vite"],
+    relatedProjectId: 3, // Bread & Bite - migration cutting build times from 45s to 3s
+  },
+  {
+    topic: "Building Multi-Step Customer Intake Forms with React Hook Form and Zod Schema Validation",
+    category: "Frontend Development",
+    targetKeywords: ["multi step form react hook form zod", "persisted form state react", "accessible multi step wizard form"],
+    relatedProjectId: 14, // LA Salon & Spa - step-by-step appointment booking wizard
+  },
+  {
+    topic: "Building an Automatic Sitemap and LLM Search Engine Feed Generator for React SPAs",
+    category: "SEO & Growth",
+    targetKeywords: ["automated sitemap generator react", "llms txt search engine optimization", "programmatic seo single page application"],
+    relatedProjectId: 17, // Al Raheeq Tourism - programmatic SEO and llms.txt generation
+  },
+  {
+    topic: "Fast Headless CMS Integration: Connecting Sanity and Strapi to React with Incremental Static Regeneration",
+    category: "Frameworks & Tools",
+    targetKeywords: ["headless cms react sanity strapi", "incremental static regeneration isr", "content management nextjs react"],
+    relatedProjectId: 17, // Al Raheeq Tourism - dynamic travel package updates via CMS
+  },
+
+  // ── Cluster 15: Client Acquisition, Pricing & Commercial Strategy ──
+  {
+    topic: "Why Early-Stage Startups Are Ditching WordPress for Custom Next.js and React Web Applications",
+    category: "Client Acquisition & Guide",
+    targetKeywords: ["wordpress vs custom nextjs", "why switch from wordpress to react", "headless cms vs wordpress"],
+    relatedProjectId: 17, // Al Raheeq Tourism - replacing plugin-bloated WordPress with Next.js
+  },
+  {
+    topic: "How Much Does It Cost to Redesign an Outdated Business Website in 2026?",
+    category: "Client Acquisition & Guide",
+    targetKeywords: ["website redesign cost 2026", "how much to redesign business website", "cost to upgrade website to react"],
+    relatedProjectId: 17, // Al Raheeq Tourism - realistic budgeting for modern business redesigns
+  },
+  {
+    topic: "How to Conduct a Web App Performance Audit: Identifying and Fixing Conversion Leaks in 48 Hours",
+    category: "Client Acquisition & Guide",
+    targetKeywords: ["web app performance audit", "website conversion rate optimization audit", "core web vitals audit service"],
+    relatedProjectId: 17, // Al Raheeq Tourism - auditing and optimizing real conversion funnels
+  },
+  {
+    topic: "The Real Cost of Website Maintenance: DIY Headaches vs Retaining an Independent Engineer",
+    category: "Client Acquisition & Guide",
+    targetKeywords: ["website maintenance cost 2026", "hire freelance developer retainer", "cost of maintaining custom web application"],
+    relatedProjectId: 17, // Al Raheeq Tourism - ROI of maintenance retainers
+  },
+  {
+    topic: "How to Build a High-Trust Web Portfolio That Actually Converts Visitors into Inbound Leads",
+    category: "Client Acquisition & Guide",
+    targetKeywords: ["how to build high converting developer portfolio", "freelance web developer portfolio strategy", "convert portfolio visitors to clients"],
+    relatedProjectId: 17, // Al Raheeq Tourism - portfolio conversion architecture
   }
 ];
 
@@ -296,21 +550,109 @@ const blogsFileContent = fs.readFileSync(blogsFilePath, "utf8");
 console.log(`📚 Found ${currentBlogs.length} existing blogs in repository.`);
 
 function isTopicCovered(topicObj, blogsList) {
-  const stopWords = ['with', 'from', 'your', 'this', 'into', 'without', 'when', 'using'];
-  const keywords = topicObj.topic.toLowerCase().split(/\s+/).filter(w => w.length > 3 && !stopWords.includes(w));
+  const stopWords = new Set([
+    'with', 'from', 'your', 'this', 'into', 'without', 'when', 'using',
+    'guide', 'practical', 'building', 'implementing', 'react', 'nextjs',
+    'modern', 'eliminating', 'application', 'applications', 'single', 'custom',
+    'system', 'systems', 'architecture', 'better', 'engine', 'engines',
+    'production', 'real-time', 'realtime', 'stack', 'tools', 'server', 'actions'
+  ]);
+  const keywords = topicObj.topic.toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/)
+    .filter(w => w.length > 3 && !stopWords.has(w));
+  if (keywords.length === 0) return false;
+
   return blogsList.some(b => {
     const bTitle = (b.title || "").toLowerCase();
     const bSlug = (b.slug || "").toLowerCase();
     const matches = keywords.filter(w => bTitle.includes(w) || bSlug.includes(w));
-    return matches.length >= Math.min(3, keywords.length);
+    const threshold = Math.max(3, Math.ceil(keywords.length * 0.5));
+    return matches.length >= Math.min(threshold, keywords.length);
   });
 }
 
-// 2. Select the next unwritten topic from the queue
-const chosenTopic = TOPIC_QUEUE.find((t) => !isTopicCovered(t, currentBlogs)) ||
-  TOPIC_QUEUE[Math.floor(Math.random() * TOPIC_QUEUE.length)];
+// Automated Trending Radar: Scan Hacker News top tech stories for breaking web tech news
+async function getTrendingTechTopic(blogsList) {
+  try {
+    const res = await fetch("https://hacker-news.firebaseio.com/v0/topstories.json");
+    if (!res.ok) return null;
+    const ids = (await res.json()).slice(0, 35);
+    const techKeywords = [
+      "react", "next.js", "nextjs", "vulnerability", "cve", "postgresql", "postgres",
+      "tailwind", "typescript", "supabase", "vite", "web security", "zero-day",
+      "rce", "cloudflare", "stripe", "docker", "bun", "node.js"
+    ];
 
-console.log(`🎯 Generating high-intent blog for topic: "${chosenTopic.topic}"...`);
+    for (const id of ids) {
+      const itemRes = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
+      if (!itemRes.ok) continue;
+      const item = await itemRes.json();
+      const title = item.title || "";
+      const score = item.score || 0;
+
+      // Filter: High engagement (score >= 120) and mentions core web tech using word boundaries
+      if (score >= 120) {
+        const matchedKw = techKeywords.find((kw) => {
+          const escaped = kw.replace(".", "\\.");
+          const regex = new RegExp(`(^|[^a-zA-Z0-9])${escaped}([^a-zA-Z0-9]|$)`, "i");
+          return regex.test(title);
+        });
+        if (matchedKw) {
+          const candidate = {
+            topic: title,
+            category: "Trending & Web Architecture",
+            targetKeywords: [matchedKw, title, "technical breakdown", "web engineering"],
+            relatedProjectId: 17,
+            isTrending: true,
+          };
+          if (!isTopicCovered(candidate, blogsList)) {
+            console.log(`🔥 Detected high-engagement trending topic: "${title}" (${score} points on Hacker News)`);
+            return candidate;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("ℹ️ Could not query trending radar, falling back to curated queue:", err.message);
+  }
+  return null;
+}
+
+// 2. Select topic: Manual Input -> Trending Radar -> Curated High-Intent Queue
+let chosenTopic = null;
+
+// A. Check for manual override (from CLI argument or GitHub Actions CUSTOM_TOPIC env var)
+const manualInput = process.env.CUSTOM_TOPIC?.trim() || process.argv[2]?.trim();
+if (manualInput) {
+  console.log(`⚡ Manual topic override provided: "${manualInput}"`);
+  chosenTopic = {
+    topic: manualInput,
+    category: "Architecture & Engineering",
+    targetKeywords: [manualInput, "full stack guide", "web development 2026"],
+    relatedProjectId: 17,
+  };
+}
+
+// B. Check for breaking trending tech news
+if (!chosenTopic) {
+  console.log("📡 Scanning trending developer radar for breaking topics...");
+  chosenTopic = await getTrendingTechTopic(currentBlogs);
+}
+
+// C. Fallback to curated high-intent queue
+if (!chosenTopic) {
+  chosenTopic = TOPIC_QUEUE.find((t) => !isTopicCovered(t, currentBlogs));
+  if (chosenTopic) {
+    console.log(`🎯 Picked next unwritten topic from curated queue: "${chosenTopic.topic}"`);
+  } else {
+    // If all topics in queue have been written, pick random
+    chosenTopic = TOPIC_QUEUE[Math.floor(Math.random() * TOPIC_QUEUE.length)];
+    console.log(`🔄 Queue fully covered. Rotating topic: "${chosenTopic.topic}"`);
+  }
+}
+
+console.log(`🎯 Final Selected Topic: "${chosenTopic.topic}" (Category: ${chosenTopic.category})...`);
 
 const prompt = `
 You are the senior technical lead and AI co-author for Aafaque Nazir, an independent freelance full-stack web developer based in Navi Mumbai, India (website: https://aafaque.in, phone/whatsapp: +91 93256 29256).

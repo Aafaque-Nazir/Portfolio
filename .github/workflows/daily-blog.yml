@@ -6,6 +6,12 @@ on:
     - cron: '0 4 * * *'
   # Allows manual triggering from GitHub Actions UI anytime
   workflow_dispatch:
+    inputs:
+      custom_topic:
+        description: 'Trending topic to write today (Leave blank for automated radar/queue)'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -28,6 +34,7 @@ jobs:
       - name: Run Blog Generator Script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CUSTOM_TOPIC: ${{ github.event.inputs.custom_topic }}
         run: |
           if [ -z "$GEMINI_API_KEY" ]; then
             echo "::warning::GEMINI_API_KEY secret is not configured in repository settings. Skipping daily post generation."
