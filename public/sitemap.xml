@@ -332,6 +332,13 @@
     <priority>0.85</priority>
   </url>
 
+  <url>
+    <loc>https://aafaque.in/blog/openssl-cve-2026-121481-technical-breakdown/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Project Detail Pages (Programmatic SEO & Case Studies) -->
   <url>
     <loc>https://aafaque.in/projects/17/</loc>
