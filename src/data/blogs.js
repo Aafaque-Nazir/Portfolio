@@ -1,5 +1,106 @@
 export const blogs = [
   {
+    "id": "how-to-write-web-development-sow",
+    "slug": "how-to-write-web-development-sow",
+    "title": "How to Write a Scope of Work When Hiring an Independent Full-Stack Developer",
+    "seoTitle": "How to Write a Web Development SOW: Practical Guide",
+    "description": "Learn how to write a clear software contractor agreement scope for your next web project to prevent delays, budget overruns, and misunderstandings.",
+    "publishedAt": "2026-11-21",
+    "updatedAt": "2026-11-21",
+    "readTime": "7 min read",
+    "category": "Client Acquisition & Guide",
+    "tags": [
+      "web development SOW",
+      "software contractor agreement scope",
+      "hiring freelance developer contract"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "A well-written web development scope of work defines project goals, specific features, technology stack, timeline milestones, and deliverables to keep both the client and independent developer aligned on costs and expectations.",
+    "relatedProjectId": 15,
+    "faqs": [
+      {
+        "question": "What is the primary purpose of a web development Scope of Work?",
+        "answer": "The primary purpose is to eliminate ambiguity by clearly outlining what is included in the project, what is excluded, payment milestones, and expected deadlines."
+      },
+      {
+        "question": "How should feature changes be handled after signing an SOW?",
+        "answer": "Feature changes should be handled via a formal change order process that recalculates timelines and costs before any extra development begins."
+      },
+      {
+        "question": "Should database schemas and tech stack choices be included in the SOW?",
+        "answer": "Yes. Listing specific tools such as React, TypeScript, or Supabase PostgreSQL ensures both parties agree on the technical foundation and maintenance requirements."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Vague Requirements Destroy Web Projects"
+      },
+      {
+        "type": "paragraph",
+        "text": "When hiring an independent software contractor, the biggest risk to project failure is poorly defined project boundaries. Phrases like 'build a fast property portal' or 'create an online store' leave too much room for interpretation. As a developer based in Navi Mumbai, I often review project requests that lack concrete technical parameters. Clear documentation prevents scope creep and ensures projects stay on budget."
+      },
+      {
+        "type": "paragraph",
+        "text": "For data-driven applications like [Aura Estate](/projects/15/), defining data models, search filters, and valuation calculator logic upfront saves weeks of rework during development."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Core Components of an Effective SOW"
+      },
+      {
+        "type": "paragraph",
+        "text": "A complete scope of work document should be structured logically so that both non-technical stakeholders and engineers understand their exact responsibilities."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Project Objective: A short summary of the business problem being solved.",
+          "Scope of Deliverables: Exact pages, API endpoints, and user flows to be built.",
+          "Out of Scope: Explicitly list what will not be built to prevent scope creep.",
+          "Technology Stack: The exact frontend framework, backend runtime, and database.",
+          "Milestones and Payment Terms: Fixed dates tied to verifiable testing checkpoints."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Defining Technical Deliverables in Code"
+      },
+      {
+        "type": "paragraph",
+        "text": "Instead of writing paragraphs of text about how a feature should behave, include functional interface definitions. For example, specifying database types or component props removes guesswork."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "Example TypeScript interface definition for a property listing filter in an SOW",
+        "code": "export interface PropertyFilterParams {\n  city: string;\n  minPrice: number;\n  maxPrice: number;\n  propertyType: 'apartment' | 'villa' | 'commercial';\n  bedrooms?: number;\n  page: number;\n  limit: number;\n}"
+      },
+      {
+        "type": "callout",
+        "title": "Engineering Tip on Change Requests",
+        "text": "Always include a clause stating that requests outside the agreed deliverables require a separate written addendum and additional billing."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you are planning a new web application and need a clean, predictable development process from planning to production deployment, I can help. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your project requirements."
+      }
+    ]
+  },
+  {
     "id": "openssl-cve-2026-121481-technical-breakdown",
     "slug": "openssl-cve-2026-121481-technical-breakdown",
     "title": "OpenSSL Buffer Overflow in EVP_EncodeBlock() CVE-2026-121481",
