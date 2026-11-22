@@ -1,5 +1,106 @@
 export const blogs = [
   {
+    "id": "upload2shell-cve-2026-125396-technical-breakdown",
+    "slug": "upload2shell-cve-2026-125396-technical-breakdown",
+    "title": "Upload2Shell (CVE-2026-125396): A Deep Technical Breakdown",
+    "seoTitle": "Upload2Shell CVE-2026-125396: Technical Breakdown",
+    "description": "An in-depth technical analysis of CVE-2026-125396 (Upload2Shell), explaining how arbitrary file upload flaws lead to remote code execution.",
+    "publishedAt": "2026-03-30",
+    "updatedAt": "2026-03-30",
+    "readTime": "7 min read",
+    "category": "Trending & Web Architecture",
+    "tags": [
+      "cve",
+      "Upload2Shell (CVE-2026-125396)",
+      "technical breakdown",
+      "web engineering"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Upload2Shell (CVE-2026-125396) is a critical remote code execution vulnerability caused by unsafe file upload handling, where attackers bypass extension filters to execute arbitrary code on the target server.",
+    "relatedProjectId": 17,
+    "faqs": [
+      {
+        "question": "What is CVE-2026-125396?",
+        "answer": "It is a severe web vulnerability known as Upload2Shell, allowing attackers to upload executable scripts disguised as media files and achieve remote code execution."
+      },
+      {
+        "question": "How can developers prevent Upload2Shell vulnerabilities?",
+        "answer": "Developers must validate file contents using magic bytes rather than trusting file extensions, store uploaded files outside the web root, and disable script execution in upload directories."
+      },
+      {
+        "question": "Does this vulnerability affect modern cloud architectures?",
+        "answer": "Yes, any web application handling user uploads without strict MIME validation and secure storage routing is potentially vulnerable, regardless of hosting provider."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Understanding the Mechanics of CVE-2026-125396"
+      },
+      {
+        "type": "paragraph",
+        "text": "File upload endpoints are among the most common entry points for severe security incidents. When web applications accept user-generated files without rigorous validation, they open the door to remote code execution. CVE-2026-125396 highlights flaws in how backend parsers verify incoming mime types and file extensions. When building secure systems—such as booking engines or document handlers like the ones used in [Al Raheeq Tourism](/projects/17/)—developers must treat every byte from an external client as untrusted data."
+      },
+      {
+        "type": "paragraph",
+        "text": "The vulnerability typically manifests when an application checks only the client-supplied Content-Type header or relies on weak blacklists for file extensions like .php, .jsp, or .aspx. Attackers exploit this by renaming script files or embedding malicious payloads inside seemingly harmless image containers."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Vulnerable Upload Handler Pattern"
+      },
+      {
+        "type": "paragraph",
+        "text": "Consider a typical flawed Node.js or Express endpoint that accepts profile pictures or document uploads based solely on the file extension string provided in the request body."
+      },
+      {
+        "type": "code",
+        "language": "tsx",
+        "caption": "Insecure file upload implementation",
+        "code": "import express from 'express';\nimport multer from 'multer';\nimport path from 'path';\n\nconst upload = multer({ dest: 'public/uploads/' });\nconst app = express();\n\n// VULNERABLE: Only checking extension string\napp.post('/api/upload', upload.single('file'), (req, res) => {\n  const file = req.file;\n  if (!file) {\n    return res.status(400).json({ error: 'No file uploaded' });\n  }\n  \n  // Attackers can bypass this by sending a malformed filename\n  res.json({ success: true, path: `/uploads/${file.filename}` });\n});"
+      },
+      {
+        "type": "callout",
+        "title": "Critical Engineering Takeaway",
+        "text": "Never rely on client-supplied file extensions or HTTP headers for security validation. Always inspect file signatures (magic bytes) on the server side."
+      },
+      {
+        "heading": 2,
+        "type": "heading",
+        "title": "Securing the Upload Pipeline"
+      },
+      {
+        "type": "paragraph",
+        "text": "To neutralize CVE-2026-125396 and similar flaws, web engineering teams must implement a multi-layered defense strategy. This includes validating internal magic bytes, storing uploads in isolated object storage rather than local web directories, and enforcing strict execution permissions."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Validate file headers (magic bytes) to confirm true file type.",
+          "Store uploaded assets in isolated cloud storage buckets or non-executable directories.",
+          "Sanitize and randomize filenames to prevent path traversal and script execution attacks.",
+          "Set strict Content-Security-Policy (CSP) headers to block unauthorized script execution."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "As an independent web developer, I build fast, production-ready web applications with security built into the core architecture. [Hire Aafaque Nazir](/services/) or [get in touch for a consultation](/contact/)."
+      }
+    ]
+  },
+  {
     "id": "how-to-write-web-development-sow",
     "slug": "how-to-write-web-development-sow",
     "title": "How to Write a Scope of Work When Hiring an Independent Full-Stack Developer",
