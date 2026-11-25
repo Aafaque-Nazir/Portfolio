@@ -45,7 +45,7 @@ const ProjectDetails = () => {
             <span>Projects</span>
           </Link>
 
-          <span className="text-zinc-500 uppercase tracking-widest text-[11px]">
+          <span className="text-accent/90 uppercase tracking-widest text-[11px]">
             {project.category}
           </span>
         </nav>
@@ -76,8 +76,8 @@ const ProjectDetails = () => {
             </div>
 
             {/* Solution Card */}
-            <div className="p-5 rounded-xl bg-zinc-950 border border-zinc-800/80">
-              <h2 className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 font-medium mb-2">
+            <div className="p-5 rounded-xl bg-zinc-950 border border-zinc-800/80 border-l-2 border-l-accent/70">
+              <h2 className="text-[11px] font-mono uppercase tracking-widest text-accent font-medium mb-2">
                 The Solution
               </h2>
               <p className="text-sm text-zinc-300 font-normal leading-relaxed">
@@ -139,10 +139,10 @@ const ProjectDetails = () => {
           {prevProject ? (
             <Link
               to={`/projects/${prevProject.id}/`}
-              className="group inline-flex items-center justify-between sm:justify-start gap-2 px-3.5 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white transition-all shadow-sm"
+              className="group inline-flex items-center justify-between sm:justify-start gap-2 px-3.5 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-accent/35 text-zinc-300 hover:text-white transition-all shadow-sm"
             >
               <span className="flex items-center gap-1.5 min-w-0">
-                <RiArrowLeftLine className="text-zinc-400 group-hover:text-white transition-transform group-hover:-translate-x-0.5 shrink-0" />
+                <RiArrowLeftLine className="text-zinc-400 group-hover:text-accent transition-transform group-hover:-translate-x-0.5 shrink-0" />
                 <span className="text-zinc-500 font-normal shrink-0">Prev:</span>
                 <span className="font-medium text-zinc-200 group-hover:text-white truncate max-w-[150px] sm:max-w-[180px]">
                   {prevProject.title}
@@ -155,7 +155,7 @@ const ProjectDetails = () => {
 
           <Link
             to="/projects/"
-            className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white transition-all shadow-sm text-center"
+            className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-accent/35 text-zinc-400 hover:text-white transition-all shadow-sm text-center"
           >
             All Projects
           </Link>
@@ -163,14 +163,14 @@ const ProjectDetails = () => {
           {nextProject ? (
             <Link
               to={`/projects/${nextProject.id}/`}
-              className="group inline-flex items-center justify-between sm:justify-end gap-2 px-3.5 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white transition-all shadow-sm"
+              className="group inline-flex items-center justify-between sm:justify-end gap-2 px-3.5 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-accent/35 text-zinc-300 hover:text-white transition-all shadow-sm"
             >
               <span className="flex items-center gap-1.5 min-w-0">
                 <span className="text-zinc-500 font-normal shrink-0">Next:</span>
                 <span className="font-medium text-zinc-200 group-hover:text-white truncate max-w-[150px] sm:max-w-[180px]">
                   {nextProject.title}
                 </span>
-                <RiArrowRightLine className="text-zinc-400 group-hover:text-white transition-transform group-hover:translate-x-0.5 shrink-0" />
+                <RiArrowRightLine className="text-zinc-400 group-hover:text-accent transition-transform group-hover:translate-x-0.5 shrink-0" />
               </span>
             </Link>
           ) : (

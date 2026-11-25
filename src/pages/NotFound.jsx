@@ -24,9 +24,9 @@ export default function NotFound() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-zinc-300 text-xs font-mono uppercase tracking-widest mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-accent/25 text-zinc-300 text-xs font-mono uppercase tracking-widest mb-6"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
             <span>ERR_PAGE_NOT_FOUND</span>
           </motion.div>
 

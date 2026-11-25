@@ -37,6 +37,11 @@ const Footer = () => {
               <stop offset="0%" stopColor="#121217" />
               <stop offset="100%" stopColor="#09090b" />
             </linearGradient>
+            <linearGradient id="footerWaveStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(255, 255, 255, 0.08)" />
+              <stop offset="50%" stopColor="rgba(251, 191, 36, 0.35)" />
+              <stop offset="100%" stopColor="rgba(255, 255, 255, 0.08)" />
+            </linearGradient>
           </defs>
           {/* Fluid Organic Wave Section Fill */}
           <path
@@ -47,7 +52,7 @@ const Footer = () => {
           <path
             d="M 0,60 C 240,85 480,85 720,52 C 960,20 1200,20 1440,55"
             fill="none"
-            stroke="rgba(255, 255, 255, 0.12)"
+            stroke="url(#footerWaveStroke)"
             strokeWidth="1.2"
             vectorEffect="non-scaling-stroke"
           />
@@ -120,7 +125,7 @@ const Footer = () => {
                       to={item.path}
                       className="group inline-flex items-center gap-1.5 py-1 text-xs text-zinc-400 hover:text-white transition-colors font-mono"
                     >
-                      <RiArrowRightLine className="text-[10px] opacity-0 -ml-2.5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200 text-white" />
+                      <RiArrowRightLine className="text-[10px] opacity-0 -ml-2.5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200 text-accent" />
                       <span>{item.name}</span>
                     </Link>
                   </li>
@@ -148,7 +153,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.label}
-                    className="w-10 h-10 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/25 flex items-center justify-center text-zinc-400 hover:text-white transition-all duration-200 active:scale-95"
+                    className="w-10 h-10 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-accent/40 flex items-center justify-center text-zinc-400 hover:text-accent transition-all duration-200 active:scale-95"
                   >
                     <item.icon className="text-lg" />
                   </a>

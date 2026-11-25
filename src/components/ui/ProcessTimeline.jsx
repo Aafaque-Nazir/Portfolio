@@ -44,7 +44,7 @@ const ProcessTimeline = () => {
 
       <div className="relative max-w-4xl mx-auto">
         {/* Background Vertical Line */}
-        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-accent/35 to-transparent -translate-x-1/2" />
 
         <div className="flex flex-col gap-10 md:gap-14">
           {steps.map((step, index) => {
@@ -72,7 +72,7 @@ const ProcessTimeline = () => {
                 </div>
 
                 {/* Center Node Icon */}
-                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-11 md:h-11 rounded-full bg-zinc-950 border border-white/15 flex items-center justify-center text-zinc-300 shadow-[0_4px_16px_rgba(0,0,0,0.8)] z-20">
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-11 md:h-11 rounded-full bg-zinc-950 border border-accent/35 flex items-center justify-center text-accent shadow-[0_4px_16px_rgba(0,0,0,0.8)] z-20">
                   {step.icon}
                 </div>
 

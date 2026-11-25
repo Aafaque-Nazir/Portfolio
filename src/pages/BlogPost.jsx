@@ -44,7 +44,7 @@ const renderFormattedText = (text) => {
           <Link
             key={match.index}
             to={href}
-            className="text-zinc-200 hover:text-white underline underline-offset-4 decoration-zinc-600 hover:decoration-zinc-300 transition-colors"
+            className="text-zinc-100 hover:text-accent underline underline-offset-4 decoration-accent/50 hover:decoration-accent transition-colors"
           >
             {label}
           </Link>
@@ -56,7 +56,7 @@ const renderFormattedText = (text) => {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-200 hover:text-white underline underline-offset-4 decoration-zinc-600 hover:decoration-zinc-300 transition-colors"
+            className="text-zinc-100 hover:text-accent underline underline-offset-4 decoration-accent/50 hover:decoration-accent transition-colors"
           >
             {label}
           </a>
@@ -137,7 +137,7 @@ const StatsGrid = ({ items }) => {
       {items.map((stat, i) => (
         <div
           key={i}
-          className="p-4 rounded-xl border border-zinc-800/80 bg-zinc-950/60 flex flex-col justify-between"
+          className="p-4 rounded-xl border border-zinc-800/80 hover:border-accent/30 bg-zinc-950/60 flex flex-col justify-between transition-colors"
         >
           <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 mb-1">
             {stat.label}
@@ -169,8 +169,8 @@ const ArchitectureDiagram = ({ title, nodes, caption }) => {
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
         {nodes.map((node, i) => (
           <React.Fragment key={i}>
-            <div className="flex-1 p-3.5 rounded-lg border border-zinc-800 bg-zinc-900/50 text-center flex flex-col justify-center min-h-[72px]">
-              <div className="text-[10px] font-mono text-zinc-500 uppercase mb-0.5">
+            <div className="flex-1 p-3.5 rounded-lg border border-zinc-800 hover:border-accent/30 bg-zinc-900/50 text-center flex flex-col justify-center min-h-[72px] transition-colors">
+              <div className="text-[10px] font-mono text-accent/90 uppercase mb-0.5">
                 Step {node.step || `0${i + 1}`}
               </div>
               <div className="font-medium text-xs sm:text-sm text-zinc-200">
@@ -184,7 +184,7 @@ const ArchitectureDiagram = ({ title, nodes, caption }) => {
             </div>
 
             {i < nodes.length - 1 && (
-              <div className="flex items-center justify-center text-zinc-600 md:rotate-0 rotate-90 py-1 md:py-0 font-mono text-xs">
+              <div className="flex items-center justify-center text-accent/60 md:rotate-0 rotate-90 py-1 md:py-0 font-mono text-xs">
                 &rarr;
               </div>
             )}
@@ -219,7 +219,7 @@ const StepsPlaybook = ({ title, items }) => {
           key={idx}
           className="p-5 rounded-xl border border-zinc-800/80 bg-zinc-950/60 flex gap-4 items-start"
         >
-          <div className="text-xs font-mono font-semibold text-zinc-500 shrink-0 mt-0.5">
+          <div className="text-xs font-mono font-semibold text-accent shrink-0 mt-0.5">
             {item.step || `0${idx + 1}`}
           </div>
           <div className="flex-1 space-y-1.5">
@@ -244,10 +244,10 @@ const StepsPlaybook = ({ title, items }) => {
 // Minimal Editorial Callout
 const CalloutBox = ({ title, text, variant = "info" }) => {
   const isAlert = variant === "critical" || (title && title.toLowerCase().includes("alert"));
-  const borderColor = isAlert ? "border-amber-500/70" : "border-zinc-500";
+  const borderColor = isAlert ? "border-l-red-500/80" : "border-l-accent/80";
 
   return (
-    <div className={`my-6 p-4 sm:p-5 rounded-r-xl border-l-2 ${borderColor} bg-zinc-900/30 border border-zinc-800`}>
+    <div className={`my-6 p-4 sm:p-5 rounded-r-xl bg-zinc-900/30 border border-zinc-800 border-l-2 ${borderColor}`}>
       {title && (
         <div className="text-xs font-mono font-medium uppercase tracking-wider text-zinc-300 mb-1.5">
           {title}
@@ -380,10 +380,10 @@ export default function BlogPost() {
     <>
       <SEO blogPost={post} />
 
-      {/* Top Reading Progress Bar (Subtle 1px line) */}
+      {/* Top Reading Progress Bar (Subtle 2px hairline) */}
       <motion.div
         style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-[2px] bg-zinc-300 origin-left z-50 opacity-90"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-accent origin-left z-50 opacity-95"
       />
 
       <div className="min-h-screen bg-black text-white pt-24 pb-20 px-4 sm:px-6 lg:px-8">
@@ -393,13 +393,13 @@ export default function BlogPost() {
           <nav aria-label="Breadcrumb" className="flex items-center justify-between text-xs font-mono text-zinc-500 mb-8">
             <Link 
               to="/blog/" 
-              className="inline-flex items-center gap-1.5 hover:text-zinc-300 transition-colors"
+              className="inline-flex items-center gap-1.5 hover:text-accent transition-colors"
             >
               <RiArrowLeftLine size={13} />
               <span>Articles & Guides</span>
             </Link>
 
-            <span className="uppercase tracking-wider text-zinc-400">
+            <span className="uppercase tracking-wider text-accent/90">
               {post.category}
             </span>
           </nav>
@@ -467,8 +467,8 @@ export default function BlogPost() {
 
           {/* Executive Summary / Key Takeaways */}
           {post.quickAnswer && (
-            <div className="mb-10 p-5 rounded-xl border border-zinc-800/80 border-l-2 border-l-zinc-400 bg-zinc-950/60">
-              <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-medium mb-2">
+            <div className="mb-10 p-5 rounded-xl border border-zinc-800/80 border-l-2 border-l-accent bg-zinc-950/60">
+              <div className="text-[11px] font-mono uppercase tracking-wider text-accent font-medium mb-2">
                 Executive Summary
               </div>
               <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
@@ -481,7 +481,7 @@ export default function BlogPost() {
           {headings.length > 0 && (
             <div className="mb-10 p-5 rounded-xl border border-zinc-800 bg-zinc-950/40">
               <div className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-3 flex items-center gap-2">
-                <RiListCheck2 size={14} />
+                <RiListCheck2 size={14} className="text-accent/80" />
                 <span>Contents</span>
               </div>
               <ul className="space-y-1.5">
@@ -491,9 +491,9 @@ export default function BlogPost() {
                     <li key={h.id}>
                       <a
                         href={`#${h.id}`}
-                        className={`text-xs sm:text-sm transition-colors block py-0.5 ${
+                        className={`text-xs sm:text-sm transition-all block py-0.5 ${
                           isActive
-                            ? "text-zinc-100 font-medium translate-x-1"
+                            ? "text-accent font-medium translate-x-1"
                             : "text-zinc-500 hover:text-zinc-300"
                         }`}
                       >
@@ -615,8 +615,8 @@ export default function BlogPost() {
 
           {/* Case Study Reference */}
           {relatedProject && (
-            <div className="mt-14 p-6 rounded-2xl border border-zinc-800/80 bg-zinc-950/60">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 mb-2">
+            <div className="mt-14 p-6 rounded-2xl border border-zinc-800/80 border-l-2 border-l-accent/60 bg-zinc-950/60">
+              <div className="text-[10px] font-mono uppercase tracking-wider text-accent/90 mb-2">
                 Related Project Architecture
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -630,7 +630,7 @@ export default function BlogPost() {
                 </div>
                 <Link
                   to={`/projects/${relatedProject.id}/`}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors text-xs font-mono whitespace-nowrap shrink-0"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-accent hover:border-accent/40 transition-colors text-xs font-mono whitespace-nowrap shrink-0"
                 >
                   <span>View case study</span>
                   <RiArrowRightLine size={13} />
@@ -690,7 +690,7 @@ export default function BlogPost() {
             </div>
             <Link
               to="/contact/"
-              className="px-3.5 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors text-xs font-mono"
+              className="px-3.5 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300 hover:text-accent hover:border-accent/40 transition-colors text-xs font-mono"
             >
               Get in touch →
             </Link>
@@ -701,9 +701,9 @@ export default function BlogPost() {
             {prevPost ? (
               <Link
                 to={`/blog/${prevPost.slug}/`}
-                className="p-4 rounded-xl border border-zinc-800 hover:border-zinc-750 transition-colors group flex flex-col"
+                className="p-4 rounded-xl border border-zinc-800 hover:border-accent/35 transition-colors group flex flex-col"
               >
-                <span className="text-[10px] font-mono text-zinc-500 uppercase mb-1">
+                <span className="text-[10px] font-mono text-zinc-500 group-hover:text-accent uppercase mb-1 transition-colors">
                   ← Previous
                 </span>
                 <span className="text-xs sm:text-sm font-medium text-zinc-300 group-hover:text-white transition-colors line-clamp-1">
@@ -715,9 +715,9 @@ export default function BlogPost() {
             {nextPost ? (
               <Link
                 to={`/blog/${nextPost.slug}/`}
-                className="p-4 rounded-xl border border-zinc-800 hover:border-zinc-750 transition-colors group flex flex-col sm:text-right"
+                className="p-4 rounded-xl border border-zinc-800 hover:border-accent/35 transition-colors group flex flex-col sm:text-right"
               >
-                <span className="text-[10px] font-mono text-zinc-500 uppercase mb-1">
+                <span className="text-[10px] font-mono text-zinc-500 group-hover:text-accent uppercase mb-1 transition-colors">
                   Next →
                 </span>
                 <span className="text-xs sm:text-sm font-medium text-zinc-300 group-hover:text-white transition-colors line-clamp-1">

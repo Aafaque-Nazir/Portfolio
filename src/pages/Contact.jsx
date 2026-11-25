@@ -125,7 +125,7 @@ const Contact = () => {
                     className={`w-full bg-white/[0.03] border rounded-xl px-3.5 py-2.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none transition-all font-sans ${
                       errors.name
                         ? "border-red-500/60 focus:border-red-500"
-                        : "border-white/10 hover:border-white/20 focus:border-white/30 focus:bg-white/[0.05]"
+                        : "border-white/10 hover:border-white/20 focus:border-accent/60 focus:ring-1 focus:ring-accent/20 focus:bg-white/[0.05]"
                     }`}
                   />
                   {errors.name && (
@@ -146,7 +146,7 @@ const Contact = () => {
                     className={`w-full bg-white/[0.03] border rounded-xl px-3.5 py-2.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none transition-all font-sans ${
                       errors.email
                         ? "border-red-500/60 focus:border-red-500"
-                        : "border-white/10 hover:border-white/20 focus:border-white/30 focus:bg-white/[0.05]"
+                        : "border-white/10 hover:border-white/20 focus:border-accent/60 focus:ring-1 focus:ring-accent/20 focus:bg-white/[0.05]"
                     }`}
                   />
                   {errors.email && (
@@ -170,7 +170,7 @@ const Contact = () => {
                     className={`w-full bg-white/[0.03] border rounded-xl px-3.5 py-2.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none transition-all font-sans ${
                       errors.phone
                         ? "border-red-500/60 focus:border-red-500"
-                        : "border-white/10 hover:border-white/20 focus:border-white/30 focus:bg-white/[0.05]"
+                        : "border-white/10 hover:border-white/20 focus:border-accent/60 focus:ring-1 focus:ring-accent/20 focus:bg-white/[0.05]"
                     }`}
                   />
                   {errors.phone && (
@@ -190,7 +190,7 @@ const Contact = () => {
                       className={`w-full bg-zinc-900 border rounded-xl px-3.5 py-2.5 text-sm text-zinc-100 focus:outline-none transition-all appearance-none cursor-pointer font-sans ${
                         errors.service
                           ? "border-red-500/60 focus:border-red-500"
-                          : "border-white/10 hover:border-white/20 focus:border-white/30"
+                          : "border-white/10 hover:border-white/20 focus:border-accent/60 focus:ring-1 focus:ring-accent/20"
                       }`}
                     >
                       <option value="" className="bg-zinc-950 text-zinc-500">Select project type...</option>
@@ -223,7 +223,7 @@ const Contact = () => {
                   className={`w-full bg-white/[0.03] border rounded-xl px-3.5 py-2.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none transition-all resize-none font-sans ${
                     errors.message
                       ? "border-red-500/60 focus:border-red-500"
-                      : "border-white/10 hover:border-white/20 focus:border-white/30 focus:bg-white/[0.05]"
+                      : "border-white/10 hover:border-white/20 focus:border-accent/60 focus:ring-1 focus:ring-accent/20 focus:bg-white/[0.05]"
                   }`}
                 />
                 {errors.message && (
@@ -288,7 +288,7 @@ const Contact = () => {
               />
               {/* Location Badge */}
               <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-lg bg-zinc-950/90 backdrop-blur-md border border-white/10 text-[11px] font-mono text-zinc-300 flex items-center gap-1.5 shadow-lg pointer-events-none">
-                <MapPin size={12} className="text-zinc-400" />
+                <MapPin size={12} className="text-accent" />
                 <span>Navi Mumbai, Maharashtra</span>
               </div>
             </motion.div>
@@ -301,10 +301,10 @@ const Contact = () => {
                 transition={{ delay: 0.2 }}
                 href="mailto:aafaquenazir@gmail.com"
                 aria-label="Send email to Aafaque Nazir at aafaquenazir@gmail.com"
-                className="group flex items-center justify-between p-4 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-white/20 transition-all active:scale-[0.99]"
+                className="group flex items-center justify-between p-4 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-accent/35 transition-all active:scale-[0.99]"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300 group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 group-hover:border-accent/30 flex items-center justify-center text-zinc-300 group-hover:text-accent transition-colors">
                     <Mail size={18} />
                   </div>
                   <div className="text-left font-sans">
@@ -312,7 +312,7 @@ const Contact = () => {
                     <span className="text-xs sm:text-sm font-medium text-zinc-200 group-hover:text-white transition-colors">aafaquenazir@gmail.com</span>
                   </div>
                 </div>
-                <span className="w-7 h-7 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-500 group-hover:text-white transition-colors shrink-0">
+                <span className="w-7 h-7 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-500 group-hover:text-accent transition-colors shrink-0">
                   <ArrowUpRight size={14} />
                 </span>
               </motion.a>

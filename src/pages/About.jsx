@@ -17,7 +17,7 @@ const AboutNode = ({ children, title, className = "" }) => {
   return (
     <motion.div
       onMouseMove={handleMouseMove}
-      className={`group relative rounded-2xl p-[1px] overflow-hidden transition-all duration-300 isolation-isolate border border-white/10 hover:border-white/25 ${className}`}
+      className={`group relative rounded-2xl p-[1px] overflow-hidden transition-all duration-300 isolation-isolate border border-white/10 hover:border-accent/30 ${className}`}
     >
       {/* Border Glow */}
       <motion.div
@@ -25,7 +25,7 @@ const AboutNode = ({ children, title, className = "" }) => {
         style={{
           background: useTransform(
             [mouseX, mouseY],
-            ([x, y]) => `radial-gradient(350px circle at ${x}px ${y}px, rgba(255, 255, 255, 0.08), transparent 85%)`
+            ([x, y]) => `radial-gradient(350px circle at ${x}px ${y}px, rgba(251, 191, 36, 0.14), transparent 85%)`
           ),
         }}
       />
@@ -36,14 +36,14 @@ const AboutNode = ({ children, title, className = "" }) => {
           style={{
             background: useTransform(
               [mouseX, mouseY],
-              ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, rgba(255,255,255,0.02), transparent 80%)`
+              ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, rgba(251, 191, 36, 0.03), transparent 80%)`
             ),
           }}
         />
         <div className="relative z-10">
           {title && (
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-[2px] bg-white/60 rounded-full" />
+              <div className="w-8 h-[2px] bg-accent rounded-full" />
               <h2 className="text-xs font-mono text-zinc-300 tracking-[0.25em] uppercase font-bold">{title}</h2>
             </div>
           )}
@@ -85,7 +85,7 @@ const About = () => {
           <div className="flex flex-col gap-6 h-full justify-between">
             <AboutNode title="Background & Focus" className="flex-1">
               <p className="text-base sm:text-lg text-gray-200 font-light leading-relaxed mb-4">
-                <span className="text-white font-bold">Full-Stack Web Developer</span> focused on <span className="text-white font-semibold underline decoration-white/30 underline-offset-8">clean code & modern design</span>.
+                <span className="text-white font-bold">Full-Stack Web Developer</span> focused on <span className="text-white font-semibold underline decoration-accent/60 underline-offset-8">clean code & modern design</span>.
               </p>
               <p className="text-sm sm:text-base text-gray-400 leading-relaxed font-light mb-4">
                 I build fast, secure, and responsive web applications from the ground up using modern tools like <span className="text-white">React, Next.js, and Node.js</span>.
@@ -101,18 +101,18 @@ const About = () => {
             </AboutNode>
 
             {/* Quality Standards & Metrics Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 px-5 bg-[#09090b] border border-white/10 hover:border-white/25 rounded-2xl relative overflow-hidden group transition-all duration-300">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 px-5 bg-[#09090b] border border-white/10 hover:border-accent/35 rounded-2xl relative overflow-hidden group transition-all duration-300">
               {/* Animated Glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none opacity-20" />
               
               <div className="relative z-10 flex flex-col">
-                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">100<span className="text-zinc-400 text-xs sm:text-sm">%</span></span>
+                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">100<span className="text-accent text-xs sm:text-sm">%</span></span>
                 <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mt-0.5">Responsive</span>
               </div>
               
               <div className="relative z-10 flex flex-col">
-                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">&lt;1s</span>
+                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter"><span className="text-accent">&lt;</span>1s</span>
                 <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mt-0.5">Fast Load</span>
               </div>
               
@@ -122,7 +122,7 @@ const About = () => {
               </div>
               
               <div className="relative z-10 flex flex-col">
-                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">10<span className="text-zinc-400 text-xs sm:text-sm">+</span></span>
+                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">10<span className="text-accent text-xs sm:text-sm">+</span></span>
                 <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mt-0.5">Projects</span>
               </div>
             </div>
@@ -155,7 +155,7 @@ const About = () => {
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 group/item">
-                    <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300 group-hover/item:bg-white group-hover/item:text-black transition-all shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300 group-hover/item:bg-accent/10 group-hover/item:border-accent/40 group-hover/item:text-accent transition-all shrink-0">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                       </svg>

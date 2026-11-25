@@ -83,7 +83,7 @@ const Home = () => {
 
             {/* Normal, honest description */}
             <div className="max-w-2xl mb-6">
-              <p className="text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed font-normal border-l border-zinc-700 pl-4">
+              <p className="text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed font-normal border-l-2 border-accent/70 pl-4">
                 I build fast, responsive websites and modern web applications with clean code, smooth interactions, and thoughtful design.
               </p>
             </div>
@@ -123,26 +123,26 @@ const Home = () => {
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-10">
           <div className="relative rounded-2xl border border-white/10 bg-zinc-950/80 backdrop-blur-xl p-3 sm:p-4 shadow-[0_16px_40px_rgba(0,0,0,0.8)] overflow-hidden">
             {/* Ambient top highlight line */}
-            <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+            <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-accent/40 to-transparent pointer-events-none" />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
               {/* 01. Projects */}
               <div
                 onClick={() => document.getElementById("featured-work")?.scrollIntoView({ behavior: "smooth" })}
-                className="group relative rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 p-3.5 sm:p-4 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                className="group relative rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] hover:border-accent/30 p-3.5 sm:p-4 transition-all duration-200 cursor-pointer flex flex-col justify-between"
               >
                 <div className="flex items-center justify-between mb-2.5">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 group-hover:text-zinc-300 transition-colors">
                     Portfolio
                   </span>
-                  <div className="p-1.5 rounded-lg bg-white/[0.04] text-zinc-400 group-hover:text-white transition-colors">
+                  <div className="p-1.5 rounded-lg bg-white/[0.04] text-zinc-400 group-hover:text-accent transition-colors">
                     <FolderGit2 className="w-3.5 h-3.5" />
                   </div>
                 </div>
                 <div>
                   <div className="flex items-baseline gap-1.5">
                     <span className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                      {projects.length}+
+                      {projects.length}<span className="text-accent">+</span>
                     </span>
                     <span className="text-xs font-mono text-zinc-400 font-medium">Projects</span>
                   </div>
@@ -153,12 +153,12 @@ const Home = () => {
               </div>
 
               {/* 02. Tech Stack */}
-              <div className="group relative rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 p-3.5 sm:p-4 transition-all duration-200 flex flex-col justify-between">
+              <div className="group relative rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] hover:border-accent/30 p-3.5 sm:p-4 transition-all duration-200 flex flex-col justify-between">
                 <div className="flex items-center justify-between mb-2.5">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 group-hover:text-zinc-300 transition-colors">
                     Core Stack
                   </span>
-                  <div className="p-1.5 rounded-lg bg-white/[0.04] text-zinc-400 group-hover:text-white transition-colors">
+                  <div className="p-1.5 rounded-lg bg-white/[0.04] text-zinc-400 group-hover:text-accent transition-colors">
                     <Code2 className="w-3.5 h-3.5" />
                   </div>
                 </div>
@@ -175,19 +175,19 @@ const Home = () => {
               </div>
 
               {/* 03. Performance */}
-              <div className="group relative rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 p-3.5 sm:p-4 transition-all duration-200 flex flex-col justify-between">
+              <div className="group relative rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] hover:border-accent/30 p-3.5 sm:p-4 transition-all duration-200 flex flex-col justify-between">
                 <div className="flex items-center justify-between mb-2.5">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 group-hover:text-zinc-300 transition-colors">
                     Performance
                   </span>
-                  <div className="p-1.5 rounded-lg bg-white/[0.04] text-zinc-400 group-hover:text-white transition-colors">
+                  <div className="p-1.5 rounded-lg bg-white/[0.04] text-zinc-400 group-hover:text-accent transition-colors">
                     <Zap className="w-3.5 h-3.5" />
                   </div>
                 </div>
                 <div>
                   <div className="flex items-baseline gap-1.5">
                     <span className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                      &lt;1s
+                      <span className="text-accent">&lt;</span>1s
                     </span>
                     <span className="text-xs font-mono text-zinc-400 font-medium">Fast Load</span>
                   </div>
@@ -200,7 +200,7 @@ const Home = () => {
               {/* 04. Availability */}
               <Link
                 to="/contact/"
-                className="group relative rounded-xl border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20 p-3.5 sm:p-4 transition-all duration-200 flex flex-col justify-between block cursor-pointer"
+                className="group relative rounded-xl border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06] hover:border-emerald-400/35 p-3.5 sm:p-4 transition-all duration-200 flex flex-col justify-between block cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2.5">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
@@ -244,7 +244,7 @@ const Home = () => {
             </p>
             <Link
               to="/about/"
-              className="inline-flex items-center gap-2 text-xs font-mono text-zinc-300 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-mono text-zinc-300 hover:text-accent transition-colors"
             >
               <span>Read my full background and approach →</span>
             </Link>
@@ -298,7 +298,7 @@ const Home = () => {
             className="group inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors self-start sm:self-end"
           >
             <span>View All ({projects.length}) Projects</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:text-accent transition-all" />
           </Link>
         </div>
 
@@ -312,7 +312,7 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
               onClick={() => navigate(`/projects/${project.id}/`)}
-              className="group relative flex flex-col bg-zinc-950/80 border border-white/10 hover:border-white/25 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.7)] cursor-pointer"
+              className="group relative flex flex-col bg-zinc-950/80 border border-white/10 hover:border-accent/35 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.7)] cursor-pointer"
             >
               {/* Media Preview (Proportional 16:9) */}
               <div className="relative w-full aspect-video overflow-hidden bg-zinc-950 border-b border-white/5">
@@ -331,7 +331,7 @@ const Home = () => {
               {/* Card Body */}
               <div className="p-4 sm:p-5 flex flex-col justify-between flex-grow">
                 <div>
-                  <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block mb-1">
+                  <span className="text-xs font-mono text-accent/90 uppercase tracking-wider block mb-1">
                     {project.category}
                   </span>
                   <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors">
@@ -362,7 +362,7 @@ const Home = () => {
                     className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-white transition-colors group/link"
                   >
                     <span>View Details</span>
-                    <ArrowRight className="w-3 h-3 text-zinc-400 group-hover/link:text-white group-hover/link:translate-x-1 transition-all" />
+                    <ArrowRight className="w-3 h-3 text-zinc-400 group-hover/link:text-accent group-hover/link:translate-x-1 transition-all" />
                   </Link>
 
                   {project.link && (
@@ -422,7 +422,7 @@ const Home = () => {
             className="group inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors self-start sm:self-end"
           >
             <span>View All Services</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:text-accent transition-all" />
           </Link>
         </div>
 
@@ -430,11 +430,11 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-4">
           <div
             onClick={() => navigate("/services/", { state: { plan: "Websites" } })}
-            className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-white/25 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
+            className="group p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-accent/35 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
           >
             <div>
-              <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300 mb-4">
-                <Globe className="w-4 h-4 text-zinc-300" />
+              <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 group-hover:border-accent/30 flex items-center justify-center text-zinc-300 group-hover:text-accent transition-colors mb-4">
+                <Globe className="w-4 h-4" />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Websites</h3>
               <p className="text-sm text-zinc-400 font-light leading-relaxed mb-4">
@@ -448,17 +448,17 @@ const Home = () => {
               className="group/link inline-flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-white transition-colors"
             >
               <span>Learn more</span>
-              <ArrowRight className="w-3 h-3 text-zinc-400 group-hover/link:text-white group-hover/link:translate-x-1 transition-all" />
+              <ArrowRight className="w-3 h-3 text-zinc-400 group-hover/link:text-accent group-hover/link:translate-x-1 transition-all" />
             </Link>
           </div>
 
           <div
             onClick={() => navigate("/services/", { state: { plan: "Custom Web Applications" } })}
-            className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-white/25 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
+            className="group p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-accent/35 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
           >
             <div>
-              <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300 mb-4">
-                <Layers className="w-4 h-4 text-zinc-300" />
+              <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 group-hover:border-accent/30 flex items-center justify-center text-zinc-300 group-hover:text-accent transition-colors mb-4">
+                <Layers className="w-4 h-4" />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Web Applications</h3>
               <p className="text-sm text-zinc-400 font-light leading-relaxed mb-4">
@@ -472,17 +472,17 @@ const Home = () => {
               className="group/link inline-flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-white transition-colors"
             >
               <span>Learn more</span>
-              <ArrowRight className="w-3 h-3 text-zinc-400 group-hover/link:text-white group-hover/link:translate-x-1 transition-all" />
+              <ArrowRight className="w-3 h-3 text-zinc-400 group-hover/link:text-accent group-hover/link:translate-x-1 transition-all" />
             </Link>
           </div>
 
           <div
             onClick={() => navigate("/services/", { state: { plan: "Custom Online Stores" } })}
-            className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-white/25 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
+            className="group p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-accent/35 transition-all flex flex-col justify-between cursor-pointer hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
           >
             <div>
-              <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300 mb-4">
-                <ShoppingCart className="w-4 h-4 text-zinc-300" />
+              <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 group-hover:border-accent/30 flex items-center justify-center text-zinc-300 group-hover:text-accent transition-colors mb-4">
+                <ShoppingCart className="w-4 h-4" />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">E-Commerce Stores</h3>
               <p className="text-sm text-zinc-400 font-light leading-relaxed mb-4">
@@ -496,7 +496,7 @@ const Home = () => {
               className="group/link inline-flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-white transition-colors"
             >
               <span>Learn more</span>
-              <ArrowRight className="w-3 h-3 text-zinc-400 group-hover/link:text-white group-hover/link:translate-x-1 transition-all" />
+              <ArrowRight className="w-3 h-3 text-zinc-400 group-hover/link:text-accent group-hover/link:translate-x-1 transition-all" />
             </Link>
           </div>
         </div>

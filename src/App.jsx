@@ -44,7 +44,7 @@ function App() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className="relative min-h-screen overflow-x-hidden bg-black font-sans text-zinc-100 selection:bg-white/20 selection:text-white">
+      <div className="relative min-h-screen overflow-x-hidden bg-black font-sans text-zinc-100 selection:bg-accent/25 selection:text-white">
         <SmoothScroll />
         <Navbar />
         <CommandMenu />

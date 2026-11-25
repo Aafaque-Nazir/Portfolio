@@ -64,7 +64,7 @@ export default function CommandMenu() {
       contentClassName="cmdk-dialog-content"
     >
       <div className="flex items-center px-4 border-b border-white/10 bg-zinc-950/90">
-        <Search className="w-4 h-4 text-zinc-500 mr-3 shrink-0" />
+        <Search className="w-4 h-4 text-accent/80 mr-3 shrink-0" />
         <Command.Input
           placeholder="Search pages, projects, guides, or actions..."
           className="w-full bg-transparent py-4 text-sm text-zinc-100 placeholder:text-zinc-500 outline-none font-sans"
@@ -85,7 +85,7 @@ export default function CommandMenu() {
         <Command.Group heading="Quick Actions" className="px-1 py-1">
           <Command.Item
             onSelect={() => runCommand(copyEmail)}
-            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
               <Copy className="w-3.5 h-3.5" />
@@ -96,7 +96,7 @@ export default function CommandMenu() {
 
           <Command.Item
             onSelect={() => runCommand(() => window.open("/Aafaque_Nazir_Resume.pdf", "_blank"))}
-            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
               <FileText className="w-3.5 h-3.5" />
@@ -107,7 +107,7 @@ export default function CommandMenu() {
 
           <Command.Item
             onSelect={() => runCommand(() => window.open("https://wa.me/919325629256", "_blank"))}
-            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
               <PhoneCall className="w-3.5 h-3.5" />
@@ -121,7 +121,7 @@ export default function CommandMenu() {
         <Command.Group heading="Navigation" className="px-1 py-1 mt-1 border-t border-white/5 pt-1">
           <Command.Item
             onSelect={() => runCommand(() => navigate("/"))}
-            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
               <Home className="w-3.5 h-3.5" />
@@ -131,7 +131,7 @@ export default function CommandMenu() {
 
           <Command.Item
             onSelect={() => runCommand(() => navigate("/about/"))}
-            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
               <User className="w-3.5 h-3.5" />
@@ -141,7 +141,7 @@ export default function CommandMenu() {
 
           <Command.Item
             onSelect={() => runCommand(() => navigate("/projects/"))}
-            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
               <FolderGit2 className="w-3.5 h-3.5" />
@@ -151,7 +151,7 @@ export default function CommandMenu() {
 
           <Command.Item
             onSelect={() => runCommand(() => navigate("/services/"))}
-            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
               <Briefcase className="w-3.5 h-3.5" />
@@ -161,7 +161,7 @@ export default function CommandMenu() {
 
           <Command.Item
             onSelect={() => runCommand(() => navigate("/blog/"))}
-            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
               <BookOpen className="w-3.5 h-3.5" />
@@ -171,7 +171,7 @@ export default function CommandMenu() {
 
           <Command.Item
             onSelect={() => runCommand(() => navigate("/contact/"))}
-            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+            className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
           >
             <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
               <Mail className="w-3.5 h-3.5" />
@@ -186,7 +186,7 @@ export default function CommandMenu() {
             <Command.Item
               key={p.id}
               onSelect={() => runCommand(() => navigate(`/projects/${p.id}/`))}
-              className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+              className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
             >
               <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
                 <Folder className="w-3.5 h-3.5" />
@@ -210,7 +210,7 @@ export default function CommandMenu() {
             <Command.Item
               key={b.slug}
               onSelect={() => runCommand(() => navigate(`/blog/${b.slug}/`))}
-              className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white"
+              className="group flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm text-zinc-200 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors border-l-2 border-l-transparent data-[selected=true]:bg-white/[0.08] data-[selected=true]:text-white data-[selected=true]:border-l-accent"
             >
               <div className="w-6 h-6 rounded-md bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 text-zinc-400 group-hover:text-zinc-200">
                 <BookOpen className="w-3.5 h-3.5" />
@@ -230,8 +230,8 @@ export default function CommandMenu() {
       </Command.List>
 
       <div className="flex items-center justify-between px-4 py-2.5 border-t border-white/10 bg-zinc-950 text-[11px] text-zinc-500 font-mono">
-        <span>Press <kbd className="text-zinc-400">↑</kbd> <kbd className="text-zinc-400">↓</kbd> to navigate</span>
-        <span><kbd className="text-zinc-400">↵</kbd> to open</span>
+        <span>Press <kbd className="text-accent/90">↑</kbd> <kbd className="text-accent/90">↓</kbd> to navigate</span>
+        <span><kbd className="text-accent/90">↵</kbd> to open</span>
       </div>
     </Command.Dialog>
   );

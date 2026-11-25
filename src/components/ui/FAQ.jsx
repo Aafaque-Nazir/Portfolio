@@ -22,7 +22,7 @@ const faqs = [
 
 const FAQItem = ({ faq, isOpen, onClick }) => {
   return (
-    <div className={`backdrop-blur-sm rounded-2xl overflow-hidden transition-all ${isOpen ? "border border-white/20 bg-zinc-950/80 shadow-[0_4px_20px_rgba(0,0,0,0.5)]" : "border border-white/5 bg-zinc-950/40 hover:border-white/15"}`}>
+    <div className={`backdrop-blur-sm rounded-2xl overflow-hidden transition-all ${isOpen ? "border border-accent/35 bg-zinc-950/80 shadow-[0_4px_20px_rgba(0,0,0,0.5)]" : "border border-white/5 bg-zinc-950/40 hover:border-white/15"}`}>
       <button
         type="button"
         onClick={onClick}
@@ -35,7 +35,7 @@ const FAQItem = ({ faq, isOpen, onClick }) => {
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.25, ease: "easeInOut" }}
-          className="flex-shrink-0 ml-4 text-zinc-400 group-hover:text-white"
+          className={`flex-shrink-0 ml-4 transition-colors ${isOpen ? "text-accent" : "text-zinc-400 group-hover:text-accent"}`}
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

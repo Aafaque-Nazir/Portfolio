@@ -54,7 +54,7 @@ export default function Blog() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search articles by title, topic, or tags..."
-              className="w-full pl-10 pr-10 py-2.5 sm:py-3 rounded-xl bg-zinc-950/80 border border-zinc-800 text-white placeholder-zinc-500 text-xs sm:text-sm font-mono focus:outline-none focus:border-zinc-600 focus:ring-1 focus:ring-zinc-700/50 transition-all shadow-sm"
+              className="w-full pl-10 pr-10 py-2.5 sm:py-3 rounded-xl bg-zinc-950/80 border border-zinc-800 text-white placeholder-zinc-500 text-xs sm:text-sm font-mono focus:outline-none focus:border-accent/60 focus:ring-1 focus:ring-accent/20 transition-all shadow-sm"
               aria-label="Search articles"
             />
             {searchQuery && (
@@ -104,12 +104,12 @@ export default function Blog() {
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}/`}
-                className="group relative rounded-xl p-5 bg-zinc-950 border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/40 transition-all duration-200 flex flex-col justify-between cursor-pointer no-underline block"
+                className="group relative rounded-xl p-5 bg-zinc-950 border border-zinc-800/80 hover:border-accent/35 hover:bg-zinc-900/40 transition-all duration-200 flex flex-col justify-between cursor-pointer no-underline block"
               >
                 <div>
                   {/* Category & Read Time */}
                   <div className="flex items-center justify-between gap-2 mb-3 text-[11px] font-mono">
-                    <span className="uppercase tracking-wider text-zinc-400 font-medium">
+                    <span className="uppercase tracking-wider text-accent/90 font-medium">
                       {post.category}
                     </span>
                     <div className="flex items-center gap-1 text-zinc-500">
@@ -149,7 +149,7 @@ export default function Blog() {
                     </span>
                     <span className="inline-flex items-center gap-1 text-zinc-300 group-hover:text-white transition-colors font-medium">
                       <span>Read</span>
-                      <RiArrowRightLine className="text-xs transition-transform group-hover:translate-x-0.5" />
+                      <RiArrowRightLine className="text-xs text-zinc-400 group-hover:text-accent transition-all group-hover:translate-x-0.5" />
                     </span>
                   </div>
                 </div>

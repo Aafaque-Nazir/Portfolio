@@ -167,12 +167,18 @@ const GlobalBackground = () => {
           const dEnd = Math.min(p.length, t.distance);
           
           if (dEnd > dStart) {
+            const isAccentSignal = t.pathIdx % 5 === 0;
             const head = getPointAtDist(p.points, dEnd);
             const tail = getPointAtDist(p.points, dStart);
 
             const grad = ctx.createLinearGradient(tail.x, tail.y, head.x, head.y);
-            grad.addColorStop(0, "rgba(255, 255, 255, 0)");
-            grad.addColorStop(1, "rgba(255, 255, 255, 0.45)");
+            if (isAccentSignal) {
+              grad.addColorStop(0, "rgba(245, 158, 11, 0)");
+              grad.addColorStop(1, "rgba(251, 191, 36, 0.35)");
+            } else {
+              grad.addColorStop(0, "rgba(255, 255, 255, 0)");
+              grad.addColorStop(1, "rgba(255, 255, 255, 0.45)");
+            }
 
             ctx.lineWidth = t.width;
             ctx.strokeStyle = grad;
@@ -190,13 +196,13 @@ const GlobalBackground = () => {
             ctx.stroke();
 
             // Head Glow — Fast dual-pass circle (zero CPU shadowBlur penalty)
-            ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+            ctx.fillStyle = isAccentSignal ? "rgba(245, 158, 11, 0.22)" : "rgba(255, 255, 255, 0.25)";
             ctx.beginPath();
             ctx.arc(head.x, head.y, t.width * 2.4, 0, Math.PI * 2);
             ctx.fill();
 
             // Inner bright core
-            ctx.fillStyle = "#ffffff";
+            ctx.fillStyle = isAccentSignal ? "#fbbf24" : "#ffffff";
             ctx.beginPath();
             ctx.arc(head.x, head.y, t.width * 1.2, 0, Math.PI * 2);
             ctx.fill();

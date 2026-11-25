@@ -123,10 +123,10 @@ export default function Navbar() {
                       {isActive && (
                         <motion.div
                           layoutId="activeNavTabPC"
-                          className="absolute inset-0 bg-white/[0.1] rounded-full border border-white/[0.08]"
+                          className="absolute inset-0 bg-white/[0.08] rounded-full border border-white/[0.1]"
                           transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                         >
-                          <div className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-white/90" />
+                          <div className="absolute bottom-0 left-1/4 right-1/4 h-[1.5px] bg-accent rounded-full" />
                         </motion.div>
                       )}
                       <span className="relative z-10 select-none pointer-events-none">{item.name}</span>
@@ -141,12 +141,12 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={openCommandPalette}
-                className="flex items-center gap-2 px-2.5 py-1 rounded-full text-xs text-zinc-400 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] transition-all cursor-pointer active:scale-95 select-none"
+                className="group flex items-center gap-2 px-2.5 py-1 rounded-full text-xs text-zinc-400 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-accent/35 transition-all cursor-pointer active:scale-95 select-none"
                 title="Search & Commands (Ctrl+K)"
                 aria-label="Search and commands"
               >
-                <Search size={12} className="text-zinc-400" />
-                <kbd className="text-[10px] font-mono text-zinc-400 bg-white/5 px-1 py-0.2 rounded border border-white/10">
+                <Search size={12} className="text-zinc-400 group-hover:text-accent transition-colors" />
+                <kbd className="text-[10px] font-mono text-zinc-400 group-hover:text-zinc-200 bg-white/5 px-1 py-0.2 rounded border border-white/10">
                   ⌘K
                 </kbd>
               </button>
@@ -157,7 +157,7 @@ export default function Navbar() {
                 download
                 aria-label="Download Resume"
                 title="Download Resume PDF"
-                className="relative p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/5 transition-all select-none"
+                className="relative p-2 rounded-full text-zinc-400 hover:text-accent hover:bg-white/5 transition-all select-none"
               >
                 <PiReadCvLogoFill size={16} />
               </a>
@@ -168,7 +168,7 @@ export default function Navbar() {
               <div className="lg:hidden flex items-center justify-between w-full gap-4 px-2 py-0.5 select-none">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-1.5 w-1.5 flex-shrink-0 items-center justify-center">
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
                   </span>
                   <AnimatePresence mode="wait">
                     <motion.span
@@ -272,9 +272,9 @@ export default function Navbar() {
                               {item.name}
                             </span>
                             {isActive ? (
-                              <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                              <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                             ) : (
-                              <RiArrowRightLine className="text-[11px] text-zinc-600 group-hover:text-zinc-300 group-hover:translate-x-0.5 transition-all" />
+                              <RiArrowRightLine className="text-[11px] text-zinc-600 group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
                             )}
                           </>
                         )}

@@ -27,23 +27,27 @@ const ServiceCard = ({ pkg }) => {
       onClick={handleCardClick}
       className={`group relative rounded-2xl overflow-hidden transition-all duration-300 w-full h-full flex flex-col cursor-pointer hover:-translate-y-1 ${
         isHighlight
-          ? "border border-white/25 bg-zinc-950/90 shadow-[0_20px_45px_rgba(0,0,0,0.8)]"
-          : "border border-white/10 hover:border-white/20 bg-zinc-950/70 shadow-[0_16px_36px_rgba(0,0,0,0.6)]"
+          ? "border border-accent/40 hover:border-accent/70 bg-zinc-950/90 shadow-[0_20px_45px_rgba(0,0,0,0.8)]"
+          : "border border-white/10 hover:border-accent/35 bg-zinc-950/70 shadow-[0_16px_36px_rgba(0,0,0,0.6)]"
       }`}
     >
       <div className="relative z-10 h-full flex flex-col p-6 sm:p-7 justify-between">
         <div className="flex-1 flex flex-col">
           {/* Header Row: Icon & Tag */}
           <div className="flex items-center justify-between mb-5">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 bg-white/[0.04] text-zinc-300 group-hover:text-white transition-colors">
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-colors ${
+              isHighlight
+                ? "border-accent/30 bg-accent/10 text-accent"
+                : "border-white/10 bg-white/[0.04] text-zinc-300 group-hover:text-accent group-hover:border-accent/30"
+            }`}>
               {pkg.icon}
             </div>
 
             {pkg.benefitTag && (
               <span className={`inline-flex items-center text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
                 isHighlight
-                  ? "text-zinc-200 bg-white/[0.08] border-white/20 font-semibold"
-                  : "text-zinc-400 bg-white/[0.03] border-white/10"
+                  ? "text-accent bg-accent/10 border-accent/30 font-semibold"
+                  : "text-zinc-400 bg-white/[0.03] border-white/10 group-hover:text-zinc-200"
               }`}>
                 {pkg.benefitTag}
               </span>
@@ -67,7 +71,11 @@ const ServiceCard = ({ pkg }) => {
           <div className="space-y-2.5 mb-6 flex-1 pt-4 border-t border-white/5">
             {pkg.features.map((feature, idx) => (
               <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm">
-                <span className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 bg-white/[0.06] border border-white/10 text-zinc-300">
+                <span className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 border transition-colors ${
+                  isHighlight
+                    ? "bg-accent/10 border-accent/25 text-accent"
+                    : "bg-white/[0.06] border-white/10 text-zinc-300 group-hover:border-accent/25 group-hover:text-accent"
+                }`}>
                   <Check size={10} />
                 </span>
                 <span className="text-zinc-300 font-normal font-sans">
