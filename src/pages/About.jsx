@@ -2,6 +2,7 @@
 import React from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
+import { projects } from "../data/projects";
 import FAQ from "../components/ui/FAQ";
 
 const AboutNode = ({ children, title, className = "" }) => {
@@ -122,7 +123,7 @@ const About = () => {
               </div>
               
               <div className="relative z-10 flex flex-col">
-                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">10<span className="text-accent text-xs sm:text-sm">+</span></span>
+                <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter">{projects.length}<span className="text-accent text-xs sm:text-sm">+</span></span>
                 <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mt-0.5">Projects</span>
               </div>
             </div>

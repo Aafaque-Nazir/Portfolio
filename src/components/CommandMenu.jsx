@@ -49,9 +49,9 @@ export default function CommandMenu() {
   };
 
   const copyEmail = () => {
-    navigator.clipboard.writeText("aafaquebuisness@gmail.com");
+    navigator.clipboard.writeText("aafaquenazir@gmail.com");
     toast.success("Email copied to clipboard!", {
-      description: "aafaquebuisness@gmail.com",
+      description: "aafaquenazir@gmail.com",
     });
   };
 
@@ -91,7 +91,7 @@ export default function CommandMenu() {
               <Copy className="w-3.5 h-3.5" />
             </div>
             <span className="flex-grow font-sans font-normal normal-case">Copy Email Address</span>
-            <span className="text-[11px] font-mono text-zinc-500">aafaquebuisness@gmail.com</span>
+            <span className="text-[11px] font-mono text-zinc-500">aafaquenazir@gmail.com</span>
           </Command.Item>
 
           <Command.Item

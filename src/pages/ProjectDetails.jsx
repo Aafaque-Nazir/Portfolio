@@ -17,7 +17,7 @@ const ProjectDetails = () => {
     if (foundProject) {
       setProject(foundProject);
     } else {
-      navigate("/projects");
+      navigate("/projects/");
     }
   }, [id, navigate]);
 

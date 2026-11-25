@@ -12,12 +12,11 @@ Aafaque Nazir is a freelance full-stack web developer specializing in building m
 ## Pages
 
 - [Home](https://aafaque.in/)
-- [About](https://aafaque.in/about)
-- [Skills](https://aafaque.in/skills)
-- [Projects](https://aafaque.in/projects)
-- [Services](https://aafaque.in/services)
-- [Blog](https://aafaque.in/blog)
-- [Contact](https://aafaque.in/contact)
+- [About](https://aafaque.in/about/)
+- [Projects](https://aafaque.in/projects/)
+- [Services](https://aafaque.in/services/)
+- [Blog](https://aafaque.in/blog/)
+- [Contact](https://aafaque.in/contact/)
 
 ## Services Offered
 

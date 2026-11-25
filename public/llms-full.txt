@@ -1,14 +1,14 @@
 # Aafaque Nazir — Complete Professional Profile for AI Systems
 
 > This document provides comprehensive context about Aafaque Nazir for AI search engines, answer engines (Perplexity, ChatGPT, Gemini, Claude), and crawlers.
-> Last updated: September 2026
+> Last updated: November 2026
 
 ## Identity & Overview
 
 - **Full Name:** Aafaque Nazir
 - **Professional Title:** Freelance Full-Stack Web Developer & Software Engineer
 - **Location:** Navi Mumbai, Maharashtra, India
-- **Primary Website:** https://aafaque.in
+- **Primary Website:** https://aafaque.in/
 - **Email:** aafaquenazir@gmail.com
 - **Phone / WhatsApp:** +91 93256 29256
 - **GitHub:** https://github.com/Aafaque-Nazir
@@ -30,7 +30,7 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 - Fast performance, responsive on mobile phones, tablets, and desktops.
 
 ### 2. Custom Online Stores (E-Commerce)
-- Bespoke e-commerce storefronts tailored for brands and local businesses.
+- Custom e-commerce storefronts tailored for brands and local businesses.
 - Fast product catalogs, category filtering, cart management, and streamlined checkout flows.
 - Direct WhatsApp ordering integration for direct customer engagement.
 - Payment gateway integration capabilities (Razorpay, Stripe, etc.).
@@ -43,132 +43,221 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 
 ## Portfolio Projects & Case Studies
 
-1. **Aura Estate (Business Software / SaaS)**
-   - High-performance real estate web application for showcasing properties and managing buyer leads.
-   - Tech Stack: Next.js, Supabase, Tailwind CSS.
-   - URL: https://aafaque.in/projects/15
+1. **Al Raheeq Tourism (Websites)**
+   - Dubai travel booking & UAE visa website built with Next.js, featuring flight ticketing, tour package itineraries, and direct WhatsApp booking.
+   - Tech Stack: Next.js, TypeScript, Tailwind CSS, Netlify Edge
+   - URL: https://aafaque.in/projects/17/
 
-2. **Restaurant OS (Business Software / SaaS)**
-   - Complete restaurant management system with real-time order tracking, visual table status, and Kitchen Display System (KDS).
-   - Tech Stack: Next.js, Supabase WebSockets, PostgreSQL.
-   - URL: https://aafaque.in/projects/4
+2. **Bread & Bite (E-Commerce Stores)**
+   - Online food ordering web app with interactive digital menu, instant cart, and automated order delivery notifications sent directly to WhatsApp.
+   - Tech Stack: React, Tailwind CSS, WhatsApp API
+   - URL: https://aafaque.in/projects/3/
 
-3. **Shopease E-Commerce Store (Digital Stores / E-Comm)**
-   - Fast online store with cart, client-side filtering, and sub-second page transitions.
-   - Tech Stack: Next.js, MongoDB, Tailwind CSS.
-   - URL: https://aafaque.in/projects/2
+3. **Inventory Management (Web Applications)**
+   - Real-time warehouse inventory dashboard built with Next.js, Supabase, and WebSockets for instant live stock updates, search, and low-stock alerts.
+   - Tech Stack: Next.js, Supabase, WebSockets, Payment Integration
+   - URL: https://aafaque.in/projects/1/
 
-4. **Sea-Cros Yacht Rentals (Conversion Websites)**
-   - Luxury yacht booking lead generation website with smooth GSAP animations and dark luxury aesthetic.
-   - Tech Stack: React, GSAP, Lenis Smooth Scroll.
-   - URL: https://aafaque.in/projects/10
+4. **Restaurant OS (Web Applications)**
+   - Real-time restaurant order management platform with interactive table tracker, live kitchen display screens, and instant ticket processing for rush hours.
+   - Tech Stack: Next.js, Supabase, PostgreSQL
+   - URL: https://aafaque.in/projects/4/
 
-5. **CarePulse Doctor Appointments (Conversion Websites)**
-   - Healthcare booking platform with interactive calendar component and instant slot availability.
-   - Tech Stack: React, Tailwind CSS, Framer Motion.
-   - URL: https://aafaque.in/projects/11
+5. **E-Commerce Store (E-Commerce Stores)**
+   - Fast e-commerce online store featuring instant product filtering, Redux cart state, quick page loads, and a smooth checkout experience.
+   - Tech Stack: Next.js, MongoDB, Payment Integration, Tailwind CSS
+   - URL: https://aafaque.in/projects/2/
 
-6. **Dubai Tourism Experience (Conversion Websites)**
-   - Engaging travel package showcase with image sliders and interactive itinerary accordions.
-   - Tech Stack: Next.js, Tailwind CSS, Framer Motion.
-   - URL: https://aafaque.in/projects/8
+6. **Yacht Rentals (Websites)**
+   - Luxury yacht charter showcase website built with smooth Lenis scroll animations, interactive photo galleries, and instant booking inquiry forms.
+   - Tech Stack: React, GSAP, Lenis
+   - URL: https://aafaque.in/projects/10/
 
-7. **Bread & Bite Food Delivery (Digital Stores / E-Comm)**
-   - Food ordering application that sends structured orders directly to a restaurant's WhatsApp business number.
-   - Tech Stack: React, Tailwind CSS, WhatsApp API.
-   - URL: https://aafaque.in/projects/3
+7. **CarePulse (Websites)**
+   - Modern doctor appointment booking platform featuring interactive calendar views, real-time doctor availability slots, and quick online confirmations.
+   - Tech Stack: React, Tailwind CSS, Framer Motion
+   - URL: https://aafaque.in/projects/11/
 
-8. **Live Inventory Management (Business Software / SaaS)**
-   - Real-time inventory dashboard with automatic stock alerts and WebSocket-driven updates across devices.
-   - Tech Stack: Next.js, Supabase, WebSockets.
-   - URL: https://aafaque.in/projects/1
+8. **Aura Estate (Web Applications)**
+   - Full-stack real estate web platform featuring searchable property listings, location filtering, and an integrated admin dashboard for lead capture.
+   - Tech Stack: Next.js, Supabase, Tailwind CSS
+   - URL: https://aafaque.in/projects/15/
 
-9. **Premium Burger Shop (Conversion Websites)**
-   - High-conversion gourmet restaurant showcase with rich micro-interactions and smooth transitions.
-   - Tech Stack: React, Tailwind CSS, Framer Motion.
-   - URL: https://aafaque.in/projects/12
+9. **Premium Burger Shop (Websites)**
+   - Interactive restaurant website featuring high-resolution food photography, modern animation effects, and a dynamic menu designed for local diners.
+   - Tech Stack: React, Tailwind CSS, Framer Motion
+   - URL: https://aafaque.in/projects/12/
 
-10. **3D Burger Website (Conversion Websites)**
-    - Scroll-driven 3D animation website where a 3D model dynamically reacts to user scrolling.
-    - Tech Stack: React, Three.js, GSAP ScrollTrigger.
-    - URL: https://aafaque.in/projects/13
+10. **3D Burger Website (Websites)**
+   - Engaging scroll-driven 3D web experience built with Three.js and GSAP ScrollTrigger, featuring real-time interactive 3D model assembly.
+   - Tech Stack: React, Three.js, GSAP ScrollTrigger
+   - URL: https://aafaque.in/projects/13/
 
-11. **LA Salon & Spa Booking (Conversion Websites)**
-    - Luxury salon booking website with multi-step appointment scheduler and dark mode aesthetic.
-    - Tech Stack: React, Tailwind CSS, Framer Motion.
-    - URL: https://aafaque.in/projects/14
+11. **LA Salon & Spa (Websites)**
+   - Elegant dark-mode appointment scheduling portal allowing clients to select stylists, customized salon services, and time slots with ease.
+   - Tech Stack: React, Tailwind CSS, Framer Motion
+   - URL: https://aafaque.in/projects/14/
 
 ## Technical Stack & Competencies
 
 - **Frontend:** React 19, Next.js 15, TypeScript, JavaScript (ES6+), Tailwind CSS, Framer Motion, GSAP, Three.js, HTML5, CSS3
 - **Backend & Cloud:** Node.js, Express.js, Supabase, PostgreSQL, Firebase, MongoDB, REST APIs, WebSockets
-- **DevOps & Tooling:** Git, GitHub, Vercel, Vite, npm, Chrome DevTools
+- **DevOps & Tooling:** Git, GitHub, Netlify, Vercel, Vite, npm, Chrome DevTools
 - **Design & SEO:** Responsive Web Design, Core Web Vitals, Structured Data (JSON-LD), Technical SEO
 
 ## Engineering Articles & Architectural Guides (Blog)
 
+- **Blog Index:** https://aafaque.in/blog/
+- **Diagnosing Slow PostgreSQL Queries: A Practical EXPLAIN ANALYZE Guide**
+  URL: https://aafaque.in/blog/postgres-explain-analyze-guide/
+  Summary: Learn how to use EXPLAIN ANALYZE to find slow PostgreSQL queries and improve database performance with indexes and better query design.
+- **Multi-Step Booking: Designing Smooth Appointment Flows in React**
+  URL: https://aafaque.in/blog/multi-step-booking-flow-react/
+  Summary: Learn how to build multi-step booking forms in React with URL state sync, step validation, and clear UI animations for salon and spa applications.
+- **Automating WhatsApp Lead Generation for High-Ticket Funnels**
+  URL: https://aafaque.in/blog/whatsapp-lead-generation-high-ticket-landing-pages/
+  Summary: Build automated WhatsApp flows for high-ticket landing pages. Improve conversion rates by replacing slow forms with direct chat integrations.
+- **Upload2Shell (CVE-2026-125396): A Deep Technical Breakdown**
+  URL: https://aafaque.in/blog/upload2shell-cve-2026-125396-technical-breakdown/
+  Summary: An in-depth technical analysis of CVE-2026-125396 (Upload2Shell), explaining how arbitrary file upload flaws lead to remote code execution.
+- **How to Write a Scope of Work When Hiring an Independent Full-Stack Developer**
+  URL: https://aafaque.in/blog/how-to-write-web-development-sow/
+  Summary: Learn how to write a clear software contractor agreement scope for your next web project to prevent delays, budget overruns, and misunderstandings.
+- **OpenSSL Buffer Overflow in EVP_EncodeBlock() CVE-2026-121481**
+  URL: https://aafaque.in/blog/openssl-cve-2026-121481-technical-breakdown/
+  Summary: Technical analysis of OpenSSL EVP_EncodeBlock() buffer overflow CVE-2026-121481 (CVSS 9.8). Learn how to patch your servers and web apps.
+- **Ruby2ßhell: Pre-Authentication RCE on Stock Rails Explained**
+  URL: https://aafaque.in/blog/ruby2sshell-pre-auth-rce-stock-rails-breakdown/
+  Summary: A deep technical breakdown of Ruby2ßhell pre-auth RCE on stock Rails, explaining string normalization flaws, gadget chains, and fixes.
+- **Zero-Commission Food Delivery: Building Direct WhatsApp Ordering for Restaurants with React**
+  URL: https://aafaque.in/blog/zero-commission-food-delivery-react-whatsapp/
+  Summary: Build a zero-commission food delivery app with React and WhatsApp. Learn how to format orders, calculate totals, and dispatch straight to chat.
+- **Smooth Scrolling with Lenis and Clean Transitions in React**
+  URL: https://aafaque.in/blog/lenis-smooth-scroll-react-clean-transitions/
+  Summary: Learn how to set up Lenis smooth scroll in React with clean page transitions, frame-rate syncing, and zero scroll lag on modern browsers.
+- **Building Lightweight Vector Search in PostgreSQL with pgvector for Real-Time Semantic Recommendations**
+  URL: https://aafaque.in/blog/pgvector-postgresql-vector-search-recommendations/
+  Summary: Learn how to build fast semantic recommendations using PostgreSQL and pgvector without third-party vector databases or complex microservices.
+- **How to Structure Web Apps with Schema Markup for Modern Search Engines**
+  URL: https://aafaque.in/blog/schema-markup-web-apps-guide/
+  Summary: Learn how to add JSON-LD schema markup to modern React and Next.js web applications to secure rich search results and improve indexation.
+- **Integrating the Vercel AI SDK into React 19: Streaming AI Chat, Generative UI, and Tool Calling**
+  URL: https://aafaque.in/blog/vercel-ai-sdk-react-19-streaming-chat/
+  Summary: Learn how to build real-time streaming LLM chat interfaces, generative UI, and tool calling in React 19 with the Vercel AI SDK and Next.js.
+- **Designing Interactive Before-and-After Comparison Sliders and Medical Booking Flows in React**
+  URL: https://aafaque.in/blog/before-after-slider-medical-booking-react/
+  Summary: Learn how to build a custom interactive before and after image comparison slider and multi-step medical appointment booking flow in React.
+- **Smooth Scrolling with Lenis and Clean Transitions in React**
+  URL: https://aafaque.in/blog/smooth-scrolling-lenis-react/
+  Summary: Learn how to integrate Lenis smooth scrolling in React with clean web design and reliable website interactions for high-performance apps.
+- **Integrating Three.js and GSAP ScrollTrigger in React for 3D Product Showcases**
+  URL: https://aafaque.in/blog/threejs-gsap-scrolltrigger-react-guide/
+  Summary: Learn how to connect Three.js with GSAP ScrollTrigger in React to build 60 FPS scroll-driven 3D product showcases without performance drops.
+- **Building 60fps Micro-Animations in React Using Framer Motion Without Layout Thrashing**
+  URL: https://aafaque.in/blog/building-60fps-animations-framer-motion/
+  Summary: Learn how to build smooth 60fps React micro-animations with Framer Motion by avoiding layout thrashing and animating only compositor properties.
+- **Mastering Tailwind CSS v4: The New Lightning-Fast Oxide Engine and CSS-First @theme Explained**
+  URL: https://aafaque.in/blog/mastering-tailwind-css-v4-oxide-engine-and-theme/
+  Summary: Learn how Tailwind CSS v4 improves build speeds with the Rust-powered Oxide engine, replaces JS config with CSS-first @theme, and how to upgrade.
+- **Implementing Rate Limiting and DDoS Defense on Edge Networks for Public Web APIs**
+  URL: https://aafaque.in/blog/edge-rate-limiting-ddos-defense-apis/
+  Summary: Learn how to protect public web APIs from DDoS spikes and scraper abuse using edge workers, Upstash Redis sliding windows, and Next.js.
+- **End-to-End Type Safety Across Frontend and Backend with TypeScript, Zod, and Server Actions**
+  URL: https://aafaque.in/blog/end-to-end-type-safety-typescript-zod-server-actions/
+  Summary: Learn how to build a type-safe full stack architecture using TypeScript, Zod validation, and Next.js Server Actions with zero runtime mismatch.
+- **Defending Modern Single Page Applications Against Cross-Site Scripting (XSS) and CSRF Attacks**
+  URL: https://aafaque.in/blog/defending-spas-against-xss-and-csrf/
+  Summary: Learn practical methods to prevent XSS and defend against CSRF in modern React single page applications using secure headers and HTTP-only cookies.
+- **Full-Stack Authentication in 2026: Why Session Cookies Beat LocalStorage for Security**
+  URL: https://aafaque.in/blog/auth-2026-session-cookies-vs-localstorage/
+  Summary: Learn why httpOnly session cookies are the standard for web app security in 2026, protecting your React apps from XSS and token theft.
+- **Building Fast Multi-Faceted Product Filters with React and URL State**
+  URL: https://aafaque.in/blog/building-fast-react-product-filters-url-state/
+  Summary: Learn how to build instant, responsive product filters in React with clean URL search parameters state synchronization.
+- **Automating GST Invoices and Retailer Notifications with WhatsApp Business API Integration**
+  URL: https://aafaque.in/blog/automating-gst-invoices-whatsapp-business-api/
+  Summary: Learn how to build a reliable backend pipeline to auto-generate GST invoices and dispatch PDF copies directly via the official WhatsApp Business API.
+- **Shopify vs Custom Next.js Storefront: When Should E-Commerce Brands Go Headless?**
+  URL: https://aafaque.in/blog/shopify-vs-custom-nextjs-storefront/
+  Summary: Compare Shopify standard themes with custom Next.js headless storefronts. Learn performance, cost, and technical tradeoffs for scaling brands.
+- **Why Slow Websites Kill Conversions: How a 500ms Speed Improvement Boosts Revenue by 20%**
+  URL: https://aafaque.in/blog/why-slow-websites-kill-conversions-speed-roi/
+  Summary: Learn how cutting 500ms from load times increases sales by 20%. Real performance audit steps, core web vital fixes, and revenue math.
+- **How Much Does a Custom Web Application MVP Cost to Build in 2026?**
+  URL: https://aafaque.in/blog/custom-web-app-mvp-cost-2026/
+  Summary: Learn the real cost to build an MVP web application in 2026. Explore pricing tiers, timeline estimates, and smart scope management tips.
+- **Freelance Developer vs Web Agency: Which Option Delivers Higher ROI for Early-Stage Startups?**
+  URL: https://aafaque.in/blog/freelance-developer-vs-web-agency-startup-roi/
+  Summary: Compare freelance developers and agencies for your startup MVP. Discover cost breakdowns, delivery timelines, and true engineering ROI.
+- **Cost of Hiring a Freelance Full-Stack Web Developer in India (2026 Guide)**
+  URL: https://aafaque.in/blog/cost-of-hiring-freelance-full-stack-web-developer-india-2026/
+  Summary: Find real freelance web developer rates in India for 2026. Compare hourly and fixed quotes for React, Next.js, and full-stack projects.
+- **Offline-First Web Apps: Synchronizing IndexedDB with PostgreSQL**
+  URL: https://aafaque.in/blog/offline-first-indexeddb-postgresql-sync/
+  Summary: Learn how to build offline-first web apps with React, IndexedDB, and PostgreSQL using optimistic UI updates and background synchronization queues.
+- **Database Connection Pooling at Scale: Configuring PgBouncer and Supabase Connection Pools**
+  URL: https://aafaque.in/blog/database-connection-pooling-pgbouncer-supabase/
+  Summary: Learn how to configure PgBouncer and Supabase connection pools to prevent database timeouts in serverless Next.js apps.
 - **PHP2Shell: Inside the Latest PHP Vulnerability & Critical Security Flaws (CVE-2026-109618 & CVE-2026-109619)**
-  URL: /
+  URL: https://aafaque.in/blog/php2shell-vulnerability-cve-2026-109618-rce-breakdown/
   Summary: Architectural breakdown of the latest PHP vulnerability (PHP2Shell): how to apply the emergency PHP patch and fix critical PHP security vulnerabilities.
-
-- **Blog Index:** https://aafaque.in/blog
 - **WebSockets vs Server-Sent Events: Choosing the Right Protocol for Live Dashboards**
-  URL: /
+  URL: https://aafaque.in/blog/websockets-vs-server-sent-events-dashboards/
   Summary: Compare WebSockets and Server-Sent Events for real-time dashboards. Learn connection costs, auto-reconnect, and code implementations.
 - **PostgreSQL vs MongoDB for Business Applications: Why Relational Data Wins for Order Management**
-  URL: /
+  URL: https://aafaque.in/blog/postgresql-vs-mongodb-order-management/
   Summary: Compare PostgreSQL and MongoDB for order management. See why ACID transactions, strict schemas, and SQL keep inventory data accurate.
 - **Building Multi-Tenant SaaS Dashboards with PostgreSQL Row-Level Security**
-  URL: /
+  URL: https://aafaque.in/blog/multi-tenant-saas-postgresql-row-level-security/
   Summary: Learn how to isolate tenant data in multi-tenant SaaS dashboards using PostgreSQL row-level security and Supabase for safe, scalable data access.
-- **The Speculation Rules API: Instantaneous Multi-Page Navigation for High-Conversion Web Apps**
-  URL: /
+- **The Speculation Rules API: Fast Multi-Page Navigation for Modern Web Apps**
+  URL: https://aafaque.in/blog/speculation-rules-api-instant-navigation/
   Summary: Master the Speculation Rules API to achieve instant zero-millisecond page transitions and boost high-intent web conversion rates.
 - **Eliminating Cumulative Layout Shift (CLS): Modern Font Fallbacks and CSS Aspect-Ratio Strategies**
-  URL: /
+  URL: https://aafaque.in/blog/eliminating-cls-font-fallbacks-aspect-ratio/
   Summary: Learn how to fix Cumulative Layout Shift (CLS) using size-adjust font fallbacks and modern CSS aspect-ratio properties for flawless Core Web Vitals.
-- **Sub-Second LCP: Accelerating Largest Contentful Paint with HTTP 103 Early Hints and AVIF Images**
-  URL: /
-  Summary: Achieve sub-second Largest Contentful Paint using HTTP 103 Early Hints, Edge CDN preloading, and next-gen AVIF image optimization pipelines.
+- **Fast Page Loads: Improving Largest Contentful Paint with Early Hints and Modern Images**
+  URL: https://aafaque.in/blog/sub-second-lcp-http-103-early-hints-avif-images/
+  Summary: Achieve fast Largest Contentful Paint using HTTP 103 Early Hints, Edge CDN preloading, and next-gen AVIF image optimization pipelines.
 - **Reducing JavaScript Bundle Size by 60% with Modern Tree-Shaking and Dynamic Imports**
-  URL: /
+  URL: https://aafaque.in/blog/reducing-javascript-bundle-size-tree-shaking-dynamic-imports/
   Summary: Learn how to reduce React and Next.js bundle sizes by 60% using dead-code elimination, ESM tree-shaking, and route-driven dynamic code-splitting patterns.
 - **Passing Interaction to Next Paint (INP): How to Break Up Long JavaScript Tasks with scheduler.yield()**
-  URL: /
-  Summary: Fix Interaction to Next Paint (INP) issues by breaking up heavy JavaScript tasks using scheduler.yield(). Master main-thread cooperative scheduling in modern apps.
-- **Reverse Engineering Adobe into Free Open Source: The Viral ArtCraft Movement, Rust, AI Clean-Room Clones, and the Fall of SaaS Moats**
-  URL: /
-  Summary: How software engineer Brandon Thomas used Rust and Claude to build ArtCraft—open-source clean-room clones of Adobe Photoshop (PhotoCraft), Premiere (FilmCraft), and Illustrator—and why AI-assisted reverse engineering is breaking proprietary software monopolies.
+  URL: https://aafaque.in/blog/passing-inp-break-up-long-tasks-scheduler-yield/
+  Summary: Fix Interaction to Next Paint (INP) issues by breaking up heavy JavaScript tasks using scheduler.yield() and cooperative main-thread scheduling.
+- **How Free Open Source Tools and Rust Are Challenging Expensive SaaS Subscriptions**
+  URL: https://aafaque.in/blog/reverse-engineering-adobe-open-source-artcraft-ai-clones/
+  Summary: How Brandon Thomas used Rust and Claude to build ArtCraft—open-source clean-room clones of Adobe Photoshop, Premiere, and Illustrator.
 - **The React Compiler in Production: How Automatic Memoization Eliminates useMemo and useCallback**
-  URL: /
-  Summary: Discover how the React Compiler automates memoization in React 19, eliminating the need for manual useMemo and useCallback hooks in high-performance applications.
+  URL: https://aafaque.in/blog/react-compiler-production-guide/
+  Summary: Learn how the React Compiler automates memoization in React 19, eliminating manual useMemo and useCallback hooks in production applications.
 - **Why Lightweight React SPAs with Vite Beat Complex Meta-Frameworks for Local Business Apps**
-  URL: /
-  Summary: Discover why lean React SPAs powered by Vite outperform complex meta-frameworks for local business apps, ensuring sub-second loads and instant mobile orders.
+  URL: https://aafaque.in/blog/vite-react-spas-beat-meta-frameworks-local-business/
+  Summary: Discover why lean React SPAs powered by Vite outperform complex meta-frameworks for local business apps, ensuring fast loading times and instant orders.
 - **Partial Prerendering (PPR) in Next.js: Blending Static Speed with Dynamic Real-Time Data**
-  URL: /
+  URL: https://aafaque.in/blog/partial-prerendering-nextjs-ppr-architecture/
   Summary: Master Partial Prerendering (PPR) in Next.js. Learn how to combine static edge shells with dynamic React Suspense streaming for optimal Core Web Vitals.
 - **React 19 Server Actions vs Traditional API Routes: Production Migration & Best Practices**
-  URL: /
-  Summary: Architectural breakdown comparing React 19 Server Actions to REST API routes. Learn real-world data mutation, caching strategies, and Zod security patterns.
-- **Architecting a Headless E-Commerce Store with Next.js and Tailwind CSS for Sub-Second Conversions**
-  URL: /
-  Summary: Master building a fast online store under 1 second using Next.js App Router, Tailwind CSS, and headless commerce architectures to maximize checkout conversions.
-- **Building Real-Time Web Applications with React 19 and WebSockets**
-  URL: /
-  Summary: Master real-time web app architecture using React 19, WebSockets, and Supabase Realtime. Build scalable, high-performance systems with clean TypeScript code.
-- **React 19 vs Next.js 15: Which Architecture Should You Choose in 2026?**
-  URL: /
-  Summary: Breakdown of when to choose lightweight Vite SPA vs Next.js 15 SSR, Core Web Vitals benchmarks, and client project advice.
+  URL: https://aafaque.in/blog/react-19-server-actions-vs-traditional-api-routes/
+  Summary: Comparison of React 19 Server Actions vs REST API routes. Learn real-world data mutation, caching strategies, and Zod security patterns.
+- **Building a Fast E-Commerce Store with Next.js and Tailwind CSS**
+  URL: https://aafaque.in/blog/high-converting-headless-ecommerce-nextjs-tailwind/
+  Summary: Master building a fast online store under 1 second using Next.js App Router and headless commerce architectures to maximize checkout conversions.
+- **Building Real-Time Web Apps with React 19 and WebSockets**
+  URL: https://aafaque.in/blog/building-real-time-web-apps-react-19-websockets/
+  Summary: Architect resilient, production-grade real-time systems using React 19, WebSockets, and Supabase Realtime without render cascades or connection thrashing.
+- **React 19 vs Next.js 15: Which Architecture Should You Choose for Web Apps in 2026?**
+  URL: https://aafaque.in/blog/react-19-vs-nextjs-15-architecture-guide-2026/
+  Summary: Senior full-stack guide comparing React 19 and Next.js 15: choose between lightweight client SPAs and full-stack SSR based on real Core Web Vitals.
 - **How to Fix Core Web Vitals in React: Lowering INP and LCP Below 200ms**
-  URL: /
-  Summary: Engineering playbook to pass Google Core Web Vitals (sub-200ms INP) using React 19 startTransition and atomic state.
+  URL: https://aafaque.in/blog/how-to-fix-core-web-vitals-react-inp-lcp/
+  Summary: Actionable guide to passing Google's Core Web Vitals in React. Learn how to diagnose INP bottlenecks, eliminate blocking JS, and reach 95+ scores.
 - **Why Modern Startups Are Choosing Supabase Over Firebase in 2026**
-  URL: /
-  Summary: Comparative analysis of relational PostgreSQL, ACID transactions, and Row-Level Security vs NoSQL Firestore.
+  URL: https://aafaque.in/blog/why-startups-choose-supabase-over-firebase-2026/
+  Summary: Comparing Supabase and Firebase for modern web apps. Discover why PostgreSQL, Row Level Security, and zero vendor lock-in make Supabase the top choice.
 
 ## Contact
 
-- **Website:** https://aafaque.in
+- **Website:** https://aafaque.in/
 - **Email:** aafaquenazir@gmail.com
 - **WhatsApp:** +91 93256 29256

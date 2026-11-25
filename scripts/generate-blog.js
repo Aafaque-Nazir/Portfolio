@@ -16,6 +16,7 @@ import path from "path";
 import process from "process";
 import { fileURLToPath } from "url";
 import { blogs as currentBlogs } from "../src/data/blogs.js";
+import { projectsData } from "../src/data/projects-data.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -954,6 +955,24 @@ async function generate() {
 
   blogObj = cleanJargon(blogObj);
 
+  // Guardrail: Force exact today's ISO date and unique slug/ID + valid project reference
+  const todayStr = new Date().toISOString().split("T")[0];
+  blogObj.publishedAt = todayStr;
+  blogObj.updatedAt = todayStr;
+
+  if (!blogObj.slug) {
+    blogObj.slug = chosenTopic.topic.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
+  }
+  if (currentBlogs.some((b) => b.slug === blogObj.slug || b.id === blogObj.slug)) {
+    blogObj.slug = `${blogObj.slug}-${todayStr.slice(5)}`;
+  }
+  blogObj.id = blogObj.slug;
+
+  const validProjectIds = new Set(projectsData.map((p) => p.id));
+  if (!validProjectIds.has(blogObj.relatedProjectId)) {
+    blogObj.relatedProjectId = validProjectIds.has(chosenTopic.relatedProjectId) ? chosenTopic.relatedProjectId : 17;
+  }
+
   console.log(`✅ Successfully generated & sanitized: "${blogObj.title}" (slug: ${blogObj.slug})`);
 
   // Programmatic SEO Guardrails for Ahrefs & Google SERP Compliance
@@ -1015,7 +1034,7 @@ async function generate() {
 
   // 5. Update public/llms-full.txt
   const llmsContent = fs.readFileSync(llmsFullFilePath, "utf8");
-  const llmsMarker = "## Engineering Articles & Architectural Guides (Blog)\n\n- **Blog Index:** https://aafaque.in/blog";
+  const llmsMarker = "## Engineering Articles & Architectural Guides (Blog)\n\n- **Blog Index:** https://aafaque.in/blog/";
   const newLlmsEntry = `\n- **${blogObj.title}**\n  URL: https://aafaque.in/blog/${blogObj.slug}/\n  Summary: ${blogObj.description}`;
 
   if (llmsContent.includes(llmsMarker) && !llmsContent.includes(blogObj.slug)) {
