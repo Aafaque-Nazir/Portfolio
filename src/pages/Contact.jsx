@@ -14,12 +14,15 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
+const WEB3FORMS_ACCESS_KEY = "02299699-e40a-4b18-a94b-2ad01e224ab9";
+
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(10, "Please enter a valid WhatsApp number"),
   service: z.string().min(1, "Please select a service"),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  botcheck: z.boolean().optional(),
 });
 
 const Contact = () => {
@@ -52,28 +55,50 @@ const Contact = () => {
   }, [location, setValue]);
 
   const onSubmit = async (data) => {
+    if (data.botcheck) return;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
     try {
-      const res = await fetch("https://formsubmit.co/aafaquenazir@gmail.com", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        signal: controller.signal,
         body: JSON.stringify({
-          ...data,
-          _captcha: "false",
-          _template: "table",
-          _subject: `Portfolio Inquiry: ${data.service || "General"} from ${data.name}`,
+          access_key: WEB3FORMS_ACCESS_KEY,
+          from_name: "Aafaque Portfolio",
+          subject: `Portfolio Inquiry: ${data.service || "General"} from ${data.name}`,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          service: data.service,
+          message: data.message,
+          botcheck: false,
         }),
       });
 
-      if (res.ok) {
+      const result = await res.json().catch(() => ({}));
+
+      if (res.ok && result.success) {
         toast.success("Message sent successfully!", {
           description: "I will get back to you within 24 hours.",
         });
         reset();
       } else {
-        toast.error("Message could not be sent. Please reach out directly on WhatsApp or Email.");
+        toast.error(result.message || "Message could not be sent. Please reach out directly on WhatsApp or Email.");
       }
-    } catch {
-      toast.error("Network error. Please message me directly on WhatsApp.");
+    } catch (err) {
+      if (err?.name === "AbortError") {
+        toast.error("Request timed out. Please message me directly on WhatsApp or Email.");
+      } else {
+        toast.error("Network error. Please message me directly on WhatsApp.");
+      }
+    } finally {
+      clearTimeout(timeoutId);
     }
   };
 
@@ -112,6 +137,14 @@ const Contact = () => {
             className="lg:col-span-7 rounded-2xl bg-zinc-950/80 border border-white/10 p-6 sm:p-8 shadow-[0_16px_40px_rgba(0,0,0,0.7)]"
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
+              {/* Honeypot Spam Filter */}
+              <input
+                type="checkbox"
+                tabIndex={-1}
+                aria-hidden="true"
+                className="hidden"
+                {...register("botcheck")}
+              />
               {/* Name & Email Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
@@ -240,7 +273,10 @@ const Contact = () => {
                 className="w-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold py-3 px-6 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer shadow-sm disabled:opacity-50"
               >
                 {isSubmitting ? (
-                  <div className="w-4 h-4 border-2 border-zinc-950 rounded-full border-t-transparent animate-spin" />
+                  <>
+                    <div className="w-4 h-4 border-2 border-zinc-950 rounded-full border-t-transparent animate-spin" />
+                    <span>Sending...</span>
+                  </>
                 ) : (
                   <>
                     <span>Send Message</span>
