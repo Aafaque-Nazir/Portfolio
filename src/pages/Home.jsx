@@ -15,6 +15,7 @@ import { FaGithub } from "react-icons/fa";
 import GlobalBackground from "../components/GlobalBackground";
 import { SplitText } from "../components/ui/SplitText";
 import { projects } from "../data/projects";
+import { blogsMeta } from "../data/blogs-meta";
 import FAQ from "../components/ui/FAQ";
 
 // Animation Variants
@@ -77,14 +78,14 @@ const Home = () => {
                 delay={0}
                 className="text-zinc-400 text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase font-mono font-medium"
               >
-                WEB DEVELOPER &amp; FRONTEND ENGINEER
+                WEB DEVELOPER IN NAVI MUMBAI, INDIA
               </SplitText>
             </div>
 
             {/* Normal, honest description */}
             <div className="max-w-2xl mb-6">
               <p className="text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed font-normal border-l-2 border-accent/70 pl-4">
-                I build fast, responsive websites and modern web applications with clean code, smooth interactions, and thoughtful design.
+                I build fast, responsive websites, e-commerce stores, and web applications for businesses in Navi Mumbai, Mumbai, India, and worldwide.
               </p>
             </div>
 
@@ -264,7 +265,7 @@ const Home = () => {
             <div className="pt-3 border-t border-white/5 space-y-1.5 text-xs font-mono text-zinc-300">
               <div className="flex justify-between">
                 <span className="text-zinc-500">Location:</span>
-                <span>India</span>
+                <span>Navi Mumbai, India</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-zinc-500">Focus:</span>
@@ -503,7 +504,63 @@ const Home = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          5. COMMON QUESTIONS (FAQ)
+          5. LATEST ENGINEERING GUIDES (BLOG)
+      ────────────────────────────────────────────────────────────── */}
+      <section id="latest-guides" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14 border-t border-white/5">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
+          <div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
+              Latest Guides
+            </h2>
+            <p className="text-zinc-400 text-sm md:text-base max-w-xl mt-1.5 font-light">
+              Practical articles on React, Next.js performance, databases, and building fast web applications.
+            </p>
+          </div>
+
+          <Link
+            to="/blog/"
+            className="group inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors self-start sm:self-end"
+          >
+            <span>View All ({blogsMeta.length}) Articles</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:text-accent transition-all" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {blogsMeta.slice(0, 3).map((post) => (
+            <Link
+              key={post.slug}
+              to={`/blog/${post.slug}/`}
+              className="group p-5 rounded-2xl bg-zinc-950/80 border border-white/10 hover:border-accent/35 transition-all flex flex-col justify-between gap-4 hover:-translate-y-1"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2.5 text-[11px] font-mono">
+                  <span className="uppercase tracking-wider text-accent/90 font-medium">
+                    {post.category}
+                  </span>
+                  <span className="text-zinc-500">{post.readTime}</span>
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-zinc-200 transition-colors line-clamp-2 leading-snug mb-2">
+                  {post.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-zinc-400 font-light line-clamp-2 leading-relaxed">
+                  {post.description}
+                </p>
+              </div>
+              <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-zinc-400 group-hover:text-white transition-colors">
+                <span>{post.publishedAt}</span>
+                <span className="inline-flex items-center gap-1">
+                  <span>Read</span>
+                  <ArrowRight className="w-3 h-3 text-zinc-400 group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          6. COMMON QUESTIONS (FAQ)
       ────────────────────────────────────────────────────────────── */}
       <section id="faq-section" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 border-t border-white/5">
         <FAQ />

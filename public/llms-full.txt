@@ -117,9 +117,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 - **Automating WhatsApp Lead Generation for High-Ticket Funnels**
   URL: https://aafaque.in/blog/whatsapp-lead-generation-high-ticket-landing-pages/
   Summary: Build automated WhatsApp flows for high-ticket landing pages. Improve conversion rates by replacing slow forms with direct chat integrations.
-- **Upload2Shell (CVE-2026-125396): A Deep Technical Breakdown**
+- **Upload2Shell (CVE-2026-125396): Ghostscript Sandbox Escape in File Upload Pipelines**
   URL: https://aafaque.in/blog/upload2shell-cve-2026-125396-technical-breakdown/
-  Summary: An in-depth technical analysis of CVE-2026-125396 (Upload2Shell), explaining how arbitrary file upload flaws lead to remote code execution.
+  Summary: Technical breakdown of CVE-2026-125396 (Upload2Shell), a Ghostscript Type 1 font loader sandbox escape triggered by uploaded files.
 - **How to Write a Scope of Work When Hiring an Independent Full-Stack Developer**
   URL: https://aafaque.in/blog/how-to-write-web-development-sow/
   Summary: Learn how to write a clear software contractor agreement scope for your next web project to prevent delays, budget overruns, and misunderstandings.
@@ -147,9 +147,6 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 - **Designing Interactive Before-and-After Comparison Sliders and Medical Booking Flows in React**
   URL: https://aafaque.in/blog/before-after-slider-medical-booking-react/
   Summary: Learn how to build a custom interactive before and after image comparison slider and multi-step medical appointment booking flow in React.
-- **Smooth Scrolling with Lenis and Clean Transitions in React**
-  URL: https://aafaque.in/blog/smooth-scrolling-lenis-react/
-  Summary: Learn how to integrate Lenis smooth scrolling in React with clean web design and reliable website interactions for high-performance apps.
 - **Integrating Three.js and GSAP ScrollTrigger in React for 3D Product Showcases**
   URL: https://aafaque.in/blog/threejs-gsap-scrolltrigger-react-guide/
   Summary: Learn how to connect Three.js with GSAP ScrollTrigger in React to build 60 FPS scroll-driven 3D product showcases without performance drops.

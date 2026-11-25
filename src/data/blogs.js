@@ -370,18 +370,18 @@ export const blogs = [
   {
     "id": "upload2shell-cve-2026-125396-technical-breakdown",
     "slug": "upload2shell-cve-2026-125396-technical-breakdown",
-    "title": "Upload2Shell (CVE-2026-125396): A Deep Technical Breakdown",
-    "seoTitle": "Upload2Shell CVE-2026-125396: Technical Breakdown",
-    "description": "An in-depth technical analysis of CVE-2026-125396 (Upload2Shell), explaining how arbitrary file upload flaws lead to remote code execution.",
+    "title": "Upload2Shell (CVE-2026-125396): Ghostscript Sandbox Escape in File Upload Pipelines",
+    "seoTitle": "Upload2Shell CVE-2026-125396: Ghostscript RCE Fix",
+    "description": "Technical breakdown of CVE-2026-125396 (Upload2Shell), a Ghostscript Type 1 font loader sandbox escape triggered by uploaded files.",
     "publishedAt": "2026-11-22",
-    "updatedAt": "2026-11-22",
+    "updatedAt": "2026-11-26",
     "readTime": "7 min read",
-    "category": "Trending & Web Architecture",
+    "category": "Security & Architecture",
     "tags": [
-      "cve",
-      "Upload2Shell (CVE-2026-125396)",
-      "technical breakdown",
-      "web engineering"
+      "Ghostscript",
+      "CVE-2026-125396",
+      "File Upload Security",
+      "Web Security"
     ],
     "author": {
       "name": "Aafaque Nazir",
@@ -389,82 +389,82 @@ export const blogs = [
       "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
       "avatar": "/og-image.png"
     },
-    "quickAnswer": "Upload2Shell (CVE-2026-125396) is a critical remote code execution vulnerability caused by unsafe file upload handling, where attackers bypass extension filters to execute arbitrary code on the target server.",
+    "quickAnswer": "Upload2Shell (CVE-2026-125396) is a use-after-free and sandbox escape flaw in Ghostscript prior to 10.08.0 inside the Type 1 font loader (.putgstringcopy in gs_fonts.ps). Attackers upload crafted PostScript or PDF files disguised as images to bypass -dSAFER and run commands on backend preview servers.",
     "relatedProjectId": 17,
     "faqs": [
       {
-        "question": "What is CVE-2026-125396?",
-        "answer": "It is a severe web vulnerability known as Upload2Shell, allowing attackers to upload executable scripts disguised as media files and achieve remote code execution."
+        "question": "What is CVE-2026-125396 (Upload2Shell)?",
+        "answer": "It is a high-severity vulnerability in Ghostscript versions before 10.08.0. By triggering a type error in the Type 1 font loader (.putgstringcopy in gs_fonts.ps), crafted files misuse the internal .forceput operator to escape the -dSAFER sandbox and run arbitrary code."
       },
       {
-        "question": "How can developers prevent Upload2Shell vulnerabilities?",
-        "answer": "Developers must validate file contents using magic bytes rather than trusting file extensions, store uploaded files outside the web root, and disable script execution in upload directories."
+        "question": "Why does Upload2Shell affect web applications that accept image uploads?",
+        "answer": "Many backend pipelines pass uploaded files to ImageMagick, GraphicsMagick, or PDF thumbnail generators without inspecting file magic bytes. Those tools often delegate PostScript or PDF handling to Ghostscript even when the upload uses a .jpg or .png extension."
       },
       {
-        "question": "Does this vulnerability affect modern cloud architectures?",
-        "answer": "Yes, any web application handling user uploads without strict MIME validation and secure storage routing is potentially vulnerable, regardless of hosting provider."
+        "question": "How do you mitigate CVE-2026-125396 in production?",
+        "answer": "Upgrade Ghostscript to 10.08.0 or later, validate file magic bytes before processing, disable PostScript/EPS/PDF coders in ImageMagick policy.xml if unused, and run media processing inside isolated, unprivileged containers."
       }
     ],
     "sections": [
       {
         "type": "heading",
         "level": 2,
-        "title": "Understanding the Mechanics of CVE-2026-125396"
+        "title": "What Actually Causes CVE-2026-125396 (Upload2Shell)"
       },
       {
         "type": "paragraph",
-        "text": "File upload endpoints are among the most common entry points for severe security incidents. When web applications accept user-generated files without rigorous validation, they open the door to remote code execution. CVE-2026-125396 highlights flaws in how backend parsers verify incoming mime types and file extensions. When building secure systems—such as booking engines or document handlers like the ones used in [Al Raheeq Tourism](/projects/17/)—developers must treat every byte from an external client as untrusted data."
+        "text": "File upload endpoints rarely execute uploaded files directly anymore, yet Upload2Shell (CVE-2026-125396) shows how secondary processing tools reintroduce remote code execution. The bug lives in Ghostscript versions prior to 10.08.0, specifically in the `.putgstringcopy` procedure inside `gs_fonts.ps`."
       },
       {
         "type": "paragraph",
-        "text": "The vulnerability typically manifests when an application checks only the client-supplied Content-Type header or relies on weak blacklists for file extensions like .php, .jsp, or .aspx. Attackers exploit this by renaming script files or embedding malicious payloads inside seemingly harmless image containers."
+        "text": "When Ghostscript parses a crafted PostScript or PDF document, a type error during font loading lets the payload abuse the privileged `.forceput` operator and escape the `-dSAFER` sandbox. In booking or document portals like [Al Raheeq Tourism](/projects/17/), any server that automatically generates PDF or image thumbnails from user uploads is exposed if it delegates parsing to an unpatched Ghostscript binary."
       },
       {
         "type": "heading",
         "level": 2,
-        "title": "Vulnerable Upload Handler Pattern"
+        "title": "Why Renamed Files Reach Ghostscript"
       },
       {
         "type": "paragraph",
-        "text": "Consider a typical flawed Node.js or Express endpoint that accepts profile pictures or document uploads based solely on the file extension string provided in the request body."
+        "text": "Attackers do not need to upload a `.ps` or `.pdf` file to hit Ghostscript. If your Node.js or Python backend relies on `Content-Type` headers or filename extensions and forwards uploads to ImageMagick or a thumbnail worker, ImageMagick inspects the internal content and invokes Ghostscript automatically for PostScript-formatted payloads disguised as `.png` or `.jpg`."
       },
       {
         "type": "code",
         "language": "tsx",
-        "caption": "Insecure file upload implementation",
-        "code": "import express from 'express';\nimport multer from 'multer';\nimport path from 'path';\n\nconst upload = multer({ dest: 'public/uploads/' });\nconst app = express();\n\n// VULNERABLE: Only checking extension string\napp.post('/api/upload', upload.single('file'), (req, res) => {\n  const file = req.file;\n  if (!file) {\n    return res.status(400).json({ error: 'No file uploaded' });\n  }\n  \n  // Attackers can bypass this by sending a malformed filename\n  res.json({ success: true, path: `/uploads/${file.filename}` });\n});"
+        "caption": "Inspecting magic bytes and disabling unsafe delegates before processing uploads",
+        "code": "import { fileTypeFromBuffer } from 'file-type';\n\nconst ALLOWED_IMAGE_MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);\n\nexport async function validateUploadedImage(buffer: Buffer) {\n  const detected = await fileTypeFromBuffer(buffer);\n\n  // Reject files whose binary signature does not match an allowed raster format\n  if (!detected || !ALLOWED_IMAGE_MIMES.has(detected.mime)) {\n    throw new Error('Invalid file signature: only JPEG, PNG, and WebP are accepted.');\n  }\n\n  return detected;\n}"
       },
       {
         "type": "callout",
-        "title": "Critical Engineering Takeaway",
-        "text": "Never rely on client-supplied file extensions or HTTP headers for security validation. Always inspect file signatures (magic bytes) on the server side."
+        "title": "Check Your ImageMagick Policy",
+        "text": "Even with magic-byte checks, restrict ImageMagick in `/etc/ImageMagick-6/policy.xml` (or v7) by setting `rights=\"none\"` for `PS`, `EPS`, `PDF`, and `XPS` coders unless your application explicitly needs Ghostscript rendering."
       },
       {
-        "heading": 2,
         "type": "heading",
-        "title": "Securing the Upload Pipeline"
+        "level": 2,
+        "title": "Hardening Your Upload Pipeline"
       },
       {
         "type": "paragraph",
-        "text": "To neutralize CVE-2026-125396 and similar flaws, web engineering teams must implement a multi-layered defense strategy. This includes validating internal magic bytes, storing uploads in isolated object storage rather than local web directories, and enforcing strict execution permissions."
+        "text": "Fixing CVE-2026-125396 takes both patching the underlying binary and isolating how your web app handles untrusted uploads. Combine binary updates with strict input boundaries and cloud object storage."
       },
       {
         "type": "list",
         "items": [
-          "Validate file headers (magic bytes) to confirm true file type.",
-          "Store uploaded assets in isolated cloud storage buckets or non-executable directories.",
-          "Sanitize and randomize filenames to prevent path traversal and script execution attacks.",
-          "Set strict Content-Security-Policy (CSP) headers to block unauthorized script execution."
+          "Upgrade Ghostscript to version 10.08.0 or newer across all application servers and Docker images.",
+          "Inspect binary magic bytes server-side with `file-type` and re-encode raster images using `sharp` (libvips) instead of ImageMagick + Ghostscript.",
+          "Store raw user uploads in private object storage buckets (such as Cloudflare R2 or S3) and serve assets from a separate domain with `Content-Disposition: attachment` where appropriate.",
+          "If PDF rendering is required, run Ghostscript inside a minimal, network-isolated container or sandboxed worker with strict CPU, memory, and filesystem limits."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "title": "Need Help Implementing This in Your Product?"
+        "title": "Need Help Hardening Your Web App?"
       },
       {
         "type": "paragraph",
-        "text": "As an independent web developer, I build fast, production-ready web applications with security built into the core architecture. [Hire Aafaque Nazir](/services/) or [get in touch for a consultation](/contact/)."
+        "text": "As an independent web developer, I build fast, production-ready web applications with security built into the core architecture. [Explore my web development services](/services/) or [get in touch for a consultation](/contact/)."
       }
     ]
   },
@@ -1480,123 +1480,6 @@ export const blogs = [
       {
         "type": "paragraph",
         "text": "As an independent web developer, I build fast, production-ready web applications. If you need custom UI components or complete booking portals, [explore my full-stack web development services](/services/) or [get in touch with Aafaque Nazir](/contact/)."
-      }
-    ]
-  },
-  {
-    "id": "smooth-scrolling-lenis-react",
-    "slug": "smooth-scrolling-lenis-react",
-    "title": "Smooth Scrolling with Lenis and Clean Transitions in React",
-    "seoTitle": "Lenis Smooth Scroll in React: Complete Guide",
-    "description": "Learn how to integrate Lenis smooth scrolling in React with clean web design and reliable website interactions for high-performance apps.",
-    "publishedAt": "2026-11-12",
-    "updatedAt": "2026-11-12",
-    "readTime": "7 min read",
-    "category": "UI & Animation",
-    "tags": [
-      "Lenis",
-      "React",
-      "Smooth Scroll",
-      "Web Animation",
-      "Frontend"
-    ],
-    "author": {
-      "name": "Aafaque Nazir",
-      "role": "Freelance Full-Stack Developer",
-      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
-      "avatar": "/og-image.png"
-    },
-    "quickAnswer": "Lenis is a lightweight JavaScript library that replaces native browser scrolling with inertial momentum physics, creating clean web design and smooth website interactions in React applications.",
-    "relatedProjectId": 10,
-    "faqs": [
-      {
-        "question": "Does Lenis work well with React and Next.js?",
-        "answer": "Yes. Lenis can be initialized inside a React useEffect hook or custom provider component, ensuring smooth scroll physics across routes while cleaning up event listeners on unmount."
-      },
-      {
-        "question": "How does Lenis affect mobile performance?",
-        "answer": "Lenis handles touch events efficiently, but you can configure it to disable or relax inertia on mobile devices to preserve native touch responsiveness and save CPU cycles."
-      },
-      {
-        "question": "Can I use Lenis with GSAP ScrollTrigger?",
-        "answer": "Yes. Lenis syncs cleanly with GSAP ScrollTrigger by updating the scroll position on every animation frame, ensuring your scroll-based animations stay perfectly aligned."
-      }
-    ],
-    "sections": [
-      {
-        "type": "heading",
-        "level": 2,
-        "title": "Why Native Browser Scrolling Falls Short"
-      },
-      {
-        "type": "paragraph",
-        "text": "Standard browser scroll behavior depends on operating system settings and hardware configurations. On Windows machines without precision trackpads, scrolling often feels abrupt and disjointed. When building high-end interfaces like the [Yacht Rentals / Sea Cross](/projects/10/) platform, predictable and clean motion is crucial for creating a premium feel without hurting accessibility or performance."
-      },
-      {
-        "type": "paragraph",
-        "text": "To solve this, developers use inertial scroll libraries. Among modern options, Lenis stands out for its lightweight footprint, lack of heavy dependencies, and precise control over easing curves."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "title": "Setting Up Lenis in a React Application"
-      },
-      {
-        "type": "paragraph",
-        "text": "Integrating Lenis into a React component requires managing the requestAnimationFrame loop properly. Below is a clean, production-ready custom hook and provider setup that initializes Lenis and connects it with GSAP if your project requires scroll-triggered animations."
-      },
-      {
-        "type": "code",
-        "language": "tsx",
-        "caption": "React Lenis Provider Component",
-        "code": "import React, { useEffect } from 'react';\nimport Lenis from '@studio-freight/lenis';\n\ninterface SmoothScrollProps {\n  children: React.ReactNode;\n}\n\nexport default function SmoothScrollProvider({ children }: SmoothScrollProps) {\n  useEffect(() => {\n    const lenis = new Lenis({\n      duration: 1.2,\n      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),\n      direction: 'vertical',\n      gestureDirection: 'vertical',\n      smooth: true,\n      mouseMultiplier: 1,\n      smoothTouch: false,\n      touchMultiplier: 2,\n    });\n\n    function raf(time: number) {\n      lenis.raf(time);\n      requestAnimationFrame(raf);\n    }\n\n    requestAnimationFrame(raf);\n\n    return () => {\n      lenis.destroy();\n    };\n  }, []);\n\n  return <>{children}</>;\n}"
-      },
-      {
-        "type": "callout",
-        "title": "Performance Tip",
-        "text": "Always destroy the Lenis instance inside the useEffect cleanup function. Failing to remove event listeners on route changes can cause memory leaks in single-page applications."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "title": "Handling Anchor Links and Focus States"
-      },
-      {
-        "type": "paragraph",
-        "text": "A common pitfall with custom scroll libraries is broken anchor tag navigation and keyboard accessibility. Because Lenis intercepts default scroll behavior, standard HTML anchor jumps (`href=\"#section\"`) will not animate correctly out of the box."
-      },
-      {
-        "type": "paragraph",
-        "text": "To fix this, capture click events on internal anchor links and call the Lenis scrollTo method explicitly:"
-      },
-      {
-        "type": "code",
-        "language": "tsx",
-        "caption": "Handling Smooth Anchor Navigation",
-        "code": "const handleScrollTo = (targetId: string) => {\n  const targetElement = document.getElementById(targetId);\n  if (targetElement && lenisInstance) {\n    lenisInstance.scrollTo(targetElement, {\n      offset: 0,\n      duration: 1.5,\n      easing: (t) => 1 - Math.pow(1 - t, 3),\n    });\n  }\n};"
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "title": "Checklist for Clean Web Design and Interactions"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Disable smooth touch scrolling on mobile devices if native momentum feels more natural to users.",
-          "Test keyboard navigation (Tab and Spacebar) to ensure focus outlines remain visible and scroll position updates correctly.",
-          "Combine Lenis with CSS will-change properties sparingly to prevent GPU layer bloat.",
-          "Ensure your website loads quickly across all devices before adding complex animation layers."
-        ]
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "title": "Need Help Implementing This in Your Product?"
-      },
-      {
-        "type": "paragraph",
-        "text": "As an independent web developer based in Navi Mumbai, I build fast, production-ready web applications with clean animations and reliable user interfaces. Explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your project requirements."
       }
     ]
   },

@@ -7,15 +7,15 @@ import {
   RiArticleLine,
   RiCloseLine
 } from "react-icons/ri";
-import { blogs } from "../data/blogs";
+import { blogsMeta } from "../data/blogs-meta";
 
 export default function Blog() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredBlogs = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
-    if (!q) return blogs;
-    return blogs.filter((post) => {
+    if (!q) return blogsMeta;
+    return blogsMeta.filter((post) => {
       return (
         post.title.toLowerCase().includes(q) ||
         post.description.toLowerCase().includes(q) ||

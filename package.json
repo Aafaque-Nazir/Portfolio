@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/sync-blog-data.js",
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.js",
+    "build": "node scripts/sync-blog-data.js && vite build && node scripts/prerender.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -253,36 +253,41 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
       : null;
 
   // ──────────────────────────────────────────────────
-  // JSON-LD: WebApplication / CreativeWork (For Individual Projects)
+  // JSON-LD: SoftwareApplication / CreativeWork (For Individual Projects)
   // ──────────────────────────────────────────────────
   const projectSchema = project
-    ? {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: project.title,
-      applicationCategory: "WebApplication",
-      operatingSystem: "All Web Browsers",
-      url: `${siteUrl}/projects/${project.id}/`,
-      image: resolvedImage,
-      description: resolvedDescription,
-      author: {
-        "@type": "Person",
-        name: "Aafaque Nazir",
-        url: siteUrl,
-      },
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-      },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "5.0",
-        ratingCount: "1",
-        bestRating: "5",
-        worstRating: "1",
-      },
-    }
+    ? project.category === "Web Applications"
+      ? {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: project.title,
+          applicationCategory: "WebApplication",
+          operatingSystem: "All Web Browsers",
+          url: `${siteUrl}/projects/${project.id}/`,
+          image: resolvedImage,
+          description: resolvedDescription,
+          keywords: project.techStack ? project.techStack.join(", ") : undefined,
+          author: {
+            "@type": "Person",
+            name: "Aafaque Nazir",
+            url: siteUrl,
+          },
+        }
+      : {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          genre: project.category,
+          url: `${siteUrl}/projects/${project.id}/`,
+          image: resolvedImage,
+          description: resolvedDescription,
+          keywords: project.techStack ? project.techStack.join(", ") : undefined,
+          author: {
+            "@type": "Person",
+            name: "Aafaque Nazir",
+            url: siteUrl,
+          },
+        }
     : null;
 
   // ──────────────────────────────────────────────────
@@ -415,19 +420,11 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
             },
           })),
         }
-      : section === "home" || section === "services"
+      : section === "home" || section === "about"
       ? {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         mainEntity: [
-          {
-            "@type": "Question",
-            name: "How long does it usually take to complete a web project?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "A standard website typically takes about 1-2 weeks, while larger web applications with database features take 3-6 weeks depending on the scope.",
-            },
-          },
           {
             "@type": "Question",
             name: "Do you build websites from scratch or use templates?",
@@ -438,18 +435,26 @@ const SEO = ({ title, description, keywords, image, url, section, project, blogP
           },
           {
             "@type": "Question",
-            name: "Do you work with clients outside your local area?",
+            name: "How long does it usually take to complete a project?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Yes! While I am based in Navi Mumbai, Maharashtra, I work with clients, startups, and businesses remotely across India and internationally.",
+              text: "A standard website typically takes about 1-2 weeks, while larger web applications with database features take 3-6 weeks depending on the scope.",
             },
           },
           {
             "@type": "Question",
-            name: "What technologies do you use for web development?",
+            name: "Do you provide support after the website goes live?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "I specialize in React, Next.js, JavaScript, TypeScript, Tailwind CSS, Node.js, Supabase, PostgreSQL, and modern frontend animation libraries like Framer Motion.",
+              text: "Yes, I provide post-launch support to make sure everything runs smoothly, fix any issues, and help with updates.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Will my website be mobile-friendly and SEO ready?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes, every site is designed to look great on mobile phones, tablets, and desktops, with proper SEO meta tags included.",
             },
           },
         ],

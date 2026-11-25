@@ -18,8 +18,10 @@ import {
   RiListCheck2,
 } from "react-icons/ri";
 import SEO from "../components/SEO";
-import { getBlogBySlug, blogs } from "../data/blogs";
+import { blogsMeta } from "../data/blogs-meta";
 import { projects } from "../data/projects";
+
+const postModules = import.meta.glob("../data/posts/*.json");
 
 // Parse markdown links [text](url) and inline code `code`
 const renderFormattedText = (text) => {
@@ -297,11 +299,34 @@ const ComparisonTable = ({ headers, rows }) => {
 
 export default function BlogPost() {
   const { slug } = useParams();
-  const post = getBlogBySlug(slug);
+  const meta = useMemo(
+    () => blogsMeta.find((b) => b.slug === slug || b.id === slug) || null,
+    [slug]
+  );
 
+  const [loadedPost, setLoadedPost] = useState(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [activeHeadingId, setActiveHeadingId] = useState("");
+
+  useEffect(() => {
+    if (!meta) return;
+    let cancelled = false;
+    const loader = postModules[`../data/posts/${meta.slug}.json`];
+    if (loader) {
+      loader().then((mod) => {
+        if (!cancelled) {
+          setLoadedPost(mod.default || mod);
+        }
+      });
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [meta]);
+
+  const post = loadedPost && meta && loadedPost.slug === meta.slug ? loadedPost : null;
+  const activePost = post || meta;
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -310,12 +335,28 @@ export default function BlogPost() {
     restDelta: 0.001,
   });
 
-  const currentIndex = blogs.findIndex((b) => b.slug === slug || b.id === slug);
-  const prevPost = currentIndex > 0 ? blogs[currentIndex - 1] : null;
-  const nextPost = currentIndex < blogs.length - 1 ? blogs[currentIndex + 1] : null;
+  const currentIndex = meta ? blogsMeta.findIndex((b) => b.slug === meta.slug) : -1;
+  const prevPost = currentIndex > 0 ? blogsMeta[currentIndex - 1] : null;
+  const nextPost = currentIndex >= 0 && currentIndex < blogsMeta.length - 1 ? blogsMeta[currentIndex + 1] : null;
 
-  const relatedProject = post?.relatedProjectId
-    ? projects.find((p) => p.id === post.relatedProjectId)
+  const relatedBlogs = useMemo(() => {
+    if (!meta) return [];
+    const currentTags = new Set((meta.tags || []).map((t) => t.toLowerCase()));
+    return blogsMeta
+      .filter((b) => b.slug !== meta.slug)
+      .map((b) => {
+        let score = b.category === meta.category ? 3 : 0;
+        for (const t of b.tags || []) {
+          if (currentTags.has(t.toLowerCase())) score += 2;
+        }
+        return { ...b, score };
+      })
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3);
+  }, [meta]);
+
+  const relatedProject = activePost?.relatedProjectId
+    ? projects.find((p) => p.id === activePost.relatedProjectId)
     : null;
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : `https://aafaque.in/blog/${slug}/`;
@@ -359,26 +400,29 @@ export default function BlogPost() {
     return () => observer.disconnect();
   }, [headings]);
 
-  if (!post) {
+  if (!meta) {
     return (
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 pt-24">
-        <h1 className="text-2xl font-semibold mb-3 font-mono">Article Not Found</h1>
-        <p className="text-zinc-500 text-sm mb-6">
-          The requested engineering article does not exist.
-        </p>
-        <Link
-          to="/blog/"
-          className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-mono hover:text-white transition-colors"
-        >
-          ← Return to Articles
-        </Link>
-      </div>
+      <>
+        <SEO section="notFound" noindex={true} />
+        <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 pt-24">
+          <h1 className="text-2xl font-semibold mb-3 font-mono">Article Not Found</h1>
+          <p className="text-zinc-500 text-sm mb-6">
+            The requested engineering article does not exist.
+          </p>
+          <Link
+            to="/blog/"
+            className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-mono hover:text-white transition-colors"
+          >
+            ← Return to Articles
+          </Link>
+        </div>
+      </>
     );
   }
 
   return (
     <>
-      <SEO blogPost={post} />
+      <SEO blogPost={activePost} />
 
       {/* Top Reading Progress Bar (Subtle 2px hairline) */}
       <motion.div
@@ -400,28 +444,28 @@ export default function BlogPost() {
             </Link>
 
             <span className="uppercase tracking-wider text-accent/90">
-              {post.category}
+              {activePost.category}
             </span>
           </nav>
 
           {/* Article Header */}
           <header className="mb-10 space-y-4">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-zinc-100 tracking-tight leading-tight">
-              {post.title}
+              {activePost.title}
             </h1>
 
             <p className="text-zinc-400 text-base sm:text-lg font-light leading-relaxed">
-              {post.description}
+              {activePost.description}
             </p>
 
             {/* Author Attribution & Date Strip */}
             <div className="pt-4 border-t border-b border-zinc-800 py-3.5 flex items-center justify-between text-xs font-mono text-zinc-500">
               <div className="flex items-center gap-2">
-                <span className="text-zinc-300 font-medium">{post.author.name}</span>
+                <span className="text-zinc-300 font-medium">{activePost.author?.name || "Aafaque Nazir"}</span>
                 <span>·</span>
-                <span>{post.publishedAt}</span>
+                <span>{activePost.publishedAt}</span>
                 <span>·</span>
-                <span>{post.readTime}</span>
+                <span>{activePost.readTime}</span>
               </div>
 
               {/* Share actions */}
@@ -435,7 +479,7 @@ export default function BlogPost() {
                   {copiedLink ? <RiCheckLine size={14} className="text-emerald-400" /> : <RiFileCopyLine size={14} />}
                 </button>
                 <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(currentUrl)}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(activePost.title)}&url=${encodeURIComponent(currentUrl)}`}
                   target="_blank"
                   rel="nofollow noopener noreferrer"
                   aria-label="Share on X"
@@ -453,7 +497,7 @@ export default function BlogPost() {
                   <RiLinkedinFill size={14} />
                 </a>
                 <a
-                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(post.title + " " + currentUrl)}`}
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(activePost.title + " " + currentUrl)}`}
                   target="_blank"
                   rel="nofollow noopener noreferrer"
                   aria-label="Share on WhatsApp"
@@ -466,7 +510,7 @@ export default function BlogPost() {
           </header>
 
           {/* Executive Summary / Key Takeaways */}
-          {post.quickAnswer && (
+          {post?.quickAnswer && (
             <div className="mb-10 p-5 rounded-xl border border-zinc-800/80 border-l-2 border-l-accent bg-zinc-950/60">
               <div className="text-[11px] font-mono uppercase tracking-wider text-accent font-medium mb-2">
                 Executive Summary
@@ -506,9 +550,17 @@ export default function BlogPost() {
             </div>
           )}
 
-          {/* Body Prose Content */}
-          <div className="space-y-7 text-zinc-300 leading-relaxed font-light text-sm sm:text-base">
-            {post.sections.map((section, idx) => {
+          {/* Body Prose Content (with skeleton while async post chunk resolves) */}
+          {!post ? (
+            <div className="space-y-4 py-4" aria-busy="true">
+              <div className="h-5 w-2/3 rounded bg-zinc-900 animate-pulse" />
+              <div className="h-4 w-full rounded bg-zinc-900/70 animate-pulse" />
+              <div className="h-4 w-5/6 rounded bg-zinc-900/70 animate-pulse" />
+              <div className="h-28 w-full rounded-xl bg-zinc-900/60 animate-pulse mt-4" />
+            </div>
+          ) : (
+            <div className="space-y-7 text-zinc-300 leading-relaxed font-light text-sm sm:text-base">
+              {post.sections.map((section, idx) => {
               if (section.type === "heading") {
                 const headingId = `heading-${post.sections.slice(0, idx + 1).filter((s) => s.type === "heading" && s.level === 2).length - 1}`;
                 if (section.level === 2) {
@@ -611,7 +663,8 @@ export default function BlogPost() {
 
               return null;
             })}
-          </div>
+            </div>
+          )}
 
           {/* Case Study Reference */}
           {relatedProject && (
@@ -640,7 +693,7 @@ export default function BlogPost() {
           )}
 
           {/* Structured FAQs */}
-          {post.faqs && post.faqs.length > 0 && (
+          {post?.faqs && post.faqs.length > 0 && (
             <div className="mt-14 pt-8 border-t border-zinc-800">
               <div className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-2 flex items-center gap-1.5">
                 <RiQuestionLine size={14} />
@@ -685,8 +738,8 @@ export default function BlogPost() {
           {/* Author Note */}
           <div className="mt-14 p-6 rounded-2xl border border-zinc-800 bg-zinc-950/40 flex items-center justify-between gap-4">
             <div>
-              <h4 className="text-sm font-semibold text-zinc-200">{post.author.name}</h4>
-              <p className="text-xs text-zinc-500 font-mono">{post.author.role}</p>
+              <h4 className="text-sm font-semibold text-zinc-200">{activePost.author?.name || "Aafaque Nazir"}</h4>
+              <p className="text-xs text-zinc-500 font-mono">{activePost.author?.role || "Freelance Full-Stack Developer"}</p>
             </div>
             <Link
               to="/contact/"
@@ -695,6 +748,36 @@ export default function BlogPost() {
               Get in touch →
             </Link>
           </div>
+
+          {/* Related Guides (Internal Topic Cluster Links) */}
+          {relatedBlogs.length > 0 && (
+            <div className="mt-12 pt-8 border-t border-zinc-800">
+              <h3 className="text-sm font-mono uppercase tracking-wider text-zinc-400 mb-4">
+                Related Guides
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                {relatedBlogs.map((rel) => (
+                  <Link
+                    key={rel.slug}
+                    to={`/blog/${rel.slug}/`}
+                    className="p-4 rounded-xl border border-zinc-800/80 bg-zinc-950/50 hover:border-accent/35 transition-colors flex flex-col justify-between gap-2 group"
+                  >
+                    <div>
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-accent/80 block mb-1">
+                        {rel.category}
+                      </span>
+                      <span className="text-xs sm:text-sm font-medium text-zinc-200 group-hover:text-white line-clamp-2 leading-snug block">
+                        {rel.title}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-mono text-zinc-500 group-hover:text-accent transition-colors">
+                      Read guide →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Prev / Next Navigation */}
           <div className="mt-12 pt-8 border-t border-zinc-800 grid grid-cols-1 sm:grid-cols-2 gap-4">

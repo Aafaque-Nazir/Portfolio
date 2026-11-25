@@ -18,12 +18,17 @@
   status = 301
   force = true
 
-# SPA Fallback — Critical for SEO
-# Without this, /about, /services etc. return 404 to Google crawler
+[[redirects]]
+  from = "/blog/smooth-scrolling-lenis-react*"
+  to = "/blog/lenis-smooth-scroll-react-clean-transitions/"
+  status = 301
+  force = true
+
+# Proper HTTP 404 for unknown routes (all valid routes are pre-rendered in dist/)
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404
 
 # Security Headers — Google trusts sites with proper security
 [[headers]]

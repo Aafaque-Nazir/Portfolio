@@ -17,6 +17,7 @@ import process from "process";
 import { fileURLToPath } from "url";
 import { blogs as currentBlogs } from "../src/data/blogs.js";
 import { projectsData } from "../src/data/projects-data.js";
+import { syncBlogData } from "./sync-blog-data.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -556,34 +557,75 @@ function isTopicCovered(topicObj, blogsList) {
     'guide', 'practical', 'building', 'implementing', 'react', 'nextjs',
     'modern', 'eliminating', 'application', 'applications', 'single', 'custom',
     'system', 'systems', 'architecture', 'better', 'engine', 'engines',
-    'production', 'real-time', 'realtime', 'stack', 'tools', 'server', 'actions'
+    'production', 'real-time', 'realtime', 'stack', 'tools', 'server', 'actions',
+    'clean', 'fast', 'design', 'complete', 'transitions'
   ]);
   const keywords = topicObj.topic.toLowerCase()
     .replace(/[^a-z0-9\s]/g, ' ')
     .split(/\s+/)
-    .filter(w => w.length > 3 && !stopWords.has(w));
+    .filter(w => w.length > 2 && !stopWords.has(w));
   if (keywords.length === 0) return false;
+
+  const targetKeywords = (topicObj.targetKeywords || [])
+    .map(k => k.toLowerCase())
+    .filter(Boolean);
 
   return blogsList.some(b => {
     const bTitle = (b.title || "").toLowerCase();
     const bSlug = (b.slug || "").toLowerCase();
-    const matches = keywords.filter(w => bTitle.includes(w) || bSlug.includes(w));
-    const threshold = Math.max(3, Math.ceil(keywords.length * 0.5));
-    return matches.length >= Math.min(threshold, keywords.length);
+    const bTags = (b.tags || []).map(t => t.toLowerCase()).join(" ");
+    const haystack = `${bTitle} ${bSlug} ${bTags}`;
+
+    // Catch exact/near-exact primary keyword phrase overlap
+    if (targetKeywords.some(kw => bTitle.includes(kw) || bSlug.includes(kw.replace(/\s+/g, "-")))) {
+      return true;
+    }
+
+    const matches = keywords.filter(w => haystack.includes(w));
+    const threshold = keywords.length <= 2 ? keywords.length : Math.max(2, Math.ceil(keywords.length * 0.45));
+    return matches.length >= threshold;
   });
 }
 
-// Automated Trending Radar: Scan Hacker News top tech stories for breaking web tech news
+// Fetch brief readable excerpt from an article URL so the LLM never guesses facts from a headline alone
+async function fetchArticleContext(url) {
+  if (!url) return "";
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 6000);
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; PortfolioResearchBot/1.0)" },
+    });
+    clearTimeout(timer);
+    if (!res.ok) return "";
+    const contentType = res.headers.get("content-type") || "";
+    if (!contentType.includes("text/html") && !contentType.includes("text/plain")) return "";
+    const html = await res.text();
+    const stripped = html
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    return stripped.slice(0, 2800);
+  } catch {
+    return "";
+  }
+}
+
+// Automated Trending Radar: Scan Hacker News top stories strictly within core web dev niche
 async function getTrendingTechTopic(blogsList) {
   try {
     const res = await fetch("https://hacker-news.firebaseio.com/v0/topstories.json");
     if (!res.ok) return null;
     const ids = (await res.json()).slice(0, 35);
     const techKeywords = [
-      "react", "next.js", "nextjs", "vulnerability", "cve", "postgresql", "postgres",
-      "tailwind", "typescript", "supabase", "vite", "web security", "zero-day",
-      "rce", "cloudflare", "stripe", "docker", "bun", "node.js"
+      "react", "next.js", "nextjs", "postgresql", "postgres",
+      "tailwind", "typescript", "supabase", "vite", "cloudflare",
+      "node.js", "framer motion", "core web vitals", "web performance"
     ];
+    const blockedTopics = /\b(cve-\d+|zero-day|0day|rce|php|openssl|rails|ruby|kernel|ubuntu|windows|macos)\b/i;
 
     for (const id of ids) {
       const itemRes = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
@@ -592,23 +634,28 @@ async function getTrendingTechTopic(blogsList) {
       const title = item.title || "";
       const score = item.score || 0;
 
-      // Filter: High engagement (score >= 120) and mentions core web tech using word boundaries
-      if (score >= 120) {
+      if (score >= 120 && !blockedTopics.test(title)) {
         const matchedKw = techKeywords.find((kw) => {
           const escaped = kw.replace(".", "\\.");
           const regex = new RegExp(`(^|[^a-zA-Z0-9])${escaped}([^a-zA-Z0-9]|$)`, "i");
           return regex.test(title);
         });
         if (matchedKw) {
+          const sourceExcerpt = await fetchArticleContext(item.url);
+          if (!sourceExcerpt || sourceExcerpt.length < 300) {
+            continue;
+          }
           const candidate = {
             topic: title,
             category: "Trending & Web Architecture",
-            targetKeywords: [matchedKw, title, "technical breakdown", "web engineering"],
+            targetKeywords: [matchedKw, title, "web engineering"],
             relatedProjectId: 17,
             isTrending: true,
+            sourceUrl: item.url,
+            sourceExcerpt,
           };
           if (!isTopicCovered(candidate, blogsList)) {
-            console.log(`🔥 Detected high-engagement trending topic: "${title}" (${score} points on Hacker News)`);
+            console.log(`🔥 Detected verified trending web topic: "${title}" (${score} points on Hacker News)`);
             return candidate;
           }
         }
@@ -663,6 +710,7 @@ Task: Write an in-depth, authoritative, production-grade engineering blog post o
 Category: "${chosenTopic.category}"
 Target Keywords: ${chosenTopic.targetKeywords.join(", ")}
 Related Portfolio Project ID: ${chosenTopic.relatedProjectId}
+${chosenTopic.sourceExcerpt ? `\nVerified Source Reference (${chosenTopic.sourceUrl}):\n"""\n${chosenTopic.sourceExcerpt}\n"""\nUse ONLY verified technical facts from the source reference above; never invent mechanisms not supported by the source.\n` : ""}
 
 Strict Requirements:
 1. STRICT NO FANCY JARGON POLICY (MANDATORY):
@@ -1043,6 +1091,7 @@ async function generate() {
     console.log(`🤖 Added new article summary to public/llms-full.txt for AI engines`);
   }
 
+  await syncBlogData();
   console.log(`🎉 Automated blog generation complete! Post is ready to deploy.`);
 }
 

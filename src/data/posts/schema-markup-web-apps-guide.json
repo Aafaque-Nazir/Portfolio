@@ -1,0 +1,101 @@
+{
+  "id": "schema-markup-web-apps-guide",
+  "slug": "schema-markup-web-apps-guide",
+  "title": "How to Structure Web Apps with Schema Markup for Modern Search Engines",
+  "seoTitle": "Schema Markup Guide for Web Apps: JSON-LD & Snippets",
+  "description": "Learn how to add JSON-LD schema markup to modern React and Next.js web applications to secure rich search results and improve indexation.",
+  "publishedAt": "2026-11-15",
+  "updatedAt": "2026-11-15",
+  "readTime": "7 min read",
+  "category": "SEO & Growth",
+  "tags": [
+    "Schema Markup",
+    "JSON-LD",
+    "Search Engine Optimization",
+    "React"
+  ],
+  "author": {
+    "name": "Aafaque Nazir",
+    "role": "Freelance Full-Stack Developer",
+    "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+    "avatar": "/og-image.png"
+  },
+  "quickAnswer": "Schema markup is a standardized code format (JSON-LD) added to web apps to help search engines understand entities, products, and services, directly enabling rich snippets in search results.",
+  "relatedProjectId": 17,
+  "faqs": [
+    {
+      "question": "What is JSON-LD schema markup?",
+      "answer": "JSON-LD stands for JavaScript Object Notation for Linked Data. It is a lightweight method of writing structured data that search engines read to understand the exact context of your web page content."
+    },
+    {
+      "question": "Where should JSON-LD scripts be placed in a React or Next.js app?",
+      "answer": "JSON-LD scripts should be injected directly into the document head or rendered inside the server-side component tree using a script tag with the type 'application/ld+json' so crawlers parse it immediately."
+    },
+    {
+      "question": "Does schema markup guarantee rich snippets in Google?",
+      "answer": "No. Valid schema makes your app eligible for rich snippets, but Google decides whether to display them based on search query relevance, page quality, and crawler assessment."
+    }
+  ],
+  "sections": [
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "Why Modern Web Apps Need Structured Data"
+    },
+    {
+      "type": "paragraph",
+      "text": "Search engine crawlers are smart, but they still rely on explicit hints to categorize dynamic web application content. When building single-page apps or server-rendered React portals, plain HTML is often not enough to explain complex data relationships like travel itineraries, local business details, or e-commerce inventories. By implementing structured data, you remove ambiguity for search crawlers."
+    },
+    {
+      "type": "paragraph",
+      "text": "In projects like [Al Raheeq Tourism](/projects/17/), integrating precise Schema.org types for travel agencies and local tours helps search engines display pricing, duration, and reviews directly in search results. Similar benefits apply when setting up e-commerce catalogs or local service portfolios."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "Implementing JSON-LD in React and Next.js"
+    },
+    {
+      "type": "paragraph",
+      "text": "The cleanest way to add schema markup in modern component-driven apps is to create a reusable TypeScript helper that injects a JSON-LD script block into your page head. This ensures type safety and prevents syntax errors that invalidate your structured data."
+    },
+    {
+      "type": "code",
+      "language": "tsx",
+      "caption": "Reusable JSON-LD Component in React",
+      "code": "import React from 'react';\n\ninterface SchemaScriptProps {\n  data: Record<string, any>;\n}\n\nexport default function SchemaScript({ data }: SchemaScriptProps) {\n  return (\n    <script\n      type=\"application/ld+json\"\n      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}\n    />\n  );\n}"
+    },
+    {
+      "type": "callout",
+      "title": "Validation Warning",
+      "text": "Always test your generated JSON-LD blocks using the official Google Rich Results Test or Schema Markup Validator before pushing updates to production."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "Common Types of Schema for Web Applications"
+    },
+    {
+      "type": "paragraph",
+      "text": "Depending on the type of web application you are building, you should combine multiple schema types to provide complete entity data to search engines."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Organization & LocalBusiness: Establishes company identity, physical address, support phone numbers, and social profiles.",
+        "Product & Offer: Essential for e-commerce apps to expose live pricing, stock status, and customer reviews.",
+        "FAQPage: Enables collapsible FAQ accordions directly in Google search results.",
+        "BreadcrumbList: Clarifies the URL hierarchy and site structure for crawlers and users."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "Need Help Implementing This in Your Product?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Proper technical setup makes a massive difference in how search engines index and rank web applications. If you need clean, high-performance implementation for your project, explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your requirements."
+    }
+  ]
+}

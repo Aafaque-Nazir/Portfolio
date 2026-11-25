@@ -17,7 +17,7 @@ import {
   Folder,
 } from "lucide-react";
 import { projects } from "../data/projects";
-import { blogs } from "../data/blogs";
+import { blogsMeta } from "../data/blogs-meta";
 
 export default function CommandMenu() {
   const [open, setOpen] = useState(false);
@@ -206,7 +206,7 @@ export default function CommandMenu() {
 
         {/* Engineering Articles */}
         <Command.Group heading="Engineering Guides" className="px-1 py-1 mt-1 border-t border-white/5 pt-1">
-          {blogs.slice(0, 5).map((b) => (
+          {blogsMeta.slice(0, 5).map((b) => (
             <Command.Item
               key={b.slug}
               onSelect={() => runCommand(() => navigate(`/blog/${b.slug}/`))}

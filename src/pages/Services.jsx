@@ -161,10 +161,10 @@ const Services = () => {
         {/* Header Section: Proper clearance from floating navbar */}
         <div className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase mb-3 font-sans">
-            Services &amp; Solutions
+            Web Development Services
           </h1>
           <p className="text-zinc-400 text-sm sm:text-base font-normal leading-relaxed font-sans">
-            Clean, modern web development services tailored to help your brand or business build a fast, reliable online presence.
+            Custom websites, e-commerce stores, and web applications built for businesses in Navi Mumbai, Mumbai, India, and worldwide.
           </p>
         </div>
 

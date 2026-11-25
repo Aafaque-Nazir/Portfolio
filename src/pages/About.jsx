@@ -68,7 +68,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase mb-3"
           >
-            About Me
+            About Aafaque Nazir
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -77,7 +77,7 @@ const About = () => {
             transition={{ delay: 0.1 }}
             className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed"
           >
-            My background, how I work, and how I build modern websites and web applications.
+            Freelance web developer in Navi Mumbai, India — my background, how I work, and how I build fast websites and web applications.
           </motion.p>
         </div>
 
@@ -92,7 +92,7 @@ const About = () => {
                 I build fast, secure, and responsive web applications from the ground up using modern tools like <span className="text-white">React, Next.js, and Node.js</span>.
               </p>
               <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-light mb-6">
-                I build responsive, fast websites with clean frontend code and reliable backend systems.
+                Based in Navi Mumbai and serving clients across Mumbai, India, and remote teams worldwide with clean frontend code and reliable backend systems.
               </p>
               <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
                 <p className="text-xs font-mono text-zinc-300 italic">
