@@ -1,5 +1,133 @@
 export const blogs = [
   {
+    "id": "postgres-explain-analyze-guide",
+    "slug": "postgres-explain-analyze-guide",
+    "title": "Diagnosing Slow PostgreSQL Queries: A Practical EXPLAIN ANALYZE Guide",
+    "seoTitle": "Fix Slow PostgreSQL Queries with EXPLAIN ANALYZE",
+    "description": "Learn how to use EXPLAIN ANALYZE to find slow PostgreSQL queries and improve database performance with indexes and better query design.",
+    "publishedAt": "2026-11-25",
+    "updatedAt": "2026-11-25",
+    "readTime": "7 min read",
+    "category": "Backend & Database",
+    "tags": [
+      "PostgreSQL",
+      "SQL Performance",
+      "Database Indexing"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Run 'EXPLAIN ANALYZE' before your SQL query to see the execution plan and actual runtime. Look for 'Seq Scan' on large tables; this usually indicates a missing index that is forcing the database to read every row on the disk.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "What is the difference between EXPLAIN and EXPLAIN ANALYZE?",
+        "answer": "EXPLAIN shows the query planner's estimated cost without running the query. EXPLAIN ANALYZE actually executes the query and provides the real time taken for each step, which is much more accurate for debugging."
+      },
+      {
+        "question": "Why is my query slow even if I have an index?",
+        "answer": "The query planner might ignore your index if the table is very small, if the column has low cardinality, or if you are using functions on the indexed column in your WHERE clause, which prevents index usage."
+      },
+      {
+        "question": "What does 'Sequential Scan' mean in a query plan?",
+        "answer": "A Sequential Scan (Seq Scan) means PostgreSQL is reading every single row in the table to find matches. On large tables, this is slow and usually means you need to add a proper index on the columns used in your filters."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Why Your PostgreSQL Queries Get Slow"
+      },
+      {
+        "type": "paragraph",
+        "text": "As your application grows, database queries that used to take 10ms might start taking 2 seconds. This usually happens because the database is reading more data than necessary. When I built [InvMaster OS](/projects/1/), an inventory system with batch tracking and multi-godown routing, keeping queries fast was critical. If a warehouse manager scans a barcode and the database takes 3 seconds to respond, the system is broken for them."
+      },
+      {
+        "type": "paragraph",
+        "text": "To fix this, you need to stop guessing and start measuring. PostgreSQL provides a tool called EXPLAIN ANALYZE that shows you exactly how the database engine processes your SQL."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Using EXPLAIN ANALYZE"
+      },
+      {
+        "type": "paragraph",
+        "text": "By adding these two words before your query, PostgreSQL runs the command and returns a detailed report. This report shows the execution path, the time spent on each step, and how many rows were processed."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "Running a diagnostic on a slow inventory query",
+        "code": "EXPLAIN ANALYZE\nSELECT * FROM inventory_items \nWHERE batch_number = 'B-2024-001' \nAND status = 'IN_STOCK';"
+      },
+      {
+        "type": "callout",
+        "title": "Warning: It Runs the Query",
+        "text": "Unlike EXPLAIN, EXPLAIN ANALYZE actually executes the query. If you run it on a DELETE or UPDATE statement, the data will be changed. Always use it within a transaction that you roll back if you are testing write operations."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Reading the Output: Seq Scan vs Index Scan"
+      },
+      {
+        "type": "paragraph",
+        "text": "The most important part of the output is the 'Scan' type. If you see 'Seq Scan' on a table with 100,000 rows, that is your bottleneck. It means the database is looking at every single row on the hard drive."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Seq Scan: Bad for large tables. Reads everything.",
+          "Index Scan: Good. Uses the index to jump straight to the data.",
+          "Index Only Scan: Best. The data is found entirely within the index without touching the main table heap.",
+          "Bitmap Heap Scan: Used when the query returns many rows that are spread across the table."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Fixing Performance with Better Indexing"
+      },
+      {
+        "type": "paragraph",
+        "text": "In the [InvMaster OS](/projects/1/) project, we often filter by batch expiry dates. Without an index, the system slows down as the history grows. Adding a B-Tree index on the filtered columns usually solves the problem immediately."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "Adding an index to fix a slow filter",
+        "code": "CREATE INDEX idx_inventory_batch_status \nON inventory_items (batch_number, status);"
+      },
+      {
+        "type": "paragraph",
+        "text": "After adding the index, run the EXPLAIN ANALYZE again. You should see the 'Execution Time' drop significantly and the plan change from 'Seq Scan' to 'Index Scan'."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Common Mistakes to Avoid"
+      },
+      {
+        "type": "paragraph",
+        "text": "Even with indexes, queries can be slow if you write SQL that prevents the database from using them. For example, using a function on an indexed column like `WHERE lower(email) = 'user@example.com'` will ignore a standard index on `email`. You would need a functional index for that."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Scaling Your Database?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If your application is slowing down or your database costs are rising due to unoptimized queries, I can help. I provide [full-stack web development services](/services/) with a focus on high-performance database design and clean code. [Get in touch with me](/contact/) to discuss your project and optimize your infrastructure."
+      }
+    ]
+  },
+  {
     "id": "multi-step-booking-flow-react",
     "slug": "multi-step-booking-flow-react",
     "title": "Multi-Step Booking: Designing Smooth Appointment Flows in React",
