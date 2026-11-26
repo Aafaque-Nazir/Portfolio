@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog/
+- **Implementing Full-Text Search in PostgreSQL with tsvector and GIN Indexes: Better Than Elasticsearch for Small Teams**
+  URL: https://aafaque.in/blog/postgresql-full-text-search-tsvector-gin/
+  Summary: Learn how to build fast search in PostgreSQL using tsvector and GIN indexes, saving your small team the overhead of running Elasticsearch.
 - **Diagnosing Slow PostgreSQL Queries: A Practical EXPLAIN ANALYZE Guide**
   URL: https://aafaque.in/blog/postgres-explain-analyze-guide/
   Summary: Learn how to use EXPLAIN ANALYZE to find slow PostgreSQL queries and improve database performance with indexes and better query design.
