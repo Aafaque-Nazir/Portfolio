@@ -1,5 +1,122 @@
 export const blogs = [
   {
+    "id": "zero-downtime-database-migrations-drizzle-postgresql",
+    "slug": "zero-downtime-database-migrations-drizzle-postgresql",
+    "title": "Zero-Downtime Database Schema Migrations in Production with Drizzle ORM and PostgreSQL",
+    "seoTitle": "Zero-Downtime PostgreSQL Migrations with Drizzle ORM",
+    "description": "Learn how to perform safe, zero-downtime database schema migrations in PostgreSQL using Drizzle ORM without locking tables or breaking live apps.",
+    "publishedAt": "2026-11-27",
+    "updatedAt": "2026-11-27",
+    "readTime": "7 min read",
+    "category": "Backend & Database",
+    "tags": [
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Database Migrations",
+      "Backend Engineering"
+    ],
+    "author": {
+      "name": "Aafaque Nazir",
+      "role": "Freelance Full-Stack Developer",
+      "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+      "avatar": "/og-image.png"
+    },
+    "quickAnswer": "Zero-downtime database migrations in PostgreSQL are achieved by breaking breaking-changes into backward-compatible multi-step deployments, avoiding exclusive table locks, and managing Drizzle ORM state changes incrementally.",
+    "relatedProjectId": 1,
+    "faqs": [
+      {
+        "question": "How do you avoid table locks during PostgreSQL migrations?",
+        "answer": "Avoid heavy operations like adding columns with default values or modifying column types directly on large tables. Instead, add nullable columns, backfill data in small batches, and apply constraints later."
+      },
+      {
+        "question": "Can Drizzle ORM run zero-downtime migrations automatically?",
+        "answer": "Drizzle generates precise SQL migration files, but safely executing them without downtime requires discipline. You must use the expand-and-contract pattern and separate schema deployment from application logic updates."
+      },
+      {
+        "question": "What is the best way to rename a column in production?",
+        "answer": "Rename operations cause downtime if old code queries the old name. Use the expand-and-contract pattern: add the new column, write to both columns via application code, backfill historical data, read from the new column, and finally drop the old column."
+      }
+    ],
+    "sections": [
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Production Migration Challenge"
+      },
+      {
+        "type": "paragraph",
+        "text": "When running high-traffic applications, deploying a database change is often the rishest part of the release cycle. Simple commands like `ALTER TABLE ADD COLUMN` or changing a column type can take an exclusive lock on PostgreSQL tables, freezing all read and write queries until the operation completes. For systems handling heavy traffic, such as the [Inventory Management / InvMaster OS](/projects/1/), unexpected table locks lead to dropped requests, frontend timeouts, and angry users."
+      },
+      {
+        "type": "paragraph",
+        "text": "Drizzle ORM provides a fast, lightweight bridge to PostgreSQL. While Drizzle Kit makes generating SQL migration scripts simple, developers must still follow strict engineering rules to ensure updates happen live without disrupting users."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "The Expand-and-Contract Pattern"
+      },
+      {
+        "type": "paragraph",
+        "text": "To achieve zero downtime, break every significant schema change into multiple separate deployments using the expand-and-contract pattern. Never deploy a breaking schema change and application code update in the exact same release."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Phase 1 (Expand): Add new database columns or tables as optional fields so existing code continues working.",
+          "Phase 2 (Migrate): Update application code to write to both old and new fields while reading from the old ones.",
+          "Phase 3 (Backfill): Run a background script to copy historical data from old fields to new fields.",
+          "Phase 4 (Switch): Update application code to read exclusively from the new fields.",
+          "Phase 5 (Contract): Remove old columns or tables in a subsequent release after verifying stability."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Safe Schema Definition with Drizzle"
+      },
+      {
+        "type": "paragraph",
+        "text": "When defining tables in Drizzle, always design columns to be nullable or provide safe defaults that do not trigger heavy table rewrites in PostgreSQL. Below is an example of adding a new status column safely."
+      },
+      {
+        "type": "code",
+        "language": "typescript",
+        "caption": "Defining a safe nullable column in Drizzle schema",
+        "code": "import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';\n\nexport const shipments = pgTable('shipments', {\n  id: serial('id').primaryKey(),\n  trackingNumber: text('tracking_number').notNull(),\n  // Safe addition: nullable initially, populated via app logic\n  fulfillmentStatus: text('fulfillment_status'),\n  updatedAt: timestamp('updated_at').defaultNow().notNull(),\n});"
+      },
+      {
+        "type": "callout",
+        "title": "Engineering Rule",
+        "text": "Never use `NOT NULL DEFAULT 'value'` on existing large tables in PostgreSQL unless you are running newer PostgreSQL versions (11+) that optimize metadata-only defaults. Always add columns as nullable first, backfill in batches, and apply the constraint later."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Handling Foreign Key Constraints Safely"
+      },
+      {
+        "type": "paragraph",
+        "text": "Adding a foreign key constraint forces PostgreSQL to scan the entire table and lock writes to verify existing rows. To prevent this, create the foreign key as `NOT VALID`, which tells PostgreSQL to skip checking existing rows immediately. Then, validate the constraint in a separate transaction."
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "caption": "Adding a non-blocking foreign key in PostgreSQL",
+        "code": "-- Step 1: Add constraint without validating existing rows\nALTER TABLE shipments\nADD CONSTRAINT fk_warehouse\nFOREIGN KEY (warehouse_id)\nREFERENCES warehouses(id)\nNOT VALID;\n\n-- Step 2: Validate constraint later without exclusive locks\nALTER TABLE shipments\nVALIDATE CONSTRAINT fk_warehouse;"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "title": "Need Help Implementing This in Your Product?"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you are building database-backed web apps and need reliable backend engineering, I can help design robust systems. [Explore my Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your requirements."
+      }
+    ]
+  },
+  {
     "id": "postgresql-full-text-search-tsvector-gin",
     "slug": "postgresql-full-text-search-tsvector-gin",
     "title": "Implementing Full-Text Search in PostgreSQL with tsvector and GIN Indexes: Better Than Elasticsearch for Small Teams",

@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog/
+- **Zero-Downtime Database Schema Migrations in Production with Drizzle ORM and PostgreSQL**
+  URL: https://aafaque.in/blog/zero-downtime-database-migrations-drizzle-postgresql/
+  Summary: Learn how to perform safe, zero-downtime database schema migrations in PostgreSQL using Drizzle ORM without locking tables or breaking live apps.
 - **Implementing Full-Text Search in PostgreSQL with tsvector and GIN Indexes: Better Than Elasticsearch for Small Teams**
   URL: https://aafaque.in/blog/postgresql-full-text-search-tsvector-gin/
   Summary: Learn how to build fast search in PostgreSQL using tsvector and GIN indexes, saving your small team the overhead of running Elasticsearch.
