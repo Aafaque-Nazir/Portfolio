@@ -1,0 +1,145 @@
+{
+  "id": "prevent-double-booking-postgresql-row-locks",
+  "slug": "prevent-double-booking-postgresql-row-locks",
+  "title": "Preventing Double Bookings with PostgreSQL Row Locks and Exclusion Constraints",
+  "seoTitle": "Prevent Double Bookings in PostgreSQL with Row Locks",
+  "description": "Stop race conditions in appointment booking systems. Learn how to use PostgreSQL row locks, FOR UPDATE, and exclusion constraints cleanly.",
+  "publishedAt": "2026-11-28",
+  "updatedAt": "2026-11-28",
+  "readTime": "7 min read",
+  "category": "Backend & Database",
+  "tags": [
+    "PostgreSQL",
+    "Concurrency Control",
+    "Database Locking",
+    "Node.js",
+    "SQL"
+  ],
+  "author": {
+    "name": "Aafaque Nazir",
+    "role": "Freelance Full-Stack Developer",
+    "bio": "Independent web engineer building high-performance websites, e-commerce stores, and SaaS web applications for clients across India & worldwide.",
+    "avatar": "/og-image.png"
+  },
+  "quickAnswer": "To prevent double booking in PostgreSQL, wrap booking creation inside an ACID transaction using SELECT ... FOR UPDATE to lock slot rows, or enforce database-level exclusion constraints using tsrange with GiST indexes to automatically reject overlapping reservations.",
+  "relatedProjectId": 14,
+  "faqs": [
+    {
+      "question": "Why is an application-level check not enough to stop double bookings?",
+      "answer": "If two users request the same appointment slot simultaneously, both requests can execute the read query before either writes to the database. Both see the slot as open and proceed to insert a booking, causing a duplicate record unless database-level locks or constraints block them."
+    },
+    {
+      "question": "What is the difference between FOR UPDATE and exclusion constraints?",
+      "answer": "FOR UPDATE locks specific rows during an open transaction so concurrent workers must wait or fail immediately. PostgreSQL exclusion constraints use GiST indexes and range types to enforce at the table schema level that no two bookings for the same staff or room overlap in time."
+    },
+    {
+      "question": "Should I use FOR UPDATE NOWAIT or FOR UPDATE SKIP LOCKED?",
+      "answer": "Use NOWAIT when you want to return an immediate error if someone else is actively booking that exact slot. Use SKIP LOCKED for background queue workers picking tasks where you want workers to ignore locked items and process the next available job."
+    }
+  ],
+  "sections": [
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "The Concurrency Flaw in Traditional Booking Flows"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most reservation workflows start with a simple pattern: query the database to verify if an appointment slot is available, then write a new booking row if the query returns empty. In development environments where requests happen sequentially, this logic passes every test. In production, simultaneous requests from two customers or multiple browser tabs trigger race conditions."
+    },
+    {
+      "type": "paragraph",
+      "text": "When Request A and Request B arrive within 15 milliseconds of each other, both read the database at the same time. Both requests see that the 10:00 AM slot is free. Both proceed to run an INSERT query. Without strict concurrency control in Postgres, both inserts succeed, resulting in two different clients showing up for the exact same staff member or physical room."
+    },
+    {
+      "type": "callout",
+      "title": "Application Layer vs. Database Engine",
+      "text": "Never rely solely on application servers or Node.js in-memory locks to handle booking concurrency. If you run multiple server instances, serverless functions, or container replicas, memory-based mutexes do not share state. Your database must be the single source of truth for transaction integrity."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "Method 1: Row-Level Locking with SELECT ... FOR UPDATE"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pessimistic locking using SELECT ... FOR UPDATE instructs PostgreSQL to lock the selected rows until the current transaction commits or rolls back. Any other transaction attempting to select or modify those locked rows must wait in line or fail immediately."
+    },
+    {
+      "type": "paragraph",
+      "text": "When building appointment booking for [LA Salon & Spa / Lumina Aura](/projects/14/), we structured appointment slots as discrete inventory rows. Before confirming an appointment, the backend locks the slot record, verifies its current status, updates it to confirmed, and commits the transaction."
+    },
+    {
+      "type": "code",
+      "language": "sql",
+      "caption": "SQL transaction locking an appointment slot row",
+      "code": "BEGIN;\n\n-- Lock the target slot row so concurrent transactions cannot read it FOR UPDATE\nSELECT id, status \nFROM appointment_slots\nWHERE id = 'slot_98234'\n  AND status = 'AVAILABLE'\nFOR UPDATE;\n\n-- If the query returns a row, perform the update and write the reservation\nUPDATE appointment_slots\nSET status = 'BOOKED',\n    customer_id = 'cust_44120',\n    updated_at = NOW()\nWHERE id = 'slot_98234';\n\nINSERT INTO appointments (slot_id, customer_id, service_id, created_at)\nVALUES ('slot_98234', 'cust_44120', 'srv_haircut', NOW());\n\nCOMMIT;"
+    },
+    {
+      "type": "paragraph",
+      "text": "If a second user attempts to run this transaction for the same slot at the exact same moment, their transaction pauses until the first transaction finishes. Once the first transaction commits, the second transaction acquires the lock, sees that status is now 'BOOKED' instead of 'AVAILABLE', and aborts without overwriting the data."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "Method 2: Postgres Exclusion Constraints for Dynamic Time Ranges"
+    },
+    {
+      "type": "paragraph",
+      "text": "Not every appointment system uses pre-generated fixed 30-minute slot rows. In medical clinics like [CarePulse / Aura Dental Studio](/projects/11/) or restaurant table bookings like [Restaurant OS / Corner Cafe](/projects/4/), appointments have variable start and end times. In these cases, locking a static slot row is impossible because the time ranges are dynamic."
+    },
+    {
+      "type": "paragraph",
+      "text": "PostgreSQL provides a native feature designed specifically for this: Exclusion Constraints using the btree_gist extension and range types like tsrange (timestamp range). An exclusion constraint guarantees that no two rows satisfy a comparison operator across selected columns."
+    },
+    {
+      "type": "code",
+      "language": "sql",
+      "caption": "PostgreSQL schema with btree_gist exclusion constraint",
+      "code": "-- Enable the GiST indexing extension for scalar types\nCREATE EXTENSION IF NOT EXISTS btree_gist;\n\nCREATE TABLE staff_appointments (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    staff_id UUID NOT NULL,\n    customer_id UUID NOT NULL,\n    booking_period TSRANGE NOT NULL,\n    status VARCHAR(20) NOT NULL DEFAULT 'CONFIRMED',\n    \n    -- Prevent overlapping booking periods for the same staff member\n    CONSTRAINT no_overlapping_staff_bookings EXCLUDE USING gist (\n        staff_id WITH =,\n        booking_period WITH &&\n    ) WHERE (status != 'CANCELLED')\n);"
+    },
+    {
+      "type": "paragraph",
+      "text": "The constraint operator '&&' checks for range overlaps, while '=' checks for the exact staff identifier. If two concurrent users attempt to book Dr. Sharma between 2:00 PM and 2:45 PM, PostgreSQL evaluates the GiST index at the storage level. The first insert succeeds, and the second insert raises an exclusion violation error (code 23P01) immediately, making double booking physically impossible."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "TypeScript Implementation with Safe Error Handling"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here is how to implement this cleanly in Node.js using pg (node-postgres). We catch the specific PostgreSQL exclusion error code (23P01) or handle serialization failures, returning a clean error message back to the client."
+    },
+    {
+      "type": "code",
+      "language": "typescript",
+      "caption": "Node.js service handling Postgres exclusion constraint violations",
+      "code": "import { Pool, PoolClient } from 'pg';\n\nconst pool = new Pool({\n  connectionString: process.env.DATABASE_URL,\n});\n\ninterface BookingRequest {\n  staffId: string;\n  customerId: string;\n  startTime: string; // ISO string\n  endTime: string;   // ISO string\n}\n\nexport async function createAppointment(req: BookingRequest) {\n  const client: PoolClient = await pool.connect();\n\n  try {\n    await client.query('BEGIN');\n\n    const insertQuery = `\n      INSERT INTO staff_appointments (staff_id, customer_id, booking_period)\n      VALUES ($1, $2, tsrange($3, $4, '[)'))\n      RETURNING id, staff_id, customer_id, booking_period;\n    `;\n\n    const result = await client.query(insertQuery, [\n      req.staffId,\n      req.customerId,\n      req.startTime,\n      req.endTime,\n    ]);\n\n    await client.query('COMMIT');\n    return { success: true, booking: result.rows[0] };\n  } catch (error: any) {\n    await client.query('ROLLBACK');\n\n    // PostgreSQL error code 23P01 is exclusion_violation\n    if (error.code === '23P01') {\n      return {\n        success: false,\n        error: 'The requested time slot was just taken by another client. Please choose another time.',\n      };\n    }\n\n    console.error('Failed to create appointment:', error);\n    throw new Error('Database transaction failed.');\n  } finally {\n    client.release();\n  }\n}"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "Summary of Concurrency Best Practices"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Pick row locks (FOR UPDATE) when appointments map to pre-generated slot records.",
+        "Pick exclusion constraints (tsrange with GiST) when clients book variable, custom durations.",
+        "Always use short database transactions. Keep payment gateway calls or email notifications outside the transactional lock block.",
+        "Add an index on your search columns so SELECT queries inside transactions execute in single-digit milliseconds.",
+        "Catch PostgreSQL constraint codes (23P01 for exclusion, 23505 for unique) in your API layer to send friendly validation messages."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "title": "Need Help Implementing This in Your Product?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Handling concurrent database transactions requires clean schema design, proper indexing, and careful error management. If you are building an appointment scheduler, marketplace, or booking portal, explore my [Full-Stack Web Development Services](/services/) or [get in touch with Aafaque](/contact/) to discuss your technical architecture."
+    }
+  ]
+}

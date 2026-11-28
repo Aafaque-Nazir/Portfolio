@@ -108,6 +108,9 @@ He specializes in modern frontend architectures (React, Next.js, TypeScript, Tai
 ## Engineering Articles & Architectural Guides (Blog)
 
 - **Blog Index:** https://aafaque.in/blog/
+- **Preventing Double Bookings with PostgreSQL Row Locks and Exclusion Constraints**
+  URL: https://aafaque.in/blog/prevent-double-booking-postgresql-row-locks/
+  Summary: Stop race conditions in appointment booking systems. Learn how to use PostgreSQL row locks, FOR UPDATE, and exclusion constraints cleanly.
 - **Zero-Downtime Database Schema Migrations in Production with Drizzle ORM and PostgreSQL**
   URL: https://aafaque.in/blog/zero-downtime-database-migrations-drizzle-postgresql/
   Summary: Learn how to perform safe, zero-downtime database schema migrations in PostgreSQL using Drizzle ORM without locking tables or breaking live apps.
